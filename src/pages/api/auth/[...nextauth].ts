@@ -1,5 +1,4 @@
 import NextAuth, { type NextAuthOptions } from "next-auth";
-import DiscordProvider from "next-auth/providers/discord";
 import GoogleProvider, { GoogleProfile } from "next-auth/providers/google"
 
 // Prisma adapter for NextAuth, optional and can be removed
@@ -25,10 +24,10 @@ export const authOptions: NextAuthOptions = {
       clientSecret: env.GOOGLE_CLIENT_SECRET,
       profile(profile: GoogleProfile) {
         return {
-          id: profile.id,
-          // Return all the profile information you need.
-          // The only truly required field is `id`
-          // to be able identify the account when added to a database
+          id: profile.sub,
+          name: profile.name,
+          email: profile.email,
+          image: profile.picture,
         }
       },
     })
