@@ -11,7 +11,7 @@
     color: var(--color-neutral-600);
   }
 
-  input, .select {
+  input, .select, label {
     background-color: var(--color-neutral-100);
   }
 
@@ -27,19 +27,27 @@
     background-color: var(--color-white);
   }
 
+
+  /***** Chrome, Safari, Opera, and Edge Chromium *****/
+  input[type="range"]::-webkit-slider-runnable-track {
+    background: var(--color-neutral-200);
+  
+  }
+
+
 }
 
 @media (prefers-color-scheme: dark) {
   body {
-    background-color: var(--color-slate-900);
+    background-color: var(--color-neutral-900);
   }
 
-  input, p, h1, h2, h3, h4, h5, h6 {
+  input, p, h1, h2, h3, h4, h5, h6,  label {
     color: var(--color-slate-200);
   }
 
-  input {
-    background-color: var(--color-slate-700);
+  input,  label {
+    background-color: var(--color-neutral-800);
   }
 
   input::placeholder {
@@ -49,6 +57,18 @@
   input:focus {
     outline: 2px solid var(--color-rose-200);
   }
+
+  input.has-value {
+    background-color: var(--color-neutral-700);
+  }
+
+  /***** Chrome, Safari, Opera, and Edge Chromium *****/
+    input[type="range"]::-webkit-slider-runnable-track {
+    background: var(--color-neutral-800);
+  
+  }
+
+
 }
 
 input, .select {

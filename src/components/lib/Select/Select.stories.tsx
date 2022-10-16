@@ -25,11 +25,11 @@ export const Template: ComponentStory<typeof Select> = (args) => {
           },
           {
             label: 'Plum',
-            value: '1',
+            value: '2',
           },
           {
             label: 'Pear',
-            value: '1',
+            value: '3',
           }
         ]}
         setChosenValue={(chosenValue: string) => {

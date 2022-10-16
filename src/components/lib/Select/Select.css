@@ -16,7 +16,7 @@
   }
 }
 
-.active {
+.active { 
   animation: rotate-open;
   animation-duration: 0.5s;
   animation-fill-mode: forwards;
@@ -50,7 +50,6 @@
 .select.chosen-value {
   color: var(--color-neutral-600);
   background-color: var(--color-neutral-100);
-  border-bottom: 1px solid var(--color-rose-300);
   border-bottom: none;
 }
 
@@ -58,3 +57,31 @@
   background-color: var(--color-white);
 }
 
+
+
+@media (prefers-color-scheme: dark) {
+ 
+  .select.option {
+    color: var(--color-neutral-200);
+    background-color: var(--color-neutral-800);
+    border-bottom: 1px solid var(--color-rose-300);
+  }
+
+  .select.option:hover,
+  .select.option:focus-within  {
+    background-color: var(--color-rose-200);
+    color: var(--color-neutral-900);
+  }
+  .select.chosen-value {
+    color: var(--color-neutral-300);
+    background-color: var(--color-neutral-800);
+    border-bottom: none;
+  }
+  .select.chosen-value:focus-within {
+   
+    outline: 2px solid var(--color-rose-300);
+  }
+  .select.chosen-value.exists {
+    background-color: var(--color-neutral-700);
+  }
+}

@@ -7,6 +7,7 @@ export interface Option {
 }
 
 export interface Props {
+  label?: string,
   isOpenByDefault: boolean;
   options: Option[];
   placeholder?: string;
@@ -15,6 +16,7 @@ export interface Props {
 }
 
 export const Select: React.FC<Props> = ({
+  label = 'Label',
   isOpenByDefault,
   options = [],
   placeholder = 'Type here',
@@ -28,6 +30,8 @@ export const Select: React.FC<Props> = ({
       className="w-full cursor-pointer"
       onClick={() => setIsOpen(!isOpen)}
     >
+
+      <label>{label}</label>
       <button
         className={`${value ? 'exists' : ''} select chosen-value justify-between flex h-12 p-4 text-lg w-full border-transparent`}
         tabIndex={0}
