@@ -51,7 +51,7 @@
   }
 
   .chosenValue:focus-within {
-    outline: 2px solid var(--color-rose-300);
+    outline: 2px solid  var(--color-rose-300);
   }
   .chosenValue:focus-within .caret {
     color: var(--color-rose-300);
