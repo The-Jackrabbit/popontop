@@ -1,0 +1,15 @@
+@media (prefers-color-scheme: light) {
+  
+}
+
+@media (prefers-color-scheme: dark) {
+  
+}
+
+.button:focus-within {
+  outline: 2px solid var(--color-rose-300)
+}
+
+.primary {
+  background-color: var(--color-rose-400);
+}

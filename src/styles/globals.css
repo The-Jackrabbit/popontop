@@ -7,11 +7,11 @@
     background-color:  var(--color-neutral-50);
   }
 
-  input, p, h1, h2, h3, h4, h5, h6 {
+  input, p, h1, h2, h3, h4, h5, h6, input {
     color: var(--color-neutral-600);
   }
 
-  input, .select, label {
+  input, .select, label, button {
     background-color: var(--color-neutral-100);
   }
 
@@ -46,11 +46,11 @@
     background-color: var(--color-neutral-900);
   }
 
-  input, p, h1, h2, h3, h4, h5, h6,  label {
+  input, p, h1, h2, h3, h4, h5, h6,  label, button {
     color: var(--color-slate-200);
   }
 
-  input,  label {
+  input,  label, button {
     background-color: var(--color-neutral-800);
   }
 
@@ -58,7 +58,8 @@
     color:  var(--color-slate-400);
   }
 
-  input:focus {
+  input:focus,  
+  input:focus button:focus-within {
     outline: 2px solid var(--color-rose-200);
   }
 
@@ -85,16 +86,41 @@
 @media (prefers-color-scheme: light) {
   .actions-container  {
     border-color: var(--color-neutral-200);
-  } 
+  }
+
+  button {
+    color: var(--color-neutral-900);
+    border-radius: 4px;
+  }
+  button:hover{
+    background-color: var(--color-rose-200);
+    color: var(--color-neutral-50);
+  }
+  button.primary {
+    background-color: var(--color-rose-400);
+  }
 }
 
 @media (prefers-color-scheme: dark) {
   .actions-container  {
     border-color: var(--color-neutral-600);
   }
+
+  button {
+    color: var(--color-neutral-100);
+    border-radius: 4px;
+    background-color: var(--color-neutral-800);
+  }
+  button:hover{
+    background-color: var(--color-rose-200);
+    color: var(--color-neutral-50);
+  }
+  button.primary {
+    background-color: var(--color-rose-400);
+  }
 }
 
-input, .select {
+input, .select, button {
   border-radius: 4px;
   padding: 12px;
   outline-offset: 3px;

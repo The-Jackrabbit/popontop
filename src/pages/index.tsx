@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
-import Head from "next/head";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { trpc } from "../utils/trpc";
 import DesktopSidebar from "../components/global/Sidebar/DesktopSidebar";
+import DesktopActions from "../components/global/Actions/DesktopActions";
 
 const Home: NextPage = () => {
   return (
@@ -14,10 +14,7 @@ const Home: NextPage = () => {
         <div className="page-content">
           <h1>hello world</h1>
         </div>
-        <div className="border-l-2 actions-container">
-          <button>a</button>
-          <button>b</button>
-        </div>
+       <DesktopActions />
       </div>
     </div>
   );
