@@ -45,10 +45,8 @@ const DesktopActions: React.FC = () => {
         />
       </div>
       <div>
-        <ActionButton
-          onClick={console.log}
-          text="c"
-        />
+
+        <div className={styles.profile}></div>
       </div>
     </div>
   );

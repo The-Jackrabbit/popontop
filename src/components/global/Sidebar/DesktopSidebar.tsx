@@ -131,9 +131,9 @@ export const DesktopSidebar: React.FC = () => {
         </div>
       </div>
       <div className=" flex flex-row justify-between">
-        <div className={styles.logo}>
+        
+      <div className={styles.logo}>
         💿💿</div>
-        <div className={styles.profile}></div>
       </div>
     </div>
   );
