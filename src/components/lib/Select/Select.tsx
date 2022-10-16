@@ -26,15 +26,21 @@ export const Select: React.FC<Props> = ({
   const [isOpen, setIsOpen] = useState(isOpenByDefault);
 
   return (
-    <>
-      <label>{label}</label>
+    <div className={styles.select + " flex flex-col"}>
+      <label className="mb-4">{label}</label>
       <button
-        className={`${value ? 'exists' : ''} ${styles.select} ${styles['chosen-value']} justify-between flex h-12 p-4 text-lg w-full border-transparent`}
-        tabIndex={0}
-
+        className={`
+          ${value ? 'exists' : ''}
+          ${styles.chosenValue}
+          justify-between flex
+          h-12 p-4 w-full
+          mb-2
+          text-lg border-transparent
+        `}
         onClick={() => setIsOpen(!isOpen)}
+        tabIndex={0}
       >
-        <div className="text">
+        <div className={styles.text}>
           {value  
             ? <p className="value">{
               options
@@ -43,18 +49,22 @@ export const Select: React.FC<Props> = ({
             : <p className="placeholder">{placeholder}</p>
           }
         </div>
-        <div className={styles["caret-container"]}>
-          <div className={`${styles.caret} ${isOpen
-            ? styles.active
-            : styles.inactive
-          }`}>▽</div>
+        <div className={`
+          ${styles.caret}
+          ${isOpen ? styles.active : styles.inactive}
+          active
+        `}>
+          ▽
         </div>
-      
       </button>
       {isOpen && options.map(({ value, label } ) => (
         <button
           key={`${value}${label}`}
-          className={`text-left ${styles.select} ${styles.option} h-12 p-4 outline-none text-lg w-full mb`}
+          className={`
+            ${styles.option}
+            w-full h-12 mb p-4 outline-none 
+            text-left text-lg
+          `}
           onClick={() => {
             setChosenValue(value);
             setIsOpen(false);
@@ -64,7 +74,7 @@ export const Select: React.FC<Props> = ({
           {label}
         </button>
       ))}
-  </>
+    </div>
   );
 }
 

@@ -1,6 +1,6 @@
 
 import styles from './DesktopActions.module.css'
-import ProfileCircle from './ProfileCircle/ProfileCIrcle';
+import ProfileCircle from './ProfileCircle/ProfileCircle';
 
 export interface Props {
   onClick: () => void;
@@ -19,12 +19,13 @@ export const ActionButton: React.FC<Props> = ({
         w-12
         h-12
         text-xl
+        leading-none
         ${styles[variant]}
         ${styles.button}
       `}
       onClick={() => onClick()}
     >
-      <p>{text}</p>
+      {text}
     </button>
   </div>
 )

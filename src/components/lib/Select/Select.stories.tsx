@@ -3,6 +3,23 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Select from './Select';
 
 export default {
+  args: {
+    label: 'Fruit',
+    options: [
+      {
+        label: 'Peach',
+        value: 'peach'
+      },
+      {
+        label: 'Plum',
+        value: 'plum'
+      },
+      {
+        label: 'Pear',
+        value: 'pear'
+      },
+    ],
+  },
   title: 'lib/Select',
   component: Select,
   parameters: {

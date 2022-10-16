@@ -2,20 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+.app {
+  width: 1200px
+}
+
 @media (prefers-color-scheme: light) {
   body {
     background-color:  var(--color-neutral-50);
   }
 
   input, p, h1, h2, h3, h4, h5, h6, input {
-    color: var(--color-neutral-600);
+    color: var(--color-neutral-400);
   }
 
-  input, .select, label, button {
+  input, .select, button {
     background-color: var(--color-neutral-100);
   }
 
-  input::placeholder, .select .placeholder {
+  input::placeholder,
+  .select .placeholder,
+  label {
     color: var(--color-neutral-400);
   }
 
@@ -27,18 +33,10 @@
     background-color: var(--color-white);
   }
 
-
   /***** Chrome, Safari, Opera, and Edge Chromium *****/
   input[type="range"]::-webkit-slider-runnable-track {
-    background: var(--color-neutral-200);
-  
+    background: var(--color-neutral-200);  
   }
-
-
-}
-
-.app {
-  width: 1200px
 }
 
 @media (prefers-color-scheme: dark) {
@@ -50,12 +48,13 @@
     color: var(--color-slate-200);
   }
 
-  input,  label, button {
+  input, button {
     background-color: var(--color-neutral-800);
   }
 
-  input::placeholder {
-    color:  var(--color-slate-400);
+  input::placeholder,
+  label {
+    color: var(--color-slate-400);
   }
 
   input:focus,  

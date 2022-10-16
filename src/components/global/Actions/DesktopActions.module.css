@@ -1,23 +1,21 @@
-@media (prefers-color-scheme: light) {
-  
-}
-
-@media (prefers-color-scheme: dark) {
-  
-}
-
-.button > * {
-  transform: translateY(-2px);
-}
-
+/* For both night mode and light mode */
 .button:focus-within {
   outline: 2px solid var(--color-rose-300)
 }
 
 .primary {
   background-color: var(--color-rose-400);
+  color: var(--color-neutral-50);
 }
 
+.button:active {
+  background-color: var(--color-rose-500);
+  color: var(--color-neutral-50)
+}
+
+.button:active p {
+  color: var(--color-neutral-50)
+}
 
 .profile {
   height: 50px;
