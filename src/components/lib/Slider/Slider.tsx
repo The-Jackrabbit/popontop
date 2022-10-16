@@ -1,5 +1,5 @@
 import { ChangeEventHandler } from "react";
-import './Slider.css';
+import './Slider.module.css';
 
 export interface Props {
   label?: string;
@@ -22,7 +22,7 @@ export const Slider: React.FC<Props> = ({
     <>
       <label>{label}</label>
       <input
-        className="p-4 w-full text-lg h-12"
+        className="slider p-0 w-full text-lg h-12"
         onChange={onChange}
         placeholder={placeholder}
         type="range"

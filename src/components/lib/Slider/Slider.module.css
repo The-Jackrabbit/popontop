@@ -1,24 +1,14 @@
-input[type="range"] {
+input[type=range].slider {
   -webkit-appearance: none;
   appearance: none;
   background: transparent;
   cursor: pointer;
-  width: 15rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;;
 }
 
-input[type="range"]::after {
-  content: attr(data-value);
-  margin-left: 12px;
-  width: 50px;
-  transform: translateY(-2px);
-}
 
 /***** Thumb Styles *****/
 /***** Chrome, Safari, Opera, and Edge Chromium *****/
-input[type="range"]::-webkit-slider-thumb {
+input[type="range"].slider::-webkit-slider-thumb {
   -webkit-appearance: none; /* Override default look */
   appearance: none;
   margin-top: 0; /* Centers thumb on the track */
@@ -28,7 +18,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 /******** Firefox ********/
-input[type="range"]::-moz-range-track {
+input[type="range"].slider::-moz-range-track {
   background: #053a5f;
   height: 0.5rem;
 }

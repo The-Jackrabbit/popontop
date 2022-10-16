@@ -1,5 +1,5 @@
 import { useState } from "react";
-import './Select.css';
+import './Select.module.css';
 
 export interface Option {
   label: string;
@@ -26,15 +26,13 @@ export const Select: React.FC<Props> = ({
   const [isOpen, setIsOpen] = useState(isOpenByDefault);
 
   return (
-    <div
-      className="w-full cursor-pointer"
-      onClick={() => setIsOpen(!isOpen)}
-    >
-
+    <>
       <label>{label}</label>
       <button
         className={`${value ? 'exists' : ''} select chosen-value justify-between flex h-12 p-4 text-lg w-full border-transparent`}
         tabIndex={0}
+
+        onClick={() => setIsOpen(!isOpen)}
       >
         <div className="text">
           {value  
@@ -67,7 +65,7 @@ export const Select: React.FC<Props> = ({
           {label}
         </button>
       ))}
-    </div>
+  </>
   );
 }
 

@@ -1,0 +1,15 @@
+@media (prefers-color-scheme: light) {
+  .sidebar  {
+    border-color: var(--color-neutral-200);
+  } 
+}
+
+@media (prefers-color-scheme: dark) {
+  .sidebar  {
+    border-color: var(--color-neutral-600);
+  }
+}
+
+.sidebar > div {
+  padding: 10px 0px 10px 0px;
+}

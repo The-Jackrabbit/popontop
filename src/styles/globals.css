@@ -51,7 +51,7 @@
   }
 
   input::placeholder {
-    color:  var(--color-slate-300);
+    color:  var(--color-slate-400);
   }
 
   input:focus {

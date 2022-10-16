@@ -2,12 +2,14 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { trpc } from "../utils/trpc";
+import DesktopSidebar from "../components/global/Sidebar/DesktopSidebar";
 
 const Home: NextPage = () => {
   return (
     <>
       <div>
         💿💿
+        <DesktopSidebar />
       </div>
     </>
   );
