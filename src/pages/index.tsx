@@ -6,12 +6,20 @@ import DesktopSidebar from "../components/global/Sidebar/DesktopSidebar";
 
 const Home: NextPage = () => {
   return (
-    <>
-      <div>
-        💿💿
-        <DesktopSidebar />
+    <div className="w-screen flex justify-center ">
+      <div className="min-w-screen-md flex flex-row app">
+        <div className="sidebar-container">
+          <DesktopSidebar />
+        </div>
+        <div className="page-content">
+          <h1>hello world</h1>
+        </div>
+        <div className="border-l-2 actions-container">
+          <button>a</button>
+          <button>b</button>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 

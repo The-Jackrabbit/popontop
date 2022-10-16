@@ -37,6 +37,10 @@
 
 }
 
+.app {
+  width: 1200px
+}
+
 @media (prefers-color-scheme: dark) {
   body {
     background-color: var(--color-neutral-900);
@@ -67,8 +71,27 @@
     background: var(--color-neutral-800);
   
   }
+}
+.sidebar-container {
+  flex-basis: 30%;
+}
+.page-content {
+  flex-basis: 65%;
+}
+.actions-container {
+  flex-basis: 5%
+}
 
+@media (prefers-color-scheme: light) {
+  .actions-container  {
+    border-color: var(--color-neutral-200);
+  } 
+}
 
+@media (prefers-color-scheme: dark) {
+  .actions-container  {
+    border-color: var(--color-neutral-600);
+  }
 }
 
 input, .select {

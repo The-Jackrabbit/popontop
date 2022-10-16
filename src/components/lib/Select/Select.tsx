@@ -1,5 +1,5 @@
 import { useState } from "react";
-import './Select.module.css';
+import styles from './Select.module.css';
 
 export interface Option {
   label: string;
@@ -29,7 +29,7 @@ export const Select: React.FC<Props> = ({
     <>
       <label>{label}</label>
       <button
-        className={`${value ? 'exists' : ''} select chosen-value justify-between flex h-12 p-4 text-lg w-full border-transparent`}
+        className={`${value ? 'exists' : ''} ${styles.select} ${styles['chosen-value']} justify-between flex h-12 p-4 text-lg w-full border-transparent`}
         tabIndex={0}
 
         onClick={() => setIsOpen(!isOpen)}
@@ -43,19 +43,18 @@ export const Select: React.FC<Props> = ({
             : <p className="placeholder">{placeholder}</p>
           }
         </div>
-        <div className="caret-container">
-
-        <div className={`caret ${isOpen
-          ? 'active'
-          : 'inactive'
-        }`}>▽</div>
+        <div className={styles["caret-container"]}>
+          <div className={`${styles.caret} ${isOpen
+            ? styles.active
+            : styles.inactive
+          }`}>▽</div>
         </div>
       
       </button>
       {isOpen && options.map(({ value, label } ) => (
         <button
           key={`${value}${label}`}
-          className="text-left select option h-12 p-4 outline-none text-lg w-full mb"
+          className={`text-left ${styles.select} ${styles.option} h-12 p-4 outline-none text-lg w-full mb`}
           onClick={() => {
             setChosenValue(value);
             setIsOpen(false);
