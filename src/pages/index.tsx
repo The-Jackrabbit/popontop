@@ -7,7 +7,7 @@ import DesktopEditor from "../components/global/DesktopEditor/DesktopEditor";
 
 const Home: NextPage = () => {
   return (
-    <div className="w-screen flex justify-center ">
+    <div className="w-screen flex justify-center">
       <div className="min-w-screen-md flex flex-row app">
         <div className="sidebar-container">
           <DesktopSidebar />

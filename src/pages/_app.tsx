@@ -6,6 +6,7 @@ import type { AppType } from "next/app";
 import { trpc } from "../utils/trpc";
 import Head from "next/head";
 import "../styles/globals.css";
+import ismobile from 'is-mobile';
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -22,8 +23,12 @@ const MyApp: AppType<{ session: Session | null }> = ({
         <meta
           name="theme-color"
           media="(prefers-color-scheme: dark)"
-          content="#0f172a"
+          content="#171717"
         />
+        {ismobile() && (
+
+          <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale = 1.0, initial-scale=1.0, viewport-fit=cover" />
+        )}
         <title>popontop</title>
       </Head>
       <Component {...pageProps} />
