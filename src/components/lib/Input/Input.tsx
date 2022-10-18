@@ -15,9 +15,16 @@ export const Input: React.FC<Props> = ({
 }) => {
   return (
     <>
-      <label>{label}</label>
+      <label className="text-neutral-400">{label}</label>
       <input
-        className={`p-4 outline-none w-full text-lg justify-between flex h-12 border-transparent ${value.length > 0 ? 'has-value' : ''}`}
+        className={`
+          dark:bg-neutral-700 
+          focus-within:outline focus-within:outline-rose-200
+          mt-2 p-4 outline-none w-full h-12 
+          text-lg text-neutral-900 dark:text-white placeholder:text-neutral-400
+          flex justify-between
+          border-transparent rounded-md
+        `}
         onChange={onChange}
         placeholder={placeholder}
         value={value}

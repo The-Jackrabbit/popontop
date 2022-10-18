@@ -27,13 +27,11 @@ export const Select: React.FC<Props> = ({
     .find((option: Option): boolean => value === option.value)?.label
   return (
     <div className="flex flex-col">
-      <label className="mb-4">{label}</label>
+      <label className="text-neutral-400">{label}</label>
       <button
         className={`
-          ${value
-            ? 'bg-white dark:bg-black dark:text-neutral-50'
-            : 'bg-neutral-100 text-neutral-600 dark:bg-neutral-800 dark:text-neutral-400'
-          }
+        
+          bg-white dark:bg-neutral-600
           outline-2 outline-rose-200
           focus-within:outline focus-within:text-rose-300 
           justify-between flex
@@ -45,20 +43,19 @@ export const Select: React.FC<Props> = ({
       >
         <div className="-translate-y-1">
           {value  
-            ? <p className="text-neutral-800 dark:text-neutral-100">{selectedValueLabel}</p>
-            : <p className="text-neutral-600 dark:text-neutral-400">{placeholder}</p>
+            ? <p className="text-neutral-800 dark:text-neutral-100   dark:hover:text-white">{selectedValueLabel}</p>
+            : <p className="text-neutral-600 dark:text-neutral-400   dark:hover:text-white">{placeholder}</p>
           }
         </div>
         <div className="hover:text-rose-500 flex flex-row">
           <span
-            className={`${isOpen
-              ? 'text-rose-300'
-              : ''
-            }
-            hover:text-rose-300
-            text-neutral-600
-            -translate-y-1
-          `}>
+            className={`
+              ${value ? 'text-rose-300' : ''}
+              hover:text-rose-300
+              text-neutral-400
+              -translate-y-1
+            `}
+          >
             ▽△
           </span>
         </div>
