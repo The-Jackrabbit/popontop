@@ -22,7 +22,12 @@ export const Slider: React.FC<Props> = ({
     <>
       <label>{label}</label>
       <input
-        className={`${styles.slider} p-0 w-full text-lg h-12`}
+        className={`
+          ${styles.slider}
+          p-0 w-full text-lg h-12
+          appearance-none bg-transparent
+          cursor-pointer
+        `}
         onChange={onChange}
         placeholder={placeholder}
         type="range"

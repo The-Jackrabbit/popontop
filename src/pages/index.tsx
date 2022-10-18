@@ -3,6 +3,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { trpc } from "../utils/trpc";
 import DesktopSidebar from "../components/global/Sidebar/DesktopSidebar";
 import DesktopActions from "../components/global/Actions/DesktopActions";
+import DesktopEditor from "../components/global/DesktopEditor/DesktopEditor";
 
 const Home: NextPage = () => {
   return (
@@ -12,7 +13,7 @@ const Home: NextPage = () => {
           <DesktopSidebar />
         </div>
         <div className="p-4 page-content">
-          <h1>hello world</h1>
+          <DesktopEditor />
         </div>
        <DesktopActions />
       </div>

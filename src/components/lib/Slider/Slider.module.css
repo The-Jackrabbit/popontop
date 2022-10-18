@@ -1,11 +1,3 @@
-input[type=range].slider {
-  -webkit-appearance: none;
-  appearance: none;
-  background: transparent;
-  cursor: pointer;
-}
-
-
 /***** Thumb Styles *****/
 /***** Chrome, Safari, Opera, and Edge Chromium *****/
 input[type="range"].slider::-webkit-slider-thumb {
@@ -19,6 +11,6 @@ input[type="range"].slider::-webkit-slider-thumb {
 
 /******** Firefox ********/
 input[type="range"].slider::-moz-range-track {
-  background: #053a5f;
+  background-color: var(--color-rose-300);
   height: 0.5rem;
 }
