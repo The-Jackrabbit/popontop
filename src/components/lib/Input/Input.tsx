@@ -1,21 +1,21 @@
 import { ChangeEventHandler } from "react";
 
 export interface Props {
-  label: string;
+  label?: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
   placeholder?: string;
   value?: string;
 }
 
 export const Input: React.FC<Props> = ({
-  label = 'Label',
+  label,
   onChange,
   placeholder = 'Type here',
   value = '',
 }) => {
   return (
     <>
-      <label className="text-neutral-400">{label}</label>
+      {label ? <label className="text-neutral-400">{label}</label> : null}
       <input
         className={`
           dark:bg-neutral-700 

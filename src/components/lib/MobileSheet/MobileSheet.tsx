@@ -25,10 +25,10 @@ export const MobileSheet: React.FC<Props> = ({
       style={{ height: windowHeight, marginTop: layer*10 }}
       className={`
         overflow-y-scroll w-screen h-[${windowHeight}]
-        z-${layer*10}
+        z-${(1+layer)*10}
         shadow-inner
         fixed inset-0
-        justify-center ${isTop ? 'bg-neutral-200 dark:bg-neutral-800' : 'bg-neutral-100 dark:bg-neutral-700'}  rounded-t-2xl
+        justify-center ${isTop ? 'bg-neutral-100 dark:bg-neutral-800' : 'bg-neutral-200 dark:bg-neutral-700'}  rounded-t-2xl
       `}
     >
       <div onClick={() => onClose()} className="h-6 w-screen flex justify-center items-center">

@@ -18,7 +18,7 @@ const List: React.FC = () => {
   return (
     <div >
       {list.map((args, index) => (
-        <div key={index} className="mb-4 w-screen h-12 bg-green-300">
+        <div key={index} className="mb-4 w-screen h-12 dark:bg-neutral-300">
 
         </div>
       ))}
