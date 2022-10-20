@@ -16,7 +16,7 @@ const List: React.FC = () => {
   const [list,] = useState(generateFakeList());
 
   return (
-    <div >
+    <div className="overflow-y-scroll h-screen">
       {list.map((args, index) => (
         <div key={index} className="mb-4 w-screen h-12 dark:bg-neutral-300">
 

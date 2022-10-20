@@ -1,11 +1,10 @@
-import type { NextPage } from "next";
-import { useState } from "react";
+import { MouseEventHandler } from "react";
 
 export interface Props {
   backgroundColor: string;
   children?: React.ReactNode;
   locationOnScreen?: string;
-  onClick: () => void;
+  onClick: MouseEventHandler<HTMLButtonElement>;
 }
 
 const FloatingButton: React.FC<Props> = ({
@@ -15,12 +14,12 @@ const FloatingButton: React.FC<Props> = ({
   onClick,
 }) => {
   return (
-    <div
-      onClick={() => onClick()}
-      className={backgroundColor + " " + locationOnScreen + "  rounded-full fixed m-4"}
+    <button
+      onClick={onClick}
+      className={backgroundColor + " " + locationOnScreen + "  rounded-full absolute m-3"}
     >
       {children}
-    </div>
+    </button>
   );
 };
 

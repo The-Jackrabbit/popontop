@@ -5,6 +5,13 @@
 .app {
   width: 1200px
 }
+.sheet {
+  position: fixed;
+  left: 2vw;
+
+  width: 96vw;
+  touch-action: none;
+}
 
 @media (prefers-color-scheme: light) {
   body {

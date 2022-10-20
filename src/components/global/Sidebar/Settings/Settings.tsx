@@ -17,12 +17,12 @@ const Settings: React.FC = () => {
   return (
     <>
       <div>
-        <Input
+        {/* <Input
           label="Search"
           onChange={(event) => setSearch(event.target.value)}
           placeholder="Search albums..."
           value={search}
-        />
+        /> */}
       </div>
       <div>
         <Select

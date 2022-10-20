@@ -48,7 +48,6 @@ const SearchAlbums: React.FC<Props> = ({
     >
       <Input value={searchText} placeholder="Search Albums" onChange={(event) => onType(event)} label={""} />
 
-
       <div className="mt-4">
         <SearchResults albums={[]} isLoading={true} />
       </div>

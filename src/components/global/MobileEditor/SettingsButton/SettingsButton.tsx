@@ -1,7 +1,8 @@
 import FloatingButton from "../../../lib/FloatingButton/FloatingButton";
+import { MouseEventHandler } from "react";
 
 export interface Props {
-  onClick: () => void;
+  onClick: MouseEventHandler<HTMLButtonElement>;
 }
 
 const SettingsButton: React.FC<Props> = ({
@@ -10,9 +11,10 @@ const SettingsButton: React.FC<Props> = ({
   return (
     <FloatingButton
       backgroundColor="bg-red-300"
-      onClick={() => onClick()}
+      locationOnScreen="bottom-0 left-0"
+      onClick={(e) => onClick(e)}
     >
-      <div className="p-4 text-3xl leading-none">⚙️</div>
+      <div className="p-2 text-3xl leading-none">⚙️</div>
     </FloatingButton>
   );
 };
