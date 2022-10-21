@@ -8,6 +8,7 @@ import AddAlbumButton from "../components/global/MobileEditor/AddAlbumButton/Add
 import SearchAlbums from "../components/global/MobileEditor/SearchAlbums/SearchAlbums";
 import { a } from '@react-spring/web';
 import { useDragSheetDown } from "../frontend/hooks/use-drag-sheet-down";
+import HorizontalSwipe from "../components/mobile-editor/HorizontalSwipe/HorizontalSwipe";
 
 const Mobile: NextPage = () => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -70,7 +71,13 @@ const Mobile: NextPage = () => {
         )}
         {isSettingsOpen && (
           <div className="p-3">
-            <Settings />
+            <HorizontalSwipe>
+
+                <h1>swipe right</h1>
+                <Settings />
+                <h1>hello</h1>
+
+            </HorizontalSwipe>
           </div>
         )}
       </a.div>
