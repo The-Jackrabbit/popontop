@@ -2,7 +2,7 @@ import { useRef, useState } from 'react'
 import { useSprings, animated } from '@react-spring/web'
 import { useDrag, Vector2 } from '@use-gesture/react'
 import clamp from 'lodash.clamp'
-import { isMoreVerticalThanHorizontal } from '../../../utils/directions';
+import { isIntentionalXAxisGesture } from '../../../utils/directions';
 // import '../../../styles/globals.css';
 
 export interface Props {
@@ -20,11 +20,12 @@ export const HorizontalSwipe: React.FC<Props> = ({ children }) => {
     display: 'block',
   }));
 
-  const bind = useDrag(({ active, movement: [mx, my], direction: [xDir, yDir], cancel }) => {
-    if (isMoreVerticalThanHorizontal(mx, my)) {
+  const bind = useDrag(({ active, movement: [mx, my], direction: [xDir,], cancel }) => {
+    if (!isIntentionalXAxisGesture(mx, my)) {
       return;
     }
-    if (active && Math.abs(mx) > width / 2) {
+    const swipelengthThresholdToMoveCard = width / 3;
+    if (active && Math.abs(mx) > swipelengthThresholdToMoveCard) {
       index.current = clamp(index.current + (xDir > 0 ? -1 : 1), 0, children.length - 1)
       cancel()
     }

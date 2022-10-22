@@ -6,6 +6,7 @@ import { LoadingAlbumSearchResult } from "./LoadingAlbumSearchResult";
 export interface Props {
   albums: Album[];
   isLoading: boolean;
+  onClick: (album: Album) => void;
 }
 
 const FAKES = generateEmptyArrayOfSize<Album>({
@@ -17,7 +18,7 @@ const FAKES = generateEmptyArrayOfSize<Album>({
   }
 });
 
-export const SearchResults: React.FC<Props> = ({ albums, isLoading }) => {
+export const SearchResults: React.FC<Props> = ({ albums, isLoading, onClick }) => {
   return (
     <>
       {isLoading
@@ -48,7 +49,12 @@ export const SearchResults: React.FC<Props> = ({ albums, isLoading }) => {
                   <p>{album.name}</p>
                 </div>
 
-                <div className="dark:text-neutral-50 align-end">+</div>
+                <div
+                  onClick={() => onClick(album)}
+                  className="dark:text-neutral-50 align-end"
+                >
+                  +
+                </div>
               </div>
             ))}
           </div>

@@ -10,7 +10,7 @@ async function searchAlbums(_text: string): Promise<any> {
 }
 
 export interface Props {
-  onClick: () => void;
+  onClick: (album: Album) => void;
 }
 
 const SearchAlbums: React.FC<Props> = ({
@@ -46,7 +46,7 @@ const SearchAlbums: React.FC<Props> = ({
       <Input value={searchText} placeholder="Search Albums" onChange={(event) => onType(event)} label={""} />
 
       <div className="mt-4">
-        <SearchResults albums={data ?? []} isLoading={isLoading} />
+        <SearchResults albums={data ?? []} isLoading={isLoading} onClick={onClick} />
       </div>
     </div>
   );

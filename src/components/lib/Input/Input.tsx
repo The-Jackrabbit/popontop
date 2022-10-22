@@ -20,7 +20,7 @@ export const Input: React.FC<Props> = ({
         className={`
           dark:bg-neutral-700 
           focus-within:outline focus-within:outline-rose-200
-          mt-2 p-4 outline-none w-full h-12 
+          mt-2 p-4 outline-none w-full h-12  outline-dashed
           text-lg text-neutral-900 dark:text-white placeholder:text-neutral-400
           flex justify-between
           border-transparent rounded-md

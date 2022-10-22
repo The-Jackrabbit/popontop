@@ -9,6 +9,8 @@ import SearchAlbums from "../components/global/MobileEditor/SearchAlbums/SearchA
 import { a } from '@react-spring/web';
 import { useDragSheetDown } from "../frontend/hooks/use-drag-sheet-down";
 import HorizontalSwipe from "../components/mobile-editor/HorizontalSwipe/HorizontalSwipe";
+import MobileSettings from "../components/global/Sidebar/Settings/MobileSettings";
+import { Album } from "../types/Albums";
 
 const Mobile: NextPage = () => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -27,6 +29,8 @@ const Mobile: NextPage = () => {
     setIsSearchOpen(false);
   });
 
+  const [list, setList] = useState<Album[]>([]);
+
   return (
     <div className="flex overflow-hidden" style={{ height: windowHeight }}>
       <a.div
@@ -34,7 +38,13 @@ const Mobile: NextPage = () => {
         onClick={() => close()}
         style={{ ...bgStyle, height: windowHeight }}
       >
-        <List />
+        <List list={list} removeAlbumAtIndex={(index: number) => {
+              const newAlbums = [...list];
+              newAlbums.splice(index, 1);
+
+              setList(newAlbums);
+            }}
+        />
         <SettingsButton
           onClick={(e) => {
             e.stopPropagation();
@@ -66,19 +76,16 @@ const Mobile: NextPage = () => {
       >
         {isSearchOpen && (
           <div className="p-3">
-            <SearchAlbums onClick={() => undefined} />
+            <SearchAlbums onClick={(album: Album) => {
+              const newAlbums = [...list];
+              newAlbums.push(album);
+
+              setList(newAlbums);
+            }} />
           </div>
         )}
         {isSettingsOpen && (
-          <div className="p-3">
-            <HorizontalSwipe>
-
-                <h1>swipe right</h1>
-                <Settings />
-                <h1>hello</h1>
-
-            </HorizontalSwipe>
-          </div>
+          <MobileSettings />
         )}
       </a.div>
     </div>

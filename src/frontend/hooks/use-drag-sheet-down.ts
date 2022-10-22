@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSpring, config } from '@react-spring/web';
 import { useDrag, Vector2 } from '@use-gesture/react'
-import { isMoreHorizontalThanVertical } from '../../utils/directions';
+import { isIntentionalYAxisGesture } from '../../utils/directions';
 
 export interface Props {
   children?: React.ReactNode;
@@ -47,7 +47,7 @@ export function useDragSheetDown(height: number, onCloseCallback: () => void) {
       cancel,
       canceled
     }) => {
-      if (isMoreHorizontalThanVertical(mx, my)) {
+      if (!isIntentionalYAxisGesture(mx, my)) {
         return;
       }
       if (my < -40){
