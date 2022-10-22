@@ -87,9 +87,6 @@ export const MobileSheet: React.FC<Props> = ({
     opacity: y.to([0, height], [0.4, 1], "clamp")
   };
 
-  useEffect(() => {
-    console.log({ y });
-  }, [y]);
   return (
     <a.div
       className={`

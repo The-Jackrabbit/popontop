@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Album } from "../../../../types/Albums";
 import { fakeHttpRequest } from "../../../../utils/fake-http-request";
+import { trpc } from "../../../../utils/trpc";
 import Input from "../../../lib/Input/Input";
 import { SearchResults } from "../SearchResults/SearchResults";
 
@@ -17,18 +19,30 @@ const SearchAlbums: React.FC<Props> = ({
   const [searchText, setSearchText] = useState('');
   const [isLoading, setIsLoading] = useState(!false);
   const [timeoutId, setTimeoutId] = useState<null | NodeJS.Timeout>(null);
+  const [albums, setalbums] = useState<Album[]>([]);
+
+  const { data, refetch } = trpc.albums.search.useQuery({ text: searchText }, {
+    enabled: false, // disable this query from automatically running
+  });
 
   const search = async (text: string) => {
     console.log({ text });
     try {
       setIsLoading(true);
-      const result = await searchAlbums(text);
-    } catch {
-      console.error('There was an error thrown in the request')
+    
+      const { data } = await refetch({  });
+
+      console.log({ data })
+
+      setalbums(data as unknown as Album[]);
+    } catch (e) {
+      // debugger;
+      console.error('There was an error thrown in the')
     } finally {
       setIsLoading(false);
     }
   }
+
 
   const onType = (event: { target: { value: string; }; }) => {
     setSearchText(event.target.value)
@@ -37,7 +51,7 @@ const SearchAlbums: React.FC<Props> = ({
     }
     const newTimeoutId = setTimeout(() => {
       search(event.target.value);
-    }, 300);
+    }, 500);
 
     setTimeoutId(newTimeoutId);
   };
@@ -49,7 +63,8 @@ const SearchAlbums: React.FC<Props> = ({
       <Input value={searchText} placeholder="Search Albums" onChange={(event) => onType(event)} label={""} />
 
       <div className="mt-4">
-        <SearchResults albums={[]} isLoading={true} />
+        <code>{JSON.stringify(albums)}</code>
+        <SearchResults albums={albums} isLoading={true} />
       </div>
     </div>
   );

@@ -51,7 +51,6 @@ export function useDragSheetDown(height: number, onCloseCallback: () => void) {
         return;
       }
       if (my < -40){
-        console.log('cancel');
         cancel();
       }
 
@@ -62,7 +61,6 @@ export function useDragSheetDown(height: number, onCloseCallback: () => void) {
       }
       else {
         api.start({ y: my, immediate: true });
-        console.log({my})
       }
     },
     {

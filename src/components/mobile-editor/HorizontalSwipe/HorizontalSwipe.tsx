@@ -21,7 +21,6 @@ export const HorizontalSwipe: React.FC<Props> = ({ children }) => {
   }));
 
   const bind = useDrag(({ active, movement: [mx, my], direction: [xDir, yDir], cancel }) => {
-    // console.log({ mx, my,xDir, yDir })
     if (isMoreVerticalThanHorizontal(mx, my)) {
       return;
     }

@@ -2,10 +2,12 @@
 import { router } from "../trpc";
 import { exampleRouter } from "./example";
 import { authRouter } from "./auth";
+import { albumsRouter } from "./albums";
 
 export const appRouter = router({
   example: exampleRouter,
   auth: authRouter,
+  albums: albumsRouter,
 });
 
 // export type definition of API
