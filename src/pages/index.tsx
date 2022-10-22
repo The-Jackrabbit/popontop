@@ -4,6 +4,7 @@ import { trpc } from "../utils/trpc";
 import DesktopSidebar from "../components/global/Sidebar/DesktopSidebar";
 import DesktopActions from "../components/global/Actions/DesktopActions";
 import DesktopEditor from "../components/global/DesktopEditor/DesktopEditor";
+import Link from "next/link";
 
 const Home: NextPage = () => {
   return (
@@ -13,6 +14,7 @@ const Home: NextPage = () => {
           <DesktopSidebar />
         </div>
         <div className="p-4 page-content">
+          <Link href="/mobile">Go to mobile</Link>
           <DesktopEditor />
         </div>
        <DesktopActions />

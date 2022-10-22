@@ -1,14 +1,11 @@
 import type { NextPage } from "next";
 import { useState } from "react";
 import List from "../components/mobile-editor/List/List";
-import Settings from "../components/global/Sidebar/Settings/Settings";
-import MobileSheet from "../components/lib/MobileSheet/MobileSheet";
 import SettingsButton from "../components/global/MobileEditor/SettingsButton/SettingsButton";
 import AddAlbumButton from "../components/global/MobileEditor/AddAlbumButton/AddAlbumButton";
 import SearchAlbums from "../components/global/MobileEditor/SearchAlbums/SearchAlbums";
 import { a } from '@react-spring/web';
 import { useDragSheetDown } from "../frontend/hooks/use-drag-sheet-down";
-import HorizontalSwipe from "../components/mobile-editor/HorizontalSwipe/HorizontalSwipe";
 import MobileSettings from "../components/global/Sidebar/Settings/MobileSettings";
 import { Album } from "../types/Albums";
 
@@ -32,18 +29,20 @@ const Mobile: NextPage = () => {
   const [list, setList] = useState<Album[]>([]);
 
   return (
-    <div className="flex overflow-hidden" style={{ height: windowHeight }}>
+    <div className="flex overflow-hidden " style={{ height: windowHeight }}>
       <a.div
-        className="w-screen"
+        className="w-screen p-4"
         onClick={() => close()}
         style={{ ...bgStyle, height: windowHeight }}
       >
-        <List list={list} removeAlbumAtIndex={(index: number) => {
-              const newAlbums = [...list];
-              newAlbums.splice(index, 1);
+        <List
+          list={list}
+          removeAlbumAtIndex={(index: number) => {
+            const newAlbums = [...list];
+            newAlbums.splice(index, 1);
 
-              setList(newAlbums);
-            }}
+            setList(newAlbums);
+          }}
         />
         <SettingsButton
           onClick={(e) => {

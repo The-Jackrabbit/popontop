@@ -10,24 +10,39 @@ const List: React.FC<Props> = ({ list, removeAlbumAtIndex }) => {
   return (
     <div className="overflow-y-scroll h-screen">
       {list.map((album, index) => (
-        <div key={index} className="mb-4 w-screen h-12 dark:bg-neutral-300">
-           <div
-                key={JSON.stringify(album) + index}
-            className="
-              flex flex-row
-              dark:border-neutral-200 border-b pb-2 mb-2
-            "
-          >
-            <div>
-              <Image width="50" height="50" src={album.imageUrl} alt={album.artist} />
-            </div>
-            <div className="pl-4 basis-10/12">
-              <p>{album.artist}</p>
-              <p>{album.name}</p>
-            </div>
-
-            <div className="dark:text-neutral-50 align-end" onClick={() => removeAlbumAtIndex(index)}>-</div>
+        <div
+          key={JSON.stringify(album) + index}
+          className="
+            flex flex-row
+            dark:border-neutral-200 border-b pb-2 mb-2
+            w-full justify-between
+          "
+        >
+          <div>
+            <Image width="50" height="50" src={album.imageUrl} alt={album.artist} />
           </div>
+          <div className="pl-4 basis-8/12">
+            <p>{album.artist}</p>
+            <p>{album.name}</p>
+          </div>
+
+          <div className="basis-2/12 flex justify-end">
+            <div
+              onClick={() => removeAlbumAtIndex(index)}
+              className="
+                flex justify-center content-center
+                circle-button
+                border
+                h-6 w-6 leading-6 text-xs
+                rounded-full
+                dark:border-neutral-300
+                dark:text-neutral-50
+              "
+            >
+              -
+            </div>
+          </div>
+          
         </div>
       ))}
     </div>

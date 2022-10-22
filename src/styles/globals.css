@@ -23,7 +23,7 @@
 .sheet {
   position: fixed;
   left: 2vw;
-
+  height: calc(100vh + 100px);
   width: 96vw;
   touch-action: none;
 }

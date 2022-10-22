@@ -33,7 +33,7 @@ export function useDragSheetDown(height: number, onCloseCallback: () => void) {
 
   useEffect(() => {
     if (window) {
-      open({ canceled: false });
+      // open({ canceled: false });
       setWindowHeight(`${window.innerHeight}px`)
     }
   }, []); 
