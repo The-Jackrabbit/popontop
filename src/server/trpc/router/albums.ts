@@ -2,6 +2,7 @@ import { router, publicProcedure } from "../trpc";
 import { z } from "zod";
 import axios from 'axios';
 import { env } from "../../../env/server.mjs";
+import { Album, LastFmAlbum } from "../../../types/Albums";
 
 export const albumsRouter = router({
   search: publicProcedure
@@ -11,24 +12,6 @@ export const albumsRouter = router({
       return t;
     }),
 });
-
-export interface LastFmAlbumImage {
-  '#text': string;
-}
-
-export interface LastFmAlbum {
-  image: [LastFmAlbumImage, LastFmAlbumImage, LastFmAlbumImage];
-  name: string;
-  artist: string;
-  mbid: string;
-}
-
-export interface Album {
-  imageUrl: string;
-  name: string;
-  artist: string;
-  lastfmId: string;
-}
 
 
 const albums = async (input: string): Promise<Album[]> => {
