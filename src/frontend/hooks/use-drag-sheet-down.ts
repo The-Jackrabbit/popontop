@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSpring, config } from '@react-spring/web';
-import { useDrag } from '@use-gesture/react'
+import { useDrag, Vector2 } from '@use-gesture/react'
+import { isMoreHorizontalThanVertical } from '../../utils/directions';
 
 export interface Props {
   children?: React.ReactNode;
@@ -42,10 +43,13 @@ export function useDragSheetDown(height: number, onCloseCallback: () => void) {
       last,
       velocity: [, vy],
       direction: [, dy],
-      movement: [, my],
+      movement: [mx, my],
       cancel,
       canceled
     }) => {
+      if (isMoreHorizontalThanVertical(mx, my)) {
+        return;
+      }
       if (my < -40){
         console.log('cancel');
         cancel();
@@ -65,6 +69,7 @@ export function useDragSheetDown(height: number, onCloseCallback: () => void) {
       from: () => [0, y.get()],
       filterTaps: true,
       bounds: { top: 0 },
+      threshold: [100, 0] as Vector2,
       rubberband: true
     }
   );

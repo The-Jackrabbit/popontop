@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react'
 import { useSprings, animated } from '@react-spring/web'
-import { useDrag } from '@use-gesture/react'
+import { useDrag, Vector2 } from '@use-gesture/react'
 import clamp from 'lodash.clamp'
+import { isMoreVerticalThanHorizontal } from '../../../utils/directions';
 // import '../../../styles/globals.css';
 
 export interface Props {
@@ -19,7 +20,11 @@ export const HorizontalSwipe: React.FC<Props> = ({ children }) => {
     display: 'block',
   }));
 
-  const bind = useDrag(({ active, movement: [mx], direction: [xDir], cancel }) => {
+  const bind = useDrag(({ active, movement: [mx, my], direction: [xDir, yDir], cancel }) => {
+    // console.log({ mx, my,xDir, yDir })
+    if (isMoreVerticalThanHorizontal(mx, my)) {
+      return;
+    }
     if (active && Math.abs(mx) > width / 2) {
       index.current = clamp(index.current + (xDir > 0 ? -1 : 1), 0, children.length - 1)
       cancel()
@@ -33,6 +38,10 @@ export const HorizontalSwipe: React.FC<Props> = ({ children }) => {
       setFocusedIndex(index.current)
       return { x, scale, display: 'block' }
     })
+  }, {
+    filterTaps: true,
+    rubberband: true,
+    threshold: [0, 100] as Vector2,
   });
 
   return (
@@ -40,10 +49,8 @@ export const HorizontalSwipe: React.FC<Props> = ({ children }) => {
       <div className="w-full h-full overflow-hidden" >
         {props.map(({ x, display, scale }, i) => (
           <animated.div  key={i} className="page" {...bind()} style={{ display, x }}>
-            <animated.div style={{ scale }} >
-              <animated.div style={{  scale, }}>
-                {children[i]}
-              </animated.div>
+            <animated.div style={{  scale, }}>
+              {children[i]}
             </animated.div>
           </animated.div>
         ))}

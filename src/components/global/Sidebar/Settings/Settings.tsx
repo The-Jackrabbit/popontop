@@ -16,15 +16,6 @@ const Settings: React.FC = () => {
 
   return (
     <>
-      <div>
-        {/* <Input
-          label="Search"
-          onChange={(event) => setSearch(event.target.value)}
-          placeholder="Search albums..."
-          value={search}
-        /> */}
-      </div>
-      <div>
         <Select
           options={[
             {
@@ -46,8 +37,8 @@ const Settings: React.FC = () => {
           placeholder="Chart type"
           isOpenByDefault={false}
         />
-      </div>
-      <div>
+      
+      
         <Select
           options={[
             {
@@ -65,8 +56,8 @@ const Settings: React.FC = () => {
           placeholder="Show title?"
           isOpenByDefault={false}
         />
-      </div>
-      <div>
+      
+      
         <Select
           options={[
             {
@@ -84,8 +75,8 @@ const Settings: React.FC = () => {
           placeholder="List albums?"
           isOpenByDefault={false}
         />
-      </div>
-      <div>
+      
+      
         <Slider
           min={0}
           max={10}
@@ -93,16 +84,16 @@ const Settings: React.FC = () => {
           label="Album padding"
           value={albumPadding}
         />
-      </div>
-      <div>
+      
+      
         <Input
           label={'Border color'}
           onChange={(event) => setBorderColor(event.target.value)}
           placeholder="#adf2da"
           value={borderColor}
         />
-      </div>
-      <div>
+      
+      
         <Slider
           min={0}
           max={10}
@@ -110,23 +101,23 @@ const Settings: React.FC = () => {
           label="Border size"
           value={borderSize}
         />
-      </div>
-      <div>
+      
+      
         <Input
           label="Background color"
           onChange={(event) => setBackgroundColor(event?.target.value)}
           placeholder="#adf2da"
           value={backgroundColor}
         />
-      </div>
-      <div>
+      
+      
         <Input
           label="Text color"
           onChange={(event) => setTextColor(event?.target.value)}
           placeholder="#adf2da"
           value={textColor}
         />
-      </div>
+      
     </>
   );
 };

@@ -15,9 +15,10 @@
 
 .page {
   position: absolute;
-  width: 90%;
   height: 90%;
   touch-action: none;
+  left: 0;
+    right: 0;
 }
 
 .page > div {
