@@ -43,6 +43,28 @@ const Mobile: NextPage = () => {
 
             setList(newAlbums);
           }}
+          advanceAlbumAtIndex={(index: number) => {
+            const newAlbums = [...list];
+            if (index === 0) {
+              return;
+            }
+            const temp = newAlbums[index] as Album;
+            newAlbums[index] = newAlbums[index-1] as Album;
+            newAlbums[index - 1] = temp as Album;
+
+            setList(newAlbums);
+          }}
+          lowerAlbumAtIndex={(index: number) => {
+            const newAlbums = [...list];
+            if (index === list.length - 1) {
+              return;
+            }
+            const temp = newAlbums[index] as Album;
+            newAlbums[index] = newAlbums[index+1] as Album;
+            newAlbums[index + 1] = temp as Album;
+
+            setList(newAlbums);
+          }}
         />
         <SettingsButton
           onClick={(e) => {

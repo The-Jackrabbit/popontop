@@ -38,7 +38,7 @@ export const SearchResults: React.FC<Props> = ({ albums, isLoading, onClick }) =
                 key={JSON.stringify(album) + index}
                 className="
                   flex flex-row
-                  dark:border-neutral-200 border-b pb-2 mb-2
+                  dark:border-neutral-500 border-b pb-2 mb-2
                   w-full justify-between
                 "
               >

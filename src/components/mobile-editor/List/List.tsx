@@ -4,9 +4,11 @@ import Image from "next/image";
 export interface Props {
   list: Album[];
   removeAlbumAtIndex: (index: number) => void;
+  advanceAlbumAtIndex: (index: number) => void;
+  lowerAlbumAtIndex: (index: number) => void;
 }
 
-const List: React.FC<Props> = ({ list, removeAlbumAtIndex }) => {
+const List: React.FC<Props> = ({ list, removeAlbumAtIndex, advanceAlbumAtIndex, lowerAlbumAtIndex}) => {
   return (
     <div className="overflow-y-scroll h-screen">
       {list.map((album, index) => (
@@ -14,10 +16,18 @@ const List: React.FC<Props> = ({ list, removeAlbumAtIndex }) => {
           key={JSON.stringify(album) + index}
           className="
             flex flex-row
-            dark:border-neutral-200 border-b pb-2 mb-2
+            dark:border-neutral-500 border-b pb-2 mb-2
             w-full justify-between
           "
         >
+          <div>
+            <div  className="dark:text-neutral-200 text-neutral-600" onClick={() => advanceAlbumAtIndex(index)}>
+              ^
+            </div>
+            <div className="dark:text-neutral-200 text-neutral-600"  onClick={() => lowerAlbumAtIndex(index)}>
+              v
+            </div>
+          </div>
           <div>
             <Image width="50" height="50" src={album.imageUrl} alt={album.artist} />
           </div>
