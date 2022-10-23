@@ -30,7 +30,7 @@ export const Multiple: ComponentStory<typeof ListRow> = () => {
     { name: 'pear' },
   ]);
   return (
-    <div className="m-4">
+    <div className="m-4 w-96 overflow-x-hidden">
       {ALBUM_RESULTS.map((album, index) => (
         <ListRow
           key={JSON.stringify(album) + index}

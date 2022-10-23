@@ -7,6 +7,17 @@ import { useSpring, animated } from '@react-spring/web'
 import React, { useEffect, useRef, useState } from "react";
 import Image from 'next/image';
 import { Album } from '../../../../types/Albums';
+import { useDrag } from '@use-gesture/react';
+import { isIntentionalXAxisGesture } from '../../../../utils/directions';
+
+const left = {
+  bg: `linear-gradient(120deg, #f093fb 0%, #f5576c 100%)`,
+  justifySelf: 'end',
+}
+const right = {
+  bg: `linear-gradient(120deg, #96fbc4 0%, #f9f586 100%)`,
+  justifySelf: 'start',
+}
 
 export interface Props {
   album: Album;
@@ -23,26 +34,105 @@ export const ListRow: React.FC<Props> = ({
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [isBreakVisible, setIsBreakVisible] = useState(!isLastRowInList);
+  const [layerActionText, setlayerActionText] = useState('🗑')
   const [style, animate] = useSpring(() => ({
     height: "50px",
     onRest: () => {
-      setIsBreakVisible(false);
       removeSelfFromList();
     }
   }), []);
 
   const toggleRowVisibility = () => {
+
+    setIsBreakVisible(false);
     animate({
       height: "0px",
     });
   }
 
+  const [{ x, bg, height, justifySelf }, api] = useSpring(() => ({
+    x: 0,
+    height: 50,
+    ...left,
+  }))
+  const bind = useDrag(({ active, cancel, movement: [mx, my] }) => {
+    if (!isIntentionalXAxisGesture(mx, my)) {
+      return;
+    }
+
+    if (layerActionText === '🗑' && mx > 0) {
+      setlayerActionText('ℹ️');
+    }
+
+    if (layerActionText === 'ℹ️' && mx < 0) {
+      setlayerActionText('🗑');
+    }
+
+    const swipelengthThresholdToMoveCard = 50;
+    if (!active && mx < 0 && Math.abs(mx) > swipelengthThresholdToMoveCard) {
+      toggleRowVisibility();
+      setlayerActionText('');
+      api.start({
+        x: 400,
+        height: 0,
+        immediate: true,
+      });
+      cancel();
+      return;
+    }
+
+
+    if (!active && mx > 0 && Math.abs(mx) > swipelengthThresholdToMoveCard) {
+      alert(JSON.stringify({...album, mx }))
+      // cancel();
+      api.start({
+        x: 0,
+        ...(mx < 0 ? left : right),
+        immediate: true,
+      });
+      return;
+    }
+
+    api.start({
+      x: active ? mx : 0,
+      ...(mx < 0 ? left : right),
+      immediate: name => active && name === 'x',
+    });
+  });
+
+  const avSize = x.to({
+    map: Math.abs,
+    range: [50, 300],
+    output: [1, 1],
+    extrapolate: 'clamp',
+  })
+
   return (
     <>
-      <div className="h-full">
+      <animated.div 
+        {...bind()}
+        className="
+          touch-pan-x
+          px-6 h-12
+          relative 
+          grid items-center
+          origin-[50%_50%_0px]
+        "
+        style={{
+          background: bg,
+          ...style,
+        }}
+      >
+        <animated.div style={{ scale: avSize, justifySelf }}>
+          {layerActionText}
+        </animated.div>
         <animated.div
+
+        ref={ref}
           className={`
-            h-8 xs:h-12 sm:h-14 md:h-16 lg:h-18
+            absolute
+            bg-neutral-100 dark:bg-neutral-900
+            h-[50px]
             overflow-hidden w-full
             last-of-type:border-b-0
             text-neutral-900 dark:text-neutral-50
@@ -50,9 +140,9 @@ export const ListRow: React.FC<Props> = ({
             gap-2 my-0
           `}
           style={{
-            ...style,
+            x,
+            height,
           }}
-          ref={ref}
         >
           <div className="basis-12 grow-0">
             <Image width="50" height="50" src={album.imageUrl} alt={album.artist} />
@@ -64,7 +154,7 @@ export const ListRow: React.FC<Props> = ({
           </div>
 
           <div className="grow-0 flex items-center">
-            <button
+            {/* <button
               onClick={() => toggleRowVisibility()}
               className="
                 border
@@ -76,10 +166,10 @@ export const ListRow: React.FC<Props> = ({
               "
             >
               +
-            </button>
+            </button> */}
           </div>
         </animated.div>
-      </div>
+      </animated.div>
       {isBreakVisible && (<hr className="my-1 border-neutral-300 dark:border-neutral-600" />)}
     </>
   )
