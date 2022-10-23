@@ -30,14 +30,6 @@ export const ListRow: React.FC<Props> = ({
       removeSelfFromList();
     }
   }), []);
- 
-  /**
-   * The HTMLElement.offsetHeight read-only property returns the height of an element,
-   * including vertical padding and borders, as an integer.
-   */
-  // useEffect(() => {
-    
-  // }, [animate, ref, toggle, isLastRowInList]);
 
   const toggleRowVisibility = () => {
     animate({
@@ -55,7 +47,7 @@ export const ListRow: React.FC<Props> = ({
             last-of-type:border-b-0
             text-neutral-900 dark:text-neutral-50
             flex justify-between
-            gap-2 my-1
+            gap-2 my-0
           `}
           style={{
             ...style,
@@ -88,7 +80,7 @@ export const ListRow: React.FC<Props> = ({
           </div>
         </animated.div>
       </div>
-      {isBreakVisible && (<hr className="border-neutral-300 dark:border-neutral-600" />)}
+      {isBreakVisible && (<hr className="my-1 border-neutral-300 dark:border-neutral-600" />)}
     </>
   )
 }
