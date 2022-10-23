@@ -1,13 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Album } from "../../../../types/Albums";
-import { fakeHttpRequest } from "../../../../utils/fake-http-request";
 import { trpc } from "../../../../utils/trpc";
 import Input from "../../../lib/Input/Input";
-import { SearchResults } from "../SearchResults/SearchResults";
-
-async function searchAlbums(_text: string): Promise<any> {
-  await fakeHttpRequest({ albums: []})
-}
+import { SearchResults } from "./SearchResults/SearchResults";
 
 export interface Props {
   onClick: (album: Album) => void;
@@ -40,9 +35,7 @@ const SearchAlbums: React.FC<Props> = ({
   };
 
   return (
-    <div
-      className="h-14 w-full bg-red-red-400"
-    >
+    <div className="h-14 w-full bg-red-red-400">
       <Input value={searchText} placeholder="Search Albums" onChange={(event) => onType(event)} label={""} />
 
       <div className="mt-4">

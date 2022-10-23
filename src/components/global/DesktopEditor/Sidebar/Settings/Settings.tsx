@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Select from "../../../../components/lib/Select/Select";
-import Slider from "../../../../components/lib/Slider/Slider";
-import Input from "../../../../components/lib/Input/Input";
+import Select from "../../../../lib/Select/Select";
+import Slider from "../../../../lib/Slider/Slider";
+import Input from "../../../../lib/Input/Input";
 
 const Settings: React.FC = () => {
   const [search, setSearch] = useState('');

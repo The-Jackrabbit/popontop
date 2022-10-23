@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { Album } from "../../../../types/Albums"
-import { generateEmptyArrayOfSize } from "../../../../utils/generate-fake-data-in-list";
+import { Album } from "../../../../../types/Albums"
+import { generateEmptyArrayOfSize } from "../../../../../utils/generate-fake-data-in-list";
 import { LoadingAlbumSearchResult } from "./LoadingAlbumSearchResult";
 
 export interface Props {

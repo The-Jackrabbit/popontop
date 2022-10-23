@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import Input from '../../lib/Input/Input';
-import Select from '../../lib/Select/Select';
-import Slider from '../../lib/Slider/Slider';
+import Input from '../../../lib/Input/Input';
+import Select from '../../../lib/Select/Select';
+import Slider from '../../../lib/Slider/Slider';
 import styles from './DesktopSidebar.module.css';
 
 export const DesktopSidebar: React.FC = () => {

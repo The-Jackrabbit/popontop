@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { trpc } from "../utils/trpc";
-import DesktopSidebar from "../components/global/Sidebar/DesktopSidebar";
-import DesktopActions from "../components/global/Actions/DesktopActions";
+import DesktopSidebar from "../components/global/DesktopEditor/Sidebar/DesktopSidebar";
+import DesktopActions from "../components/global/DesktopEditor/Actions/DesktopActions";
 import DesktopEditor from "../components/global/DesktopEditor/DesktopEditor";
 import Link from "next/link";
 

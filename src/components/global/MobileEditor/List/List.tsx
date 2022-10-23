@@ -1,4 +1,4 @@
-import { Album } from "../../../types/Albums";
+import { Album } from "../../../../types/Albums";
 import Image from "next/image";
 
 export interface Props {

@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Select from "../../../lib/Select/Select";
-import Slider from "../../../lib/Slider/Slider";
-import Input from "../../../lib/Input/Input";
-import HorizontalSwipe from "../../../mobile-editor/HorizontalSwipe/HorizontalSwipe";
+import Select from "../../../../lib/Select/Select";
+import Slider from "../../../../lib/Slider/Slider";
+import Input from "../../../../lib/Input/Input";
+import HorizontalSwipe from "../../../../lib/HorizontalSwipe/HorizontalSwipe";
 import Settings from "./Settings";
 
 export const MobileSettings: React.FC = () => {
