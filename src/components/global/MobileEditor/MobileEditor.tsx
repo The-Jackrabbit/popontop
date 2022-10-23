@@ -87,9 +87,12 @@ const MobileEditor: NextPage = () => {
           {isSearchOpen && (
             <SearchAlbums
               onClick={(album: Album) => {
-                const newAlbums = [...list];
-                newAlbums.push(album);
-                setList(newAlbums);
+                setList((albums) => {
+                  const newAlbums = [...albums];
+                  newAlbums.push(album);
+
+                  return newAlbums;
+                });
               }}
             />
           )}

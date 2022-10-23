@@ -70,14 +70,15 @@ export const ListRow: React.FC<Props> = ({
 
     const swipelengthThresholdToMoveCard = 50;
     if (!active && mx < 0 && Math.abs(mx) > swipelengthThresholdToMoveCard) {
-      toggleRowVisibility();
-      setlayerActionText('');
+
       api.start({
         x: 400,
         height: 0,
         immediate: true,
       });
       cancel();
+      toggleRowVisibility();
+      setlayerActionText('');
       return;
     }
 
@@ -131,7 +132,7 @@ export const ListRow: React.FC<Props> = ({
         ref={ref}
           className={`
             absolute
-            bg-neutral-100 dark:bg-neutral-900
+            bg-neutral-50 dark:bg-neutral-900
             h-[50px]
             overflow-hidden w-full
             last-of-type:border-b-0

@@ -14,7 +14,7 @@ const SearchAlbums: React.FC<Props> = ({
   const [searchText, setSearchText] = useState('');
   const [timeoutId, setTimeoutId] = useState<null | NodeJS.Timeout>(null);
 
-  const { data, isLoading, refetch } = trpc.albums.search.useQuery({ text: searchText }, {
+  const { data, isLoading, refetch, isFetching } = trpc.albums.search.useQuery({ text: searchText }, {
     enabled: false, // disable this query from automatically running
   });
 
@@ -39,7 +39,7 @@ const SearchAlbums: React.FC<Props> = ({
       <Input value={searchText} placeholder="Search Albums" onChange={(event) => onType(event)} label={""} />
 
       <div className="mt-4">
-        <SearchResults albums={data ?? []} isLoading={isLoading} onClick={onClick} />
+        <SearchResults albums={data ?? []} isLoading={isLoading && isFetching} onClick={onClick} />
       </div>
     </div>
   );

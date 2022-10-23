@@ -1,0 +1,1 @@
+- For the shrinking rows https://codesandbox.io/s/9ifsb?file=/src/App.js
