@@ -29,7 +29,7 @@ export const MobileSearchResult: React.FC<Props> = ({
       <animated.div
         style={style}
         className={`
-          bg-neutral-100 dark:bg-neutral-900
+          bg-neutral-100 dark:bg-neutral-800
           overflow-hidden w-full
           last-of-type:border-b-0
           text-neutral-900 dark:text-neutral-50
