@@ -22,10 +22,10 @@ const List: React.FC<Props> = ({ list, removeAlbumAtIndex, advanceAlbumAtIndex, 
         >
           <div>
             <div  className="dark:text-neutral-200 text-neutral-600" onClick={() => advanceAlbumAtIndex(index)}>
-              ^
+              👆
             </div>
             <div className="dark:text-neutral-200 text-neutral-600"  onClick={() => lowerAlbumAtIndex(index)}>
-              v
+              👇
             </div>
           </div>
           <div>
