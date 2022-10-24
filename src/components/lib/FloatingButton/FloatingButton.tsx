@@ -16,7 +16,7 @@ const FloatingButton: React.FC<Props> = ({
   return (
     <button
       onClick={onClick}
-      className={backgroundColor + " " + locationOnScreen + " rounded-full absolute m-3"}
+      className={backgroundColor + " " + locationOnScreen + " rounded-full p-3 absolute m-3"}
     >
       {children}
     </button>

@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { a } from "react-spring";
 import { useDragSheetDown } from "../../../frontend/hooks/use-drag-sheet-down";
 import { Album } from "../../../types/Albums";
@@ -29,6 +29,10 @@ const MobileEditor: NextPage = () => {
 
   const [list, setList] = useState<Album[]>([]);
 
+  useEffect(() => {
+    console.log({list})
+  }, [list]);
+
   return (
     <div className="flex overflow-hidden " style={{ height: windowHeight }}>
       <a.div
@@ -39,10 +43,13 @@ const MobileEditor: NextPage = () => {
         <List
           list={list}
           removeAlbumAtIndex={(index: number) => {
-            const newAlbums = [...list];
-            newAlbums.splice(index, 1);
+            setList((list) =>{
+              debugger;
+              const newAlbums = [...list];
+              newAlbums.splice(index, 1);
 
-            setList(newAlbums);
+              return newAlbums;
+            });
           }}
           advanceAlbumAtIndex={(index: number) => {
             const newAlbums = [...list];
