@@ -37,7 +37,7 @@ export const ListRow: React.FC<Props> = ({
     isBreakVisible,
     style,
     toggleRowVisibility,
-  } = useDisappearRow( {isLastRowInList, onClick: () => undefined });
+  } = useDisappearRow( { frequency: 10 , isLastRowInList, onClick: () => undefined });
 
   const leftSwipeAction = () => {
     toggleRowVisibility();
