@@ -9,6 +9,8 @@ import Image from 'next/image';
 import { Album } from '../../../../types/Albums';
 import { useDrag } from '@use-gesture/react';
 import { isIntentionalXAxisGesture } from '../../../../utils/directions';
+import { useRowSwipeActions } from '../../../../frontend/hooks/use-row-swipe-actions';
+import { useDisappearRow } from '../../../../frontend/hooks/use-disappear-row';
 
 const left = {
   bg: `linear-gradient(120deg, #f093fb 0%, #f5576c 100%)`,
@@ -28,85 +30,32 @@ export interface Props {
 
 export const ListRow: React.FC<Props> = ({
   album,
-  children,
   isLastRowInList = true,
   removeSelfFromList = () => undefined,
 }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const [isBreakVisible, setIsBreakVisible] = useState(!isLastRowInList);
-  const [layerActionText, setlayerActionText] = useState('🗑')
-  const [style, animate] = useSpring(() => ({
-    height: "50px",
-    onRest: () => {
-      removeSelfFromList();
-    }
-  }), []);
+  const {
+    isBreakVisible,
+    style,
+    toggleRowVisibility,
+  } = useDisappearRow( {isLastRowInList, onClick: () => undefined });
 
-  const toggleRowVisibility = () => {
+  const leftSwipeAction = () => {
+    toggleRowVisibility();
+    removeSelfFromList();
+  };
 
-    setIsBreakVisible(false);
-    animate({
-      height: "0px",
-    });
-  }
+  const rightSwipeAction = () => {
+    alert(JSON.stringify(album));
+  };
 
-  const [{ x, bg, height, justifySelf }, api] = useSpring(() => ({
-    x: 0,
-    height: 50,
-    ...left,
-  }))
-  const bind = useDrag(({ active, cancel, movement: [mx, my] }) => {
-    if (!isIntentionalXAxisGesture(mx, my)) {
-      return;
-    }
-
-    if (layerActionText === '🗑' && mx > 0) {
-      setlayerActionText('ℹ️');
-    }
-
-    if (layerActionText === 'ℹ️' && mx < 0) {
-      setlayerActionText('🗑');
-    }
-
-    const swipelengthThresholdToMoveCard = 50;
-    if (!active && mx < 0 && Math.abs(mx) > swipelengthThresholdToMoveCard) {
-
-      api.start({
-        x: 400,
-        height: 0,
-        immediate: true,
-      });
-      cancel();
-      toggleRowVisibility();
-      setlayerActionText('');
-      return;
-    }
-
-
-    if (!active && mx > 0 && Math.abs(mx) > swipelengthThresholdToMoveCard) {
-      alert(JSON.stringify({...album, mx }))
-      // cancel();
-      api.start({
-        x: 0,
-        ...(mx < 0 ? left : right),
-        immediate: true,
-      });
-      return;
-    }
-
-    api.start({
-      x: active ? mx : 0,
-      ...(mx < 0 ? left : right),
-      immediate: name => active && name === 'x',
-    });
+  const {
+    bind,
+    layerActionText,
+    x, bg, height, justifySelf,
+  } = useRowSwipeActions({
+    leftSwipeAction,
+    rightSwipeAction,
   });
-
-  const avSize = x.to({
-    map: Math.abs,
-    range: [50, 300],
-    output: [1, 1],
-    extrapolate: 'clamp',
-  })
 
   return (
     <>
@@ -124,12 +73,10 @@ export const ListRow: React.FC<Props> = ({
           ...style,
         }}
       >
-        <animated.div style={{ scale: avSize, justifySelf }}>
+        <animated.div style={{ justifySelf }}>
           {layerActionText}
         </animated.div>
         <animated.div
-
-        ref={ref}
           className={`
             absolute
             bg-neutral-50 dark:bg-neutral-900
@@ -155,19 +102,7 @@ export const ListRow: React.FC<Props> = ({
           </div>
 
           <div className="grow-0 flex items-center">
-            {/* <button
-              onClick={() => toggleRowVisibility()}
-              className="
-                border
-                h-6 w-6 p-0 text-sm
-                rounded-full
-                hover:bg-rose-300
-                border-neutral-400 dark:border-neutral-400 hover:border-rose-300
-                text-neutral-400 dark:text-neutral-400 hover:text-neutral-50 
-              "
-            >
-              +
-            </button> */}
+            
           </div>
         </animated.div>
       </animated.div>
@@ -177,11 +112,3 @@ export const ListRow: React.FC<Props> = ({
 }
 
 export default ListRow;
-
-export const getBottomBorderWidth = (toggle: boolean, isLastRowInList: boolean): string => {
-  if (isLastRowInList) {
-    return '0px'
-  }
-
-  return  toggle ? '1px' : '0px';
-}

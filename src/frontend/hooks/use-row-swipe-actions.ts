@@ -51,7 +51,7 @@ export const useRowSwipeActions = ({
         immediate: name => active && name === 'x',
       });
     }
-    
+    cancel();
     const isSwipeLengthOverThreshold = Math.abs(mx) > swipeLengthThreshold;
 
     if (!isSwipeLengthOverThreshold) {
@@ -59,21 +59,23 @@ export const useRowSwipeActions = ({
     }
 
     const finalizeActionAnimations = {
-      x: mx < 0 ? 400 : 0,
+      x: mx > 0 ? 400 : 0,
       height: 0,
       immediate: true,
     };
 
-    api.start(finalizeActionAnimations);
     if (mx < 0) {
       leftSwipeAction();
     } else {
       rightSwipeAction();
     }
+
+    api.start(finalizeActionAnimations);
   });
 
   return {
     bind,
+    layerActionText,
     x, bg, height, justifySelf,
   }
 }

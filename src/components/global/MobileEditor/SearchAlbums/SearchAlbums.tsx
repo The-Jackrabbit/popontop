@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { LOCAL_ALBUM_RESULTS } from "../../../../constants/test-data/search-results";
 import { Album } from "../../../../types/Albums";
 import { trpc } from "../../../../utils/trpc";
 import Input from "../../../lib/Input/Input";
@@ -17,9 +18,13 @@ const SearchAlbums: React.FC<Props> = ({
   const { data, isLoading, refetch, isFetching } = trpc.albums.search.useQuery({ text: searchText }, {
     enabled: false, // disable this query from automatically running
   });
+  // const isLoading = false;
+  // const isFetching = false;
+  // const [data, setData] = useState<Album[]>([]);
 
   const search = async () => {
     await refetch({});
+    // setData([...LOCAL_ALBUM_RESULTS])
   }
 
   const onType = (event: { target: { value: string; }; }) => {

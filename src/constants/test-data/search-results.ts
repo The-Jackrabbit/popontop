@@ -1,3 +1,4 @@
+
 import { Album } from "../../types/Albums";
 
 export const ALBUM_RESULTS: Album[] = [
@@ -62,3 +63,30 @@ export const ALBUM_RESULTS: Album[] = [
     name: 'ágætis byrjun',
   },
 ]
+
+function makeStringFileSafe(str: string): string {
+  let s = '';
+  for (let index = 0; index < str.length; index++) {
+    const letter = str[index];
+    if (letter === ' ') {
+      s += '_';
+    } else if (letter === '"' || letter === "'") {
+      s += '';
+    } else {
+      s += letter;
+    }
+  }
+
+  return s;
+}
+
+function makeLocalPath(albumName: string): string {
+  const localImageName = makeStringFileSafe(albumName);
+
+  return `/assets/${localImageName}.png`;
+}
+
+export const LOCAL_ALBUM_RESULTS = ALBUM_RESULTS.map((album) => ({
+  ...album,
+  imageUrl: makeLocalPath(album.name)
+}))
