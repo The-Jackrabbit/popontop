@@ -22,7 +22,7 @@ export interface Props {
 export const useRowSwipeActions = ({
   leftSwipeAction,
   rightSwipeAction,
-  swipeLengthThreshold = 100,
+  swipeLengthThreshold = 150,
 }: Props) => {
   const [layerActionText, setlayerActionText] = useState('🗑');
   const [{ x, bg, height, justifySelf }, api] = useSpring(() => ({
@@ -31,7 +31,7 @@ export const useRowSwipeActions = ({
     ...left,
   }));
 
-  const bind = useDrag(({ intentional, active, movement: [mx, my] }) => {
+  const bind = useDrag(({ active, movement: [mx, my] }) => {
     if (!isIntentionalXAxisGesture(mx, my)) {
       return;
     }
