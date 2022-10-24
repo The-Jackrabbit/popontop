@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import { useEffect, useState } from "react";
 import { a } from "react-spring";
+import { ALBUM_RESULTS } from "../../../constants/test-data/search-results";
 import { useDragSheetDown } from "../../../frontend/hooks/use-drag-sheet-down";
 import { Album } from "../../../types/Albums";
 import MobileSheet from "../../lib/MobileSheet/MobileSheet";
@@ -27,7 +28,7 @@ const MobileEditor: NextPage = () => {
     setIsSearchOpen(false);
   });
 
-  const [list, setList] = useState<Album[]>([]);
+  const [list, setList] = useState<Album[]>([...ALBUM_RESULTS]);
 
   useEffect(() => {
     console.log({list})

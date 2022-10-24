@@ -22,7 +22,7 @@ export interface Props {
 export const useRowSwipeActions = ({
   leftSwipeAction,
   rightSwipeAction,
-  swipeLengthThreshold = 50,
+  swipeLengthThreshold = 100,
 }: Props) => {
   const [layerActionText, setlayerActionText] = useState('🗑');
   const [{ x, bg, height, justifySelf }, api] = useSpring(() => ({
@@ -31,7 +31,7 @@ export const useRowSwipeActions = ({
     ...left,
   }));
 
-  const bind = useDrag(({ active, cancel, movement: [mx, my] }) => {
+  const bind = useDrag(({ intentional, active, movement: [mx, my] }) => {
     if (!isIntentionalXAxisGesture(mx, my)) {
       return;
     }
@@ -44,17 +44,32 @@ export const useRowSwipeActions = ({
       setlayerActionText('🗑');
     }
 
+    const isSwipeLengthOverThreshold = Math.abs(mx) > swipeLengthThreshold;
+
     if (active) {
+
+      if (isSwipeLengthOverThreshold) {
+        return api.start({
+          x: active ? mx : 0,
+          ...(mx < 0 ? left : right),
+          
+          immediate: name => active && name === 'x',
+        });
+      }
+
       return api.start({
         x: active ? mx : 0,
         ...(mx < 0 ? left : right),
         immediate: name => active && name === 'x',
       });
     }
-    cancel();
-    const isSwipeLengthOverThreshold = Math.abs(mx) > swipeLengthThreshold;
 
     if (!isSwipeLengthOverThreshold) {
+      api.start({
+        x: 0,
+        height: 50,
+        ...left,
+      });
       return;
     }
 
@@ -64,11 +79,14 @@ export const useRowSwipeActions = ({
       immediate: true,
     };
 
-    if (mx < 0) {
-      leftSwipeAction();
-    } else {
-      rightSwipeAction();
+    if (isSwipeLengthOverThreshold) {
+      if (mx < 0) {
+        leftSwipeAction();
+      } else {
+        rightSwipeAction();
+      }
     }
+    
 
     api.start(finalizeActionAnimations);
   });
