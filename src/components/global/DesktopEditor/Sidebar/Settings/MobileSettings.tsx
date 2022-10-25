@@ -3,7 +3,8 @@ import Select from "../../../../lib/Select/Select";
 import Slider from "../../../../lib/Slider/Slider";
 import Input from "../../../../lib/Input/Input";
 import HorizontalSwipe from "../../../../lib/HorizontalSwipe/HorizontalSwipe";
-import Settings from "./Settings";
+import dynamic from 'next/dynamic'
+import { Suspense } from 'react'
 
 export const MobileSettings: React.FC = () => {
   return (
@@ -15,7 +16,9 @@ export const MobileSettings: React.FC = () => {
     </div>
   )
 }
-
+const DynamicDownLoadButton = dynamic(() => import('./DownloadButton'), {
+  ssr: false,
+})
 const SettingsPageOne: React.FC = () => {
   const [chartType, setChartType] = useState('');  
   const [showTitle, setShowTitle] = useState('');
@@ -24,6 +27,9 @@ const SettingsPageOne: React.FC = () => {
 
   return (
     <>
+      <Suspense fallback={`Loading...`}>
+        <DynamicDownLoadButton />
+      </Suspense>
       <Select
         options={[
           {
