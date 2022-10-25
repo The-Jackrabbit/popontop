@@ -28,7 +28,7 @@ const MobileEditor: NextPage = () => {
     setIsSearchOpen(false);
   });
 
-  const [list, setList] = useState<Album[]>([...ALBUM_RESULTS]);
+  const [list, setList] = useState<Album[]>([]);
 
   useEffect(() => {
     console.log({list})
