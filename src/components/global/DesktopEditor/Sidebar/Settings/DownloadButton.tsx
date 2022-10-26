@@ -2,6 +2,7 @@
 import domtoimage from 'dom-to-image-more';
 import dynamic from 'next/dynamic'
 import * as htmlToImage from 'html-to-image';
+import Button from '../../../../lib/Button/Button';
 const DownloadButton: React.FC = () => {
   const downloadChart = (): void => {
     if (window) {
@@ -15,6 +16,9 @@ const DownloadButton: React.FC = () => {
         cacheBust: true,
       })
         .then(function (dataUrl) {
+          const img = new Image();
+          img.src = dataUrl;
+          document.body.appendChild(img);
           const link = document.createElement('a');
           link.download = 'my-image-name.png';
           link.href = dataUrl;
@@ -27,7 +31,9 @@ const DownloadButton: React.FC = () => {
   }
 
   return (
-    <button onClick={() => downloadChart()}>Download chart</button>
+    <Button  onClick={() => downloadChart()}>
+      Download chart
+    </Button>
   );
 };
 

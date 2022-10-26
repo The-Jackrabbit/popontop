@@ -10,8 +10,9 @@ export const MobileSettings: React.FC = () => {
   return (
     <div className="p-3">
       <HorizontalSwipe>
-        <SettingsPageOne />
-        <SettingsPageTwo />
+        <div className="p-8"><SettingsPageZero /></div>
+        <div className="p-8"><SettingsPageOne /></div>
+        <div className="p-8"><SettingsPageTwo /></div>
       </HorizontalSwipe>
     </div>
   )
@@ -19,6 +20,21 @@ export const MobileSettings: React.FC = () => {
 const DynamicDownLoadButton = dynamic(() => import('./DownloadButton'), {
   ssr: false,
 })
+
+const SettingsPageZero: React.FC = () => {
+  return (
+    <>
+      <Suspense fallback={<p>Download</p>}>
+        <DynamicDownLoadButton />
+ 
+      </Suspense>
+      <div id="chartPreview" className="bg-rose-500 w-full mt-12 h-full">
+
+      </div>
+    </>
+  );
+};
+
 const SettingsPageOne: React.FC = () => {
   const [chartType, setChartType] = useState('');  
   const [showTitle, setShowTitle] = useState('');
@@ -27,9 +43,6 @@ const SettingsPageOne: React.FC = () => {
 
   return (
     <>
-      <Suspense fallback={`Loading...`}>
-        <DynamicDownLoadButton />
-      </Suspense>
       <Select
         options={[
           {

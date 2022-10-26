@@ -45,8 +45,8 @@ export const HorizontalSwipe: React.FC<Props> = ({ children }) => {
   });
 
   return (
-    <div style={{  padding: '12px', height: '400px' }}>
-      <div className="w-full h-full overflow-hidden" >
+    <div className="p-3 flex flex-col">
+      <div className="grow-1 h-full" >
         {props.map(({ x, display, scale }, i) => (
           <animated.div  key={i} className="page" {...bind()} style={{ display, x }}>
             <animated.div style={{  scale, }}>
@@ -55,7 +55,7 @@ export const HorizontalSwipe: React.FC<Props> = ({ children }) => {
           </animated.div>
         ))}
       </div>
-      <div className="flex justify-center align-items h-8 w-full">
+      <div className="grow-0 flex justify-center align-items h-8 w-full">
         {children.map((_, currentPageIndex) => (
           <div
             key={currentPageIndex}
