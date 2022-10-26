@@ -1,7 +1,6 @@
 import { NextPage } from "next";
 import { useEffect, useState } from "react";
 import { a } from "react-spring";
-import { ALBUM_RESULTS } from "../../../constants/test-data/search-results";
 import { useDragSheetDown } from "../../../frontend/hooks/use-drag-sheet-down";
 import { Album } from "../../../types/Albums";
 import MobileSheet from "../../lib/MobileSheet/MobileSheet";
@@ -10,6 +9,7 @@ import AddAlbumButton from "./AddAlbumButton/AddAlbumButton";
 import List from "./List/List";
 import SearchAlbums from "./SearchAlbums/SearchAlbums";
 import SettingsButton from "./SettingsButton/SettingsButton";
+import { trpc } from '../../../utils/trpc';
 
 const MobileEditor: NextPage = () => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -34,6 +34,14 @@ const MobileEditor: NextPage = () => {
     console.log({list})
   }, [list]);
 
+  const mutation = trpc.charts.create.useMutation();
+
+  const saveChart = async () => {
+    const result = await mutation.mutate({ albums: list });
+    console.log({ result })
+    debugger;
+  }
+
   return (
     <div className="flex overflow-hidden " style={{ height: windowHeight }}>
       <a.div
@@ -41,6 +49,7 @@ const MobileEditor: NextPage = () => {
         onClick={() => close()}
         style={{ ...bgStyle, height: windowHeight }}
       >
+        <button onClick={() => saveChart()}>save chart</button>
         <List
           list={list}
           removeAlbumAtIndex={(index: number) => {

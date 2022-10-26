@@ -22,13 +22,15 @@ const albums = async (input: string): Promise<Album[]> => {
     const results = response.data.results;
     
     const albums: Album[] = [];
+
     if (results.albummatches && results.albummatches.album) {
       results.albummatches.album.forEach((album: LastFmAlbum) => {
         albums.push({
           imageUrl: album.image[2]['#text'],
-          name: album.name,
-          artist: album.artist,
+          // name: album.name,
+          // artist: album.artist,
           lastfmId: album.mbid,
+          ...album
         });
       });
     }
