@@ -10,6 +10,7 @@ import List from "./List/List";
 import SearchAlbums from "./SearchAlbums/SearchAlbums";
 import SettingsButton from "./SettingsButton/SettingsButton";
 import { trpc } from '../../../utils/trpc';
+import Link from "next/link";
 
 const MobileEditor: NextPage = () => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -35,7 +36,6 @@ const MobileEditor: NextPage = () => {
   }, [list]);
 
   const mutation = trpc.charts.create.useMutation();
-
   const saveChart = async () => {
     const result = await mutation.mutate({ albums: list });
     console.log({ result })
@@ -50,6 +50,7 @@ const MobileEditor: NextPage = () => {
         style={{ ...bgStyle, height: windowHeight }}
       >
         <button onClick={() => saveChart()}>save chart</button>
+        <Link href={"/charts/"+mutation.data?.chart.uuid}>View chart</Link>
         <List
           list={list}
           removeAlbumAtIndex={(index: number) => {

@@ -15,16 +15,11 @@ const ChartPage: NextPage = () => {
   const router = useRouter();
   const { uuid } = router.query;
 
-
   const n = genUuid(uuid);
-  console.log({ n })
+
   const { data, isLoading, refetch, isFetching } = trpc.charts.getById.useQuery({ uuid: n }, {
     enabled: true, // disable this query from automatically running
   });
-
-  if (data) {
-    debugger;
-  }
   
   return (
     <>
