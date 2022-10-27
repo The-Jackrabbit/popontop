@@ -10,6 +10,7 @@ const SettingsButton: React.FC<Props> = ({
 }) => {
   return (
     <FloatingButton
+      isAbsolute={false}
       backgroundColor="bg-red-300"
       locationOnScreen="bottom-0 left-0"
       onClick={(e) => onClick(e)}

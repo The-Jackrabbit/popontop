@@ -10,6 +10,7 @@ const AddAlbumButton: React.FC<Props> = ({
 }) => {
   return (
     <FloatingButton 
+      isAbsolute={false}
       backgroundColor="bg-green-300"
       locationOnScreen=" bottom-0 right-0"
       onClick={(e) => onClick(e)}

@@ -4,13 +4,15 @@ import { a } from "react-spring";
 import { useDragSheetDown } from "../../../frontend/hooks/use-drag-sheet-down";
 import { Album } from "../../../types/Albums";
 import MobileSheet from "../../lib/MobileSheet/MobileSheet";
-import MobileSettings from "../DesktopEditor/Sidebar/Settings/MobileSettings";
+
 import AddAlbumButton from "./AddAlbumButton/AddAlbumButton";
 import List from "./List/List";
 import SearchAlbums from "./SearchAlbums/SearchAlbums";
 import SettingsButton from "./SettingsButton/SettingsButton";
 import { trpc } from '../../../utils/trpc';
 import Link from "next/link";
+import MobileSettings from "../DesktopEditor/Sidebar/Settings/MobileSettings/MobileSettings";
+import Button from "../../lib/Button/Button";
 
 const MobileEditor: NextPage = () => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -36,12 +38,12 @@ const MobileEditor: NextPage = () => {
   }, [list]);
 
   const mutation = trpc.charts.create.useMutation();
-  const saveChart = async () => {
-    const result = await mutation.mutate({ albums: list });
-    console.log({ result })
-    debugger;
-  }
+  const saveChart = async (): Promise<string> => {
 
+    const result = await mutation.mutateAsync({ albums: list });
+
+    return result.chart.uuid ?? '';
+  }
   return (
     <div className="flex overflow-hidden " style={{ height: windowHeight }}>
       <a.div
@@ -49,8 +51,6 @@ const MobileEditor: NextPage = () => {
         onClick={() => close()}
         style={{ ...bgStyle, height: windowHeight }}
       >
-        <button onClick={() => saveChart()}>save chart</button>
-        <Link href={"/charts/"+mutation.data?.chart.uuid}>View chart</Link>
         <List
           list={list}
           removeAlbumAtIndex={(index: number) => {
@@ -85,23 +85,26 @@ const MobileEditor: NextPage = () => {
             setList(newAlbums);
           }}
         />
-        <SettingsButton
-          onClick={(e) => {
-            e.stopPropagation();
-            setIsSettingsOpen(true);
-            open({ canceled:false });
-          }}
-        />
-        <AddAlbumButton
-          onClick={(e) => {
-            e.stopPropagation();
-            setIsSearchOpen(true);
-            open({ canceled:false });
-          }}
-        />
+        <div className="w-screen justify-between items-center absolute bottom-0 flex flex-row">
+          <SettingsButton
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsSettingsOpen(true);
+              open({ canceled:false });
+            }}
+          />
+          <h1 className="text-2xl">💿popontop</h1>
+          <AddAlbumButton
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsSearchOpen(true);
+              open({ canceled:false });
+            }}
+          />
+        </div>
       </a.div>
       <MobileSheet bind={bind} display={display} y={y}>
-        <div className="p-3">
+        <>
           {isSearchOpen && (
             <SearchAlbums
               onClick={(album: Album) => {
@@ -115,9 +118,12 @@ const MobileEditor: NextPage = () => {
             />
           )}
           {isSettingsOpen && (
-            <MobileSettings />
+            <MobileSettings
+              isSaveLoading={mutation.isLoading}
+              onSave={saveChart}
+            />
           )}
-        </div>
+        </>
       </MobileSheet>
     </div>
   );
