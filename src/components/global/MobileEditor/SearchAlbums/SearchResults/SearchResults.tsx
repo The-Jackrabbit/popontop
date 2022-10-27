@@ -32,7 +32,7 @@ export const SearchResults: React.FC<Props> = ({ albums, isLoading, onClick }) =
           </div>
         ) 
         : (
-          <div className="w-full overflow-y-scroll h-[50%]">
+          <div className="w-full h-[50%]">
             {albums.map((album: Album, index:number) => (
               <MobileSearchResult
                 album={album}

@@ -15,7 +15,7 @@ const FloatingButton: React.FC<Props> = ({
   locationOnScreen = ' bottom-0 left-0',
   onClick,
 }) => {
-  const absolute = isAbsolute ? 'absolute' : undefined;
+  const absolute = isAbsolute ? 'absolute' : '';
   return (
     <button
       onClick={onClick}

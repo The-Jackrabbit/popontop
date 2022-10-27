@@ -21,7 +21,6 @@ const MobileSheet: React.FC<Props> = ({
         z-10 fixed inset-0
         shadow-inner
         mt-8 p-4 pb-28
-        overflow-y-scroll
        bg-neutral-100 dark:bg-neutral-800
         rounded-t-2xl
       `}
