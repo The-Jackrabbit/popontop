@@ -85,7 +85,7 @@ const MobileEditor: NextPage = () => {
             setList(newAlbums);
           }}
         />
-        <div className="w-screen justify-between items-center absolute bottom-0 flex flex-row">
+        <div className="w-[calc(100vw_-_2rem)] justify-between items-center absolute bottom-0 flex flex-row">
           <SettingsButton
             onClick={(e) => {
               e.stopPropagation();
