@@ -23,12 +23,12 @@ export const Slider: React.FC<Props> = ({
       <input
         className="
           slider
-          rounded-md
           p-0 w-full text-lg h-12
           appearance-none bg-transparent
           cursor-pointer
           outline-2 outline-rose-200
-          focus-within:outline focus-within:text-rose-300 
+          focus-within:outline focus-within:text-rose-300
+          outline-offset-2
         "
         onChange={onChange}
         placeholder={placeholder}

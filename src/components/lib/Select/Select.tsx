@@ -34,7 +34,7 @@ export const Select: React.FC<Props> = ({
         if (!blurLock) {
 
         console.log('onBlur');
-          setIsOpen(!isOpen);
+          setIsOpen(false);
         }
       }}
     >
@@ -42,9 +42,11 @@ export const Select: React.FC<Props> = ({
       <button
         className={`
           bg-white dark:bg-neutral-600
-          outline-2 outline-rose-200 text-neutral-400
-          focus-within:outline focus-within:text-rose-300 
+          outline-rose-200 text-neutral-400
+          focus-within:text-rose-300 
           justify-between flex
+          outline-offset-2  outline-2 
+          focus-within:outline focus-within:outline-rose-200
           h-12 p-4 w-full mb
           text-lg border-transparent
           z-20
