@@ -22,7 +22,7 @@ export interface Props {
 export const useRowSwipeActions = ({
   leftSwipeAction,
   rightSwipeAction,
-  swipeLengthThreshold = 150,
+  swipeLengthThreshold = 100,
 }: Props) => {
   const [layerActionText, setlayerActionText] = useState('🗑');
   const [{ x, bg, height, justifySelf }, api] = useSpring(() => ({
