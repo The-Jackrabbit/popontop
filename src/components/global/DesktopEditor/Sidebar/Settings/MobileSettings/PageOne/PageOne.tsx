@@ -45,10 +45,10 @@ const PageOne: React.FC<Props> = ({
            <Button       className="mt-8 bg-neutral-50 hover:bg-rose-300 active:bg-rose-500
             focus-within:outline focus-within:outline-rose-200
              p-4 outline-none w-full outline-dashed
-            text-lg  dark:text-white placeholder:text-neutral-400
+            text-lg   placeholder:text-neutral-400
             flex justify-center content-center
             border-transparent rounded-md
-            text-neutral-700 hover:text-neutral-100" onClick={() => undefined}>View chart</Button>
+            text-neutral-700 dark:text-neutral-700 hover:text-neutral-100" onClick={() => undefined}>View chart</Button>
           </Link>
         )
         : null}
