@@ -18,10 +18,11 @@ export const Input: React.FC<Props> = ({
       {label ? <label className="text-neutral-400">{label}</label> : null}
       <input
         className={`
-          dark:bg-neutral-700 
+          dark:bg-neutral-700
+          mb-4
           focus-within:outline focus-within:outline-rose-200
           mt-2 p-4 outline-none w-full h-12  outline-dashed
-          text-lg text-neutral-900 dark:text-white placeholder:text-neutral-400
+          text-lg text-neutral-900 dark:text-white placeholder:text-neutral-300
           flex justify-between
           border-transparent rounded-md
         `}

@@ -12,7 +12,7 @@ export interface Props {
 
 const List: React.FC<Props> = ({ list, removeAlbumAtIndex, advanceAlbumAtIndex, lowerAlbumAtIndex}) => {
   return (
-    <div className="h-screen bg-neutral-50 dark:bg-neutral-900" id="mobile-chart">
+    <div className="mt-12 h-screen dark:bg-neutral-900" id="mobile-chart">
       <div className="m-4 overflow-x-hidden">
         {list.map((album, index) => (
           <ListRow
