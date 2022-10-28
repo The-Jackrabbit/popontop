@@ -109,7 +109,7 @@ const ActionBar: React.FC<Props> = ({ onClickSettings, onClickSearch }) => {
       <h1  onTouchMove={(e) => {
           console.log('t')
           e.stopPropagation();
-        }} className="select-none text-lg z-30">💿popontop</h1>
+        }} className="dark:bg-green-400 select-none text-lg z-30">💿popontop</h1>
     </div>
     <AddAlbumButton
       onClick={(e) => {

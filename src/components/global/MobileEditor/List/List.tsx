@@ -12,8 +12,8 @@ export interface Props {
 
 const List: React.FC<Props> = ({ list, removeAlbumAtIndex, advanceAlbumAtIndex, lowerAlbumAtIndex}) => {
   return (
-    <div className="mt-12 h-screen dark:bg-neutral-900" id="mobile-chart">
-      <div className="m-4 overflow-x-hidden">
+    <div className="pb-[280px] mt-2 h-screen dark:bg-neutral-900  overflow-y-scroll" id="mobile-chart">
+      <div className=" overflow-x-hidden">
         {list.map((album, index) => (
           <ListRow
             key={JSON.stringify(album) + index}

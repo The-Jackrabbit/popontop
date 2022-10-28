@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import { useEffect, useState } from "react";
-import { a } from "react-spring";
+import { a, useSpring } from "react-spring";
 import { useDragSheetDown } from "../../../frontend/hooks/use-drag-sheet-down";
 import { Album } from "../../../types/Albums";
 import MobileSheet from "../../lib/MobileSheet/MobileSheet";
@@ -13,10 +13,39 @@ import { trpc } from '../../../utils/trpc';
 import Link from "next/link";
 import MobileSettings from "../DesktopEditor/Sidebar/Settings/MobileSettings/MobileSettings";
 import Button from "../../lib/Button/Button";
+import { apiBaseUrl } from "next-auth/client/_utils";
 
 const MobileEditor: NextPage = () => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isStarted, setIsStarted] = useState(false);
+  const isSheetOpen = isSettingsOpen || isSearchOpen;
+  const [style, api] = useSpring(() => ({
+    to: { height: '10px' },
+    from: { height: 'max-content' },
+    config: {
+      bounce: 0.1,
+      friction: 20,
+      mass:4,
+      tension: 200,
+    },
+    loop: true,
+    reverse: true,
+  }));
+  const [firstClick, setfirstClick] = useState(false);
+  const [opacity, opacityApi] = useSpring(() => ({
+    to: { opacity: '0' },
+    from: { opacity: '1' },
+    config: {
+      bounce: 0.1,
+      friction: 20,
+      mass:4,
+      tension: 200,
+    },
+    delay: 500,
+    loop: true,
+    reverse: true,
+  }));
   const height = 667;
   const {
     bgStyle,
@@ -29,13 +58,18 @@ const MobileEditor: NextPage = () => {
   } = useDragSheetDown(height, () => {
     setIsSettingsOpen(false);
     setIsSearchOpen(false);
+    changeTitleZone();
   });
 
-  const [list, setList] = useState<Album[]>([]);
+  const changeTitleZone = () => {
+    if (isStarted) {
+      api.start();
+      // opacityApi.start({ opacity: '0' });
+      opacityApi.start({ opacity: '1' });
+    }
+  }
 
-  useEffect(() => {
-    console.log({list})
-  }, [list]);
+  const [list, setList] = useState<Album[]>([]);
 
   const mutation = trpc.charts.create.useMutation();
   const saveChart = async (): Promise<string> => {
@@ -48,9 +82,34 @@ const MobileEditor: NextPage = () => {
     <div className="flex overflow-hidden " style={{ height: windowHeight }}>
       <a.div
         className="w-screen p-4"
-        onClick={() => close()}
+        onClick={() => {
+          if (!isSheetOpen) {
+            return;
+          }
+          setfirstClick(true);
+          close()
+        }}
         style={{ ...bgStyle, height: windowHeight }}
-      >
+      > 
+        <a.div
+          style={{ ...style }}
+          className={`
+            rounded-lg bg-white dark:bg-black sm:px-4 sm:py-3
+            px-6 py-4
+
+          `}
+        >
+          <a.div style={opacity}>
+            {isStarted && firstClick ? (
+              <div className="text-lg text-neutral-500 dark:text-neutral-200">My sick ass chart</div>
+            ) : (
+              <>
+               <h1 className="text-3xl">Hi :-)</h1>
+                <p className="text-3xl">To get started, click the ➕. Search the name or your favorite albums, and them to your list </p>
+              </>
+            )}
+           </a.div>
+        </a.div>
         <List
           list={list}
           removeAlbumAtIndex={(index: number) => {
@@ -93,7 +152,7 @@ const MobileEditor: NextPage = () => {
               open({ canceled:false });
             }}
           />
-          <h1 className="text-2xl">💿popontop</h1>
+          <h1 className="dark:bg-black px-2 py-1sm:px-4 sm:py-1 rounded-full text-2xl">💿popontop</h1>
           <AddAlbumButton
             onClick={(e) => {
               e.stopPropagation();
@@ -111,6 +170,10 @@ const MobileEditor: NextPage = () => {
                 setList((albums) => {
                   const newAlbums = [...albums];
                   newAlbums.push(album);
+
+                  if (albums.length === 0 && newAlbums.length === 1) {
+                    setIsStarted(true);
+                  }
 
                   return newAlbums;
                 });
