@@ -14,6 +14,8 @@ import Link from "next/link";
 import MobileSettings from "../DesktopEditor/Sidebar/Settings/MobileSettings/MobileSettings";
 import Button from "../../lib/Button/Button";
 import { apiBaseUrl } from "next-auth/client/_utils";
+import { Input } from "../../lib/Input/Input";
+
 
 const MobileEditor: NextPage = () => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -21,16 +23,19 @@ const MobileEditor: NextPage = () => {
   const [isStarted, setIsStarted] = useState(false);
   const isSheetOpen = isSettingsOpen || isSearchOpen;
   const [style, api] = useSpring(() => ({
-    to: { height: '10px' },
-    from: { height: 'max-content' },
+    to: { height: 'initial' },
     config: {
-      bounce: 0.1,
+      bounce: 2,
       friction: 20,
-      mass:4,
+      mass:4 ,
       tension: 200,
+
     },
-    loop: true,
-    reverse: true,
+    delay: 20000,
+    onRest: () => {
+      debugger
+    setfirstClick(true);
+    },
   }));
   const [firstClick, setfirstClick] = useState(false);
   const [opacity, opacityApi] = useSpring(() => ({
@@ -58,14 +63,19 @@ const MobileEditor: NextPage = () => {
   } = useDragSheetDown(height, () => {
     setIsSettingsOpen(false);
     setIsSearchOpen(false);
-    changeTitleZone();
+    ab();
   });
+
+  const ab = () => {
+    changeTitleZone();
+  }
 
   const changeTitleZone = () => {
     if (isStarted) {
-      api.start();
+      api.start({ height: 'initial'});
+      
       // opacityApi.start({ opacity: '0' });
-      opacityApi.start({ opacity: '1' });
+      // opacityApi.start({ opacity: '1' });
     }
   }
 
@@ -78,6 +88,8 @@ const MobileEditor: NextPage = () => {
 
     return result.chart.uuid ?? '';
   }
+  const [isEditing, setIsEditing] = useState(false);
+  const [value, setValue] = useState('My sick ass chart');
   return (
     <div className="flex overflow-hidden " style={{ height: windowHeight }}>
       <a.div
@@ -96,12 +108,22 @@ const MobileEditor: NextPage = () => {
           className={`
             rounded-lg bg-white dark:bg-black sm:px-4 sm:py-3
             px-6 py-4
-
+            overflow-hidden
           `}
         >
           <a.div style={opacity}>
             {isStarted && firstClick ? (
-              <div className="text-lg text-neutral-500 dark:text-neutral-200">My sick ass chart</div>
+              <div className=" flex justify-between text-lg text-neutral-500 dark:text-neutral-200">
+                {!isEditing ? <p>{value}</p> : (<>
+                  <Input value={value} onChange={(e) => { setValue(e.target.value) }} placeholder="New title" />
+                </>)}
+
+                <button
+                onClick={() => {
+                  setIsEditing(!isEditing)
+                }}
+                className="active:outline-rose-300 active:outline outline-offset-2 rounded active:outline-2 outline-solid">✎</button>
+              </div>
             ) : (
               <>
                <h1 className="text-3xl">Hi :-)</h1>
@@ -152,7 +174,7 @@ const MobileEditor: NextPage = () => {
               open({ canceled:false });
             }}
           />
-          <h1 className="dark:bg-black px-2 py-1sm:px-4 sm:py-1 rounded-full text-2xl">💿popontop</h1>
+          <h1 onClick={() => ab()} className="dark:bg-black px-2 py-1sm:px-4 sm:py-1 rounded-full text-2xl">💿popontop</h1>
           <AddAlbumButton
             onClick={(e) => {
               e.stopPropagation();
