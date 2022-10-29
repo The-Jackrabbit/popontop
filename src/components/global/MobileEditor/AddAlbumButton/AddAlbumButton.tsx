@@ -8,7 +8,7 @@ export interface Props {
 const AddAlbumButton: React.FC<Props> = ({ onClick }) =>  (
   <FloatingButton 
     isAbsolute={false}
-    backgroundColor="hover:bg-green-300 active:bg-green-300"
+    backgroundColor="hover:bg-green-200 active:bg-green-200"
     locationOnScreen="bottom-0 right-0"
     onClick={(e) => onClick(e)}
   >

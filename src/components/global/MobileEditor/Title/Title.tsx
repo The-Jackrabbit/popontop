@@ -39,7 +39,7 @@ const Title: React.FC<Props> = ({
       style={{ ...titleHeightStyle }}
       className="
         rounded-lg bg-white dark:bg-[#0a0a0a]
-        shadow-md
+        shadow-xl
         px-6 py-4 sm:px-4 sm:py-3
         overflow-hidden
       "
