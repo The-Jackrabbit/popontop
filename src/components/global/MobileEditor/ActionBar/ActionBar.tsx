@@ -19,7 +19,12 @@ const ActionBar: React.FC<Props> = ({ onClickSettings, onClickSearch }) => {
         }}
       />
       <h1
-        className="dark:bg-black px-2 py-1  py-1sm:px-4 sm:py-1 rounded-full text-2xl"
+        className="
+          bg-white dark:bg-black
+          px-2 py-1 py-1sm:px-4 sm:py-1
+          rounded-full
+          text-2xl
+        "
       >
         💿popontop
       </h1>

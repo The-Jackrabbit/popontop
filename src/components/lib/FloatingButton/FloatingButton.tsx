@@ -12,18 +12,21 @@ const FloatingButton: React.FC<Props> = ({
   isAbsolute = true,
   backgroundColor,
   children,
-  locationOnScreen = ' bottom-0 left-0',
+  locationOnScreen = 'bottom-0 left-0',
   onClick,
-}) => {
-  const absolute = isAbsolute ? 'absolute' : '';
-  return (
-    <button
-      onClick={onClick}
-      className={backgroundColor + " " + locationOnScreen + " " + absolute  + " rounded-full p-3  m-3"}
-    >
-      {children}
-    </button>
-  );
-};
+}) => (
+  <button
+    onClick={onClick}
+    className={`
+      ${backgroundColor}
+      ${locationOnScreen} ${isAbsolute ? 'absolute' : ''}
+      rounded-full
+      p-3 my-3 shadow-lg
+      bg-white dark:bg-black
+    `}
+  >
+    <div className="p-1 text-2xl leading-none">{children}</div>
+  </button>
+);
 
 export default FloatingButton;

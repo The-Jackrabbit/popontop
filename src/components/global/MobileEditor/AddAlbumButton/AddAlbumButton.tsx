@@ -5,19 +5,16 @@ export interface Props {
   onClick: MouseEventHandler<HTMLButtonElement>;
 }
 
-const AddAlbumButton: React.FC<Props> = ({
-  onClick
-}) => {
-  return (
-    <FloatingButton 
-      isAbsolute={false}
-      backgroundColor="bg-green-300"
-      locationOnScreen=" bottom-0 right-0"
-      onClick={(e) => onClick(e)}
-    >
-      <div className="p-2 text-3xl leading-none">➕</div>
-    </FloatingButton>
-  );
-};
+const AddAlbumButton: React.FC<Props> = ({ onClick }) =>  (
+  <FloatingButton 
+    isAbsolute={false}
+    backgroundColor="hover:bg-green-300 active:bg-green-300"
+    locationOnScreen="bottom-0 right-0"
+    onClick={(e) => onClick(e)}
+  >
+    ➕
+  </FloatingButton>
+);
+
 
 export default AddAlbumButton;

@@ -1,14 +1,7 @@
-// import { useRef, useState } from 'react'
 import { useSpring, animated } from '@react-spring/web'
-// import { useDrag, Vector2 } from '@use-gesture/react'
-// import clamp from 'lodash.clamp'
-// import { isIntentionalXAxisGesture } from '../../../utils/directions';
-// import '../../../styles/globals.css';
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import Image from 'next/image';
 import { Album } from '../../../../types/Albums';
-import { useDrag } from '@use-gesture/react';
-import { isIntentionalXAxisGesture } from '../../../../utils/directions';
 import { useRowSwipeActions } from '../../../../frontend/hooks/use-row-swipe-actions';
 import { useDisappearRow } from '../../../../frontend/hooks/use-disappear-row';
 
@@ -23,7 +16,6 @@ const right = {
 
 export interface Props {
   album: Album;
-  children: React.ReactNode;
   isLastRowInList?: boolean;
   index?: number;
   isInteractive: boolean;

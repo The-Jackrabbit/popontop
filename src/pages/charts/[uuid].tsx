@@ -25,7 +25,6 @@ const ChartPage: NextPage = () => {
 
     <div className="w-screen p-4">
       <div className="rounded-lg bg-white dark:bg-[#0a0a0a]
-        shadow-2xl
         px-6 py-4 sm:px-4 sm:py-3
         overflow-hidden">
         <div className=" flex justify-between text-lg text-neutral-500 dark:text-neutral-200">

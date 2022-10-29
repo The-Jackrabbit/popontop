@@ -5,19 +5,15 @@ export interface Props {
   onClick: MouseEventHandler<HTMLButtonElement>;
 }
 
-const SettingsButton: React.FC<Props> = ({
-  onClick
-}) => {
-  return (
-    <FloatingButton
-      isAbsolute={false}
-      backgroundColor="bg-red-300"
-      locationOnScreen="bottom-0 left-0"
-      onClick={(e) => onClick(e)}
-    >
-      <div className="p-2 text-3xl leading-none">⚙️</div>
-    </FloatingButton>
-  );
-};
+const SettingsButton: React.FC<Props> = ({ onClick }) => (
+  <FloatingButton
+    isAbsolute={false}
+    backgroundColor="hover:bg-red-300 active:bg-red-300"
+    locationOnScreen="bottom-0 left-0"
+    onClick={(e) => onClick(e)}
+  >
+   ⚙️
+  </FloatingButton>
+);
 
 export default SettingsButton;
