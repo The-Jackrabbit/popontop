@@ -16,7 +16,13 @@ export default {
 export const Single: ComponentStory<typeof ListRow> = () => {
   return (
     <div className="m-4 dark:bg-neutral-600">
-      <ListRow album={ALBUM_RESULTS[0] as Album}>
+      <ListRow
+        isInteractive={true}
+        album={ALBUM_RESULTS[0] as Album}
+        removeSelfFromList={() => undefined}
+        onAdvanceAlbumAtIndex={() => undefined}
+        onLowerAlbumAtIndex={() => undefined}
+      >
         <p>hello world</p>
       </ListRow>
     </div>
@@ -35,6 +41,9 @@ export const Multiple: ComponentStory<typeof ListRow> = () => {
         <ListRow
           key={JSON.stringify(album) + index}
           album={album}
+          isInteractive={true}
+          onAdvanceAlbumAtIndex={() => undefined}
+          onLowerAlbumAtIndex={() => undefined}
           isLastRowInList={index === ALBUM_RESULTS.length - 1}
           removeSelfFromList={(): void => {
             setFruits((fruits) => {

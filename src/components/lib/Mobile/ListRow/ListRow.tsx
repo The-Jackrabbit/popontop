@@ -25,12 +25,20 @@ export interface Props {
   album: Album;
   children: React.ReactNode;
   isLastRowInList?: boolean;
+  index?: number;
+  isInteractive: boolean;
   removeSelfFromList?: () => void;
+  onAdvanceAlbumAtIndex: (index: number) => void;
+  onLowerAlbumAtIndex: (index: number) => void;
 }
 
 export const ListRow: React.FC<Props> = ({
   album,
+  index = 0,
+  isInteractive,
   isLastRowInList = true,
+  onAdvanceAlbumAtIndex,
+  onLowerAlbumAtIndex,
   removeSelfFromList = () => undefined,
 }) => {
   const {
@@ -87,11 +95,18 @@ export const ListRow: React.FC<Props> = ({
             flex justify-between
             gap-2 my-0
           `}
-          style={{
+          style={isInteractive ? {
             x,
             height,
-          }}
+          }: {}}
         >
+          <div className="text-xs basis-4 grow-0 flex flex-col justify-center content-center items-center">
+            {isInteractive ?
+            <button onClick={() => onAdvanceAlbumAtIndex(index)}>▲</button>
+            : null}
+            <p>{index+1}</p>
+            {isInteractive ? <button onClick={() => onLowerAlbumAtIndex(index)}>▼</button> : null}
+          </div>
           <div className="basis-12 grow-0">
             <Image width="50" height="50" src={album.imageUrl} alt={album.artist} />
           </div>

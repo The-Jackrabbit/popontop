@@ -26,9 +26,11 @@ export function useDragSheetDown(height: number, onCloseCallback: () => void) {
     api.start({
       y: height,
       immediate: false,
-      config: { ...config.stiff, velocity }
+      config: { ...config.stiff, velocity },
+      onRest: () => {
+        onCloseCallback();
+      }
     });
-    onCloseCallback();
   };
 
   useEffect(() => {

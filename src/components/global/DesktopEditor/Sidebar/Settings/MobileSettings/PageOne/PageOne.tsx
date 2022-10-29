@@ -20,7 +20,6 @@ const PageOne: React.FC<Props> = ({
   const [savedChartId, setSavedChartId] = useState<null | string>(null);
   const save = async () => {
     const uuid = await onSave();
-    debugger;
     setSavedChartId(uuid);
   }
   return (

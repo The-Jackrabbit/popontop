@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { animated,config, useSpring } from "react-spring";
 import AddAlbumButton from "../AddAlbumButton/AddAlbumButton";
 import SettingsButton from "../SettingsButton/SettingsButton";
@@ -7,6 +7,7 @@ import SettingsButton from "../SettingsButton/SettingsButton";
 export interface Props {
   onClickSettings: () => void;
   onClickSearch: () => void;
+  onClickTitle: () => void;
 }
 
 function Number() {
@@ -24,7 +25,32 @@ function Number() {
   return <animated.div>{number.to(n => n.toFixed(2))}</animated.div>
 }
 
-const ActionBar: React.FC<Props> = ({ onClickSettings, onClickSearch }) => {
+const ActionBar: React.FC<Props> = ({ onClickSettings, onClickSearch, onClickTitle }) => {
+  return (
+    <div className="w-[calc(100vw_-_2rem)] justify-between items-center absolute bottom-0 flex flex-row">
+      <SettingsButton
+        onClick={(e) => {
+          e.stopPropagation();
+          onClickSettings();
+        }}
+      />
+      <h1
+        onClick={() => onClickTitle()}
+        className="dark:bg-black px-2 py-1  py-1sm:px-4 sm:py-1 rounded-full text-2xl"
+      >
+        💿popontop
+      </h1>
+      <AddAlbumButton
+        onClick={(e) => {
+          e.stopPropagation();
+          onClickSearch();
+        }}
+      />
+    </div>
+  );
+}
+
+const ActionBarNew: React.FC<Props> = ({ onClickSettings, onClickSearch }) => {
   const [flip, set] = useState(false)
   const [style, api] = useSpring(() => ({
     to: { x: '0px', y: '-300px' },
