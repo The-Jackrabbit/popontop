@@ -13,9 +13,10 @@ export const chartsRouter = router({
 
   create: publicProcedure
     .input(z.object({
-      albums: z.array(z.any())
+      albums: z.array(z.any()),
+      name: z.string(),
     }))
     .mutation(async (req)  => {
-      return createChart(req.input.albums);
+      return createChart(req.input.albums, req.input.name);
     }),
 });

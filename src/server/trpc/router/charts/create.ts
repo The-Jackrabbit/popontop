@@ -14,10 +14,11 @@ export const formatUrl = (url: string) => {
   return url;
 }
 
-export const createChart = async (albums: Album[]) => {
+export const createChart = async (albums: Album[], name: string) => {
+  console.log({ albums, name });
   const chart = await prisma.chart.create({
     data: {
-      name: 'My chart'
+      name,
     },
   });
 

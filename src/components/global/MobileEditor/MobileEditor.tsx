@@ -53,7 +53,9 @@ const MobileEditor: NextPage = () => {
   }
 
   const saveChart = async (): Promise<string> => {
-    const result = await mutation.mutateAsync({ albums: list });
+    const t = { name: chartTitle, albums: list };
+    console.log({ t })
+    const result = await mutation.mutateAsync(t);
 
     return result.chart.uuid ?? '';
   }
