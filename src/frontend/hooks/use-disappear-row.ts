@@ -1,5 +1,5 @@
 import { useSpring, SpringValue } from '@react-spring/web'
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 export interface Props {
   frequency?: number;

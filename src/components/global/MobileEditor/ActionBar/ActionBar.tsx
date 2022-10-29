@@ -1,31 +1,15 @@
 
 import { useState } from "react";
-import { animated,config, useSpring } from "react-spring";
+import { animated, useSpring } from "react-spring";
 import AddAlbumButton from "../AddAlbumButton/AddAlbumButton";
 import SettingsButton from "../SettingsButton/SettingsButton";
 
 export interface Props {
   onClickSettings: () => void;
   onClickSearch: () => void;
-  onClickTitle: () => void;
 }
 
-function Number() {
-  const [flip, set] = useState(false)
-  const { number } = useSpring({
-    reset: true,
-    reverse: flip,
-    from: { number: 0 },
-    number: 1,
-    delay: 200,
-    config: config.molasses,
-    onRest: () => set(!flip),
-  })
-
-  return <animated.div>{number.to(n => n.toFixed(2))}</animated.div>
-}
-
-const ActionBar: React.FC<Props> = ({ onClickSettings, onClickSearch, onClickTitle }) => {
+const ActionBar: React.FC<Props> = ({ onClickSettings, onClickSearch }) => {
   return (
     <div className="w-[calc(100vw_-_2rem)] justify-between items-center absolute bottom-0 flex flex-row">
       <SettingsButton
@@ -35,7 +19,6 @@ const ActionBar: React.FC<Props> = ({ onClickSettings, onClickSearch, onClickTit
         }}
       />
       <h1
-        onClick={() => onClickTitle()}
         className="dark:bg-black px-2 py-1  py-1sm:px-4 sm:py-1 rounded-full text-2xl"
       >
         💿popontop
@@ -50,7 +33,7 @@ const ActionBar: React.FC<Props> = ({ onClickSettings, onClickSearch, onClickTit
   );
 }
 
-const ActionBarNew: React.FC<Props> = ({ onClickSettings, onClickSearch }) => {
+export const ActionBarNew: React.FC<Props> = ({ onClickSettings, onClickSearch }) => {
   const [flip, set] = useState(false)
   const [style, api] = useSpring(() => ({
     to: { x: '0px', y: '-300px' },

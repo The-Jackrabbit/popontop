@@ -1,27 +1,34 @@
 import { NextPage } from "next";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { a, useSpring } from "react-spring";
 import { useDragSheetDown } from "../../../frontend/hooks/use-drag-sheet-down";
-import { Album } from "../../../types/Albums";
 import MobileSheet from "../../lib/MobileSheet/MobileSheet";
 import List from "./List/List";
 import SearchAlbums from "./SearchAlbums/SearchAlbums";
-import { trpc } from '../../../utils/trpc';
 import MobileSettings from "../DesktopEditor/Sidebar/Settings/MobileSettings/MobileSettings";
 import ActionBar from "./ActionBar/ActionBar";
 import Title from "./Title/Title";
+import useChartList from "../../../frontend/hooks/use-chart-list";
 
 const height = 667;
 
 const MobileEditor: NextPage = () => {
+  const {
+    addAlbumToList,
+    chartTitle,
+    list,
+    saveChart,
+    removeAlbumAtIndex,
+    advanceAlbumAtIndex,
+    lowerAlbumAtIndex,
+    isLoading,
+    isStarted,
+    setChartTitle,
+  } = useChartList();
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [isStarted, setIsStarted] = useState(false);
-  const [chartTitle, setChartTitle] = useState('My sick ass chart');
   const [isFirstCloseDone, setIsFirstCloseDone] = useState(false);
-  const mutation = trpc.charts.create.useMutation();
-  const [list, setList] = useState<Album[]>([]);
-  const [style, api] = useSpring(() => ({
+  const [titleHeightStyle, titleHeightAnimation] = useSpring(() => ({
     to: { height: '250px' },
     config: {
       bounce: 2,
@@ -45,23 +52,16 @@ const MobileEditor: NextPage = () => {
     toggleTitle();
   });
 
+  const isSheetOpen = isSettingsOpen || isSearchOpen;
+
   const toggleTitle = () => {
     if (isStarted) {
       setIsFirstCloseDone(true);
-      api.start({ height: '54px' });
+      titleHeightAnimation.start({ height: '54px' });
     }
   }
 
-  const saveChart = async (): Promise<string> => {
-    const t = { name: chartTitle, albums: list };
-    console.log({ t })
-    const result = await mutation.mutateAsync(t);
-
-    return result.chart.uuid ?? '';
-  }
-
-  const isSheetOpen = isSettingsOpen || isSearchOpen;
-  const onCLickSheetDeadArea = () => {
+  const onClickSheetDeadArea = () => {
     if (!isSheetOpen) {
       return;
     }
@@ -69,83 +69,44 @@ const MobileEditor: NextPage = () => {
   };
 
   return (
-    <div className="flex overflow-hidden " style={{ height: windowHeight }}>
+    <div className="flex overflow-hidden" style={{ height: windowHeight }}>
       <a.div
         className="w-screen p-4"
-        onClick={() => onCLickSheetDeadArea()}
+        onClick={() => onClickSheetDeadArea()}
         style={{ ...bgStyle, height: windowHeight }}
       > 
         <Title
           chartTitle={chartTitle}
           setValue={(value: string) => setChartTitle(value)}
           showIntroduction={isStarted && isFirstCloseDone}
-          style={style}
+          titleHeightStyle={titleHeightStyle}
         />
         <List
           list={list}
-          removeAlbumAtIndex={(index: number) => {
-            setList((list) =>{
-              const newAlbums = [...list];
-              newAlbums.splice(index, 1);
-
-              return newAlbums;
-            });
-          }}
-          advanceAlbumAtIndex={(index: number) => {
-            const newAlbums = [...list];
-            if (index === 0) {
-              return;
-            }
-            const temp = newAlbums[index] as Album;
-            newAlbums[index] = newAlbums[index-1] as Album;
-            newAlbums[index - 1] = temp as Album;
-
-            setList(newAlbums);
-          }}
-          lowerAlbumAtIndex={(index: number) => {
-            const newAlbums = [...list];
-            if (index === list.length - 1) {
-              return;
-            }
-            const temp = newAlbums[index] as Album;
-            newAlbums[index] = newAlbums[index+1] as Album;
-            newAlbums[index + 1] = temp as Album;
-
-            setList(newAlbums);
-          }}
+          removeAlbumAtIndex={removeAlbumAtIndex}
+          advanceAlbumAtIndex={advanceAlbumAtIndex}
+          lowerAlbumAtIndex={lowerAlbumAtIndex}
         />
         <ActionBar
           onClickSettings={() => {
             setIsSettingsOpen(true);
-            open({ canceled:false });
+            open({ canceled: false });
           }}
           onClickSearch={() => {
             setIsSearchOpen(true);
-            open({ canceled:false });
+            open({ canceled: false });
           }}
-          onClickTitle={() => toggleTitle()}
        />
       </a.div>
       <MobileSheet bind={bind} display={display} y={y}>
         {isSearchOpen && (
           <SearchAlbums
-            onClick={(album: Album) => {
-              setList((albums) => {
-                const newAlbums = [...albums];
-                newAlbums.push(album);
-
-                if (albums.length === 0 && newAlbums.length === 1) {
-                  setIsStarted(true);
-                }
-
-                return newAlbums;
-              });
-            }}
+            onClick={addAlbumToList}
           />
         )}
         {isSettingsOpen && (
           <MobileSettings
-            isSaveLoading={mutation.isLoading}
+            isSaveLoading={isLoading}
             onSave={saveChart}
           />
         )}

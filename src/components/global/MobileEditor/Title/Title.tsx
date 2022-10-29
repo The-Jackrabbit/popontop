@@ -1,22 +1,21 @@
-import { useRef, useState } from "react";
-import { a, useSpring } from "react-spring";
-import Input from "../../../lib/Input/Input";
-
+import { useState } from "react";
+import { a, useSpring, SpringValue } from "react-spring";
 
 export interface Props {
   chartTitle: string;
   setValue: (value: string) => void;
   showIntroduction: boolean;
-  style: any;
+  titleHeightStyle: { height: SpringValue<string>; };
 }
 
 const Title: React.FC<Props> = ({ 
   chartTitle,
   setValue,
   showIntroduction,
-  style,
+  titleHeightStyle,
  }) => {
   const [isEditing, setIsEditing] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [opacity, opacityApi] = useSpring(() => ({
     to: { opacity: '0' },
     from: { opacity: '1' },
@@ -30,24 +29,29 @@ const Title: React.FC<Props> = ({
     loop: true,
     reverse: true,
   }));
+ 
   const clickEditTitleButton = () => {
-
     setIsEditing(!isEditing);
-  
-  }
+  };
+
   return (
     <a.div
-      style={{ ...style }}
+      style={{ ...titleHeightStyle }}
       className="
         rounded-lg bg-white dark:bg-[#0a0a0a]
-        shadow-2xl
+        shadow-md
         px-6 py-4 sm:px-4 sm:py-3
         overflow-hidden
       "
     >
       <a.div style={opacity}>
         {showIntroduction ? (
-          <div className=" flex justify-between text-lg text-neutral-500 dark:text-neutral-200">
+          <div
+            className="
+              flex justify-between
+              text-lg text-neutral-500 dark:text-neutral-200
+            "
+          >
             {!isEditing
               ? <p>{chartTitle}</p>
               : (
@@ -68,7 +72,8 @@ const Title: React.FC<Props> = ({
                 active:outline
                 outline-offset-2
                 active:outline-2 outline-solid
-                rounded"
+                rounded
+              "
             >
               ✎
             </button>
