@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { a, useSpring } from "react-spring";
 import { useDragSheetDown } from "../../../frontend/hooks/use-drag-sheet-down";
 import MobileSheet from "../../lib/MobileSheet/MobileSheet";
@@ -9,10 +9,15 @@ import MobileSettings from "../DesktopEditor/Sidebar/Settings/MobileSettings/Mob
 import ActionBar from "./ActionBar/ActionBar";
 import Title from "./Title/Title";
 import useChartList from "../../../frontend/hooks/use-chart-list";
+import { setUncaughtExceptionCaptureCallback } from "process";
+import { useRouter } from 'next/router'
 
 const height = 667;
 
 const MobileEditor: NextPage = () => {
+  const router = useRouter()
+  const { query } = router;
+  debugger;
   const {
     addAlbumToList,
     chartTitle,
@@ -41,6 +46,9 @@ const MobileEditor: NextPage = () => {
   const {
     bgStyle,
     bind,
+
+
+
     close,
     display,
     open,
@@ -67,10 +75,15 @@ const MobileEditor: NextPage = () => {
     }
     close();
   };
+const [text, setText] = useState('');
+  useEffect(() => {
+    setText(window.navigator.userAgent);
+  }, []);
 
   return (
-    <div className="flex overflow-hidden" style={{ height: windowHeight }}>
-      <a.div
+    <div className="flex " style={{ height: windowHeight }}>
+
+      {/* <a.div
         className="w-screen p-4"
         onClick={() => onClickSheetDeadArea()}
         style={{ ...bgStyle, height: windowHeight }}
@@ -97,7 +110,7 @@ const MobileEditor: NextPage = () => {
             open({ canceled: false });
           }}
        />
-      </a.div>
+      </a.div> */}
       <MobileSheet bind={bind} display={display} y={y}>
         {isSearchOpen && (
           <SearchAlbums
@@ -111,6 +124,7 @@ const MobileEditor: NextPage = () => {
           />
         )}
       </MobileSheet>
+      <p className="text-white">{text}</p>
     </div>
   );
 };

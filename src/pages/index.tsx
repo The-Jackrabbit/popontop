@@ -5,8 +5,16 @@ import DesktopSidebar from "../components/global/DesktopEditor/Sidebar/DesktopSi
 import DesktopActions from "../components/global/DesktopEditor/Actions/DesktopActions";
 import DesktopEditor from "../components/global/DesktopEditor/DesktopEditor";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import Image from "next/image";
 
 const Home: NextPage = () => {
+// const router = useRouter()
+// const { query } = router;
+// debugger;
+
+// router.push('/mobile')
+
   return (
     <div className="w-screen flex justify-center">
       <div className="min-w-screen-md flex flex-row app">
@@ -15,6 +23,7 @@ const Home: NextPage = () => {
         </div>
         <div className="p-4 page-content">
           <Link href="/mobile">Go to mobile</Link>
+          <AuthShowcase />
           <DesktopEditor />
         </div>
        <DesktopActions />
@@ -35,6 +44,7 @@ export const AuthShowcase: React.FC = () => {
       {sessionData && (
         <p className="text-2xl text-blue-500">
           Logged in as {sessionData?.user?.name}
+          <Image src={sessionData?.user?.image as string} height="50px" width="50px" alt="profile" />
         </p>
       )}
       {secretMessage && (
