@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.app {
-  width: 1200px
-}
-
 .sheet {
   position: fixed;
   left: 2vw;

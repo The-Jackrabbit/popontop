@@ -174,7 +174,17 @@ export const DesktopSidebar: React.FC = () => {
       <div className=" flex flex-row justify-between">
         
       <div className={styles.logo + " text-5xl"}>
-        💿💿</div>
+        <h1
+          className="
+            bg-white dark:bg-black
+            px-2 py-1 py-1sm:px-4 sm:py-1
+            rounded-full
+            text-2xl
+          "
+        >
+          💿popontop
+        </h1>
+      </div>
       </div>
     </div>
   );

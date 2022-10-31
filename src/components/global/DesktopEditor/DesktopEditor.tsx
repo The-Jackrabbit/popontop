@@ -36,10 +36,10 @@ export const DesktopEditor: React.FC<Props> = ({
   return (
     <div className="
     flex
-    bg-blue-300 min-w-[20rem]
-    sm:bg-green-400 sm:min-w-[25rem]
-    md:bg-red-300 md:min-w-[35rem]
-    lg:bg-amber-600 lg:min-w-[40rem] lg:max-w-[41rem]
+    min-w-[20rem]
+     sm:min-w-[25rem]
+     md:min-w-[35rem]
+     lg:min-w-[40rem] lg:max-w-[41rem]
     flex-wrap
   ">
       {containers.map((album, index) => (

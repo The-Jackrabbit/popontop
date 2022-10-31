@@ -10,6 +10,7 @@ import Image from "next/image";
 import { DndContext, DragEndEvent } from "@dnd-kit/core";
 import { useState } from "react";
 import { Album } from "../types/Albums";
+import { a, config, useSpring } from "react-spring";
 
 const Home: NextPage = () => {
   const [containers, setContainers] = useState(generateBoard());
@@ -38,6 +39,19 @@ const Home: NextPage = () => {
     });
     // setParent(over ? over.id as string : null);
   }
+
+  const [isListVisible, setIsListVisible] = useState(true);
+  const [listStyles, animateListStyles] = useSpring(() => ({
+    from: { width: '300px' },
+    // config: config.stiff
+  }));
+  const toggleList = () => {
+    animateListStyles.start({
+      width: !isListVisible ? '300px' : '0px',
+    });
+    setIsListVisible(!isListVisible);
+  };
+
   return (
     <div className="w-screen flex justify-center">
       <DndContext
@@ -47,19 +61,30 @@ const Home: NextPage = () => {
         }}
         onDragEnd={handleDragEnd}
       >
-        <div className="min-w-screen-md flex flex-row app">
+        <div className=" flex flex-row app">
           <div className="sidebar-container">
             <DesktopSidebar />
           </div>
           <div className="flex justify-center">
             <div className="p-4 page-content">
               <DesktopEditor containers={containers} />
+              <button onClick={() => toggleList()}>
+                Toggle
+              </button>
             </div>
           </div>
+          <a.div style={{ ...listStyles }} className="overflow-x-hidden h-screen">
+            <ol className="dark:text-neutral-50 text-[8px] list-disc list-item">
+              {containers.map((album, index) => (
+                <li className="list-decimal list-inside list-item" key={index+'list'}>
+                   {album.artist} - {album.name}
+                </li>
+              ))}
+            </ol>
+          </a.div>
          <DesktopActions />
         </div>
       </DndContext>
-      
     </div>
   );
 };

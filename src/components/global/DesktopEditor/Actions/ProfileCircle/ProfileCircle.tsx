@@ -16,6 +16,7 @@ const ProfileCircle: React.FC = () => {
         bg-rose-300
       "
     >
+      <p className="p-2 text-2xl">🪵</p>
       {/* <Image
         className="rounded-full"
         // src={sessionData?.user?.image as string}

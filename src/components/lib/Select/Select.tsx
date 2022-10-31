@@ -30,13 +30,13 @@ export const Select: React.FC<Props> = ({
     <div
       className="flex flex-col pb-4"
       onAbort={() => console.log}
-      onBlur={(e) => {
-        if (!blurLock) {
+      // onBlur={(e) => {
+      //   if (!blurLock) {
 
-        console.log('onBlur');
-          setIsOpen(false);
-        }
-      }}
+      //   console.log('onBlur');
+      //     setIsOpen(false);
+      //   }
+      // }}
     >
       <label className="text-neutral-400">{label}</label>
       <button
@@ -73,8 +73,12 @@ export const Select: React.FC<Props> = ({
           </span>
         </div>
       </button>
-      <div className="shadow-2xl z-0 
-              rounded-lg">
+      <div
+        className="
+          shadow-2xl z-0 
+          rounded-lg
+        "
+      >
         {isOpen && options.map(({ value, label } ) => (
           <button
             key={`${value}${label}`}
@@ -84,7 +88,6 @@ export const Select: React.FC<Props> = ({
               border-transparent
               focus-within:z-50
               hover:bg-rose-200 hover:text-neutral-50  
-
               focus-within:bg-rose-200 focus-within:text-neutral-50 focus:border-green-300
               active:bg-rose-300
               w-full h-12 mb p-4 
