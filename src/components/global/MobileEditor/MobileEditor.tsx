@@ -83,7 +83,7 @@ const [text, setText] = useState('');
   return (
     <div className="flex " style={{ height: windowHeight }}>
 
-      {/* <a.div
+      <a.div
         className="w-screen p-4"
         onClick={() => onClickSheetDeadArea()}
         style={{ ...bgStyle, height: windowHeight }}
@@ -110,7 +110,7 @@ const [text, setText] = useState('');
             open({ canceled: false });
           }}
        />
-      </a.div> */}
+      </a.div>
       <MobileSheet bind={bind} display={display} y={y}>
         {isSearchOpen && (
           <SearchAlbums
@@ -124,7 +124,6 @@ const [text, setText] = useState('');
           />
         )}
       </MobileSheet>
-      <p className="text-white">{text}</p>
     </div>
   );
 };
