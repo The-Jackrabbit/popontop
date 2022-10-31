@@ -3,31 +3,63 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { trpc } from "../utils/trpc";
 import DesktopSidebar from "../components/global/DesktopEditor/Sidebar/DesktopSidebar";
 import DesktopActions from "../components/global/DesktopEditor/Actions/DesktopActions";
-import DesktopEditor from "../components/global/DesktopEditor/DesktopEditor";
+import DesktopEditor, { EMPTY_ALBUM, generateBoard } from "../components/global/DesktopEditor/DesktopEditor";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import { DndContext, DragEndEvent } from "@dnd-kit/core";
+import { useState } from "react";
+import { Album } from "../types/Albums";
 
 const Home: NextPage = () => {
-// const router = useRouter()
-// const { query } = router;
-// debugger;
+  const [containers, setContainers] = useState(generateBoard());
+  const [draggedAlbum, setDraggedAlbum] = useState({
+    album: EMPTY_ALBUM,
+    index: -1,
+  });
+  
+  const handleDragEnd = (event:  DragEndEvent) => {
+    const { over } = event;
 
-// router.push('/mobile')
+    if (!over) {
+      return;
+    }
+    
+    const droppedIndex = parseInt(over.id as string);
 
+    setContainers((oldContainers) => {
+      const newContainers = [...oldContainers];
+
+      newContainers[draggedAlbum.index] = EMPTY_ALBUM;
+      console.log({ droppedIndex })
+      newContainers.splice(droppedIndex, 1, draggedAlbum.album as Album);
+
+      return newContainers;
+    });
+    // setParent(over ? over.id as string : null);
+  }
   return (
     <div className="w-screen flex justify-center">
-      <div className="min-w-screen-md flex flex-row app">
-        <div className="sidebar-container">
-          <DesktopSidebar />
+      <DndContext
+        onDragStart={(event) => {
+           console.log(event.active.data.current );
+          setDraggedAlbum(event.active.data.current as any);
+        }}
+        onDragEnd={handleDragEnd}
+      >
+        <div className="min-w-screen-md flex flex-row app">
+          <div className="sidebar-container">
+            <DesktopSidebar />
+          </div>
+          <div className="flex justify-center">
+            <div className="p-4 page-content">
+              <DesktopEditor containers={containers} />
+            </div>
+          </div>
+         <DesktopActions />
         </div>
-        <div className="p-4 page-content">
-          <Link href="/mobile">Go to mobile</Link>
-          <AuthShowcase />
-          <DesktopEditor />
-        </div>
-       <DesktopActions />
-      </div>
+      </DndContext>
+      
     </div>
   );
 };

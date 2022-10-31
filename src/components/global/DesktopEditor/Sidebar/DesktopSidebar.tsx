@@ -1,11 +1,13 @@
 import { useState } from 'react';
+import { trpc } from '../../../../utils/trpc';
 import Input from '../../../lib/Input/Input';
 import Select from '../../../lib/Select/Select';
 import Slider from '../../../lib/Slider/Slider';
+import Draggable from '../DragNDrop/Draggable/Draggable';
 import styles from './DesktopSidebar.module.css';
+import Image from 'next/image';
 
 export const DesktopSidebar: React.FC = () => {
-  const [search, setSearch] = useState('');
   const [chartType, setChartType] = useState('');  
   const [showTitle, setShowTitle] = useState('');
   const [listAlbums, setListAlbums] = useState('');
@@ -14,17 +16,56 @@ export const DesktopSidebar: React.FC = () => {
   const [borderSize, setBorderSize] = useState('');
   const [backgroundColor, setBackgroundColor] = useState('');
   const [textColor, setTextColor] = useState('');
+  const [searchText, setSearchText] = useState('');
+  const [timeoutId, setTimeoutId] = useState<null | NodeJS.Timeout>(null);
+
+  const { data, isLoading, refetch, isFetching } = trpc.albums.search.useQuery({ text: searchText }, {
+    enabled: false, // disable this query from automatically running
+  });
+
+  const search = async () => {
+    await refetch({});
+  }
+
+  const onType = (event: { target: { value: string; }; }) => {
+    setSearchText(event.target.value)
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+    const newTimeoutId = setTimeout(() => {
+      search();
+    }, 500);
+
+    setTimeoutId(newTimeoutId);
+  };
 
   return (
     <div className={`${styles.sidebar} p-4 h-screen max-w-sm flex flex-col justify-between border-r-2`}>
       <div className={styles.sidebarSettings}>
         <div>
-          <Input
-            label="Search"
-            onChange={(event) => setSearch(event.target.value)}
-            placeholder="Search albums..."
-            value={search}
-          />
+        <Input value={searchText} placeholder="Search Albums" onChange={(event) => onType(event)} label={""} />
+
+      <div className="mt-4">
+        {data?.map(((album, index) => (
+          <>
+            <Draggable
+              data={{
+                album,
+                index,
+              }}
+              id={`results-${index.toString()}`}
+              key={index}
+            >
+              <Image
+                width="50"
+                height="50"
+                src={album.imageUrl}
+                alt={album.artist}
+              />
+            </Draggable>
+          </>
+        )))}
+      </div>
         </div>
         <div>
           <Select
