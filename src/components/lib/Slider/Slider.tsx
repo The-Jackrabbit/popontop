@@ -22,8 +22,8 @@ export const Slider: React.FC<Props> = ({
       <label className="text-neutral-400">{label}</label>
       <input
         className="
-          slider
-          p-0 w-full text-lg h-12
+          slider   shadow-lg
+          p-0 w-full text-lg 
           appearance-none bg-transparent
           cursor-pointer
           outline-2 outline-rose-200

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { a, config, useSpring } from 'react-spring';
 
 export interface Option {
   label: string;
@@ -26,6 +27,18 @@ export const Select: React.FC<Props> = ({
   const [blurLock, setBlurLock] = useState(false);
   const selectedValueLabel = options
     .find((option: Option): boolean => value === option.value)?.label
+    const [buttonStyle, animatebuttonStyle] = useSpring(() => ({
+      from: { scale: 1 },
+      config: {
+        bounce: 1.1
+      },
+    }));
+    const onMouseOver = () => {
+      animatebuttonStyle.start({scale: 1.05});
+    }
+    const onMouseLeave = () => {
+      animatebuttonStyle.start({scale: 1.0});
+    }
   return (
     <div
       className="flex flex-col pb-4"
@@ -39,8 +52,13 @@ export const Select: React.FC<Props> = ({
       // }}
     >
       <label className="text-neutral-400">{label}</label>
-      <button
+      <a.button
+       onMouseEnter={() => onMouseOver()}
+       onMouseLeave={() => onMouseLeave()}
+       style={{ ...buttonStyle }}
         className={`
+        rounded-lg
+        shadow-lg
           bg-white dark:bg-neutral-600
           outline-rose-200 text-neutral-400
           focus-within:text-rose-300 
@@ -72,7 +90,7 @@ export const Select: React.FC<Props> = ({
             ▽△
           </span>
         </div>
-      </button>
+      </a.button>
       <div
         className="
           shadow-2xl z-0 

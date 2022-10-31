@@ -10,7 +10,9 @@ const ProfileCircle: React.FC = () => {
   return (
     <div
       className="
+        shadow-xl
         m-4
+        cursor-pointer
         h-11 w-11
         rounded-full
         bg-rose-300

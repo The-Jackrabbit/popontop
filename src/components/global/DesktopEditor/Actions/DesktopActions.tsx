@@ -10,7 +10,7 @@ export interface Props {
 
 const DesktopActions: React.FC = () => {
   return (
-    <div className="border-l-2 h-screen actions-container flex flex-col justify-between">
+    <div className="pt-5 border-l-2 h-screen actions-container flex flex-col justify-between">
       <div>
         <ActionButton
           onClick={console.log}

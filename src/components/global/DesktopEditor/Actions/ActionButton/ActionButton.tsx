@@ -31,13 +31,14 @@ export const ActionButton: React.FC<Props> = ({
         onMouseLeave={() => onMouseLeave()}
         style={{ ...buttonStyle }}
         className={`
+          shadow-md rounded-lg
           w-12 h-12
           text-2xl
           leading-none
           outline-2 outline-rose-200
           focus-within:outline 
-          active:bg-rose-500 active:text-neutral-50
-          ${variant === 'primary' ? 'bg-rose-400 text-neutral-50' : 'bg-neutral-300'}
+       active:text-neutral-50
+          ${variant === 'primary' ? 'bg-rose-400     active:bg-rose-500 text-neutral-50' : 'bg-white active:bg-neutral-200'}
         `}
         onClick={() => onClick()}
       >

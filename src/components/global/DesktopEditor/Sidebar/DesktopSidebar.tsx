@@ -7,15 +7,37 @@ import Draggable from '../DragNDrop/Draggable/Draggable';
 import styles from './DesktopSidebar.module.css';
 import Image from 'next/image';
 
-export const DesktopSidebar: React.FC = () => {
+export interface Props {
+  showAlbums: boolean;
+  setShowAlbums: (value: boolean) => void;
+  showTitle: boolean;
+  setShowTitle: (value: boolean) => void;
+  borderColor: string;
+  setBorderColor: (value: string) => void;
+  textColor: string;
+  setTextColor: (value: string) => void;
+  backgroundColor: string;
+  setBackgroundColor: (value: string) => void;
+  borderSize: number;
+  setBorderSize: (value: number) => void;
+}
+
+export const DesktopSidebar: React.FC<Props> = ({
+  setShowAlbums,
+  showAlbums,
+  showTitle,
+  setShowTitle,
+  borderColor,
+  setBorderColor,
+  textColor,
+  setTextColor,
+  backgroundColor,
+  setBackgroundColor,
+  borderSize,
+  setBorderSize,
+}) => {
   const [chartType, setChartType] = useState('');  
-  const [showTitle, setShowTitle] = useState('');
-  const [listAlbums, setListAlbums] = useState('');
   const [albumPadding, setAlbumPadding] = useState('');
-  const [borderColor, setBorderColor] = useState('');
-  const [borderSize, setBorderSize] = useState('');
-  const [backgroundColor, setBackgroundColor] = useState('');
-  const [textColor, setTextColor] = useState('');
   const [searchText, setSearchText] = useState('');
   const [timeoutId, setTimeoutId] = useState<null | NodeJS.Timeout>(null);
 
@@ -40,12 +62,19 @@ export const DesktopSidebar: React.FC = () => {
   };
 
   return (
-    <div className={`${styles.sidebar} p-4 h-screen max-w-sm flex flex-col justify-between border-r-2`}>
+    <div
+      className={`
+        ${styles.sidebar}
+        p-4 h-screen
+        flex flex-col justify-between
+        border-r-2
+        w-44 sm:w-48 md:w-56 lg:w-64 overflow-x-hidden
+      `}>
       <div className={styles.sidebarSettings}>
         <div>
         <Input value={searchText} placeholder="Search Albums" onChange={(event) => onType(event)} label={""} />
 
-      <div className="mt-4">
+      <div className="mt-4 w-full">
         {data?.map(((album, index) => (
           <>
             <Draggable
@@ -57,8 +86,8 @@ export const DesktopSidebar: React.FC = () => {
               key={index}
             >
               <Image
-                width="50"
-                height="50"
+                width="100px"
+                height="100px"
                 src={album.imageUrl}
                 alt={album.artist}
               />
@@ -102,8 +131,8 @@ export const DesktopSidebar: React.FC = () => {
                 value: 'no',
               },
             ]}
-            value={showTitle}
-            setChosenValue={(value) => setShowTitle(value)}
+            value={showTitle ? 'yes' : 'no'}
+            setChosenValue={(value) => setShowTitle(value === 'yes')}
             label="Show title?"
             placeholder="Show title?"
             isOpenByDefault={false}
@@ -121,8 +150,10 @@ export const DesktopSidebar: React.FC = () => {
                 value: 'no',
               },
             ]}
-            value={listAlbums}
-            setChosenValue={(value) => setListAlbums(value)}
+            value={showAlbums ? 'yes' : 'no'}
+            setChosenValue={(value) => {
+              setShowAlbums(value === 'yes')
+            }}
             label="List albums?"
             placeholder="List albums?"
             isOpenByDefault={false}
@@ -149,9 +180,12 @@ export const DesktopSidebar: React.FC = () => {
           <Slider
             min={0}
             max={10}
-            onChange={(event) => setBorderSize(event?.target.value)}
+            onChange={(event) => {
+              debugger;
+              setBorderSize(parseInt(event?.target.value))
+            }}
             label="Border size"
-            value={borderSize}
+            value={borderSize.toString()}
           />
         </div>
         <div>

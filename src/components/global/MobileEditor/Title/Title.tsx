@@ -5,7 +5,7 @@ export interface Props {
   chartTitle: string;
   setValue: (value: string) => void;
   showIntroduction: boolean;
-  titleHeightStyle: { height: SpringValue<string>; };
+  titleHeightStyle?: { height: SpringValue<string>; };
 }
 
 const Title: React.FC<Props> = ({ 
@@ -36,11 +36,13 @@ const Title: React.FC<Props> = ({
 
   return (
     <a.div
-      style={{ ...titleHeightStyle }}
+      style={titleHeightStyle ? { ...titleHeightStyle } : undefined}
       className="
         rounded-lg bg-white dark:bg-[#0a0a0a]
         shadow-xl
+        box-content
         px-6 py-4 sm:px-4 sm:py-3
+        mb-4
         overflow-hidden
       "
     >

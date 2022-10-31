@@ -8,9 +8,10 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { DndContext, DragEndEvent } from "@dnd-kit/core";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Album } from "../types/Albums";
 import { a, config, useSpring } from "react-spring";
+import Title from "../components/global/MobileEditor/Title/Title";
 
 const Home: NextPage = () => {
   const [containers, setContainers] = useState(generateBoard());
@@ -52,6 +53,20 @@ const Home: NextPage = () => {
     setIsListVisible(!isListVisible);
   };
 
+  const [backgroundColor, setBackgroundColor] = useState('');
+  const [borderColor, setBorderColor] = useState('');
+  const [borderSize, setBorderSize] = useState(1);
+  const [textColor, setTextColor] = useState('');
+
+  const [showAlbums, setShowAlbums] = useState(false);
+  const [showTitle, setShowTitle] = useState(false);
+  const [titleStyle, animateTitleStyle] = useSpring(() => ({
+    from: { height: '0px' },
+  }));
+
+  useEffect(() => {
+    console.log({ borderSize })
+  }, [borderSize]);
   return (
     <div className="w-screen flex justify-center">
       <DndContext
@@ -63,17 +78,49 @@ const Home: NextPage = () => {
       >
         <div className=" flex flex-row app">
           <div className="sidebar-container">
-            <DesktopSidebar />
+            <DesktopSidebar
+              showAlbums={showAlbums}
+              setShowAlbums={(val: boolean) => {
+                setShowAlbums(val);
+                animateListStyles.start({
+                  width: val ? '300px' : '0px',
+                });
+              }}
+              showTitle={showTitle}
+              setShowTitle={(val: boolean) => {
+                setShowTitle(val);
+                animateTitleStyle.start({
+                  height: val ? '72px' : '0px',
+                });
+              }}
+              borderColor={borderColor}
+              setBorderColor={setBorderColor}
+              textColor={textColor}
+              setTextColor={setTextColor}
+              backgroundColor={backgroundColor}
+              setBackgroundColor={setBackgroundColor}
+              borderSize={borderSize}
+              setBorderSize={setBorderSize}
+            />
           </div>
           <div className="flex justify-center">
-            <div className="p-4 page-content">
-              <DesktopEditor containers={containers} />
-              <button onClick={() => toggleList()}>
-                Toggle
-              </button>
+            <div className="p-4 page-content py-8">
+              <a.div style={titleStyle} className="overflow-y-hidden">
+                <Title
+                  chartTitle="hello"
+                  setValue={() => undefined}
+                  showIntroduction={true}
+                />
+              </a.div>
+              <DesktopEditor
+                containers={containers}
+                backgroundColor={backgroundColor}
+                borderColor={borderColor}
+                borderSize={borderSize}
+              />
             </div>
           </div>
-          <a.div style={{ ...listStyles }} className="overflow-x-hidden h-screen">
+          <a.div style={{ ...listStyles, color: textColor }} className="overflow-x-hidden h-screen pt-9">
             <ol className="dark:text-neutral-50 text-[8px] list-disc list-item">
               {containers.map((album, index) => (
                 <li className="list-decimal list-inside list-item" key={index+'list'}>

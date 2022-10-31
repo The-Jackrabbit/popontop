@@ -1,4 +1,5 @@
 import { ChangeEventHandler } from "react";
+import { a, config, useSpring } from 'react-spring';
 
 export interface Props {
   label?: string;
@@ -13,13 +14,28 @@ export const Input: React.FC<Props> = ({
   placeholder = 'Type here',
   value = '',
 }) => {
+  const [buttonStyle, animatebuttonStyle] = useSpring(() => ({
+    from: { scale: 1 },
+    config: {
+      bounce: 1.1
+    },
+  }));
+  const onMouseOver = () => {
+    animatebuttonStyle.start({scale: 1.05});
+  }
+  const onMouseLeave = () => {
+    animatebuttonStyle.start({scale: 1.0});
+  }
   return (
     <>
       {label ? <label className="text-neutral-400">{label}</label> : null}
-      <input
+      <a.input
+        onMouseEnter={() => onMouseOver()}
+        onMouseLeave={() => onMouseLeave()}
+        style={{ ...buttonStyle }}
         className={`
-          dark:bg-neutral-700
-          mb-4
+          dark:bg-neutral-700         rounded-lg
+          mb-4   shadow-lg
           outline-offset-2
           focus-within:outline focus-within:outline-rose-200
           mt-2 p-4  outline-2 w-full h-12 
