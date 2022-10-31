@@ -53,7 +53,7 @@ export const DesktopSidebar: React.FC = () => {
                 album,
                 index,
               }}
-              id={index.toString()}
+              id={`results-${index.toString()}`}
               key={index}
             >
               <Image

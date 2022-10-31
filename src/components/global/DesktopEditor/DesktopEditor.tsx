@@ -3,6 +3,7 @@ import { DndContext, DragEndEvent } from '@dnd-kit/core';
 import Draggable from './DragNDrop/Draggable/Draggable';
 import Droppable from './DragNDrop/Droppable/Droppable';
 import { Album } from '../../../types/Albums';
+import Image from 'next/image';
 
 
 export const EMPTY_ALBUM: Album = {
@@ -33,16 +34,41 @@ export const DesktopEditor: React.FC<Props> = ({
   // handleDragEnd,
 }) => {
   return (
-    <div className='flex max-w-2xl flex-wrap'>
+    <div className="
+    flex
+    bg-blue-300 min-w-[20rem]
+    sm:bg-green-400 sm:min-w-[25rem]
+    md:bg-red-300 md:min-w-[35rem]
+    lg:bg-amber-600 lg:min-w-[40rem] lg:max-w-[41rem]
+    flex-wrap
+  ">
       {containers.map((album, index) => (
         <Droppable
           key={index}
           id={index.toString()}
           album={album}
         >
-          {album.name
-            ? <Draggable id={index.toString()}>Drag me</Draggable>
-            : ''
+          {album.imageUrl
+            ? (
+              <Draggable
+                data={{
+                  album,
+                  index,
+                }}
+                id={index.toString()}
+                key={index}
+              >
+                <Image
+                  className="w-4 h-4"
+                  src={album.imageUrl}
+                  height="100%"
+                  width="100%"
+                  alt="profile"
+                />
+              </Draggable>
+             
+            )
+            : null
           }
         </Droppable>
       ))}

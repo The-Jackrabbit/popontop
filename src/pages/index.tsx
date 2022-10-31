@@ -26,15 +26,13 @@ const Home: NextPage = () => {
     }
     
     const droppedIndex = parseInt(over.id as string);
-    console.log({
-      draggedIndex,
-      droppedIndex,
-    })
+
     setContainers((oldContainers) => {
       const newContainers = [...oldContainers];
-      const temp = {...newContainers[draggedIndex]};
-      newContainers[draggedIndex] = EMPTY_ALBUM;
-      newContainers.splice(droppedIndex, 0, temp as Album);
+
+      newContainers[draggedAlbum.index] = EMPTY_ALBUM;
+      console.log({ droppedIndex })
+      newContainers.splice(droppedIndex, 1, draggedAlbum.album as Album);
 
       return newContainers;
     });
@@ -44,7 +42,8 @@ const Home: NextPage = () => {
     <div className="w-screen flex justify-center">
       <DndContext
         onDragStart={(event) => {
-          setDraggedAlbum(event.active.data);
+           console.log(event.active.data.current );
+          setDraggedAlbum(event.active.data.current as any);
         }}
         onDragEnd={handleDragEnd}
       >
@@ -52,8 +51,10 @@ const Home: NextPage = () => {
           <div className="sidebar-container">
             <DesktopSidebar />
           </div>
-          <div className="p-4 page-content">
-            <DesktopEditor containers={containers} />
+          <div className="flex justify-center">
+            <div className="p-4 page-content">
+              <DesktopEditor containers={containers} />
+            </div>
           </div>
          <DesktopActions />
         </div>

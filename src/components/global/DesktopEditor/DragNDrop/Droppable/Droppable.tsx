@@ -21,7 +21,11 @@ const Droppable: React.FC<Props> = ({
     <div
       className={`
         border border-1 border-neutral-800 dark:border-neutral-300px
-        w-12 h-12 xs:w-13 xs:h-13 sm:w-14 sm:h-14 md:w-15 md:h-15 lg:w-16 lg:h-16
+        
+        w-8 h-8 
+        sm:w-10 sm:h-10
+        md:w-[3.5rem] md:h-[3.5rem]
+        lg:w-16 lg:h-16
         ${isOver ? 'bg-red-400' : 'bg-transparent'}
       `}
       ref={setNodeRef}
