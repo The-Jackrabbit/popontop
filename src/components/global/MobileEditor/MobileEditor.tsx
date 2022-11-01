@@ -5,19 +5,15 @@ import { useDragSheetDown } from "../../../frontend/hooks/use-drag-sheet-down";
 import MobileSheet from "../../lib/MobileSheet/MobileSheet";
 import List from "./List/List";
 import SearchAlbums from "./SearchAlbums/SearchAlbums";
-import MobileSettings from "../DesktopEditor/Sidebar/Settings/MobileSettings/MobileSettings";
+import MobileSettings from "./MobileSettings/MobileSettings";
 import ActionBar from "./ActionBar/ActionBar";
 import Title from "./Title/Title";
 import useChartList from "../../../frontend/hooks/use-chart-list";
-import { setUncaughtExceptionCaptureCallback } from "process";
 import { useRouter } from 'next/router'
 
 const height = 667;
 
 const MobileEditor: NextPage = () => {
-  const router = useRouter()
-  const { query } = router;
-  debugger;
   const {
     addAlbumToList,
     chartTitle,
@@ -46,9 +42,6 @@ const MobileEditor: NextPage = () => {
   const {
     bgStyle,
     bind,
-
-
-
     close,
     display,
     open,
@@ -75,7 +68,8 @@ const MobileEditor: NextPage = () => {
     }
     close();
   };
-const [text, setText] = useState('');
+
+  const [text, setText] = useState('');
   useEffect(() => {
     setText(window.navigator.userAgent);
   }, []);

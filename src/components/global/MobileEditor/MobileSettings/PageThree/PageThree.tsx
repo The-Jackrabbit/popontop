@@ -1,7 +1,7 @@
 
 import { useState } from "react";
-import Input from "../../../../../../lib/Input/Input";
-import Slider from "../../../../../../lib/Slider/Slider";
+import Input from "../../../../lib/Input/Input";
+import Slider from "../../../../lib/Slider/Slider";
 
 const PageThree: React.FC = () => {
   const [borderColor, setBorderColor] = useState('');

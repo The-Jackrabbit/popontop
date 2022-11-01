@@ -1,4 +1,4 @@
-import HorizontalSwipe from "../../../../../lib/HorizontalSwipe/HorizontalSwipe";
+import HorizontalSwipe from "../../../lib/HorizontalSwipe/HorizontalSwipe";
 import PageOne from "./PageOne/PageOne";
 import PageThree from "./PageThree/PageThree";
 import PageTwo from "./PageTwo/PageTwo";

@@ -10,6 +10,10 @@
   touch-action: none;
 }
 
+li::marker {
+  height:200px
+}
+
 .page {
   position: absolute;
   height: 90%;

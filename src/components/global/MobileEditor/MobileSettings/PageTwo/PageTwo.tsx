@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Select from "../../../../../../lib/Select/Select";
-import Slider from "../../../../../../lib/Slider/Slider";
+import Select from "../../../../lib/Select/Select";
+import Slider from "../../../../lib/Slider/Slider";
 
 const PageTwo: React.FC = () => {
   const [chartType, setChartType] = useState('');  
