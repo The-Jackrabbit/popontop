@@ -3,8 +3,16 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { trpc } from "../utils/trpc";
 import DesktopEditor from "../components/global/DesktopEditor/DesktopEditor";
 import Image from "next/image";
+import { userAgent } from "next/server";
 
-const Home: NextPage = () => {
+// export async function getStaticProps(context) {
+//   return {
+//     props: {}, // will be passed to the page component as props
+//   }
+// }
+
+const Home: NextPage = (props) => {
+  console.log({ props })
   return (
     <DesktopEditor />
   );

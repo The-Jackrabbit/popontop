@@ -25,7 +25,7 @@ const Title: React.FC<Props> = ({
       mass:4,
       tension: 200,
     },
-    delay: 500,
+    delay: 0,
     loop: true,
     reverse: true,
   }));
