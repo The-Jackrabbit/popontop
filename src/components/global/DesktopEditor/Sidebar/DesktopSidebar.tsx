@@ -41,7 +41,7 @@ export const DesktopSidebar: React.FC<Props> = ({
   const [searchText, setSearchText] = useState('');
   const [timeoutId, setTimeoutId] = useState<null | NodeJS.Timeout>(null);
 
-  const { data, isLoading, refetch, isFetching } = trpc.albums.search.useQuery({ text: searchText }, {
+  const { data, refetch } = trpc.albums.search.useQuery({ text: searchText }, {
     enabled: false, // disable this query from automatically running
   });
 
@@ -72,45 +72,35 @@ export const DesktopSidebar: React.FC<Props> = ({
       `}>
       <div className={styles.sidebarSettings}>
         <div>
-        <Input value={searchText} placeholder="Search Albums" onChange={(event) => onType(event)} label={""} />
+          <Input
+            value={searchText} 
+            placeholder="Search Albums" 
+            onChange={(event) => onType(event)} 
+            label={""}
+          />
 
-      <div className="mt-4 w-full">
-        {data?.map(((album, index) => (
-          <>
-            <Draggable
-              data={{
-                album,
-                index,
-              }}
-              id={`results-${index.toString()}`}
-              key={index}
-            >
-              <Image
-                width="100px"
-                height="100px"
-                src={album.imageUrl}
-                alt={album.artist}
-              />
-            </Draggable>
-          </>
-        )))}
-      </div>
+          <div className="mt-4 w-full">
+            {data?.map(((album, index) => (
+              <Draggable
+                data={{ album, index }}
+                id={`results-${index.toString()}`}
+                key={index}
+              >
+                <Image
+                  width="100px"
+                  height="100px"
+                  src={album.imageUrl}
+                  alt={album.artist}
+                />
+              </Draggable>
+            )))}
+          </div>
         </div>
-        <div>
           <Select
             options={[
-              {
-                label: 'Top 100',
-                value: 'top-100',
-              },
-              {
-                label: 'Top 50',
-                value: 'top-50',
-              },
-              {
-                label: 'Grid',
-                value: 'grid',
-              },
+              { label: 'Top 100', value: 'top-100', },
+              { label: 'Top 50', value: 'top-50', },
+              { label: 'Grid', value: 'grid', },
             ]}
             value={chartType}
             setChosenValue={(val) => setChartType(val)}
@@ -118,18 +108,11 @@ export const DesktopSidebar: React.FC<Props> = ({
             placeholder="Chart type"
             isOpenByDefault={false}
           />
-        </div>
-        <div>
+
           <Select
             options={[
-              {
-                label: 'Yes',
-                value: 'yes',
-              },
-              {
-                label: 'No',
-                value: 'no',
-              },
+              { label: 'Yes', value: 'yes' },
+              { label: 'No', value: 'no',},
             ]}
             value={showTitle ? 'yes' : 'no'}
             setChosenValue={(value) => setShowTitle(value === 'yes')}
@@ -137,29 +120,19 @@ export const DesktopSidebar: React.FC<Props> = ({
             placeholder="Show title?"
             isOpenByDefault={false}
           />
-        </div>
-        <div>
+
           <Select
             options={[
-              {
-                label: 'Yes',
-                value: 'yes',
-              },
-              {
-                label: 'No',
-                value: 'no',
-              },
+              { label: 'Yes', value: 'yes' },
+              { label: 'No', value: 'no' },
             ]}
             value={showAlbums ? 'yes' : 'no'}
-            setChosenValue={(value) => {
-              setShowAlbums(value === 'yes')
-            }}
+            setChosenValue={(value) => setShowAlbums(value === 'yes')}
             label="List albums?"
             placeholder="List albums?"
             isOpenByDefault={false}
           />
-        </div>
-        <div>
+
           <Slider
             min={0}
             max={10}
@@ -167,58 +140,49 @@ export const DesktopSidebar: React.FC<Props> = ({
             label="Album padding"
             value={albumPadding}
           />
-        </div>
-        <div>
+
           <Input
             label={'Border color'}
             onChange={(event) => setBorderColor(event.target.value)}
             placeholder="#adf2da"
             value={borderColor}
           />
-        </div>
-        <div>
+
           <Slider
             min={0}
             max={10}
-            onChange={(event) => {
-              debugger;
-              setBorderSize(parseInt(event?.target.value))
-            }}
+            onChange={(event) => setBorderSize(parseInt(event?.target.value))}
             label="Border size"
             value={borderSize.toString()}
           />
-        </div>
-        <div>
+
           <Input
             label="Background color"
             onChange={(event) => setBackgroundColor(event?.target.value)}
             placeholder="#adf2da"
             value={backgroundColor}
           />
-        </div>
-        <div>
+
           <Input
             label="Text color"
             onChange={(event) => setTextColor(event?.target.value)}
             placeholder="#adf2da"
             value={textColor}
           />
-        </div>
       </div>
       <div className=" flex flex-row justify-between">
-        
-      <div className={styles.logo + " text-5xl"}>
-        <h1
-          className="
-            bg-white dark:bg-black
-            px-2 py-1 py-1sm:px-4 sm:py-1
-            rounded-full
-            text-2xl
-          "
-        >
-          💿popontop
-        </h1>
-      </div>
+        <div className={styles.logo + " text-5xl"}>
+          <h1
+            className="
+              bg-white dark:bg-black
+              px-2 py-1 py-1sm:px-4 sm:py-1
+              rounded-full
+              text-2xl
+            "
+          >
+            💿popontop
+          </h1>
+        </div>
       </div>
     </div>
   );

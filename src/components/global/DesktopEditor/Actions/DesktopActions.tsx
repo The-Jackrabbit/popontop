@@ -14,7 +14,7 @@ const DesktopActions: React.FC = () => {
       <div>
         <ActionButton
           onClick={console.log}
-          text="a"
+          text="💾"
           variant="primary"
         />
         <ActionButton

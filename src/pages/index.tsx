@@ -3,15 +3,16 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { trpc } from "../utils/trpc";
 import DesktopSidebar from "../components/global/DesktopEditor/Sidebar/DesktopSidebar";
 import DesktopActions from "../components/global/DesktopEditor/Actions/DesktopActions";
-import DesktopEditor, { EMPTY_ALBUM, generateBoard } from "../components/global/DesktopEditor/DesktopEditor";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import DesktopEditor from "../components/global/DesktopEditor/DesktopEditor";
 import Image from "next/image";
 import { DndContext, DragEndEvent } from "@dnd-kit/core";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Album } from "../types/Albums";
-import { a, config, useSpring } from "react-spring";
+import { a, useSpring } from "react-spring";
 import Title from "../components/global/MobileEditor/Title/Title";
+import { EMPTY_ALBUM } from "../constants/empty-album";
+import { generateBoard } from "../utils/instantiators";
+import ChartList from "../components/global/DesktopEditor/ChartList/ChartList";
 
 const Home: NextPage = () => {
   const [containers, setContainers] = useState(generateBoard());
@@ -19,6 +20,13 @@ const Home: NextPage = () => {
     album: EMPTY_ALBUM,
     index: -1,
   });
+  const [backgroundColor, setBackgroundColor] = useState('');
+  const [borderColor, setBorderColor] = useState('');
+  const [borderSize, setBorderSize] = useState(1);
+  const [textColor, setTextColor] = useState('');
+  const [chartTitle, setChartTitle] = useState('My chart');
+  const [showAlbums, setShowAlbums] = useState(false);
+  const [showTitle, setShowTitle] = useState(false);
   
   const handleDragEnd = (event:  DragEndEvent) => {
     const { over } = event;
@@ -39,41 +47,18 @@ const Home: NextPage = () => {
       return newContainers;
     });
     // setParent(over ? over.id as string : null);
-  }
-
-  const [isListVisible, setIsListVisible] = useState(true);
+  };
   const [listStyles, animateListStyles] = useSpring(() => ({
     from: { width: '300px' },
-    // config: config.stiff
   }));
-  const toggleList = () => {
-    animateListStyles.start({
-      width: !isListVisible ? '300px' : '0px',
-    });
-    setIsListVisible(!isListVisible);
-  };
-
-  const [backgroundColor, setBackgroundColor] = useState('');
-  const [borderColor, setBorderColor] = useState('');
-  const [borderSize, setBorderSize] = useState(1);
-  const [textColor, setTextColor] = useState('');
-
-  const [showAlbums, setShowAlbums] = useState(false);
-  const [showTitle, setShowTitle] = useState(false);
   const [titleStyle, animateTitleStyle] = useSpring(() => ({
     from: { height: '0px' },
   }));
 
-  useEffect(() => {
-    console.log({ borderSize })
-  }, [borderSize]);
   return (
     <div className="w-screen flex justify-center">
       <DndContext
-        onDragStart={(event) => {
-           console.log(event.active.data.current );
-          setDraggedAlbum(event.active.data.current as any);
-        }}
+        onDragStart={(event) => setDraggedAlbum(event.active.data.current as any)}
         onDragEnd={handleDragEnd}
       >
         <div className=" flex flex-row app">
@@ -107,8 +92,8 @@ const Home: NextPage = () => {
             <div className="p-4 page-content py-8">
               <a.div style={titleStyle} className="overflow-y-hidden">
                 <Title
-                  chartTitle="hello"
-                  setValue={() => undefined}
+                  chartTitle={chartTitle}
+                  setValue={(val: string) => setChartTitle(val)}
                   showIntroduction={true}
                 />
               </a.div>
@@ -120,15 +105,11 @@ const Home: NextPage = () => {
               />
             </div>
           </div>
-          <a.div style={{ ...listStyles, color: textColor }} className="overflow-x-hidden h-screen pt-9">
-            <ol className="dark:text-neutral-50 text-[8px] list-disc list-item">
-              {containers.map((album, index) => (
-                <li className="list-decimal list-inside list-item" key={index+'list'}>
-                   {album.artist} - {album.name}
-                </li>
-              ))}
-            </ol>
-          </a.div>
+          <ChartList
+            listStyles={listStyles}
+            textColor={textColor}
+            containers={containers}
+          />
          <DesktopActions />
         </div>
       </DndContext>
