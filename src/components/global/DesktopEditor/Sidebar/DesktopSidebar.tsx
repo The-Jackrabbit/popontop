@@ -20,6 +20,10 @@ export interface Props {
   setBackgroundColor: (value: string) => void;
   borderSize: number;
   setBorderSize: (value: number) => void;
+  numberOfRows: number;
+  setNumberOfRows: (value: number) => void;
+  numberOfColumns: number;
+  setNumberOfColumns: (value: number) => void;
 }
 
 export const DesktopSidebar: React.FC<Props> = ({
@@ -35,6 +39,10 @@ export const DesktopSidebar: React.FC<Props> = ({
   setBackgroundColor,
   borderSize,
   setBorderSize,
+  numberOfRows,
+  setNumberOfRows,
+  numberOfColumns,
+  setNumberOfColumns,
 }) => {
   const [chartType, setChartType] = useState('');  
   const [albumPadding, setAlbumPadding] = useState('');
@@ -107,6 +115,22 @@ export const DesktopSidebar: React.FC<Props> = ({
             label="Chart type"
             placeholder="Chart type"
             isOpenByDefault={false}
+          />
+          
+          <Slider
+            min={0}
+            max={10}
+            onChange={(event) => setNumberOfRows(parseInt(event.target.value))}
+            label="Rows"
+            value={numberOfRows.toString()}
+          />
+
+          <Slider
+            min={0}
+            max={10}
+            onChange={(event) => setNumberOfColumns(parseInt(event.target.value))}
+            label="Columns"
+            value={numberOfColumns.toString()}
           />
 
           <Select

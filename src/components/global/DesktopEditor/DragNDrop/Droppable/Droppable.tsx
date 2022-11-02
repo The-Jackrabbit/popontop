@@ -25,10 +25,10 @@ const Droppable: React.FC<Props> = ({
       border-neutral-800  dark:border-neutral-300px
         border border-1
         
-        w-8 h-8 
-        sm:w-10 sm:h-10
-        md:w-[3.5rem] md:h-[3.5rem]
-        lg:w-16 lg:h-16
+        w-4 h-4 
+        sm:w-8 sm:h-8
+        md:w-10 md:h-10
+        lg:w-12 lg:h-12
         ${isOver ? 'bg-red-400' : 'bg-transparent'}
       `}
       style={style}

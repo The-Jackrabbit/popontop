@@ -57,13 +57,21 @@ const DesktopEditor: React.FC = () => {
     from: { height: '0px' },
   }));
 
+  const [numberOfColumns, setNumberOfColumns] = useState(10);
+  const [numberOfRows, setNumberOfRows] = useState(10);
+
   return (
     <div className="w-screen flex justify-center">
       <DndContext
         onDragStart={(event) => setDraggedAlbum(event.active.data.current as any)}
         onDragEnd={handleDragEnd}
       >
-        <div className=" flex flex-row app">
+        <div className="
+          w-[600px
+          md:w-[750px] 
+          lg:w-[1000px] 
+          flex flex-row
+        ">
           <div className="sidebar-container">
             <DesktopSidebar
               showAlbums={showAlbums}
@@ -88,6 +96,10 @@ const DesktopEditor: React.FC = () => {
               setBackgroundColor={setBackgroundColor}
               borderSize={borderSize}
               setBorderSize={setBorderSize}
+              numberOfColumns={numberOfColumns}
+              numberOfRows={numberOfRows}
+              setNumberOfColumns={setNumberOfColumns}
+              setNumberOfRows={setNumberOfRows}
             />
           </div>
           <div className="flex justify-center">
@@ -100,6 +112,8 @@ const DesktopEditor: React.FC = () => {
                 />
               </a.div>
               <DesktopChart
+                numberOfColumns={numberOfColumns}
+                numberOfRows={numberOfRows}
                 containers={containers}
                 backgroundColor={backgroundColor}
                 borderColor={borderColor}

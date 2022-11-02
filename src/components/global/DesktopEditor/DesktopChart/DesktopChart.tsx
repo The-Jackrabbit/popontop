@@ -10,6 +10,8 @@ export interface Props {
   borderColor: string;
   backgroundColor?: string;
   borderSize: number;
+  numberOfColumns: number;
+  numberOfRows: number;
 }
 
 export const DesktopChart: React.FC<Props> = ({
@@ -22,10 +24,10 @@ export const DesktopChart: React.FC<Props> = ({
     <div
       className="
         flex flex-wrap
-        min-w-[20rem]
-        sm:min-w-[25rem]
-        md:min-w-[35rem]
-        lg:min-w-[40rem] lg:max-w-[41rem]
+        min-w-[10rem]
+        sm:min-w-[20rem]
+        md:min-w-[25rem]
+        lg:min-w-[30rem] max-w-[35rem]
         box-content
       "
       style={{
