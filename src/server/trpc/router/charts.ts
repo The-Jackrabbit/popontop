@@ -8,6 +8,7 @@ export const chartsRouter = router({
   getById: publicProcedure
     .input(z.object({ uuid: z.string() }))
     .query(async ({ input }) => {
+      console.log({ 'input.uuid': input.uuid });
       return getChartById(input.uuid);
     }),
 

@@ -1,23 +1,19 @@
-import { uniqueId } from 'lodash';
-import { NextPage } from 'next';
-import { useRouter } from 'next/router'
-import { useState } from 'react';
-import List from '../../components/global/MobileEditor/List/List';
-import { trpc } from '../../utils/trpc';
-const genUuid = (uuid: string | string[] | undefined): string  => {
-  if (typeof uuid === 'string' ) {
-    return uuid;
-  }
-  return uuid && uuid.length > 0 ? uuid[0] as string : '';
-}
+import type { NextPage } from "next";
+import { useRouter } from "next/router";
+import DesktopEditor from "../../components/global/DesktopEditor/DesktopEditor";
+import { trpc } from "../../utils/trpc";
+import { genUuid } from "../mobile/charts/[uuid]";
 
-const ChartPage: NextPage = () => {
+
+const Chart: NextPage = () => {
   const router = useRouter();
   const { uuid } = router.query;
 
   const n = genUuid(uuid);
 
-  const { data, isLoading, refetch, isFetching } = trpc.charts.getById.useQuery({ uuid: n }, {
+  console.log({ n })
+
+  const { data } = trpc.charts.getById.useQuery({ uuid: n }, {
     enabled: true, // disable this query from automatically running
   });
   
@@ -31,16 +27,15 @@ const ChartPage: NextPage = () => {
           <p>{data?.name}</p>
         </div>
       </div>
-     
-      <List
-        list={data?.albums ?? []}
-        isInteractive={false}
-        removeAlbumAtIndex={() => undefined}
-        advanceAlbumAtIndex={() => undefined}
-        lowerAlbumAtIndex={() => undefined}
-      />
+      {data && data?.albums?.length > 0 && (
+        <DesktopEditor
+          readonly={true}
+          albums={data?.albums}
+          chartName={data?.name}
+        />
+      )}
     </div>
   )
-}
+};
 
-export default ChartPage;
+export default Chart;

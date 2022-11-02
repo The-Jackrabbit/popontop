@@ -3,6 +3,14 @@ import { Album } from "../../../../types/Albums";
 import { Chart } from "../../../../types/Charts";
 
 export const getChartById = async (uuid: string): Promise<Chart> => {
+  console.log({ uuid })
+  if (uuid.length === 0) {
+    return {
+      albums: [],
+      name:  '',
+      uuid:   '',
+    };
+  }
   const chart = await prisma.chart.findFirst({
     where: {
       uuid,

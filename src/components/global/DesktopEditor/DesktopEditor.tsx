@@ -12,14 +12,13 @@ import { Album } from '../../../types/Albums';
 import DesktopChart from './DesktopChart/DesktopChart';
 
 export interface Props {
-  containers: Album[];
-  borderColor: string;
-  backgroundColor?: string;
-  borderSize: number;
+  albums?: Album[];
+  readonly?: boolean;
+  chartName?: string;
 }
 
-const DesktopEditor: React.FC = () => {
-  const [containers, setContainers] = useState(generateBoard());
+const DesktopEditor: React.FC<Props> = ({ chartName = 'My chart', albums = generateBoard(), readonly = false }) => {
+  const [containers, setContainers] = useState(albums);
   const [draggedAlbum, setDraggedAlbum] = useState({
     album: EMPTY_ALBUM,
     index: -1,
@@ -27,8 +26,8 @@ const DesktopEditor: React.FC = () => {
   const [backgroundColor, setBackgroundColor] = useState('');
   const [borderColor, setBorderColor] = useState('');
   const [borderSize, setBorderSize] = useState(1);
-  const [textColor, setTextColor] = useState('');
-  const [chartTitle, setChartTitle] = useState('My chart');
+  const [textColor, setTextColor] = useState('black');
+  const [chartTitle, setChartTitle] = useState(chartName);
   const [showAlbums, setShowAlbums] = useState(false);
   const [showTitle, setShowTitle] = useState(false);
   
@@ -59,7 +58,7 @@ const DesktopEditor: React.FC = () => {
 
   const [numberOfColumns, setNumberOfColumns] = useState(10);
   const [numberOfRows, setNumberOfRows] = useState(10);
-
+  console.log({ albums })
   return (
     <div className="w-screen flex justify-center">
       <DndContext
@@ -72,36 +71,38 @@ const DesktopEditor: React.FC = () => {
           lg:w-[1000px] 
           flex flex-row
         ">
-          <div className="sidebar-container">
-            <DesktopSidebar
-              showAlbums={showAlbums}
-              setShowAlbums={(val: boolean) => {
-                setShowAlbums(val);
-                animateListStyles.start({
-                  width: val ? '300px' : '0px',
-                });
-              }}
-              showTitle={showTitle}
-              setShowTitle={(val: boolean) => {
-                setShowTitle(val);
-                animateTitleStyle.start({
-                  height: val ? '72px' : '0px',
-                });
-              }}
-              borderColor={borderColor}
-              setBorderColor={setBorderColor}
-              textColor={textColor}
-              setTextColor={setTextColor}
-              backgroundColor={backgroundColor}
-              setBackgroundColor={setBackgroundColor}
-              borderSize={borderSize}
-              setBorderSize={setBorderSize}
-              numberOfColumns={numberOfColumns}
-              numberOfRows={numberOfRows}
-              setNumberOfColumns={setNumberOfColumns}
-              setNumberOfRows={setNumberOfRows}
-            />
-          </div>
+          {!readonly && (
+            <div className="sidebar-container">
+              <DesktopSidebar
+                showAlbums={showAlbums}
+                setShowAlbums={(val: boolean) => {
+                  setShowAlbums(val);
+                  animateListStyles.start({
+                    width: val ? '300px' : '0px',
+                  });
+                }}
+                showTitle={showTitle}
+                setShowTitle={(val: boolean) => {
+                  setShowTitle(val);
+                  animateTitleStyle.start({
+                    height: val ? '72px' : '0px',
+                  });
+                }}
+                borderColor={borderColor}
+                setBorderColor={setBorderColor}
+                textColor={textColor}
+                setTextColor={setTextColor}
+                backgroundColor={backgroundColor}
+                setBackgroundColor={setBackgroundColor}
+                borderSize={borderSize}
+                setBorderSize={setBorderSize}
+                numberOfColumns={numberOfColumns}
+                numberOfRows={numberOfRows}
+                setNumberOfColumns={setNumberOfColumns}
+                setNumberOfRows={setNumberOfRows}
+              />
+            </div>
+          )}
           <div className="flex justify-center">
             <div className="p-4 page-content py-8">
               <a.div style={titleStyle} className="overflow-y-hidden">
@@ -126,7 +127,9 @@ const DesktopEditor: React.FC = () => {
             textColor={textColor}
             containers={containers}
           />
-         <DesktopActions />
+          {!readonly && (
+            <DesktopActions />
+          )}
         </div>
       </DndContext>
     </div>
