@@ -34,14 +34,14 @@ export const Select: React.FC<Props> = ({
       },
     }));
     const onMouseOver = () => {
-      animatebuttonStyle.start({scale: 1.05});
+      animatebuttonStyle.start({scale: isOpen ? 1 : 1.02 });
     }
     const onMouseLeave = () => {
       animatebuttonStyle.start({scale: 1.0});
     }
   return (
     <div
-      className="flex flex-col pb-4"
+      className="flex flex-col pb-4 relative"
       onAbort={() => console.log}
     >
       <label className="text-neutral-400">{label}</label>
@@ -62,7 +62,10 @@ export const Select: React.FC<Props> = ({
           text-lg border-transparent
           z-20
         `}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => {
+          animatebuttonStyle.start({scale: 1.0});
+          setIsOpen(!isOpen)
+        }}
         tabIndex={0}
       >
         <div className="-translate-y-1">
@@ -85,22 +88,29 @@ export const Select: React.FC<Props> = ({
         </div>
       </a.button>
       <div
-        className="
-          shadow-2xl z-0 
+        className={`
+          shadow-xl z-50 
           rounded-lg
-        "
+          mt-2
+          bg-white dark:bg-neutral-800
+          absolute w-full top-[80px]
+          max-h-[144px]
+          ${options.length > 3 ? 
+            'overflow-y-scroll' : ''}
+        `}
       >
         {isOpen && options.map(({ value, label } ) => (
           <button
             key={`${value}${label}`}
             className={`
-              bg-white dark:bg-neutral-800
+
               outline outline-2 outline-transparent
               border-transparent
+              bg-transparent
               focus-within:z-50
-              hover:bg-rose-200 hover:text-neutral-50  
+              first-of-type:rounded-t-lg  last-of-type:rounded-b-lg
+            hover:text-neutral-50  hover:bg-rose-300
               focus-within:bg-rose-200 focus-within:text-neutral-50 focus:border-green-300
-              active:bg-rose-300
               w-full h-12 mb p-4 
               text-left text-lg text-neutral-600 dark:text-neutral-200
             `}

@@ -50,7 +50,7 @@ const DesktopEditor: React.FC<Props> = ({ chartName = 'My chart', albums = gener
     });
   };
   const [listStyles, animateListStyles] = useSpring(() => ({
-    from: { width: '300px' },
+    from: { width: '0px' },
   }));
   const [titleStyle, animateTitleStyle] = useSpring(() => ({
     from: { height: '0px' },

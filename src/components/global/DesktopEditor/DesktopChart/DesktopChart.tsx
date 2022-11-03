@@ -23,6 +23,7 @@ export const DesktopChart: React.FC<Props> = ({
   return (
     <div
       className="
+      border-neutral-800  dark:border-neutral-300
         flex flex-wrap
         min-w-[10rem]
         sm:min-w-[20rem]

@@ -18,17 +18,19 @@ export const Slider: React.FC<Props> = ({
   value = '',
 }) => {
   return (
-    <>
-      <label className="text-neutral-400">{label}</label>
+    <div className="outline-rose-200 outline-2  rounded-lg focus-within:outline outline-offset-2">
+      <label className="text-neutral-400 flex w-full justify-between">
+        <span>{label}</span>
+        <span>{value}</span>
+      </label>
       <input
         className="
-          slider   shadow-lg
+          slider   shadow-lg 
           p-0 w-full text-lg 
           appearance-none bg-transparent
           cursor-pointer
-          outline-2 outline-rose-200
-          focus-within:outline focus-within:text-rose-300
-          outline-offset-2
+         focus-within:text-rose-300
+          outline-none
         "
         onChange={onChange}
         placeholder={placeholder}
@@ -38,7 +40,7 @@ export const Slider: React.FC<Props> = ({
         value={value}
         data-value={value}
       />
-    </>
+    </div>
   );
 }
 
