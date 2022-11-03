@@ -1,18 +1,20 @@
 import { a, config, useSpring } from 'react-spring';
+import ButtonAccessory from '../../../../lib/ButtonAccessory/ButtonAccessory';
+
+import { useState } from "react";
 
 export interface Props {
   disabled?: boolean;
   onClick: (e: any) => void;
   text: string | React.ReactNode;
   variant?: 'primary' | 'regular';
-
 }
 
 export const ActionButton: React.FC<Props> = ({
   disabled = false,
   onClick,
   text,
-  variant = 'regular'
+  variant = 'regular',
 }) => {
   const [buttonStyle, animatebuttonStyle] = useSpring(() => ({
     from: { scale: 1 },
@@ -23,11 +25,23 @@ export const ActionButton: React.FC<Props> = ({
   }));
   const onMouseOver = () => animatebuttonStyle.start({scale: 1.1});
   const onMouseLeave = () => animatebuttonStyle.start({scale: 1.0});
+  const [isHovered, setIsHovered] = useState(false);
   return (
     <div className="m-4 flex-grow-0">
+      {isHovered && (
+        <ButtonAccessory>
+          Save chart    
+        </ButtonAccessory>
+      )}
       <a.button
         onMouseEnter={() => onMouseOver()}
         onMouseLeave={() => onMouseLeave()}
+        onMouseOver={() => {
+          setIsHovered(true);
+        }}
+        onMouseOut={() => {
+          setIsHovered(false);
+        }}
         style={{ ...buttonStyle }}
         disabled={disabled}
         className={`

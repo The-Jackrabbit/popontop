@@ -5,6 +5,7 @@ import useChartList from '../../../../frontend/hooks/use-chart-list';
 import { Album } from '../../../../types/Albums';
 import { trpc } from '../../../../utils/trpc';
 import Button from '../../../lib/Button/Button';
+import ButtonAccessory from '../../../lib/ButtonAccessory/ButtonAccessory';
 import LoadingBouncer from '../../../lib/LoadingBouncer/LoadingBouncer';
 import ActionButton from './ActionButton/ActionButton';
 import ProfileCircle from './ProfileCircle/ProfileCircle';
@@ -31,14 +32,12 @@ const DesktopActions: React.FC<Props> = ({ list, chartTitle }) => {
     const uuid = await saveChart();
     setSavedChartId(uuid);
   }
-  
   return (
     <div className="pt-5 border-neutral-300  dark:border-neutral-600 border-l-2 h-screen actions-container flex flex-col justify-between">
       <div>
         <ActionButton
           onClick={() => save()}
           disabled={mutation.isLoading}
-          // disabled={true}
           text={
             !mutation.isLoading
               ? (
