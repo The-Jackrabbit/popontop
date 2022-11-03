@@ -40,7 +40,7 @@ export const ActionButton: React.FC<Props> = ({
             : 'bg-white dark:bg-black active:bg-neutral-200 dark:active:bg-neutral-700'
           }
         `}
-        onClick={(e) => onClick(e)}
+        onClick={() => onClick()}
       >
         {text}
       </a.button>
