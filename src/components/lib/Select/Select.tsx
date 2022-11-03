@@ -50,7 +50,7 @@ export const Select: React.FC<Props> = ({
        onMouseLeave={() => onMouseLeave()}
        style={{ ...buttonStyle }}
         className={`
-        rounded-lg
+        rounded-sm
         shadow-lg
           bg-white dark:bg-neutral-600
           outline-rose-200 text-neutral-400

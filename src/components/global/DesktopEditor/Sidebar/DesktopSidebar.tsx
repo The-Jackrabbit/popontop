@@ -82,13 +82,13 @@ export const DesktopSidebar: React.FC<Props> = ({
   return (
     <div
       className={`
-        ${styles.sidebar}
         p-4 h-screen
         flex flex-col justify-between
         border-r-2
+        z-50
         w-44 sm:w-48 md:w-56 lg:w-64 overflow-x-hidden
       `}>
-      <div className={" " + styles.sidebarSettings}>
+      <div>
         <div>
           <Input
             value={searchText} 
@@ -97,7 +97,7 @@ export const DesktopSidebar: React.FC<Props> = ({
             label={""}
           />
 
-          <div className="mt-4 w-full">
+          <div className="mt-4">
             {data?.map(((album, index) => (
               <Draggable
                 data={{ album, index }}

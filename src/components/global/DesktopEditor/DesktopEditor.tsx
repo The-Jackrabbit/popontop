@@ -62,11 +62,12 @@ const DesktopEditor: React.FC<Props> = ({ chartName = 'My chart', albums = gener
   return (
     <div className="w-screen flex justify-center">
       <DndContext
+       autoScroll={false}
         onDragStart={(event) => setDraggedAlbum(event.active.data.current as any)}
         onDragEnd={handleDragEnd}
       >
         <div className="
-          w-[600px
+          w-[600px]
           md:w-[750px] 
           lg:w-[1000px] 
           flex flex-row
