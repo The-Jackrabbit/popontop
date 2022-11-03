@@ -128,7 +128,10 @@ const DesktopEditor: React.FC<Props> = ({ chartName = 'My chart', albums = gener
             containers={containers}
           />
           {!readonly && (
-            <DesktopActions />
+            <DesktopActions
+              list={containers}
+              chartTitle={chartTitle}
+            />
           )}
         </div>
       </DndContext>

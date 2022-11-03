@@ -13,8 +13,9 @@ export const MobileSettings: React.FC<Props> = ({ isSaveLoading, onSave }) => {
     <div className="p-3">
       <HorizontalSwipe>
         <div className="p-8"><PageOne onSave={onSave} isSaveLoading={isSaveLoading} /></div>
-        <div className="p-8"><PageTwo /></div>
-        <div className="p-8"><PageThree /></div>
+        <></>
+        {/* <div className="p-8"><PageTwo /></div>
+        <div className="p-8"><PageThree /></div> */}
       </HorizontalSwipe>
     </div>
   )

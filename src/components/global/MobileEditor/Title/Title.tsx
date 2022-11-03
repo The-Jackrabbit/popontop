@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { createRef, useState } from "react";
 import { a, useSpring, SpringValue } from "react-spring";
 
 export interface Props {
@@ -55,14 +55,15 @@ const Title: React.FC<Props> = ({
             "
           >
             {!isEditing
-              ? <p>{chartTitle}</p>
+              ? <p className="    basis-full ">{chartTitle}</p>
               : (
                 <input
+                  autoFocus
                   value={chartTitle}
                   onChange={(e) => { setValue(e.target.value) }}
-           
                   placeholder="New title"
-                  className="bg-neutral-900"
+                  className=" focus-visible:outline-none active:outline-none bg-transparent border-bottom-2 border-b-2 
+                  basis-full grow-1"
                 />
               )
             }
@@ -75,6 +76,7 @@ const Title: React.FC<Props> = ({
                 outline-offset-2
                 active:outline-2 outline-solid
                 rounded
+               
               "
             >
               ✎

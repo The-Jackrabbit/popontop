@@ -58,7 +58,7 @@ const MobileEditor: NextPage = () => {
   const toggleTitle = () => {
     if (isStarted) {
       setIsFirstCloseDone(true);
-      titleHeightAnimation.start({ height: '54px' });
+      titleHeightAnimation.start({ height: '20x' });
     }
   }
 

@@ -6,6 +6,8 @@ import Slider from '../../../lib/Slider/Slider';
 import Draggable from '../DragNDrop/Draggable/Draggable';
 import styles from './DesktopSidebar.module.css';
 import Image from 'next/image';
+import Link from 'next/link';
+import { a, config, useSpring } from 'react-spring';
 
 export interface Props {
   showAlbums: boolean;
@@ -68,7 +70,15 @@ export const DesktopSidebar: React.FC<Props> = ({
 
     setTimeoutId(newTimeoutId);
   };
-
+  const [buttonStyle, animatebuttonStyle] = useSpring(() => ({
+    from: { scale: 1 },
+    config: {
+      ...config.wobbly,
+      bounce: 1.2
+    },
+  }));
+  const onMouseOver = () => animatebuttonStyle.start({scale: 1.1});
+  const onMouseLeave = () => animatebuttonStyle.start({scale: 1.0});
   return (
     <div
       className={`
@@ -78,7 +88,7 @@ export const DesktopSidebar: React.FC<Props> = ({
         border-r-2
         w-44 sm:w-48 md:w-56 lg:w-64 overflow-x-hidden
       `}>
-      <div className={styles.sidebarSettings}>
+      <div className={" " + styles.sidebarSettings}>
         <div>
           <Input
             value={searchText} 
@@ -104,7 +114,7 @@ export const DesktopSidebar: React.FC<Props> = ({
             )))}
           </div>
         </div>
-          <Select
+          {/* <Select
             options={[
               { label: 'Top 100', value: 'top-100', },
               { label: 'Top 50', value: 'top-50', },
@@ -116,8 +126,8 @@ export const DesktopSidebar: React.FC<Props> = ({
             placeholder="Chart type"
             isOpenByDefault={false}
           />
-          
-          <Slider
+           */}
+          {/* <Slider
             min={0}
             max={10}
             onChange={(event) => setNumberOfRows(parseInt(event.target.value))}
@@ -131,7 +141,7 @@ export const DesktopSidebar: React.FC<Props> = ({
             onChange={(event) => setNumberOfColumns(parseInt(event.target.value))}
             label="Columns"
             value={numberOfColumns.toString()}
-          />
+          /> */}
 
           <Select
             options={[
@@ -156,14 +166,14 @@ export const DesktopSidebar: React.FC<Props> = ({
             placeholder="List albums?"
             isOpenByDefault={false}
           />
-
+{/* 
           <Slider
             min={0}
             max={10}
             onChange={(event) => setAlbumPadding(event.target.value)}
             label="Album padding"
             value={albumPadding}
-          />
+          /> */}
 
           <Input
             label={'Border color'}
@@ -196,16 +206,26 @@ export const DesktopSidebar: React.FC<Props> = ({
       </div>
       <div className=" flex flex-row justify-between">
         <div className={styles.logo + " text-5xl"}>
-          <h1
-            className="
-              bg-white dark:bg-black
-              px-2 py-1 py-1sm:px-4 sm:py-1
-              rounded-full
-              text-2xl
-            "
-          >
-            💿popontop
-          </h1>
+          {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+          <a href="/">
+            <a.h1
+              style={{...buttonStyle}}
+              onMouseEnter={() => onMouseOver()}
+              onMouseLeave={() => onMouseLeave()}
+              className="
+                cursor-pointer
+                bg-white dark:bg-black
+                px-2 py-1 py-1sm:px-4 sm:py-1
+                rounded-full
+                text-2xl
+                shadow-lg 
+                dark:shadow-neutral-700
+              "
+            >
+              💿popontop
+            </a.h1>
+          </a>
+         
         </div>
       </div>
     </div>

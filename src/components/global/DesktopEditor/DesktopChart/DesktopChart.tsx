@@ -20,7 +20,6 @@ export const DesktopChart: React.FC<Props> = ({
   backgroundColor,
   borderSize,
 }) => {
-  console.log(containers)
   return (
     <div
       className="
@@ -31,18 +30,18 @@ export const DesktopChart: React.FC<Props> = ({
         lg:min-w-[30rem] max-w-[35rem]
         box-content
       "
-      // style={{
-      //   backgroundColor,
-      //   borderWidth: `${borderSize}px`,
-      //   borderColor,
-      // }}
+      style={{
+        backgroundColor,
+        borderWidth: `${borderSize}px`,
+        borderColor,
+      }}
     >
       {containers.map((album, index) => (
         <Droppable
           key={index}
           id={index.toString()}
           album={album}
-          // style={{ borderWidth: `${borderSize}px`, borderColor }}
+          style={{ borderWidth: `${borderSize}px`, borderColor }}
         >
           {album.imageUrl
             ? (

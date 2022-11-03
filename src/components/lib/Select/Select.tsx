@@ -43,13 +43,6 @@ export const Select: React.FC<Props> = ({
     <div
       className="flex flex-col pb-4"
       onAbort={() => console.log}
-      // onBlur={(e) => {
-      //   if (!blurLock) {
-
-      //   console.log('onBlur');
-      //     setIsOpen(false);
-      //   }
-      // }}
     >
       <label className="text-neutral-400">{label}</label>
       <a.button
@@ -115,7 +108,6 @@ export const Select: React.FC<Props> = ({
               setBlurLock(true);
             }}
             onClick={() => {
-              // console.log
               setChosenValue(value);
               setIsOpen(false);
               setBlurLock(false);
