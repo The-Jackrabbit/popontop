@@ -2,6 +2,7 @@ import { ChangeEventHandler } from "react";
 import { a, config, useSpring } from 'react-spring';
 
 export interface Props {
+  isMobile?: boolean;
   label?: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
   placeholder?: string;
@@ -9,6 +10,7 @@ export interface Props {
 }
 
 export const Input: React.FC<Props> = ({
+  isMobile = false,
   label,
   onChange,
   placeholder = 'Type here',
@@ -21,7 +23,7 @@ export const Input: React.FC<Props> = ({
     },
   }));
   const onMouseOver = () => {
-    animatebuttonStyle.start({scale: 1.05});
+    animatebuttonStyle.start({scale: !isMobile ? 1.05 : 1});
   }
   const onMouseLeave = () => {
     animatebuttonStyle.start({scale: 1.0});

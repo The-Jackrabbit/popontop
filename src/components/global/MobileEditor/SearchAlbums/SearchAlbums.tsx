@@ -41,7 +41,13 @@ const SearchAlbums: React.FC<Props> = ({
 
   return (
     <div className="h-14 w-full bg-red-red-400">
-      <Input value={searchText} placeholder="Search Albums" onChange={(event) => onType(event)} label={""} />
+      <Input
+        isMobile={true}
+        value={searchText}
+        placeholder="Search Albums"
+        onChange={(event) => onType(event)} 
+        label={""}
+      />
 
       <div className="mt-4">
         <SearchResults albums={data ?? []} isLoading={isLoading && isFetching} onClick={onClick} />
