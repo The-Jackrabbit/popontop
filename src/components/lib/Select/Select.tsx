@@ -7,7 +7,8 @@ export interface Option {
 }
 
 export interface Props {
-  label?: string,
+  label?: string;
+  isMobile?: boolean;
   isOpenByDefault: boolean;
   options: Option[];
   placeholder?: string;
@@ -17,6 +18,7 @@ export interface Props {
 
 export const Select: React.FC<Props> = ({
   label = 'Label',
+  // isMobile = false,
   isOpenByDefault,
   options = [],
   placeholder = 'Type here',
@@ -50,7 +52,7 @@ export const Select: React.FC<Props> = ({
        onMouseLeave={() => onMouseLeave()}
        style={{ ...buttonStyle }}
         className={`
-        rounded-sm
+        rounded-lg
         shadow-lg
           bg-white dark:bg-neutral-600
           outline-rose-200 text-neutral-400
