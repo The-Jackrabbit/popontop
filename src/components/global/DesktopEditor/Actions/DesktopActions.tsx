@@ -33,7 +33,7 @@ const DesktopActions: React.FC<Props> = ({ list, chartTitle }) => {
   }
   
   return (
-    <div className="pt-5 border-l-2 h-screen actions-container flex flex-col justify-between">
+    <div className="pt-5 border-neutral-300  dark:border-neutral-600 border-l-2 h-screen actions-container flex flex-col justify-between">
       <div>
         <ActionButton
           onClick={() => save()}

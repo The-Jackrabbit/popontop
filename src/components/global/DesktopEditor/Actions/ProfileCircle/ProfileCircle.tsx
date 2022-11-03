@@ -20,56 +20,80 @@ const ProfileCircle: React.FC = () => {
   const [isHovered, setIsHovered] = useState(false);
   return (
     <>
-    {isHovered && (
-     <div
-     className="
-       bg-white dark:bg-black
-       text-neutral-800 dark:text-neutral-50
-       pl-4 pr-4 py-2 
-       rounded-xl absolute
-       -translate-x-[105%]
-       shadow-lg
-       translate-y-4
-     "
-    >
-    {sessionData ? 'Sign out' : 'Log in'}
-    </div>
-    )}
-   
-    <a.div
-      className="
-        shadow-xl
-        m-4
-        cursor-pointer
-        h-11 w-11
-        rounded-full
-        bg-rose-300
-      "
-      style={{...buttonStyle}}
-      onMouseOver={() => {
-        setIsHovered(true);
-      }}
-      onMouseOut={() => {
-        setIsHovered(false);
-      }}
-      onMouseEnter={() => onMouseOver()}
-      onMouseLeave={() => onMouseLeave()}
-      onClick={sessionData ? () => signOut() : () => signIn('google')}
-    >
+      {isHovered && (
+        <div>
+          <div
+            className="
+              dark:bg-white bg-black
+              dark:text-neutral-800 text-neutral-50
+              pl-4 pr-4 py-2 
+              rounded-xl absolute
+              -translate-x-[100%]
+              shadow-lg
+              translate-y-4
+            "
+          >
+            {
+              sessionData
+                ? 'Sign out'
+                : (
+                  <div>
+                    Log in with
+                    <div   className="inline ml-2 mt-1"> 
 
-      {sessionData
-        ? (
-          <Image
-            className="rounded-full"
-            src={sessionData?.user?.image as string}
-            height="50px"
-            width="50px"
-            alt="profile"
+                    <Image
+                      src="/assets/google-logo.png"
+                      width="16px"
+                      height="16px"
+                      alt="google"
+                    
+                    />
+                    </div>
+                  </div>
+                )
+            }   
+          </div>
+          <div
+            className="
+              bg-black dark:bg-white h-3 w-3  py-2 rotate-45
+              absolute -translate-x-[70%]  translate-y-[29px]
+            "
           />
-        )
-        : <p className="p-2 text-2xl">🪵</p>
-      }
-    </a.div>
+        </div>
+      )}
+      <a.div
+        className="
+          shadow-xl
+          m-4
+          cursor-pointer
+          h-11 w-11
+          rounded-full
+          bg-rose-300
+        "
+        style={{...buttonStyle}}
+        onMouseOver={() => {
+          setIsHovered(true);
+        }}
+        onMouseOut={() => {
+          setIsHovered(false);
+        }}
+        onMouseEnter={() => onMouseOver()}
+        onMouseLeave={() => onMouseLeave()}
+        onClick={sessionData ? () => signOut() : () => signIn('google')}
+      >
+        {sessionData
+          ? (
+            <Image
+              className="rounded-full"
+              src={sessionData?.user?.image as string}
+              height="50px"
+              width="50px"
+              alt="profile"
+            />
+          )
+          : <p className="p-2 text-2xl">🪵</p>
+        }
+      </a.div>
     </>
   );
 };

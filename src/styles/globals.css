@@ -77,9 +77,7 @@ li::marker {
     background: var(--color-neutral-800);
   }
 
-  .actions-container  {
-    border-color: var(--color-neutral-600);
-  }
+
 }
 .page-content {
   flex-basis: 65%;

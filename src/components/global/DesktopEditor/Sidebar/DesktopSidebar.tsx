@@ -84,7 +84,7 @@ export const DesktopSidebar: React.FC<Props> = ({
       className={`
         p-4 h-screen
         flex flex-col justify-between
-        border-r-2
+        border-r-2 border-neutral-300 dark:border-neutral-600
         z-50
         w-44 sm:w-48 md:w-56 lg:w-64 overflow-x-hidden
       `}>
@@ -219,7 +219,7 @@ export const DesktopSidebar: React.FC<Props> = ({
                 rounded-full
                 text-2xl
                 shadow-lg 
-                dark:shadow-neutral-700
+                dark:shadow-neutral-800
               "
             >
               💿popontop
