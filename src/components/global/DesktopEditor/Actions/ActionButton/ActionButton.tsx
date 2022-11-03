@@ -1,12 +1,15 @@
 import { a, config, useSpring } from 'react-spring';
 
 export interface Props {
-  onClick: () => void;
-  text: string;
+  disabled?: boolean;
+  onClick: (e: any) => void;
+  text: string | React.ReactNode;
   variant?: 'primary' | 'regular';
+
 }
 
 export const ActionButton: React.FC<Props> = ({
+  disabled = false,
   onClick,
   text,
   variant = 'regular'
@@ -26,6 +29,7 @@ export const ActionButton: React.FC<Props> = ({
         onMouseEnter={() => onMouseOver()}
         onMouseLeave={() => onMouseLeave()}
         style={{ ...buttonStyle }}
+        disabled={disabled}
         className={`
           shadow-sm rounded-lg
           dark:shadow-neutral-700
@@ -35,12 +39,16 @@ export const ActionButton: React.FC<Props> = ({
           outline-2 outline-rose-200
           focus-within:outline  dark:text-neutral-50 
           text-neutral-600
-          ${variant === 'primary'
+          ${disabled
+            ? 'cursor-default bg-neutral-100 border-2 border-neutral-100'
+            : ''
+          }
+          ${variant === 'primary' && !disabled
             ? 'bg-rose-400 active:bg-rose-500 '
-            : 'bg-white dark:bg-black active:bg-neutral-200 dark:active:bg-neutral-700'
+            : 'bg-white dark:bg-black '
           }
         `}
-        onClick={() => onClick()}
+        onClick={(e) => !disabled && onClick(e)}
       >
         {text}
       </a.button>

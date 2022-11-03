@@ -5,6 +5,7 @@ import useChartList from '../../../../frontend/hooks/use-chart-list';
 import { Album } from '../../../../types/Albums';
 import { trpc } from '../../../../utils/trpc';
 import Button from '../../../lib/Button/Button';
+import LoadingBouncer from '../../../lib/LoadingBouncer/LoadingBouncer';
 import ActionButton from './ActionButton/ActionButton';
 import ProfileCircle from './ProfileCircle/ProfileCircle';
 
@@ -17,7 +18,10 @@ const DesktopActions: React.FC<Props> = ({ list, chartTitle }) => {
   const [savedChartId, setSavedChartId] = useState<null | string>(null);
   const mutation = trpc.charts.create.useMutation();
   const saveChart = async (): Promise<string> => {
-    const t = { name: chartTitle, albums: list };
+    const t = {
+      name: chartTitle,
+      albums: list,
+    };
     const result = await mutation.mutateAsync(t);
 
     return result.chart.uuid ?? '';
@@ -33,7 +37,15 @@ const DesktopActions: React.FC<Props> = ({ list, chartTitle }) => {
       <div>
         <ActionButton
           onClick={() => save()}
-          text="💾"
+          disabled={mutation.isLoading}
+          // disabled={true}
+          text={
+            !mutation.isLoading
+              ? (
+                <p>💾</p>
+              )
+              : <LoadingBouncer />
+          }
           variant="primary"
         />
         {savedChartId && (
