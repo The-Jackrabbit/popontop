@@ -11,9 +11,10 @@ export interface Props {
 }
 
 const List: React.FC<Props> = ({ isInteractive = true ,list, removeAlbumAtIndex, advanceAlbumAtIndex, lowerAlbumAtIndex}) => {
-  // const overflowSetting = list.length > 10 ? ' overflow-y-scroll' : '';
   return (
-    <div className="pb-[280px] mt-2 h-screen dark:bg-neutral-900  overflow-y-scroll" id="mobile-chart">
+    <div className={`
+      ${list.length > 10 ? 'pb-[280px]' : ''}
+      mt-2 h-[calc(100vh_-_100px)] dark:bg-neutral-900  overflow-y-scroll" id="mobile-chart`}>
       <div className=" overflow-x-hidden">
         {list.map((album, index) => (
           <ListRow

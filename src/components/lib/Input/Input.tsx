@@ -1,5 +1,5 @@
 import { ChangeEventHandler } from "react";
-import { a, config, useSpring } from 'react-spring';
+import { a, useSpring } from 'react-spring';
 
 export interface Props {
   isMobile?: boolean;

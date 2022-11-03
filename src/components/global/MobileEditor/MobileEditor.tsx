@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { a, useSpring } from "react-spring";
 import { useDragSheetDown } from "../../../frontend/hooks/use-drag-sheet-down";
 import MobileSheet from "../../lib/MobileSheet/MobileSheet";
@@ -9,7 +9,6 @@ import MobileSettings from "./MobileSettings/MobileSettings";
 import ActionBar from "./ActionBar/ActionBar";
 import Title from "./Title/Title";
 import useChartList from "../../../frontend/hooks/use-chart-list";
-import { useRouter } from 'next/router'
 
 const height = 667;
 
@@ -68,11 +67,6 @@ const MobileEditor: NextPage = () => {
     }
     close();
   };
-
-  const [text, setText] = useState('');
-  useEffect(() => {
-    setText(window.navigator.userAgent);
-  }, []);
 
   return (
     <div className="flex " style={{ height: windowHeight }}>
