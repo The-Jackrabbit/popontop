@@ -22,7 +22,7 @@ const Droppable: React.FC<Props> = ({
   return (
     <div
       className={`
-      border-neutral-800  dark:border-neutral-300
+        border-neutral-300 dark:border-neutral-600
         border border-1
         w-4 h-4 
         sm:w-[40px] sm:h-[40px]

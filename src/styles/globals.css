@@ -79,9 +79,7 @@ li::marker {
 
 
 }
-.page-content {
-  flex-basis: 65%;
-}
+
 .actions-container {
   flex-basis: 5%
 }

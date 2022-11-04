@@ -12,12 +12,14 @@ import { Album } from '../../../types/Albums';
 import DesktopChart from './DesktopChart/DesktopChart';
 
 export interface Props {
-  albums?: Album[];
-  readonly?: boolean;
-  chartName?: string;
+  chartComponent: () => JSX.Element;
+  sidebarComponent: () => JSX.Element;
 }
 
-const DesktopEditor: React.FC<Props> = ({ chartName = 'My chart', albums = generateBoard(), readonly = false }) => {
+const DesktopEditor: React.FC<Props> = ({
+  chartComponent,
+  sidebarComponent,
+}) => {
   const [containers, setContainers] = useState(albums);
   const [draggedAlbum, setDraggedAlbum] = useState({
     album: EMPTY_ALBUM,
@@ -26,7 +28,7 @@ const DesktopEditor: React.FC<Props> = ({ chartName = 'My chart', albums = gener
   const [backgroundColor, setBackgroundColor] = useState('');
   const [borderColor, setBorderColor] = useState('');
   const [borderSize, setBorderSize] = useState(1);
-  const [textColor, setTextColor] = useState('');
+  const [textColor, setTextColor] = useState('black');
   const [chartTitle, setChartTitle] = useState(chartName);
   const [showAlbums, setShowAlbums] = useState(false);
   const [showTitle, setShowTitle] = useState(false);
@@ -90,43 +92,19 @@ const DesktopEditor: React.FC<Props> = ({ chartName = 'My chart', albums = gener
         <div className="flex flex-row basis-[content]">
           {!readonly && (
             <div className="sidebar-container">
-              <DesktopSidebar
-                showAlbums={showAlbums}
-                setShowAlbums={toggleAlbums}
-                showTitle={showTitle}
-                setShowTitle={toggleTitle}
-                borderColor={borderColor}
-                setBorderColor={setBorderColor}
-                textColor={textColor}
-                setTextColor={setTextColor}
-                backgroundColor={backgroundColor}
-                setBackgroundColor={setBackgroundColor}
-                borderSize={borderSize}
-                setBorderSize={setBorderSize}
-                numberOfColumns={numberOfColumns}
-                numberOfRows={numberOfRows}
-                setNumberOfColumns={setNumberOfColumns}
-                setNumberOfRows={setNumberOfRows}
-              />
+              {() => sidebarComponent()}
             </div>
           )}
           <div className="flex justify-center">
             <div className="flex flex-col items-center basis-[65%] px-4 py-8">
-              <a.div style={titleStyle} className="overflow-y-hidden w-full">
+              <a.div style={titleStyle} className="overflow-y-hidden">
                 <Title
                   chartTitle={chartTitle}
                   setValue={(val: string) => setChartTitle(val)}
                   showIntroduction={true}
                 />
               </a.div>
-              <DesktopChart
-                numberOfColumns={numberOfColumns}
-                numberOfRows={numberOfRows}
-                containers={containers}
-                backgroundColor={backgroundColor}
-                borderColor={borderColor}
-                borderSize={borderSize}
-              />
+              {() => chartComponent()}
             </div>
           </div>
           <ChartList

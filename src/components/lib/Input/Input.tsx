@@ -36,14 +36,15 @@ export const Input: React.FC<Props> = ({
         onMouseLeave={() => onMouseLeave()}
         style={{ ...buttonStyle }}
         className={`
-          dark:bg-neutral-700         rounded-lg
-          mb-4   shadow-lg
+          dark:bg-neutral-700
+          rounded-lg
+          mb-4
+          shadow-lg
           outline-offset-2
           focus-within:outline focus-within:outline-rose-200
           mt-2 p-4  outline-2 w-full h-12 
-          text-lg text-neutral-900 dark:text-white placeholder:text-neutral-300
+          text-lg text-neutral-900 dark:text-white placeholder:dark:text-neutral-600
           flex justify-between
-
         `}
         onChange={onChange}
         placeholder={placeholder}

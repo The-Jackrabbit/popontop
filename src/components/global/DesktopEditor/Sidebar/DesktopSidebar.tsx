@@ -88,7 +88,7 @@ export const DesktopSidebar: React.FC<Props> = ({
         z-50
         w-44 sm:w-48 md:w-56 lg:w-64 overflow-x-hidden
       `}>
-      <div>
+      <div className="mt-2">
         <div>
           <Input
             value={searchText} 
@@ -114,35 +114,6 @@ export const DesktopSidebar: React.FC<Props> = ({
             )))}
           </div>
         </div>
-          {/* <Select
-            options={[
-              { label: 'Top 100', value: 'top-100', },
-              { label: 'Top 50', value: 'top-50', },
-              { label: 'Grid', value: 'grid', },
-            ]}
-            value={chartType}
-            setChosenValue={(val) => setChartType(val)}
-            label="Chart type"
-            placeholder="Chart type"
-            isOpenByDefault={false}
-          />
-           */}
-          {/* <Slider
-            min={0}
-            max={10}
-            onChange={(event) => setNumberOfRows(parseInt(event.target.value))}
-            label="Rows"
-            value={numberOfRows.toString()}
-          />
-
-          <Slider
-            min={0}
-            max={10}
-            onChange={(event) => setNumberOfColumns(parseInt(event.target.value))}
-            label="Columns"
-            value={numberOfColumns.toString()}
-          /> */}
-
           <Select
             options={[
               { label: 'Yes', value: 'yes' },
@@ -166,14 +137,6 @@ export const DesktopSidebar: React.FC<Props> = ({
             placeholder="List albums?"
             isOpenByDefault={false}
           />
-{/* 
-          <Slider
-            min={0}
-            max={10}
-            onChange={(event) => setAlbumPadding(event.target.value)}
-            label="Album padding"
-            value={albumPadding}
-          /> */}
 
           <Input
             label={'Border color'}
