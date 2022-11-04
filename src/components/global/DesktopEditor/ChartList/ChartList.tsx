@@ -18,7 +18,8 @@ const ChartList: React.FC<Props> = ({
   return (
     <a.div
       style={{ ...listStyles, color: textColor }}
-      className="overflow-x-hidden h-screen pt-9"
+      className="
+      overflow-x-hidden h-screen pt-9"
     >
       <ol className="dark:text-neutral-50 text-[8px] list-disc list-item">
         {containers.map((album, index) => (

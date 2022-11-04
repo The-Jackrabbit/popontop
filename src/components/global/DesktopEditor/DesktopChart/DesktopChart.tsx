@@ -25,10 +25,12 @@ export const DesktopChart: React.FC<Props> = ({
       className="
       border-neutral-800  dark:border-neutral-300
         flex flex-wrap
-        min-w-[10rem]
-        sm:min-w-[20rem]
-        md:min-w-[25rem]
-        lg:min-w-[30rem] max-w-[35rem]
+        sm:min-w-[400px] sm:max-w-[420px]
+        md:min-w-[450px] md:max-w-[470px]
+        lg:min-w-[450px] lg:max-w-[470px]
+        xl:min-w-[600px] xl:max-w-[620px]
+        2xl:min-w-[700px] 2xl:max-w-[720px]
+        3xl:min-w-[800px] 3xl:max-w-[800px]
         box-content
       "
       style={{

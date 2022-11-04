@@ -59,36 +59,46 @@ const DesktopEditor: React.FC<Props> = ({ chartName = 'My chart', albums = gener
   const [numberOfColumns, setNumberOfColumns] = useState(10);
   const [numberOfRows, setNumberOfRows] = useState(10);
   console.log({ albums })
+
+  const toggleTitle = (val: boolean): void => {
+    setShowTitle(val);
+    animateTitleStyle.start({
+      height: val ? '72px' : '0px',
+    });
+  };
+
+  const toggleAlbums = (val: boolean): void => {
+    setShowAlbums(val);
+    animateListStyles.start({
+      width: val ? '200px' : '0px',
+    });
+  };
+
   return (
-    <div className="w-screen flex justify-center">
+    <div
+      // bg-red-400 sm:bg-green-400 md:bg-blue-400 lg:bg-yellow-400
+      // xl:bg-neutral-400 2xl:bg-lime-400 3xl:bg-indigo-400
+      className="
+        flex justify-center
+        min-w-[1000px]
+      "
+    >
       <DndContext
        autoScroll={false}
         onDragStart={(event) => setDraggedAlbum(event.active.data.current as any)}
         onDragEnd={handleDragEnd}
       >
         <div className="
-          w-[600px]
-          md:w-[750px] 
-          lg:w-[1000px] 
           flex flex-row
+          basis-[content]
         ">
           {!readonly && (
             <div className="sidebar-container">
               <DesktopSidebar
                 showAlbums={showAlbums}
-                setShowAlbums={(val: boolean) => {
-                  setShowAlbums(val);
-                  animateListStyles.start({
-                    width: val ? '300px' : '0px',
-                  });
-                }}
+                setShowAlbums={toggleAlbums}
                 showTitle={showTitle}
-                setShowTitle={(val: boolean) => {
-                  setShowTitle(val);
-                  animateTitleStyle.start({
-                    height: val ? '72px' : '0px',
-                  });
-                }}
+                setShowTitle={toggleTitle}
                 borderColor={borderColor}
                 setBorderColor={setBorderColor}
                 textColor={textColor}
@@ -105,7 +115,13 @@ const DesktopEditor: React.FC<Props> = ({ chartName = 'My chart', albums = gener
             </div>
           )}
           <div className="flex justify-center">
-            <div className="p-4 page-content py-8">
+            <div
+              className="
+                flex flex-col items-center
+              
+                p-4 page-content py-8
+              "
+            >
               <a.div style={titleStyle} className="overflow-y-hidden">
                 <Title
                   chartTitle={chartTitle}
