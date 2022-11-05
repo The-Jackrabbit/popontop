@@ -18,9 +18,7 @@ const Layout: React.FC<Props> = ({
   actions,
 }) => (
   <div className="flex flex-row basis-[content]">
-    {!isReadonly && (
-      <div className="sidebar-container">{sidebar}</div>
-    )}
+    {!isReadonly && sidebar}
     <div className="flex justify-center">
       <div className="flex flex-col items-center basis-[65%] px-4 py-8">
         {title}

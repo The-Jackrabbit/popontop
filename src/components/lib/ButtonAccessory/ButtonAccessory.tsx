@@ -6,6 +6,7 @@ const ButtonAccessory: React.FC<Props> = ({ children }) => {
   return (
     <div className="absolute -translate-x-[7.5rem]">
       <div
+        // Bubble content
         className="
           dark:bg-white bg-black
           dark:text-neutral-800 text-neutral-50
@@ -17,6 +18,7 @@ const ButtonAccessory: React.FC<Props> = ({ children }) => {
         {children}   
       </div>
       <div
+        // Caret
         className="
           translate-x-[6.2rem]
           -translate-y-[150%]

@@ -19,6 +19,8 @@ export interface Props {
   readonly?: boolean;
   chartName?: string;
   settings?: ChartSettings | null;
+  page: string;
+  setPage: (page: string) => void;
 }
 
 const DesktopEditor: React.FC<Props> = ({
@@ -26,6 +28,8 @@ const DesktopEditor: React.FC<Props> = ({
   chartName = 'My chart',
   readonly = false,
   settings,
+  page,
+  setPage,
 }) => {
   const [containers, setContainers] = useState(albums);
   const [draggedAlbum, setDraggedAlbum] = useState({
@@ -111,6 +115,7 @@ const DesktopEditor: React.FC<Props> = ({
     setSavedChartId(uuid);
   }
 
+
   return (
     <div className="flex justify-center min-w-[1000px]">
       <DndContext
@@ -142,6 +147,9 @@ const DesktopEditor: React.FC<Props> = ({
               numberOfRows={numberOfRows}
               setNumberOfColumns={setNumberOfColumns}
               setNumberOfRows={setNumberOfRows}
+
+              page={page}
+              setPage={setPage}
             />
           }
           title={

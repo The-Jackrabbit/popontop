@@ -8,7 +8,7 @@ import styles from './DesktopSidebar.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import { a, config, useSpring } from 'react-spring';
-import { useZoomOnHover } from '../../../../frontend/hooks/springs/use-zoom-on-hover';
+import SidebarNav from './SidebarNav/SidebarNav';
 
 export interface Props {
   showAlbums: boolean;
@@ -27,6 +27,8 @@ export interface Props {
   setNumberOfRows: (value: number) => void;
   numberOfColumns: number;
   setNumberOfColumns: (value: number) => void;
+  page: string;
+  setPage: (page: string) => void;
 }
 
 export const DesktopSidebar: React.FC<Props> = ({
@@ -46,6 +48,8 @@ export const DesktopSidebar: React.FC<Props> = ({
   setNumberOfRows,
   numberOfColumns,
   setNumberOfColumns,
+  page,
+  setPage,
 }) => {
   const [searchText, setSearchText] = useState('');
   const [timeoutId, setTimeoutId] = useState<null | NodeJS.Timeout>(null);
@@ -70,7 +74,6 @@ export const DesktopSidebar: React.FC<Props> = ({
     setTimeoutId(newTimeoutId);
   };
 
-  const { zoomOnHoverStyle, onMouseLeave, onMouseOver } = useZoomOnHover();
   return (
     <div
       className={`
@@ -78,7 +81,7 @@ export const DesktopSidebar: React.FC<Props> = ({
         flex flex-col justify-between
         border-r-2 border-neutral-300 dark:border-neutral-600
         z-50
-        w-44 sm:w-48 md:w-56 lg:w-64 overflow-x-hidden
+        w-44 sm:w-48 md:w-56 lg:w-64
       `}
     >
       <div className="mt-2">
@@ -161,30 +164,10 @@ export const DesktopSidebar: React.FC<Props> = ({
             value={textColor}
           />
       </div>
-      <div className=" flex flex-row justify-between">
-        <div className={styles.logo + " text-5xl"}>
-          {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-          <a href="/">
-            <a.h1
-              style={{...zoomOnHoverStyle}}
-              onMouseEnter={() => onMouseOver()}
-              onMouseLeave={() => onMouseLeave()}
-              className="
-                cursor-pointer
-                bg-white dark:bg-black
-                px-2 py-1 py-1sm:px-4 sm:py-1
-                rounded-full
-                text-2xl
-                shadow-lg 
-                dark:shadow-neutral-900
-              "
-            >
-              💿popontop
-            </a.h1>
-          </a>
-         
-        </div>
-      </div>
+      <SidebarNav
+        page={page}
+        setPage={setPage}
+      />
     </div>
   );
 }
