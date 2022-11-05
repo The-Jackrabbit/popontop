@@ -1,14 +1,27 @@
-
-import { useState } from "react";
 import Input from "../../../../lib/Input/Input";
 import Slider from "../../../../lib/Slider/Slider";
 
-const PageThree: React.FC = () => {
-  const [borderColor, setBorderColor] = useState('');
-  const [borderSize, setBorderSize] = useState('');
-  const [backgroundColor, setBackgroundColor] = useState('');
-  const [textColor, setTextColor] = useState('');
+export interface Props {
+  borderColor: string;
+  setBorderColor: (value: string) => void;
+  borderSize: number;
+  setBorderSize: (value: number) => void;
+  backgroundColor: string;
+  setBackgroundColor: (value: string) => void;
+  textColor: string;
+  setTextColor: (value: string) => void;
+}
 
+const PageThree: React.FC<Props> = ({
+  borderColor,
+  setBorderColor,
+  borderSize,
+  setBorderSize,
+  backgroundColor,
+  setBackgroundColor,
+  textColor,
+  setTextColor,
+}) => {
   return (
     <>
       <Input
@@ -21,9 +34,9 @@ const PageThree: React.FC = () => {
       <Slider
         min={0}
         max={10}
-        onChange={(event) => setBorderSize(event?.target.value)}
+        onChange={(event) => setBorderSize(parseInt(event?.target.value))}
         label="Border size"
-        value={borderSize}
+        value={borderSize.toString()}
       />   
     
       <Input

@@ -16,7 +16,7 @@ const ChartList: React.FC<Props> = ({
 }) => {
   return (
     <a.div
-      style={{ ...listStyles, color: textColor }}
+      style={{ ...listStyles }}
       className="overflow-x-hidden h-screen pt-9"
     >
       <ol 
@@ -26,6 +26,7 @@ const ChartList: React.FC<Props> = ({
           list-disc
           list-item
         "
+        style={{ color: textColor }}
       >
         {containers.map((album, index) => (
           <li className="list-decimal list-inside list-item" key={index+'list'}>

@@ -6,16 +6,66 @@ import PageTwo from "./PageTwo/PageTwo";
 export interface Props {
   isSaveLoading: boolean;
   onSave: () => Promise<string>;
+  showTitle: boolean;
+  setShowTitle: (value: boolean) => void;
+  listAlbums: boolean;
+  setListAlbums: (value: boolean) => void;
+  borderColor: string;
+  setBorderColor: (value: string) => void;
+  borderSize: number;
+  setBorderSize: (value: number) => void;
+  backgroundColor: string;
+  setBackgroundColor: (value: string) => void;
+  textColor: string;
+  setTextColor: (value: string) => void;
 }
 
-export const MobileSettings: React.FC<Props> = ({ isSaveLoading, onSave }) => {
+
+export const MobileSettings: React.FC<Props> = ({ 
+  isSaveLoading,
+  onSave,
+  borderColor,
+  setBorderColor,
+  borderSize,
+  setBorderSize,
+  backgroundColor,
+  setBackgroundColor,
+  textColor,
+  setTextColor,
+  showTitle,
+  setShowTitle,
+  listAlbums,
+  setListAlbums,
+}) => {
   return (
     <div className="p-3">
       <HorizontalSwipe>
-        <div className="p-8"><PageOne onSave={onSave} isSaveLoading={isSaveLoading} /></div>
-        <></>
-        {/* <div className="p-8"><PageTwo /></div>
-        <div className="p-8"><PageThree /></div> */}
+        <div className="p-8">
+          <PageOne
+            onSave={onSave}
+            isSaveLoading={isSaveLoading}
+          />
+        </div>
+        <div className="p-8">
+          <PageTwo
+            showTitle={showTitle}
+            setShowTitle={setShowTitle}
+            listAlbums={listAlbums}
+            setListAlbums={setListAlbums}
+          />
+        </div>
+        <div className="p-8">
+          <PageThree
+            borderColor={borderColor}
+            setBorderColor={setBorderColor}
+            borderSize={borderSize}
+            setBorderSize={setBorderSize}
+            backgroundColor={backgroundColor}
+            setBackgroundColor={setBackgroundColor}
+            textColor={textColor}
+            setTextColor={setTextColor}
+          />
+        </div>
       </HorizontalSwipe>
     </div>
   )

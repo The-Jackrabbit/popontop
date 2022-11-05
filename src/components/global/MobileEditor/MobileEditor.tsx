@@ -34,6 +34,18 @@ const MobileEditor: React.FC<Props> = ({
     isLoading,
     isStarted,
     setChartTitle,
+    backgroundColor,
+    setBackgroundColor,
+    borderColor,
+    setBorderColor,
+    borderSize,
+    setBorderSize,
+    showAlbums,
+    setShowAlbums,
+    textColor,
+    setTextColor,
+    showTitle,
+    setShowTitle,
   } = useChartList({
     chartName,
     readonly,
@@ -123,6 +135,18 @@ const MobileEditor: React.FC<Props> = ({
           <MobileSettings
             isSaveLoading={isLoading}
             onSave={saveChart}
+            borderColor={borderColor}
+            setBorderColor={setBorderColor}
+            borderSize={borderSize}
+            setBorderSize={setBorderSize}
+            backgroundColor={backgroundColor}
+            setBackgroundColor={setBackgroundColor}
+            textColor={textColor}
+            setTextColor={setTextColor}
+            showTitle={showTitle}
+            setShowTitle={setShowTitle}
+            listAlbums={showAlbums}
+            setListAlbums={setShowAlbums}
           />
         )}
       </MobileSheet>
