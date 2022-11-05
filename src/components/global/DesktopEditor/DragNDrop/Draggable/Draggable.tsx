@@ -5,14 +5,14 @@ export interface Props {
   children: React.ReactNode;
   data: any;
   id: string;
-  isReadOnly: boolean;
+  isReadOnly?: boolean;
 }
 
 const Draggable: React.FC<Props> = ({
   children,
   data,
   id,
-  isReadOnly,
+  isReadOnly = false,
 }) =>{
   const {attributes, listeners, setNodeRef, transform} = useDraggable({
     id,
