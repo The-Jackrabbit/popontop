@@ -84,6 +84,7 @@ model Chart {
   name           String           @default("") @db.VarChar
   uuid           String           @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
   Album          Album[]
+  ChartSettings  ChartSettings?
   album_to_chart album_to_chart[]
 }
 
@@ -108,4 +109,16 @@ model album_to_chart {
   uuid       String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
   Album      Album     @relation(fields: [album_id], references: [uuid], onDelete: NoAction, onUpdate: NoAction)
   Chart      Chart?    @relation(fields: [chart_id], references: [uuid], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model ChartSettings {
+  chart_id         String?  @unique @db.Uuid
+  uuid             String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  background_color String?  @db.VarChar
+  border_color     String?  @db.VarChar
+  border_size      Decimal? @db.Decimal
+  show_albums      Boolean?
+  show_title       Boolean?
+  text_color       String?  @db.VarChar
+  Chart            Chart?   @relation(fields: [chart_id], references: [uuid], onDelete: NoAction, onUpdate: NoAction)
 }

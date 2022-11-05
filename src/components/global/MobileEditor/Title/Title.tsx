@@ -3,6 +3,7 @@ import { a, useSpring, SpringValue } from "react-spring";
 
 export interface Props {
   chartTitle: string;
+  isReadOnly: boolean;
   setValue: (value: string) => void;
   showIntroduction: boolean;
   titleHeightStyle?: { height: SpringValue<string>; };
@@ -10,6 +11,7 @@ export interface Props {
 
 const Title: React.FC<Props> = ({ 
   chartTitle,
+  isReadOnly,
   setValue,
   showIntroduction,
   titleHeightStyle,
@@ -68,19 +70,20 @@ const Title: React.FC<Props> = ({
               )
             }
 
-            <button
-              onClick={() => clickEditTitleButton()}
-              className="
-                active:outline-rose-300
-                active:outline
-                outline-offset-2
-                active:outline-2 outline-solid
-                rounded
-               
-              "
-            >
-              ✎
-            </button>
+            {isReadOnly ? null : (
+              <button
+                onClick={() => clickEditTitleButton()}
+                className="
+                  active:outline-rose-300
+                  active:outline
+                  outline-offset-2
+                  active:outline-2 outline-solid
+                  rounded
+                "
+              >
+                ✎
+              </button>
+            )}
           </div>
         ) : (
           <>

@@ -8,6 +8,7 @@ import styles from './DesktopSidebar.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import { a, config, useSpring } from 'react-spring';
+import { useZoomOnHover } from '../../../../frontend/hooks/springs/use-zoom-on-hover';
 
 export interface Props {
   showAlbums: boolean;
@@ -46,13 +47,11 @@ export const DesktopSidebar: React.FC<Props> = ({
   numberOfColumns,
   setNumberOfColumns,
 }) => {
-  const [chartType, setChartType] = useState('');  
-  const [albumPadding, setAlbumPadding] = useState('');
   const [searchText, setSearchText] = useState('');
   const [timeoutId, setTimeoutId] = useState<null | NodeJS.Timeout>(null);
 
   const { data, refetch } = trpc.albums.search.useQuery({ text: searchText }, {
-    enabled: false, // disable this query from automatically running
+    enabled: false,
   });
 
   const search = async () => {
@@ -70,15 +69,8 @@ export const DesktopSidebar: React.FC<Props> = ({
 
     setTimeoutId(newTimeoutId);
   };
-  const [buttonStyle, animatebuttonStyle] = useSpring(() => ({
-    from: { scale: 1 },
-    config: {
-      ...config.wobbly,
-      bounce: 1.2
-    },
-  }));
-  const onMouseOver = () => animatebuttonStyle.start({scale: 1.1});
-  const onMouseLeave = () => animatebuttonStyle.start({scale: 1.0});
+
+  const { zoomOnHoverStyle, onMouseLeave, onMouseOver } = useZoomOnHover();
   return (
     <div
       className={`
@@ -87,9 +79,10 @@ export const DesktopSidebar: React.FC<Props> = ({
         border-r-2 border-neutral-300 dark:border-neutral-600
         z-50
         w-44 sm:w-48 md:w-56 lg:w-64 overflow-x-hidden
-      `}>
+      `}
+    >
       <div className="mt-2">
-        <div>
+        <div className='flex flex-col justify-center items-center align-middle'>
           <Input
             value={searchText} 
             placeholder="Search Albums" 
@@ -97,7 +90,7 @@ export const DesktopSidebar: React.FC<Props> = ({
             label={""}
           />
 
-          <div className="mt-4">
+          <div className="mt-4 align-middle justify-center w-[200px]">
             {data?.map(((album, index) => (
               <Draggable
                 data={{ album, index }}
@@ -108,6 +101,7 @@ export const DesktopSidebar: React.FC<Props> = ({
                   width="100px"
                   height="100px"
                   src={album.imageUrl}
+                  className="absolute"
                   alt={album.artist}
                 />
               </Draggable>
@@ -172,7 +166,7 @@ export const DesktopSidebar: React.FC<Props> = ({
           {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
           <a href="/">
             <a.h1
-              style={{...buttonStyle}}
+              style={{...zoomOnHoverStyle}}
               onMouseEnter={() => onMouseOver()}
               onMouseLeave={() => onMouseLeave()}
               className="
@@ -182,7 +176,7 @@ export const DesktopSidebar: React.FC<Props> = ({
                 rounded-full
                 text-2xl
                 shadow-lg 
-                dark:shadow-neutral-800
+                dark:shadow-neutral-900
               "
             >
               💿popontop

@@ -8,6 +8,7 @@ export const getChartById = async (uuid: string): Promise<Chart> => {
     return {
       albums: [],
       name:  '',
+      settings: null,
       uuid:   '',
     };
   }
@@ -21,6 +22,11 @@ export const getChartById = async (uuid: string): Promise<Chart> => {
       chart_id: chart?.uuid,
     }
   });
+  const chartSettings = await prisma.chartSettings.findFirst({
+    where: {
+      chart_id: chart?.uuid,
+    }
+  });
 
   return {
     albums: albums.map((album): Album => ({
@@ -30,6 +36,7 @@ export const getChartById = async (uuid: string): Promise<Chart> => {
       lastfmId: ''
     })),
     name: chart?.name ?? '',
+    settings: chartSettings,
     uuid: chart?.uuid ?? '',
   };
 };

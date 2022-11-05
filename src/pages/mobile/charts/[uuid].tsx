@@ -18,7 +18,7 @@ const ChartPage: NextPage = () => {
 
   const n = genUuid(uuid);
 
-  const { data, isLoading, refetch, isFetching } = trpc.charts.getById.useQuery({ uuid: n }, {
+  const { data } = trpc.charts.getById.useQuery({ uuid: n }, {
     enabled: true, // disable this query from automatically running
   });
   
@@ -28,7 +28,11 @@ const ChartPage: NextPage = () => {
       <div className="rounded-lg bg-white dark:bg-[#0a0a0a]
         px-6 py-4 sm:px-4 sm:py-3
         overflow-hidden">
-        <div className=" flex justify-between text-lg text-neutral-500 dark:text-neutral-200">
+        <div
+          className="
+            flex justify-between text-lg  text-neutral-500 dark:text-neutral-200
+          "
+        >
           <p>{data?.name}</p>
         </div>
       </div>

@@ -1,7 +1,18 @@
 import { Album as DbAlbum } from "@prisma/client";
 import { prisma } from "../../../../server/db/client";
 import { Album } from "../../../../types/Albums";
+
+export interface Settings {
+  backgroundColor: string;
+  borderColor: string;
+  borderSize: number;
+  showAlbums: boolean;
+  showTitle: boolean;
+  textColor: string;
+}
+
 export const lastFmImageOrigin = "https://lastfm.freetls.fastly.net/i/u/174s/";
+
 export const formatUrl = (url: string) => {
   if (url.length < 43) {
     return '';
@@ -14,11 +25,35 @@ export const formatUrl = (url: string) => {
   return url;
 }
 
-export const createChart = async (albums: Album[], name: string) => {
+export const formatColor = (url: string) => {
+  if (url.length > 16) {
+    return '';
+  }
+
+  if (url.substring(0, 1) === '#' && url.length > 7) {
+    return '';
+  }
+
+  return url;
+}
+
+export const createChart = async (albums: Album[], name: string, settings: Settings) => {
   console.log({ albums, name });
   const chart = await prisma.chart.create({
     data: {
       name,
+    },
+  });
+
+  const chartSettings = await prisma.chartSettings.create({
+    data: {
+      background_color: settings.backgroundColor,
+      border_color: settings.borderColor,
+      border_size: settings.borderSize,
+      chart_id: chart.uuid,
+      show_albums: settings.showAlbums,
+      show_title: settings.showTitle,
+      text_color: settings.textColor,
     },
   });
 
@@ -34,6 +69,7 @@ export const createChart = async (albums: Album[], name: string) => {
 
   return {
     chart,
-    albumsInChart
+    chartSettings,
+    albumsInChart,
   };
 }

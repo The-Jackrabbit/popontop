@@ -10,6 +10,7 @@ export interface Props {
   borderColor: string;
   backgroundColor?: string;
   borderSize: number;
+  isReadOnly: boolean;
   numberOfColumns: number;
   numberOfRows: number;
 }
@@ -19,11 +20,12 @@ export const DesktopChart: React.FC<Props> = ({
   borderColor,
   backgroundColor,
   borderSize,
+  isReadOnly,
 }) => {
   return (
     <div
       className="
-      border-neutral-300  dark:border-neutral-600
+        border-neutral-300  dark:border-neutral-600
         flex flex-wrap
         sm:min-w-[400px] sm:max-w-[420px]
         md:min-w-[450px] md:max-w-[470px]
@@ -41,6 +43,17 @@ export const DesktopChart: React.FC<Props> = ({
     >
       {containers.map((album, index) => (
         <Droppable
+          className={`
+            border-neutral-300 dark:border-neutral-600
+            border border-1
+            w-4 h-4 
+            sm:w-[40px] sm:h-[40px]
+            md:w-[45px] md:h-[45px]
+            lg:w-[45px] lg:h-[45px]
+            xl:w-[60px] xl:h-[60px]
+            2xl:w-[70px] 2xl:h-[70px]
+            3xl:w-[80px] 3xl:h-[80px]
+          `}
           key={index}
           id={index.toString()}
           album={album}
@@ -51,6 +64,7 @@ export const DesktopChart: React.FC<Props> = ({
               <Draggable
                 data={{ album, index }}
                 id={index.toString()}
+                isReadOnly={isReadOnly}
                 key={index}
               >
                 <Image

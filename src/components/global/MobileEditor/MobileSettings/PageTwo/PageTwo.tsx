@@ -2,6 +2,10 @@ import { useState } from "react";
 import Select from "../../../../lib/Select/Select";
 import Slider from "../../../../lib/Slider/Slider";
 
+export interface Props {
+  
+}
+
 const PageTwo: React.FC = () => {
   const [chartType, setChartType] = useState('');  
   const [showTitle, setShowTitle] = useState('');

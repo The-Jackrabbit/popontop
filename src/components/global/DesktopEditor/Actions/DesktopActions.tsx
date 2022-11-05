@@ -11,35 +11,24 @@ import ActionButton from './ActionButton/ActionButton';
 import ProfileCircle from './ProfileCircle/ProfileCircle';
 
 export interface Props {
-  list: Album[];
-  chartTitle: string;
+  isLoading: boolean;
+  save: () => void;
+  savedChartId: string | null;
 }
 
-const DesktopActions: React.FC<Props> = ({ list, chartTitle }) => {
-  const [savedChartId, setSavedChartId] = useState<null | string>(null);
-  const mutation = trpc.charts.create.useMutation();
-  const saveChart = async (): Promise<string> => {
-    const t = {
-      name: chartTitle,
-      albums: list,
-    };
-    const result = await mutation.mutateAsync(t);
-
-    return result.chart.uuid ?? '';
-  };
-
-  const save = async () => {
-    const uuid = await saveChart();
-    setSavedChartId(uuid);
-  }
+const DesktopActions: React.FC<Props> = ({
+  isLoading,
+  save,
+  savedChartId,
+}) => {
   return (
     <div className="pt-5 border-neutral-300  dark:border-neutral-600 border-l-2 h-screen actions-container flex flex-col justify-between">
       <div>
         <ActionButton
           onClick={() => save()}
-          disabled={mutation.isLoading}
+          disabled={isLoading}
           text={
-            !mutation.isLoading
+            !isLoading
               ? (
                 <p>💾</p>
               )

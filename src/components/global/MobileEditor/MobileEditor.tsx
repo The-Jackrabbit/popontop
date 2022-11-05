@@ -1,4 +1,3 @@
-import { NextPage } from "next";
 import { useState } from "react";
 import { a, useSpring } from "react-spring";
 import { useDragSheetDown } from "../../../frontend/hooks/use-drag-sheet-down";
@@ -9,10 +8,21 @@ import MobileSettings from "./MobileSettings/MobileSettings";
 import ActionBar from "./ActionBar/ActionBar";
 import Title from "./Title/Title";
 import useChartList from "../../../frontend/hooks/use-chart-list";
+import { ChartSettings } from "@prisma/client";
 
 const height = 667;
 
-const MobileEditor: NextPage = () => {
+export interface Props {
+  chartName?: string;
+  readonly?: boolean;
+  settings?: ChartSettings | null;
+}
+
+const MobileEditor: React.FC<Props> = ({
+  chartName = 'My chart',
+  readonly = false,
+  settings = null,
+}) => {
   const {
     addAlbumToList,
     chartTitle,
@@ -24,7 +34,11 @@ const MobileEditor: NextPage = () => {
     isLoading,
     isStarted,
     setChartTitle,
-  } = useChartList();
+  } = useChartList({
+    chartName,
+    readonly,
+    settings,
+  });
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isFirstCloseDone, setIsFirstCloseDone] = useState(false);
@@ -70,13 +84,13 @@ const MobileEditor: NextPage = () => {
 
   return (
     <div className="flex " style={{ height: windowHeight }}>
-
       <a.div
         className="w-screen p-4"
         onClick={() => onClickSheetDeadArea()}
         style={{ ...bgStyle, height: windowHeight }}
       > 
         <Title
+          isReadOnly={readonly}
           chartTitle={chartTitle}
           setValue={(value: string) => setChartTitle(value)}
           showIntroduction={isStarted && isFirstCloseDone}

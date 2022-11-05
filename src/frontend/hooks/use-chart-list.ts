@@ -1,17 +1,41 @@
+import { ChartSettings } from "@prisma/client";
 import { useState } from "react";
 import { Album } from "../../types/Albums";
 import { trpc } from '../../utils/trpc';
 
-const useChartList = () => {
-  const [chartTitle, setChartTitle] = useState('My sick ass chart');
+const useChartList = ({
+  chartName = 'My sick ass chart',
+  readonly = false,
+  settings,
+}: {
+  chartName: string;
+  readonly?: boolean;
+  settings: ChartSettings | null;
+}) => {
   const mutation = trpc.charts.create.useMutation();
   const [list, setList] = useState<Album[]>([]);
   const [isStarted, setIsStarted] = useState(false);
+  const [backgroundColor, setBackgroundColor] = useState(settings?.background_color ?? '');
+  const [borderColor, setBorderColor] = useState(settings?.border_color ?? '');
+  const [borderSize, setBorderSize] = useState(1);
+  const [showAlbums, setShowAlbums] = useState(settings?.show_albums ? settings?.show_albums : false);
+  const [chartTitle, setChartTitle] = useState(chartName ?? '');
+  const [textColor, setTextColor] = useState(settings?.text_color ?? '');
+  const [showTitle, setShowTitle] = useState(settings?.show_title ?? false);
 
   const saveChart = async (): Promise<string> => {
-    const t = { name: chartTitle, albums: list };
-    console.log({ t })
-    const result = await mutation.mutateAsync(t);
+    const result = await mutation.mutateAsync({
+      name: chartTitle,
+      albums: list,
+      settings: {
+        backgroundColor,
+        borderColor,
+        borderSize,
+        showAlbums,
+        showTitle,
+        textColor,
+      },
+    });
 
     return result.chart.uuid ?? '';
   };
@@ -73,6 +97,18 @@ const useChartList = () => {
     isLoading: mutation.isLoading,
     isStarted,
     setChartTitle,
+    backgroundColor,
+    setBackgroundColor,
+    borderColor,
+    setBorderColor,
+    borderSize,
+    setBorderSize,
+    showAlbums,
+    setShowAlbums,
+    textColor,
+    setTextColor,
+    showTitle,
+    setShowTitle,
   }
 };
 
