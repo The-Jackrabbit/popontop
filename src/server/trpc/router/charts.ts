@@ -1,7 +1,8 @@
-import { router, publicProcedure } from "../trpc";
+import { router, publicProcedure, protectedProcedure } from "../trpc";
 import { z } from "zod";
 import { getChartById } from "./charts/getById";
 import { createChart } from "./charts/create";
+import { getChartsForUser } from "./charts/getChartsForUser";
 
 
 export const chartsRouter = router({
@@ -9,6 +10,14 @@ export const chartsRouter = router({
     .input(z.object({ uuid: z.string() }))
     .query(async ({ input }) => {
       return getChartById(input.uuid);
+    }),
+
+  getUserCharts: protectedProcedure
+    .query(async ({ ctx }) => {
+      console.log({
+        s: ctx.session,
+      })
+      return getChartsForUser(ctx.session.user.id);
     }),
 
   create: publicProcedure
@@ -27,6 +36,13 @@ export const chartsRouter = router({
       })
     )
     .mutation(async (req)  => {
-      return createChart(req.input.albums, req.input.name, req.input.settings);
+      const { ctx } = req;
+
+      return createChart(
+        req.input.albums,
+        req.input.name,
+        req.input.settings,
+        ctx?.session?.user?.id
+      );
     }),
 });

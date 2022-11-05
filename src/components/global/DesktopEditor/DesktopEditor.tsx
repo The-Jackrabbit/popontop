@@ -29,7 +29,7 @@ const DesktopEditor: React.FC<Props> = ({
 }) => {
   const [containers, setContainers] = useState(albums);
   const [draggedAlbum, setDraggedAlbum] = useState({
-    album: EMPTY_ALBUM,
+    data: EMPTY_ALBUM,
     origin: 'search',
     index: -1,
   });
@@ -56,7 +56,7 @@ const DesktopEditor: React.FC<Props> = ({
       }
 
       if (droppedIndex !== -1) {
-        newContainers.splice(droppedIndex, 1, draggedAlbum.album as Album);
+        newContainers.splice(droppedIndex, 1, draggedAlbum.data);
       }
 
       return newContainers;
@@ -117,7 +117,6 @@ const DesktopEditor: React.FC<Props> = ({
         autoScroll={false}
         onDragStart={
           (event) => {
-            debugger;
             setDraggedAlbum(event.active.data.current as any)
           }
         }

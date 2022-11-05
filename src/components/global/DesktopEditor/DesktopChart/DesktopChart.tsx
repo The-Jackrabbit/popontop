@@ -22,6 +22,7 @@ export const DesktopChart: React.FC<Props> = ({
   borderSize,
   isReadOnly,
 }) => {
+  console.log({ containers });
   return (
     <div
       className="

@@ -37,14 +37,30 @@ export const formatColor = (url: string) => {
   return url;
 }
 
-export const createChart = async (albums: Album[], name: string, settings: Settings) => {
-  console.log({ albums, name });
+export const createChart = async (
+  albums: Album[],
+  name: string,
+  settings: Settings,
+  userId?: string,
+) => {
   const chart = await prisma.chart.create({
     data: {
       name,
     },
   });
 
+  if (userId) {
+
+    console.log('creating chart to user');
+    const chartToUser = await prisma.chart_to_user.create({
+      data: {
+        user_id: userId,
+        chart_id: chart.uuid,
+      },
+    });
+  }
+
+  console.log('chart settings');
   const chartSettings = await prisma.chartSettings.create({
     data: {
       background_color: settings.backgroundColor,
@@ -57,6 +73,7 @@ export const createChart = async (albums: Album[], name: string, settings: Setti
     },
   });
 
+  console.log('creating albums');
   const albumsInChart = await prisma.album.createMany({
     data: albums.map((album: Album) => ({
       name: album.name,

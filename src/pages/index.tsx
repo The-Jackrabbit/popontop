@@ -6,6 +6,7 @@ import Image from "next/image";
 import { userAgent } from "next/server";
 
 const Home: NextPage = (props) => {
+  // const r = trpc.charts.getUserCharts.useQuery();
   return (
     <DesktopEditor />
   );

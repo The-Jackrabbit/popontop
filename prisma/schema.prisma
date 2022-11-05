@@ -38,13 +38,15 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String          @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String?         @unique
   emailVerified DateTime?
   image         String?
+  uuid          String?         @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
   accounts      Account[]
   sessions      Session[]
+  chart_to_user chart_to_user[]
 }
 
 model VerificationToken {
@@ -86,6 +88,7 @@ model Chart {
   Album          Album[]
   ChartSettings  ChartSettings?
   album_to_chart album_to_chart[]
+  chart_to_user  chart_to_user[]
 }
 
 model Song {
@@ -121,4 +124,12 @@ model ChartSettings {
   show_title       Boolean?
   text_color       String?  @db.VarChar
   Chart            Chart?   @relation(fields: [chart_id], references: [uuid], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model chart_to_user {
+  chart_id String? @db.Uuid
+  user_id  String?
+  uuid     String  @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  Chart    Chart?  @relation(fields: [chart_id], references: [uuid], onDelete: NoAction, onUpdate: NoAction)
+  User     User?   @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
