@@ -93,7 +93,7 @@ export const DesktopSidebar: React.FC<Props> = ({
           <div className="mt-4 align-middle justify-center w-[200px]">
             {data?.map(((album, index) => (
               <Draggable
-                data={{ album, index }}
+                data={{ data: album, index, origin: 'search' }}
                 id={`results-${index.toString()}`}
                 key={index}
               >

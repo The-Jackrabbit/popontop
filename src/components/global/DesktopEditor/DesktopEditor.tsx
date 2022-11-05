@@ -30,6 +30,7 @@ const DesktopEditor: React.FC<Props> = ({
   const [containers, setContainers] = useState(albums);
   const [draggedAlbum, setDraggedAlbum] = useState({
     album: EMPTY_ALBUM,
+    origin: 'search',
     index: -1,
   });
   const [backgroundColor, setBackgroundColor] = useState(settings?.background_color ?? '');
@@ -43,16 +44,17 @@ const DesktopEditor: React.FC<Props> = ({
   const handleDragEnd = (event:  DragEndEvent) => {
     const { over } = event;
 
-    if (!over) {
-      return;
-    }
+    if (!over) { return; }
     
     const droppedIndex = over ? parseInt(over.id as string) : -1;
 
     setContainers((oldContainers) => {
       const newContainers = [...oldContainers];
 
-      newContainers[draggedAlbum.index] = EMPTY_ALBUM;
+      if (draggedAlbum.origin === 'chart') {
+        newContainers[draggedAlbum.index] = EMPTY_ALBUM; 
+      }
+
       if (droppedIndex !== -1) {
         newContainers.splice(droppedIndex, 1, draggedAlbum.album as Album);
       }
@@ -109,13 +111,15 @@ const DesktopEditor: React.FC<Props> = ({
     setSavedChartId(uuid);
   }
 
-  debugger;
   return (
     <div className="flex justify-center min-w-[1000px]">
       <DndContext
         autoScroll={false}
         onDragStart={
-          (event) => setDraggedAlbum(event.active.data.current as any)
+          (event) => {
+            debugger;
+            setDraggedAlbum(event.active.data.current as any)
+          }
         }
         onDragEnd={handleDragEnd}
       >

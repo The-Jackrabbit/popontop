@@ -54,7 +54,7 @@ export const DesktopChart: React.FC<Props> = ({
             2xl:w-[70px] 2xl:h-[70px]
             3xl:w-[80px] 3xl:h-[80px]
           `}
-          key={index}
+          key={`droppable-${index}-key`}
           id={index.toString()}
           album={album}
           style={{ borderWidth: `${borderSize}px`, borderColor }}
@@ -62,10 +62,10 @@ export const DesktopChart: React.FC<Props> = ({
           {album.imageUrl
             ? (
               <Draggable
-                data={{ album, index }}
+                data={{ data: album, index, origin: 'chart' }}
                 id={index.toString()}
                 isReadOnly={isReadOnly}
-                key={index}
+                key={`chart-${index.toString()}-key`}
               >
                 <Image
                   className="w-4 h-4"

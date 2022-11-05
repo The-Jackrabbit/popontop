@@ -1,9 +1,18 @@
 import React from 'react';
 import { useDraggable } from '@dnd-kit/core';
+import { Album } from '../../../../../types/Albums';
+
+export type DragSubZone = 'search' | 'chart';
+
+export interface DraggableDataNode<T> {
+  data: T;
+  index: number;
+  origin: DragSubZone;
+}
 
 export interface Props {
   children: React.ReactNode;
-  data: any;
+  data: DraggableDataNode<Album>;
   id: string;
   isReadOnly?: boolean;
 }
@@ -18,6 +27,7 @@ const Draggable: React.FC<Props> = ({
     id,
     data,
   });
+
   const style = transform
     ? {
         transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,

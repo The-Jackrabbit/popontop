@@ -23,7 +23,7 @@ export const Input: React.FC<Props> = ({
     },
   }));
   const onMouseOver = () => {
-    animatebuttonStyle.start({scale: !isMobile ? 1.05 : 1});
+    animatebuttonStyle.start({scale: !isMobile ? 1.02 : 1});
   }
   const onMouseLeave = () => {
     animatebuttonStyle.start({scale: 1.0});
