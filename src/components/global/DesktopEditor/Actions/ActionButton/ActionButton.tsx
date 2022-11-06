@@ -25,7 +25,7 @@ export const ActionButton: React.FC<Props> = ({
   }));
   const onMouseOver = () => animatebuttonStyle.start({scale: 1.1});
   const onMouseLeave = () => animatebuttonStyle.start({scale: 1.0});
-  const [isHovered, setIsHovered] = useState(!false);
+  const [isHovered, setIsHovered] = useState(false);
   return (
     <div
       className="
