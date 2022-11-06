@@ -1,14 +1,11 @@
-import { useState } from "react";
 import { a } from "react-spring";
 import { useZoomOnHover } from "../../../../../frontend/hooks/springs/use-zoom-on-hover";
 import NavDot, { Color } from "./NavDot/NavDot";
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface Props {
   page: string;
   setPage: (page: string) => void;
 }
-
 
 export const SidebarNav: React.FC<Props> = ({
   page,

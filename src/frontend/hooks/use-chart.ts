@@ -1,6 +1,6 @@
 import { DragEndEvent } from "@dnd-kit/core";
 import { useState } from "react";
-import { useSpring } from "react-spring";
+import { SpringValue, useSpring } from "react-spring";
 import { EMPTY_ALBUM } from "../../constants/empty-album";
 import { Album } from "../../types/Albums";
 import { generateBoard } from "../../utils/instantiators";
@@ -101,7 +101,7 @@ const useChart = ({
   }
 
   return {
-    mutation,
+    isLoading: mutation.isLoading,
     titleStyle,
     listStyles,
     chart: {
@@ -177,9 +177,9 @@ export interface Settings {
 
 
 export interface ChartActions {
-  save: any;
-  handleDragEnd: any;
-  setDraggedAlbum: any;
+  save: () => void;
+  handleDragEnd: (event: DragEndEvent) => void;
+  setDraggedAlbum: (draggedAlbum: { data: Album; origin: string; index: number; }) => void;
   setChartTitle: (title: string) => void;
 }
 
@@ -197,7 +197,7 @@ export interface Chart {
 
 export interface ChartState {
   chart: Chart;
-  listStyles: any;
-  mutation: any;
-  titleStyle: any;
+  listStyles: { width: SpringValue<string>; };
+  isLoading: boolean;
+  titleStyle: { height: SpringValue<string>; };
 }

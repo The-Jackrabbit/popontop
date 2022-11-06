@@ -1,6 +1,5 @@
-// import { useRef, useState } from 'react'
 import { useSpring } from '@react-spring/web'
-import React, {  useState } from "react";
+import { useState } from "react";
 import { useDrag } from '@use-gesture/react';
 import { isIntentionalXAxisGesture } from '../../utils/directions';
 

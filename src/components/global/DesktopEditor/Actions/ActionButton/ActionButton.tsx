@@ -1,11 +1,9 @@
 import { a, config, useSpring } from 'react-spring';
-import ButtonAccessory from '../../../../lib/ButtonAccessory/ButtonAccessory';
-
 import { useState } from "react";
 
 export interface Props {
   disabled?: boolean;
-  onClick: (e: any) => void;
+  onClick: () => void;
   text: string | React.ReactNode;
   variant?: 'primary' | 'regular';
 }
@@ -88,7 +86,7 @@ export const ActionButton: React.FC<Props> = ({
             : 'bg-white dark:bg-black '
           }
         `}
-        onClick={(e) => !disabled && onClick(e)}
+        onClick={() => !disabled && onClick()}
       >
         {text}
       </a.button>

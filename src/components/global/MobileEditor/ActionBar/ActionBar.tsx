@@ -120,10 +120,14 @@ export const ActionBarNew: React.FC<Props> = ({ onClickSettings, onClickSearch }
 
         </div>
       ) : null}
-      <h1  onTouchMove={(e) => {
-          console.log('t')
+      <h1
+        onTouchMove={(e) => {
           e.stopPropagation();
-        }} className="dark:bg-green-400 select-none text-lg z-30">💿popontop</h1>
+        }}
+        className="dark:bg-green-400 select-none text-lg z-30"
+      >
+        💿popontop
+      </h1>
     </div>
     <AddAlbumButton
       onClick={(e) => {

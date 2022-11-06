@@ -1,23 +1,23 @@
-import React, { useEffect } from 'react';
-import { a } from "react-spring";
+import React from 'react';
+import { a, SpringValue } from "react-spring";
 import Title from '../MobileEditor/Title/Title';
 import DesktopActions from './Actions/DesktopActions';
 import ChartList from './ChartList/ChartList';
 import DesktopChart from './DesktopChart/DesktopChart';
 import Layout from './Layout';
-import { Chart, Settings } from '../../../frontend/hooks/use-chart';
+import { Chart } from '../../../frontend/hooks/use-chart';
 
 export interface Props {
   chart: Chart;
-  mutation: any;
-  listStyles: any;
+  isLoading: boolean;
+  listStyles: { width: SpringValue<string>; };
   readonly?: boolean;
-  titleStyle: any;
+  titleStyle: { height: SpringValue<string>; };
 }
 
 const DesktopEditor: React.FC<Props> = ({
   chart,
-  mutation,
+  isLoading,
   listStyles,
   titleStyle,
   readonly = false,
@@ -55,7 +55,7 @@ const DesktopEditor: React.FC<Props> = ({
       }
       actions={
         <DesktopActions
-          isLoading={mutation.isLoading}
+          isLoading={isLoading}
           save={chart.actions.save}
           savedChartId={chart.data.savedChartId}
         />

@@ -4,11 +4,7 @@ import Input from '../../../lib/Input/Input';
 import Select from '../../../lib/Select/Select';
 import Slider from '../../../lib/Slider/Slider';
 import Draggable from '../DragNDrop/Draggable/Draggable';
-import styles from './DesktopSidebar.module.css';
 import Image from 'next/image';
-import Link from 'next/link';
-import { a, config, useSpring } from 'react-spring';
-import SidebarNav from './SidebarNav/SidebarNav';
 import { Settings } from '../../../../frontend/hooks/use-chart';
 import { EMPTY_ALBUM } from '../../../../constants/empty-album';
 import { Album } from '../../../../types/Albums';
@@ -66,8 +62,8 @@ export const DesktopSidebar: React.FC<Props> = ({
                       return (
                         <Draggable
                           data={{ data: album as Album, index, origin: 'search' }}
-                          id={index.toString()}
-                          key={'st-' + index}
+                          id={`results-${index.toString()}`}
+                          key={'search-results-' + JSON.stringify(album)}
                           className="basis-1/2"
                         >
                           <Image

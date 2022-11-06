@@ -1,7 +1,5 @@
-import { uniqueId } from 'lodash';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router'
-import { useState } from 'react';
 import List from '../../../components/global/MobileEditor/List/List';
 import { trpc } from '../../../utils/trpc';
 

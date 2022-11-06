@@ -30,11 +30,7 @@ export const Single: ComponentStory<typeof ListRow> = () => {
 }
 
 export const Multiple: ComponentStory<typeof ListRow> = () => {
-  const [fruits, setFruits] = useState([
-    { name: 'peach' },
-    { name: 'plum' },
-    { name: 'pear' },
-  ]);
+ 
   return (
     <div className="m-4 w-96 overflow-x-hidden">
       {ALBUM_RESULTS.map((album, index) => (
@@ -46,15 +42,7 @@ export const Multiple: ComponentStory<typeof ListRow> = () => {
           onAdvanceAlbumAtIndex={() => undefined}
           onLowerAlbumAtIndex={() => undefined}
           isLastRowInList={index === ALBUM_RESULTS.length - 1}
-          removeSelfFromList={(): void => {
-            setFruits((fruits) => {
-              const newFruits = [...fruits];
-
-              newFruits.splice(index, 1);
-
-              return newFruits;
-            });
-          }}
+          removeSelfFromList={(): void =>  undefined}
         />
       ))}
     </div>

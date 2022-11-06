@@ -54,7 +54,7 @@ const Chart = ({
     animateFadeIn,
   } = usePageFadeIn();
   const {
-    mutation,
+    isLoading,
     titleStyle,
     listStyles,
     chart,
@@ -87,7 +87,7 @@ const Chart = ({
                 chart={chart}
                 listStyles={listStyles}
                 readonly={true}
-                mutation={mutation}
+                isLoading={isLoading}
                 titleStyle={titleStyle}
               />
             )

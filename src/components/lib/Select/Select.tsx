@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { a, config, useSpring } from 'react-spring';
+import { a, useSpring } from 'react-spring';
 
 export interface Option {
   label: string;
@@ -18,7 +18,6 @@ export interface Props {
 
 export const Select: React.FC<Props> = ({
   label = 'Label',
-  // isMobile = false,
   isOpenByDefault,
   options = [],
   placeholder = 'Type here',
@@ -26,7 +25,6 @@ export const Select: React.FC<Props> = ({
   value,
 }) => {
   const [isOpen, setIsOpen] = useState(isOpenByDefault);
-  const [blurLock, setBlurLock] = useState(false);
   const selectedValueLabel = options
     .find((option: Option): boolean => value === option.value)?.label
   const [buttonStyle, animatebuttonStyle] = useSpring(() => ({
@@ -41,10 +39,7 @@ export const Select: React.FC<Props> = ({
   const onMouseLeave = () => animatebuttonStyle.start({ scale: 1.0 });
 
   return (
-    <div
-      className="flex flex-col pb-4 mt-0 relative"
-      onAbort={() => console.log}
-    >
+    <div className="flex flex-col pb-4 mt-0 relative">
       <label className="text-neutral-400">{label}</label>
       <a.button
         onMouseEnter={() => onMouseOver()}
@@ -116,13 +111,9 @@ export const Select: React.FC<Props> = ({
               ${options.length <= 3 ? 'last-of-type:pb-5' : ''}
               text-left text-lg text-neutral-600 dark:text-neutral-200
             `}
-            onPointerDown={() => {
-              setBlurLock(true);
-            }}
             onClick={() => {
               setChosenValue(value);
               setIsOpen(false);
-              setBlurLock(false);
             }}
             tabIndex={0}
           >

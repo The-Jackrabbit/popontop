@@ -27,6 +27,7 @@ export const DesktopChart: React.FC<Props> = ({
   columnCount = 10,
   rowCount = 10,
 }) => {
+  debugger;
   return (
     <div
       className="
@@ -75,9 +76,8 @@ export const DesktopChart: React.FC<Props> = ({
                   {album.imageUrl
                     ? (
                       <Draggable
-                        
                         data={{ data: album, index, origin: 'chart' }}
-                        id={index.toString()}
+                        id={`chart-${index.toString()}`}
                         isReadOnly={isReadOnly}
                         key={`chart-${index.toString()}-key`}
                       >

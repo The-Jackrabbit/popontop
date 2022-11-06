@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDraggable } from '@dnd-kit/core';
 import { Album } from '../../../../../types/Albums';
+import { CSS } from '@dnd-kit/utilities';
 
 export type DragSubZone = 'search' | 'chart';
 
@@ -24,30 +25,39 @@ const Draggable: React.FC<Props> = ({
   data,
   id,
   isReadOnly = false,
-}) =>{
-  const {attributes, listeners, setNodeRef, transform} = useDraggable({
+}) => {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform
+  } = useDraggable({
     id,
     data,
   });
 
-  const style = transform
-    ? {
-        transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
-      }
-    : undefined;
+  const draggableButtonProps = isReadOnly
+    ? {}
+    : {
+      ...listeners,
+      ...attributes,
+      ref: setNodeRef,
+      style: {
+        transform: CSS.Translate.toString(transform),
+      },
+      className: "interactive " + className,
+    };
   
-  return isReadOnly
-    ? (
-        <button>
-          {children}
-        </button>
-      )
-    : (
-        <button ref={setNodeRef} style={style} {...listeners} {...attributes} className={"interactive " + className}>
-          {children}
-        </button>
-      )
-  ;
+  return (
+    <button
+      {...draggableButtonProps}
+      onClick={() => {
+        console.log({ draggableButtonProps });
+      }}
+    >
+      {children}
+    </button>
+  );
 }
 
 export default Draggable;

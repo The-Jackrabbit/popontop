@@ -14,9 +14,6 @@ export const chartsRouter = router({
 
   getUserCharts: protectedProcedure
     .query(async ({ ctx }) => {
-      console.log({
-        s: ctx.session,
-      })
       return getChartsForUser(ctx.session.user.id);
     }),
 

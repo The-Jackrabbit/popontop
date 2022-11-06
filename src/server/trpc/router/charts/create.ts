@@ -1,4 +1,3 @@
-import { Album as DbAlbum } from "@prisma/client";
 import { prisma } from "../../../../server/db/client";
 import { Album } from "../../../../types/Albums";
 
@@ -50,9 +49,7 @@ export const createChart = async (
   });
 
   if (userId) {
-
-    console.log('creating chart to user');
-    const chartToUser = await prisma.chart_to_user.create({
+    await prisma.chart_to_user.create({
       data: {
         user_id: userId,
         chart_id: chart.uuid,
@@ -60,7 +57,6 @@ export const createChart = async (
     });
   }
 
-  console.log('chart settings');
   const chartSettings = await prisma.chartSettings.create({
     data: {
       background_color: settings.backgroundColor,
@@ -73,7 +69,6 @@ export const createChart = async (
     },
   });
 
-  console.log('creating albums');
   const albumsInChart = await prisma.album.createMany({
     data: albums.map((album: Album) => ({
       name: album.name,

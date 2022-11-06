@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
-import { useEffect, useState } from "react";
-import { a, useSpring } from "react-spring";
+import { useState } from "react";
+import { a } from "react-spring";
 import DesktopSidebar from "../../components/global/DesktopEditor/Sidebar/DesktopSidebar";
 import { SidebarNav } from "../../components/global/DesktopEditor/Sidebar/SidebarNav/SidebarNav";
 import { usePageFadeIn } from "../../frontend/hooks/springs/use-page-fade-in";
@@ -18,7 +18,7 @@ const App: NextPage = () => {
     animateFadeIn,
   } = usePageFadeIn();
   const {
-    mutation,
+    isLoading,
     titleStyle,
     listStyles,
     chart,
@@ -63,7 +63,7 @@ const App: NextPage = () => {
                 <DesktopEditor
                   chart={chart}
                   listStyles={listStyles}
-                  mutation={mutation}
+                  isLoading={isLoading}
                   titleStyle={titleStyle}
                 />
               )
