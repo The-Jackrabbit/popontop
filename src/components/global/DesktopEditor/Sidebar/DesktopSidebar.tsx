@@ -45,7 +45,7 @@ export const DesktopSidebar: React.FC<Props> = ({
 
   return (
     <>
-      <div className='flex flex-col justify-center items-center'>
+      <div className='flex flex-col justify-center '>
         <Input
           autofocus={true}
           value={searchText} 
@@ -54,7 +54,7 @@ export const DesktopSidebar: React.FC<Props> = ({
           label="Search albums"
         />
 
-        <div className="flex justify-center content-center">
+        <div className="flex ">
           {data
           ? (
               <div className="mt-4 flex flex-col">
