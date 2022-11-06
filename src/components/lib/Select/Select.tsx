@@ -29,18 +29,17 @@ export const Select: React.FC<Props> = ({
   const [blurLock, setBlurLock] = useState(false);
   const selectedValueLabel = options
     .find((option: Option): boolean => value === option.value)?.label
-    const [buttonStyle, animatebuttonStyle] = useSpring(() => ({
-      from: { scale: 1 },
-      config: {
-        bounce: 1.1
-      },
-    }));
-    const onMouseOver = () => {
-      animatebuttonStyle.start({scale: isOpen ? 1 : 1.02 });
-    }
-    const onMouseLeave = () => {
-      animatebuttonStyle.start({scale: 1.0});
-    }
+  const [buttonStyle, animatebuttonStyle] = useSpring(() => ({
+    from: { scale: 1 },
+    config: {
+      bounce: 1.1
+    },
+  }));
+  const onMouseOver = () => animatebuttonStyle.start({
+    scale: isOpen ? 1 : 1.02,
+  });
+  const onMouseLeave = () => animatebuttonStyle.start({ scale: 1.0 });
+
   return (
     <div
       className="flex flex-col pb-4 mt-0 relative"
@@ -48,12 +47,12 @@ export const Select: React.FC<Props> = ({
     >
       <label className="text-neutral-400">{label}</label>
       <a.button
-       onMouseEnter={() => onMouseOver()}
-       onMouseLeave={() => onMouseLeave()}
-       style={{ ...buttonStyle }}
+        onMouseEnter={() => onMouseOver()}
+        onMouseLeave={() => onMouseLeave()}
+        style={{ ...buttonStyle }}
         className={`
-        rounded-lg
-        shadow-lg
+          rounded-lg
+          shadow-lg
           bg-white dark:bg-neutral-600
           outline-rose-200 text-neutral-400
           focus-within:text-rose-300 
@@ -96,16 +95,15 @@ export const Select: React.FC<Props> = ({
           mt-2
           bg-white dark:bg-neutral-800
           absolute w-full top-[80px]
-          max-h-[144px]
+
           ${options.length > 3 ? 
-            'overflow-y-scroll' : ''}
+            'overflow-y-scroll max-h-[150px]' : ''}
         `}
       >
         {isOpen && options.map(({ value, label } ) => (
           <button
             key={`${value}${label}`}
             className={`
-
               outline outline-2 outline-transparent
               border-transparent
               bg-transparent
@@ -113,7 +111,9 @@ export const Select: React.FC<Props> = ({
               first-of-type:rounded-t-lg  last-of-type:rounded-b-lg
             hover:text-neutral-50  hover:bg-rose-300
               focus-within:bg-rose-200 focus-within:text-neutral-50 focus:border-green-300
-              w-full h-12 mb p-4 
+              w-full
+              mb p-4 l
+              ${options.length <= 3 ? 'last-of-type:pb-5' : ''}
               text-left text-lg text-neutral-600 dark:text-neutral-200
             `}
             onPointerDown={() => {
