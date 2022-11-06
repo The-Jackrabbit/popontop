@@ -1,9 +1,11 @@
-import { a, config, useSpring } from 'react-spring';
+import { a } from 'react-spring';
 import { useState } from "react";
+import { useZoomOnHover } from '../../../../../frontend/hooks/springs/use-zoom-on-hover';
+import { MouseEventHandler } from 'react';
 
 export interface Props {
   disabled?: boolean;
-  onClick: () => void;
+  onClick: MouseEventHandler<HTMLButtonElement>;
   text: string | React.ReactNode;
   variant?: 'primary' | 'regular';
 }
@@ -14,15 +16,12 @@ export const ActionButton: React.FC<Props> = ({
   text,
   variant = 'regular',
 }) => {
-  const [buttonStyle, animatebuttonStyle] = useSpring(() => ({
-    from: { scale: 1 },
-    config: {
-      ...config.wobbly,
-      bounce: 1.2
-    },
-  }));
-  const onMouseOver = () => animatebuttonStyle.start({scale: 1.1});
-  const onMouseLeave = () => animatebuttonStyle.start({scale: 1.0});
+  const {
+    zoomOnHoverStyle,
+    onMouseLeave,
+    onMouseOver,
+  } = useZoomOnHover();
+
   const [isHovered, setIsHovered] = useState(false);
   return (
     <div
@@ -60,13 +59,9 @@ export const ActionButton: React.FC<Props> = ({
       <a.button
         onMouseEnter={() => onMouseOver()}
         onMouseLeave={() => onMouseLeave()}
-        onMouseOver={() => {
-          setIsHovered(true);
-        }}
-        onMouseOut={() => {
-          setIsHovered(false);
-        }}
-        style={{ ...buttonStyle }}
+        onMouseOver={() => setIsHovered(true)}
+        onMouseOut={() => setIsHovered(false)}
+        style={{ ...zoomOnHoverStyle }}
         disabled={disabled}
         className={`
           shadow-sm rounded-lg
@@ -86,7 +81,7 @@ export const ActionButton: React.FC<Props> = ({
             : 'bg-white dark:bg-black '
           }
         `}
-        onClick={() => !disabled && onClick()}
+        onClick={(e) => !disabled && onClick(e)}
       >
         {text}
       </a.button>

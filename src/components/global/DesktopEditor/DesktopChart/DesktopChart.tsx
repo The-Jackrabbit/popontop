@@ -27,7 +27,6 @@ export const DesktopChart: React.FC<Props> = ({
   columnCount = 10,
   rowCount = 10,
 }) => {
-  debugger;
   return (
     <div
       className="
