@@ -57,7 +57,7 @@ export const DesktopSidebar: React.FC<Props> = ({
         <div className="flex ">
           {data
           ? (
-              <div className="mt-4 flex flex-col">
+              <div className="mt-4 flex flex-col w-[200px]">
                 {[...new Array(5)].map((v, rowIndex) => (
                   <div key={`sr-row-${rowIndex}`}>
                     {[...new Array(2)].map((v, columnIndex ) => {

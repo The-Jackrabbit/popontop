@@ -12,9 +12,9 @@ export const Layout: React.FC<Props> = ({ children }) => {
  
   return (
     <div
-      // border-4 border-black
-      // full frame
-      className="
+    // full frame
+    // border-4 border-black
+    className="
         h-screen w-screen
         flex justify-center
         overflow-x-visible
@@ -24,7 +24,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
         // app
         // border-4 border-amber-500
         className="
-          w-full xl:w-[90%] max-w-[100rem]
+          min-w-[200px]
           px-4 py-4
           flex 
         "
@@ -32,15 +32,15 @@ export const Layout: React.FC<Props> = ({ children }) => {
         <div
           // border-4 border-red-500
           className="
-            max-w-[300px]
+
             basis-3/12 grow-0 shrink-0
             flex flex-col justify-between
             px-4
             border-neutral-300  dark:border-neutral-800 border-r-2
-          "
+            "
         >
           <div
-            // border-4 border-green-500
+          // border-4 border-green-500
             className="
               basis-11/12
             "

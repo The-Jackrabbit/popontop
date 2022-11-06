@@ -44,7 +44,7 @@ export const SidebarNav: React.FC<Props> = ({
         <NavDot
           isActive={page === 'editor'}
           onClick={() => setPage('editor')}
-          color={Color.violet}
+          color={Color.green}
           label="Editor"
         />
         <NavDot
@@ -56,7 +56,7 @@ export const SidebarNav: React.FC<Props> = ({
         <NavDot
           isActive={page === 'credits'}
           onClick={() => setPage('credits')}
-          color={Color.rose}
+          color={Color.violet}
           label="Credits"
         />
       </div>

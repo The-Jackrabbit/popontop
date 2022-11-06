@@ -15,13 +15,13 @@ const Layout: React.FC<Props> = ({
   list,
   actions,
 }) => (
-  <div className="flex flex-row basis-[content] h-full">
-    <div className="flex">
-      <div className="flex flex-col items-center px-4">
-        {title}
-        {chart}
-      </div>
+  <div className="flex flex-row h-full">
+
+    <div className="flex flex-col items-center px-4">
+      {title}
+      {chart}
     </div>
+
     {list}
     <div className="
       border-neutral-300 dark:border-neutral-800 border-l-2
