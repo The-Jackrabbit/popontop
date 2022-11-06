@@ -24,7 +24,9 @@ export const Layout: React.FC<Props> = ({ children }) => {
         // app
         // border-4 border-amber-500
         className="
-          min-w-[200px]
+          min-w-[800px]
+
+          lg:min-w-[1000px]
           px-4 py-4
           flex 
         "
@@ -32,8 +34,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
         <div
           // border-4 border-red-500
           className="
-
-            basis-3/12 grow-0 shrink-0
+            w-3/12
             flex flex-col justify-between
             px-4
             border-neutral-300  dark:border-neutral-800 border-r-2
@@ -42,7 +43,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
           <div
           // border-4 border-green-500
             className="
-              basis-11/12
+           
             "
           >
             {sidebarComponent}
@@ -58,7 +59,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
         <div
           // border-4 border-purple-500
           className="
-            basis-10/12
+            w-9/12
           "
         >
           {subPageComponent}
