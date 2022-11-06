@@ -1,4 +1,4 @@
-import { createRef, useState } from "react";
+import { useState } from "react";
 import { a, useSpring, SpringValue } from "react-spring";
 
 export interface Props {

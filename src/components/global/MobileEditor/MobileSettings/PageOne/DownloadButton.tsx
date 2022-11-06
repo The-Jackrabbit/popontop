@@ -1,8 +1,7 @@
-
-import domtoimage from 'dom-to-image-more';
-import dynamic from 'next/dynamic'
+// import domtoimage from 'dom-to-image-more';
 import * as htmlToImage from 'html-to-image';
 import Button from '../../../../lib/Button/Button';
+
 const DownloadButton: React.FC = () => {
   const downloadChart = (): void => {
     if (window) {

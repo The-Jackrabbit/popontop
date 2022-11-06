@@ -1,7 +1,5 @@
 import { useState } from 'react';
-import { a, config, useSpring } from 'react-spring';
 import { colorMap } from '../../../../../../constants/colors';
-import ButtonAccessory from '../../../../../lib/ButtonAccessory/ButtonAccessory';
 
 export interface Props {
   className?: string;
@@ -56,8 +54,7 @@ export const NavDot: React.FC<Props> = ({
               bg-black dark:bg-white
               h-3 w-3 rotate-45
             "
-          >
-          </div>
+          />
         </div>
       )}
        

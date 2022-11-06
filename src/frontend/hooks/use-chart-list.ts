@@ -5,7 +5,7 @@ import { trpc } from '../../utils/trpc';
 
 const useChartList = ({
   chartName = 'My sick ass chart',
-  readonly = false,
+  // readonly = false,
   settings,
 }: {
   chartName: string;

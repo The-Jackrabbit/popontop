@@ -15,5 +15,5 @@ export function useZoomOnHover() {
     zoomOnHoverStyle,
     onMouseLeave,
     onMouseOver,
-  }
+  };
 }

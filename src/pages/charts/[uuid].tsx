@@ -1,17 +1,16 @@
+import { ChartSettings } from "@prisma/client";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { a } from "react-spring";
 import DesktopEditor from "../../components/global/DesktopEditor/DesktopEditor";
-import DesktopSidebar from "../../components/global/DesktopEditor/Sidebar/DesktopSidebar";
 import SidebarNav from "../../components/global/DesktopEditor/Sidebar/SidebarNav/SidebarNav";
 import { usePageFadeIn } from "../../frontend/hooks/springs/use-page-fade-in";
-import useChart, { Settings } from "../../frontend/hooks/use-chart";
+import useChart from "../../frontend/hooks/use-chart";
 import { Album } from "../../types/Albums";
 import { trpc } from "../../utils/trpc";
 import Layout from "../create-chart/Layout";
 import { genUuid } from "../mobile/charts/[uuid]";
-
 
 const ApiWrapper: NextPage = () => {
   const router = useRouter();
@@ -23,20 +22,20 @@ const ApiWrapper: NextPage = () => {
     enabled: true, // disable this query from automatically running
   });
 
+  const isDoneLoading = data && data?.albums?.length > 0 && data.name && data.settings;
+
+  if (!isDoneLoading) {
+    return null;
+  }
+
   return (
-    <>
-      {data && data?.albums?.length > 0 && data.name && data.settings && (
-        <Chart
-          albums={data.albums}
-          chartName={data.name}
-          settings={data.settings}
-        />
-      )}
-    </>
+    <Chart
+      albums={data.albums}
+      chartName={data.name}
+      settings={data.settings}
+    />
   )
 };
-
-
 
 const Chart = ({
   albums,
@@ -45,7 +44,7 @@ const Chart = ({
 }: { 
   albums: Album[];
   chartName: string;
-  settings: any;
+  settings: ChartSettings | null;
 }) => {
   const [page, setPage] = useState('editor');
   const {

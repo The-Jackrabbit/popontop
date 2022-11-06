@@ -1,5 +1,4 @@
 import Select from "../../../../lib/Select/Select";
-import Slider from "../../../../lib/Slider/Slider";
 
 export interface Props {
   showTitle: boolean;

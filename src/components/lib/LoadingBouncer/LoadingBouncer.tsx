@@ -13,7 +13,6 @@ export const DOT_HOP_ANIMATION = {
 };
 
 const LoadingBouncer: React.FC<Props> = ({}) => {
-
   const [dotStyleOne, animateDotStyleOne] = useSpring(() => ({ ...DOT_HOP_ANIMATION,
   }));
   const [dotStyleTwo, animateDotStyleTwo] = useSpring(() => ({ ...DOT_HOP_ANIMATION }));
@@ -30,8 +29,7 @@ const LoadingBouncer: React.FC<Props> = ({}) => {
     setTimeout(() => {
       animatedDotStyleThree.resume();
     }, 400);
-    // setTimeout(() => animatedDotStyleThree.start(), 1000);
-  }, []);
+  }, [animateDotStyleOne, animateDotStyleTwo, animatedDotStyleThree]);
 
   return (
     <div className="flex flex-row justify-center gap-1 width-full">

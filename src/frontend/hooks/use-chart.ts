@@ -1,4 +1,5 @@
 import { DragEndEvent } from "@dnd-kit/core";
+import { ChartSettings } from "@prisma/client";
 import { useState } from "react";
 import { SpringValue, useSpring } from "react-spring";
 import { EMPTY_ALBUM } from "../../constants/empty-album";
@@ -13,11 +14,11 @@ const useChart = ({
 }: {
   albums?: Album[];
   chartName?: string;
-  settings?: any | null;
+  settings?: ChartSettings | null;
 }) : ChartState => {
   const [containers, setContainers] = useState(albums);
 
-  const [draggedAlbum, setDraggedAlbum] = useState({
+  const [draggedAlbum, setDraggedAlbum] = useState<DraggedAlbum>({
     data: EMPTY_ALBUM,
     origin: 'search',
     index: -1,
@@ -179,8 +180,14 @@ export interface Settings {
 export interface ChartActions {
   save: () => void;
   handleDragEnd: (event: DragEndEvent) => void;
-  setDraggedAlbum: (draggedAlbum: { data: Album; origin: string; index: number; }) => void;
+  setDraggedAlbum: (draggedAlbum: DraggedAlbum) => void;
   setChartTitle: (title: string) => void;
+}
+
+export interface DraggedAlbum {
+  data: Album;
+  origin: string;
+  index: number;
 }
 
 export interface ChartData {

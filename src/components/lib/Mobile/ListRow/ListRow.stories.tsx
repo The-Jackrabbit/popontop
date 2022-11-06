@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import ListRow from './ListRow';
 import { ALBUM_RESULTS } from '../../../../constants/test-data/search-results';

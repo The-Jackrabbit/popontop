@@ -1,10 +1,12 @@
-import { a } from "react-spring";
+import { ReactDOMAttributes } from "@use-gesture/react/dist/declarations/src/types";
+import { a, Interpolation, SpringValue } from "react-spring";
 
 export interface Props {
-  bind: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  bind: (...args: any[]) => ReactDOMAttributes;
   children: React.ReactNode;
-  display: any;
-  y: any;
+  display: Interpolation<number, "block" | "none">;
+  y: SpringValue<number>;
 }
 
 const MobileSheet: React.FC<Props> = ({

@@ -1,18 +1,9 @@
-import { useSpring, animated } from '@react-spring/web'
+import { animated } from '@react-spring/web'
 import React from "react";
 import Image from 'next/image';
 import { Album } from '../../../../types/Albums';
 import { useRowSwipeActions } from '../../../../frontend/hooks/use-row-swipe-actions';
 import { useDisappearRow } from '../../../../frontend/hooks/use-disappear-row';
-
-const left = {
-  bg: `linear-gradient(120deg, #f093fb 0%, #f5576c 100%)`,
-  justifySelf: 'end',
-}
-const right = {
-  bg: `linear-gradient(120deg, #96fbc4 0%, #f9f586 100%)`,
-  justifySelf: 'start',
-}
 
 export interface Props {
   album: Album;

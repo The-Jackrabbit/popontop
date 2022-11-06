@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useSpring, config } from '@react-spring/web';
+import { useSpring, SpringValue, config } from '@react-spring/web';
 import { useDrag, Vector2 } from '@use-gesture/react'
 import { isIntentionalYAxisGesture } from '../../utils/directions';
+import { Interpolation } from 'react-spring';
+import { ReactDOMAttributes } from '@use-gesture/react/dist/declarations/src/types';
 
 export interface Props {
   children?: React.ReactNode;
@@ -10,7 +12,21 @@ export interface Props {
   onClose: () => void;
 }
 
-export function useDragSheetDown(height: number, onCloseCallback: () => void) {
+export function useDragSheetDown(
+  height: number,
+  onCloseCallback: () => void,
+): {
+  bgStyle: {
+    transform: Interpolation<number, "translateY(-8%)" | "translateY(0px)">; opacity: Interpolation<number, 0.4 | 1>;
+  };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  bind: (...args: any[]) => ReactDOMAttributes;
+  close: (velocity?: number) => void;
+  display: Interpolation<number, "block" | "none">;
+  open: ({ canceled }: { canceled: boolean; }) => void;
+  windowHeight: string;
+  y: SpringValue<number>;
+} {
   const [{ y }, api] = useSpring(() => ({ y: height }));
   const [windowHeight, setWindowHeight] = useState('100vh');
 
@@ -35,7 +51,6 @@ export function useDragSheetDown(height: number, onCloseCallback: () => void) {
 
   useEffect(() => {
     if (window) {
-      // open({ canceled: false });
       setWindowHeight(`${window.innerHeight}px`)
     }
   }, []); 
@@ -91,6 +106,6 @@ export function useDragSheetDown(height: number, onCloseCallback: () => void) {
     display,
     open,
     windowHeight,
-    y
+    y,
   };
 }

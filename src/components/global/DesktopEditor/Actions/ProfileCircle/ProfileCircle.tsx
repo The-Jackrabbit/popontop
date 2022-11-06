@@ -1,23 +1,18 @@
 import Image from "next/image";
-import { trpc } from "../../../../../utils/trpc";
-import { a, config, useSpring } from 'react-spring';
+import { a } from 'react-spring';
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useState } from "react";
+import { useZoomOnHover } from "../../../../../frontend/hooks/springs/use-zoom-on-hover";
 
 const ProfileCircle: React.FC = () => {
-  const { data: secretMessage } = trpc.auth.getSecretMessage.useQuery();
-
   const { data: sessionData } = useSession();
-  const [buttonStyle, animatebuttonStyle] = useSpring(() => ({
-    from: { scale: 1 },
-    config: {
-      ...config.wobbly,
-      bounce: 1.2
-    },
-  }));
-  const onMouseOver = () => animatebuttonStyle.start({scale: 1.1});
-  const onMouseLeave = () => animatebuttonStyle.start({scale: 1.0});
   const [isHovered, setIsHovered] = useState(false);
+  const {
+    zoomOnHoverStyle,
+    onMouseLeave,
+    onMouseOver,
+  } = useZoomOnHover();
+
   return (
     <div
       className="
@@ -73,13 +68,9 @@ const ProfileCircle: React.FC = () => {
           rounded-full
           bg-rose-300
         "
-        style={{...buttonStyle}}
-        onMouseOver={() => {
-          setIsHovered(true);
-        }}
-        onMouseOut={() => {
-          setIsHovered(false);
-        }}
+        style={{ ...zoomOnHoverStyle }}
+        onMouseOver={() => setIsHovered(true)}
+        onMouseOut={() => setIsHovered(false)}
         onMouseEnter={() => onMouseOver()}
         onMouseLeave={() => onMouseLeave()}
         onClick={sessionData ? () => signOut() : () => signIn('google')}

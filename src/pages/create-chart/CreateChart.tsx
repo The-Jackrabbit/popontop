@@ -5,7 +5,7 @@ import DesktopSidebar from "../../components/global/DesktopEditor/Sidebar/Deskto
 import { SidebarNav } from "../../components/global/DesktopEditor/Sidebar/SidebarNav/SidebarNav";
 import { usePageFadeIn } from "../../frontend/hooks/springs/use-page-fade-in";
 import Layout from "./Layout";
-import useChart from '../../frontend/hooks/use-chart';
+import useChart, { DraggedAlbum } from '../../frontend/hooks/use-chart';
 import { DndContext } from "@dnd-kit/core";
 import DesktopEditor from "../../components/global/DesktopEditor/DesktopEditor";
 
@@ -29,7 +29,7 @@ const App: NextPage = () => {
       autoScroll={false}
       onDragStart={
         (event) => {
-          chart.actions.setDraggedAlbum(event.active.data.current as any)
+          chart.actions.setDraggedAlbum(event.active.data.current as DraggedAlbum)
         }
       }
       onDragEnd={(args) => {
