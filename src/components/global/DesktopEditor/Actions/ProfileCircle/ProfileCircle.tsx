@@ -19,47 +19,51 @@ const ProfileCircle: React.FC = () => {
   const onMouseLeave = () => animatebuttonStyle.start({scale: 1.0});
   const [isHovered, setIsHovered] = useState(false);
   return (
-    <>
+    <div
+      className="
+        flex-grow-0 first-of-type:mt-0 mt-0
+        relative
+      "
+    >
       {isHovered && (
-        <div>
-          <div
-            className="
-              dark:bg-white bg-black
-              dark:text-neutral-800 text-neutral-50
-              pl-4 pr-4 py-2 
-              rounded-xl absolute
-              -translate-x-[100%]
-              shadow-lg
-              translate-y-4
-            "
-          >
-            {
-              sessionData
-                ? 'Sign out'
-                : (
-                  <div>
-                    Log in with
-                    <div   className="inline ml-2 mt-1"> 
-
-                    <Image
-                      src="/assets/google-logo.png"
-                      width="16px"
-                      height="16px"
-                      alt="google"
-                    
-                    />
-                    </div>
-                  </div>
-                )
-            }   
-          </div>
-          <div
-            className="
-              bg-black dark:bg-white h-3 w-3  py-2 rotate-45
-              absolute -translate-x-[70%]  translate-y-[29px]
-            "
-          />
+        <div className="absolute -left-[120px]">
+        <div
+          // Bubble content
+          className="
+            dark:bg-white bg-black
+            dark:text-neutral-800 text-neutral-50
+            pl-4 pr-4 py-2 
+            rounded-xl
+            shadow-lg
+          "
+        >
+          {sessionData
+            ? 'Sign out'
+            : (
+              <div>
+                Log in with
+                <div className="inline ml-2 mt-1"> 
+                  <Image
+                    src="/assets/google-logo.png"
+                    width="16px"
+                    height="16px"
+                    alt="google"  
+                  />
+                </div>
+              </div>
+          )} 
         </div>
+        <div
+          // Caret
+          className="
+            translate-x-[5.3rem]
+            -translate-y-[150%]
+            bg-black dark:bg-white
+            h-3 w-3
+            py-2 rotate-45
+          "
+        />
+      </div>
       )}
       <a.div
         className="
@@ -93,7 +97,7 @@ const ProfileCircle: React.FC = () => {
           : <p className="p-2 text-2xl">🪵</p>
         }
       </a.div>
-    </>
+    </div>
   );
 };
 
