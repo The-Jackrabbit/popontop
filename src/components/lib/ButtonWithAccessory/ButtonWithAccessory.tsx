@@ -2,7 +2,8 @@ export interface Props {
   children: React.ReactNode;
   containerPositionStyle: string;
   containerWidthStyle: string;
-  label: string;
+  isVisible?: boolean;
+  label: string | React.ReactNode;
   pointerPositionStyle: string;
 }
 
@@ -22,11 +23,16 @@ const ButtonWithAccessory: React.FC<Props> = ({
   children,
   containerPositionStyle,
   containerWidthStyle,
+  isVisible = true,
   label,
   pointerPositionStyle,
  }) => {
+  if (!isVisible) {
+    return <>{children}</>;
+  }
+
   return (
-    <div className="flex justify-center content-center items-center self-center m-4 mt-24 relative max-w-[400px]">
+    <div className="flex justify-center content-center items-center self-center  relative ">
       <div className={`absolute ${containerPositionStyle}`}>
         <div
           // Bubble content

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { colorMap } from '../../../../../../constants/colors';
+import ButtonWithAccessory, { TOP_POSITION_STYLE } from '../../../../../lib/ButtonWithAccessory/ButtonWithAccessory';
 
 export interface Props {
   className?: string;
@@ -29,49 +30,27 @@ export const NavDot: React.FC<Props> = ({
   const activeClasses = colorMap[color];
   const [isHovered, setIsHovered] = useState(false);
   return (
-    <div className="relative w-4 h-4">
-      {isHovered && label && (
-        <div className="absolute -top-12 -left-[50px] w-[120px]">
-          <div
-            // Bubble content
-            className="
-              dark:bg-white bg-black
-              z-50
-              dark:text-neutral-800 text-neutral-50
-              pl-4 pr-4 py-2 
-              rounded-xl
-              shadow-lg
-              text-center
-            "
-          >
-            {label}   
-          </div>
-          <div
-            // Caret
-            className="
-              translate-x-[52px]
-              -translate-y-1/2
-              bg-black dark:bg-white
-              h-3 w-3 rotate-45
-            "
-          />
-        </div>
-      )}
-       
-      <button
-        className={`
-          ${className ?? ''}
-          border-2 
-          w-4 h-4 rounded-full
-          shadow-md 
-          outline-offset-4 outline-rose-300
-          ${isActive ? activeClasses : colorMap.neutral}
-        `}
-        onClick={() => onClick()}
-        onMouseOver={() => setIsHovered(true)}
-        onMouseOut={() => setIsHovered(false)}
-      />
-    </div>
+    <ButtonWithAccessory
+      {...TOP_POSITION_STYLE}
+      label={label ?? ''}
+      isVisible={isHovered}
+    >   
+      <div className="relative w-4 h-4">
+        <button
+          className={`
+            ${className ?? ''}
+            border-2 
+            w-4 h-4 rounded-full
+            shadow-md 
+            outline-offset-4 outline-rose-300
+            ${isActive ? activeClasses : colorMap.neutral}
+          `}
+          onClick={() => onClick()}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        />
+      </div>
+    </ButtonWithAccessory>
   );
 }
 

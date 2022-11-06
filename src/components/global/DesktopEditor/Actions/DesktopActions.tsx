@@ -16,10 +16,11 @@ const DesktopActions: React.FC<Props> = ({
 }) => {
   return (
     <>
-      <div>
+      <div className="flex flex-col gap-2">
         <ActionButton
           onClick={() => save()}
           disabled={isLoading}
+          label="Save chart"
           text={
             !isLoading
               ? (
@@ -32,6 +33,7 @@ const DesktopActions: React.FC<Props> = ({
         {savedChartId && (
           <Link href={`/charts/${savedChartId}`}>
             <ActionButton
+              label="View newly saved chart"
               onClick={() => undefined}
               text="➾"
               variant="regular"
@@ -39,9 +41,7 @@ const DesktopActions: React.FC<Props> = ({
           </Link>
         )}
       </div>
-      <div>
-        <ProfileCircle />     
-      </div>
+      <ProfileCircle />
     </>
   );
 };
