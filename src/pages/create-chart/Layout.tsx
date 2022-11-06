@@ -24,9 +24,9 @@ export const Layout: React.FC<Props> = ({ children }) => {
         // app
         // border-4 border-amber-500
         className="
-          min-w-[800px]
-
-          lg:min-w-[1000px]
+          w-[800px]
+          md:w-[945px]
+          lg:w-[1200px]
           px-4 py-4
           flex 
         "
