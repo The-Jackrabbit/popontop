@@ -16,6 +16,7 @@ const useChart = ({
   settings?: any | null;
 }) : ChartState => {
   const [containers, setContainers] = useState(albums);
+
   const [draggedAlbum, setDraggedAlbum] = useState({
     data: EMPTY_ALBUM,
     origin: 'search',

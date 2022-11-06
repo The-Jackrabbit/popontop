@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { a } from "react-spring";
 import Title from '../MobileEditor/Title/Title';
 import DesktopActions from './Actions/DesktopActions';
@@ -22,6 +22,9 @@ const DesktopEditor: React.FC<Props> = ({
   titleStyle,
   readonly = false,
 }) => {
+  // useEffect(() => {
+  //   console.log({ chart });
+  // }, [chart]);
   return (
     <Layout
       isReadonly={readonly}

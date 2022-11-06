@@ -37,7 +37,6 @@ const App: NextPage = () => {
         }
       }
       onDragEnd={(args) => {
-        debugger;
         chart.actions.handleDragEnd(args)
       }}
     >

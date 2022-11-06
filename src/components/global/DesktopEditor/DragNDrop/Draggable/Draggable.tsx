@@ -25,7 +25,6 @@ const Draggable: React.FC<Props> = ({
   id,
   isReadOnly = false,
 }) =>{
-  debugger
   const {attributes, listeners, setNodeRef, transform} = useDraggable({
     id,
     data,
