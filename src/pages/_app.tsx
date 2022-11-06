@@ -31,15 +31,9 @@ const MyApp: AppType<{ session: Session | null }> = ({
         )}
         <title>popontop</title>
       </Head>
-      <Layout Component={Component} pageProps={pageProps} />
+      <Component {...pageProps} />
     </SessionProvider>
   );
 };
-const Layout = ({ Component, pageProps }: { Component: any; pageProps: any; }) => {
-  if ((Component as any).getLayout) {
-    return Component.getLayout(<Component {...pageProps} />);
-  } else {
-    return <Component {...pageProps} />;
-  }
-};
+
 export default trpc.withTRPC(MyApp);

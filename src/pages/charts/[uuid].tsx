@@ -9,7 +9,7 @@ import { usePageFadeIn } from "../../frontend/hooks/springs/use-page-fade-in";
 import useChart, { Settings } from "../../frontend/hooks/use-chart";
 import { Album } from "../../types/Albums";
 import { trpc } from "../../utils/trpc";
-import { Layout } from "../create-chart/Layout";
+import Layout from "../create-chart/Layout";
 import { genUuid } from "../mobile/charts/[uuid]";
 
 
@@ -45,7 +45,7 @@ const Chart = ({
 }: { 
   albums: Album[];
   chartName: string;
-  settings: Settings;
+  settings: any;
 }) => {
   const [page, setPage] = useState('editor');
   const {
@@ -81,18 +81,18 @@ const Chart = ({
        }}
       />
       <a.div style={pageOpacity} className="h-full">
-       {page === 'editor' 
-         ? (
-            <DesktopEditor
-              chart={chart}
-              listStyles={listStyles}
-              readonly={true}
-              mutation={mutation}
-              titleStyle={titleStyle}
-            />
-           )
-         : null
-       }
+        {page === 'editor' 
+          ? (
+              <DesktopEditor
+                chart={chart}
+                listStyles={listStyles}
+                readonly={true}
+                mutation={mutation}
+                titleStyle={titleStyle}
+              />
+            )
+          : null
+        }
       </a.div>
     </Layout>
   )

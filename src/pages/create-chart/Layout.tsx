@@ -5,16 +5,19 @@ export interface Props {
 }
 
 // Desktop App Layout
-export const Layout: React.FC<Props> = ({ children }) => {
+const Layout: React.FC<Props> = ({ children }) => {
+  if (!children || children.length < 3) {
+    return null;
+  }
   const sidebarComponent = children[0];
   const bottomNavComponent = children[1];
   const subPageComponent = children[2];
  
   return (
     <div
-    // full frame
-    // border-4 border-black
-    className="
+      // full frame
+      // border-4 border-black
+      className="
         h-screen w-screen
         flex justify-center
         overflow-x-visible
@@ -65,6 +68,8 @@ export const Layout: React.FC<Props> = ({ children }) => {
           {subPageComponent}
         </div>
       </div>
-      </div>
-    );
-  }
+    </div>
+  );
+}
+
+export default Layout;

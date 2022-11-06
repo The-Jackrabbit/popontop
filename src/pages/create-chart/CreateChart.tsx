@@ -4,7 +4,7 @@ import { a, useSpring } from "react-spring";
 import DesktopSidebar from "../../components/global/DesktopEditor/Sidebar/DesktopSidebar";
 import { SidebarNav } from "../../components/global/DesktopEditor/Sidebar/SidebarNav/SidebarNav";
 import { usePageFadeIn } from "../../frontend/hooks/springs/use-page-fade-in";
-import { Layout } from "./Layout";
+import Layout from "./Layout";
 import useChart from '../../frontend/hooks/use-chart';
 import { DndContext } from "@dnd-kit/core";
 import DesktopEditor from "../../components/global/DesktopEditor/DesktopEditor";
@@ -23,10 +23,6 @@ const App: NextPage = () => {
     listStyles,
     chart,
   } = useChart({});
-
-  useEffect(() => {
-    console.log({ listStyles });
-  }, [listStyles]);
 
   return (
     <DndContext

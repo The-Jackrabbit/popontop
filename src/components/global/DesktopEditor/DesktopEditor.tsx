@@ -22,9 +22,6 @@ const DesktopEditor: React.FC<Props> = ({
   titleStyle,
   readonly = false,
 }) => {
-  // useEffect(() => {
-  //   console.log({ chart });
-  // }, [chart]);
   return (
     <Layout
       isReadonly={readonly}
