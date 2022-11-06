@@ -10,6 +10,30 @@
   touch-action: none;
 }
 
+@media (prefers-color-scheme: dark) {
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--color-neutral-900);
+}
+
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--color-neutral-800);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-neutral-700);
+}
+
+}
 li::marker {
   height:200px
 }

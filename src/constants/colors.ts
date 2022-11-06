@@ -5,5 +5,7 @@ export const colorMap = {
   rose: 'bg-rose-400 border-rose-400 hover:bg-rose-300 active:bg-rose-200 shadow-rose-500',
   purple: 'bg-purple-400 border-purple-400 hover:bg-purple-300 active:bg-purple-200 shadow-purple-500',
   violet: 'bg-violet-400 border-violet-400 hover:bg-violet-300 active:bg-violet-200 shadow-violet-500',
-  fuchsia: 'bg-fuchsia-400 border-fuchsia-400 hover:bg-fuchsia-300 active:bg-fuchsia-200 shadow-fuchsia-500',
+  fuchsia: 'bg-fuchsia-400 border-fuchsia-400 hover:bg-fuchsia-300 active:bg-fuchsia-200 shadow-fuchsia-500 dark:shadow-fuchsia-500',
+  neutral: 'hover:bg-neutral-200 active:bg-neutral-100\
+  shadow-neutral-400 dark:shadow-neutral-600 bg-neutral-300 dark:bg-neutral-700 border-neutral-300'
 }

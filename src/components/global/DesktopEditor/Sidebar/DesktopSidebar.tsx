@@ -9,47 +9,16 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { a, config, useSpring } from 'react-spring';
 import SidebarNav from './SidebarNav/SidebarNav';
+import { Settings } from '../../../../frontend/hooks/use-chart';
+import { EMPTY_ALBUM } from '../../../../constants/empty-album';
+import { Album } from '../../../../types/Albums';
 
 export interface Props {
-  showAlbums: boolean;
-  setShowAlbums: (value: boolean) => void;
-  showTitle: boolean;
-  setShowTitle: (value: boolean) => void;
-  borderColor: string;
-  setBorderColor: (value: string) => void;
-  textColor: string;
-  setTextColor: (value: string) => void;
-  backgroundColor: string;
-  setBackgroundColor: (value: string) => void;
-  borderSize: number;
-  setBorderSize: (value: number) => void;
-  numberOfRows: number;
-  setNumberOfRows: (value: number) => void;
-  numberOfColumns: number;
-  setNumberOfColumns: (value: number) => void;
-  page: string;
-  setPage: (page: string) => void;
+  settings: Settings;
 }
 
 export const DesktopSidebar: React.FC<Props> = ({
-  setShowAlbums,
-  showAlbums,
-  showTitle,
-  setShowTitle,
-  borderColor,
-  setBorderColor,
-  textColor,
-  setTextColor,
-  backgroundColor,
-  setBackgroundColor,
-  borderSize,
-  setBorderSize,
-  numberOfRows,
-  setNumberOfRows,
-  numberOfColumns,
-  setNumberOfColumns,
-  page,
-  setPage,
+  settings
 }) => {
   const [searchText, setSearchText] = useState('');
   const [timeoutId, setTimeoutId] = useState<null | NodeJS.Timeout>(null);
@@ -75,100 +44,102 @@ export const DesktopSidebar: React.FC<Props> = ({
   };
 
   return (
-    <div
-      className={`
-        p-4 h-screen
-        flex flex-col justify-between
-        border-r-2 border-neutral-300 dark:border-neutral-600
-        z-50
-        w-44 sm:w-48 md:w-56 lg:w-64
-      `}
-    >
-      <div className="mt-2">
-        <div className='flex flex-col justify-center items-center align-middle'>
-          <Input
-            value={searchText} 
-            placeholder="Search Albums" 
-            onChange={(event) => onType(event)} 
-            label={""}
-          />
+    <>
+      <div className='flex flex-col justify-center items-center'>
+        <Input
+          autofocus={true}
+          value={searchText} 
+          placeholder="Search albums" 
+          onChange={(event) => onType(event)} 
+          label="Search albums"
+        />
 
-          <div className="mt-4 align-middle justify-center w-[200px]">
-            {data?.map(((album, index) => (
-              <Draggable
-                data={{ data: album, index, origin: 'search' }}
-                id={`results-${index.toString()}`}
-                key={index}
-              >
-                <Image
-                  width="100px"
-                  height="100px"
-                  src={album.imageUrl}
-                  className="absolute"
-                  alt={album.artist}
-                />
-              </Draggable>
-            )))}
-          </div>
+        <div className="flex justify-center content-center">
+          {data
+          ? (
+              <div className="mt-4 flex flex-col">
+                {[...new Array(5)].map((v, rowIndex) => (
+                  <div key={`sr-row-${rowIndex}`}>
+                    {[...new Array(2)].map((v, columnIndex ) => {
+                      const index = rowIndex*2 + columnIndex;
+                      const album: Album = data ? data[index] as Album : EMPTY_ALBUM;
+                      return (
+                        <Draggable
+                          data={{ data: album as Album, index, origin: 'search' }}
+                          id={index.toString()}
+                          key={'st-' + index}
+                          className="basis-1/2"
+                        >
+                          <Image
+                            width="100px"
+                            height="100px"
+                            src={album?.imageUrl}
+                            className="absolute "
+                            alt={album?.artist}
+                          />
+                        </Draggable>
+                      );
+                    })}
+                  </div>
+                ))}
+              </div>
+            )
+          : null}
         </div>
-          <Select
-            options={[
-              { label: 'Yes', value: 'yes' },
-              { label: 'No', value: 'no',},
-            ]}
-            value={showTitle ? 'yes' : 'no'}
-            setChosenValue={(value) => setShowTitle(value === 'yes')}
-            label="Show title?"
-            placeholder="Show title?"
-            isOpenByDefault={false}
-          />
-
-          <Select
-            options={[
-              { label: 'Yes', value: 'yes' },
-              { label: 'No', value: 'no' },
-            ]}
-            value={showAlbums ? 'yes' : 'no'}
-            setChosenValue={(value) => setShowAlbums(value === 'yes')}
-            label="List albums?"
-            placeholder="List albums?"
-            isOpenByDefault={false}
-          />
-
-          <Input
-            label={'Border color'}
-            onChange={(event) => setBorderColor(event.target.value)}
-            placeholder="#adf2da"
-            value={borderColor}
-          />
-
-          <Slider
-            min={0}
-            max={10}
-            onChange={(event) => setBorderSize(parseInt(event?.target.value))}
-            label="Border size"
-            value={borderSize.toString()}
-          />
-
-          <Input
-            label="Background color"
-            onChange={(event) => setBackgroundColor(event?.target.value)}
-            placeholder="#adf2da"
-            value={backgroundColor}
-          />
-
-          <Input
-            label="Text color"
-            onChange={(event) => setTextColor(event?.target.value)}
-            placeholder="#adf2da"
-            value={textColor}
-          />
       </div>
-      <SidebarNav
-        page={page}
-        setPage={setPage}
+      <Select
+        options={[
+          { label: 'Yes', value: 'yes' },
+          { label: 'No', value: 'no',},
+        ]}
+        value={settings.data.showTitle ? 'yes' : 'no'}
+        setChosenValue={(value) => settings.actions.toggleTitle(value === 'yes')}
+        label="Show title?"
+        placeholder="Show title?"
+        isOpenByDefault={false}
       />
-    </div>
+
+      <Select
+        options={[
+          { label: 'Yes', value: 'yes' },
+          { label: 'No', value: 'no' },
+        ]}
+        value={settings.data.showAlbums ? 'yes' : 'no'}
+        setChosenValue={(value) => settings.actions.toggleAlbums(value === 'yes')}
+        label="List albums?"
+        placeholder="List albums?"
+        isOpenByDefault={false}
+      />
+
+      <Input
+        label={'Border color'}
+        onChange={(event) => settings.actions.setBorderColor(event.target.value)}
+        placeholder="#adf2da"
+        value={settings.data.borderColor}
+      />
+
+      <Slider
+        min={0}
+        max={10}
+        onChange={(event) => settings.actions.setBorderSize(parseInt(event?.target.value))}
+        label="Border size"
+        value={settings.data.borderSize.toString()}
+      />
+
+      <Input
+        label="Background color"
+        onChange={(event) => settings.actions.setBackgroundColor(event?.target.value)}
+        placeholder="#adf2da"
+        value={settings.data.backgroundColor}
+      />
+
+      <Input
+        label="Text color"
+        onChange={(event) => settings.actions.setTextColor(event?.target.value)}
+        placeholder="#adf2da"
+        value={settings.data.textColor}
+      />
+    </>
   );
 }
 

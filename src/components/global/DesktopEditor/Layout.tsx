@@ -2,7 +2,6 @@ import React from 'react';
 
 export interface Props {
   isReadonly: boolean;
-  sidebar: React.ReactNode;
   title: React.ReactNode;
   chart: React.ReactNode;
   list: React.ReactNode;
@@ -11,25 +10,29 @@ export interface Props {
 
 const Layout: React.FC<Props> = ({ 
   isReadonly,
-  sidebar,
   title,
   chart,
   list,
   actions,
 }) => (
   <div className="flex flex-row basis-[content]">
-    {!isReadonly && sidebar}
-    <div className="flex justify-center">
-      <div className="flex flex-col items-center basis-[65%] px-4 py-8">
+    <div className="flex">
+      <div className="flex flex-col items-center px-4">
         {title}
         {chart}
       </div>
     </div>
     {list}
-    {!isReadonly
-      ? actions
-      : null
-    }
+    <div className="
+      border-neutral-300 dark:border-neutral-800 border-l-2
+      flex flex-col justify-between
+      pl-4
+    ">
+      {!isReadonly
+        ? actions
+        : null
+      }
+    </div>
   </div>
 );
 

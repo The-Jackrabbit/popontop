@@ -11,6 +11,7 @@ export interface DraggableDataNode<T> {
 }
 
 export interface Props {
+  className?: string;
   children: React.ReactNode;
   data: DraggableDataNode<Album>;
   id: string;
@@ -19,10 +20,12 @@ export interface Props {
 
 const Draggable: React.FC<Props> = ({
   children,
+  className = '',
   data,
   id,
   isReadOnly = false,
 }) =>{
+  debugger
   const {attributes, listeners, setNodeRef, transform} = useDraggable({
     id,
     data,
@@ -41,7 +44,7 @@ const Draggable: React.FC<Props> = ({
         </button>
       )
     : (
-        <button ref={setNodeRef} style={style} {...listeners} {...attributes}>
+        <button ref={setNodeRef} style={style} {...listeners} {...attributes} className={"interactive " + className}>
           {children}
         </button>
       )

@@ -22,7 +22,7 @@ const DesktopActions: React.FC<Props> = ({
   savedChartId,
 }) => {
   return (
-    <div className="pt-5 border-neutral-300  dark:border-neutral-600 border-l-2 h-screen actions-container flex flex-col justify-between">
+    <>
       <div>
         <ActionButton
           onClick={() => save()}
@@ -49,7 +49,7 @@ const DesktopActions: React.FC<Props> = ({
       <div>
         <ProfileCircle />     
       </div>
-    </div>
+    </>
   );
 };
 

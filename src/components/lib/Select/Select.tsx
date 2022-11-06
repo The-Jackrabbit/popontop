@@ -43,7 +43,7 @@ export const Select: React.FC<Props> = ({
     }
   return (
     <div
-      className="flex flex-col pb-4 relative"
+      className="flex flex-col pb-4 mt-0 relative"
       onAbort={() => console.log}
     >
       <label className="text-neutral-400">{label}</label>

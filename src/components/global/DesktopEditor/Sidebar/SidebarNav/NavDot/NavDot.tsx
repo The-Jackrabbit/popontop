@@ -64,12 +64,11 @@ export const NavDot: React.FC<Props> = ({
       <button
         className={`
           ${className ?? ''}
-          border-2 border-neutral-00
+          border-2 
           w-4 h-4 rounded-full
-          shadow-md shadow-neutral-400 
+          shadow-md 
           outline-offset-4 outline-rose-300
-          hover:bg-neutral-200 active:bg-neutral-100
-          ${isActive ? activeClasses : 'bg-neutral-300 dark:bg-neutral-700'}
+          ${isActive ? activeClasses : colorMap.neutral}
         `}
         onClick={() => onClick()}
         onMouseOver={() => setIsHovered(true)}

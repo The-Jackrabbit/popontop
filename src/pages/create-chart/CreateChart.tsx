@@ -1,0 +1,84 @@
+import type { NextPage } from "next";
+import { useEffect, useState } from "react";
+import { a, useSpring } from "react-spring";
+import DesktopSidebar from "../../components/global/DesktopEditor/Sidebar/DesktopSidebar";
+import { SidebarNav } from "../../components/global/DesktopEditor/Sidebar/SidebarNav/SidebarNav";
+import { usePageFadeIn } from "../../frontend/hooks/springs/use-page-fade-in";
+import { Layout } from "./Layout";
+import useChart from '../../frontend/hooks/use-chart';
+import { DndContext } from "@dnd-kit/core";
+import DesktopEditor from "../../components/global/DesktopEditor/DesktopEditor";
+
+
+const App: NextPage = () => {
+  const [page, setPage] = useState('editor');
+  const {
+    pageOpacity,
+    animateFadeOut,
+    animateFadeIn,
+  } = usePageFadeIn();
+  const {
+    mutation,
+    titleStyle,
+    listStyles,
+    chart,
+  } = useChart({});
+
+  useEffect(() => {
+    console.log({ listStyles });
+  }, [listStyles]);
+
+  return (
+    <DndContext
+      autoScroll={false}
+      onDragStart={
+        (event) => {
+          chart.actions.setDraggedAlbum(event.active.data.current as any)
+        }
+      }
+      onDragEnd={(args) => {
+        debugger;
+        chart.actions.handleDragEnd(args)
+      }}
+    >
+      <Layout>
+        <a.div
+          style={pageOpacity}
+          className="overflow-x-visible h-full"
+        >
+          {page === 'editor' 
+            ? (
+                <DesktopSidebar settings={chart.settings} />
+              )
+            : null
+          }
+        </a.div>
+        <SidebarNav
+          page={page}
+          setPage={(page) => {
+            animateFadeOut(() => {
+              setPage(page);
+              animateFadeIn();
+            });  
+          }}
+        />
+        <a.div style={pageOpacity}>
+          {page === 'editor' 
+            ? (
+                <DesktopEditor
+                  chart={chart}
+                  listStyles={listStyles}
+                  mutation={mutation}
+                  titleStyle={titleStyle}
+                />
+              )
+            : null
+          }
+        </a.div>
+      </Layout>
+    </DndContext>
+  );
+};
+
+export default App;
+

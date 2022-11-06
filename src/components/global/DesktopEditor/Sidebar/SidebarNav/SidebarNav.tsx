@@ -30,7 +30,8 @@ export const SidebarNav: React.FC<Props> = ({
               bg-white dark:bg-black
               px-2 py-1 py-1sm:px-4 sm:py-1
               rounded-full
-              text-2xl
+              min-w-96
+              text-sm lg:text-xl
               shadow-lg 
               dark:shadow-neutral-900
             "
@@ -51,6 +52,12 @@ export const SidebarNav: React.FC<Props> = ({
           onClick={() => setPage('your-charts')}
           color={Color.fuchsia}
           label="Your charts"
+        />
+        <NavDot
+          isActive={page === 'credits'}
+          onClick={() => setPage('credits')}
+          color={Color.rose}
+          label="Credits"
         />
       </div>
     </div>

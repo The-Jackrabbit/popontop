@@ -1,195 +1,66 @@
 import React from 'react';
-import { DndContext, DragEndEvent } from "@dnd-kit/core";
-import { useState } from "react";
-import { a, useSpring } from "react-spring";
-import { EMPTY_ALBUM } from '../../../constants/empty-album';
-import { generateBoard } from '../../../utils/instantiators';
+import { a } from "react-spring";
 import Title from '../MobileEditor/Title/Title';
 import DesktopActions from './Actions/DesktopActions';
 import ChartList from './ChartList/ChartList';
-import DesktopSidebar from './Sidebar/DesktopSidebar';
-import { Album } from '../../../types/Albums';
 import DesktopChart from './DesktopChart/DesktopChart';
 import Layout from './Layout';
-import { trpc } from '../../../utils/trpc';
-import { ChartSettings } from '@prisma/client';
+import { Chart, Settings } from '../../../frontend/hooks/use-chart';
 
 export interface Props {
-  albums?: Album[];
+  chart: Chart;
+  mutation: any;
+  listStyles: any;
   readonly?: boolean;
-  chartName?: string;
-  settings?: ChartSettings | null;
-  page: string;
-  setPage: (page: string) => void;
+  titleStyle: any;
 }
 
 const DesktopEditor: React.FC<Props> = ({
-  albums = generateBoard(),
-  chartName = 'My chart',
+  chart,
+  mutation,
+  listStyles,
+  titleStyle,
   readonly = false,
-  settings,
-  page,
-  setPage,
 }) => {
-  const [containers, setContainers] = useState(albums);
-  const [draggedAlbum, setDraggedAlbum] = useState({
-    data: EMPTY_ALBUM,
-    origin: 'search',
-    index: -1,
-  });
-  const [backgroundColor, setBackgroundColor] = useState(settings?.background_color ?? '');
-  const [borderColor, setBorderColor] = useState(settings?.border_color ?? '');
-  const [borderSize, setBorderSize] = useState(1);
-  const [showAlbums, setShowAlbums] = useState(settings?.show_albums ? settings?.show_albums : false);
-  const [chartTitle, setChartTitle] = useState(chartName ?? '');
-  const [textColor, setTextColor] = useState(settings?.text_color ?? '');
-  const [showTitle, setShowTitle] = useState(settings?.show_title ?? false);
-  
-  const handleDragEnd = (event:  DragEndEvent) => {
-    const { over } = event;
-
-    if (!over) { return; }
-    
-    const droppedIndex = over ? parseInt(over.id as string) : -1;
-
-    setContainers((oldContainers) => {
-      const newContainers = [...oldContainers];
-
-      if (draggedAlbum.origin === 'chart') {
-        newContainers[draggedAlbum.index] = EMPTY_ALBUM; 
-      }
-
-      if (droppedIndex !== -1) {
-        newContainers.splice(droppedIndex, 1, draggedAlbum.data);
-      }
-
-      return newContainers;
-    });
-  };
-
-  const [listStyles, animateListStyles] = useSpring(() => ({
-    from: { width: !showAlbums ? '0px' : '200px' },
-  }));
-  const [titleStyle, animateTitleStyle] = useSpring(() => ({
-    from: { height: settings?.show_title ? '72px' : '0px' },
-  }));
-
-  const [numberOfColumns, setNumberOfColumns] = useState(10);
-  const [numberOfRows, setNumberOfRows] = useState(10);
-
-  const toggleTitle = (val: boolean): void => {
-    setShowTitle(val);
-    animateTitleStyle.start({
-      height: val ? '72px' : '0px',
-    });
-  };
-
-  const toggleAlbums = (val: boolean): void => {
-    setShowAlbums(val);
-    animateListStyles.start({
-      width: val ? '200px' : '0px',
-    });
-  };
-
-  const [savedChartId, setSavedChartId] = useState<null | string>(null);
-  const mutation = trpc.charts.create.useMutation();
-  const saveChart = async (): Promise<string> => {
-    const result = await mutation.mutateAsync({
-      name: chartTitle,
-      albums: containers,
-      settings: {
-        backgroundColor,
-        borderColor,
-        borderSize,
-        showAlbums,
-        showTitle,
-        textColor,
-      }
-    });
-
-    return result.chart.uuid ?? '';
-  };
-
-  const save = async () => {
-    const uuid = await saveChart();
-    setSavedChartId(uuid);
-  }
-
-
   return (
-    <div className="flex justify-center min-w-[1000px]">
-      <DndContext
-        autoScroll={false}
-        onDragStart={
-          (event) => {
-            setDraggedAlbum(event.active.data.current as any)
-          }
-        }
-        onDragEnd={handleDragEnd}
-      >
-        <Layout
-          isReadonly={readonly}
-          sidebar={
-            <DesktopSidebar
-              showAlbums={showAlbums}
-              setShowAlbums={toggleAlbums}
-              showTitle={showTitle}
-              setShowTitle={toggleTitle}
-              borderColor={borderColor}
-              setBorderColor={setBorderColor}
-              backgroundColor={backgroundColor}
-              setTextColor={setTextColor}
-              textColor={textColor}
-              setBackgroundColor={setBackgroundColor}
-              borderSize={borderSize}
-              setBorderSize={setBorderSize}
-              numberOfColumns={numberOfColumns}
-              numberOfRows={numberOfRows}
-              setNumberOfColumns={setNumberOfColumns}
-              setNumberOfRows={setNumberOfRows}
-
-              page={page}
-              setPage={setPage}
-            />
-          }
-          title={
-            <a.div style={titleStyle} className="overflow-y-hidden w-full">
-              <Title
-                chartTitle={chartTitle}
-                setValue={(val: string) => setChartTitle(val)}
-                showIntroduction={true}
-                isReadOnly={readonly}
-              />
-            </a.div>
-          }
-          chart={
-            <DesktopChart
-              isReadOnly={readonly}
-              numberOfColumns={numberOfColumns}
-              numberOfRows={numberOfRows}
-              containers={containers}
-              backgroundColor={backgroundColor}
-              borderColor={borderColor}
-              borderSize={borderSize}
-            />
-          }
-          list={
-            <ChartList
-              listStyles={listStyles}
-              containers={containers}
-              textColor={textColor}
-            />
-          }
-          actions={
-            <DesktopActions
-              isLoading={mutation.isLoading}
-              save={save}
-              savedChartId={savedChartId}
-            />
-          }
+    <Layout
+      isReadonly={readonly}
+      title={
+        <a.div style={titleStyle} className="overflow-y-hidden w-full">
+          <Title
+            chartTitle={chart.data.chartTitle}
+            setValue={(val: string) => chart.actions.setChartTitle(val)}
+            showIntroduction={true}
+            isReadOnly={readonly}
+          />
+        </a.div>
+      }
+      chart={
+        <DesktopChart
+          isReadOnly={readonly}
+          numberOfColumns={chart.settings.data.numberOfColumns}
+          numberOfRows={chart.settings.data.numberOfRows}
+          containers={chart.data.entries ?? []}
+          backgroundColor={chart.settings.data.backgroundColor}
+          borderColor={chart.settings.data.borderColor}
+          borderSize={chart.settings.data.borderSize}
         />
-      </DndContext>
-    </div>
+      }
+      list={
+        <ChartList
+          listStyles={listStyles}
+          containers={chart.data.entries ?? []}
+          textColor={chart.settings.data.textColor}
+        />
+      }
+      actions={
+        <DesktopActions
+          isLoading={mutation.isLoading}
+          save={chart.actions.save}
+          savedChartId={chart.data.savedChartId}
+        />
+      }
+    />
   );
 };
 

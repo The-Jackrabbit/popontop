@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Draggable from '../DragNDrop/Draggable/Draggable';
 import Droppable from '../DragNDrop/Droppable/Droppable';
 import { Album } from '../../../../types/Albums';
+import { EMPTY_ALBUM } from '../../../../constants/empty-album';
 
 
 export interface Props {
@@ -13,6 +14,8 @@ export interface Props {
   isReadOnly: boolean;
   numberOfColumns: number;
   numberOfRows: number;
+  columnCount?: number;
+  rowCount?: number;
 }
 
 export const DesktopChart: React.FC<Props> = ({
@@ -21,19 +24,15 @@ export const DesktopChart: React.FC<Props> = ({
   backgroundColor,
   borderSize,
   isReadOnly,
+  columnCount = 10,
+  rowCount = 10,
 }) => {
-  console.log({ containers });
   return (
     <div
       className="
-        border-neutral-300  dark:border-neutral-600
-        flex flex-wrap
-        sm:min-w-[400px] sm:max-w-[420px]
-        md:min-w-[450px] md:max-w-[470px]
-        lg:min-w-[450px] lg:max-w-[470px]
-        xl:min-w-[600px] xl:max-w-[620px]
-        2xl:min-w-[700px] 2xl:max-w-[720px]
-        3xl:min-w-[800px] 3xl:max-w-[800px]
+        border-neutral-300 dark:border-neutral-600
+        flex flex-wrap flex-row
+        w-[min-content]
         box-content
       "
       style={{
@@ -42,44 +41,62 @@ export const DesktopChart: React.FC<Props> = ({
         borderColor,
       }}
     >
-      {containers.map((album, index) => (
-        <Droppable
-          className={`
-            border-neutral-300 dark:border-neutral-600
-            border border-1
-            w-4 h-4 
-            sm:w-[40px] sm:h-[40px]
-            md:w-[45px] md:h-[45px]
-            lg:w-[45px] lg:h-[45px]
-            xl:w-[60px] xl:h-[60px]
-            2xl:w-[70px] 2xl:h-[70px]
-            3xl:w-[80px] 3xl:h-[80px]
-          `}
-          key={`droppable-${index}-key`}
-          id={index.toString()}
-          album={album}
-          style={{ borderWidth: `${borderSize}px`, borderColor }}
-        >
-          {album.imageUrl
-            ? (
-              <Draggable
-                data={{ data: album, index, origin: 'chart' }}
-                id={index.toString()}
-                isReadOnly={isReadOnly}
-                key={`chart-${index.toString()}-key`}
+      {[...new Array(rowCount)].map((v, rowIndex) => (
+        <div
+          className="flex flex-row"
+          id={`editor-row-${rowIndex}`} key={`editor-row-${rowIndex}`}>
+          {[...new Array(columnCount)].map((v, columnIndex ) => {
+            const index = rowIndex*rowCount + columnIndex;
+            const album = containers[index] ?? EMPTY_ALBUM;
+
+            return (
+              <div
+                data-index-row={rowIndex}
+                data-index-column={columnIndex}
+                data-index-inchart={index}
+                key={`editor-column-${rowIndex}-${columnIndex}`}
               >
-                <Image
-                  className="w-4 h-4"
-                  src={album.imageUrl}
-                  height="100%"
-                  width="100%"
-                  alt="profile"
-                />
-              </Draggable>
-            )
-            : null
-          }
-        </Droppable>
+                <Droppable
+                  className={`
+                    border-neutral-300 dark:border-neutral-600
+                    border border-1
+                    w-[40px] h-[40px]
+                    md:w-[50px] md:h-[50px]
+                    lg:w-[50x] lg:h-[50px]
+                    xl:w-[60px] xl:h-[60px]
+                    2xl:w-[60px] 2xl:h-[60px]
+                    3xl:w-[80px] 3xl:h-[80px]
+                  `}
+                  key={`droppable-${index}-key`}
+                  id={index.toString()}
+                  album={album}
+                  style={{ borderWidth: `${borderSize}px`, borderColor }}
+                >
+                  {album.imageUrl
+                    ? (
+                      <Draggable
+                        
+                        data={{ data: album, index, origin: 'chart' }}
+                        id={index.toString()}
+                        isReadOnly={isReadOnly}
+                        key={`chart-${index.toString()}-key`}
+                      >
+                        <Image
+                          className="w-4 h-4"
+                          src={album.imageUrl}
+                          height="100%"
+                          width="100%"
+                          alt="profile"
+                        />
+                      </Draggable>
+                    )
+                    : null
+                  }
+                </Droppable>
+              </div>
+            );
+          })}
+        </div>
       ))}
     </div>
   );

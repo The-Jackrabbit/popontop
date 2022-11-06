@@ -27,7 +27,7 @@ export const ActionButton: React.FC<Props> = ({
   const onMouseLeave = () => animatebuttonStyle.start({scale: 1.0});
   const [isHovered, setIsHovered] = useState(false);
   return (
-    <div className="m-4 flex-grow-0">
+    <div className="flex-grow-0">
       {isHovered && (
         <ButtonAccessory>
           Save chart    

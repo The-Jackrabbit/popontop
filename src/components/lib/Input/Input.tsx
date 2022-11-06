@@ -2,6 +2,7 @@ import { ChangeEventHandler } from "react";
 import { a, useSpring } from 'react-spring';
 
 export interface Props {
+  autofocus?: boolean;
   isMobile?: boolean;
   label?: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
@@ -42,7 +43,7 @@ export const Input: React.FC<Props> = ({
           shadow-lg
           outline-offset-2
           focus-within:outline focus-within:outline-rose-200
-          mt-2 p-4  outline-2 w-full h-12 
+          p-4  outline-2 w-full h-12 
           text-lg text-neutral-900 dark:text-white placeholder:dark:text-neutral-600
           flex justify-between
         `}

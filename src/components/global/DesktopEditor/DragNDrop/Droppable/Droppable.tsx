@@ -25,6 +25,7 @@ const Droppable: React.FC<Props> = ({
     <div
       className={`
         ${className}
+        droppable
         ${isOver ? 'bg-red-400' : 'bg-transparent'}
       `}
       style={style}
