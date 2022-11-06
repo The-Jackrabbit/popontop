@@ -15,7 +15,7 @@ const Layout: React.FC<Props> = ({
   list,
   actions,
 }) => (
-  <div className="flex flex-row basis-[content]">
+  <div className="flex flex-row basis-[content] h-full">
     <div className="flex">
       <div className="flex flex-col items-center px-4">
         {title}

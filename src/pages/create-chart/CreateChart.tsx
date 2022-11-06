@@ -62,7 +62,7 @@ const App: NextPage = () => {
             });  
           }}
         />
-        <a.div style={pageOpacity}>
+        <a.div style={pageOpacity} className="h-full">
           {page === 'editor' 
             ? (
                 <DesktopEditor

@@ -64,7 +64,6 @@ const ProfileCircle: React.FC = () => {
       <a.div
         className="
           shadow-xl
-          m-4
           cursor-pointer
           h-11 w-11
           rounded-full
