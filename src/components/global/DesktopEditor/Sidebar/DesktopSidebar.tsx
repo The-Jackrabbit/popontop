@@ -55,7 +55,7 @@ export const DesktopSidebar: React.FC<Props> = ({
         />
 
         <div className="flex ">
-          {data
+          {data && data.length > 5 
           ? (
               <div className="mt-4 flex flex-col w-[200px]">
                 {[...new Array(5)].map((v, rowIndex) => (
