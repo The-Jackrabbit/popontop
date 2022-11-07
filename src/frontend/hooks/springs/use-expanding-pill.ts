@@ -45,30 +45,21 @@ export function useExpandingPill({
     width: isVisible ? '200px' : '0px',
   }), []);
 
-  const toggleRowVisibility = () => {
-    setIsVisible((isVisible) => !isVisible);
-    animateBorderRadius.start({
-      borderRadius: !isVisible ? '4px' : '20px',
-    });
-    animateRowHeight.start({
-      width: !isVisible ? '200px' : '0px',
-      onRest: () => {
-        animateRowHeight.start({
-          height: !isVisible ? '64px' : '0px',
-          padding: !isVisible ?  '0.5rem 0.5rem' : '0rem 0.5rem',
-        });
-      }
-    });
-  };
-
   const expandPill = () => {
     setIsVisible((isVisible) => !isVisible);
     animateBorderRadius.start({ borderRadius: '4px' });
     animateRowHeight.start({
-      config: config.stiff,
+      config: {
+        ...config.wobbly,
+        duration: 100,
+      },
       onRest: () => animateRowHeight.start({
         height: '64px',
         padding: '0.5rem 0.5rem',
+        config: {
+          ...config.wobbly,
+          duration: 200,
+        },
       }),
       width: '200px',
     });
@@ -78,12 +69,17 @@ export function useExpandingPill({
     setIsVisible((isVisible) => !isVisible);
     animateBorderRadius.start({ borderRadius: '20px' });
     animateRowHeight.start({
-      height: !isVisible ? '64px' : '0px',
-      padding: !isVisible ?  '0.5rem 0.5rem' : '0rem 0.5rem',
-      onRest: () => animateRowHeight.start({
-        config: config.stiff,
-        width: '0px',
-      }),
+      config: {
+        ...config.wobbly,
+        duration: 200,
+      },
+      padding: '0rem 0.5rem',
+      height: '0px',
+      onRest: () => {
+        animateRowHeight.start({
+          width: '0px',
+        });
+      },
     });
   }
 

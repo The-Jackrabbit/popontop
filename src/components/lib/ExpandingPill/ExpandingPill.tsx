@@ -1,28 +1,33 @@
-import { useState } from 'react';
 import { a } from 'react-spring';
 import { useExpandingPill } from '../../../frontend/hooks/springs/use-expanding-pill';
 import Input from '../Input/Input';
+import { ChangeEventHandler } from "react";
 
 export interface Props {
   className?: string;
-  isInitiallyOpen?: boolean;
+  isActive: boolean;
   label: string;
+  onChange: ChangeEventHandler<HTMLInputElement>;
+  toggleVisibility: () => void;
+  value: string;
 }
 
 export const ExpandingPill: React.FC<Props> = ({
   className = '',
-  isInitiallyOpen = false,
+  isActive,
   label,
+  onChange,
+  toggleVisibility,
+  value,
 }) => {
-  const [isActive, setIsActive] = useState(isInitiallyOpen);
   const {
     borderRadiusStyle,
     opacityAnimationStyle,
     rowHeightStyle,
     togglePill,
   } = useExpandingPill({
-    onExpand: () => setIsActive((isActive) => !isActive),
-    onMinimize: () => setIsActive((isActive) => !isActive),
+    onExpand: () => toggleVisibility(),
+    onMinimize: () =>  toggleVisibility(),
   });
 
   return (
@@ -43,11 +48,13 @@ export const ExpandingPill: React.FC<Props> = ({
         className="flex-nowrap flex justify-between px-2"
         onClick={() => togglePill(isActive)}
       >
-        <a.p
-          // style={{ ...pillWidthStyle }}
-          className="pr-4"
-        >{label}</a.p>
-        <a.button style={opacityAnimationStyle}>
+        <a.p className="pr-4">
+          {label}
+        </a.p>
+        <a.button
+          style={opacityAnimationStyle}
+          className="hover:text-rose-300"
+        >
           {isActive ? '-' : '+'}
         </a.button>
       </div>
@@ -59,9 +66,9 @@ export const ExpandingPill: React.FC<Props> = ({
       >
         <Input
           className="w-full bg-neutral-100 "
-          onChange={() => undefined}
+          onChange={onChange}
           placeholder="#adf2da"
-          value={'adf2da'}
+          value={value}
         />
       </a.div>
     </a.div>

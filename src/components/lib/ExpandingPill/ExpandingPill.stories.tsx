@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import ExpandingPill from './ExpandingPill';
+import { usePillList } from '../../../frontend/hooks/springs/use-pill-list';
 
 export default {
   args: {
@@ -23,26 +24,46 @@ export const Single: ComponentStory<typeof ExpandingPill> = (args) => {
   )
 }
 
-export const List: ComponentStory<typeof ExpandingPill> = (args) => {
-  const fruits = [
-    'peach',
-    'plum',
-    'pear',
-    'grapes',
-    'orange',
-    'apple',
-    'mango',
-    'watermelon'
-  ]
+const INIT_FRUITS: string[] = [
+  'peach',
+  'plum',
+  'pear',
+  'grapes',
+  'orange',
+  'apple',
+  'mango',
+  'watermelon'
+];
+
+export const List: ComponentStory<typeof ExpandingPill> = () => {
+  const {
+    onTypeForInputAtIndex,
+    pillValues,
+    toggleVisibilityOfInputAtIndex,
+    visibilityMap,
+  } = usePillList<string>({
+    initialValues: INIT_FRUITS,
+  });
   return (
-    <div className="gap-1 flex flex-row m-4 w-[300px] flex-wrap items-center ">
-      {fruits.map(((fruit) => (
-        <ExpandingPill
-          className=""
-          label={fruit}
-          key={fruit}
-        />
-      )))}
+    <div>
+      <div className="gap-1 flex flex-row m-4 w-[300px] flex-wrap items-center ">
+        {pillValues.map(((pill, index) => (
+          <ExpandingPill
+            className=""
+            isActive={visibilityMap[index] ?? false}
+            onChange={(event) => onTypeForInputAtIndex(event, index)}
+            key={index}
+            label={INIT_FRUITS[index] ?? ''}
+            toggleVisibility={() => toggleVisibilityOfInputAtIndex(index)}
+            value={pill as string}
+          />
+        )))}
+      </div>
+      <div>
+        {INIT_FRUITS.map((fruitLabel, index) => (
+          <p key={fruitLabel}>{fruitLabel}: {pillValues[index]}</p>
+        ))}
+      </div>
     </div>
   )
 }
