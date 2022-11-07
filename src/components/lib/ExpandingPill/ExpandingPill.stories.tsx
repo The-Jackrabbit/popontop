@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import ExpandingPill from './ExpandingPill';
 import { usePillList } from '../../../frontend/hooks/springs/use-pill-list';
@@ -43,6 +43,7 @@ export const List: ComponentStory<typeof ExpandingPill> = () => {
     visibilityMap,
   } = usePillList<string>({
     initialValues: INIT_FRUITS,
+    setterFunctions: INIT_FRUITS.map(() => () => undefined),
   });
   return (
     <div>

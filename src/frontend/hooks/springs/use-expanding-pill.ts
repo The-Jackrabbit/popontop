@@ -1,6 +1,5 @@
-import { config, SpringValue, useSpring } from 'react-spring';
+import { SpringValue, useSpring } from 'react-spring';
 import { usePageFadeIn } from './use-page-fade-in';
-import { useRowSlideInAndOut } from './use-row-slide-in-and-out';
 import { useState } from 'react';
 
 export interface ExpandingPillHookState {
