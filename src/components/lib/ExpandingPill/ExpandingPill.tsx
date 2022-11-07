@@ -2,6 +2,7 @@ import { a } from 'react-spring';
 import { useExpandingPill } from '../../../frontend/hooks/springs/use-expanding-pill';
 import Input from '../Input/Input';
 import { ChangeEventHandler } from "react";
+import { useZoomOnHover } from '../../../frontend/hooks/springs/use-zoom-on-hover';
 
 export interface Props {
   className?: string;
@@ -29,7 +30,15 @@ export const ExpandingPill: React.FC<Props> = ({
     onExpand: () => toggleVisibility(),
     onMinimize: () =>  toggleVisibility(),
   });
-
+  const {
+    onMouseLeave,
+    onMouseOver: onMouseEnter,
+    zoomOnHoverStyle,
+  } = useZoomOnHover();
+  const mouseActions = isActive ? {} : {
+    onMouseLeave,
+    onMouseEnter,
+  };
   return (
     <a.div
       className={`
@@ -38,22 +47,29 @@ export const ExpandingPill: React.FC<Props> = ({
         bg-white dark:bg-black
         px-2 py-1
         rounded-lg
-        text-sm lg:text-xl
-        shadow-lg
+        text-xs
+        shadow-lg dark:shadow-sm dark:shadow-neutral-800
         flex flex-col
       `}
-      style={{ ...borderRadiusStyle }}
+      {...mouseActions}
+      style={{
+        ...borderRadiusStyle, 
+        ...zoomOnHoverStyle,
+      }}
     >
       <div
         className="flex-nowrap flex justify-between px-2"
-        onClick={() => togglePill(isActive)}
+        onClick={() => {
+          togglePill(isActive)
+          onMouseLeave();
+        }}
       >
         <a.p className="pr-4">
           {label}
         </a.p>
         <a.button
           style={opacityAnimationStyle}
-          className="hover:text-rose-300"
+          className="hover:text-rose-300 dark:text-white"
         >
           {isActive ? '-' : '+'}
         </a.button>

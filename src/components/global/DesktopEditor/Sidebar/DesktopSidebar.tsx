@@ -8,13 +8,21 @@ import Image from 'next/image';
 import { Settings } from '../../../../frontend/hooks/use-chart';
 import { EMPTY_ALBUM } from '../../../../constants/empty-album';
 import { Album } from '../../../../types/Albums';
+import { usePillList } from '../../../../frontend/hooks/springs/use-pill-list';
+import ExpandingPill from '../../../lib/ExpandingPill/ExpandingPill';
 
 export interface Props {
+  initialValues?: string[];
   settings: Settings;
 }
 
 export const DesktopSidebar: React.FC<Props> = ({
-  settings
+  initialValues = [
+    '',
+    '',
+    ''
+  ],
+  settings,
 }) => {
   const [searchText, setSearchText] = useState('');
   const [timeoutId, setTimeoutId] = useState<null | NodeJS.Timeout>(null);
@@ -38,6 +46,26 @@ export const DesktopSidebar: React.FC<Props> = ({
 
     setTimeoutId(newTimeoutId);
   };
+
+  const labels = [
+    'background',
+    'font color',
+    'border color',
+  ];
+  const setterFunctions = [
+    settings.actions.setBackgroundColor,
+    settings.actions.setTextColor,
+    settings.actions.setBorderColor,
+  ];
+  const {
+    onTypeForInputAtIndex,
+    pillValues,
+    toggleVisibilityOfInputAtIndex,
+    visibilityMap,
+  } = usePillList<string>({
+    initialValues: [...initialValues],
+    setterFunctions,
+  });
 
   return (
     <>
@@ -83,6 +111,44 @@ export const DesktopSidebar: React.FC<Props> = ({
           : null}
         </div>
       </div>
+
+      <div>
+      <div className="flex flex-row flex-wrap items-center ">
+        {pillValues.map(((pill, index) => (
+          <ExpandingPill
+            className="m-1"
+            isActive={visibilityMap[index] ?? false}
+            onChange={(event) => onTypeForInputAtIndex(event, index)}
+            key={index}
+            label={labels[index] ?? ''}
+            toggleVisibility={() => toggleVisibilityOfInputAtIndex(index)}
+            value={pill as string}
+          />
+        )))}
+      </div>
+    </div>
+
+      {/* <Input
+        label="Background color"
+        onChange={(event) => settings.actions.setBackgroundColor(event?.target.value)}
+        placeholder="#adf2da"
+        value={settings.data.backgroundColor}
+      />
+
+      <Input
+        label="Text color"
+        onChange={(event) => settings.actions.setTextColor(event?.target.value)}
+        placeholder="#adf2da"
+        value={settings.data.textColor}
+      />
+
+      <Input
+        label={'Border color'}
+        onChange={(event) => settings.actions.setBorderColor(event.target.value)}
+        placeholder="#adf2da"
+        value={settings.data.borderColor}
+      />
+       */}
       <Select
         options={[
           { label: 'Yes', value: 'yes' },
@@ -107,13 +173,6 @@ export const DesktopSidebar: React.FC<Props> = ({
         isOpenByDefault={false}
       />
 
-      <Input
-        label={'Border color'}
-        onChange={(event) => settings.actions.setBorderColor(event.target.value)}
-        placeholder="#adf2da"
-        value={settings.data.borderColor}
-      />
-
       <Slider
         min={0}
         max={10}
@@ -122,19 +181,6 @@ export const DesktopSidebar: React.FC<Props> = ({
         value={settings.data.borderSize.toString()}
       />
 
-      <Input
-        label="Background color"
-        onChange={(event) => settings.actions.setBackgroundColor(event?.target.value)}
-        placeholder="#adf2da"
-        value={settings.data.backgroundColor}
-      />
-
-      <Input
-        label="Text color"
-        onChange={(event) => settings.actions.setTextColor(event?.target.value)}
-        placeholder="#adf2da"
-        value={settings.data.textColor}
-      />
     </>
   );
 }

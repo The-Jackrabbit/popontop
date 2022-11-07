@@ -10,11 +10,13 @@ export interface UsePillListState<T> {
 export interface UsePillListProps<T> {
   initialValues: T[];
   initialVisibiltyMap?: boolean[];
+  setterFunctions: ((newValue: T) => void)[];
 }
 
 export function usePillList<T>({
   initialValues = [],
   initialVisibiltyMap = initialValues.map(() => false),
+  setterFunctions,
 }: UsePillListProps<T>) {
   const [pillValues, setPillValues] = useState<T[]>(initialValues);
   const [visibilityMap, setVisibilityMap] = useState<boolean[]>(initialVisibiltyMap);
@@ -29,11 +31,19 @@ export function usePillList<T>({
           newPillValues[index] = initialValues[index] as T;
           return newPillValues;
         });
+        const updateFunction = setterFunctions[index];
+        if (updateFunction) {
+          updateFunction(initialValues[index] as T);
+        }
       }
       return newVisibilityMap;
     });
   }
   const onTypeForInputAtIndex = (event: ChangeEvent<HTMLInputElement>, index: number) => {
+    const updateFunction = setterFunctions[index];
+    if (updateFunction) {
+      updateFunction(event.target.value  as T);
+    }
     setPillValues((oldPillValues) => {
       const newPillValues = [...oldPillValues];
       newPillValues[index] = event.target.value as T;

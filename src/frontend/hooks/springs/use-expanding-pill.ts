@@ -8,7 +8,6 @@ export interface ExpandingPillHookState {
     borderRadius: SpringValue<string>;
   };
   opacityAnimationStyle: { opacity: SpringValue<number>; };
-  pillWidthStyle: { paddingRight: SpringValue<number>; };
   rowHeightStyle: {
     height: SpringValue<string>;
     padding: SpringValue<string>;
@@ -17,6 +16,29 @@ export interface ExpandingPillHookState {
   togglePill: (isActive: boolean) => void;
 }
 
+const styles = {
+  borderRadius: {
+    from: '4px',
+    to: '20px',
+  },
+  config: {
+    // ...config.stiff,
+    duration: 100,
+  },
+  height: {
+    from: '0px',
+    to: '64px',
+  },
+  width: {
+    from: '0px',
+    to: '100%',
+  },
+  padding: {
+    from: '0rem 0.5rem',
+    to: '0.5rem 0.5rem',
+  },
+};
+
 export function useExpandingPill({
   onExpand = () => undefined,
   onMinimize = () => undefined,
@@ -24,12 +46,6 @@ export function useExpandingPill({
   onExpand?: () => void;
   onMinimize?: () => void;
 }): ExpandingPillHookState {
-  const [pillWidthStyle, animatePillWidthStyle] = useSpring(() => ({
-    from: { paddingRight: 8 },
-    config: {
-      ...config.stiff,
-    },
-  }));
   const {
     animateFadeIn,
     animateFadeOut,
@@ -37,49 +53,39 @@ export function useExpandingPill({
   } = usePageFadeIn();
   const [isVisible, setIsVisible] = useState(false);
   const [borderRadiusStyle, animateBorderRadius] = useSpring(() => ({
-    borderRadius: isVisible ? '4px' : '20px',
+    borderRadius: !isVisible ? styles.borderRadius.to : styles.borderRadius.from,
   }), []);
   const [rowHeightStyle, animateRowHeight] = useSpring(() => ({
-    height: isVisible ? '64px' : '0px',
-    padding: isVisible ? '0.5rem 0.5rem' : '0rem 0.5rem',
-    width: isVisible ? '200px' : '0px',
+    height: isVisible ?  styles.height.to : styles.height.from,
+    padding: isVisible ? styles.padding.to  : styles.padding.from,
+    width: isVisible ?  styles.width.to : styles.width.from,
   }), []);
 
   const expandPill = () => {
     setIsVisible((isVisible) => !isVisible);
-    animateBorderRadius.start({ borderRadius: '4px' });
+    animateBorderRadius.start({ borderRadius:  styles.borderRadius.from });
     animateRowHeight.start({
-      config: {
-        ...config.wobbly,
-        duration: 100,
-      },
+      config: styles.config,
       onRest: () => animateRowHeight.start({
-        height: '64px',
-        padding: '0.5rem 0.5rem',
-        config: {
-          ...config.wobbly,
-          duration: 200,
-        },
+        height: styles.height.to,
+        padding: styles.padding.to,
+        config: styles.config,
       }),
-      width: '200px',
+      width: styles.width.to,
     });
   }
 
   const minimizePill = () => {
     setIsVisible((isVisible) => !isVisible);
-    animateBorderRadius.start({ borderRadius: '20px' });
+    animateBorderRadius.start({ borderRadius:  styles.borderRadius.to });
     animateRowHeight.start({
-      config: {
-        ...config.wobbly,
-        duration: 200,
-      },
-      padding: '0rem 0.5rem',
-      height: '0px',
-      onRest: () => {
-        animateRowHeight.start({
-          width: '0px',
-        });
-      },
+      config: styles.config,
+      padding: styles.padding.from,
+      height: styles.height.from,
+      width: styles.width.from,
+      // onRest: () => {
+        // animateRowHeight.start({});
+      // },
     });
   }
 
@@ -100,7 +106,6 @@ export function useExpandingPill({
   return {
     borderRadiusStyle,
     opacityAnimationStyle,
-    pillWidthStyle,
     rowHeightStyle,
     togglePill: onClickHeader,
   };
