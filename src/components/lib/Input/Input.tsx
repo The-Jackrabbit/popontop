@@ -3,6 +3,7 @@ import { a, useSpring } from 'react-spring';
 
 export interface Props {
   autofocus?: boolean;
+  className?: string;
   isMobile?: boolean;
   label?: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
@@ -11,6 +12,7 @@ export interface Props {
 }
 
 export const Input: React.FC<Props> = ({
+  className = '',
   isMobile = false,
   label,
   onChange,
@@ -37,6 +39,7 @@ export const Input: React.FC<Props> = ({
         onMouseLeave={() => onMouseLeave()}
         style={{ ...buttonStyle }}
         className={`
+          ${className}
           dark:bg-neutral-700
           rounded-lg
           mb-4

@@ -25,7 +25,7 @@ export const SidebarNav: React.FC<Props> = ({
             className="
               cursor-pointer
               bg-white dark:bg-black
-              px-2 py-1 py-1sm:px-4 sm:py-1
+              px-2 py-1 sm:py-1
               rounded-full
               min-w-96
               text-sm lg:text-xl
