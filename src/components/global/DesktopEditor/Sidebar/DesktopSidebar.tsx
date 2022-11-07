@@ -81,9 +81,9 @@ export const DesktopSidebar: React.FC<Props> = ({
         <div className="flex ">
           {data && data.length > 5 
           ? (
-              <div className="mt-4 flex flex-col w-[200px]">
+              <div className="mt-4 flex flex-col">
                 {[...new Array(5)].map((v, rowIndex) => (
-                  <div key={`sr-row-${rowIndex}`}>
+                  <div className="flex gap-2 my-1" key={`sr-row-${rowIndex}`}>
                     {[...new Array(2)].map((v, columnIndex ) => {
                       const index = rowIndex*2 + columnIndex;
                       const album: Album = data ? data[index] as Album : EMPTY_ALBUM;
@@ -91,14 +91,24 @@ export const DesktopSidebar: React.FC<Props> = ({
                         <Draggable
                           data={{ data: album as Album, index, origin: 'search' }}
                           id={`results-${index.toString()}`}
-                          key={'search-results-' + JSON.stringify(album)}
-                          className="basis-1/2"
+                          key={'search-results-' + JSON.stringify(album) + index}
+                          className=" relative basis-1/2 p-5 pl-4 pb-4 bg-black rounded-xl"
                         >
+                          <p 
+                            className="
+                              absolute right-0 top-0 
+                              p-3
+                              -translate-y-2
+                              cursor-move
+                            "
+                          >
+                            +
+                          </p>
                           <Image
                             width="100px"
                             height="100px"
                             src={album?.imageUrl}
-                            className="absolute "
+                            className="rounded-tr-full absolute text-white"
                             alt={album?.artist}
                           />
                         </Draggable>
