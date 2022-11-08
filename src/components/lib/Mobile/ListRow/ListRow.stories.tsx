@@ -24,6 +24,7 @@ export const Single: ComponentStory<typeof ListRow> = () => {
         setIsScrollDisabled={() => undefined}
         removeSelfFromList={() => undefined}
         onAdvanceAlbumAtIndex={() => undefined}
+        openRearrangeView={() => undefined}
         onLowerAlbumAtIndex={() => undefined}
       />
     </div>
@@ -43,6 +44,7 @@ export const Multiple: ComponentStory<typeof ListRow> = () => {
           setIsScrollDisabled={() => undefined}
           onAdvanceAlbumAtIndex={() => undefined}
           onLowerAlbumAtIndex={() => undefined}
+          openRearrangeView={() => undefined}
           isLastRowInList={index === ALBUM_RESULTS.length - 1}
           removeSelfFromList={(): void =>  undefined}
         />

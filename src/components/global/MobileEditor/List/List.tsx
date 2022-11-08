@@ -9,21 +9,21 @@ export interface Props {
   removeAlbumAtIndex: (index: number) => void;
   advanceAlbumAtIndex: (index: number) => void;
   lowerAlbumAtIndex: (index: number) => void;
-  toggleRearrangeView: () => void;
+  openRearrangeView: (indexToBeginAltering: number) => void;
 }
 
 const List: React.FC<Props> = ({ 
-  toggleRearrangeView,
   isInteractive = true ,
   list,
   removeAlbumAtIndex,
   advanceAlbumAtIndex,
-  lowerAlbumAtIndex
+  lowerAlbumAtIndex,
+  openRearrangeView,
 }) => {
   const [, setIsScrollDisabled] = useState(false);
   return (
     <div className={`
-      ${list.length > 10 ? 'pb-[200px]' : ''}
+      ${list.length > 10 ? 'pb-[270px]' : ''}
          h-[calc(100vh_-_10px)]
        dark:bg-neutral-900  overflow-y-scroll
         mt-[200px] -translate-y-32 z-10
@@ -36,7 +36,7 @@ const List: React.FC<Props> = ({
             key={JSON.stringify(album) + index}
             album={album}
             index={index}
-            toggleRearrangeView={toggleRearrangeView}
+            openRearrangeView={() => openRearrangeView(index)}
             isInteractive={isInteractive}
             isLastRowInList={index === ALBUM_RESULTS.length - 1}
             removeSelfFromList={() => removeAlbumAtIndex(index)}

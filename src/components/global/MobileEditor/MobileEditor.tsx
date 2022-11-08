@@ -10,6 +10,7 @@ import Title from "./Title/Title";
 import useChartList from "../../../frontend/hooks/use-chart-list";
 import { ChartSettings } from "@prisma/client";
 import ReorderOverlay from "./ReorderOverlay/ReorderOverlay";
+import { Album } from "../../../types/Albums";
 
 const height = 667;
 
@@ -32,6 +33,7 @@ const MobileEditor: React.FC<Props> = ({
     removeAlbumAtIndex,
     advanceAlbumAtIndex,
     lowerAlbumAtIndex,
+    insertAlbumAtIndex,
     isLoading,
     isStarted,
     setChartTitle,
@@ -96,12 +98,45 @@ const MobileEditor: React.FC<Props> = ({
   };
 
   const [isRearrangeViewActive, setIsRearrangeViewActive] = useState(false);
-  const toggleRearrangeView = () => setIsRearrangeViewActive((current) => !current);
+  const [currentIndexBeingDragged, setCurrentIndexBeingDragged] = useState(-1);
+
+  const [currentValue, setCurrentValue] = useState(currentIndexBeingDragged);
+
+  const openRearrangeView = (indexToBeginAltering: number) => {
+    setCurrentIndexBeingDragged(indexToBeginAltering)
+    setCurrentValue(indexToBeginAltering)
+    setIsRearrangeViewActive((current) => !current);
+  };
+
+  const onPointerUp = () => {
+    insertAlbumAtIndex(
+      list[currentIndexBeingDragged] as Album,
+      currentIndexBeingDragged,
+      currentValue,
+    )
+    setCurrentIndexBeingDragged(-1)
+    setIsRearrangeViewActive(false);
+  };
+
+  const onCancel = () => {
+    setCurrentIndexBeingDragged(-1)
+    setIsRearrangeViewActive(false);
+  };
 
   return (
     <div className="overflow-y-hidden flex " style={{ height: windowHeight }}>
     
-      {isRearrangeViewActive ?   <ReorderOverlay /> : null
+      {isRearrangeViewActive ?  (
+        <ReorderOverlay
+          min={0}
+          max={list.length}
+          initialValue={currentIndexBeingDragged}
+          currentValue={currentValue}
+          setCurrentValue={setCurrentValue}
+          onPointerUp={onPointerUp}
+          onCancel={onCancel}
+        /> 
+      ) : null
       
     }
       <a.div
@@ -122,7 +157,7 @@ const MobileEditor: React.FC<Props> = ({
           removeAlbumAtIndex={removeAlbumAtIndex}
           advanceAlbumAtIndex={advanceAlbumAtIndex}
           lowerAlbumAtIndex={lowerAlbumAtIndex}
-          toggleRearrangeView={toggleRearrangeView}
+          openRearrangeView={openRearrangeView}
         />
         <ActionBar
           onClickSettings={() => {

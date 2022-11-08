@@ -14,7 +14,7 @@ export interface Props {
   onAdvanceAlbumAtIndex: (index: number) => void;
   onLowerAlbumAtIndex: (index: number) => void;
   setIsScrollDisabled: (value: boolean) => void;
-  toggleRearrangeView: () => void;
+  openRearrangeView:  (index: number) => void;
 }
 
 export const ListRow: React.FC<Props> = ({
@@ -26,7 +26,7 @@ export const ListRow: React.FC<Props> = ({
   onLowerAlbumAtIndex,
   removeSelfFromList = () => undefined,
   setIsScrollDisabled,
-  toggleRearrangeView,
+  openRearrangeView,
 }) => {
   const {
     isBreakVisible,
@@ -106,7 +106,7 @@ export const ListRow: React.FC<Props> = ({
 
           <div
             className="grow-0 flex items-center"
-            onClick={toggleRearrangeView}
+            onClick={() => openRearrangeView(index)}
           >
             🧤
           </div>

@@ -3,6 +3,7 @@ import { a, useSpring } from "react-spring";
 
 export interface Props {
   onChange: (value: number) => void;
+  onPointerUp: () => void;
   value: number;
   min: number;
   max: number
@@ -10,6 +11,7 @@ export interface Props {
 
 const ThumbSlider: React.FC<Props> = ({
   onChange,
+  onPointerUp,
   value,
   min,
   max,
@@ -19,27 +21,20 @@ const ThumbSlider: React.FC<Props> = ({
       className="
         outline-rose-200 
         rounded-lg
+        h-full
         outline-2 focus-within:outline outline-offset-2
       "
     >
       <input
-       className="gh"
-     step="1" 
-        // className="
-        //   slider shadow-lg 
-        //   p-0 w-full text-lg 
-        //   bg-transparent
-        //   cursor-pointer
-        //  focus-within:text-rose-300
-        //   outline-none
-        // "
+        className="gh h-full slider rotate-180"
+        step="1" 
         onChange={(e) => onChange(parseInt(e.target.value))}
+        onPointerUp={() => onPointerUp()}
         type="range"
-        // orient="vertical"
         min={min}
         max={max}
         value={value}
-        data-value={value}
+        data-attribute-value={value}
       /> 
     </div>
   );

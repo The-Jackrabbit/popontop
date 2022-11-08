@@ -3,13 +3,16 @@
 import Notch from "./Notch/Notch";
 
 export interface Props {
-  activeValue? : number;
   min: number;
   max: number;
+  offset?: number;
+  currentValue: number;
+  initialValue: number;
 }
 
 const Thermometer: React.FC<Props> = ({
-  activeValue = 50,
+  currentValue = 50,
+  initialValue,
   min,
   max,
 }) => {
@@ -21,10 +24,7 @@ const Thermometer: React.FC<Props> = ({
         dark:text-neutral-50
       "
     >
-      <div className="  text-center px-6 text-sm basis-1/12">
-        {/* {min} */}
-        top of the list
-      </div>
+      
       <div
         className="
           basis-10/12
@@ -38,11 +38,14 @@ const Thermometer: React.FC<Props> = ({
             justify-between z-50
           "
         >
-          {[... new Array(101)].map((_, index) => (
+          {[... new Array(max-min)].map((_, index) => (
             <Notch
-              key={index}
-              index={index}
-              isActive={index === 37}
+              key={`notch-${index}`}
+              index={min + index}
+              isActive={index === currentValue}
+              isMajorStep={false}
+              isMinorStep={true} //index%10 === 0 && index%20 !== 0}
+              label={index}
             />
           ))}
         </div>
@@ -56,12 +59,17 @@ const Thermometer: React.FC<Props> = ({
 
         </div>
       </div>
-      <div className=" text-center px-2 text-sm basis-1/12 flex justify-end flex-col">
-        {/* {max} */}
-        bottom of the list
-      </div>
+    
     </div>
   );
 };
 
 export default Thermometer;
+// <div className=" text-center px-2 text-sm basis-1/12 flex justify-end flex-col">
+// {/* {max} */}
+// bottom of the list
+// </div>
+// <div className="  text-center px-6 text-sm basis-1/12">
+//         {/* {min} */}
+//         top of the list
+//       </div>

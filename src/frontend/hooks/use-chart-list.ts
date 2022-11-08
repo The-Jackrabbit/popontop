@@ -86,6 +86,21 @@ const useChartList = ({
     });
   };
 
+  const insertAlbumAtIndex = (album: Album, oldIndex: number, newIndex: number) => {
+    setList((albums) => {
+      const listWithoutAlbum = list.filter((_, albumIndex) => albumIndex !== oldIndex);
+
+      const newAlbums = [...listWithoutAlbum];
+      newAlbums.splice(newIndex, 0, album);
+
+      if (albums.length === 0 && newAlbums.length === 1) {
+        setIsStarted(true);
+      }
+
+      return newAlbums;
+    });
+  };
+
   return {
     addAlbumToList,
     chartTitle,
@@ -94,6 +109,7 @@ const useChartList = ({
     removeAlbumAtIndex,
     advanceAlbumAtIndex,
     lowerAlbumAtIndex,
+    insertAlbumAtIndex,
     isLoading: mutation.isLoading,
     isStarted,
     setChartTitle,
