@@ -1,5 +1,5 @@
 import { animated } from '@react-spring/web'
-import React from "react";
+import React, { useState } from "react";
 import Image from 'next/image';
 import { Album } from '../../../../types/Albums';
 import { useRowSwipeActions } from '../../../../frontend/hooks/use-row-swipe-actions';
@@ -14,6 +14,7 @@ export interface Props {
   onAdvanceAlbumAtIndex: (index: number) => void;
   onLowerAlbumAtIndex: (index: number) => void;
   setIsScrollDisabled: (value: boolean) => void;
+  toggleRearrangeView: () => void;
 }
 
 export const ListRow: React.FC<Props> = ({
@@ -25,6 +26,7 @@ export const ListRow: React.FC<Props> = ({
   onLowerAlbumAtIndex,
   removeSelfFromList = () => undefined,
   setIsScrollDisabled,
+  toggleRearrangeView,
 }) => {
   const {
     isBreakVisible,
@@ -102,12 +104,15 @@ export const ListRow: React.FC<Props> = ({
             <p className="text-xs overflow-x-hidden whitespace-nowrap">{album.name}</p>
           </div>
 
-          <div className="grow-0 flex items-center">
-            
+          <div
+            className="grow-0 flex items-center"
+            onClick={toggleRearrangeView}
+          >
+            🧤
           </div>
         </animated.div>
       </animated.div>
-      {isBreakVisible && (<hr className="my-1 border-neutral-200 dark:border-neutral-600" />)}
+      {isBreakVisible && (<hr className="my-1 border-neutral-200 dark:border-neutral-800" />)}
     </>
   )
 }

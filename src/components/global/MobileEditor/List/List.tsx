@@ -9,16 +9,24 @@ export interface Props {
   removeAlbumAtIndex: (index: number) => void;
   advanceAlbumAtIndex: (index: number) => void;
   lowerAlbumAtIndex: (index: number) => void;
+  toggleRearrangeView: () => void;
 }
 
-const List: React.FC<Props> = ({ isInteractive = true ,list, removeAlbumAtIndex, advanceAlbumAtIndex, lowerAlbumAtIndex}) => {
+const List: React.FC<Props> = ({ 
+  toggleRearrangeView,
+  isInteractive = true ,
+  list,
+  removeAlbumAtIndex,
+  advanceAlbumAtIndex,
+  lowerAlbumAtIndex
+}) => {
   const [, setIsScrollDisabled] = useState(false);
   return (
     <div className={`
-      ${list.length > 10 ? 'pb-[70px]' : ''}
-        mt-2 h-[calc(100vh_-_10px)]
-      dark:bg-neutral-900  overflow-y-scroll
-      mt-[200px] -translate-y-32 z-10
+      ${list.length > 10 ? 'pb-[200px]' : ''}
+         h-[calc(100vh_-_10px)]
+       dark:bg-neutral-900  overflow-y-scroll
+        mt-[200px] -translate-y-32 z-10
       `}
       // style={{ overflowY: isScrollDisabled ? 'hidden' :s 'scroll' }}
     >
@@ -28,6 +36,7 @@ const List: React.FC<Props> = ({ isInteractive = true ,list, removeAlbumAtIndex,
             key={JSON.stringify(album) + index}
             album={album}
             index={index}
+            toggleRearrangeView={toggleRearrangeView}
             isInteractive={isInteractive}
             isLastRowInList={index === ALBUM_RESULTS.length - 1}
             removeSelfFromList={() => removeAlbumAtIndex(index)}

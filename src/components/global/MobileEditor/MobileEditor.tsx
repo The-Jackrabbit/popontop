@@ -95,9 +95,15 @@ const MobileEditor: React.FC<Props> = ({
     close();
   };
 
+  const [isRearrangeViewActive, setIsRearrangeViewActive] = useState(false);
+  const toggleRearrangeView = () => setIsRearrangeViewActive((current) => !current);
+
   return (
     <div className="overflow-y-hidden flex " style={{ height: windowHeight }}>
-      {/* <ReorderOverlay /> */}
+    
+      {isRearrangeViewActive ?   <ReorderOverlay /> : null
+      
+    }
       <a.div
         className="w-screen p-4 overflow-y-hidden"
         onClick={() => onClickSheetDeadArea()}
@@ -116,6 +122,7 @@ const MobileEditor: React.FC<Props> = ({
           removeAlbumAtIndex={removeAlbumAtIndex}
           advanceAlbumAtIndex={advanceAlbumAtIndex}
           lowerAlbumAtIndex={lowerAlbumAtIndex}
+          toggleRearrangeView={toggleRearrangeView}
         />
         <ActionBar
           onClickSettings={() => {
