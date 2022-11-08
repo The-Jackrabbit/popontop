@@ -12,11 +12,11 @@ export interface Props {
 }
 
 const List: React.FC<Props> = ({ isInteractive = true ,list, removeAlbumAtIndex, advanceAlbumAtIndex, lowerAlbumAtIndex}) => {
-  const [isScrollDisabled, setIsScrollDisabled] = useState(false);
+  const [, setIsScrollDisabled] = useState(false);
   return (
     <div className={`
       ${list.length > 10 ? 'pb-[70px]' : ''}
-         h-[calc(100vh_-_10px)]
+        mt-2 h-[calc(100vh_-_10px)]
       dark:bg-neutral-900  overflow-y-scroll
       mt-[200px] -translate-y-32 z-10
       `}

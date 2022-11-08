@@ -32,7 +32,7 @@ export const useRowSwipeActions = ({
     ...left,
   }));
 
-  const bind = useDrag(({ active, movement: [mx, my] }) => {
+  const bind = useDrag(({ active, movement: [mx,] }) => {
     // if (!isIntentionalXAxisGesture(mx, my)) {
     //   return;
     // }
