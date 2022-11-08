@@ -9,6 +9,7 @@ import ActionBar from "./ActionBar/ActionBar";
 import Title from "./Title/Title";
 import useChartList from "../../../frontend/hooks/use-chart-list";
 import { ChartSettings } from "@prisma/client";
+import ReorderOverlay from "./ReorderOverlay/ReorderOverlay";
 
 const height = 667;
 
@@ -96,12 +97,14 @@ const MobileEditor: React.FC<Props> = ({
 
   return (
     <div className="overflow-y-hidden flex " style={{ height: windowHeight }}>
+      {/* <ReorderOverlay /> */}
       <a.div
         className="w-screen p-4 overflow-y-hidden"
         onClick={() => onClickSheetDeadArea()}
         style={{ ...bgStyle, height: windowHeight }}
       > 
         <Title
+          isFixed={true}
           isReadOnly={readonly}
           chartTitle={chartTitle}
           setValue={(value: string) => setChartTitle(value)}

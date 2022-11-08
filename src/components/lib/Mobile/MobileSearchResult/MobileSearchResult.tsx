@@ -51,9 +51,9 @@ export const MobileSearchResult: React.FC<Props> = ({
           <p className="text-xs overflow-x-hidden whitespace-nowrap">{album.name}</p>
         </div>
 
-        <div className="grow-0 flex items-center">
+        <div className="basis-[30%] justify-end grow-0 flex items-center" 
+            onClick={() => toggleRowVisibility()}>
           <button
-            onClick={() => toggleRowVisibility()}
             className="
               border
               h-6 w-6 p-0 text-sm

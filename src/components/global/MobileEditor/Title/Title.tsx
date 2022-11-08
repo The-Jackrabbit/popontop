@@ -3,6 +3,7 @@ import { useState } from "react";
 
 export interface Props {
   chartTitle: string;
+  isFixed?: boolean;
   isReadOnly: boolean;
   setValue: (value: string) => void;
   showIntroduction: boolean;
@@ -11,6 +12,7 @@ export interface Props {
 
 const Title: React.FC<Props> = ({ 
   chartTitle,
+  isFixed = false,
   isReadOnly,
   setValue,
   showIntroduction,
@@ -39,15 +41,16 @@ const Title: React.FC<Props> = ({
   return (
     <a.div
       style={titleHeightStyle ? { ...titleHeightStyle } : undefined}
-      className="
+      className={`
         rounded-lg bg-white dark:bg-[#0a0a0a]
         shadow-xl
         box-content
         px-6 py-4 sm:px-4 sm:py-3
         mb-4 z-50
         overflow-hidden
-        fixed left-[1rem] right-[1rem]
-      "
+        
+        ${isFixed ? 'fixed left-[1rem] right-[1rem]' : ''}
+      `}
     >
       <a.div style={opacity}>
         {showIntroduction ? (

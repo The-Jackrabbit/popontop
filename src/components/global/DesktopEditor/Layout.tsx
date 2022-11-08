@@ -17,9 +17,11 @@ const Layout: React.FC<Props> = ({
 }) => (
   <div className="flex flex-row h-full justify-between">
 
-    <div className="flex flex-col items-center px-4">
+    <div className="flex flex-col items-center px-4 relative">
       {title}
-      {chart}
+      <div>
+        {chart}
+      </div>
     </div>
 
     {list}
@@ -27,6 +29,7 @@ const Layout: React.FC<Props> = ({
       border-neutral-300 dark:border-neutral-800 border-l-2
       flex flex-col justify-between
       pl-4
+      
     ">
       {!isReadonly
         ? actions

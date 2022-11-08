@@ -116,6 +116,11 @@ li::marker {
 
 }
 
+input.gh {
+  writing-mode: bt-lr;
+  appearance: slider-vertical;
+}
+
 .actions-container {
   flex-basis: 5%
 }
