@@ -8,7 +8,13 @@ export interface Props {
 
 const ActionBar: React.FC<Props> = ({ onClickSettings, onClickSearch }) => {
   return (
-    <div className="w-[calc(100vw_-_2rem)] justify-between items-center absolute bottom-0 flex flex-row">
+    <div
+      className="
+        w-[calc(100vw_-_2rem)] 
+        flex flex-row justify-between items-center 
+        fixed bottom-[0px]
+      "
+    >
       <SettingsButton
         onClick={(e) => {
           e.stopPropagation();

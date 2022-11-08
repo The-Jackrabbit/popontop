@@ -95,9 +95,9 @@ const MobileEditor: React.FC<Props> = ({
   };
 
   return (
-    <div className="flex " style={{ height: windowHeight }}>
+    <div className="overflow-y-hidden flex " style={{ height: windowHeight }}>
       <a.div
-        className="w-screen p-4"
+        className="w-screen p-4 overflow-y-hidden"
         onClick={() => onClickSheetDeadArea()}
         style={{ ...bgStyle, height: windowHeight }}
       > 

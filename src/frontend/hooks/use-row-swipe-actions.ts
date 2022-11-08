@@ -1,7 +1,7 @@
 import { useSpring } from '@react-spring/web'
 import { useState } from "react";
 import { useDrag } from '@use-gesture/react';
-import { isIntentionalXAxisGesture } from '../../utils/directions';
+// import { isIntentionalXAxisGesture } from '../../utils/directions';
 
 const left = {
   bg: `linear-gradient(120deg, #f093fb 0%, #f5576c 100%)`,
@@ -15,12 +15,14 @@ const right = {
 export interface Props {
   leftSwipeAction: () => void;
   rightSwipeAction: () => void;
+  setIsScrollDisabled: (value: boolean) => void;
   swipeLengthThreshold?: number;
 }
 
 export const useRowSwipeActions = ({
   leftSwipeAction,
   rightSwipeAction,
+  setIsScrollDisabled,
   swipeLengthThreshold = 100,
 }: Props) => {
   const [layerActionText, setlayerActionText] = useState('🗑');
@@ -31,9 +33,9 @@ export const useRowSwipeActions = ({
   }));
 
   const bind = useDrag(({ active, movement: [mx, my] }) => {
-    if (!isIntentionalXAxisGesture(mx, my)) {
-      return;
-    }
+    // if (!isIntentionalXAxisGesture(mx, my)) {
+    //   return;
+    // }
 
     if (layerActionText === '🗑' && mx > 0) {
       setlayerActionText('💿');
@@ -46,7 +48,7 @@ export const useRowSwipeActions = ({
     const isSwipeLengthOverThreshold = Math.abs(mx) > swipeLengthThreshold;
 
     if (active) {
-
+      setIsScrollDisabled(true);
       if (isSwipeLengthOverThreshold) {
         return api.start({
           x: active ? mx : 0,
@@ -62,6 +64,7 @@ export const useRowSwipeActions = ({
         immediate: name => active && name === 'x',
       });
     }
+    setIsScrollDisabled(!true);
 
     if (!isSwipeLengthOverThreshold) {
       api.start({

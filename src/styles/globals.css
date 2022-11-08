@@ -9,6 +9,18 @@
   width: 96vw;
   touch-action: none;
 }
+          
+@media (prefers-color-scheme: light) {
+  :root {
+    --theme: blue;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+      --theme: green;
+    }
+}
 
 @media (prefers-color-scheme: dark) {
 
@@ -59,7 +71,7 @@ li::marker {
 
 @media (prefers-color-scheme: light) {
   body {
-    background-color:  var(--color-neutral-50);
+    background-color: #F8F9F8;
   }
 
   p, h1, h2, h3, h4, h5, h6, input {

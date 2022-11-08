@@ -13,6 +13,7 @@ export interface Props {
   removeSelfFromList?: () => void;
   onAdvanceAlbumAtIndex: (index: number) => void;
   onLowerAlbumAtIndex: (index: number) => void;
+  setIsScrollDisabled: (value: boolean) => void;
 }
 
 export const ListRow: React.FC<Props> = ({
@@ -23,6 +24,7 @@ export const ListRow: React.FC<Props> = ({
   onAdvanceAlbumAtIndex,
   onLowerAlbumAtIndex,
   removeSelfFromList = () => undefined,
+  setIsScrollDisabled,
 }) => {
   const {
     isBreakVisible,
@@ -44,6 +46,7 @@ export const ListRow: React.FC<Props> = ({
     layerActionText,
     x, bg, height, justifySelf,
   } = useRowSwipeActions({
+    setIsScrollDisabled,
     leftSwipeAction,
     rightSwipeAction,
   });
@@ -104,7 +107,7 @@ export const ListRow: React.FC<Props> = ({
           </div>
         </animated.div>
       </animated.div>
-      {isBreakVisible && (<hr className="my-1 border-neutral-300 dark:border-neutral-600" />)}
+      {isBreakVisible && (<hr className="my-1 border-neutral-200 dark:border-neutral-600" />)}
     </>
   )
 }

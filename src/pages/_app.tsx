@@ -15,11 +15,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     <SessionProvider session={session}>
       <Head>
-        <meta
-          name="theme-color"
-          media="(prefers-color-scheme: light)"
-          content="#f8fafc"
-        />
+        <meta name="theme-color" content="var(--theme)" />
         <meta
           name="theme-color"
           media="(prefers-color-scheme: dark)"
@@ -31,7 +27,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
         )}
         <title>popontop</title>
       </Head>
-      <Component {...pageProps} />
+      <div className=""><Component {...pageProps} /></div>
     </SessionProvider>
   );
 };

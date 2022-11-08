@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { a, useSpring, SpringValue } from "react-spring";
+import { useState } from "react";
 
 export interface Props {
   chartTitle: string;
@@ -44,8 +44,9 @@ const Title: React.FC<Props> = ({
         shadow-xl
         box-content
         px-6 py-4 sm:px-4 sm:py-3
-        mb-4
+        mb-4 z-50
         overflow-hidden
+        fixed left-[1rem] right-[1rem]
       "
     >
       <a.div style={opacity}>
