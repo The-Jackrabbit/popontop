@@ -21,6 +21,7 @@ export const Single: ComponentStory<typeof ListRow> = () => {
         index={0}
         isInteractive={true}
         isLastRowInList={true}
+        setIsScrollDisabled={() => undefined}
         removeSelfFromList={() => undefined}
         onAdvanceAlbumAtIndex={() => undefined}
         onLowerAlbumAtIndex={() => undefined}
@@ -39,6 +40,7 @@ export const Multiple: ComponentStory<typeof ListRow> = () => {
           album={album}
           index={index}
           isInteractive={true}
+          setIsScrollDisabled={() => undefined}
           onAdvanceAlbumAtIndex={() => undefined}
           onLowerAlbumAtIndex={() => undefined}
           isLastRowInList={index === ALBUM_RESULTS.length - 1}
