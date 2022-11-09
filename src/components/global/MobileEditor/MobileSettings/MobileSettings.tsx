@@ -38,9 +38,9 @@ export const MobileSettings: React.FC<Props> = ({
   setListAlbums,
 }) => {
   return (
-    <div className="p-3">
+    <div className="p-3  h-full">
       <HorizontalSwipe>
-        <div className="p-8">
+        <div className="p-8 h-full">
           <PageOne
             onSave={onSave}
             isSaveLoading={isSaveLoading}

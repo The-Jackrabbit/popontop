@@ -2,70 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
-.sheet {
-  position: fixed;
-  left: 2vw;
-  height: calc(100vh + 100px);
-  width: 96vw;
-  touch-action: none;
-}
-          
-@media (prefers-color-scheme: light) {
-  :root {
-    --theme: blue;
-  }
+
+/** Start thumb **/
+input[type="range"] {
+  writing-mode: bt-lr;
+  appearance: slider-vertical;
 }
 
-@media (prefers-color-scheme: dark) {
-    :root {
-      --theme: green;
-    }
+::-webkit-slider-thumb,
+::-moz-range-thumb,
+::-ms-thumb {
+  background-color: red;
 }
+::-moz-range-track,
+::-webkit-slider-runnable-track,
+::-ms-track {
+  background-color: red;
+} 
 
-@media (prefers-color-scheme: dark) {
+/** End thumb **/
 
-/* width */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: var(--color-neutral-900);
-}
-
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: var(--color-neutral-800);
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-neutral-700);
-}
-
-}
 li::marker {
   height:200px
 }
 
-.page {
-  position: absolute;
-  height: 90%;
-  touch-action: none;
-  left: 0;
-    right: 0;
-}
 
 .page > div {
-  touch-action: none;
-  background-size: cover;
-  background-repeat: no-repeat;
   background-position: center center;
-  width: 100%;
-  height: 100%;
-
 }
 
 
@@ -87,11 +50,6 @@ li::marker {
     background-color: var(--color-white);
   }
 
-  /***** Chrome, Safari, Opera, and Edge Chromium *****/
-  input[type="range"]::-webkit-slider-runnable-track {
-    background: var(--color-neutral-200);  
-  }
-
   .actions-container  {
     border-color: var(--color-neutral-200);
   }
@@ -107,18 +65,6 @@ li::marker {
     color: var(--color-slate-200);
   }
 
-
-  /***** Chrome, Safari, Opera, and Edge Chromium *****/
-  input[type="range"]::-webkit-slider-runnable-track {
-    background: var(--color-neutral-800);
-  }
-
-
-}
-
-input.gh {
-
-  appearance: slider-vertical;
 }
 
 .actions-container {
@@ -130,23 +76,6 @@ input.gh {
   padding: 12px;
   outline-offset: 3px;
   outline: none;
-}
-
-/***** Thumb Styles *****/
-/***** Chrome, Safari, Opera, and Edge Chromium *****/
-input[type="range"].slider::-webkit-slider-thumb {
-  -webkit-appearance: none; /* Override default look */
-  appearance: none;
-  margin-top: 0; /* Centers thumb on the track */
-  background-color: var(--color-green-300);
-  height: 1rem;
-  width: 1rem;    
-}
-
-/******** Firefox ********/
-input[type="range"].slider::-moz-range-track {
-  background-color: var(--color-rose-300);
-  height: 0.5rem;
 }
 
 /* Colors */

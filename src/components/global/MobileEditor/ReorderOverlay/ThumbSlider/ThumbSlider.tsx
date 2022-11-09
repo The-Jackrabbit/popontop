@@ -1,5 +1,9 @@
+import { useDraggable } from "@dnd-kit/core";
 import { useState } from "react";
 import { a, useSpring } from "react-spring";
+import { CSS } from '@dnd-kit/utilities';
+import { useDrag } from "@use-gesture/react";
+import { listeners } from "process";
 
 export interface Props {
   onChange: (value: number) => void;
@@ -16,13 +20,21 @@ const ThumbSlider: React.FC<Props> = ({
   min,
   max,
 }) => {
+  const [sliderYPosition, animateSliderYPosition] = useSpring(() => ({
+    y: 0,
+  }));
+  const bind = useDrag(({ movement: [,my] }) => {
+    animateSliderYPosition.start({
+      y: my,
+    });
+  });
+  const t = { orient: "vertical"} as any
   return (
     <div
       className="
-        outline-rose-200 
         rounded-lg
         h-full
-        outline-2 focus-within:outline outline-offset-2
+        outline-2 outline-rose-200  outline-offset-2 focus-within:outline
       "
     >
       <input
@@ -31,11 +43,28 @@ const ThumbSlider: React.FC<Props> = ({
         onChange={(e) => onChange(parseInt(e.target.value))}
         onPointerUp={() => onPointerUp()}
         type="range"
+        {...t}
         min={min}
         max={max}
         value={value}
         data-attribute-value={value}
-      /> 
+        list="tickmarks" />
+
+      <datalist id="tickmarks">
+        <option value="0" label="very cold!"></option>
+        <option value="25" label="cool"></option>
+        <option value="50" label="medium"></option>
+        <option value="75" label="getting warm!"></option>
+        <option value="100" label="hot!"></option>
+      </datalist>
+      {/* <a.div
+        {...bind()}
+        className="
+          rounded-sm h-4 w-full
+          bg-neutral-400
+        "
+        style={{ ...sliderYPosition }}
+      /> */}
     </div>
   );
 };

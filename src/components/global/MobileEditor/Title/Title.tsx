@@ -46,7 +46,7 @@ const Title: React.FC<Props> = ({
         shadow-xl
         box-content
         px-6 py-4 sm:px-4 sm:py-3
-        mb-4 z-50
+        mb-4 z-30
         overflow-hidden
         
         ${isFixed ? 'fixed left-[1rem] right-[1rem]' : ''}

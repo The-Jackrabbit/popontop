@@ -27,8 +27,8 @@ const Thermometer: React.FC<Props> = ({
       
       <div
         className="
-          basis-10/12
-          m-2 relative
+          basis-full
+          relative
         "
       >
         <div

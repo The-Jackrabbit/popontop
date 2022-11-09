@@ -18,10 +18,10 @@ const MobileSheet: React.FC<Props> = ({
   return (
     <a.div
       className={`
-        sheet
-        w-screen
-        z-10 fixed inset-0
+        w-[96vw] h-[calc(100vh_+_100px)]
+        z-10 fixed inset-0 left-[2vw] 
         shadow-inner
+        touch-none
         mt-8 p-4 pb-28
        bg-neutral-100 dark:bg-neutral-800
         rounded-t-2xl

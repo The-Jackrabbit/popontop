@@ -1,5 +1,6 @@
 export interface Props {
   children: React.ReactNode;
+  className?: string;
   containerPositionStyle: string;
   containerWidthStyle: string;
   isVisible?: boolean;
@@ -21,6 +22,7 @@ export const LEFT_POSITION_STYLE = {
 
 const ButtonWithAccessory: React.FC<Props> = ({
   children,
+  className = '',
   containerPositionStyle,
   containerWidthStyle,
   isVisible = true,
@@ -32,7 +34,7 @@ const ButtonWithAccessory: React.FC<Props> = ({
   }
 
   return (
-    <div className="flex justify-center content-center items-center self-center  relative ">
+    <div className={className+"flex justify-center content-center items-center self-center  relative "}>
       <div className={`absolute ${containerPositionStyle}`}>
         <div
           // Bubble content

@@ -35,7 +35,7 @@ export const NavDot: React.FC<Props> = ({
       label={label ?? ''}
       isVisible={isHovered}
     >   
-      <div className="relative w-4 h-4">
+      <div className={className + "  w-4 h-4"}>
         <button
           className={`
             ${className ?? ''}

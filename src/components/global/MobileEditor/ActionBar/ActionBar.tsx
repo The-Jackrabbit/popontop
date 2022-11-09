@@ -1,19 +1,63 @@
+import { useState } from "react";
+import { a, useSpring, animated, config } from "react-spring";
+import NavDot, { Color } from "../../DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot";
 import AddAlbumButton from "../AddAlbumButton/AddAlbumButton";
 import SettingsButton from "../SettingsButton/SettingsButton";
+import { ActionOverlay } from "./ActionOverlay/ActionOverlay";
 
 export interface Props {
   onClickSettings: () => void;
   onClickSearch: () => void;
+  isActive: boolean;
+  isLoading: boolean;
+  setIsActive: (val: boolean) =>  void;
+  saveChart: () => Promise<string>;
 }
 
-const ActionBar: React.FC<Props> = ({ onClickSettings, onClickSearch }) => {
+export const ActionBarNew: React.FC<Props> = ({
+  isActive,
+  onClickSettings,
+  onClickSearch,
+  setIsActive,
+  saveChart,
+  isLoading,
+}) => {
+  const [isOverlayVisible, setIsOverlayVisible] = useState(false);
+
+  const start  = () => {
+    setIsActive(false);
+    animateActionOverlayOpacity.start({ opacity: 0 })
+    // debugger
+    setIsOverlayVisible(true);
+    // animateActionOverlayOpacity.start({ opacity: 1 },)
+  }
+
+  const end  = () => {
+    animateActionOverlayOpacity.start({ opacity: 1 })
+    // debugger;
+    // animateActionOverlayOpacity.start({
+    //   opacity: 0,
+    //   // onRest: () =>
+    // })
+    setIsOverlayVisible(false)
+  }
+
+  const [actionOverlayOpacity, animateActionOverlayOpacity] = useSpring(() => ({
+    from: { opacity: 0 },
+    to: { opacity: 1 },
+    config: config.molasses,
+  }));
+  const [hideAnimation, animatehideAnimation] = useState(false);
   return (
-    <div
+    <>
+    <a.div 
       className="
         w-[calc(100vw_-_2rem)] 
-        flex flex-row justify-between items-center 
-        fixed bottom-[0px]
+        justify-between items-center 
+        absolute bottom-0 
+        flex flex-row
       "
+      style={{...actionOverlayOpacity}}
     >
       <SettingsButton
         onClick={(e) => {
@@ -21,125 +65,57 @@ const ActionBar: React.FC<Props> = ({ onClickSettings, onClickSearch }) => {
           onClickSettings();
         }}
       />
-      <h1
-        className="
-          bg-white dark:bg-black
-          px-2 py-1 py-1sm:px-4 sm:py-1
-          rounded-full
-          text-2xl
-        "
+      <div
+
+        onClick={() => start()}
+        className="grow-1 flex content-center justify-center"
       >
-        💿popontop
-      </h1>
+       
+        <h1
+          onTouchMove={(e) => {
+            e.stopPropagation();
+          }}
+          onClick={end}
+          className="
+            bg-white dark:bg-black
+            px-2 py-1 py-1sm:px-4 sm:py-1
+            rounded-full
+            relative
+            select-none text-lg z-30"
+        >
+          💿popontop
+          {isActive ? (
+            <NavDot
+              color={Color.fuchsia}
+              isActive={true}
+              onClick={() => undefined}
+              className="animate-bounce absolute top-[-4px] right-[-2px]"
+              label="asdfasdf"
+            />
+          ): null}
+        </h1>
+      </div>
       <AddAlbumButton
         onClick={(e) => {
           e.stopPropagation();
           onClickSearch();
         }}
       />
-    </div>
+    </a.div>
+     <a.div
+     className="-translate-y-12"
+   >
+    <ActionOverlay
+      saveChart={saveChart}
+      isLoading={isLoading}
+      onExit={(e: any) => {
+        e.stopPropagation()
+        end();
+        animatehideAnimation(true);
+      }}
+    />     
+   </a.div>
+   </>
   );
-}
+};
 
-// export const ActionBarNew: React.FC<Props> = ({ onClickSettings, onClickSearch }) => {
-//   const [flip, set] = useState(false)
-//   const [style, api] = useSpring(() => ({
-//     to: { x: '0px', y: '-300px' },
-//     from: { x: '0px', y: '200px' },
-//     // reset: true,
-//     // reverse: flip,
-//     // delay: 200,
-
-//     config: {
-//       bounce: 0.1,
-//       friction: 20,
-//       mass:4,
-//       tension: 200,
-//     },
-//     loop: true,
-//     reverse: true,
-//     // onRest: () => set(!flip),
-//   }));
-
-//   const [expandstyle, expandapi] = useSpring(() => ({
-//     to: { scale: 3, bg: 'orange'  },
-//     from: { scale: 1, bg: 'red'  },
-//     reset: true,
-//     reverse: true,
-//     delay: 200,
-//     loop: true,
-//     // onRest: () => set(!flip),
-//   }));
-
-//   const [isAtPeak , setIsAtPeak ] = useState(false);
-
-//   // props.
-//   const start  = () => {
-//     api.start({ y: '-300px', onRest: () => {
-//       setIsAtPeak(true);
-//     } });
-//     // api.stop()
-//   }
-
-//   const end  = () => {
-//     setIsAtPeak(false);
-//     api.start({ y: '200px' });
-//     // api.stop()
-//   }
-
-//   return (
-//     <div  className="w-[calc(100vw_-_2rem)] justify-between items-center absolute bottom-0 flex flex-row">
-//     <SettingsButton
-//       onClick={(e) => {
-//         e.stopPropagation();
-//         onClickSettings();
-//       }}
-//     />
-//     <div
-//       onPointerUp={() => end()}
-//       onPointerDown={() => start()}
-//       className="grow-1 flex content-center justify-center"
-//     >
-//       {/* <Number /> */}
-//       <animated.div
-//         onTouchCancel={() => console.log('onTouchCancel')}
-//         onTouchEnd={() => console.log('onTouchEnd')}
-//         onTouchMove={() => console.log('onTouchMove')}
-//         onTouchStart={() => console.log('onTouchStart')}
-//         onPointerCancel={() => console.log('onPointerCancel')}
-//         onPointerDown={() => console.log('onPointerDown')}
-//         onPointerEnter={() => console.log('onPointerEnter')}
-//         onPointerLeave={() => console.log('onPointerLeave')}
-//         onPointerMove={() => console.log('onPointerMove')}
-//         onPointerOut={() => console.log('onPointerOut')}
-//         onPointerOver={() => console.log('onPointerOver')}
-//         onPointerUp={() => console.log('onPointerUp')}
-       
-//         style={{ ...style, ...expandstyle}}
-//         className="bg-rose-600 absolute z-20 rounded-full h-24 w-24 "
-//       ></animated.div>
-//       {isAtPeak ? (
-//         <div className="absolute w-20 h-96 z-10 bg-blue-500 translate-y-[calc(-300px_+_48px)]">
-
-//         </div>
-//       ) : null}
-//       <h1
-//         onTouchMove={(e) => {
-//           e.stopPropagation();
-//         }}
-//         className="dark:bg-green-400 select-none text-lg z-30"
-//       >
-//         💿popontop
-//       </h1>
-//     </div>
-//     <AddAlbumButton
-//       onClick={(e) => {
-//         e.stopPropagation();
-//         onClickSearch();
-//       }}
-//     />
-//   </div>
-//   );
-// };
-
-export default ActionBar;

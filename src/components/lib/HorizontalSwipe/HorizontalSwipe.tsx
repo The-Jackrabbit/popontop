@@ -9,6 +9,8 @@ export interface Props {
   children: React.ReactNode[];
 }
 
+export const isPageOffScreen = (i: number, index: { current: number; }) => i < index.current - 1 || i > index.current + 1;
+
 export const HorizontalSwipe: React.FC<Props> = ({ children }) => {
   const index = useRef(0)
   const width = window.innerWidth;
@@ -30,7 +32,7 @@ export const HorizontalSwipe: React.FC<Props> = ({ children }) => {
       cancel()
     }
     api.start(i => {
-      if (i < index.current - 1 || i > index.current + 1) {
+      if (isPageOffScreen(i, index)) {
         return { display: 'none' }
       }
       const x = (i - index.current) * width + (active ? mx : 0)
@@ -45,24 +47,47 @@ export const HorizontalSwipe: React.FC<Props> = ({ children }) => {
   });
 
   return (
-    <div className="p-3 flex flex-col">
-      <div className="grow-1 h-full" >
+    <div className="p-3 flex flex-col  h-full">
+      <div className=" basis-4/5  h-full" >
         {props.map(({ x, display, scale }, i) => (
-          <animated.div  key={i} className="page" {...bind()} style={{ display, x }}>
-            <animated.div style={{  scale, }}>
+          <animated.div
+            {...bind()}
+            key={i}
+            className="
+              page
+              absolute 
+              touch-none
+              left-0 right-0  h-[90%]
+            "
+            style={{ display, x }}
+          >
+            <animated.div
+              className="
+                touch-none bg-no-repeat
+                h-full w-full bg-cover
+              "
+              style={{  scale, }}
+            >
               {children[i]}
             </animated.div>
           </animated.div>
         ))}
       </div>
-      <div className="grow-0 flex justify-center align-items h-8 w-full">
+      <div className="z-50 basis-1/5  flex justify-center align-items h-8 w-full">
         {children.map((_, currentPageIndex) => (
           <div
             key={currentPageIndex}
             className={`
-              ${currentPageIndex === focusedIndex ? 'bg-neutral-200 ' : 'bg-neutral-500'} rounded-full mx-1 h-2 w-2
-              ${index?.current}
+              ${currentPageIndex === focusedIndex ? 'bg-neutral-200 ' : 'bg-neutral-500'}   rounded-full 
+                mx-1 
+                h-3
+                w-3
+                ${index?.current}
             `}
+            onClick={() => {
+              debugger;
+              setFocusedIndex(currentPageIndex)
+            }} 
           />
         ))}
       </div>

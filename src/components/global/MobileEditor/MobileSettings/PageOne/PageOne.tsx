@@ -75,9 +75,6 @@ const PageOne: React.FC<Props> = ({
           </Link>
         )
         : null}
-      <div id="chartPreview" className="bg-rose-500 w-full mt-12 h-full">
-
-      </div>
     </>
   );
 };

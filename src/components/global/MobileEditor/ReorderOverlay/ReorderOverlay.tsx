@@ -37,15 +37,13 @@ const ReorderOverlay: React.FC<Props> = ({
       >
         {initialValue}
       </div>
-      <div className="h-full   basis-3/12 py-8">
+      <div className="h-full flex flex-row  basis-6/12 py-8">
         <Thermometer
           min={min}
           max={max}
           currentValue={currentValue}
           initialValue={initialValue}
         />
-      </div>
-      <div className="h-full bg-neutral-800 basis-3/12 py-8">
         <ThumbSlider
           onChange={setCurrentValue}
           onPointerUp={onPointerUp}

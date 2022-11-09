@@ -5,7 +5,7 @@ import MobileSheet from "../../lib/MobileSheet/MobileSheet";
 import List from "./List/List";
 import SearchAlbums from "./SearchAlbums/SearchAlbums";
 import MobileSettings from "./MobileSettings/MobileSettings";
-import ActionBar from "./ActionBar/ActionBar";
+import { ActionBarNew } from "./ActionBar/ActionBar";
 import Title from "./Title/Title";
 import useChartList from "../../../frontend/hooks/use-chart-list";
 import { ChartSettings } from "@prisma/client";
@@ -57,6 +57,7 @@ const MobileEditor: React.FC<Props> = ({
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isFirstCloseDone, setIsFirstCloseDone] = useState(false);
+  const [isActive, setIsActive] = useState(true); 
   const [titleHeightStyle, titleHeightAnimation] = useSpring(() => ({
     to: { height: '250px' },
     config: {
@@ -109,14 +110,26 @@ const MobileEditor: React.FC<Props> = ({
   };
 
   const onPointerUp = () => {
+    // insertAlbumAtIndex(
+    //   list[currentIndexBeingDragged] as Album,
+    //   currentIndexBeingDragged,
+    //   currentValue,
+    // )
+    // setCurrentIndexBeingDragged(-1)
+    // setIsRearrangeViewActive(false);
+  };
+
+  const onThumbSliderChange = (newValue: number) => {
     insertAlbumAtIndex(
       list[currentIndexBeingDragged] as Album,
       currentIndexBeingDragged,
-      currentValue,
-    )
-    setCurrentIndexBeingDragged(-1)
-    setIsRearrangeViewActive(false);
+      newValue,
+    );
+    setCurrentValue(newValue);
+    setCurrentIndexBeingDragged(newValue-1)
+    // setIsRearrangeViewActive(false);
   };
+
 
   const onCancel = () => {
     setCurrentIndexBeingDragged(-1)
@@ -132,7 +145,7 @@ const MobileEditor: React.FC<Props> = ({
           max={list.length}
           initialValue={currentIndexBeingDragged}
           currentValue={currentValue}
-          setCurrentValue={setCurrentValue}
+          setCurrentValue={onThumbSliderChange}
           onPointerUp={onPointerUp}
           onCancel={onCancel}
         /> 
@@ -142,8 +155,9 @@ const MobileEditor: React.FC<Props> = ({
       <a.div
         className="w-screen p-4 overflow-y-hidden"
         onClick={() => onClickSheetDeadArea()}
-        style={{ ...bgStyle, height: windowHeight }}
-      > 
+        style={{ ...bgStyle, height: windowHeight }}>
+     
+
         <Title
           isFixed={true}
           isReadOnly={readonly}
@@ -151,15 +165,19 @@ const MobileEditor: React.FC<Props> = ({
           setValue={(value: string) => setChartTitle(value)}
           showIntroduction={isStarted && isFirstCloseDone}
           titleHeightStyle={titleHeightStyle}
-        />
+          />
+          
+        {/* <div style={{ opacity: !isActive ?  1 : 0, height: '100%'}}> */}
         <List
           list={list}
           removeAlbumAtIndex={removeAlbumAtIndex}
           advanceAlbumAtIndex={advanceAlbumAtIndex}
           lowerAlbumAtIndex={lowerAlbumAtIndex}
           openRearrangeView={openRearrangeView}
-        />
-        <ActionBar
+          />
+          {/* </div> */}
+       <ActionBarNew
+       isLoading={isLoading}
           onClickSettings={() => {
             setIsSettingsOpen(true);
             open({ canceled: false });
@@ -168,6 +186,9 @@ const MobileEditor: React.FC<Props> = ({
             setIsSearchOpen(true);
             open({ canceled: false });
           }}
+          isActive={isActive}
+          setIsActive={setIsActive}
+          saveChart={saveChart}
        />
       </a.div>
       <MobileSheet bind={bind} display={display} y={y}>
