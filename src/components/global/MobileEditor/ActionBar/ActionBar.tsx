@@ -103,7 +103,7 @@ export const ActionBarNew: React.FC<Props> = ({
       />
     </a.div>
      <a.div
-     className="-translate-y-12"
+     className={!isOverlayVisible ? "-translate-y-12" : ''}
    >
     <ActionOverlay
       saveChart={saveChart}

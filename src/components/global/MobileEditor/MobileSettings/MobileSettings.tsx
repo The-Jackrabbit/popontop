@@ -1,5 +1,4 @@
 import HorizontalSwipe from "../../../lib/HorizontalSwipe/HorizontalSwipe";
-import PageOne from "./PageOne/PageOne";
 import PageThree from "./PageThree/PageThree";
 import PageTwo from "./PageTwo/PageTwo";
 
@@ -40,18 +39,20 @@ export const MobileSettings: React.FC<Props> = ({
   return (
     <div className="p-3  h-full">
       <HorizontalSwipe>
-        <div className="p-8 h-full">
-          <PageOne
-            onSave={onSave}
-            isSaveLoading={isSaveLoading}
-          />
-        </div>
         <div className="p-8">
           <PageTwo
             showTitle={showTitle}
             setShowTitle={setShowTitle}
             listAlbums={listAlbums}
             setListAlbums={setListAlbums}
+            borderColor={borderColor}
+            setBorderColor={setBorderColor}
+            borderSize={borderSize}
+            setBorderSize={setBorderSize}
+            backgroundColor={backgroundColor}
+            setBackgroundColor={setBackgroundColor}
+            textColor={textColor}
+            setTextColor={setTextColor}
           />
         </div>
         <div className="p-8">

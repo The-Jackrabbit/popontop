@@ -67,10 +67,10 @@ export const ClickCircle: React.FC<Props> = ({
        ">
         {savedChartId !== 'null' ? 
           <Link href={`/mobile/charts/${savedChartId}`}>
-          <>
+          <a>
           <p className="animate-pulse ">➡️</p>
           <p className="text-neutral-600  text-xs ">view chart</p>
-          </>
+          </a>
           </Link>
           
           : null
