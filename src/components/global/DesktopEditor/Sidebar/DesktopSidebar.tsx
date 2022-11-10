@@ -130,11 +130,13 @@ export const DesktopSidebar: React.FC<Props> = ({
             isActive={visibilityMap[index] ?? false}
             onChange={(event) => onTypeForInputAtIndex(event, index)}
             key={index}
-            label={labels[index] ?? ''}
             toggleVisibility={() => toggleVisibilityOfInputAtIndex(index)}
             value={pill as string}
-          />
-        )))}
+            >
+              <p className="text-lg">{labels[index] ?? ''}</p>
+              <p>-</p>
+            </ExpandingPill>
+         )))}
       </div>
     </div>
 

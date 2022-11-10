@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import ExpandingPill from './ExpandingPill';
 import { usePillList } from '../../../frontend/hooks/springs/use-pill-list';
+import NavDot, { Color } from '../../global/DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
+import { Input } from '../Input/Input';
+import RadioIcon from '../Radio/RadioIcon';
+import { Radio } from '../Radio/Radio';
 
 export default {
   args: {
@@ -15,11 +19,61 @@ export default {
   },
 } as ComponentMeta<typeof ExpandingPill>;
 
-export const Single: ComponentStory<typeof ExpandingPill> = (args) => {
-
+export const TextInput: React.FC = ({}) => {
+  const {
+    onTypeForInputAtIndex,
+    pillValues,
+    toggleVisibilityOfInputAtIndex,
+    visibilityMap,
+  } = usePillList<string>({
+    initialValues: ['hi'],
+    setterFunctions: ['hi'].map(() => () => undefined),
+  });
   return (
     <div className="m-4 max-w-[220px]">
-      <ExpandingPill {...args}  />
+      <ExpandingPill
+        className=""
+        isActive={visibilityMap[0] ?? false}
+        toggleVisibility={() => toggleVisibilityOfInputAtIndex(0)}
+      >
+        <p className="text-lg">hello world</p>
+        <button className=" text-lg">✏️</button>
+        <Input
+          className="w-full bg-neutral-100 "
+          onChange={(event) => onTypeForInputAtIndex(event, 0)}
+          placeholder="#adf2da"
+          value={pillValues[0] as string}
+        />
+      </ExpandingPill>
+    </div>
+  )
+}
+
+export const SwitchInput: React.FC = () => {
+  const {
+    toggleVisibilityOfInputAtIndex,
+    visibilityMap,
+  } = usePillList<boolean>({
+    initialValues: [false],
+    setterFunctions: [false].map(() => () => undefined),
+  });
+  const [value, setValue] = useState<boolean | null>(null);
+  return (
+    <div className="m-4 max-w-[220px]">
+      <ExpandingPill
+        className=""
+        isActive={visibilityMap[0] ?? true}
+        toggleVisibility={() => toggleVisibilityOfInputAtIndex(0)}
+      >
+        <p className="text-lg">show title?</p>
+        <div className="">
+          <RadioIcon variant={value} />
+        </div>
+        <Radio 
+          onClick={(value) => setValue(value)}
+          value={Boolean(value)}
+        />
+      </ExpandingPill>
     </div>
   )
 }
@@ -52,12 +106,18 @@ export const List: ComponentStory<typeof ExpandingPill> = () => {
           <ExpandingPill
             className=""
             isActive={visibilityMap[index] ?? false}
-            onChange={(event) => onTypeForInputAtIndex(event, index)}
             key={index}
-            label={INIT_FRUITS[index] ?? ''}
             toggleVisibility={() => toggleVisibilityOfInputAtIndex(index)}
-            value={pill as string}
-          />
+          >
+            <p className="text-lg">hello world</p>
+            <button className=" text-lg">✏️</button>
+            <Input
+              className="w-full bg-neutral-100 "
+              onChange={(event) => onTypeForInputAtIndex(event, 0)}
+              placeholder="#adf2da"
+              value={pillValues[0] as string}
+            />
+          </ExpandingPill>
         )))}
       </div>
       <div>

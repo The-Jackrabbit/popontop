@@ -1,25 +1,20 @@
 import { a } from 'react-spring';
 import { useExpandingPill } from '../../../frontend/hooks/springs/use-expanding-pill';
-import Input from '../Input/Input';
 import { ChangeEventHandler } from "react";
 import { useZoomOnHover } from '../../../frontend/hooks/springs/use-zoom-on-hover';
 
 export interface Props {
+  children: [React.ReactNode, React.ReactNode, React.ReactNode];
   className?: string;
   isActive: boolean;
-  label: string;
-  onChange: ChangeEventHandler<HTMLInputElement>;
   toggleVisibility: () => void;
-  value: string;
 }
 
 export const ExpandingPill: React.FC<Props> = ({
+  children,
   className = '',
   isActive,
-  label,
-  onChange,
   toggleVisibility,
-  value,
 }) => {
   const {
     borderRadiusStyle,
@@ -58,20 +53,18 @@ export const ExpandingPill: React.FC<Props> = ({
       }}
     >
       <div
-        className="flex-nowrap flex justify-between px-2"
+        className="flex-nowrap flex justify-between content-center items-center px-2"
         onClick={() => {
           togglePill(isActive)
           onMouseLeave();
         }}
       >
-        <a.p className="pr-4">
-          {label}
-        </a.p>
+        {children[0]}
         <a.button
           style={opacityAnimationStyle}
           className="hover:text-rose-300 dark:text-white"
         >
-          {isActive ? '-' : '+'}
+          {isActive ? '-' : children[1]}
         </a.button>
       </div>
       <a.div
@@ -80,12 +73,7 @@ export const ExpandingPill: React.FC<Props> = ({
         }}
         className="overflow-hidden px-2"
       >
-        <Input
-          className="w-full bg-neutral-100 "
-          onChange={onChange}
-          placeholder="#adf2da"
-          value={value}
-        />
+        {children[2]}
       </a.div>
     </a.div>
   )

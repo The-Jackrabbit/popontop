@@ -1,5 +1,6 @@
 import { usePillList } from "../../../../../frontend/hooks/springs/use-pill-list";
 import ExpandingPill from "../../../../lib/ExpandingPill/ExpandingPill";
+import Input from "../../../../lib/Input/Input";
 import Select from "../../../../lib/Select/Select";
 
 export interface Props {
@@ -60,12 +61,18 @@ setTextColor,
           <ExpandingPill
             className="m-1"
             isActive={visibilityMap[index] ?? false}
-            onChange={(event) => onTypeForInputAtIndex(event, index)}
             key={index}
-            label={labels[index] ?? ''}
             toggleVisibility={() => toggleVisibilityOfInputAtIndex(index)}
-            value={pill as string}
-          />
+          >
+            <p className="text-lg">hello world</p>
+            <button className=" text-lg">✏️</button>
+            <Input
+              className="w-full bg-neutral-100 "
+              onChange={(event) => onTypeForInputAtIndex(event, 0)}
+              placeholder="#adf2da"
+              value={pill as string}
+            />
+          </ExpandingPill>
         )))}
       </div>
       <Select

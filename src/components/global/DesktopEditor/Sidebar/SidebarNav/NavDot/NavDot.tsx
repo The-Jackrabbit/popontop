@@ -33,23 +33,21 @@ export const NavDot: React.FC<Props> = ({
     <ButtonWithAccessory
       {...TOP_POSITION_STYLE}
       label={label ?? ''}
-      isVisible={isHovered}
-    >   
-      <div className={className + "  w-4 h-4"}>
-        <button
-          className={`
-            ${className ?? ''}
-            border-2 
-            w-4 h-4 rounded-full
-            shadow-md 
-            outline-offset-4 outline-rose-300
-            ${isActive ? activeClasses : colorMap.neutral}
-          `}
-          onClick={() => onClick()}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        />
-      </div>
+      isVisible={isHovered && label !== null}
+    > 
+      <button
+        className={`
+          ${className ?? '  w-4 h-4 '}
+          border-2 
+          rounded-full
+          shadow-md 
+          outline-offset-4 outline-rose-300
+          ${isActive ? activeClasses : colorMap.neutral}
+        `}
+        onClick={() => onClick()}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      />
     </ButtonWithAccessory>
   );
 }
