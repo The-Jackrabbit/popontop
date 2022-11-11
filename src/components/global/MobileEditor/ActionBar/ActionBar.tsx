@@ -22,7 +22,7 @@ export const ActionBar: React.FC<Props> = ({
   saveChart,
   isLoading,
 }) => {
-  const [isOverlayVisible, setIsOverlayVisible] = useState(false);
+  const [isOverlayVisible, setIsOverlayVisible] = useState(isActive);
 
   const start  = () => {
     setIsActive(false);
