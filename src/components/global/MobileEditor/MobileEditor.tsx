@@ -5,7 +5,7 @@ import MobileSheet from "../../lib/MobileSheet/MobileSheet";
 import List from "./List/List";
 import SearchAlbums from "./SearchAlbums/SearchAlbums";
 import MobileSettings from "./MobileSettings/MobileSettings";
-import { ActionBarNew } from "./ActionBar/ActionBar";
+import { ActionBar } from "./ActionBar/ActionBar";
 import Title from "./Title/Title";
 import useChartList from "../../../frontend/hooks/use-chart-list";
 import { ChartSettings } from "@prisma/client";
@@ -176,7 +176,7 @@ const MobileEditor: React.FC<Props> = ({
           openRearrangeView={openRearrangeView}
           />
           {/* </div> */}
-       <ActionBarNew
+       <ActionBar
        isLoading={isLoading}
           onClickSettings={() => {
             setIsSettingsOpen(true);

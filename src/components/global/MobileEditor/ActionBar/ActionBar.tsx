@@ -14,7 +14,7 @@ export interface Props {
   saveChart: () => Promise<string>;
 }
 
-export const ActionBarNew: React.FC<Props> = ({
+export const ActionBar: React.FC<Props> = ({
   isActive,
   onClickSettings,
   onClickSearch,
@@ -119,3 +119,4 @@ export const ActionBarNew: React.FC<Props> = ({
   );
 };
 
+export default ActionBar;

@@ -3,6 +3,7 @@ import LoadingBouncer from "../../../../../lib/LoadingBouncer/LoadingBouncer";
 import Link from 'next/link';
 import ClickCircleButton from "./ClickCircleButton/ClickCircleButton";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 export interface Props {
   isLoading: boolean;
   saveChart: () => Promise<string>;
@@ -13,6 +14,8 @@ export const ClickCircle: React.FC<Props> = ({
   saveChart,
 }) => {
   const { data: sessionData } = useSession();
+  const r = useRouter();
+  console.log(r.pathname)
   const [savedChartId, setSavedChartId] = useState<null | string>('null');
   const save = async () => {
     const uuid = await saveChart();
@@ -37,7 +40,30 @@ export const ClickCircle: React.FC<Props> = ({
       }}
     >
       <div className="basis-1/3 h-1/3 rounded-full"></div>
-      <button id="top" className="basis-1/3 h-1/3 rounded-full"></button>
+      <button id="top" className="basis-1/3 h-1/3 rounded-full">
+        {sessionData && r.pathname === '/mobile' ? (
+          <ClickCircleButton
+            icon="📖"
+            isLoading={false}
+            label="your charts"
+            onClick={(e) => {
+              e.stopPropagation();
+              r.push('/mobile/your-charts')
+            }}
+          />
+        ) : null}
+         {sessionData && r.pathname === '/mobile/your-charts' ? (
+          <ClickCircleButton
+            icon="✍️"
+            isLoading={false}
+            label="create chart"
+            onClick={(e) => {
+              e.stopPropagation();
+              r.push('/mobile')
+            }}
+          />
+        ) : null}
+      </button>
       <div className="basis-1/3 h-1/3 rounded-full"></div>
       <ClickCircleButton
         icon="💾"

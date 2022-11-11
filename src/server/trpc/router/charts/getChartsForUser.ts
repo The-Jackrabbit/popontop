@@ -14,6 +14,11 @@ export async function getChartsForUser(userId: string) {
     }
   })
   
-  console.log({ user });
+  // console.log({ user, ' user?.chart_to_user': user?.chart_to_user.map(ctou => JSON.stringify(ctou.Chart)) });
 
+
+  return user?.chart_to_user.map(ctou => ({
+    uuid: ctou.Chart?.uuid,
+    name: ctou.Chart?.name,
+  }));
 }
