@@ -17,6 +17,7 @@ export const Single: ComponentStory<typeof ListRow> = () => {
   return (
     <div className="m-4 dark:bg-neutral-600">
       <ListRow
+        isDragged={false}
         album={ALBUM_RESULTS[0] as Album}
         index={0}
         isInteractive={true}
@@ -38,6 +39,7 @@ export const Multiple: ComponentStory<typeof ListRow> = () => {
     <div className="m-4 w-96 overflow-x-hidden">
       {ALBUM_RESULTS.map((album, index) => (
         <ListRow
+          isDragged={false}
           key={JSON.stringify(album) + index}
           album={album}
           index={index}
