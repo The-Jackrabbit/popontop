@@ -26,6 +26,7 @@ export const Single: ComponentStory<typeof ListRow> = () => {
         onAdvanceAlbumAtIndex={() => undefined}
         openRearrangeView={() => undefined}
         onLowerAlbumAtIndex={() => undefined}
+        textColor={'green'}
       />
     </div>
   )
@@ -47,6 +48,7 @@ export const Multiple: ComponentStory<typeof ListRow> = () => {
           openRearrangeView={() => undefined}
           isLastRowInList={index === ALBUM_RESULTS.length - 1}
           removeSelfFromList={(): void =>  undefined}
+          textColor={'green'}
         />
       ))}
     </div>

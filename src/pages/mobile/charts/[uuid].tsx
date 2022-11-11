@@ -36,12 +36,13 @@ const ChartPage: NextPage = () => {
       </div>
      
       <List
-        isInteractive={false}
-        list={data?.albums ?? []}
-        removeAlbumAtIndex={() => undefined}
         advanceAlbumAtIndex={() => undefined}
+        isInteractive={false}
         lowerAlbumAtIndex={() => undefined}
+        list={data?.albums ?? []}
         openRearrangeView={() => undefined}
+        removeAlbumAtIndex={() => undefined}
+        textColor={data?.settings?.text_color ?? ''}
       />
     </div>
   )

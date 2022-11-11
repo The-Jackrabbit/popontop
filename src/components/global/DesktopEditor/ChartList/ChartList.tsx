@@ -18,7 +18,7 @@ const ChartList: React.FC<Props> = ({
     <a.div
       style={{ ...listStyles }}
       className="
-        overflow-x-hidden overflow-y-scroll
+        overflow-x-hidden overflow-y-hidden
         h-full max-h-[calc(100vh_-_2rem)]
       "
     >
