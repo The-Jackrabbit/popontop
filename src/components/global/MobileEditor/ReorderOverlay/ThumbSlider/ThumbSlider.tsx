@@ -1,5 +1,6 @@
-import { useSpring } from "react-spring";
-import { useDrag } from "@use-gesture/react";
+import { a, config, useSpring } from "react-spring";
+import { useDrag, Vector2 } from "@use-gesture/react";
+import { useState, useEffect, useRef } from "react";
 
 export interface Props {
   onChange: (value: number) => void;
@@ -16,51 +17,48 @@ const ThumbSlider: React.FC<Props> = ({
   min,
   max,
 }) => {
-  const [sliderYPosition, animateSliderYPosition] = useSpring(() => ({
+  const [height, setHeight] = useState(100);
+
+  const [{ y }, api] = useSpring(() => ({
     y: 0,
   }));
-  const bind = useDrag(({ movement: [,my] }) => {
-    animateSliderYPosition.start({
-      y: my,
-    });
+  const frame = useRef<HTMLDivElement | null>(null);
+  const bind = useDrag(({ offset: [,y], ...props }) => {
+    const t = props;
+    debugger;
+    const percent = y / height;
+    api.start({ y })
+  }, {
+    rubberband: true,
+    bounds: { left: 0, right: 0, top: 0, bottom: height }
   });
-  const t = { orient: "vertical"} as any
+  useEffect(() => {
+
+  console.log({ frame })
+    setHeight( frame?.current?.clientHeight ?
+      frame?.current?.clientHeight
+      : 100)
+  }, []);
   return (
     <div
+      ref={frame}
       className="
         rounded-lg
-        h-full
+        h-full w-12
+        relative
         outline-2 outline-rose-200  outline-offset-2 focus-within:outline
       "
     >
-      <input
-        className="vertical h-full slider rotate-180"
-        step="1" 
-        onChange={(e) => onChange(parseInt(e.target.value))}
-        onPointerUp={() => onPointerUp()}
-        type="range"
-        {...t}
-        min={min}
-        max={max}
-        value={value}
-        data-attribute-value={value}
-        list="tickmarks" />
-
-      <datalist id="tickmarks">
-        <option value="0" label="very cold!"></option>
-        <option value="25" label="cool"></option>
-        <option value="50" label="medium"></option>
-        <option value="75" label="getting warm!"></option>
-        <option value="100" label="hot!"></option>
-      </datalist>
-      {/* <a.div
-        {...bind()}
-        className="
-          rounded-sm h-4 w-full
-          bg-neutral-400
-        "
-        style={{ ...sliderYPosition }}
-      /> */}
+      <a.div {...bind()} className="absolute" style={{ backgroundColor:'gray' }}>
+        <a.div   
+          className="
+            rounded-sm h-4
+            w-32 px-4
+            bg-neutral-400
+          "
+          style={{ y }}
+        />
+    </a.div>
     </div>
   );
 };

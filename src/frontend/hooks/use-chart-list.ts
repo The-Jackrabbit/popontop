@@ -101,7 +101,19 @@ const useChartList = ({
     });
   };
 
+  const swapAlbumsAtIndices = (oldIndex: number, newIndex: number) => {
+    setList((albums) => {
+      
+      const newAlbums = [...albums];
+      newAlbums[oldIndex] = albums[newIndex] as Album;
+      newAlbums[newIndex] = albums[oldIndex] as Album;
+
+      return newAlbums;
+    });
+  };
+
   return {
+    swapAlbumsAtIndices,
     addAlbumToList,
     chartTitle,
     list,

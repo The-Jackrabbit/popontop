@@ -27,6 +27,7 @@ const MobileEditor: React.FC<Props> = ({
 }) => {
   const {
     addAlbumToList,
+    swapAlbumsAtIndices,
     chartTitle,
     list,
     saveChart,
@@ -109,24 +110,20 @@ const MobileEditor: React.FC<Props> = ({
     setIsRearrangeViewActive((current) => !current);
   };
 
-  const onPointerUp = () => {
-    insertAlbumAtIndex(
-      list[currentIndexBeingDragged] as Album,
-      currentIndexBeingDragged,
-      currentValue,
-    )
-    setCurrentIndexBeingDragged(-1)
-    // setIsRearrangeViewActive(false);
-  };
+  const onThumbSliderChange = (newValuec: number) => {
 
-  const onThumbSliderChange = (newValue: number) => {
+    const newValue = newValuec; // - 1;
+    const direction = newValue > currentValue ? 'DOWN' : 'UP';
+
+    console.log({ direction });
+    swapAlbumsAtIndices(currentValue, newValue)
     // insertAlbumAtIndex(
     //   list[currentIndexBeingDragged] as Album,
     //   currentIndexBeingDragged,
     //   newValue,
     // );
     setCurrentValue(newValue);
-    setCurrentIndexBeingDragged(newValue-1)
+    setCurrentIndexBeingDragged(newValue + direction === 'DOWN' ? -1 : 1)
     // setIsRearrangeViewActive(false);
   };
 
@@ -141,26 +138,23 @@ const MobileEditor: React.FC<Props> = ({
       className="overflow-y-hidden flex "
       style={{ height: windowHeight, backgroundColor: backgroundColor }}
     >
-    
       {isRearrangeViewActive ?  (
         <ReorderOverlay
           min={0}
-          max={list.length}
+          max={list.length-1}
           initialValue={currentIndexBeingDragged}
           currentValue={currentValue}
           setCurrentValue={onThumbSliderChange}
-          onPointerUp={onPointerUp}
+          onPointerUp={() => undefined}
           onCancel={onCancel}
         /> 
       ) : null
-      
     }
       <a.div
         className="w-screen p-4 overflow-y-hidden"
         onClick={() => onClickSheetDeadArea()}
-        style={{ ...bgStyle, height: windowHeight }}>
-     
-
+        style={{ ...bgStyle, height: windowHeight }}
+      >
         <Title
           textColor={textColor}
           isFixed={true}

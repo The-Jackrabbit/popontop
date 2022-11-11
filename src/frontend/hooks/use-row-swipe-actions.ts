@@ -28,7 +28,7 @@ export const useRowSwipeActions = ({
   const [layerActionText, setlayerActionText] = useState('');
   const [{ x, bg, height, justifySelf }, api] = useSpring(() => ({
     x: 0,
-    height: 50,
+    height: 55,
     ...left,
   }));
 
@@ -69,7 +69,7 @@ export const useRowSwipeActions = ({
     if (!isSwipeLengthOverThreshold) {
       api.start({
         x: 0,
-        height: 50,
+        height: 55,
         ...left,
       });
       return;

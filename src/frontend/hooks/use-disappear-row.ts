@@ -14,7 +14,7 @@ export const useDisappearRow = ({ frequency =  0.1, isLastRowInList, onClick }: 
 } => {
   const [isBreakVisible, setIsBreakVisible] = useState(!isLastRowInList);
   const [style, animate] = useSpring(() => ({
-    height: "50px",
+    height: "52px",
     config: {
       frequency,
     },

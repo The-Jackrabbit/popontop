@@ -40,7 +40,7 @@ const ReorderOverlay: React.FC<Props> = ({
       <div className="h-full flex flex-row  basis-6/12 py-8">
         <Thermometer
           min={min}
-          max={max}
+          max={max+1}
           currentValue={currentValue}
           initialValue={initialValue}
         />

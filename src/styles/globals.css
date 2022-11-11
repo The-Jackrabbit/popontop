@@ -2,23 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /** Start thumb **/
+input[type=range] {
+  appearance: none;
+  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+  background: transparent; /* Otherwise white in Chrome */
+}
+
 input[type="range"].vertical {
   writing-mode: bt-lr; 
   appearance: slider-vertical; 
 }
 
-::-webkit-slider-thumb,
-::-moz-range-thumb,
-::-ms-thumb {
+input[type=range]::-webkit-slider-thumb,
+input[type=range]::-moz-range-thumb,
+input[type=range]::-ms-thumb {
   background-color: red;
   width: 200px;
 }
-::-moz-range-track,
-::-webkit-slider-runnable-track,
-::-ms-track {
+input[type=range]::-moz-range-track,
+input[type=range]::-webkit-slider-runnable-track,
+input[type=range]::-ms-track {
   background-color: red;
+  width: 200px;
+  height: 200px;
 } 
 
 /** End thumb **/

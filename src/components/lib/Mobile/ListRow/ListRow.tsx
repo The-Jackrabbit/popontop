@@ -48,7 +48,8 @@ export const ListRow: React.FC<Props> = ({
   const {
     bind,
     layerActionText,
-    x, bg, height, justifySelf,
+    x, bg,
+     height, justifySelf,
   } = useRowSwipeActions({
     setIsScrollDisabled,
     leftSwipeAction,
@@ -65,6 +66,7 @@ export const ListRow: React.FC<Props> = ({
           relative 
           grid items-center
           origin-[50%_50%_0px]
+          bg-neutral-800
         "
         style={{
           background: bg,
@@ -77,8 +79,8 @@ export const ListRow: React.FC<Props> = ({
         <animated.div
           className={`
             absolute
-
-            h-[50px]
+            bg-neutral-900
+            h-[52px]
             overflow-hidden w-full
             last-of-type:border-b-0
             text-neutral-900 dark:text-neutral-50

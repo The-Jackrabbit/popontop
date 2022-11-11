@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import ReorderOverlay from './ReorderOverlay';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
@@ -17,12 +17,20 @@ export default {
 
 } as ComponentMeta<typeof ReorderOverlay>;
 
-export const Mobile: ComponentStory<typeof ReorderOverlay> = (args) => {
-
+export const Mobile: ComponentStory<typeof ReorderOverlay> = () => {
+  const [value, setValue] = useState(0);
   return (
     <>
-      <ReorderOverlay {...args}  />
-      {[...(new Array(20))].map((_, index) => (
+      <ReorderOverlay 
+        max={10-1}
+        min={0}
+        initialValue={0}
+        currentValue={value}
+        setCurrentValue={(value) => setValue(value)}
+        onPointerUp={() => undefined}
+        onCancel={() => undefined}
+      />
+      {[].map((_, index) => (
         <div key={index} className="px-3 py-4">
           <p>paragraph: {index+1}</p>
         </div>
