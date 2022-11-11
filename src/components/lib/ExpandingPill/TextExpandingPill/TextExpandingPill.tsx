@@ -26,12 +26,8 @@ export const TextExpandingPill: React.FC<Props> = ({
       toggleVisibility={() => setIsExpanded(!isExpanded)}
     >
       <p className={labelClassName}>{label}</p>
-      <button className="text-sm">
-        {!isExpanded
-            ? '✏️'
-            : '-'
-          }
-      </button>
+        <div className="text-sm">{!isExpanded ? '✏️' : '-'} 
+      </div>
       <Input
         onChange={(event) => setValue(event.target.value)}
         placeholder="#adf2da"

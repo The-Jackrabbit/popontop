@@ -41,7 +41,7 @@ export const DesktopSidebar: React.FC<Props> = ({ settings }) => {
 
   return (
     <>
-      <div className='flex flex-col justify-center '>
+      <div className='flex flex-col justify-center mb-2'>
         <TextExpandingPill
           label="Search albums"
           labelClassName='pr-2'

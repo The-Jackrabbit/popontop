@@ -9,8 +9,7 @@ import useChart, { DraggedAlbum } from '../../frontend/hooks/use-chart';
 import { DndContext } from "@dnd-kit/core";
 import DesktopEditor from "../../components/global/DesktopEditor/DesktopEditor";
 
-
-const App: NextPage = () => {
+const CreateChart: NextPage = () => {
   const [page, setPage] = useState('editor');
   const {
     pageOpacity,
@@ -75,5 +74,5 @@ const App: NextPage = () => {
   );
 };
 
-export default App;
+export default CreateChart;
 

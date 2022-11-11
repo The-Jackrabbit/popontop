@@ -60,12 +60,12 @@ export const ExpandingPill: React.FC<Props> = ({
         }}
       >
         {children[0]}
-        <a.button
+        <a.div
           style={opacityAnimationStyle}
           className="hover:text-rose-300 dark:text-white"
         >
           {children[1]}
-        </a.button>
+        </a.div>
       </div>
       <a.div
         style={{

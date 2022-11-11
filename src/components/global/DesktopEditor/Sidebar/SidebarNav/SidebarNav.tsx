@@ -7,11 +7,7 @@ export interface Props {
   setPage: (page: string) => void;
 }
 
-export const SidebarNav: React.FC<Props> = ({
-  page,
-  setPage,
-}) => {
-
+export const SidebarNav: React.FC<Props> = ({ page, setPage }) => {
   const { zoomOnHoverStyle, onMouseLeave, onMouseOver } = useZoomOnHover();
   return (
     <div className="flex flex-row justify-between items-end">
