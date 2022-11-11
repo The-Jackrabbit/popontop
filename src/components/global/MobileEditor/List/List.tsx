@@ -4,6 +4,7 @@ import ListRow from "../../../lib/Mobile/ListRow/ListRow";
 import { useState } from "react";
 
 export interface Props {
+  currentValue?: number | null;
   isInteractive?: boolean;
   list: Album[];
   textColor: string;
@@ -14,6 +15,7 @@ export interface Props {
 }
 
 const List: React.FC<Props> = ({ 
+  currentValue = null,
   isInteractive = true ,
   list,
   textColor,
@@ -35,6 +37,7 @@ const List: React.FC<Props> = ({
       <div className="overflow-x-hidden">
         {list.map((album, index) => (
           <ListRow
+            isDragged={currentValue === index}
             textColor={textColor}
             key={JSON.stringify(album) + index}
             album={album}

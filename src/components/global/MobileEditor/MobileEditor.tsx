@@ -167,6 +167,7 @@ const MobileEditor: React.FC<Props> = ({
           
         {/* <div style={{ opacity: !isActive ?  1 : 0, height: '100%'}}> */}
         <List
+          currentValue={currentIndexBeingDragged}
           textColor={textColor}
           list={list}
           removeAlbumAtIndex={removeAlbumAtIndex}

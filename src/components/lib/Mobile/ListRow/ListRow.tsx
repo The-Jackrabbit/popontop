@@ -7,6 +7,7 @@ import { useDisappearRow } from '../../../../frontend/hooks/use-disappear-row';
 
 export interface Props {
   album: Album;
+  isDragged: boolean;
   isLastRowInList?: boolean;
   index?: number;
   isInteractive: boolean;
@@ -22,6 +23,7 @@ export const ListRow: React.FC<Props> = ({
   album,
   index = 0,
   textColor,
+  isDragged,
   isInteractive,
   isLastRowInList = true,
   onAdvanceAlbumAtIndex,
@@ -79,7 +81,7 @@ export const ListRow: React.FC<Props> = ({
         <animated.div
           className={`
             absolute
-            bg-neutral-900
+            bg-neutral-200 dark:bg-neutral-900
             h-[52px]
             overflow-hidden w-full
             last-of-type:border-b-0
@@ -90,6 +92,7 @@ export const ListRow: React.FC<Props> = ({
           style={isInteractive ? {
             x,
             height,
+            backgroundColor: isDragged ? 'rgb(253 164 175)' : undefined,
           }: {}}
         >
           <div className="text-xs basis-4 grow-0 flex flex-col justify-center content-center items-center">
