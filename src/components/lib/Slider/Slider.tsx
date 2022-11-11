@@ -1,28 +1,34 @@
 import { ChangeEventHandler } from "react";
 
 export interface Props {
+  className?: string;
   label?: string;
   min: number;
   max: number;
   onChange: ChangeEventHandler<HTMLInputElement>;
   placeholder?: string;
+  showValue?: boolean;
   value?: string;
 }
 
 export const Slider: React.FC<Props> = ({
-  label = 'Label',
+  className = '',
+  label,
   min,
   max,
   onChange,
   placeholder = 'Type here',
+  showValue = true,
   value = '',
 }) => {
   return (
-    <div className="outline-rose-200 outline-2  rounded-lg focus-within:outline outline-offset-2">
-      <label className="text-neutral-400 flex w-full justify-between">
-        <span>{label}</span>
-        <span>{value}</span>
-      </label>
+    <div className={className+" outline-rose-200 outline-2  rounded-lg focus-within:outline outline-offset-2"}>
+      {showValue ? (
+        <label className="text-neutral-400 flex w-full justify-between">
+          <span>{label ? label : null}</span>
+          <span>{showValue ? value : null }</span>
+        </label>
+      ) : null}
       <input
         className="
           slider   shadow-lg 

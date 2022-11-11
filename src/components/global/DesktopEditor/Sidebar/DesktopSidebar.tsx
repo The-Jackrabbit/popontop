@@ -1,29 +1,21 @@
 import { useState } from 'react';
 import { trpc } from '../../../../utils/trpc';
 import Input from '../../../lib/Input/Input';
-import Select from '../../../lib/Select/Select';
-import Slider from '../../../lib/Slider/Slider';
 import Draggable from '../DragNDrop/Draggable/Draggable';
 import Image from 'next/image';
 import { Settings } from '../../../../frontend/hooks/use-chart';
 import { EMPTY_ALBUM } from '../../../../constants/empty-album';
 import { Album } from '../../../../types/Albums';
-import { usePillList } from '../../../../frontend/hooks/springs/use-pill-list';
-import ExpandingPill from '../../../lib/ExpandingPill/ExpandingPill';
+import TextExpandingPill from '../../../lib/ExpandingPill/TextExpandingPill/TextExpandingPill';
+import { SwitchExpandingPill } from '../../../lib/ExpandingPill/SwitchExpandingPill/SwitchExpandingPill';
+import NumericExpandingPill from '../../../lib/ExpandingPill/NumericExpandingPill/NumericExpandingPill';
 
 export interface Props {
   initialValues?: string[];
   settings: Settings;
 }
 
-export const DesktopSidebar: React.FC<Props> = ({
-  initialValues = [
-    '',
-    '',
-    ''
-  ],
-  settings,
-}) => {
+export const DesktopSidebar: React.FC<Props> = ({ settings }) => {
   const [searchText, setSearchText] = useState('');
   const [timeoutId, setTimeoutId] = useState<null | NodeJS.Timeout>(null);
 
@@ -35,8 +27,8 @@ export const DesktopSidebar: React.FC<Props> = ({
     await refetch({});
   }
 
-  const onType = (event: { target: { value: string; }; }) => {
-    setSearchText(event.target.value)
+  const onType = (value: string) => {
+    setSearchText(value)
     if (timeoutId) {
       clearTimeout(timeoutId);
     }
@@ -47,35 +39,14 @@ export const DesktopSidebar: React.FC<Props> = ({
     setTimeoutId(newTimeoutId);
   };
 
-  const labels = [
-    'background',
-    'font color',
-    'border color',
-  ];
-  const setterFunctions = [
-    settings.actions.setBackgroundColor,
-    settings.actions.setTextColor,
-    settings.actions.setBorderColor,
-  ];
-  const {
-    onTypeForInputAtIndex,
-    pillValues,
-    toggleVisibilityOfInputAtIndex,
-    visibilityMap,
-  } = usePillList<string>({
-    initialValues: [...initialValues],
-    setterFunctions,
-  });
-
   return (
     <>
       <div className='flex flex-col justify-center '>
-        <Input
-          autofocus={true}
-          value={searchText} 
-          placeholder="Search albums" 
-          onChange={(event) => onType(event)} 
+        <TextExpandingPill
           label="Search albums"
+          labelClassName='pr-2'
+          setValue={(value: string) => onType(value)}
+          value={searchText}
         />
 
         <div className="flex ">
@@ -122,77 +93,53 @@ export const DesktopSidebar: React.FC<Props> = ({
         </div>
       </div>
 
-      <div>
-      <div className="flex flex-row flex-wrap items-center ">
-        {pillValues.map(((pill, index) => (
-          <ExpandingPill
-            className="m-1"
-            isActive={visibilityMap[index] ?? false}
-            onChange={(event) => onTypeForInputAtIndex(event, index)}
-            key={index}
-            toggleVisibility={() => toggleVisibilityOfInputAtIndex(index)}
-            value={pill as string}
-            >
-              <p className="text-lg">{labels[index] ?? ''}</p>
-              <p>-</p>
-            </ExpandingPill>
-         )))}
+      <div className="flex flex-row flex-wrap gap-2 items-center ">
+        <TextExpandingPill
+          label="Background color"
+          labelClassName='pr-2'
+          setValue={(value: string) => settings.actions.setBackgroundColor(value)}
+          value={settings.data.backgroundColor}
+        />
+   
+        <TextExpandingPill
+          label="Text color"
+          labelClassName='pr-2'
+          setValue={(value: string) => settings.actions.setTextColor(value)}
+          value={settings.data.textColor}
+        />
+   
+        <TextExpandingPill
+          label="Border color"
+          labelClassName='pr-2'
+          setValue={(value: string) => settings.actions.setBorderColor(value)}
+          value={settings.data.borderColor}
+        />
+
+        <SwitchExpandingPill
+          className="inline-block"
+          label="list albums?"
+          labelClassName='pr-2'
+          setValue={(value: boolean | null) =>settings.actions.toggleAlbums(Boolean(value))}
+          value={settings.data.showAlbums}
+        />
+
+        <SwitchExpandingPill
+          className="inline-block"
+          label="show title?"
+          labelClassName='pr-2'
+          setValue={(value: boolean | null) =>settings.actions.toggleTitle(Boolean(value))}
+          value={settings.data.showTitle}
+        />
+
+        <NumericExpandingPill
+          label="Border width"
+          labelClassName='pr-2'
+          min={0}
+          max={10}
+          setValue={(value: number) => settings.actions.setBorderSize(value)}
+          value={settings.data.borderSize}
+        />
       </div>
-    </div>
-
-      {/* <Input
-        label="Background color"
-        onChange={(event) => settings.actions.setBackgroundColor(event?.target.value)}
-        placeholder="#adf2da"
-        value={settings.data.backgroundColor}
-      />
-
-      <Input
-        label="Text color"
-        onChange={(event) => settings.actions.setTextColor(event?.target.value)}
-        placeholder="#adf2da"
-        value={settings.data.textColor}
-      />
-
-      <Input
-        label={'Border color'}
-        onChange={(event) => settings.actions.setBorderColor(event.target.value)}
-        placeholder="#adf2da"
-        value={settings.data.borderColor}
-      />
-       */}
-      <Select
-        options={[
-          { label: 'Yes', value: 'yes' },
-          { label: 'No', value: 'no',},
-        ]}
-        value={settings.data.showTitle ? 'yes' : 'no'}
-        setChosenValue={(value) => settings.actions.toggleTitle(value === 'yes')}
-        label="Show title?"
-        placeholder="Show title?"
-        isOpenByDefault={false}
-      />
-
-      <Select
-        options={[
-          { label: 'Yes', value: 'yes' },
-          { label: 'No', value: 'no' },
-        ]}
-        value={settings.data.showAlbums ? 'yes' : 'no'}
-        setChosenValue={(value) => settings.actions.toggleAlbums(value === 'yes')}
-        label="List albums?"
-        placeholder="List albums?"
-        isOpenByDefault={false}
-      />
-
-      <Slider
-        min={0}
-        max={10}
-        onChange={(event) => settings.actions.setBorderSize(parseInt(event?.target.value))}
-        label="Border size"
-        value={settings.data.borderSize.toString()}
-      />
-
     </>
   );
 }

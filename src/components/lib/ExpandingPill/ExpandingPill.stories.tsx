@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import ExpandingPill from './ExpandingPill';
 import { usePillList } from '../../../frontend/hooks/springs/use-pill-list';
-import NavDot, { Color } from '../../global/DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
 import { Input } from '../Input/Input';
-import RadioIcon from '../Radio/RadioIcon';
-import { Radio } from '../Radio/Radio';
+import NumericExpandingPill from './NumericExpandingPill/NumericExpandingPill';
+import TextExpandingPill from './TextExpandingPill/TextExpandingPill';
+import SwitchExpandingPill from './SwitchExpandingPill/SwitchExpandingPill';
 
 export default {
   args: {
@@ -20,61 +20,40 @@ export default {
 } as ComponentMeta<typeof ExpandingPill>;
 
 export const TextInput: React.FC = ({}) => {
-  const {
-    onTypeForInputAtIndex,
-    pillValues,
-    toggleVisibilityOfInputAtIndex,
-    visibilityMap,
-  } = usePillList<string>({
-    initialValues: ['hi'],
-    setterFunctions: ['hi'].map(() => () => undefined),
-  });
+  const [value, setValue] = useState<string>('');
   return (
-    <div className="m-4 max-w-[220px]">
-      <ExpandingPill
-        className=""
-        isActive={visibilityMap[0] ?? false}
-        toggleVisibility={() => toggleVisibilityOfInputAtIndex(0)}
-      >
-        <p className="text-lg">hello world</p>
-        <button className=" text-lg">✏️</button>
-        <Input
-          className="w-full bg-neutral-100 "
-          onChange={(event) => onTypeForInputAtIndex(event, 0)}
-          placeholder="#adf2da"
-          value={pillValues[0] as string}
-        />
-      </ExpandingPill>
-    </div>
+    <TextExpandingPill
+      label="Background color"
+      setValue={setValue}
+      value={value}
+    />
   )
 }
 
 export const SwitchInput: React.FC = () => {
-  const {
-    toggleVisibilityOfInputAtIndex,
-    visibilityMap,
-  } = usePillList<boolean>({
-    initialValues: [false],
-    setterFunctions: [false].map(() => () => undefined),
-  });
   const [value, setValue] = useState<boolean | null>(null);
   return (
-    <div className="m-4 max-w-[220px]">
-      <ExpandingPill
-        className=""
-        isActive={visibilityMap[0] ?? true}
-        toggleVisibility={() => toggleVisibilityOfInputAtIndex(0)}
-      >
-        <p className="text-lg">show title?</p>
-        <div className="">
-          <RadioIcon variant={value} />
-        </div>
-        <Radio 
-          onClick={(value) => setValue(value)}
-          value={Boolean(value)}
-        />
-      </ExpandingPill>
-    </div>
+    <SwitchExpandingPill
+      label='show title?'
+      setValue={setValue}
+      value={value}
+    />
+  );
+}
+
+
+export const NumericInput: React.FC = () => {
+  const [value, setValue] = useState<number>(0);
+  const min = 0;
+  const max = 10;
+  return (
+    <NumericExpandingPill
+      label="Border width"
+      min={min}
+      max={max}
+      setValue={setValue}
+      value={value}
+    />
   )
 }
 

@@ -1,9 +1,5 @@
-import { useDraggable } from "@dnd-kit/core";
-import { useState } from "react";
-import { a, useSpring } from "react-spring";
-import { CSS } from '@dnd-kit/utilities';
+import { useSpring } from "react-spring";
 import { useDrag } from "@use-gesture/react";
-import { listeners } from "process";
 
 export interface Props {
   onChange: (value: number) => void;
@@ -38,7 +34,7 @@ const ThumbSlider: React.FC<Props> = ({
       "
     >
       <input
-        className="gh h-full slider rotate-180"
+        className="vertical h-full slider rotate-180"
         step="1" 
         onChange={(e) => onChange(parseInt(e.target.value))}
         onPointerUp={() => onPointerUp()}

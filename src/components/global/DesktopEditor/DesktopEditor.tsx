@@ -29,9 +29,10 @@ const DesktopEditor: React.FC<Props> = ({
         <a.div style={titleStyle} className="overflow-y-hidden w-full">
           <Title
             chartTitle={chart.data.chartTitle}
+            isReadOnly={readonly}
             setValue={(val: string) => chart.actions.setChartTitle(val)}
             showIntroduction={true}
-            isReadOnly={readonly}
+            textColor="black"
           />
         </a.div>
       }

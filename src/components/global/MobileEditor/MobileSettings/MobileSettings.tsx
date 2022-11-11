@@ -37,10 +37,11 @@ export const MobileSettings: React.FC<Props> = ({
   setListAlbums,
 }) => {
   return (
-    <div className="p-3  h-full">
-      <HorizontalSwipe>
-        <div className="p-8">
+    <div className="h-full">
+      {/* <HorizontalSwipe> */}
+        <div className="flex flex-col">
           <PageTwo
+            key="page-two"
             showTitle={showTitle}
             setShowTitle={setShowTitle}
             listAlbums={listAlbums}
@@ -55,19 +56,7 @@ export const MobileSettings: React.FC<Props> = ({
             setTextColor={setTextColor}
           />
         </div>
-        <div className="p-8">
-          <PageThree
-            borderColor={borderColor}
-            setBorderColor={setBorderColor}
-            borderSize={borderSize}
-            setBorderSize={setBorderSize}
-            backgroundColor={backgroundColor}
-            setBackgroundColor={setBackgroundColor}
-            textColor={textColor}
-            setTextColor={setTextColor}
-          />
-        </div>
-      </HorizontalSwipe>
+      {/* </HorizontalSwipe> */}
     </div>
   )
 }

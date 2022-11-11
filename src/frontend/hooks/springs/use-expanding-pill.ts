@@ -17,7 +17,7 @@ export interface ExpandingPillHookState {
 
 const styles = {
   borderRadius: {
-    from: '4px',
+    from: '12px',
     to: '20px',
   },
   config: {

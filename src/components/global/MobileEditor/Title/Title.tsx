@@ -7,6 +7,7 @@ export interface Props {
   isReadOnly: boolean;
   setValue: (value: string) => void;
   showIntroduction: boolean;
+  textColor: string;
   titleHeightStyle?: { height: SpringValue<string>; };
 }
 
@@ -16,6 +17,7 @@ const Title: React.FC<Props> = ({
   isReadOnly,
   setValue,
   showIntroduction,
+  textColor,
   titleHeightStyle,
  }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -66,6 +68,7 @@ const Title: React.FC<Props> = ({
                 <input
                   autoFocus
                   value={chartTitle}
+                  style={{ color: textColor }}
                   onChange={(e) => { setValue(e.target.value) }}
                   placeholder="New title"
                   className=" focus-visible:outline-none active:outline-none bg-transparent border-bottom-2 border-b-2 

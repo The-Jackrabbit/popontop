@@ -1,6 +1,5 @@
 import { a } from 'react-spring';
 import { useExpandingPill } from '../../../frontend/hooks/springs/use-expanding-pill';
-import { ChangeEventHandler } from "react";
 import { useZoomOnHover } from '../../../frontend/hooks/springs/use-zoom-on-hover';
 
 export interface Props {
@@ -44,12 +43,13 @@ export const ExpandingPill: React.FC<Props> = ({
         rounded-lg
         text-xs
         shadow-lg dark:shadow-sm dark:shadow-neutral-800
-        flex flex-col
+        inline-flex flex-col
       `}
       {...mouseActions}
       style={{
         ...borderRadiusStyle, 
         ...zoomOnHoverStyle,
+        // display: isActive ? 'flex' : 'inline-flex',
       }}
     >
       <div
@@ -64,7 +64,7 @@ export const ExpandingPill: React.FC<Props> = ({
           style={opacityAnimationStyle}
           className="hover:text-rose-300 dark:text-white"
         >
-          {isActive ? '-' : children[1]}
+          {children[1]}
         </a.button>
       </div>
       <a.div

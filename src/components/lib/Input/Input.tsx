@@ -40,7 +40,7 @@ export const Input: React.FC<Props> = ({
         style={{ ...buttonStyle }}
         className={`
           ${className}
-          dark:bg-neutral-700
+          dark:bg-neutral-900
           rounded-lg
           mb-4
           shadow-lg

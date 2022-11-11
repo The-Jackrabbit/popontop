@@ -110,21 +110,21 @@ const MobileEditor: React.FC<Props> = ({
   };
 
   const onPointerUp = () => {
-    // insertAlbumAtIndex(
-    //   list[currentIndexBeingDragged] as Album,
-    //   currentIndexBeingDragged,
-    //   currentValue,
-    // )
-    // setCurrentIndexBeingDragged(-1)
+    insertAlbumAtIndex(
+      list[currentIndexBeingDragged] as Album,
+      currentIndexBeingDragged,
+      currentValue,
+    )
+    setCurrentIndexBeingDragged(-1)
     // setIsRearrangeViewActive(false);
   };
 
   const onThumbSliderChange = (newValue: number) => {
-    insertAlbumAtIndex(
-      list[currentIndexBeingDragged] as Album,
-      currentIndexBeingDragged,
-      newValue,
-    );
+    // insertAlbumAtIndex(
+    //   list[currentIndexBeingDragged] as Album,
+    //   currentIndexBeingDragged,
+    //   newValue,
+    // );
     setCurrentValue(newValue);
     setCurrentIndexBeingDragged(newValue-1)
     // setIsRearrangeViewActive(false);
@@ -137,7 +137,10 @@ const MobileEditor: React.FC<Props> = ({
   };
 
   return (
-    <div className="overflow-y-hidden flex " style={{ height: windowHeight }}>
+    <div
+      className="overflow-y-hidden flex "
+      style={{ height: windowHeight, backgroundColor: backgroundColor }}
+    >
     
       {isRearrangeViewActive ?  (
         <ReorderOverlay
@@ -159,16 +162,18 @@ const MobileEditor: React.FC<Props> = ({
      
 
         <Title
+          textColor={textColor}
           isFixed={true}
           isReadOnly={readonly}
           chartTitle={chartTitle}
           setValue={(value: string) => setChartTitle(value)}
           showIntroduction={isStarted && isFirstCloseDone}
           titleHeightStyle={titleHeightStyle}
-          />
+        />
           
         {/* <div style={{ opacity: !isActive ?  1 : 0, height: '100%'}}> */}
         <List
+          textColor={textColor}
           list={list}
           removeAlbumAtIndex={removeAlbumAtIndex}
           advanceAlbumAtIndex={advanceAlbumAtIndex}

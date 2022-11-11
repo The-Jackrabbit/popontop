@@ -89,7 +89,7 @@ export const ActionBarNew: React.FC<Props> = ({
               color={Color.fuchsia}
               isActive={true}
               onClick={() => undefined}
-              className="animate-bounce absolute top-[-4px] right-[-2px]"
+              className="w-4 h-4 animate-bounce absolute top-[-4px] right-[-2px]"
               label="asdfasdf"
             />
           ): null}

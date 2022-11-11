@@ -6,6 +6,7 @@ import { useState } from "react";
 export interface Props {
   isInteractive?: boolean;
   list: Album[];
+  textColor: string;
   removeAlbumAtIndex: (index: number) => void;
   advanceAlbumAtIndex: (index: number) => void;
   lowerAlbumAtIndex: (index: number) => void;
@@ -15,6 +16,7 @@ export interface Props {
 const List: React.FC<Props> = ({ 
   isInteractive = true ,
   list,
+  textColor,
   removeAlbumAtIndex,
   advanceAlbumAtIndex,
   lowerAlbumAtIndex,
@@ -25,7 +27,7 @@ const List: React.FC<Props> = ({
     <div className={`
       ${list.length > 10 ? 'pb-[270px]' : ''}
          h-[calc(100vh_-_10px)]
-       dark:bg-neutral-900  overflow-y-scroll
+         overflow-y-scroll
         mt-[200px] -translate-y-32 z-10
       `}
       // style={{ overflowY: isScrollDisabled ? 'hidden' :s 'scroll' }}
@@ -33,6 +35,7 @@ const List: React.FC<Props> = ({
       <div className="overflow-x-hidden">
         {list.map((album, index) => (
           <ListRow
+            textColor={textColor}
             key={JSON.stringify(album) + index}
             album={album}
             index={index}

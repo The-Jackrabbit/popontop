@@ -4,11 +4,11 @@ import { useDrag } from '@use-gesture/react';
 // import { isIntentionalXAxisGesture } from '../../utils/directions';
 
 const left = {
-  bg: `linear-gradient(120deg, #f093fb 0%, #f5576c 100%)`,
+  // bg: `linear-gradient(120deg, #f093fb 0%, #f5576c 100%)`,
   justifySelf: 'end',
 }
 const right = {
-  bg: `linear-gradient(120deg, #96fbc4 0%, #f9f586 100%)`,
+  // bg: `linear-gradient(120deg, #96fbc4 0%, #f9f586 100%)`,
   justifySelf: 'start',
 }
 
@@ -25,7 +25,7 @@ export const useRowSwipeActions = ({
   setIsScrollDisabled,
   swipeLengthThreshold = 100,
 }: Props) => {
-  const [layerActionText, setlayerActionText] = useState('🗑');
+  const [layerActionText, setlayerActionText] = useState('');
   const [{ x, bg, height, justifySelf }, api] = useSpring(() => ({
     x: 0,
     height: 50,

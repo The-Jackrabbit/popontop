@@ -10,6 +10,7 @@ export interface Props {
   isLastRowInList?: boolean;
   index?: number;
   isInteractive: boolean;
+  textColor: string;
   removeSelfFromList?: () => void;
   onAdvanceAlbumAtIndex: (index: number) => void;
   onLowerAlbumAtIndex: (index: number) => void;
@@ -20,6 +21,7 @@ export interface Props {
 export const ListRow: React.FC<Props> = ({
   album,
   index = 0,
+  textColor,
   isInteractive,
   isLastRowInList = true,
   onAdvanceAlbumAtIndex,
@@ -75,7 +77,7 @@ export const ListRow: React.FC<Props> = ({
         <animated.div
           className={`
             absolute
-            bg-neutral-50 dark:bg-neutral-900
+
             h-[50px]
             overflow-hidden w-full
             last-of-type:border-b-0
@@ -99,9 +101,11 @@ export const ListRow: React.FC<Props> = ({
             <Image width="50" height="50" src={album.imageUrl} alt={album.artist} />
           </div>
 
-          <div className="grow-[2] content-start justify-end flex flex-col">
-            <p className="text-xs overflow-x-hidden whitespace-nowrap">{album.artist}</p>
-            <p className="text-xs overflow-x-hidden whitespace-nowrap">{album.name}</p>
+          <div
+            style={{ color: textColor }}
+            className="grow-[2] content-start justify-end flex flex-col">
+            <p      style={{ color: textColor }} className="text-xs overflow-x-hidden whitespace-nowrap">{album.artist}</p>
+            <p      style={{ color: textColor }} className="text-xs overflow-x-hidden whitespace-nowrap">{album.name}</p>
           </div>
 
           <div
