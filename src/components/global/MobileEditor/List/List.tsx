@@ -28,11 +28,10 @@ const List: React.FC<Props> = ({
   return (
     <div className={`
       ${list.length > 10 ? 'pb-[270px]' : ''}
-         h-[calc(100vh_-_10px)]
-         overflow-y-scroll
+        h-[calc(100vh_-_10px)]
+        overflow-y-scroll
         mt-[200px] -translate-y-32 z-10
       `}
-      // style={{ overflowY: isScrollDisabled ? 'hidden' :s 'scroll' }}
     >
       <div className="overflow-x-hidden">
         {list.map((album, index) => (

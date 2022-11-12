@@ -1,9 +1,9 @@
-import { animated } from '@react-spring/web'
-import React, { useState } from "react";
-import Image from 'next/image';
+import { a } from '@react-spring/web'
+import React from "react";
 import { Album } from '../../../../types/Albums';
 import { useRowSwipeActions } from '../../../../frontend/hooks/use-row-swipe-actions';
 import { useDisappearRow } from '../../../../frontend/hooks/use-disappear-row';
+import ListView from './ListView/ListView';
 
 export interface Props {
   album: Album;
@@ -23,7 +23,6 @@ export const ListRow: React.FC<Props> = ({
   album,
   index = 0,
   textColor,
-  isDragged,
   isInteractive,
   isLastRowInList = true,
   onAdvanceAlbumAtIndex,
@@ -32,11 +31,12 @@ export const ListRow: React.FC<Props> = ({
   setIsScrollDisabled,
   openRearrangeView,
 }) => {
-  const {
-    isBreakVisible,
-    style,
-    toggleRowVisibility,
-  } = useDisappearRow( { frequency: 10 , isLastRowInList, onClick: () => undefined });
+  const initialHeight = 50;
+  const { isBreakVisible, style, toggleRowVisibility } = useDisappearRow({
+    initialHeight,
+    isLastRowInList,
+    onClick: () => undefined
+  });
 
   const leftSwipeAction = () => {
     toggleRowVisibility();
@@ -47,12 +47,7 @@ export const ListRow: React.FC<Props> = ({
     alert(JSON.stringify(album));
   };
 
-  const {
-    bind,
-    layerActionText,
-    x, bg,
-     height, justifySelf,
-  } = useRowSwipeActions({
+  const { bind, bg, x } = useRowSwipeActions({
     setIsScrollDisabled,
     leftSwipeAction,
     rightSwipeAction,
@@ -60,68 +55,43 @@ export const ListRow: React.FC<Props> = ({
 
   return (
     <>
-      <animated.div 
+      <a.div 
         {...bind()}
         className="
           touch-pan-x
-          px-6 h-12
+          px-6
           relative 
           grid items-center
           origin-[50%_50%_0px]
-          bg-neutral-800
+          bg-neutral-900
+          overflow-hidden
         "
-        style={{
-          background: bg,
-          ...style,
-        }}
+        style={{ background: bg, ...style }}
       >
-        <animated.div style={{ justifySelf }}>
-          {layerActionText}
-        </animated.div>
-        <animated.div
-          className={`
-            absolute
+        <div className='flex justify-between'>
+          <div>💿</div>
+          <div>🗑</div>
+        </div>
+        <a.div
+          className="
+            absolute h-[55px]
             bg-neutral-200 dark:bg-neutral-900
-            h-[52px]
-            overflow-hidden w-full
+            w-full overflow-hidden 
             last-of-type:border-b-0
             text-neutral-900 dark:text-neutral-50
-            flex justify-between
-            gap-2 my-0
-          `}
-          style={isInteractive ? {
-            x,
-            height,
-            backgroundColor: isDragged ? 'rgb(253 164 175)' : undefined,
-          }: {}}
+            flex justify-between gap-2
+            my-0
+          "
+          style={isInteractive ? { x } : {}}
         >
-          <div className="text-xs basis-4 grow-0 flex flex-col justify-center content-center items-center">
-            {isInteractive ?
-            <button onClick={() => onAdvanceAlbumAtIndex(index)}>▲</button>
-            : null}
-            <p>{index+1}</p>
-            {isInteractive ? <button onClick={() => onLowerAlbumAtIndex(index)}>▼</button> : null}
-          </div>
-          <div className="basis-12 grow-0">
-            <Image width="50" height="50" src={album.imageUrl} alt={album.artist} />
-          </div>
-
-          <div
-            style={{ color: textColor }}
-            className="grow-[2] content-start justify-end flex flex-col">
-            <p      style={{ color: textColor }} className="text-xs overflow-x-hidden whitespace-nowrap">{album.artist}</p>
-            <p      style={{ color: textColor }} className="text-xs overflow-x-hidden whitespace-nowrap">{album.name}</p>
-          </div>
-
-          <div
-            className="grow-0 flex items-center"
-            onClick={() => openRearrangeView(index)}
-          >
-            🧤
-          </div>
-        </animated.div>
-      </animated.div>
-      {isBreakVisible && (<hr className="my-1 border-neutral-200 dark:border-neutral-800" />)}
+          <ListView
+            album={album}
+            textColor={textColor}
+            index={index}
+          />
+        </a.div>
+      </a.div>
+       {isBreakVisible && (<hr className="my-1 border-neutral-200 dark:border-transparent" />)}
     </>
   )
 }

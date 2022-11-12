@@ -1,22 +1,41 @@
 import { useSpring } from '@react-spring/web'
 import { useState } from "react";
 import { useDrag } from '@use-gesture/react';
-// import { isIntentionalXAxisGesture } from '../../utils/directions';
-
-const left = {
-  bg: `linear-gradient(120deg, #f093fb 0%, #f5576c 100%)`,
-  justifySelf: 'end',
-}
-const right = {
-  bg: `linear-gradient(120deg, #96fbc4 0%, #f9f586 100%)`,
-  justifySelf: 'start',
-}
 
 export interface Props {
   leftSwipeAction: () => void;
   rightSwipeAction: () => void;
   setIsScrollDisabled: (value: boolean) => void;
   swipeLengthThreshold?: number;
+}
+
+export enum LiftActionZone {
+  LEFT_ACTION = 'left-action',
+  NOOP = 'noop',
+  RIGHT_ACTION = 'right-action',
+  ZERO = 'zero',
+}
+
+const BG_STYLES = {
+  [LiftActionZone.LEFT_ACTION]:'linear-gradient(120deg, #96fbc4 0%, #f9f586 100%)',
+  [LiftActionZone.RIGHT_ACTION]: 'linear-gradient(120deg, #f093fb 0%, #f5576c 100%)',
+  [LiftActionZone.NOOP]: 'linear-gradient(120deg, #474747 100%, #171717 100%)',
+  [LiftActionZone.ZERO]: 'linear-gradient(120deg, #171717 100%, #171717 100%)',
+}
+
+export const getCurrentZone = (offsetX: number, swipeLengthThreshold: number): LiftActionZone => {
+  if (Math.abs(offsetX) < 5) {
+    return LiftActionZone.ZERO;
+  }
+  if (offsetX > 0 && offsetX > swipeLengthThreshold) {
+    return LiftActionZone.LEFT_ACTION;
+  }
+  
+  if (offsetX < 0 && offsetX < -1*swipeLengthThreshold) {
+    return LiftActionZone.RIGHT_ACTION;
+  }
+
+  return LiftActionZone.NOOP;
 }
 
 export const useRowSwipeActions = ({
@@ -26,76 +45,60 @@ export const useRowSwipeActions = ({
   swipeLengthThreshold = 100,
 }: Props) => {
   const [layerActionText, setlayerActionText] = useState('');
-  const [{ x, bg, height, justifySelf }, api] = useSpring(() => ({
+  const [{ x, bg }, api] = useSpring(() => ({
     x: 0,
-    height: 55,
-    ...left,
+    bg: BG_STYLES[LiftActionZone.ZERO],
   }));
 
-  const bind = useDrag(({ active, movement: [mx,] }) => {
-    // if (!isIntentionalXAxisGesture(mx, my)) {
-    //   return;
-    // }
-
-    if (layerActionText === '🗑' && mx > 0) {
+  const bind = useDrag(({ active, offset: [offsetX,] }) => {
+    if (layerActionText !== '💿' && offsetX > 0) {
       setlayerActionText('💿');
     }
 
-    if (layerActionText === '💿' && mx < 0) {
+    if (layerActionText !== '🗑' && offsetX < 0) {
       setlayerActionText('🗑');
     }
 
-    const isSwipeLengthOverThreshold = Math.abs(mx) > swipeLengthThreshold;
+    const isSwipeLengthOverThreshold = Math.abs(offsetX) > swipeLengthThreshold;
+    const zone = getCurrentZone(offsetX, swipeLengthThreshold);
+    const bg = BG_STYLES[zone];
 
     if (active) {
       setIsScrollDisabled(true);
-      if (isSwipeLengthOverThreshold) {
-        return api.start({
-          x: active ? mx : 0,
-          ...(mx < 0 ? left : right),
-          
-          immediate: name => active && name === 'x',
-        });
-      }
-
       return api.start({
-        x: active ? mx : 0,
-        ...(mx < 0 ? left : right),
-        immediate: name => active && name === 'x',
+        x: offsetX,
+        bg,
       });
     }
     setIsScrollDisabled(!true);
 
     if (!isSwipeLengthOverThreshold) {
-      api.start({
+      return api.start({
         x: 0,
-        height: 55,
-        ...left,
+        bg: BG_STYLES[LiftActionZone.ZERO],
       });
-      return;
     }
 
-    const finalizeActionAnimations = {
-      x: mx > 0 ? 400 : 0,
-      height: 0,
-      immediate: true,
-    };
+    // const finalizeActionAnimations = {
+    //   x: offsetX > 0 ? 400 : 0,
+    //   immediate: true,
+    // };
 
     if (isSwipeLengthOverThreshold) {
-      if (mx < 0) {
+      if (offsetX < 0) {
         leftSwipeAction();
       } else {
         rightSwipeAction();
       }
     }
-    
 
-    api.start(finalizeActionAnimations);
+    // api.start(finalizeActionAnimations);
   });
 
   return {
+    bg,
     bind,
     layerActionText,
-    x, bg, height, justifySelf,
+    x,
   }
 }

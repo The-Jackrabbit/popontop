@@ -1,22 +1,26 @@
-import { useSpring, SpringValue } from '@react-spring/web'
+import { config, useSpring, SpringValue } from '@react-spring/web'
 import { useState } from "react";
 
 export interface Props {
-  frequency?: number;
+  initialHeight?: number;
   isLastRowInList: boolean;
   onClick: () => void;
 }
 
-export const useDisappearRow = ({ frequency =  0.1, isLastRowInList, onClick }: Props): {
+export const useDisappearRow = ({
+  initialHeight = 55,
+  isLastRowInList,
+  onClick
+}: Props): {
   isBreakVisible: boolean;
-  style: { height: SpringValue<string>; };
+  style: { height: SpringValue<number>; };
   toggleRowVisibility: () => void;
 } => {
   const [isBreakVisible, setIsBreakVisible] = useState(!isLastRowInList);
   const [style, animate] = useSpring(() => ({
-    height: "55px",
+    height: initialHeight,
     config: {
-      frequency,
+      config: config.stiff
     },
     onRest: () => {
       onClick();
@@ -25,9 +29,7 @@ export const useDisappearRow = ({ frequency =  0.1, isLastRowInList, onClick }: 
 
   const toggleRowVisibility = () => {
     setIsBreakVisible(false);
-    animate.start({
-      height: "0px",
-    });
+    animate.start({ height: 0 });
   };
 
   return {
