@@ -8,7 +8,7 @@ export interface Props {
 }
 
 export const useDisappearRow = ({
-  initialHeight = 55,
+  initialHeight = 65,
   isLastRowInList,
   onClick
 }: Props): {

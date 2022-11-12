@@ -1,9 +1,13 @@
-import { useState } from "react";
-import { a, useSpring, animated, config } from "react-spring";
-import NavDot, { Color } from "../../DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot";
-import AddAlbumButton from "../AddAlbumButton/AddAlbumButton";
-import SettingsButton from "../SettingsButton/SettingsButton";
+import { a, useSpring, config } from "react-spring";
+import FilterButton, { ICON_STYLE } from "../../../lib/FilterButton/FilterButton.tsx/FilterButton";
 import { ActionOverlay } from "./ActionOverlay/ActionOverlay";
+import { 
+  ChevronUpDownIcon, 
+  CogIcon,
+  PlusIcon, 
+  TrashIcon,
+} from '@heroicons/react/20/solid';
+import LogoButton from "./LogoButton/LogoButton";
 
 export interface Props {
   onClickSettings: () => void;
@@ -21,101 +25,85 @@ export const ActionBar: React.FC<Props> = ({
   setIsActive,
   saveChart,
   isLoading,
-}) => {
-  const [isOverlayVisible, setIsOverlayVisible] = useState(isActive);
-
-  const start  = () => {
-    setIsActive(false);
-    animateActionOverlayOpacity.start({ opacity: 0 })
-    // debugger
-    setIsOverlayVisible(true);
-    // animateActionOverlayOpacity.start({ opacity: 1 },)
-  }
-
-  const end  = () => {
-    animateActionOverlayOpacity.start({ opacity: 1 })
-    // debugger;
-    // animateActionOverlayOpacity.start({
-    //   opacity: 0,
-    //   // onRest: () =>
-    // })
-    setIsOverlayVisible(false)
-  }
-
+}) => { 
   const [actionOverlayOpacity, animateActionOverlayOpacity] = useSpring(() => ({
     from: { opacity: 0 },
     to: { opacity: 1 },
     config: config.molasses,
   }));
-  const [hideAnimation, animatehideAnimation] = useState(false);
+
+  const [overlayPosition, animateOverlayPosition] = useSpring(() => ({
+    transform: 'translateY(0vh)',
+    config: config.stiff
+  }));
+
+  const start = () => {
+    animateOverlayPosition.start({ transform: 'translateY(-145vh)' });
+    animateActionOverlayOpacity.start({ opacity: 0 });
+    setIsActive(false);
+  };
+
+  const end = () => {
+    animateOverlayPosition.start({ transform:  'translateY(0vh)' });
+    animateActionOverlayOpacity.start({ opacity: 1 });
+  };
+
   return (
     <>
-    <a.div 
-      className="
-        w-[calc(100vw_-_2rem)] 
-        justify-between items-center 
-        absolute bottom-0 
-        flex flex-row
-      "
-      style={{...actionOverlayOpacity}}
-    >
-      <SettingsButton
-        onClick={(e) => {
-          e.stopPropagation();
-          onClickSettings();
-        }}
-      />
-      <div
-
-        onClick={() => start()}
-        className="grow-1 flex content-center justify-center"
+      <a.div 
+        className="
+          w-[calc(100vw_-_2rem)] 
+          justify-between items-center 
+          absolute bottom-2
+          flex flex-row
+        "
+        style={{...actionOverlayOpacity}}
       >
-       
-        <h1
-          onTouchMove={(e) => {
+        <FilterButton
+          fromColor="black"
+          toColor="black"
+          onClick={(e) => {
             e.stopPropagation();
+            onClickSettings();
           }}
-          onClick={end}
-          className="
-            bg-white dark:bg-black
-            px-2 py-1 py-1sm:px-4 sm:py-1
-            rounded-full
-            relative
-            select-none text-lg z-30"
         >
-          💿popontop
-          {isActive ? (
-            <NavDot
-              color={Color.fuchsia}
-              isActive={true}
-              onClick={() => undefined}
-              className="w-4 h-4 animate-bounce absolute top-[-4px] right-[-2px]"
-              label="asdfasdf"
-            />
-          ): null}
-        </h1>
-      </div>
-      <AddAlbumButton
-        onClick={(e) => {
-          e.stopPropagation();
-          onClickSearch();
-        }}
-      />
-    </a.div>
-     <a.div
-     className={!isOverlayVisible ? "-translate-y-12" : ''}
-   >
-    <ActionOverlay
-      saveChart={saveChart}
-      isLoading={isLoading}
-      onExit={(e: any) => {
-        e.stopPropagation()
-        end();
-        animatehideAnimation(true);
-      }}
-    />     
-   </a.div>
-   </>
+          <CogIcon className={ICON_STYLE} />
+        </FilterButton>
+        <div className="flex gap-2">
+          <FilterButton onClick={() => undefined}>
+            <TrashIcon className={ICON_STYLE} />
+          </FilterButton>
+          <LogoButton
+            end={() => end()}
+            isActive={isActive}
+            start={() => start()}
+          />
+          <FilterButton onClick={() => undefined}>
+            <ChevronUpDownIcon className={ICON_STYLE} />
+          </FilterButton>
+        </div>
+        <FilterButton
+          fromColor="black"
+          toColor="black"
+          onClick={(e) => {
+            e.stopPropagation();
+            onClickSearch();
+          }}
+        >
+          <PlusIcon className={ICON_STYLE} />
+        </FilterButton>
+      </a.div>
+      <a.div style={{ ...overlayPosition }}>
+        <ActionOverlay
+          saveChart={saveChart}
+          isLoading={isLoading}
+          onExit={(e: any) => {
+            e.stopPropagation()
+            end();
+          }}
+        />
+      </a.div>
+    </>
   );
 };
 

@@ -74,7 +74,7 @@ export const ListRow: React.FC<Props> = ({
         </div>
         <a.div
           className="
-            absolute h-[55px]
+            absolute h-[65px]
             bg-neutral-200 dark:bg-neutral-900
             w-full overflow-hidden 
             last-of-type:border-b-0

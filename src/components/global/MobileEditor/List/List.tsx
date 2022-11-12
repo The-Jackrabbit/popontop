@@ -24,7 +24,7 @@ const List: React.FC<Props> = ({
   lowerAlbumAtIndex,
   openRearrangeView,
 }) => {
-  const [, setIsScrollDisabled] = useState(false);
+  const [isScrollDisabled, setIsScrollDisabled] = useState(false);
   return (
     <div className={`
       ${list.length > 10 ? 'pb-[270px]' : ''}
@@ -32,6 +32,7 @@ const List: React.FC<Props> = ({
         overflow-y-scroll
         mt-[200px] -translate-y-32 z-10
       `}
+      // style={{scrollb}}
     >
       <div className="overflow-x-hidden">
         {list.map((album, index) => (

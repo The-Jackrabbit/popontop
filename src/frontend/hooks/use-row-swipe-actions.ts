@@ -50,7 +50,7 @@ export const useRowSwipeActions = ({
     bg: BG_STYLES[LiftActionZone.ZERO],
   }));
 
-  const bind = useDrag(({ active, offset: [offsetX,] }) => {
+  const bind = useDrag(({ active, movement: [offsetX,] }) => {
     if (layerActionText !== '💿' && offsetX > 0) {
       setlayerActionText('💿');
     }
@@ -79,20 +79,13 @@ export const useRowSwipeActions = ({
       });
     }
 
-    // const finalizeActionAnimations = {
-    //   x: offsetX > 0 ? 400 : 0,
-    //   immediate: true,
-    // };
-
-    if (isSwipeLengthOverThreshold) {
-      if (offsetX < 0) {
-        leftSwipeAction();
-      } else {
-        rightSwipeAction();
-      }
+    if (offsetX < 0) {
+      leftSwipeAction();
+    } else {
+      rightSwipeAction();
     }
-
-    // api.start(finalizeActionAnimations);
+  }, {
+    threshold: [0, 200]
   });
 
   return {

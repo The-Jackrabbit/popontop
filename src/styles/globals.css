@@ -38,28 +38,15 @@ li::marker {
 .page > div {
   background-position: center center;
 }
+body {
+  overscroll-behavior: none;
+  overscroll-behavior-y: none;
+}
 
 
 @media (prefers-color-scheme: light) {
   body {
     background-color: #F8F9F8;
-  }
-
-  p, h1, h2, h3, h4, h5, h6, input {
-    color: var(--color-neutral-600);
-  }
-
-  .select .placeholder {
-    color: var(--color-neutral-400);
-  }
-
-  .select.chosen-value:focus  {
-    outline: 2px solid var(--color-rose-300);
-    background-color: var(--color-white);
-  }
-
-  .actions-container  {
-    border-color: var(--color-neutral-200);
   }
 
 }
@@ -77,13 +64,6 @@ li::marker {
 
 .actions-container {
   flex-basis: 5%
-}
-
-.select {
-  border-radius: 4px;
-  padding: 12px;
-  outline-offset: 3px;
-  outline: none;
 }
 
 /* Colors */

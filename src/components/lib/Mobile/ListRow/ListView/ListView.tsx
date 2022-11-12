@@ -31,7 +31,7 @@ export const ListView: React.FC<Props> = ({
       } */}
     </div>
     <div className="basis-12 grow-0">
-      <Image width="50" height="50" src={album.imageUrl} alt={album.artist} />
+      <Image width="65" height="65" src={album.imageUrl} alt={album.artist} />
     </div>
 
     <div

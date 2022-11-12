@@ -19,6 +19,7 @@ export const ClickCircleButton: React.FC<Props> = ({
       className="
         basis-1/3 h-1/3 rounded-full
         text-xs
+        flex flex-col align-middle justify-center items-center
       "
       onClick={onClick}
       disabled={isLoading}

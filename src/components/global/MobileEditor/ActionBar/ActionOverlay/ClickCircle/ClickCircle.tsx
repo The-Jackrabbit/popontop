@@ -4,6 +4,14 @@ import Link from 'next/link';
 import ClickCircleButton from "./ClickCircleButton/ClickCircleButton";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import {
+  ArrowDownCircleIcon,
+  ArrowRightOnRectangleIcon,
+  CloudArrowUpIcon,
+  ListBulletIcon,
+  UserCircleIcon
+} from '@heroicons/react/24/solid';
+
 export interface Props {
   isLoading: boolean;
   saveChart: () => Promise<string>;
@@ -15,12 +23,13 @@ export const ClickCircle: React.FC<Props> = ({
 }) => {
   const { data: sessionData } = useSession();
   const r = useRouter();
-  console.log(r.pathname)
+
   const [savedChartId, setSavedChartId] = useState<null | string>('null');
   const save = async () => {
     const uuid = await saveChart();
     setSavedChartId(uuid);
   };
+
   const onClickLogin = () => {
     sessionData ?  signOut() : signIn('google')
   };
@@ -29,10 +38,8 @@ export const ClickCircle: React.FC<Props> = ({
     <div
       className="
         bg-[rgba(255,255,255,0.14)] shadow-lg
-        z-50 absolute
-        top-1/2
+        z-50
         rounded-full h-64 w-64
-
         flex flex-wrap
       "
       onClick={(e) => {
@@ -43,7 +50,15 @@ export const ClickCircle: React.FC<Props> = ({
       <button id="top" className="basis-1/3 h-1/3 rounded-full">
         {sessionData && r.pathname === '/mobile' ? (
           <ClickCircleButton
-            icon="📖"
+            icon={
+              <ListBulletIcon
+                className="
+                h-6 w-6 text-center align-center content-center justify-center
+                flex
+                text-neutral-900 dark:text-neutral-50
+                "
+              />
+            }
             isLoading={false}
             label="your charts"
             onClick={(e) => {
@@ -66,7 +81,15 @@ export const ClickCircle: React.FC<Props> = ({
       </button>
       <div className="basis-1/3 h-1/3 rounded-full"></div>
       <ClickCircleButton
-        icon="💾"
+        icon={
+          <CloudArrowUpIcon
+            className="
+              h-6 w-6 text-center align-center content-center justify-center
+              flex
+              text-neutral-900 dark:text-neutral-50
+            "
+          />
+        }
         isLoading={isLoading}
         label="save chart"
         onClick={(e) => {
@@ -91,14 +114,41 @@ export const ClickCircle: React.FC<Props> = ({
         }
       </div>
       <ClickCircleButton
-        icon="📷"
+        icon={
+          <ArrowDownCircleIcon
+            className="
+              h-6 w-6 text-center align-center content-center justify-center
+              flex
+              text-neutral-900 dark:text-neutral-50
+            "
+          />
+        }
         isLoading={false}
-        label="download as png"
+        label="download"
         onClick={() => undefined}
       />
       <div className="basis-1/3 h-1/3 rounded-full"></div>
       <ClickCircleButton
-        icon={!sessionData ? "🪵" : "👋"}
+        icon={!sessionData
+          ? (
+            <UserCircleIcon
+              className="
+                h-6 w-6 text-center align-center content-center justify-center
+                flex
+                text-neutral-900 dark:text-neutral-50
+              "
+            />
+          )
+          : (
+            <ArrowRightOnRectangleIcon
+              className="
+                h-6 w-6 text-center align-center content-center justify-center
+                flex
+                text-neutral-900 dark:text-neutral-50
+              "
+            />
+          )
+        }
         isLoading={false}
         label={!sessionData ? "log in" : "sign out"}
         onClick={onClickLogin}
