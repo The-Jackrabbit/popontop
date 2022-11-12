@@ -7,8 +7,11 @@ export interface Props {
   onClick: () => void;
 }
 
+export const ROW_HEIGHT = 60;
+export const ROW_HEIGHT_WITH_UNIT = 'h-[60px]'; // tailwind may be finicky about string templated values?
+
 export const useDisappearRow = ({
-  initialHeight = 65,
+  initialHeight = ROW_HEIGHT,
   isLastRowInList,
   onClick
 }: Props): {

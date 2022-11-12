@@ -27,7 +27,7 @@ const List: React.FC<Props> = ({
   const [isScrollDisabled, setIsScrollDisabled] = useState(false);
   return (
     <div className={`
-      ${list.length > 10 ? 'pb-[270px]' : ''}
+      ${list.length > 5 ? 'pb-[270px]' : ''}
         h-[calc(100vh_-_10px)]
         overflow-y-scroll
         mt-[200px] -translate-y-32 z-10

@@ -136,6 +136,7 @@ const MobileEditor: React.FC<Props> = ({
   return (
     <div
       className="overflow-y-hidden flex "
+      onScroll={(e) => { e.preventDefault(); e.stopPropagation(); }}
       style={{ height: windowHeight, backgroundColor: backgroundColor }}
     >
       {isRearrangeViewActive ?  (

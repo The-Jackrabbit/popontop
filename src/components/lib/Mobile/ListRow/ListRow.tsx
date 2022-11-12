@@ -2,7 +2,7 @@ import { a } from '@react-spring/web'
 import React from "react";
 import { Album } from '../../../../types/Albums';
 import { useRowSwipeActions } from '../../../../frontend/hooks/use-row-swipe-actions';
-import { useDisappearRow } from '../../../../frontend/hooks/use-disappear-row';
+import { ROW_HEIGHT, ROW_HEIGHT_WITH_UNIT, useDisappearRow } from '../../../../frontend/hooks/use-disappear-row';
 import ListView from './ListView/ListView';
 
 export interface Props {
@@ -25,13 +25,10 @@ export const ListRow: React.FC<Props> = ({
   textColor,
   isInteractive,
   isLastRowInList = true,
-  onAdvanceAlbumAtIndex,
-  onLowerAlbumAtIndex,
   removeSelfFromList = () => undefined,
   setIsScrollDisabled,
-  openRearrangeView,
 }) => {
-  const initialHeight = 50;
+  const initialHeight = ROW_HEIGHT;
   const { isBreakVisible, style, toggleRowVisibility } = useDisappearRow({
     initialHeight,
     isLastRowInList,
@@ -47,7 +44,7 @@ export const ListRow: React.FC<Props> = ({
     alert(JSON.stringify(album));
   };
 
-  const { bind, bg, x } = useRowSwipeActions({
+  const { bind, bg, isActionLayerVisible, x } = useRowSwipeActions({
     setIsScrollDisabled,
     leftSwipeAction,
     rightSwipeAction,
@@ -63,25 +60,30 @@ export const ListRow: React.FC<Props> = ({
           relative 
           grid items-center
           origin-[50%_50%_0px]
-          bg-neutral-900
+
           overflow-hidden
         "
         style={{ background: bg, ...style }}
       >
-        <div className='flex justify-between'>
+        <div
+          className={`
+            ${isActionLayerVisible ? 'opacity-100' : 'opacity-0'}
+            flex justify-between
+          `}
+        >
           <div>💿</div>
           <div>🗑</div>
         </div>
         <a.div
-          className="
-            absolute h-[65px]
-            bg-neutral-200 dark:bg-neutral-900
+          className={`
+            absolute ${ROW_HEIGHT_WITH_UNIT}
+
             w-full overflow-hidden 
             last-of-type:border-b-0
             text-neutral-900 dark:text-neutral-50
             flex justify-between gap-2
             my-0
-          "
+          `}
           style={isInteractive ? { x } : {}}
         >
           <ListView

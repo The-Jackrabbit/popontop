@@ -1,6 +1,7 @@
 import React from "react";
 import Image from 'next/image';
 import { Album } from '../../../../../types/Albums';
+import { ROW_HEIGHT } from "../../../../../frontend/hooks/use-disappear-row";
 
 export interface Props {
   album: Album;
@@ -20,18 +21,10 @@ export const ListView: React.FC<Props> = ({
         flex flex-col basis-4 grow-0 justify-center content-center items-center
       "
     >
-      {/* {isInteractive ?
-        // <button onClick={() => onAdvanceAlbumAtIndex(index)}>▲</button>
-        : null
-      } */}
       <p>{ index + 1 }</p>
-      {/* {isInteractive
-        ? <button onClick={() => onLowerAlbumAtIndex(index)}>▼</button>
-        : null
-      } */}
     </div>
-    <div className="basis-12 grow-0">
-      <Image width="65" height="65" src={album.imageUrl} alt={album.artist} />
+    <div className="">
+      <Image width={ROW_HEIGHT} height={ROW_HEIGHT} src={album.imageUrl} alt={album.artist} />
     </div>
 
     <div
@@ -51,12 +44,7 @@ export const ListView: React.FC<Props> = ({
       </p>
     </div>
 
-    <div
-      className="grow-0 flex items-center"
-      // onClick={() => openRearrangeView(index)}
-    >
-      {/* 🧤 */}
-    </div>
+    <div className="grow-0 flex items-center" />
   </>
 );
 

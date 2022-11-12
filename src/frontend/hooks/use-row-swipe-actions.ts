@@ -20,7 +20,7 @@ const BG_STYLES = {
   [LiftActionZone.LEFT_ACTION]:'linear-gradient(120deg, #96fbc4 0%, #f9f586 100%)',
   [LiftActionZone.RIGHT_ACTION]: 'linear-gradient(120deg, #f093fb 0%, #f5576c 100%)',
   [LiftActionZone.NOOP]: 'linear-gradient(120deg, #474747 100%, #171717 100%)',
-  [LiftActionZone.ZERO]: 'linear-gradient(120deg, #171717 100%, #171717 100%)',
+  [LiftActionZone.ZERO]: 'linear-gradient(120deg, transparent 0%, transparent 100%)',
 }
 
 export const getCurrentZone = (offsetX: number, swipeLengthThreshold: number): LiftActionZone => {
@@ -44,26 +44,19 @@ export const useRowSwipeActions = ({
   setIsScrollDisabled,
   swipeLengthThreshold = 100,
 }: Props) => {
-  const [layerActionText, setlayerActionText] = useState('');
+  const [isActionLayerVisible, setisActionLayerVisible] = useState(false);
   const [{ x, bg }, api] = useSpring(() => ({
     x: 0,
     bg: BG_STYLES[LiftActionZone.ZERO],
   }));
 
   const bind = useDrag(({ active, movement: [offsetX,] }) => {
-    if (layerActionText !== '💿' && offsetX > 0) {
-      setlayerActionText('💿');
-    }
-
-    if (layerActionText !== '🗑' && offsetX < 0) {
-      setlayerActionText('🗑');
-    }
-
     const isSwipeLengthOverThreshold = Math.abs(offsetX) > swipeLengthThreshold;
     const zone = getCurrentZone(offsetX, swipeLengthThreshold);
     const bg = BG_STYLES[zone];
 
     if (active) {
+      setisActionLayerVisible(true);
       setIsScrollDisabled(true);
       return api.start({
         x: offsetX,
@@ -71,6 +64,7 @@ export const useRowSwipeActions = ({
       });
     }
     setIsScrollDisabled(!true);
+    setisActionLayerVisible(false);
 
     if (!isSwipeLengthOverThreshold) {
       return api.start({
@@ -91,7 +85,7 @@ export const useRowSwipeActions = ({
   return {
     bg,
     bind,
-    layerActionText,
+    isActionLayerVisible,
     x,
   }
 }
