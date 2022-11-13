@@ -71,8 +71,6 @@ export const ActionBar: React.FC<Props> = ({
       >
        
           <FilterButton
-            fromColor="darkgray"
-            toColor="darkgray"
             onClick={(e) => {
               e.stopPropagation();
               onClickSettings();
@@ -93,9 +91,6 @@ export const ActionBar: React.FC<Props> = ({
           />
         {hasNonEmptyList && (
           <FilterButton
-            isGradient={isRearrangeModeActive}
-            fromColor="red"
-            toColor="blue"
             onClick={() => onClickRearrangeMode()}
           >
             <ChevronUpDownIcon className={ICON_STYLE} />
@@ -103,8 +98,6 @@ export const ActionBar: React.FC<Props> = ({
         )}
         </div>
           <FilterButton
-            fromColor="darkgray"
-            toColor="darkgray"
             onClick={(e) => {
               e.stopPropagation();
               onClickSearch();

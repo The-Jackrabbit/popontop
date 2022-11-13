@@ -1,6 +1,7 @@
 import { NextPage } from 'next';
 import { useRouter } from 'next/router'
 import List from '../../../components/global/MobileEditor/List/List';
+import { ListRowMode } from '../../../components/lib/Mobile/ListRow/ListRow';
 import { trpc } from '../../../utils/trpc';
 
 export const genUuid = (uuid: string | string[] | undefined): string  => {
@@ -36,12 +37,12 @@ const ChartPage: NextPage = () => {
       </div>
      
       <List
-        advanceAlbumAtIndex={() => undefined}
+        listMode={ListRowMode.NORMAL}
+        showAlbums={data?.settings?.show_albums ?? false}
         isInteractive={false}
-        lowerAlbumAtIndex={() => undefined}
         list={data?.albums ?? []}
-        openRearrangeView={() => undefined}
-        removeAlbumAtIndex={() => undefined}
+        onRearrangeClick={()=>undefined}
+        removeAlbumAtIndex={()=>undefined}
         textColor={data?.settings?.text_color ?? ''}
       />
     </div>

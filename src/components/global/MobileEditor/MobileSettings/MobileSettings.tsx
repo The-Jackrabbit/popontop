@@ -1,8 +1,4 @@
-import { ChartSettings } from "@prisma/client";
 import { Settings } from "../../../../frontend/hooks/use-chart/use-chart-settings";
-
-import HorizontalSwipe from "../../../lib/HorizontalSwipe/HorizontalSwipe";
-import PageThree from "./PageThree/PageThree";
 import PageTwo from "./PageTwo/PageTwo";
 
 export interface Props {

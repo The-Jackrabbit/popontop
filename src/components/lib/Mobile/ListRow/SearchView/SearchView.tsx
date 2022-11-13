@@ -52,8 +52,6 @@ export const SearchView: React.FC<Props> = ({
     onClick={() => undefined}
   >
     <FilterButton
-      fromColor="darkgray"
-      toColor="darkgray"
       onClick={onClick}
     >
       <PlusIcon className={ICON_STYLE} />

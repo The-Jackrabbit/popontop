@@ -23,11 +23,8 @@ export const Single: ComponentStory<typeof ListRow> = () => {
         index={0}
         isInteractive={true}
         isLastRowInList={true}
-        setIsScrollDisabled={() => undefined}
-        removeSelfFromList={() => undefined}
-        onAdvanceAlbumAtIndex={() => undefined}
-        onLowerAlbumAtIndex={() => undefined}
         onRearrangeClick={() => undefined}
+        showAlbums={true}
         textColor={'green'}
       />
     </div>
@@ -45,10 +42,7 @@ export const Multiple: ComponentStory<typeof ListRow> = () => {
           album={album}
           index={index}
           isInteractive={true}
-          setIsScrollDisabled={() => undefined}
-          onAdvanceAlbumAtIndex={() => undefined}
-          onLowerAlbumAtIndex={() => undefined}
-          onRearrangeClick={() => undefined}
+          showAlbums={true}
           isLastRowInList={index === ALBUM_RESULTS.length - 1}
           removeSelfFromList={(): void =>  undefined}
           textColor={'green'}
@@ -68,11 +62,8 @@ export const RearrangeView: ComponentStory<typeof ListRow> = () => {
           mode={ListRowMode.REARRANGE}
           album={album}
           index={index}
+          showAlbums={true}
           isInteractive={false}
-          setIsScrollDisabled={() => undefined}
-          onAdvanceAlbumAtIndex={() => undefined}
-          onRearrangeClick={() => undefined}
-          onLowerAlbumAtIndex={() => undefined}
           isLastRowInList={index === ALBUM_RESULTS.length - 1}
           removeSelfFromList={(): void =>  undefined}
           textColor={'green'}
@@ -93,10 +84,7 @@ export const SearchView: ComponentStory<typeof ListRow> = () => {
           album={album}
           index={index}
           isInteractive={false}
-          setIsScrollDisabled={() => undefined}
-          onAdvanceAlbumAtIndex={() => undefined}
-          onRearrangeClick={() => undefined}
-          onLowerAlbumAtIndex={() => undefined}
+          showAlbums={true}
           isLastRowInList={index === ALBUM_RESULTS.length - 1}
           removeSelfFromList={(): void =>  undefined}
           textColor={'green'}
