@@ -5,11 +5,13 @@ import { useRowSwipeActions } from '../../../../frontend/hooks/use-row-swipe-act
 import { ROW_HEIGHT, ROW_HEIGHT_WITH_UNIT, useDisappearRow } from '../../../../frontend/hooks/use-disappear-row';
 import ListView from './ListView/ListView';
 import RearrangeView, { RowMovementType } from './RearrangeView/RearrangeView';
+import SearchView from './SearchView/SearchView';
 
 export enum ListRowMode {
   DELETE = 'DELETE',
   NORMAL = 'NORMAL',
   REARRANGE = 'REARRANGE',
+  SEARCH = 'SEARCH',
 }
 
 export interface Props {
@@ -19,24 +21,22 @@ export interface Props {
   index?: number;
   isInteractive: boolean;
   mode: ListRowMode;
-  textColor: string;
+  textColor?: string;
   removeSelfFromList?: () => void;
-  onAdvanceAlbumAtIndex: (index: number) => void;
-  onLowerAlbumAtIndex: (index: number) => void;
-  onRearrangeClick: (rowMovementType: RowMovementType) => void;
-  setIsScrollDisabled: (value: boolean) => void;
+  onClick?: () => void;
+  onRearrangeClick?: (rowMovementType: RowMovementType) => void;
 }
 
 export const ListRow: React.FC<Props> = ({
   album,
   index = 0,
-  mode,
-  textColor,
   isInteractive,
   isLastRowInList = true,
+  mode,
+  onClick,
   onRearrangeClick,
   removeSelfFromList = () => undefined,
-  setIsScrollDisabled,
+  textColor,
 }) => {
   const initialHeight = ROW_HEIGHT;
   const { isBreakVisible, style, toggleRowVisibility } = useDisappearRow({
@@ -55,7 +55,6 @@ export const ListRow: React.FC<Props> = ({
   };
 
   const { bind, bg, isActionLayerVisible, x } = useRowSwipeActions({
-    setIsScrollDisabled,
     leftSwipeAction,
     rightSwipeAction,
   });
@@ -104,13 +103,23 @@ export const ListRow: React.FC<Props> = ({
               index={index}
             />
           ) : null}
-          {mode === ListRowMode.REARRANGE ? (
+          {mode === ListRowMode.REARRANGE && onRearrangeClick ? (
             <RearrangeView
               album={album}
               index={index}
               onClick={onRearrangeClick}
             />
           ) : null}
+           {mode === ListRowMode.SEARCH && onClick ? (
+            <SearchView
+              album={album}
+              onClick={() => {
+                onClick();
+                toggleRowVisibility();
+              }}
+            />
+          ) : null}
+          
         </a.div>
       </a.div>
        {isBreakVisible && (<hr className="my-1 border-neutral-200 dark:border-transparent" />)}

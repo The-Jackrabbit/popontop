@@ -1,5 +1,7 @@
 import { Album } from "../../../../../types/Albums"
 import { generateEmptyArrayOfSize } from "../../../../../utils/generate-fake-data-in-list";
+import ListRow, { ListRowMode } from "../../../../lib/Mobile/ListRow/ListRow";
+import { RowMovementType } from "../../../../lib/Mobile/ListRow/RearrangeView/RearrangeView";
 import MobileSearchResult from "../../../../lib/Mobile/MobileSearchResult/MobileSearchResult";
 import { LoadingAlbumSearchResult } from "./LoadingAlbumSearchResult";
 
@@ -34,10 +36,14 @@ export const SearchResults: React.FC<Props> = ({ albums, isLoading, onClick }) =
         : (
           <div className="w-full h-[50%]">
             {albums.map((album: Album, index:number) => (
-              <MobileSearchResult
+              <ListRow
                 album={album}
-                isLastRowInList={false}
-                key={JSON.stringify(album)+index}
+                index={index}
+                key={JSON.stringify(album) + index}
+                isDragged={false}
+                isInteractive={false}
+                isLastRowInList={index === albums.length - 1}
+                mode={ListRowMode.SEARCH}
                 onClick={() => onClick(album)}
               />
             ))}

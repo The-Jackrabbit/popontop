@@ -124,13 +124,11 @@ const MobileEditor: React.FC<Props> = ({
         />
           
         <List
-          textColor={settings.textColor}
           list={list}
           listMode={editor.state.listMode}
           onRearrangeClick={onRearrangeClick}
           removeAlbumAtIndex={listMutations.removeAlbumAtIndex}
-          advanceAlbumAtIndex={listMutations.advanceAlbumAtIndex}
-          lowerAlbumAtIndex={listMutations.lowerAlbumAtIndex}
+          textColor={settings.textColor}
         />
        <ActionBar
           isLoading={editor.state.isLoading}
@@ -152,12 +150,13 @@ const MobileEditor: React.FC<Props> = ({
           isActive={editor.state.isActive}
           setIsActive={editor.actions.setIsActive}
           saveChart={saveChart}
+          isRearrangeModeActive={editor.state.listMode === ListRowMode.REARRANGE}
        />
       </a.div>
       <MobileSheet bind={bind} display={display} y={y}>
         {editor.state.isSearchOpen && (
           <SearchAlbums
-            onClick={listMutations.addAlbumToList}
+            onClick={(album) => listMutations.addAlbumToList(album)}
           />
         )}
         {editor.state.isSettingsOpen && settings && (

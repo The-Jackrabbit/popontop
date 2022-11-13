@@ -5,7 +5,6 @@ import { useDrag } from '@use-gesture/react';
 export interface Props {
   leftSwipeAction: () => void;
   rightSwipeAction: () => void;
-  setIsScrollDisabled: (value: boolean) => void;
   swipeLengthThreshold?: number;
 }
 
@@ -41,7 +40,6 @@ export const getCurrentZone = (offsetX: number, swipeLengthThreshold: number): L
 export const useRowSwipeActions = ({
   leftSwipeAction,
   rightSwipeAction,
-  setIsScrollDisabled,
   swipeLengthThreshold = 100,
 }: Props) => {
   const [isActionLayerVisible, setisActionLayerVisible] = useState(false);
@@ -57,13 +55,11 @@ export const useRowSwipeActions = ({
 
     if (active) {
       setisActionLayerVisible(true);
-      setIsScrollDisabled(true);
       return api.start({
         x: offsetX,
         bg,
       });
     }
-    setIsScrollDisabled(!true);
     setisActionLayerVisible(false);
 
     if (!isSwipeLengthOverThreshold) {

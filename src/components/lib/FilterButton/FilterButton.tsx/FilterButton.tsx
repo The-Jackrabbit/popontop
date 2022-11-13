@@ -3,10 +3,10 @@ import { MouseEventHandler } from 'react';
 import { a, useSpring } from 'react-spring';
 
 export interface Props {
-  backgroundGradient?: string;
   children: React.ReactNode;
   className?: string;
   fromColor?: string;
+  isGradient?: boolean;
   onClick: MouseEventHandler<HTMLButtonElement>;
   toColor?: string;
 }
@@ -17,6 +17,7 @@ const FilterButton: React.FC<Props> = ({
   children,
   className = 'w-8 h-8 p-[2px]',
   fromColor = 'rgba(255, 0, 0, 1)',
+  isGradient = false,
   onClick,
   toColor = 'rgba(0, 0, 255, 1)',
 }) => {
@@ -34,11 +35,11 @@ const FilterButton: React.FC<Props> = ({
     <a.button
       className={` 
         ${className}
-        w-8 h-8 p-[2px]
         rounded-full
         relative
       text-black dark:text-white
         border-red-300 border-1
+        dark:bg-neutral-600
       `}
       onClick={(e) => {
         const newGradient = background.bg.get() === fromGradient
@@ -49,7 +50,7 @@ const FilterButton: React.FC<Props> = ({
       }}
       onPointerDown={() => animateButtonOverlayOpacity.start({ opacity: 1 })}
       onPointerUp={() => animateButtonOverlayOpacity.start({ opacity: 0 })}
-      style={{ background: background.bg }}
+      style={{ background: isGradient ? background.bg : '' }}
     >
       <a.div
         className="

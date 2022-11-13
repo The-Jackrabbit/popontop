@@ -16,6 +16,7 @@ export interface Props {
   onClickRearrangeMode: () => void;
   isActive: boolean;
   isLoading: boolean;
+  isRearrangeModeActive: boolean;
   setIsActive: (val: boolean) =>  void;
   saveChart: () => Promise<string>;
 }
@@ -24,6 +25,7 @@ export const ActionBar: React.FC<Props> = ({
   isActive,
   hasNonEmptyList,
   onClickRearrangeMode,
+  isRearrangeModeActive = true,
   onClickSettings,
   onClickSearch,
   setIsActive,
@@ -88,10 +90,13 @@ export const ActionBar: React.FC<Props> = ({
             start={() => start()}
           />
         {hasNonEmptyList && (
-          <FilterButton onClick={() => onClickRearrangeMode()}>
+          <FilterButton
+            isGradient={isRearrangeModeActive}
+            onClick={() => onClickRearrangeMode()}
+          >
             <ChevronUpDownIcon className={ICON_STYLE} />
           </FilterButton>
-            )}
+        )}
         </div>
           <FilterButton
             fromColor="darkgray"

@@ -3,6 +3,10 @@ import React from "react";
 import Image from 'next/image';
 import { Album } from '../../../../types/Albums';
 import { useDisappearRow, ROW_HEIGHT } from '../../../../frontend/hooks/use-disappear-row';
+import FilterButton, { ICON_STYLE } from '../../FilterButton/FilterButton.tsx/FilterButton';
+import {
+  PlusIcon, 
+} from '@heroicons/react/20/solid';
 
 export interface Props {
   album: Album;
@@ -37,36 +41,6 @@ export const MobileSearchResult: React.FC<Props> = ({
           gap-2 my-0
         `}
       >
-        <div className="basis-2/12 justify-start">
-          <Image
-            height={ROW_HEIGHT}
-            width={ROW_HEIGHT}
-            src={album.imageUrl}
-            alt={album.artist}
-          />
-        </div>
-
-        <div className="grow-0 overflow-x-hidden  content-start justify-end flex flex-col">
-          <p className="text-xs overflow-x-hidden whitespace-nowrap">{album.artist}</p>
-          <p className="text-xs overflow-x-hidden whitespace-nowrap">{album.name}</p>
-        </div>
-
-        <div className="basis-[30%] justify-end grow-0 flex items-center" 
-            onClick={() => toggleRowVisibility()}>
-          <button
-            className="
-              border
-              h-6 w-6 p-0 text-sm
-              rounded-full
-              hover:bg-rose-300
-              border-neutral-400 dark:border-neutral-400 hover:border-rose-300
-              text-neutral-400 dark:text-neutral-400 hover:text-neutral-50 
-            "
-          >
-            +
-          </button>
-        </div>
-
       </animated.div>
       {isBreakVisible && (<hr className="my-1 border-neutral-300 dark:border-neutral-600" />)}
     </>

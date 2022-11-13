@@ -82,3 +82,27 @@ export const RearrangeView: ComponentStory<typeof ListRow> = () => {
   )
 }
 
+export const SearchView: ComponentStory<typeof ListRow> = () => {
+  return (
+    <div className="m-4 w-96 overflow-x-hidden">
+      {ALBUM_RESULTS.map((album, index) => (
+        <ListRow
+          isDragged={false}
+          key={JSON.stringify(album) + index}
+          mode={ListRowMode.SEARCH}
+          album={album}
+          index={index}
+          isInteractive={false}
+          setIsScrollDisabled={() => undefined}
+          onAdvanceAlbumAtIndex={() => undefined}
+          onRearrangeClick={() => undefined}
+          onLowerAlbumAtIndex={() => undefined}
+          isLastRowInList={index === ALBUM_RESULTS.length - 1}
+          removeSelfFromList={(): void =>  undefined}
+          textColor={'green'}
+        />
+      ))}
+    </div>
+  )
+}
+
