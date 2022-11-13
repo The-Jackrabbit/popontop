@@ -1,7 +1,8 @@
 import { Album } from "../../../../types/Albums";
 import { ALBUM_RESULTS } from "../../../../constants/test-data/search-results";
-import ListRow from "../../../lib/Mobile/ListRow/ListRow";
+import ListRow, { ListRowMode } from "../../../lib/Mobile/ListRow/ListRow";
 import { useState } from "react";
+import { RowMovementType } from "../../../lib/Mobile/ListRow/RearrangeView/RearrangeView";
 
 export interface Props {
   currentValue?: number | null;
@@ -10,19 +11,21 @@ export interface Props {
   textColor: string;
   removeAlbumAtIndex: (index: number) => void;
   advanceAlbumAtIndex: (index: number) => void;
+  listMode: ListRowMode;
   lowerAlbumAtIndex: (index: number) => void;
-  openRearrangeView: (indexToBeginAltering: number) => void;
+  onRearrangeClick: (rowMovementType: RowMovementType, index: number) => void;
 }
 
 const List: React.FC<Props> = ({ 
   currentValue = null,
   isInteractive = true ,
   list,
+  listMode,
   textColor,
   removeAlbumAtIndex,
   advanceAlbumAtIndex,
   lowerAlbumAtIndex,
-  openRearrangeView,
+  onRearrangeClick,
 }) => {
   const [isScrollDisabled, setIsScrollDisabled] = useState(false);
   return (
@@ -42,12 +45,13 @@ const List: React.FC<Props> = ({
             key={JSON.stringify(album) + index}
             album={album}
             index={index}
-            openRearrangeView={() => openRearrangeView(index)}
+            mode={listMode}
             isInteractive={isInteractive}
             isLastRowInList={index === ALBUM_RESULTS.length - 1}
             removeSelfFromList={() => removeAlbumAtIndex(index)}
             onAdvanceAlbumAtIndex={() => advanceAlbumAtIndex(index)}
             onLowerAlbumAtIndex={() => lowerAlbumAtIndex(index)}
+            onRearrangeClick={(rowMovementType: RowMovementType) => onRearrangeClick(rowMovementType, index)}
             setIsScrollDisabled={setIsScrollDisabled}
           />
         ))}

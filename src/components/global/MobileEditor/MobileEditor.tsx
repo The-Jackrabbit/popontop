@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { a, useSpring } from "react-spring";
 import { useDragSheetDown } from "../../../frontend/hooks/use-drag-sheet-down";
 import MobileSheet from "../../lib/MobileSheet/MobileSheet";
@@ -9,56 +8,34 @@ import { ActionBar } from "./ActionBar/ActionBar";
 import Title from "./Title/Title";
 import useChartList from "../../../frontend/hooks/use-chart-list";
 import { ChartSettings } from "@prisma/client";
-import ReorderOverlay from "./ReorderOverlay/ReorderOverlay";
-import { Album } from "../../../types/Albums";
+import { ListRowMode } from "../../lib/Mobile/ListRow/ListRow";
+import { RowMovementType } from "../../lib/Mobile/ListRow/RearrangeView/RearrangeView";
 
 const height = 667;
 
 export interface Props {
   chartName?: string;
   readonly?: boolean;
-  settings?: ChartSettings | null;
+  initialSettings?: ChartSettings | null;
 }
 
 const MobileEditor: React.FC<Props> = ({
   chartName = 'My chart',
   readonly = false,
-  settings = null,
+  initialSettings = null,
 }) => {
   const {
-    addAlbumToList,
-    swapAlbumsAtIndices,
-    chartTitle,
     list,
     saveChart,
-    removeAlbumAtIndex,
-    advanceAlbumAtIndex,
-    lowerAlbumAtIndex,
-    insertAlbumAtIndex,
-    isLoading,
-    isStarted,
-    setChartTitle,
-    backgroundColor,
-    setBackgroundColor,
-    borderColor,
-    setBorderColor,
-    borderSize,
-    setBorderSize,
-    showAlbums,
-    setShowAlbums,
-    textColor,
-    setTextColor,
-    showTitle,
-    setShowTitle,
+    editor,
+    listMutations,
+    settings,
   } = useChartList({
     chartName,
     readonly,
-    settings,
+    defaultSettings: initialSettings,
   });
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [isFirstCloseDone, setIsFirstCloseDone] = useState(false);
-  const [isActive, setIsActive] = useState(true); 
+
   const [titleHeightStyle, titleHeightAnimation] = useSpring(() => ({
     to: { height: '250px' },
     config: {
@@ -68,7 +45,13 @@ const MobileEditor: React.FC<Props> = ({
       tension: 200,
     },
   }));
-
+  
+  const toggleTitle = () => {
+    if (editor.state.isStarted) {
+      editor.actions.setIsFirstCloseDone(true);
+      titleHeightAnimation.start({ height: '20x' });
+    }
+  };
   const {
     bgStyle,
     bind,
@@ -76,22 +59,14 @@ const MobileEditor: React.FC<Props> = ({
     display,
     open,
     windowHeight,
-    y
+    y,
   } = useDragSheetDown(height, () => {
-    setIsSettingsOpen(false);
-    setIsSearchOpen(false);
+    editor.actions.setIsSettingsOpen(false);
+    editor.actions.setIsSearchOpen(false);
     toggleTitle();
   });
 
-  const isSheetOpen = isSettingsOpen || isSearchOpen;
-
-  const toggleTitle = () => {
-    if (isStarted) {
-      setIsFirstCloseDone(true);
-      titleHeightAnimation.start({ height: '20x' });
-    }
-  }
-
+  const isSheetOpen = editor.state.isSettingsOpen || editor.state.isSearchOpen;
   const onClickSheetDeadArea = () => {
     if (!isSheetOpen) {
       return;
@@ -99,121 +74,85 @@ const MobileEditor: React.FC<Props> = ({
     close();
   };
 
-  const [isRearrangeViewActive, setIsRearrangeViewActive] = useState(false);
-  const [currentIndexBeingDragged, setCurrentIndexBeingDragged] = useState(-1);
+  const onRearrangeClick = (rowMovementType: RowMovementType, index: number) => {
+    let jumpAmount = 5;
+    if (rowMovementType === RowMovementType.UP_ONE) {
+      jumpAmount = 1;
+    }
+    if (rowMovementType === RowMovementType.DOWN_ONE) {
+      jumpAmount = -1;
+    }
+    if (rowMovementType === RowMovementType.DOWN_FIVE) {
+      jumpAmount = -5;
+    }
 
-  const [currentValue, setCurrentValue] = useState(currentIndexBeingDragged);
-
-  const openRearrangeView = (indexToBeginAltering: number) => {
-    setCurrentIndexBeingDragged(indexToBeginAltering)
-    setCurrentValue(indexToBeginAltering)
-    setIsRearrangeViewActive((current) => !current);
-  };
-
-  const onThumbSliderChange = (newValuec: number) => {
-
-    const newValue = newValuec; // - 1;
-    const direction = newValue > currentValue ? 'DOWN' : 'UP';
-
-    console.log({ direction });
-    swapAlbumsAtIndices(currentValue, newValue)
-    // insertAlbumAtIndex(
-    //   list[currentIndexBeingDragged] as Album,
-    //   currentIndexBeingDragged,
-    //   newValue,
-    // );
-    setCurrentValue(newValue);
-    setCurrentIndexBeingDragged(newValue + direction === 'DOWN' ? -1 : 1)
-    // setIsRearrangeViewActive(false);
-  };
-
-
-  const onCancel = () => {
-    setCurrentIndexBeingDragged(-1)
-    setIsRearrangeViewActive(false);
-  };
+    listMutations.swapAlbumsAtIndices(index, index - jumpAmount);
+  }
 
   return (
     <div
       className="overflow-y-hidden flex "
       onScroll={(e) => { e.preventDefault(); e.stopPropagation(); }}
-      style={{ height: windowHeight, backgroundColor: backgroundColor }}
+      style={{ height: windowHeight, backgroundColor: settings.backgroundColor }}
     >
-      {isRearrangeViewActive ?  (
-        <ReorderOverlay
-          min={0}
-          max={list.length-1}
-          initialValue={currentIndexBeingDragged}
-          currentValue={currentValue}
-          setCurrentValue={onThumbSliderChange}
-          onPointerUp={() => undefined}
-          onCancel={onCancel}
-        /> 
-      ) : null
-    }
       <a.div
         className="w-screen p-4 overflow-hidden"
         onClick={() => onClickSheetDeadArea()}
         style={{ ...bgStyle, height: windowHeight }}
       >
         <Title
-          textColor={textColor}
+          textColor={settings.textColor}
           isFixed={true}
           isReadOnly={readonly}
-          chartTitle={chartTitle}
-          setValue={(value: string) => setChartTitle(value)}
-          showIntroduction={isStarted && isFirstCloseDone}
+          chartTitle={settings.chartTitle}
+          setValue={(value: string) => settings.setChartTitle(value)}
+          showIntroduction={
+            editor.state.isStarted && editor.state.isFirstCloseDone
+          }
           titleHeightStyle={titleHeightStyle}
         />
           
-        {/* <div style={{ opacity: !isActive ?  1 : 0, height: '100%'}}> */}
         <List
-          currentValue={currentIndexBeingDragged}
-          textColor={textColor}
+          textColor={settings.textColor}
           list={list}
-          removeAlbumAtIndex={removeAlbumAtIndex}
-          advanceAlbumAtIndex={advanceAlbumAtIndex}
-          lowerAlbumAtIndex={lowerAlbumAtIndex}
-          openRearrangeView={openRearrangeView}
-          />
-          {/* </div> */}
+          listMode={editor.state.listMode}
+          onRearrangeClick={onRearrangeClick}
+          removeAlbumAtIndex={listMutations.removeAlbumAtIndex}
+          advanceAlbumAtIndex={listMutations.advanceAlbumAtIndex}
+          lowerAlbumAtIndex={listMutations.lowerAlbumAtIndex}
+        />
        <ActionBar
-       isLoading={isLoading}
+          isLoading={editor.state.isLoading}
           onClickSettings={() => {
-            setIsSettingsOpen(true);
+            editor.actions.setIsSettingsOpen(true);
             open({ canceled: false });
           }}
           onClickSearch={() => {
-            setIsSearchOpen(true);
+            editor.actions.setIsSearchOpen(true);
             open({ canceled: false });
           }}
-          isActive={isActive}
-          setIsActive={setIsActive}
+          onClickRearrangeMode={() => {
+            editor.actions.setListMode((listMode) => listMode !== ListRowMode.REARRANGE
+              ? ListRowMode.REARRANGE
+              : ListRowMode.NORMAL
+            )
+          }}
+          isActive={editor.state.isActive}
+          setIsActive={editor.actions.setIsActive}
           saveChart={saveChart}
        />
       </a.div>
       <MobileSheet bind={bind} display={display} y={y}>
-        {isSearchOpen && (
+        {editor.state.isSearchOpen && (
           <SearchAlbums
-            onClick={addAlbumToList}
+            onClick={listMutations.addAlbumToList}
           />
         )}
-        {isSettingsOpen && (
+        {editor.state.isSettingsOpen && settings && (
           <MobileSettings
-            isSaveLoading={isLoading}
+            isSaveLoading={editor.state.isLoading}
             onSave={saveChart}
-            borderColor={borderColor}
-            setBorderColor={setBorderColor}
-            borderSize={borderSize}
-            setBorderSize={setBorderSize}
-            backgroundColor={backgroundColor}
-            setBackgroundColor={setBackgroundColor}
-            textColor={textColor}
-            setTextColor={setTextColor}
-            showTitle={showTitle}
-            setShowTitle={setShowTitle}
-            listAlbums={showAlbums}
-            setListAlbums={setShowAlbums}
+            settings={settings}
           />
         )}
       </MobileSheet>

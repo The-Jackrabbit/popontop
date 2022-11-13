@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import ListRow from './ListRow';
+import ListRow, { ListRowMode } from './ListRow';
 import { ALBUM_RESULTS } from '../../../../constants/test-data/search-results';
 import { Album } from '../../../../types/Albums';
 
@@ -17,16 +17,17 @@ export const Single: ComponentStory<typeof ListRow> = () => {
   return (
     <div className="m-4 dark:bg-neutral-600">
       <ListRow
-        isDragged={false}
         album={ALBUM_RESULTS[0] as Album}
+        isDragged={false}
+        mode={ListRowMode.REARRANGE}
         index={0}
         isInteractive={true}
         isLastRowInList={true}
         setIsScrollDisabled={() => undefined}
         removeSelfFromList={() => undefined}
         onAdvanceAlbumAtIndex={() => undefined}
-        openRearrangeView={() => undefined}
         onLowerAlbumAtIndex={() => undefined}
+        onRearrangeClick={() => undefined}
         textColor={'green'}
       />
     </div>
@@ -34,20 +35,44 @@ export const Single: ComponentStory<typeof ListRow> = () => {
 }
 
 export const Multiple: ComponentStory<typeof ListRow> = () => {
- 
   return (
     <div className="m-4 w-96 overflow-x-hidden">
       {ALBUM_RESULTS.map((album, index) => (
         <ListRow
           isDragged={false}
           key={JSON.stringify(album) + index}
+          mode={ListRowMode.REARRANGE}
           album={album}
           index={index}
           isInteractive={true}
           setIsScrollDisabled={() => undefined}
           onAdvanceAlbumAtIndex={() => undefined}
           onLowerAlbumAtIndex={() => undefined}
-          openRearrangeView={() => undefined}
+          onRearrangeClick={() => undefined}
+          isLastRowInList={index === ALBUM_RESULTS.length - 1}
+          removeSelfFromList={(): void =>  undefined}
+          textColor={'green'}
+        />
+      ))}
+    </div>
+  )
+}
+
+export const RearrangeView: ComponentStory<typeof ListRow> = () => {
+  return (
+    <div className="m-4 w-96 overflow-x-hidden">
+      {ALBUM_RESULTS.map((album, index) => (
+        <ListRow
+          isDragged={false}
+          key={JSON.stringify(album) + index}
+          mode={ListRowMode.REARRANGE}
+          album={album}
+          index={index}
+          isInteractive={false}
+          setIsScrollDisabled={() => undefined}
+          onAdvanceAlbumAtIndex={() => undefined}
+          onRearrangeClick={() => undefined}
+          onLowerAlbumAtIndex={() => undefined}
           isLastRowInList={index === ALBUM_RESULTS.length - 1}
           removeSelfFromList={(): void =>  undefined}
           textColor={'green'}

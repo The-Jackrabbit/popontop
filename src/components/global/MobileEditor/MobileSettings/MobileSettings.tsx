@@ -1,3 +1,4 @@
+import { ChartSettings } from "@prisma/client";
 import HorizontalSwipe from "../../../lib/HorizontalSwipe/HorizontalSwipe";
 import PageThree from "./PageThree/PageThree";
 import PageTwo from "./PageTwo/PageTwo";
@@ -5,36 +6,25 @@ import PageTwo from "./PageTwo/PageTwo";
 export interface Props {
   isSaveLoading: boolean;
   onSave: () => Promise<string>;
-  showTitle: boolean;
-  setShowTitle: (value: boolean) => void;
-  listAlbums: boolean;
-  setListAlbums: (value: boolean) => void;
-  borderColor: string;
-  setBorderColor: (value: string) => void;
-  borderSize: number;
-  setBorderSize: (value: number) => void;
-  backgroundColor: string;
-  setBackgroundColor: (value: string) => void;
-  textColor: string;
-  setTextColor: (value: string) => void;
+  settings: any;
 }
 
 
 export const MobileSettings: React.FC<Props> = ({ 
-  isSaveLoading,
-  onSave,
-  borderColor,
-  setBorderColor,
-  borderSize,
-  setBorderSize,
-  backgroundColor,
-  setBackgroundColor,
-  textColor,
-  setTextColor,
-  showTitle,
-  setShowTitle,
-  listAlbums,
-  setListAlbums,
+  settings: {
+    borderColor,
+    setBorderColor,
+    borderSize,
+    setBorderSize,
+    backgroundColor,
+    setBackgroundColor,
+    textColor,
+    setTextColor,
+    showTitle,
+    setShowTitle,
+    listAlbums,
+    setListAlbums,
+  }
 }) => {
   return (
     <div className="h-full">

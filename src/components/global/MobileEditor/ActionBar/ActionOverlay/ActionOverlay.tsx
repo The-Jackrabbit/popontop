@@ -19,8 +19,8 @@ export const ActionOverlay: React.FC<Props> = ({
       bg-gradient-to-b
       from-[rgba(23,23,23,0)]
       to-[rgba(23,23,23,1)]
-      h-screen 
-      flex items-end justify-center
+      h-[200vh] 
+      flex items-center justify-center
       z-50
     "
     onClick={onExit}

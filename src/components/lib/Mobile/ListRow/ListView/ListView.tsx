@@ -14,22 +14,28 @@ export const ListView: React.FC<Props> = ({
   index = 0,
   textColor,
 }) => (
-  <>
+  <div
+      className="
+        w-full
+        flex justify-between
+      "
+    >
     <div
       className="
-        text-xs 
-        flex flex-col basis-4 grow-0 justify-center content-center items-center
+        text-xs basis-1/12 
+        w-12
+        flex flex-col shrink-0 justify-center content-center items-center
       "
     >
       <p>{ index + 1 }</p>
     </div>
-    <div className="">
+    <div className="basis-2/12 justify-start">
       <Image width={ROW_HEIGHT} height={ROW_HEIGHT} src={album.imageUrl} alt={album.artist} />
     </div>
-
     <div
       style={{ color: textColor }}
-      className="grow-[2] content-start justify-end flex flex-col">
+      className="basis-8/12 content-start justify-end flex flex-col"
+    >
       <p
         style={{ color: textColor }}
         className="font-sans text-xs overflow-x-hidden whitespace-nowrap"
@@ -43,9 +49,8 @@ export const ListView: React.FC<Props> = ({
         {album.name}
       </p>
     </div>
-
-    <div className="grow-0 flex items-center" />
-  </>
+    <div className="basis-1/12"></div>
+  </div>
 );
 
 export default ListView;

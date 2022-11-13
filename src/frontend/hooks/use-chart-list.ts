@@ -1,39 +1,40 @@
 import { ChartSettings } from "@prisma/client";
 import { useState } from "react";
+import { ListRowMode } from "../../components/lib/Mobile/ListRow/ListRow";
 import { Album } from "../../types/Albums";
 import { trpc } from '../../utils/trpc';
+import useChartSettings from "./use-chart/use-chart-settings";
 
 const useChartList = ({
   chartName = 'My sick ass chart',
   // readonly = false,
-  settings,
+  defaultSettings,
 }: {
   chartName: string;
   readonly?: boolean;
-  settings: ChartSettings | null;
+  defaultSettings: ChartSettings | null;
 }) => {
   const mutation = trpc.charts.create.useMutation();
+  const settings = useChartSettings(defaultSettings);
   const [list, setList] = useState<Album[]>([]);
   const [isStarted, setIsStarted] = useState(false);
-  const [backgroundColor, setBackgroundColor] = useState(settings?.background_color ?? '');
-  const [borderColor, setBorderColor] = useState(settings?.border_color ?? '');
-  const [borderSize, setBorderSize] = useState(1);
-  const [showAlbums, setShowAlbums] = useState(settings?.show_albums ? settings?.show_albums : false);
-  const [chartTitle, setChartTitle] = useState(chartName ?? '');
-  const [textColor, setTextColor] = useState(settings?.text_color ?? '');
-  const [showTitle, setShowTitle] = useState(settings?.show_title ?? false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isFirstCloseDone, setIsFirstCloseDone] = useState(false);
+  const [isActive, setIsActive] = useState(true); 
+  const [listMode, setListMode] = useState<ListRowMode>(ListRowMode.NORMAL);
 
   const saveChart = async (): Promise<string> => {
     const result = await mutation.mutateAsync({
-      name: chartTitle,
       albums: list,
+      name: settings.chartTitle,
       settings: {
-        backgroundColor,
-        borderColor,
-        borderSize,
-        showAlbums,
-        showTitle,
-        textColor,
+        backgroundColor: settings.backgroundColor,
+        borderColor: settings.borderColor,
+        borderSize: settings.borderSize,
+        showAlbums: settings.showAlbums,
+        showTitle: settings.showTitle,
+        textColor: settings.textColor,
       },
     });
 
@@ -113,31 +114,38 @@ const useChartList = ({
   };
 
   return {
-    swapAlbumsAtIndices,
-    addAlbumToList,
-    chartTitle,
     list,
     saveChart,
-    removeAlbumAtIndex,
-    advanceAlbumAtIndex,
-    lowerAlbumAtIndex,
-    insertAlbumAtIndex,
+    listMutations: {
+      swapAlbumsAtIndices,
+      addAlbumToList,
+      removeAlbumAtIndex,
+      advanceAlbumAtIndex,
+      lowerAlbumAtIndex,
+      insertAlbumAtIndex,
+    },
+    editor: {
+      actions: {
+        setIsSettingsOpen,
+        setIsSearchOpen,
+        setIsFirstCloseDone,
+        setIsActive,
+        setListMode,
+      },
+      state: {
+        isSettingsOpen,
+        isSearchOpen,
+        isFirstCloseDone,
+        isActive,
+        isLoading: mutation.isLoading,
+        isStarted,
+        listMode, 
+      },
+    },
     isLoading: mutation.isLoading,
     isStarted,
-    setChartTitle,
-    backgroundColor,
-    setBackgroundColor,
-    borderColor,
-    setBorderColor,
-    borderSize,
-    setBorderSize,
-    showAlbums,
-    setShowAlbums,
-    textColor,
-    setTextColor,
-    showTitle,
-    setShowTitle,
-  }
+    settings,
+  };
 };
 
 export default useChartList;

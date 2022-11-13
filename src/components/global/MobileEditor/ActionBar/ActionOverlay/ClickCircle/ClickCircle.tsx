@@ -37,7 +37,7 @@ export const ClickCircle: React.FC<Props> = ({
   return (
     <div
       className="
-        bg-[rgba(255,255,255,0.14)] shadow-lg
+        bg-[rgba(0,0,0,0.5)] shadow-lg
         z-50
         rounded-full h-64 w-64
         flex flex-wrap
@@ -47,15 +47,23 @@ export const ClickCircle: React.FC<Props> = ({
       }}
     >
       <div className="basis-1/3 h-1/3 rounded-full"></div>
-      <button id="top" className="basis-1/3 h-1/3 rounded-full">
+      <button
+        id="top"
+        className="
+          items-center align-middle content-center
+          basis-1/3 h-1/3
+          rounded-full
+        "
+      >
+        <div className="flex justify-center">
+
         {sessionData && r.pathname === '/mobile' ? (
           <ClickCircleButton
             icon={
               <ListBulletIcon
                 className="
-                h-6 w-6 text-center align-center content-center justify-center
-                flex
-                text-neutral-900 dark:text-neutral-50
+                  h-6 w-6 text-center align-center content-center justify-center
+                  flex
                 "
               />
             }
@@ -65,10 +73,10 @@ export const ClickCircle: React.FC<Props> = ({
               e.stopPropagation();
               r.push('/mobile/your-charts')
             }}
-          />
-        ) : null}
+            />
+            ) : null}
          {sessionData && r.pathname === '/mobile/your-charts' ? (
-          <ClickCircleButton
+           <ClickCircleButton
             icon="✍️"
             isLoading={false}
             label="create chart"
@@ -76,8 +84,9 @@ export const ClickCircle: React.FC<Props> = ({
               e.stopPropagation();
               r.push('/mobile')
             }}
-          />
-        ) : null}
+            />
+            ) : null}
+        </div>
       </button>
       <div className="basis-1/3 h-1/3 rounded-full"></div>
       <ClickCircleButton
@@ -99,7 +108,7 @@ export const ClickCircle: React.FC<Props> = ({
       />
       <div
         className="
-        bg-neutral-300 basis-1/3 h-1/3 rounded-full     
+        bg-neutral-300 dark:bg-neutral-900 basis-1/3 h-1/3 rounded-full     
           flex-col text-center flex justify-center
         "
       >

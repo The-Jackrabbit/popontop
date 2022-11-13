@@ -12,6 +12,7 @@ import LogoButton from "./LogoButton/LogoButton";
 export interface Props {
   onClickSettings: () => void;
   onClickSearch: () => void;
+  onClickRearrangeMode: () => void;
   isActive: boolean;
   isLoading: boolean;
   setIsActive: (val: boolean) =>  void;
@@ -20,6 +21,7 @@ export interface Props {
 
 export const ActionBar: React.FC<Props> = ({
   isActive,
+  onClickRearrangeMode,
   onClickSettings,
   onClickSearch,
   setIsActive,
@@ -52,9 +54,11 @@ export const ActionBar: React.FC<Props> = ({
     <>
       <a.div 
         className="
-          w-[calc(100vw_-_2rem)] 
+          w-[calc(100vw)]
+          py-4 px-1
           justify-between items-center 
-          absolute bottom-2
+          bg-gradient-to-t from-[rgba(0,0,0,0.6)] to-transparent
+          absolute bottom-0 left-0
           flex flex-row
         "
         style={{...actionOverlayOpacity}}
@@ -78,7 +82,7 @@ export const ActionBar: React.FC<Props> = ({
             isActive={isActive}
             start={() => start()}
           />
-          <FilterButton onClick={() => undefined}>
+          <FilterButton onClick={() => onClickRearrangeMode()}>
             <ChevronUpDownIcon className={ICON_STYLE} />
           </FilterButton>
         </div>
