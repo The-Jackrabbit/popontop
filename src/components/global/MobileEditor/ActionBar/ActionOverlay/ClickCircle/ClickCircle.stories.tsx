@@ -1,7 +1,6 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import ClickCircle from './ClickCircle';
-import { ChevronUpDownIcon } from '@heroicons/react/24/solid';
 import { SessionProvider } from 'next-auth/react';
 
 export default {
@@ -17,7 +16,7 @@ export default {
   },
 } as ComponentMeta<typeof ClickCircle>;
 
-export const Single: ComponentStory<typeof ClickCircle> = (args) => {
+export const Single: ComponentStory<typeof ClickCircle> = () => {
   return (
     <SessionProvider session={null}>
       <div className="m-8">

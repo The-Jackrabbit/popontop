@@ -32,7 +32,7 @@ export const RearrangeView: React.FC<Props> = ({
 
   useEffect(() => {
     animateRotationY.start({ rotateX: '0deg' });
-  }, []);
+  }, [animateRotationY]);
 
   return (
     <a.div className="w-full flex justify-between">

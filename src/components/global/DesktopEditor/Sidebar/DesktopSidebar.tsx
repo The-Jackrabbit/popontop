@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { trpc } from '../../../../utils/trpc';
-import Input from '../../../lib/Input/Input';
 import Draggable from '../DragNDrop/Draggable/Draggable';
 import Image from 'next/image';
 import { Settings } from '../../../../frontend/hooks/use-chart';

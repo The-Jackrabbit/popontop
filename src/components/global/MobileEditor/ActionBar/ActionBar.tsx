@@ -94,6 +94,8 @@ export const ActionBar: React.FC<Props> = ({
         {hasNonEmptyList && (
           <FilterButton
             isGradient={isRearrangeModeActive}
+            fromColor="red"
+            toColor="blue"
             onClick={() => onClickRearrangeMode()}
           >
             <ChevronUpDownIcon className={ICON_STYLE} />

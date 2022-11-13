@@ -4,10 +4,6 @@ import FilterButton from './FilterButton';
 import { ChevronUpDownIcon, TrashIcon } from '@heroicons/react/24/solid';
 
 export default {
-  args: {
-    backgroundGradient: '',
-    className: '',
-  },
   title: 'lib/FilterButton',
   component: FilterButton,
   parameters: {
@@ -18,7 +14,7 @@ export default {
 
 export const Single: ComponentStory<typeof FilterButton> = (args) => {
   return (
-    <div className="m-8">
+    <div className="m-16">
       <FilterButton
         {...args}
         onClick={() => undefined}

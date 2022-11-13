@@ -1,4 +1,4 @@
-import NavDot, { Color } from "../../global/DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot";
+import { Color } from "../../global/DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot";
 import { RadioOption } from "./RadioOption/RadioOption";
 
 export interface Props {

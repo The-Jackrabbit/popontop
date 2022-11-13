@@ -1,14 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { MouseEventHandler } from 'react';
 import { a, useSpring } from 'react-spring';
 
 export interface Props {
   children: React.ReactNode;
   className?: string;
-  fromColor?: string;
-  isGradient?: boolean;
+  defaultIsActive?: boolean;
   onClick: MouseEventHandler<HTMLButtonElement>;
-  toColor?: string;
 }
 
 export const ICON_STYLE = "h-6 w-6 translate-y-[1px] text-neutral-900 dark:text-neutral-50";
@@ -16,13 +14,12 @@ export const ICON_STYLE = "h-6 w-6 translate-y-[1px] text-neutral-900 dark:text-
 const FilterButton: React.FC<Props> = ({
   children,
   className = 'w-8 h-8 p-[2px]',
-  fromColor = 'rgba(255, 0, 0, 1)',
-  isGradient = false,
+  defaultIsActive = false,
   onClick,
-  toColor = 'rgba(0, 0, 255, 1)',
 }) => {
-  const fromGradient = `linear-gradient(0deg, ${fromColor} 0%, ${toColor} 100%)`;
-  const toGradient = `linear-gradient(180deg, ${fromColor} 0%, ${toColor} 100%)`;
+  const [isActive, setIsActive] = useState(defaultIsActive);
+  const fromGradient = `linear-gradient(0deg, gray 0%, gray 100%)`;
+  const toGradient = 'linear-gradient(180deg, red 0%, blue 100%)';
 
   const [background, animateBackgroundStyle] = useSpring(() => ({
     bg: fromGradient
@@ -31,6 +28,15 @@ const FilterButton: React.FC<Props> = ({
     opacity: 0
   }));
 
+  const onClickButton = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
+
+    animateBackgroundStyle.start({
+      bg: isActive ? fromGradient : toGradient,
+    });
+    setIsActive(!isActive);
+    onClick(e);
+  };
+
   return (
     <a.button
       className={` 
@@ -38,19 +44,12 @@ const FilterButton: React.FC<Props> = ({
         rounded-full
         relative
       text-black dark:text-white
-        border-red-300 border-1
         dark:bg-neutral-600
       `}
-      onClick={(e) => {
-        const newGradient = background.bg.get() === fromGradient
-          ? toGradient
-          : fromGradient;
-        animateBackgroundStyle.start({ bg: newGradient });
-        onClick(e);
-      }}
+      onClick={onClickButton}
       onPointerDown={() => animateButtonOverlayOpacity.start({ opacity: 1 })}
       onPointerUp={() => animateButtonOverlayOpacity.start({ opacity: 0 })}
-      // style={{ background: isGradient ? background.bg : '' }}
+      style={{ background:  background.bg }}
     >
       <a.div
         className="

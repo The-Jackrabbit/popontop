@@ -143,8 +143,8 @@ const MobileEditor: React.FC<Props> = ({
             isSaveLoading={editor.state.isLoading}
             onSave={saveChart}
             settings={settings}
-            />
-          </div>
+          />
+        </div>
       </MobileSheet>
     </div>
   );

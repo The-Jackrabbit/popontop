@@ -1,6 +1,5 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { ActionBar } from "../../../components/global/MobileEditor/ActionBar/ActionBar";
 import { useDragSheetDown } from "../../../frontend/hooks/use-drag-sheet-down";
 import { trpc } from "../../../utils/trpc";
 

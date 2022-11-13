@@ -1,5 +1,4 @@
 import { useState } from "react";
-import LoadingBouncer from "../../../../../lib/LoadingBouncer/LoadingBouncer";
 import Link from 'next/link';
 import ClickCircleButton from "./ClickCircleButton/ClickCircleButton";
 import { signIn, signOut, useSession } from "next-auth/react";

@@ -5,6 +5,11 @@ import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import { useSpring } from 'react-spring';
 
 export default {
+  args: {
+    isReadOnly: false,
+    showIntroduction: true,
+    textColor: 'green',
+  },
   title: 'lib/Title',
   component: Title,
   parameters: {
@@ -18,9 +23,12 @@ export default {
 
 } as ComponentMeta<typeof Title>;
 
-export const Mobile: ComponentStory<typeof Title> = () => {
+export const Mobile: ComponentStory<typeof Title> = (args) => {
+  const INTRODUCTION_HEIGHT = '250px';
+  const REGULAR_HEIGHT = '60px';
+  const MINIFIED_HEIGHT = '0px';
   const [titleHeightStyle, titleHeightAnimation] = useSpring(() => ({
-    height: '250px',
+    height: INTRODUCTION_HEIGHT,
     config: {
       bounce: 2,
       friction: 20,
@@ -30,25 +38,21 @@ export const Mobile: ComponentStory<typeof Title> = () => {
   }));
   
   const toggleTitle = () => {
-    if (isStarted) {
-      setIsFirstCloseDone(true);
-      const cHeight =  titleHeightStyle.height.get();
-      const height = cHeight === '20px' ? '0px' : '20px';
-      titleHeightAnimation.start({ height });
-    }
+    const cHeight =  titleHeightStyle.height.get();
+    const height = cHeight === REGULAR_HEIGHT ? MINIFIED_HEIGHT : REGULAR_HEIGHT;
+    titleHeightAnimation.start({ height });
   };
-  const [value, setValue] = useState(0);
-  return (
-    <>
-      <Title
-         chartTitle,
+  const [value, setValue] = useState('My storybook title');
 
-         isReadOnly,
-         setValue,
-         showIntroduction,
-         textColor,
-         titleHeightStyle,
+  return (
+    <div className="m-4">
+      <Title
+        {...args}
+        chartTitle={value}
+        setValue={setValue}
+        titleHeightStyle={titleHeightStyle}
       />
-    </>
+      <button className="mt-8" onClick={() => toggleTitle()}>toggle</button>
+    </div>
   )
 }
