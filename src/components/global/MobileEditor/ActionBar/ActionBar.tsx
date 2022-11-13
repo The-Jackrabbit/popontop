@@ -61,7 +61,9 @@ export const ActionBar: React.FC<Props> = ({
           w-[calc(100vw)]
           p-4
           justify-between items-center 
-          bg-gradient-to-t from-[rgba(0,0,0,0.6)] to-transparent
+          bg-gradient-to-t from-[rgba(200,200,200,0.6)] 
+          via-[rgba(200,200,200,0.1)] 
+          dark:from-[rgba(0,0,0,0.6)] to-transparent
           absolute bottom-0 left-0
           flex flex-row
         "
