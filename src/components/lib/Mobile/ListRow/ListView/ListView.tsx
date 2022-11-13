@@ -6,11 +6,13 @@ import { ROW_HEIGHT } from "../../../../../frontend/hooks/use-disappear-row";
 export interface Props {
   album: Album;
   index?: number;
+  showAlbums: boolean;
   textColor?: string;
 }
 
 export const ListView: React.FC<Props> = ({
   album,
+  showAlbums,
   index = 0,
   textColor = null,
 }) => (
@@ -20,15 +22,18 @@ export const ListView: React.FC<Props> = ({
       flex justify-between
     "
   >
+    {showAlbums && (
+
     <div
       className="
-        text-xs basis-1/12 
+      text-xs basis-1/12 
         w-12
         flex flex-col shrink-0 justify-center content-center items-center
-      "
-    >
+        "
+        >
       <p>{ index + 1 }</p>
     </div>
+      )}
     <div className="basis-2/12 justify-start">
       <Image
         width={ROW_HEIGHT}

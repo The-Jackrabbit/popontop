@@ -37,7 +37,8 @@ export const ClickCircle: React.FC<Props> = ({
   return (
     <div
       className="
-        bg-[rgba(0,0,0,0.5)] shadow-lg
+        bg-[rgba(255,255,255,0.5)]
+        dark:bg-[rgba(0,0,0,0.5)] shadow-lg
         z-50
         rounded-full h-64 w-64
         flex flex-wrap
@@ -54,7 +55,6 @@ export const ClickCircle: React.FC<Props> = ({
         "
       >
         <div className="flex justify-center">
-
         {sessionData && r.pathname === '/mobile' ? (
           <ClickCircleButton
             icon={

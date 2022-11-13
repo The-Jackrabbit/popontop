@@ -44,13 +44,13 @@ export const ActionBar: React.FC<Props> = ({
   }));
 
   const start = () => {
-    animateOverlayPosition.start({ transform: 'translateY(-130vh)' });
+    animateOverlayPosition.start({ transform: 'translateY(-100vh)' });
     animateActionOverlayOpacity.start({ opacity: 0 });
     setIsActive(false);
   };
 
   const end = () => {
-    animateOverlayPosition.start({ transform:  'translateY(-25vh)' });
+    animateOverlayPosition.start({ transform:  'translateY(0vh)' });
     animateActionOverlayOpacity.start({ opacity: 1 });
   };
 
@@ -81,11 +81,11 @@ export const ActionBar: React.FC<Props> = ({
            <CogIcon className={ICON_STYLE} />
          </FilterButton>
         <div className="flex gap-2">
-            {hasNonEmptyList && (
-              <FilterButton onClick={() => undefined}>
-            <TrashIcon className={ICON_STYLE} />
-          </FilterButton>
-            )}
+          {hasNonEmptyList && (
+            <FilterButton onClick={() => undefined}>
+              <TrashIcon className={ICON_STYLE + " p-1"} />
+            </FilterButton>
+          )}
           <LogoButton
             end={() => end()}
             isActive={isActive}
@@ -111,7 +111,10 @@ export const ActionBar: React.FC<Props> = ({
             <PlusIcon className={ICON_STYLE} />
           </FilterButton>
       </a.div>
-      <a.div id="action-verlay-container" style={{ ...overlayPosition }}>
+      <a.div
+        className="fixed left-0 bottom-0"
+        style={{ ...overlayPosition }}
+      >
         <ActionOverlay
           saveChart={saveChart}
           isLoading={isLoading}

@@ -9,6 +9,7 @@ export interface Props {
   album: Album;
   index: number;
   onClick: (rowMovementType: RowMovementType) => void;
+  showAlbums: boolean;
 }
 
 export enum RowMovementType {
@@ -18,7 +19,12 @@ export enum RowMovementType {
   UP_ONE = 'UP_ONE',
 }
 
-export const RearrangeView: React.FC<Props> = ({ album, index, onClick }) => {
+export const RearrangeView: React.FC<Props> = ({
+  album,
+  index,
+  onClick,
+  showAlbums,
+}) => {
   const [rotateX, animateRotationY] = useSpring(() => ({
     rotateX: '90deg',
     config: config.wobbly
@@ -29,14 +35,8 @@ export const RearrangeView: React.FC<Props> = ({ album, index, onClick }) => {
   }, []);
 
   return (
-    <a.div
-      className="
-        w-full
-        flex justify-between
-      "
- 
-    >
-      {true ? (
+    <a.div className="w-full flex justify-between">
+      {showAlbums ? (
         <div
           className="
             text-xs basis-1/12 shrink-0 
@@ -54,7 +54,13 @@ export const RearrangeView: React.FC<Props> = ({ album, index, onClick }) => {
           alt={album.artist}
         />
       </div>
-      <a.div      style={{ ...rotateX }} className="tracking-wide basis-9/12 shrink-1 flex justify-center">
+      <a.div
+        style={{ ...rotateX }}
+        className="
+          text-neutral-600 dark:text-neutral-400
+          tracking-wide basis-9/12 shrink-1 flex justify-center
+        "
+      >
         <RearrangeViewButton
           className="shrink-0 basis-3/12"
           onClick={() => onClick(RowMovementType.DOWN_FIVE)}

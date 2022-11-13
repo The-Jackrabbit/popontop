@@ -1,4 +1,6 @@
 import { ChartSettings } from "@prisma/client";
+import { Settings } from "../../../../frontend/hooks/use-chart/use-chart-settings";
+
 import HorizontalSwipe from "../../../lib/HorizontalSwipe/HorizontalSwipe";
 import PageThree from "./PageThree/PageThree";
 import PageTwo from "./PageTwo/PageTwo";
@@ -6,7 +8,7 @@ import PageTwo from "./PageTwo/PageTwo";
 export interface Props {
   isSaveLoading: boolean;
   onSave: () => Promise<string>;
-  settings: any;
+  settings: Settings;
 }
 
 
@@ -22,8 +24,8 @@ export const MobileSettings: React.FC<Props> = ({
     setTextColor,
     showTitle,
     setShowTitle,
-    listAlbums,
-    setListAlbums,
+    showAlbums,
+    setShowAlbums,
   }
 }) => {
   return (
@@ -34,8 +36,8 @@ export const MobileSettings: React.FC<Props> = ({
             key="page-two"
             showTitle={showTitle}
             setShowTitle={setShowTitle}
-            listAlbums={listAlbums}
-            setListAlbums={setListAlbums}
+            listAlbums={showAlbums}
+            setListAlbums={setShowAlbums}
             borderColor={borderColor}
             setBorderColor={setBorderColor}
             borderSize={borderSize}

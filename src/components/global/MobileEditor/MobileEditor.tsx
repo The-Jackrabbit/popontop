@@ -11,6 +11,7 @@ import { ChartSettings } from "@prisma/client";
 import { ListRowMode } from "../../lib/Mobile/ListRow/ListRow";
 import { RowMovementType } from "../../lib/Mobile/ListRow/RearrangeView/RearrangeView";
 import { Album } from "../../../types/Albums";
+import clamp from "lodash.clamp";
 
 const height = 667;
 
@@ -71,10 +72,7 @@ const MobileEditor: React.FC<Props> = ({
       jumpAmount = -5;
     }
 
-    const indexToMoveTo = index - jumpAmount;
-    if (indexToMoveTo < 0 || indexToMoveTo > list.length - 1) {
-      return;
-    }
+    const indexToMoveTo = clamp(index - jumpAmount, 0, list.length - 1);
     listMutations.insertAlbumAtIndex(list[index] as Album, index, indexToMoveTo);
   }
 
@@ -107,6 +105,7 @@ const MobileEditor: React.FC<Props> = ({
           listMode={editor.state.listMode}
           onRearrangeClick={onRearrangeClick}
           removeAlbumAtIndex={listMutations.removeAlbumAtIndex}
+          showAlbums={settings.showAlbums}
           textColor={settings.textColor}
         />
        <ActionBar
@@ -138,13 +137,14 @@ const MobileEditor: React.FC<Props> = ({
             onClick={(album) => listMutations.addAlbumToList(album)}
           />
         )}
-        {editor.state.isSettingsOpen && settings && (
+        <div style={{  display: editor.state.isSettingsOpen && settings ?  'initial'    : 'none' }}>
+
           <MobileSettings
             isSaveLoading={editor.state.isLoading}
             onSave={saveChart}
             settings={settings}
-          />
-        )}
+            />
+          </div>
       </MobileSheet>
     </div>
   );
