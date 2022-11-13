@@ -18,12 +18,12 @@ const MobileSheet: React.FC<Props> = ({
   return (
     <a.div
       className={`
-        w-[96vw] h-[calc(100vh_+_100px)]
-        z-10 fixed inset-0 left-[2vw] 
+        w-[98vw] h-[calc(100vh_+_100px)]
+        z-10 fixed inset-0 left-[1vw] 
         shadow-inner
         touch-none
         mt-8 p-4 pb-28
-       bg-neutral-100 dark:bg-neutral-800
+       bg-neutral-100 dark:bg-[#0f0f0f]
         rounded-t-2xl
       `}
       style={{ display, y }}

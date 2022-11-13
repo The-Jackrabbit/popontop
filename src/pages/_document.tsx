@@ -6,7 +6,7 @@ export default function Document() {
       <Head />
       <body
         onScroll={(e) => { e.preventDefault(); e.stopPropagation(); }}
-        // style={{ backgroundColor: 'red'}}
+
       >
         <Main />
         <NextScript />

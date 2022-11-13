@@ -10,6 +10,7 @@ import useChartList from "../../../frontend/hooks/use-chart-list";
 import { ChartSettings } from "@prisma/client";
 import { ListRowMode } from "../../lib/Mobile/ListRow/ListRow";
 import { RowMovementType } from "../../lib/Mobile/ListRow/RearrangeView/RearrangeView";
+import { Album } from "../../../types/Albums";
 
 const height = 667;
 
@@ -75,6 +76,7 @@ const MobileEditor: React.FC<Props> = ({
   };
 
   const onRearrangeClick = (rowMovementType: RowMovementType, index: number) => {
+    debugger
     let jumpAmount = 5;
     if (rowMovementType === RowMovementType.UP_ONE) {
       jumpAmount = 1;
@@ -86,7 +88,16 @@ const MobileEditor: React.FC<Props> = ({
       jumpAmount = -5;
     }
 
-    listMutations.swapAlbumsAtIndices(index, index - jumpAmount);
+    const indexToMoveTo = index - jumpAmount;
+    if (indexToMoveTo < 0 || indexToMoveTo > list.length - 1) {
+      return;
+    }
+    console.log({
+      index,
+      indexToMoveTo,
+      rowMovementType,
+    });
+    listMutations.insertAlbumAtIndex(list[index] as Album, index, indexToMoveTo);
   }
 
   return (
@@ -137,6 +148,7 @@ const MobileEditor: React.FC<Props> = ({
               : ListRowMode.NORMAL
             )
           }}
+          hasNonEmptyList={list.length > 0}
           isActive={editor.state.isActive}
           setIsActive={editor.actions.setIsActive}
           saveChart={saveChart}

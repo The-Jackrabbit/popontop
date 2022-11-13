@@ -2,7 +2,7 @@ import React from "react";
 
 export interface Props {
   className: string;
-  children: [React.ReactNode, React.ReactNode];
+  children: React.ReactNode;
   onClick: () => void;
 }
 
@@ -13,17 +13,21 @@ export const RearrangeViewButton: React.FC<Props> = ({
 }) => (
   <button
     className={`
-      ${className} h-auto   
+      ${className}  
       active:bg-neutral-200 dark:active:bg-neutral-700
       flex justify-center items-center 
+      h-full 
+      border-r-[2px] dark:border-neutral-800
+      last-of-type:border-r-0
     `}
     onClick={() => onClick()}
   >
     <p 
       className="
-        shadow-lg shadow-black 
-      bg-black rounded-lg
-        w-16 h-16
+        w-full
+        font-light
+        dark:text-neutral-500
+        text-2xl tracking-widest
       ">
         {children}
       </p>

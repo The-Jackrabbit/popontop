@@ -35,7 +35,7 @@ export const RearrangeView: React.FC<Props> = ({ album, index, onClick }) => {
           <p>{ index + 1 }</p>
         </div>
       ) : null }
-      <div className="basis-2/12 justify-start">
+      <div className="basis-2/12">
         <Image
           width={ROW_HEIGHT} 
           height={ROW_HEIGHT} 
@@ -43,35 +43,32 @@ export const RearrangeView: React.FC<Props> = ({ album, index, onClick }) => {
           alt={album.artist}
         />
       </div>
-      <div className="basis-1/12"></div>
-      <RearrangeViewButton
-        className="basis-2/12"
-        onClick={() => onClick(RowMovementType.DOWN_FIVE)}
-      >
-        <p>-</p>
-        <p>5</p>
-      </RearrangeViewButton>
-      <RearrangeViewButton
-        className="basis-2/12"
-        onClick={() => onClick(RowMovementType.DOWN_ONE)}
-      >
-        <p>-</p>
-        <p>1</p>
-      </RearrangeViewButton>
-      <RearrangeViewButton
-        className="basis-2/12"
-        onClick={() => onClick(RowMovementType.UP_ONE)}
-      >
-        <p>+</p>
-        <p>1</p>
-      </RearrangeViewButton>
-      <RearrangeViewButton
-        className="basis-2/12"
-        onClick={() => onClick(RowMovementType.UP_FIVE)}
-      >
-        <p>+</p>
-        <p>5</p>
-      </RearrangeViewButton>
+      <div className="tracking-wide basis-9/12 shrink-1 flex justify-center">
+        <RearrangeViewButton
+          className="shrink-0 basis-3/12"
+          onClick={() => onClick(RowMovementType.DOWN_FIVE)}
+        >
+          -5
+        </RearrangeViewButton>
+        <RearrangeViewButton
+          className="shrink-0 basis-3/12"
+          onClick={() => onClick(RowMovementType.DOWN_ONE)}
+        >
+          -1
+        </RearrangeViewButton>
+        <RearrangeViewButton
+          className="shrink-0 basis-3/12"
+          onClick={() => onClick(RowMovementType.UP_ONE)}
+        >
+          +1
+        </RearrangeViewButton>
+        <RearrangeViewButton
+          className="shrink-0 basis-3/12"
+          onClick={() => onClick(RowMovementType.UP_FIVE)}
+        >
+          +5
+        </RearrangeViewButton>
+      </div>
     </div>
   )
 };

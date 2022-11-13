@@ -34,7 +34,7 @@ export const ListView: React.FC<Props> = ({
     </div>
     <div
       style={{ color: textColor }}
-      className="basis-8/12 content-start justify-end flex flex-col"
+      className="basis-8/12 content-start grow-0 overflow-x-hidden justify-end flex flex-col"
     >
       <p
         style={{ color: textColor }}

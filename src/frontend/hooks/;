@@ -93,15 +93,13 @@ const useChartList = ({
     newIndex: number
   ) => {
     const diff = newIndex - oldIndex;
-
     if (Math.abs(diff) <= 1) {
-      return swapAlbumsAtIndices(oldIndex, newIndex);
+      return swapAlbumsAtIndices(oldIndex, newIndex)
     }
-
     setList((albums) => {
       const newAlbums = [...albums] as (Album | null)[];
       newAlbums[oldIndex] = null;
-      newAlbums.splice(newIndex, 0, album);
+      newAlbums.splice(newIndex + diff > 0 ? 0 :1 , 0, album);
       
       if (albums.length === 0 && newAlbums.length === 1) {
         setIsStarted(true);

@@ -38,6 +38,7 @@ const FilterButton: React.FC<Props> = ({
         rounded-full
         relative
       text-black dark:text-white
+        border-red-300 border-1
       `}
       onClick={(e) => {
         const newGradient = background.bg.get() === fromGradient

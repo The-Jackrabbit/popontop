@@ -10,6 +10,7 @@ import {
 import LogoButton from "./LogoButton/LogoButton";
 
 export interface Props {
+  hasNonEmptyList: boolean;
   onClickSettings: () => void;
   onClickSearch: () => void;
   onClickRearrangeMode: () => void;
@@ -21,6 +22,7 @@ export interface Props {
 
 export const ActionBar: React.FC<Props> = ({
   isActive,
+  hasNonEmptyList,
   onClickRearrangeMode,
   onClickSettings,
   onClickSearch,
@@ -40,13 +42,13 @@ export const ActionBar: React.FC<Props> = ({
   }));
 
   const start = () => {
-    animateOverlayPosition.start({ transform: 'translateY(-145vh)' });
+    animateOverlayPosition.start({ transform: 'translateY(-130vh)' });
     animateActionOverlayOpacity.start({ opacity: 0 });
     setIsActive(false);
   };
 
   const end = () => {
-    animateOverlayPosition.start({ transform:  'translateY(0vh)' });
+    animateOverlayPosition.start({ transform:  'translateY(-25vh)' });
     animateActionOverlayOpacity.start({ opacity: 1 });
   };
 
@@ -55,7 +57,7 @@ export const ActionBar: React.FC<Props> = ({
       <a.div 
         className="
           w-[calc(100vw)]
-          py-4 px-1
+          p-4
           justify-between items-center 
           bg-gradient-to-t from-[rgba(0,0,0,0.6)] to-transparent
           absolute bottom-0 left-0
@@ -63,41 +65,46 @@ export const ActionBar: React.FC<Props> = ({
         "
         style={{...actionOverlayOpacity}}
       >
-        <FilterButton
-          fromColor="black"
-          toColor="black"
-          onClick={(e) => {
-            e.stopPropagation();
-            onClickSettings();
-          }}
-        >
-          <CogIcon className={ICON_STYLE} />
-        </FilterButton>
+       
+          <FilterButton
+            fromColor="darkgray"
+            toColor="darkgray"
+            onClick={(e) => {
+              e.stopPropagation();
+              onClickSettings();
+            }}
+          >
+           <CogIcon className={ICON_STYLE} />
+         </FilterButton>
         <div className="flex gap-2">
-          <FilterButton onClick={() => undefined}>
+            {hasNonEmptyList && (
+              <FilterButton onClick={() => undefined}>
             <TrashIcon className={ICON_STYLE} />
           </FilterButton>
+            )}
           <LogoButton
             end={() => end()}
             isActive={isActive}
             start={() => start()}
           />
+        {hasNonEmptyList && (
           <FilterButton onClick={() => onClickRearrangeMode()}>
             <ChevronUpDownIcon className={ICON_STYLE} />
           </FilterButton>
+            )}
         </div>
-        <FilterButton
-          fromColor="black"
-          toColor="black"
-          onClick={(e) => {
-            e.stopPropagation();
-            onClickSearch();
-          }}
-        >
-          <PlusIcon className={ICON_STYLE} />
-        </FilterButton>
+          <FilterButton
+            fromColor="darkgray"
+            toColor="darkgray"
+            onClick={(e) => {
+              e.stopPropagation();
+              onClickSearch();
+            }}
+          >
+            <PlusIcon className={ICON_STYLE} />
+          </FilterButton>
       </a.div>
-      <a.div style={{ ...overlayPosition }}>
+      <a.div id="action-verlay-container" style={{ ...overlayPosition }}>
         <ActionOverlay
           saveChart={saveChart}
           isLoading={isLoading}

@@ -2,7 +2,7 @@ import { animated } from '@react-spring/web'
 import React from "react";
 import Image from 'next/image';
 import { Album } from '../../../../types/Albums';
-import { useDisappearRow } from '../../../../frontend/hooks/use-disappear-row';
+import { useDisappearRow, ROW_HEIGHT } from '../../../../frontend/hooks/use-disappear-row';
 
 export interface Props {
   album: Album;
@@ -29,7 +29,7 @@ export const MobileSearchResult: React.FC<Props> = ({
       <animated.div
         style={style}
         className={`
-          bg-neutral-100 dark:bg-neutral-800
+          bg-neutral-100 dark:bg-transparent
           overflow-hidden w-full
           last-of-type:border-b-0
           text-neutral-900 dark:text-neutral-50
@@ -37,16 +37,16 @@ export const MobileSearchResult: React.FC<Props> = ({
           gap-2 my-0
         `}
       >
-        <div className="basis-12 grow-0">
+        <div className="basis-2/12 justify-start">
           <Image
-            width="50"
-            height="50"
+            height={ROW_HEIGHT}
+            width={ROW_HEIGHT}
             src={album.imageUrl}
             alt={album.artist}
           />
         </div>
 
-        <div className="grow-[2] content-start justify-end flex flex-col">
+        <div className="grow-0 overflow-x-hidden  content-start justify-end flex flex-col">
           <p className="text-xs overflow-x-hidden whitespace-nowrap">{album.artist}</p>
           <p className="text-xs overflow-x-hidden whitespace-nowrap">{album.name}</p>
         </div>
