@@ -50,7 +50,7 @@ const FilterButton: React.FC<Props> = ({
       }}
       onPointerDown={() => animateButtonOverlayOpacity.start({ opacity: 1 })}
       onPointerUp={() => animateButtonOverlayOpacity.start({ opacity: 0 })}
-      style={{ background: isGradient ? background.bg : '' }}
+      // style={{ background: isGradient ? background.bg : '' }}
     >
       <a.div
         className="

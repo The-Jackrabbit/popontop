@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Image from 'next/image';
 import { ROW_HEIGHT } from "../../../../../frontend/hooks/use-disappear-row";
 import { Album } from "../../../../../types/Albums";
 import RearrangeViewButton from "./RearrangeViewButton/RearrangeViewButton";
+import { useSpring, a, config } from "react-spring";
 
 export interface Props {
   album: Album;
@@ -18,12 +19,22 @@ export enum RowMovementType {
 }
 
 export const RearrangeView: React.FC<Props> = ({ album, index, onClick }) => {
+  const [rotateX, animateRotationY] = useSpring(() => ({
+    rotateX: '90deg',
+    config: config.wobbly
+  }))
+
+  useEffect(() => {
+    animateRotationY.start({ rotateX: '0deg' });
+  }, []);
+
   return (
-    <div
+    <a.div
       className="
         w-full
         flex justify-between
-        "
+      "
+ 
     >
       {true ? (
         <div
@@ -43,7 +54,7 @@ export const RearrangeView: React.FC<Props> = ({ album, index, onClick }) => {
           alt={album.artist}
         />
       </div>
-      <div className="tracking-wide basis-9/12 shrink-1 flex justify-center">
+      <a.div      style={{ ...rotateX }} className="tracking-wide basis-9/12 shrink-1 flex justify-center">
         <RearrangeViewButton
           className="shrink-0 basis-3/12"
           onClick={() => onClick(RowMovementType.DOWN_FIVE)}
@@ -68,8 +79,8 @@ export const RearrangeView: React.FC<Props> = ({ album, index, onClick }) => {
         >
           +5
         </RearrangeViewButton>
-      </div>
-    </div>
+      </a.div>
+    </a.div>
   )
 };
 

@@ -5,13 +5,11 @@ export interface Settings {
   backgroundColor: string;
   borderColor: string;
   borderSize: number;
-  chartTitle: string;
   setBorderColor: (value: string) => void;
   setBorderSize: (value: number) => void;
   showAlbums: boolean;
   setShowAlbums: (value: boolean) => void;
   setBackgroundColor: (value: string) => void;
-  setChartTitle: (value: string) => void;
   setShowTitle: (value: boolean) => void;
   setTextColor: (value: string) => void;
   showTitle: boolean;
@@ -29,17 +27,14 @@ const useChartSettings = (defaultSettings: ChartSettings | null): Settings => {
   const [showAlbums, setShowAlbums] = useState(
     defaultSettings?.show_albums ? defaultSettings?.show_albums : false
   );
-  const [chartTitle, setChartTitle] = useState('');
   const [textColor, setTextColor] = useState(
     defaultSettings?.text_color ?? ''
   );
   const [showTitle, setShowTitle] = useState(
-    defaultSettings?.show_title ?? false
+    defaultSettings?.show_title ?? true
   );
 
   return {
-    chartTitle,
-    setChartTitle,
     backgroundColor,
     setBackgroundColor,
     borderColor,

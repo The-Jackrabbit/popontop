@@ -9,11 +9,6 @@ input[type=range] {
   background: transparent; /* Otherwise white in Chrome */
 }
 
-input[type="range"].vertical {
-  writing-mode: bt-lr; 
-  appearance: slider-vertical; 
-}
-
 input[type=range]::-webkit-slider-thumb,
 input[type=range]::-moz-range-thumb,
 input[type=range]::-ms-thumb {

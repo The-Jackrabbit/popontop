@@ -41,7 +41,6 @@ const SearchAlbums: React.FC<Props> = ({
         value={searchText}
         placeholder="Search Albums"
         onChange={(event) => onType(event)} 
-        label={""}
       />
 
       <div className="mt-4">

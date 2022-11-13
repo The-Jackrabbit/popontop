@@ -84,10 +84,7 @@ export const HorizontalSwipe: React.FC<Props> = ({ children }) => {
                 w-3
                 ${index?.current}
             `}
-            onClick={() => {
-              debugger;
-              setFocusedIndex(currentPageIndex)
-            }} 
+            onClick={() => setFocusedIndex(currentPageIndex)} 
           />
         ))}
       </div>

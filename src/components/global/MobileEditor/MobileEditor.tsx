@@ -37,22 +37,6 @@ const MobileEditor: React.FC<Props> = ({
     defaultSettings: initialSettings,
   });
 
-  const [titleHeightStyle, titleHeightAnimation] = useSpring(() => ({
-    to: { height: '250px' },
-    config: {
-      bounce: 2,
-      friction: 20,
-      mass: 1,
-      tension: 200,
-    },
-  }));
-  
-  const toggleTitle = () => {
-    if (editor.state.isStarted) {
-      editor.actions.setIsFirstCloseDone(true);
-      titleHeightAnimation.start({ height: '20x' });
-    }
-  };
   const {
     bgStyle,
     bind,
@@ -64,7 +48,7 @@ const MobileEditor: React.FC<Props> = ({
   } = useDragSheetDown(height, () => {
     editor.actions.setIsSettingsOpen(false);
     editor.actions.setIsSearchOpen(false);
-    toggleTitle();
+    editor.actions.toggleTitle();
   });
 
   const isSheetOpen = editor.state.isSettingsOpen || editor.state.isSearchOpen;
@@ -76,7 +60,6 @@ const MobileEditor: React.FC<Props> = ({
   };
 
   const onRearrangeClick = (rowMovementType: RowMovementType, index: number) => {
-    debugger
     let jumpAmount = 5;
     if (rowMovementType === RowMovementType.UP_ONE) {
       jumpAmount = 1;
@@ -92,11 +75,6 @@ const MobileEditor: React.FC<Props> = ({
     if (indexToMoveTo < 0 || indexToMoveTo > list.length - 1) {
       return;
     }
-    console.log({
-      index,
-      indexToMoveTo,
-      rowMovementType,
-    });
     listMutations.insertAlbumAtIndex(list[index] as Album, index, indexToMoveTo);
   }
 
@@ -104,24 +82,25 @@ const MobileEditor: React.FC<Props> = ({
     <div
       className="overflow-y-hidden flex "
       onScroll={(e) => { e.preventDefault(); e.stopPropagation(); }}
-      style={{ height: windowHeight, backgroundColor: settings.backgroundColor }}
     >
       <a.div
         className="w-screen p-4 overflow-hidden"
         onClick={() => onClickSheetDeadArea()}
         style={{ ...bgStyle, height: windowHeight }}
       >
+        {settings.showTitle  ? (
+
         <Title
           textColor={settings.textColor}
-          isFixed={true}
           isReadOnly={readonly}
-          chartTitle={settings.chartTitle}
-          setValue={(value: string) => settings.setChartTitle(value)}
+          chartTitle={editor.state.chartTitle}
+          setValue={(value: string) => editor.actions.setChartTitle(value)}
           showIntroduction={
             editor.state.isStarted && editor.state.isFirstCloseDone
           }
-          titleHeightStyle={titleHeightStyle}
-        />
+          titleHeightStyle={editor.state.titleHeightStyle}
+          />
+        ) : null}
           
         <List
           list={list}

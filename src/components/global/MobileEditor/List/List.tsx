@@ -26,7 +26,7 @@ const List: React.FC<Props> = ({
     ${list.length > 5 ? 'pb-[270px]' : ''}
       h-[calc(100vh_-_10px)]
       overflow-y-scroll
-      mt-[200px] -translate-y-32 z-10
+       z-10
     `}
     // style={{scrollb}}
   >

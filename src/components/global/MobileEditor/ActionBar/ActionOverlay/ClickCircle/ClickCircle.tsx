@@ -42,12 +42,10 @@ export const ClickCircle: React.FC<Props> = ({
         rounded-full h-64 w-64
         flex flex-wrap
       "
-      onClick={(e) => {
-        e.stopPropagation();
-      }}
+      onClick={(e) => e.stopPropagation()}
     >
       <div className="basis-1/3 h-1/3 rounded-full"></div>
-      <button
+      <div
         id="top"
         className="
           items-center align-middle content-center
@@ -62,8 +60,7 @@ export const ClickCircle: React.FC<Props> = ({
             icon={
               <ListBulletIcon
                 className="
-                  h-6 w-6 text-center align-center content-center justify-center
-                  flex
+                  h-6 w-6 text-center align-center content-center flex justify-center
                 "
               />
             }
@@ -87,7 +84,7 @@ export const ClickCircle: React.FC<Props> = ({
             />
             ) : null}
         </div>
-      </button>
+      </div>
       <div className="basis-1/3 h-1/3 rounded-full"></div>
       <ClickCircleButton
         icon={

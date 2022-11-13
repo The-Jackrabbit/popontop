@@ -1,5 +1,6 @@
 import { ChartSettings } from "@prisma/client";
 import { useState } from "react";
+import { useSpring } from "react-spring";
 import { ListRowMode } from "../../components/lib/Mobile/ListRow/ListRow";
 import { Album } from "../../types/Albums";
 import { trpc } from '../../utils/trpc';
@@ -23,11 +24,30 @@ const useChartList = ({
   const [isFirstCloseDone, setIsFirstCloseDone] = useState(false);
   const [isActive, setIsActive] = useState(true); 
   const [listMode, setListMode] = useState<ListRowMode>(ListRowMode.NORMAL);
+  const [chartTitle, setChartTitle] = useState(chartName);
+  const [titleHeightStyle, titleHeightAnimation] = useSpring(() => ({
+    height: '250px',
+    config: {
+      bounce: 2,
+      friction: 20,
+      mass: 1,
+      tension: 200,
+    },
+  }));
+  
+  const toggleTitle = () => {
+    if (isStarted) {
+      setIsFirstCloseDone(true);
+      const cHeight =  titleHeightStyle.height.get();
+      const height = cHeight === '60px' ? '0px' : '60px';
+      titleHeightAnimation.start({ height });
+    }
+  };
 
   const saveChart = async (): Promise<string> => {
     const result = await mutation.mutateAsync({
       albums: list,
-      name: settings.chartTitle,
+      name: chartTitle,
       settings: {
         backgroundColor: settings.backgroundColor,
         borderColor: settings.borderColor,
@@ -140,8 +160,12 @@ const useChartList = ({
         setIsFirstCloseDone,
         setIsActive,
         setListMode,
+        // not in love with chart title being in eidtor state vs actual state that also is in the db but eh maybe move later
+        setChartTitle,
+        toggleTitle,
       },
       state: {
+        chartTitle,
         isSettingsOpen,
         isSearchOpen,
         isFirstCloseDone,
@@ -149,11 +173,18 @@ const useChartList = ({
         isLoading: mutation.isLoading,
         isStarted,
         listMode, 
+        titleHeightStyle,
       },
     },
     isLoading: mutation.isLoading,
     isStarted,
-    settings,
+    settings: {
+      ...settings,
+      setShowTitle: (value: boolean) => {
+        settings.setShowTitle(value);
+        toggleTitle();
+      },
+    },
   };
 };
 
