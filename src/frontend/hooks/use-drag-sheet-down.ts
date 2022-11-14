@@ -51,7 +51,7 @@ export function useDragSheetDown(
 
   useEffect(() => {
     if (window) {
-      setWindowHeight(`${window.innerHeight}px`)
+      setWindowHeight(`${window.innerHeight - 16}px`)
     }
   }, []); 
 

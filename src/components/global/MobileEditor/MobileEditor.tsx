@@ -7,7 +7,6 @@ import { ActionBar } from "./ActionBar/ActionBar";
 import Title from "./Title/Title";
 import useChartList from "../../../frontend/hooks/use-chart-list";
 import { ChartSettings } from "@prisma/client";
-import { ListRowMode } from "../../lib/Mobile/ListRow/ListRow";
 import MobilePage from "../../lib/MobilePage/MobilePage";
 
 export interface Props {
@@ -59,7 +58,6 @@ const MobileEditor: React.FC<Props> = ({
           isActive={state.isActive}
           setIsActive={actions.setIsActive}
           saveChart={actions.saveChart}
-          isRearrangeModeActive={state.listMode === ListRowMode.REARRANGE}
         />
       </a.div>
       <MobileSheet bind={sheet.bind} display={sheet.display} y={sheet.y}>

@@ -11,26 +11,24 @@ import LogoButton from "./LogoButton/LogoButton";
 
 export interface Props {
   hasNonEmptyList: boolean;
+  isActive: boolean;
+  isLoading: boolean;
   onClickSettings: () => void;
   onClickSearch: () => void;
   onClickRearrangeMode: () => void;
-  isActive: boolean;
-  isLoading: boolean;
-  isRearrangeModeActive: boolean;
-  setIsActive: (val: boolean) =>  void;
   saveChart: () => Promise<string>;
+  setIsActive: (val: boolean) =>  void;
 }
 
 export const ActionBar: React.FC<Props> = ({
-  isActive,
   hasNonEmptyList,
-  onClickRearrangeMode,
-  isRearrangeModeActive = true,
-  onClickSettings,
-  onClickSearch,
-  setIsActive,
-  saveChart,
+  isActive,
   isLoading,
+  onClickRearrangeMode,
+  onClickSearch,
+  onClickSettings,
+  saveChart,
+  setIsActive,
 }) => { 
   const [actionOverlayOpacity, animateActionOverlayOpacity] = useSpring(() => ({
     from: { opacity: 0 },
@@ -58,26 +56,25 @@ export const ActionBar: React.FC<Props> = ({
     <>
       <a.div 
         className="
-          w-[calc(100vw)]
+          fixed bottom-0 left-0 -translate-x-4
           p-4
+          w-[calc(100vw)]
           justify-between items-center 
           bg-gradient-to-t from-[rgba(200,200,200,0.6)] 
           via-[rgba(200,200,200,0.1)] 
           dark:from-[rgba(0,0,0,0.6)] to-transparent
-          absolute bottom-0 left-0
           flex flex-row
         "
         style={{...actionOverlayOpacity}}
       >
-       
-          <FilterButton
-            onClick={(e) => {
-              e.stopPropagation();
-              onClickSettings();
-            }}
-          >
-           <CogIcon className={ICON_STYLE} />
-         </FilterButton>
+        <FilterButton
+          onClick={(e) => {
+            e.stopPropagation();
+            onClickSettings();
+          }}
+        >
+          <CogIcon className={ICON_STYLE} />
+        </FilterButton>
         <div className="flex gap-2">
           {hasNonEmptyList && (
             <FilterButton onClick={() => undefined}>
@@ -95,14 +92,14 @@ export const ActionBar: React.FC<Props> = ({
             </FilterButton>
           )}
         </div>
-          <FilterButton
-            onClick={(e) => {
-              e.stopPropagation();
-              onClickSearch();
-            }}
-          >
-            <PlusIcon className={ICON_STYLE} />
-          </FilterButton>
+        <FilterButton
+          onClick={(e) => {
+            e.stopPropagation();
+            onClickSearch();
+          }}
+        >
+          <PlusIcon className={ICON_STYLE} />
+        </FilterButton>
       </a.div>
       <a.div
         className="fixed left-0 bottom-0"
@@ -111,6 +108,7 @@ export const ActionBar: React.FC<Props> = ({
         <ActionOverlay
           saveChart={saveChart}
           isLoading={isLoading}
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           onExit={(e: any) => {
             e.stopPropagation()
             end();
