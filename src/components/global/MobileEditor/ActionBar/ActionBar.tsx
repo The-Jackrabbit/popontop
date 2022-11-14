@@ -89,13 +89,11 @@ export const ActionBar: React.FC<Props> = ({
             isActive={isActive}
             start={() => start()}
           />
-        {hasNonEmptyList && (
-          <FilterButton
-            onClick={() => onClickRearrangeMode()}
-          >
-            <ChevronUpDownIcon className={ICON_STYLE} />
-          </FilterButton>
-        )}
+          {hasNonEmptyList && (
+            <FilterButton onClick={() => onClickRearrangeMode()}>
+              <ChevronUpDownIcon className={ICON_STYLE} />
+            </FilterButton>
+          )}
         </div>
           <FilterButton
             onClick={(e) => {

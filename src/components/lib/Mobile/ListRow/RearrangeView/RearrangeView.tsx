@@ -19,6 +19,13 @@ export enum RowMovementType {
   UP_ONE = 'UP_ONE',
 }
 
+export const JUMP_VALUES = {
+  [RowMovementType.UP_FIVE]: 5,
+  [RowMovementType.UP_ONE]:  1,
+  [RowMovementType.DOWN_ONE]: -1,
+  [RowMovementType.DOWN_FIVE]: -5,
+};
+
 export const RearrangeView: React.FC<Props> = ({
   album,
   index,
