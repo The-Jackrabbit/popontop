@@ -17,7 +17,7 @@ export interface Props {
   };
 }
 
-const useList = (setIsStarted: (value: boolean) => void): Props => {
+const useList = (): Props => {
   const [list, setList] = useState<Album[]>([]);
 
   const removeAlbumAtIndex = (index: number) => {
@@ -58,10 +58,6 @@ const useList = (setIsStarted: (value: boolean) => void): Props => {
       const newAlbums = [...albums];
       newAlbums.push(album);
 
-      if (albums.length === 0 && newAlbums.length === 1) {
-        setIsStarted(true);
-      }
-
       return newAlbums;
     });
   };
@@ -82,10 +78,6 @@ const useList = (setIsStarted: (value: boolean) => void): Props => {
       newAlbums[oldIndex] = null;
       newAlbums.splice(newIndex, 0, album);
       
-      if (albums.length === 0 && newAlbums.length === 1) {
-        setIsStarted(true);
-      }
-
       return newAlbums.filter(el => el !== null) as Album[];
     });
   };

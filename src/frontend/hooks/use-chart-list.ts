@@ -22,9 +22,7 @@ const useChartList = ({
 }) => {
   const mutation = trpc.charts.create.useMutation();
   const settings = useChartSettings(defaultSettings);
-  const [isStarted, setIsStarted] = useState(false);
-  const { list, mutations: listMutations } = useList(setIsStarted);
-
+  const { list, mutations: listMutations } = useList();
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isFirstCloseDone, setIsFirstCloseDone] = useState(false);
@@ -42,12 +40,10 @@ const useChartList = ({
   }));
   
   const toggleTitle = () => {
-    if (isStarted) {
-      setIsFirstCloseDone(true);
-      const cHeight =  titleHeightStyle.height.get();
-      const height = cHeight === '60px' ? '0px' : '60px';
-      titleHeightAnimation.start({ height });
-    }
+    setIsFirstCloseDone(true);
+    const cHeight =  titleHeightStyle.height.get();
+    const height = cHeight !== '0px' ? '0px' : '60px';
+    titleHeightAnimation.start({ height });
   };
 
   const saveChart = async (): Promise<string> => {
@@ -79,7 +75,7 @@ const useChartList = ({
   } = useDragSheetDown(height, () => {
     setIsSettingsOpen(false);
     setIsSearchOpen(false);
-    toggleTitle();
+    // toggleTitle();
   });
 
   const onClickSheetDeadArea = () => {
@@ -144,7 +140,6 @@ const useChartList = ({
       isFirstCloseDone,
       isActive,
       isLoading: mutation.isLoading,
-      isStarted,
       list,
       listMode,
       settings: {
@@ -154,7 +149,7 @@ const useChartList = ({
           toggleTitle();
         },
       },
-      showIntroduction: isStarted && list.length === 0,
+      showIntroduction: list.length === 0,
       titleHeightStyle,
     },
   };

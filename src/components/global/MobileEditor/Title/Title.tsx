@@ -38,7 +38,7 @@ const Title: React.FC<Props> = ({
       `}
     >
 
-      {showIntroduction ? (
+      {!showIntroduction ? (
         <div
           className="
             flex justify-between w-full

@@ -36,7 +36,7 @@ export const ClickCircle: React.FC<Props> = ({
   return (
     <div
       className="
-        bg-[rgba(255,255,255,0.5)]
+        bg-[rgba(255,255,255,0.5)]  -translate-x-4
         dark:bg-[rgba(0,0,0,0.5)] shadow-lg
         z-50
         rounded-full h-64 w-64
