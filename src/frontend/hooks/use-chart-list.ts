@@ -75,7 +75,7 @@ const useChartList = ({
   } = useDragSheetDown(height, () => {
     setIsSettingsOpen(false);
     setIsSearchOpen(false);
-    // toggleTitle();
+    toggleTitle();
   });
 
   const onClickSheetDeadArea = () => {
@@ -86,11 +86,31 @@ const useChartList = ({
   };
 
   const onRearrangeClick = (rowMovementType: RowMovementType, index: number) => {
+    const unboundIndex = index - JUMP_VALUES[rowMovementType];
+    const length = list.length;
+    const min = 0;
+    const max = length - 1;
+
     const indexToMoveTo = clamp(
-      index - JUMP_VALUES[rowMovementType],
-      0,
-      list.length - 1,
+      unboundIndex,
+      min,
+      max,
     );
+
+    console.table({
+      unboundIndex,
+      length,
+      min,
+      max,
+      indexToMoveTo,
+    });
+    // ], [
+    //   'unboundIndex',
+    //   'length',
+    //   'min',
+    //   'max',
+    //   'indexToMoveTo',
+    // ]);
 
     listMutations.insertAlbumAtIndex(list[index] as Album, index, indexToMoveTo);
   };
@@ -149,7 +169,7 @@ const useChartList = ({
           toggleTitle();
         },
       },
-      showIntroduction: list.length === 0,
+      showIntroduction: !isFirstCloseDone,
       titleHeightStyle,
     },
   };
