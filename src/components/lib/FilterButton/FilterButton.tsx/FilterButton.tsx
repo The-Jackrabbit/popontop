@@ -6,6 +6,7 @@ export interface Props {
   children: React.ReactNode;
   className?: string;
   defaultIsActive?: boolean;
+  hasGradientIndicator?: boolean;
   onClick: MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -15,11 +16,14 @@ const FilterButton: React.FC<Props> = ({
   children,
   className = 'w-8 h-8 p-[2px]',
   defaultIsActive = false,
+  hasGradientIndicator = true,
   onClick,
 }) => {
   const [isActive, setIsActive] = useState(defaultIsActive);
   const fromGradient = `linear-gradient(0deg, gray 0%, gray 100%)`;
-  const toGradient = 'linear-gradient(180deg, red 0%, blue 100%)';
+  const toGradient = hasGradientIndicator
+    ? 'linear-gradient(180deg, red 0%, blue 100%)'
+    : 'linear-gradient(0deg, gray 0%, gray 100%)';
 
   const [background, animateBackgroundStyle] = useSpring(() => ({
     bg: fromGradient

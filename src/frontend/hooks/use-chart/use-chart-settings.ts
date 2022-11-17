@@ -31,7 +31,7 @@ const useChartSettings = (defaultSettings: ChartSettings | null): Settings => {
     defaultSettings?.text_color ?? ''
   );
   const [showTitle, setShowTitle] = useState(
-    defaultSettings?.show_title ?? false
+    defaultSettings?.show_title ?? true
   );
 
   return {

@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import ListRow, { ListRowMode } from './ListRow';
 import { ALBUM_RESULTS } from '../../../../constants/test-data/search-results';
 import { Album } from '../../../../types/Albums';
 
 export default {
+  args: {
+    mode: 'DELETE'
+  },
   title: 'lib/ListRow',
   component: ListRow,
   parameters: {
@@ -13,20 +16,26 @@ export default {
   },
 } as ComponentMeta<typeof ListRow>;
 
-export const Single: ComponentStory<typeof ListRow> = () => {
+export const DeleteView: ComponentStory<typeof ListRow> = () => {
+  const [isActive, setIsActive] = useState(false);
   return (
-    <div className="m-4 dark:bg-neutral-600">
-      <ListRow
-        album={ALBUM_RESULTS[0] as Album}
-        isDragged={false}
-        mode={ListRowMode.REARRANGE}
-        index={0}
-        isInteractive={true}
-        isLastRowInList={true}
-        onRearrangeClick={() => undefined}
-        showAlbums={true}
-        textColor={'green'}
-      />
+    <div className="m-4 ">
+      <button onClick={() => setIsActive(!isActive)}>toggle</button>
+        { isActive && (
+  
+        <ListRow
+          album={ALBUM_RESULTS[0] as Album}
+          isDragged={false}
+          mode={ListRowMode.DELETE}
+          index={0}
+          isInteractive={true}
+          isLastRowInList={true}
+          removeSelfFromList={() => setIsActive(false)}
+          onRearrangeClick={() => undefined}
+          showAlbums={true}
+          textColor={'green'}
+        />
+      )}
     </div>
   )
 }

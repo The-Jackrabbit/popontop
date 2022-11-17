@@ -44,13 +44,13 @@ const PageTwo: React.FC<Props> = ({
         setValue={(value: string) => setBackgroundColor(value)}
         value={backgroundColor}
       />
-
+{/* 
       <TextExpandingPill
         className="inline-block"
         label="border color"
         setValue={(value: string) => setBorderColor(value)}
         value={borderColor}
-      />
+      /> */}
 
       <SwitchExpandingPill
         className="w-[140px] inline-block"

@@ -36,6 +36,7 @@ const Title: React.FC<Props> = ({
         w-auto
         flex justify-between items-center 
       `}
+      onClick={() => clickEditTitleButton()}
     >
 
       {!showIntroduction ? (
@@ -52,6 +53,7 @@ const Title: React.FC<Props> = ({
                 autoFocus
                 value={chartTitle}
                 style={{ color: textColor }}
+                onBlur={() => setIsEditing(false)}
                 onChange={(e) => { setValue(e.target.value) }}
                 placeholder="New title"
                 className=" focus-visible:outline-none active:outline-none bg-transparent border-bottom-2 border-b-2 

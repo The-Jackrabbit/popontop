@@ -6,6 +6,7 @@ import { ROW_HEIGHT, ROW_HEIGHT_WITH_UNIT, useDisappearRow } from '../../../../f
 import ListView from './ListView/ListView';
 import RearrangeView, { RowMovementType } from './RearrangeView/RearrangeView';
 import SearchView from './SearchView/SearchView';
+import DeleteView from './DeleteView/DeleteView';
 
 export enum ListRowMode {
   DELETE = 'DELETE',
@@ -120,6 +121,17 @@ export const ListRow: React.FC<Props> = ({
               onClick={() => {
                 onClick();
                 toggleRowVisibility();
+              }}
+            />
+          ) : null}
+          {mode === ListRowMode.DELETE ? (
+            <DeleteView
+              album={album}
+              index={index}
+              showAlbums={showAlbums}
+              textColor={textColor ?? ''}
+              onClick={() => {
+                removeSelfFromList();
               }}
             />
           ) : null}

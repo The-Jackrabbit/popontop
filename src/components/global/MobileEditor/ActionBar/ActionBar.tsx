@@ -15,6 +15,7 @@ export interface Props {
   isLoading: boolean;
   onClickSettings: () => void;
   onClickSearch: () => void;
+  onClickDeleteMode: () => void;
   onClickRearrangeMode: () => void;
   saveChart: () => Promise<string>;
   setIsActive: (val: boolean) =>  void;
@@ -24,6 +25,7 @@ export const ActionBar: React.FC<Props> = ({
   hasNonEmptyList,
   isActive,
   isLoading,
+  onClickDeleteMode,
   onClickRearrangeMode,
   onClickSearch,
   onClickSettings,
@@ -72,12 +74,13 @@ export const ActionBar: React.FC<Props> = ({
             e.stopPropagation();
             onClickSettings();
           }}
+          hasGradientIndicator={false}
         >
           <CogIcon className={ICON_STYLE} />
         </FilterButton>
         <div className="flex gap-2">
           {hasNonEmptyList && (
-            <FilterButton onClick={() => undefined}>
+            <FilterButton onClick={() => onClickDeleteMode()}>
               <TrashIcon className={ICON_STYLE + " p-1"} />
             </FilterButton>
           )}
@@ -97,6 +100,7 @@ export const ActionBar: React.FC<Props> = ({
             e.stopPropagation();
             onClickSearch();
           }}
+          hasGradientIndicator={false}
         >
           <PlusIcon className={ICON_STYLE} />
         </FilterButton>

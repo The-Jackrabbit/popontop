@@ -42,7 +42,7 @@ const useChartList = ({
   const toggleTitle = () => {
     setIsFirstCloseDone(true);
     const cHeight =  titleHeightStyle.height.get();
-    const height = cHeight !== '0px' ? '0px' : '60px';
+    const height = cHeight === '60px' ? '0px' : '60px';
     titleHeightAnimation.start({ height });
   };
 
@@ -75,7 +75,9 @@ const useChartList = ({
   } = useDragSheetDown(height, () => {
     setIsSettingsOpen(false);
     setIsSearchOpen(false);
-    toggleTitle();
+    if (!isFirstCloseDone && list.length > 0) {
+      toggleTitle();
+    }
   });
 
   const onClickSheetDeadArea = () => {
@@ -131,6 +133,11 @@ const useChartList = ({
       onClickRearrangeMode: () => setListMode(
         (listMode) => listMode !== ListRowMode.REARRANGE
           ? ListRowMode.REARRANGE
+          : ListRowMode.NORMAL
+      ),
+      onClickDeleteMode: () => setListMode(
+        (listMode) => listMode !== ListRowMode.DELETE
+          ? ListRowMode.DELETE
           : ListRowMode.NORMAL
       ),
       onClickSheetDeadArea,

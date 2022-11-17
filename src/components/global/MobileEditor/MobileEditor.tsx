@@ -53,6 +53,7 @@ const MobileEditor: React.FC<Props> = ({
           isLoading={state.isLoading}
           onClickSettings={actions.onClickSettings}
           onClickSearch={actions.onClickSearch}
+          onClickDeleteMode={actions.onClickDeleteMode}
           onClickRearrangeMode={actions.onClickRearrangeMode}
           hasNonEmptyList={state.list.length > 0}
           isActive={state.isActive}
