@@ -40,7 +40,6 @@ const FilterButton: React.FC<Props> = ({
   };
 
   useEffect(() => {
-    debugger;
     animateBackgroundStyle.start({
       bg: !isActive ? fromGradient : toGradient,
     });

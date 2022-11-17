@@ -1,4 +1,4 @@
-import { Album } from "../../../../../types/Albums"
+import { Album } from "../../../../../styles/types/Albums"
 import { generateEmptyArrayOfSize } from "../../../../../utils/generate-fake-data-in-list";
 import ListRow, { ListRowMode } from "../../../../lib/Mobile/ListRow/ListRow";
 import { LoadingAlbumSearchResult } from "./LoadingAlbumSearchResult";

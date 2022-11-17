@@ -1,6 +1,6 @@
 import { animated } from '@react-spring/web'
 import React from "react";
-import { Album } from '../../../../types/Albums';
+import { Album } from '../../../../styles/types/Albums';
 import { useDisappearRow } from '../../../../frontend/hooks/use-disappear-row';
 
 export interface Props {

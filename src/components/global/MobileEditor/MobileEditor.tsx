@@ -28,6 +28,7 @@ const MobileEditor: React.FC<Props> = ({
   return (
     <MobilePage>
       <a.div
+        id="editor"
         onClick={() => actions.onClickSheetDeadArea()}
         style={{ ...sheet.bgStyle, height: sheet.windowHeight }}
       >

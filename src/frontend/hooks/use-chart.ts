@@ -3,7 +3,7 @@ import { ChartSettings } from "@prisma/client";
 import { useState } from "react";
 import { SpringValue, useSpring } from "react-spring";
 import { EMPTY_ALBUM } from "../../constants/empty-album";
-import { Album } from "../../types/Albums";
+import { Album } from "../../styles/types/Albums";
 import { generateBoard } from "../../utils/instantiators";
 import { trpc } from "../../utils/trpc";
 

@@ -1,5 +1,8 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
+import ActionBar from "../../../components/global/MobileEditor/ActionBar/ActionBar";
+import { ListRowMode } from "../../../components/lib/Mobile/ListRow/ListRow";
+import MobilePage from "../../../components/lib/MobilePage/MobilePage";
 import { useDragSheetDown } from "../../../frontend/hooks/use-drag-sheet-down";
 import { trpc } from "../../../utils/trpc";
 
@@ -17,44 +20,22 @@ const YourCharts: NextPage = () => {
   }
   
   return (
-    <div
-      className="overflow-y-hidden flex "
-      style={{ height: windowHeight }}
-    >
-      <div  
-         style={{ height: windowHeight }}
-      className="w-screen p-4 overflow-y-hidden">
-     {/* <ActionBar
-        isLoading={false}
-        onClickSettings={() => undefined}
-        onClickSearch={() => undefined}
-        isActive={true}
-        setIsActive={() => undefined}
-        saveChart={() => new Promise((res) => res(''))}
-        /> */}
-      {data.map((chart: {
-        uuid?: string;
-        name?: string;
-      })=> (
-        <div
-          className="
-            absolute
-            bg-neutral-200 dark:bg-neutral-900
-            h-[52px]
-            overflow-hidden w-full
-            last-of-type:border-b-0
-            text-neutral-900 dark:text-neutral-50
-            flex justify-between
-            gap-2 my-0
-            "
-          key={JSON.stringify(chart)}
-        >
-          <p onClick={() => router.push(`/mobile/charts/${chart.uuid}`)}>{chart.name}</p>
-        </div>
-      ))}
-     
-        </div>
-    </div>
+    <MobilePage>
+      <div>
+        <ActionBar
+          hasNonEmptyList={false}
+          listMode={ListRowMode.NORMAL}
+          onClickDeleteMode={() => undefined}
+          onClickRearrangeMode={() => undefined} 
+          isLoading={false}
+          onClickSettings={() => undefined}
+          onClickSearch={() => undefined}
+          isActive={true}
+          setIsActive={() => undefined}
+          saveChart={() => new Promise((res) => res(''))}
+        />
+      </div>
+    </MobilePage>
   );
 }
 

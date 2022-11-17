@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import ListRow, { ListRowMode } from './ListRow';
 import { ALBUM_RESULTS } from '../../../../constants/test-data/search-results';
-import { Album } from '../../../../types/Albums';
+import { Album } from '../../../../styles/types/Albums';
 
 export default {
   args: {

@@ -1,5 +1,5 @@
 
-import { Album } from "../../types/Albums";
+import { Album } from "../../styles/types/Albums";
 
 export const ALBUM_RESULTS: Album[] = [
   {

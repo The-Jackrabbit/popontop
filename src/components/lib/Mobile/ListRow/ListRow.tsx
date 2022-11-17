@@ -1,6 +1,6 @@
 import { a } from '@react-spring/web'
 import React from "react";
-import { Album } from '../../../../types/Albums';
+import { Album } from '../../../../styles/types/Albums';
 import { useRowSwipeActions } from '../../../../frontend/hooks/use-row-swipe-actions';
 import { ROW_HEIGHT, ROW_HEIGHT_WITH_UNIT, useDisappearRow } from '../../../../frontend/hooks/use-disappear-row';
 import ListView from './ListView/ListView';

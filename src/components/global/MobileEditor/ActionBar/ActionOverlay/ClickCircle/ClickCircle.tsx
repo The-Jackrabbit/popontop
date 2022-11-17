@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from 'next/link';
 import ClickCircleButton from "./ClickCircleButton/ClickCircleButton";
 import { signIn, signOut, useSession } from "next-auth/react";
@@ -10,6 +10,7 @@ import {
   ListBulletIcon,
   UserCircleIcon
 } from '@heroicons/react/24/solid';
+import html2canvas from 'html2canvas';
 
 export interface Props {
   isLoading: boolean;
@@ -20,6 +21,7 @@ export const ClickCircle: React.FC<Props> = ({
   isLoading,
   saveChart,
 }) => {
+  const [isPreviewOverlayVisible, setIsPreviewOverlayVisible] = useState(false);
   const { data: sessionData } = useSession();
   const r = useRouter();
 
@@ -33,7 +35,37 @@ export const ClickCircle: React.FC<Props> = ({
     sessionData ?  signOut() : signIn('google')
   };
 
+  const onClickDownload = () => {
+    setIsPreviewOverlayVisible(true);
+//     html2canvas(document.getElementById('editor'), {
+// // 
+//       // windowHeight: 800*1,
+//       windowWidth: 414/2,
+//       // height: 800*1,
+//       width: 414*2,
+//       scale: 1
+//     }).then((canvas) => {
+//       document?.getElementById('preview')?.appendChild(canvas);
+//     });
+  }
+
   return (
+    <>
+    {/* {isPreviewOverlayVisible && (
+
+      <div
+      className="bg-transparent fixed top-0 left-0 bottom-0 right-0 h-screen w-screen -translate-x-4 z-50"
+      id="preview"
+      >
+        <button
+          onClick={(e) => { 
+            e.stopPropagation();
+            setIsPreviewOverlayVisible(false)
+          }}
+        >
+          isPreviewOverlayVisible</button>
+      </div>
+        )} */}
     <div
       className="
         bg-[rgba(255,255,255,0.5)]  -translate-x-4
@@ -42,6 +74,7 @@ export const ClickCircle: React.FC<Props> = ({
         rounded-full h-64 w-64
         flex flex-wrap
       "
+
       onClick={(e) => e.stopPropagation()}
     >
       <div className="basis-1/3 h-1/3 rounded-full"></div>
@@ -130,7 +163,7 @@ export const ClickCircle: React.FC<Props> = ({
         }
         isLoading={false}
         label="download"
-        onClick={() => undefined}
+        onClick={() => onClickDownload()}
       />
       <div className="basis-1/3 h-1/3 rounded-full"></div>
       <ClickCircleButton
@@ -160,6 +193,7 @@ export const ClickCircle: React.FC<Props> = ({
       />
       <div className="basis-1/3 h-1/3 rounded-full"></div>
     </div>
+    </>
   );
 };
 

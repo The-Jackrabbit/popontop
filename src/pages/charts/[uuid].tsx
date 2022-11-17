@@ -7,7 +7,7 @@ import DesktopEditor from "../../components/global/DesktopEditor/DesktopEditor";
 import SidebarNav from "../../components/global/DesktopEditor/Sidebar/SidebarNav/SidebarNav";
 import { usePageFadeIn } from "../../frontend/hooks/springs/use-page-fade-in";
 import useChart from "../../frontend/hooks/use-chart";
-import { Album } from "../../types/Albums";
+import { Album } from "../../styles/types/Albums";
 import { trpc } from "../../utils/trpc";
 import Layout from "../create-chart/Layout";
 import { genUuid } from "../mobile/charts/[uuid]";

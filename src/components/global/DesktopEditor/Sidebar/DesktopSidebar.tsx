@@ -4,7 +4,7 @@ import Draggable from '../DragNDrop/Draggable/Draggable';
 import Image from 'next/image';
 import { Settings } from '../../../../frontend/hooks/use-chart';
 import { EMPTY_ALBUM } from '../../../../constants/empty-album';
-import { Album } from '../../../../types/Albums';
+import { Album } from '../../../../styles/types/Albums';
 import TextExpandingPill from '../../../lib/ExpandingPill/TextExpandingPill/TextExpandingPill';
 import { SwitchExpandingPill } from '../../../lib/ExpandingPill/SwitchExpandingPill/SwitchExpandingPill';
 import NumericExpandingPill from '../../../lib/ExpandingPill/NumericExpandingPill/NumericExpandingPill';

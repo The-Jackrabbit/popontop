@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useSpring } from "react-spring";
 import { ListRowMode } from "../../components/lib/Mobile/ListRow/ListRow";
 import { JUMP_VALUES, RowMovementType } from "../../components/lib/Mobile/ListRow/RearrangeView/RearrangeView";
-import { Album } from "../../types/Albums";
+import { Album } from "../../styles/types/Albums";
 import { trpc } from '../../utils/trpc';
 import useChartSettings from "./use-chart/use-chart-settings";
 import { useDragSheetDown } from "./use-drag-sheet-down";

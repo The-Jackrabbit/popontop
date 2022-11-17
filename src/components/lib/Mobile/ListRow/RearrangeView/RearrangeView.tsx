@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Image from 'next/image';
 import { ROW_HEIGHT } from "../../../../../frontend/hooks/use-disappear-row";
-import { Album } from "../../../../../types/Albums";
+import { Album } from "../../../../../styles/types/Albums";
 import RearrangeViewButton from "./RearrangeViewButton/RearrangeViewButton";
 import { useSpring, a, config } from "react-spring";
 

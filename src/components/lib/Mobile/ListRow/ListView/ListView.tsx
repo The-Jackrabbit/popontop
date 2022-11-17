@@ -1,6 +1,6 @@
 import React from "react";
 import Image from 'next/image';
-import { Album } from '../../../../../types/Albums';
+import { Album } from '../../../../../styles/types/Albums';
 import { ROW_HEIGHT } from "../../../../../frontend/hooks/use-disappear-row";
 
 export interface Props {
@@ -40,6 +40,7 @@ export const ListView: React.FC<Props> = ({
         height={ROW_HEIGHT}
         src={album.imageUrl}
         alt={album.artist}
+        
       />
     </div>
     <div

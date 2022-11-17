@@ -2,7 +2,7 @@ import { router, publicProcedure } from "../trpc";
 import { z } from "zod";
 import axios from 'axios';
 import { env } from "../../../env/server.mjs";
-import { Album, LastFmAlbum } from "../../../types/Albums";
+import { Album, LastFmAlbum } from "../../../styles/types/Albums";
 
 export const albumsRouter = router({
   search: publicProcedure

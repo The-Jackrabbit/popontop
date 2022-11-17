@@ -1,6 +1,6 @@
 import React from "react";
 import Image from 'next/image';
-import { Album } from '../../../../../types/Albums';
+import { Album } from '../../../../../styles/types/Albums';
 import { ROW_HEIGHT } from "../../../../../frontend/hooks/use-disappear-row";
 import FilterButton, { ICON_STYLE } from "../../../FilterButton/FilterButton.tsx/FilterButton";
 import { PlusIcon } from "@heroicons/react/20/solid";
