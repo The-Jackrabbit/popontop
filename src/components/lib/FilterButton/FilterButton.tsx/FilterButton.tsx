@@ -3,24 +3,25 @@ import { MouseEventHandler } from 'react';
 import { a, useSpring } from 'react-spring';
 
 export interface Props {
+  isActive?: boolean;
   children: React.ReactNode;
   className?: string;
-  defaultIsActive?: boolean;
   hasGradientIndicator?: boolean;
   onClick: MouseEventHandler<HTMLButtonElement>;
+  setIsActive?: (value: boolean) => void;
 }
 
 export const ICON_STYLE = "h-6 w-6 translate-y-[1px] text-neutral-900 dark:text-neutral-50";
 
 const FilterButton: React.FC<Props> = ({
+  isActive = false,
   children,
   className = 'w-8 h-8 p-[2px]',
-  defaultIsActive = false,
   hasGradientIndicator = true,
   onClick,
+  setIsActive = (value: boolean) => undefined
 }) => {
-  const [isActive, setIsActive] = useState(defaultIsActive);
-  const fromGradient = `linear-gradient(0deg, gray 0%, gray 100%)`;
+  const fromGradient = 'linear-gradient(0deg, gray 0%, gray 100%)';
   const toGradient = hasGradientIndicator
     ? 'linear-gradient(180deg, red 0%, blue 100%)'
     : 'linear-gradient(0deg, gray 0%, gray 100%)';

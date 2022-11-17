@@ -80,7 +80,10 @@ export const ActionBar: React.FC<Props> = ({
         </FilterButton>
         <div className="flex gap-2">
           {hasNonEmptyList && (
-            <FilterButton onClick={() => onClickDeleteMode()}>
+            <FilterButton
+              isActive={isActive}
+
+              onClick={() => onClickDeleteMode()}>
               <TrashIcon className={ICON_STYLE + " p-1"} />
             </FilterButton>
           )}
