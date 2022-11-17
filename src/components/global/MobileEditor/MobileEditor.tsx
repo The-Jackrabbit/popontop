@@ -51,6 +51,7 @@ const MobileEditor: React.FC<Props> = ({
         />
         <ActionBar
           isLoading={state.isLoading}
+          listMode={state.listMode}
           onClickSettings={actions.onClickSettings}
           onClickSearch={actions.onClickSearch}
           onClickDeleteMode={actions.onClickDeleteMode}

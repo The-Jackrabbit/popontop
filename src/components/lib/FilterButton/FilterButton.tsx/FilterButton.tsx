@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MouseEventHandler } from 'react';
 import { a, useSpring } from 'react-spring';
+import { ListRowMode } from '../../Mobile/ListRow/ListRow';
 
 export interface Props {
   isActive?: boolean;
@@ -34,13 +35,16 @@ const FilterButton: React.FC<Props> = ({
   }));
 
   const onClickButton = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
-
-    animateBackgroundStyle.start({
-      bg: isActive ? fromGradient : toGradient,
-    });
     setIsActive(!isActive);
     onClick(e);
   };
+
+  useEffect(() => {
+    debugger;
+    animateBackgroundStyle.start({
+      bg: !isActive ? fromGradient : toGradient,
+    });
+  }, [isActive]);
 
   return (
     <a.button

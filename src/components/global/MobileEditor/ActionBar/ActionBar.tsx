@@ -8,11 +8,13 @@ import {
   TrashIcon,
 } from '@heroicons/react/20/solid';
 import LogoButton from "./LogoButton/LogoButton";
+import { ListRowMode } from "../../../lib/Mobile/ListRow/ListRow";
 
 export interface Props {
   hasNonEmptyList: boolean;
   isActive: boolean;
   isLoading: boolean;
+  listMode: ListRowMode;
   onClickSettings: () => void;
   onClickSearch: () => void;
   onClickDeleteMode: () => void;
@@ -25,6 +27,7 @@ export const ActionBar: React.FC<Props> = ({
   hasNonEmptyList,
   isActive,
   isLoading,
+  listMode,
   onClickDeleteMode,
   onClickRearrangeMode,
   onClickSearch,
@@ -81,9 +84,9 @@ export const ActionBar: React.FC<Props> = ({
         <div className="flex gap-2">
           {hasNonEmptyList && (
             <FilterButton
-              isActive={isActive}
-
-              onClick={() => onClickDeleteMode()}>
+              isActive={listMode === ListRowMode.DELETE}
+              onClick={() => onClickDeleteMode()}
+            >
               <TrashIcon className={ICON_STYLE + " p-1"} />
             </FilterButton>
           )}
@@ -93,7 +96,10 @@ export const ActionBar: React.FC<Props> = ({
             start={() => start()}
           />
           {hasNonEmptyList && (
-            <FilterButton onClick={() => onClickRearrangeMode()}>
+            <FilterButton
+              isActive={listMode === ListRowMode.REARRANGE}
+              onClick={() => onClickRearrangeMode()}
+            >
               <ChevronUpDownIcon className={ICON_STYLE} />
             </FilterButton>
           )}
