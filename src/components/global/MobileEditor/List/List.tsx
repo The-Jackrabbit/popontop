@@ -40,7 +40,7 @@ const List: React.FC<Props> = ({
           key={JSON.stringify(album) + index}
           isDragged={currentValue === index}
           isInteractive={isInteractive}
-          isLastRowInList={index === ALBUM_RESULTS.length - 1}
+          isLastRowInList={index === list.length - 1}
           mode={listMode}
           onRearrangeClick={(rowMovementType: RowMovementType) => 
             onRearrangeClick(rowMovementType, index)
