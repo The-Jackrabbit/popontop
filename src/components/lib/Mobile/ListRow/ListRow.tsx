@@ -70,7 +70,7 @@ export const ListRow: React.FC<Props> = ({
         {...binding}
         className="
           touch-pan-x
-          px-6
+          px-6 mb-2
           relative 
           grid items-center
           origin-[50%_50%_0px]
@@ -138,7 +138,7 @@ export const ListRow: React.FC<Props> = ({
           
         </a.div>
       </a.div>
-       {isBreakVisible && (<hr className="my-1 border-neutral-200 dark:border-transparent" />)}
+       {/* {isBreakVisible && (<hr className="my-1 border-neutral-200 dark:border-transparent" />)} */}
     </>
   )
 }
