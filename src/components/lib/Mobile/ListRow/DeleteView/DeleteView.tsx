@@ -74,11 +74,11 @@ export const DeleteView: React.FC<Props> = ({
       </div>
 
       <a.button
-      className="basis-3/12  justify-center grow-0 flex items-center bg-red-600" 
-      onClick={() => onClick()}
-      style={{...rotateX}}
+        className="basis-3/12 justify-center grow-0 flex items-center bg-red-600" 
+        onClick={() => onClick()}
+        style={{...rotateX}}
       >
-      <XMarkIcon className={ICON_STYLE} />
+        <XMarkIcon className="h-6 w-6 translate-y-[1px] text-neutral-50" />
       </a.button>
     </div>
   );

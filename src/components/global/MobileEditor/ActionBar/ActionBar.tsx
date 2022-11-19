@@ -11,6 +11,8 @@ import LogoButton from "./LogoButton/LogoButton";
 import { ListRowMode } from "../../../lib/Mobile/ListRow/ListRow";
 
 export interface Props {
+  actionOverlayClassName?: string;
+  className?: string;
   hasNonEmptyList: boolean;
   isActive: boolean;
   isLoading: boolean;
@@ -24,6 +26,8 @@ export interface Props {
 }
 
 export const ActionBar: React.FC<Props> = ({
+  actionOverlayClassName,
+  className = '',
   hasNonEmptyList,
   isActive,
   isLoading,
@@ -59,15 +63,15 @@ export const ActionBar: React.FC<Props> = ({
 
   return (
     <>
-      <a.div 
-        className="
-          fixed bottom-0 left-0 -translate-x-4
+      <a.div
+        className={`
+          fixed bottom-0 left-0
           p-4
           w-[calc(100vw)]
-          justify-between items-center 
-         
+          justify-between items-center
           flex flex-row
-        "
+          ${className}
+        `}
         style={{...actionOverlayOpacity}}
       >
         <FilterButton
@@ -121,6 +125,7 @@ export const ActionBar: React.FC<Props> = ({
         style={{ ...overlayPosition }}
       >
         <ActionOverlay
+          className={actionOverlayClassName}
           saveChart={saveChart}
           isLoading={isLoading}
           // eslint-disable-next-line @typescript-eslint/no-explicit-any

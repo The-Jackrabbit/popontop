@@ -19,6 +19,7 @@ export async function getChartsForUser(userId: string) {
 
   return user?.chart_to_user.map(ctou => ({
     uuid: ctou.Chart?.uuid,
+    created_at: ctou.Chart?.created_at,
     name: ctou.Chart?.name,
   }));
 }

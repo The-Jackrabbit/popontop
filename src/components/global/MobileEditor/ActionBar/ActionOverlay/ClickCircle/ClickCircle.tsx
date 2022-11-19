@@ -11,6 +11,7 @@ import {
   UserCircleIcon
 } from '@heroicons/react/24/solid';
 import html2canvas from 'html2canvas';
+import { PaintBrushIcon } from "@heroicons/react/20/solid";
 
 export interface Props {
   isLoading: boolean;
@@ -81,7 +82,8 @@ export const ClickCircle: React.FC<Props> = ({
       <div
         id="top"
         className="
-          items-center align-middle content-center
+          flex
+          items-center align-middle content-center justify-center
           basis-1/3 h-1/3
           rounded-full
         "
@@ -106,7 +108,14 @@ export const ClickCircle: React.FC<Props> = ({
             ) : null}
          {sessionData && r.pathname === '/mobile/your-charts' ? (
            <ClickCircleButton
-            icon="✍️"
+            icon={
+              <PaintBrushIcon  className="
+              h-6 w-6 text-center align-center content-center justify-center
+              flex items-center
+              text-neutral-400 dark:text-neutral-50
+            " />
+
+            }
             isLoading={false}
             label="create chart"
             onClick={(e) => {
@@ -182,7 +191,7 @@ export const ClickCircle: React.FC<Props> = ({
               className="
                 h-6 w-6 text-center align-center content-center justify-center
                 flex
-                text-neutral-400 dark:text-neutral-50
+                text-neutral-700 dark:text-neutral-50
               "
             />
           )

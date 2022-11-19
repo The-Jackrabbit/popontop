@@ -51,6 +51,7 @@ const MobileEditor: React.FC<Props> = ({
           textColor={state.settings.textColor}
         />
         <ActionBar
+          className="-translate-x-4"
           isLoading={state.isLoading}
           listMode={state.listMode}
           onClickSettings={actions.onClickSettings}
