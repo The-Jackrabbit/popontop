@@ -19,6 +19,7 @@ export const RadioOption: React.FC<Props> = ({
       onClick={() => onClick()}
     >
       <NavDot
+        ariaLabel="option"
         color={color}
         isActive={isActive}
         className="mr-2  border-none h-4 w-4"

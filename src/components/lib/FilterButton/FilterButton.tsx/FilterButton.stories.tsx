@@ -35,6 +35,7 @@ export const Multiple: ComponentStory<typeof FilterButton> = () => {
     <>
       <div className="m-8">
         <FilterButton
+          ariaLabel=""
           onClick={() => undefined}
         >
           <ChevronUpDownIcon
@@ -47,6 +48,7 @@ export const Multiple: ComponentStory<typeof FilterButton> = () => {
       </div>
       <div className="m-8">
         <FilterButton
+          ariaLabel=""
           onClick={() => undefined}
         >
           <TrashIcon

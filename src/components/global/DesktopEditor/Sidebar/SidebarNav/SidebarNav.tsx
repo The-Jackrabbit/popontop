@@ -35,18 +35,21 @@ export const SidebarNav: React.FC<Props> = ({ page, setPage }) => {
       </div>
       <div className="flex flex-row gap-1 justify-between -translate-y-2">
         <NavDot
+          ariaLabel="editor page"
           isActive={page === 'editor'}
           onClick={() => setPage('editor')}
           color={Color.green}
           label="Editor"
         />
         <NavDot
+          ariaLabel="charts page"
           isActive={page === 'your-charts'}
           onClick={() => setPage('your-charts')}
           color={Color.fuchsia}
           label="Your charts"
         />
         <NavDot
+          ariaLabel="credits page"
           isActive={page === 'credits'}
           onClick={() => setPage('credits')}
           color={Color.violet}

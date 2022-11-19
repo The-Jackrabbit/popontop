@@ -52,6 +52,7 @@ export const SearchView: React.FC<Props> = ({
     onClick={() => undefined}
   >
     <FilterButton
+      ariaLabel="add album to chart"
       onClick={onClick}
     >
       <PlusIcon className={ICON_STYLE} />

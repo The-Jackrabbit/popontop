@@ -4,6 +4,7 @@ import { a, useSpring } from 'react-spring';
 import { ListRowMode } from '../../Mobile/ListRow/ListRow';
 
 export interface Props {
+  ariaLabel: string;
   isActive?: boolean;
   children: React.ReactNode;
   className?: string;
@@ -15,6 +16,7 @@ export interface Props {
 export const ICON_STYLE = "h-6 w-6 translate-y-[1px] text-neutral-900 dark:text-neutral-50";
 
 const FilterButton: React.FC<Props> = ({
+  ariaLabel,
   isActive = false,
   children,
   className = 'w-8 h-8 p-[2px]',
@@ -47,6 +49,7 @@ const FilterButton: React.FC<Props> = ({
 
   return (
     <a.button
+      aria-label={ariaLabel}
       className={` 
         ${className}
         rounded-full

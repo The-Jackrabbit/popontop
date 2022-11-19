@@ -71,17 +71,19 @@ export const ActionBar: React.FC<Props> = ({
         style={{...actionOverlayOpacity}}
       >
         <FilterButton
+          ariaLabel="chart settings"
+          hasGradientIndicator={false}
           onClick={(e) => {
             e.stopPropagation();
             onClickSettings();
           }}
-          hasGradientIndicator={false}
         >
           <CogIcon className={ICON_STYLE} />
         </FilterButton>
         <div className="flex gap-2">
           {hasNonEmptyList && (
             <FilterButton
+              ariaLabel="toggle delete mode"
               isActive={listMode === ListRowMode.DELETE}
               onClick={() => onClickDeleteMode()}
             >
@@ -95,6 +97,7 @@ export const ActionBar: React.FC<Props> = ({
           />
           {hasNonEmptyList && (
             <FilterButton
+              ariaLabel="toggle rearrange mode"
               isActive={listMode === ListRowMode.REARRANGE}
               onClick={() => onClickRearrangeMode()}
             >
@@ -103,6 +106,7 @@ export const ActionBar: React.FC<Props> = ({
           )}
         </div>
         <FilterButton
+          ariaLabel="search albums"
           onClick={(e) => {
             e.stopPropagation();
             onClickSearch();

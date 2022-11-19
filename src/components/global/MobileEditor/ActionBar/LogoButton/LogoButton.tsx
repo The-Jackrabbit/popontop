@@ -25,6 +25,7 @@ export const LogoButton: React.FC<Props> = ({ end, isActive, start }) => (
       💿popontop
       {isActive ? (
         <NavDot
+          ariaLabel="home badge indicator"
           color={Color.fuchsia}
           isActive={true}
           onClick={() => undefined}

@@ -37,6 +37,7 @@ export const Multiple = () => {
         {
           Object.values(Color).map((color, index) => (
             <NavDot
+              ariaLabel=""
               key={index}
               color={color}
               isActive={color === activeDot}
@@ -50,6 +51,7 @@ export const Multiple = () => {
         {
           Object.values(Color).map((color, index) => (
             <NavDot
+              ariaLabel=""
               key={`static-${index}`}
               color={color}
               isActive={true}

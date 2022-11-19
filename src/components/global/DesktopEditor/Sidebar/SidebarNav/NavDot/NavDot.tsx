@@ -1,8 +1,12 @@
+
+
+
 import { useState } from 'react';
 import { colorMap } from '../../../../../../constants/colors';
 import ButtonWithAccessory, { TOP_POSITION_STYLE } from '../../../../../lib/ButtonWithAccessory/ButtonWithAccessory';
 
 export interface Props {
+  ariaLabel: string;
   className?: string;
   color: Color;
   isActive: boolean;
@@ -21,6 +25,7 @@ export enum Color {
 }
 
 export const NavDot: React.FC<Props> = ({
+  ariaLabel,
   className,
   color,
   isActive,
@@ -36,6 +41,7 @@ export const NavDot: React.FC<Props> = ({
       isVisible={isHovered && label !== null}
     > 
       <button
+        aria-label={ariaLabel}
         className={`
           ${className ?? '  w-4 h-4 '}
           border-2 
