@@ -68,7 +68,7 @@ export const ClickCircle: React.FC<Props> = ({
         )} */}
     <div
       className="
-        bg-[rgba(255,255,255,0.5)]  -translate-x-4
+        bg-[rgba(255,255,255,0.5)]
         dark:bg-[rgba(0,0,0,0.5)] shadow-lg
         z-50
         rounded-full h-64 w-64
@@ -124,7 +124,7 @@ export const ClickCircle: React.FC<Props> = ({
             className="
               h-6 w-6 text-center align-center content-center justify-center
               flex
-              text-neutral-900 dark:text-neutral-50
+              text-neutral-400 dark:text-neutral-50
             "
           />
         }
@@ -137,7 +137,7 @@ export const ClickCircle: React.FC<Props> = ({
       />
       <div
         className="
-        bg-neutral-300 dark:bg-neutral-900 basis-1/3 h-1/3 rounded-full     
+        bg-neutral-100 dark:bg-neutral-900 basis-1/3 h-1/3 rounded-full     
           flex-col text-center flex justify-center
         "
       >
@@ -157,7 +157,7 @@ export const ClickCircle: React.FC<Props> = ({
             className="
               h-6 w-6 text-center align-center content-center justify-center
               flex
-              text-neutral-900 dark:text-neutral-50
+              text-neutral-400 dark:text-neutral-50
             "
           />
         }
@@ -173,7 +173,7 @@ export const ClickCircle: React.FC<Props> = ({
               className="
                 h-6 w-6 text-center align-center content-center justify-center
                 flex
-                text-neutral-900 dark:text-neutral-50
+                text-neutral-400 dark:text-neutral-50
               "
             />
           )
@@ -182,7 +182,7 @@ export const ClickCircle: React.FC<Props> = ({
               className="
                 h-6 w-6 text-center align-center content-center justify-center
                 flex
-                text-neutral-900 dark:text-neutral-50
+                text-neutral-400 dark:text-neutral-50
               "
             />
           )

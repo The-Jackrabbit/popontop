@@ -65,9 +65,7 @@ export const ActionBar: React.FC<Props> = ({
           p-4
           w-[calc(100vw)]
           justify-between items-center 
-          bg-gradient-to-t from-[rgba(200,200,200,0.6)] 
-          via-[rgba(200,200,200,0.1)] 
-          dark:from-[rgba(0,0,0,0.6)] to-transparent
+         
           flex flex-row
         "
         style={{...actionOverlayOpacity}}
