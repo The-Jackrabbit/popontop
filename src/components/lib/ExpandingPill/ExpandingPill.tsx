@@ -37,6 +37,7 @@ export const ExpandingPill: React.FC<Props> = ({
     <a.div
       className={`
         ${className}
+        h-max
         cursor-pointer
         bg-white dark:bg-black
         px-2 py-1
