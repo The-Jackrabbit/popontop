@@ -42,7 +42,7 @@ export const ClickCircle: React.FC<Props> = ({
   };
 
   const onClickDownload = () => {
-    setIsPreviewOverlayVisible(true);
+    // setIsPreviewOverlayVisible(true);
   }
   
   return (
