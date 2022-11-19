@@ -1,4 +1,5 @@
-import { ChangeEventHandler } from "react";
+import { XCircleIcon } from "@heroicons/react/20/solid";
+import { ChangeEvent, ChangeEventHandler } from "react";
 import { a, useSpring } from 'react-spring';
 
 export interface Props {
@@ -25,37 +26,50 @@ export const Input: React.FC<Props> = ({
       bounce: 1.1
     },
   }));
+
   const onMouseOver = () => {
     animatebuttonStyle.start({scale: !isMobile ? 1.02 : 1});
-  }
+  };
+
   const onMouseLeave = () => {
     animatebuttonStyle.start({scale: 1.0});
-  }
+  };
+
   return (
     <>
       {label ? <label className="text-neutral-400">{label}</label> : null}
-      <a.input
-        onMouseEnter={() => onMouseOver()}
-        onMouseLeave={() => onMouseLeave()}
-        style={{ ...buttonStyle }}
-        className={`
-          ${className}
+      <div
+        className="
           dark:bg-neutral-900
           rounded-lg
           mb-4
           shadow-lg
           outline-offset-2
           focus-within:outline focus-within:outline-rose-200
-          p-4  outline-2 w-full h-12 
+          py-2 px-4
+          outline-2 w-full h-12 
           text-lg text-neutral-900 dark:text-white placeholder:dark:text-neutral-600
           flex justify-between
-        `}
-        onChange={onChange}
-        placeholder={placeholder}
-        value={value}
-      />
+        "
+      >
+        <a.input
+          onMouseEnter={() => onMouseOver()}
+          onMouseLeave={() => onMouseLeave()}
+          style={{ ...buttonStyle }}
+          className={`
+            ${className}
+            bg-transparent
+            outline-none
+          `}
+          onChange={onChange}
+          placeholder={placeholder}
+          value={value}
+        />
+        <a.button onClick={() => onChange({ target: { value: '' }} as ChangeEvent<HTMLInputElement>)}>
+          <XCircleIcon className="text-neutral-300 dark:text-neutral-600 w-4 h-4" />
+        </a.button>
+      </div>
     </>
-   
   );
 }
 

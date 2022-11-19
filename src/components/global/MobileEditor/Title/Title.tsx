@@ -17,7 +17,7 @@ const Title: React.FC<Props> = ({
   showIntroduction,
   textColor,
   titleHeightStyle,
- }) => {
+}) => {
   const [isEditing, setIsEditing] = useState(false);
   const clickEditTitleButton = () => {
     setIsEditing(!isEditing);
@@ -38,7 +38,6 @@ const Title: React.FC<Props> = ({
       `}
       onClick={() => clickEditTitleButton()}
     >
-
       {!showIntroduction ? (
         <div
           className="
