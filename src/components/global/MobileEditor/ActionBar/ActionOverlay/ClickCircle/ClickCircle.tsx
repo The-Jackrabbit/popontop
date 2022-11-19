@@ -12,20 +12,25 @@ import {
 } from '@heroicons/react/24/solid';
 import html2canvas from 'html2canvas';
 import { PaintBrushIcon } from "@heroicons/react/20/solid";
-
+import ClickCircleLayout from "./ClickCircleTwo";
 export interface Props {
   isLoading: boolean;
   saveChart: () => Promise<string>;
 }
 
+export const CLICK_CIRCLE_STYLE = `
+  h-6 w-6
+  flex text-center align-center content-center justify-center
+  text-neutral-400 dark:text-neutral-50
+`;
+
 export const ClickCircle: React.FC<Props> = ({
   isLoading,
   saveChart,
 }) => {
-  const [isPreviewOverlayVisible, setIsPreviewOverlayVisible] = useState(false);
   const { data: sessionData } = useSession();
   const r = useRouter();
-
+  
   const [savedChartId, setSavedChartId] = useState<null | string>('null');
   const save = async () => {
     const uuid = await saveChart();
@@ -38,172 +43,107 @@ export const ClickCircle: React.FC<Props> = ({
 
   const onClickDownload = () => {
     setIsPreviewOverlayVisible(true);
-//     html2canvas(document.getElementById('editor'), {
-// // 
-//       // windowHeight: 800*1,
-//       windowWidth: 414/2,
-//       // height: 800*1,
-//       width: 414*2,
-//       scale: 1
-//     }).then((canvas) => {
-//       document?.getElementById('preview')?.appendChild(canvas);
-//     });
   }
-
+  
   return (
-    <>
-    {/* {isPreviewOverlayVisible && (
-
-      <div
-      className="bg-transparent fixed top-0 left-0 bottom-0 right-0 h-screen w-screen -translate-x-4 z-50"
-      id="preview"
-      >
-        <button
-          onClick={(e) => { 
-            e.stopPropagation();
-            setIsPreviewOverlayVisible(false)
-          }}
-        >
-          isPreviewOverlayVisible</button>
-      </div>
-        )} */}
-    <div
-      className="
-        bg-[rgba(255,255,255,0.5)]
-        dark:bg-[rgba(0,0,0,0.5)] shadow-lg
-        z-50
-        rounded-full h-64 w-64
-        flex flex-wrap
-      "
-
-      onClick={(e) => e.stopPropagation()}
-    >
-      <div className="basis-1/3 h-1/3 rounded-full"></div>
-      <div
-        id="top"
-        className="
-          flex
-          items-center align-middle content-center justify-center
-          basis-1/3 h-1/3
-          rounded-full
-        "
-      >
-        <div className="flex justify-center">
-        {sessionData && r.pathname === '/mobile' ? (
-          <ClickCircleButton
-            icon={
-              <ListBulletIcon
-                className="
-                  h-6 w-6 text-center align-center content-center flex justify-center
-                "
-              />
-            }
-            isLoading={false}
-            label="your charts"
-            onClick={(e) => {
-              e.stopPropagation();
-              r.push('/mobile/your-charts')
-            }}
-            />
-            ) : null}
-         {sessionData && r.pathname === '/mobile/your-charts' ? (
-           <ClickCircleButton
-            icon={
-              <PaintBrushIcon  className="
-              h-6 w-6 text-center align-center content-center justify-center
-              flex items-center
-              text-neutral-400 dark:text-neutral-50
-            " />
-
-            }
-            isLoading={false}
-            label="create chart"
-            onClick={(e) => {
-              e.stopPropagation();
-              r.push('/mobile')
-            }}
-            />
-            ) : null}
-        </div>
-      </div>
-      <div className="basis-1/3 h-1/3 rounded-full"></div>
-      <ClickCircleButton
-        icon={
-          <CloudArrowUpIcon
-            className="
-              h-6 w-6 text-center align-center content-center justify-center
-              flex
-              text-neutral-400 dark:text-neutral-50
-            "
-          />
-        }
-        isLoading={isLoading}
-        label="save chart"
-        onClick={(e) => {
-          e.stopPropagation();
-          save();
-        }}
-      />
-      <div
-        className="
-        bg-neutral-100 dark:bg-neutral-900 basis-1/3 h-1/3 rounded-full     
-          flex-col text-center flex justify-center
-        "
-      >
-        {savedChartId !== 'null' ? 
+    <ClickCircleLayout
+      bottomButton={
+        <ClickCircleButton
+          icon={!sessionData ? (
+              <UserCircleIcon className={CLICK_CIRCLE_STYLE} />
+            ) : (
+              <ArrowRightOnRectangleIcon className={CLICK_CIRCLE_STYLE} />
+            )
+          }
+          isLoading={false}
+          label={!sessionData ? "log in" : "sign out"}
+          onClick={onClickLogin}
+        />
+      }
+      centerButton={
+        savedChartId !== 'null' ? (
           <Link href={`/mobile/charts/${savedChartId}`}>
             <a>
               <p className="animate-pulse">➡️</p>
               <p className="text-neutral-600 text-xs ">view chart</p>
             </a>
           </Link>
-          : null
-        }
-      </div>
-      <ClickCircleButton
-        icon={
-          <ArrowDownCircleIcon
-            className="
-              h-6 w-6 text-center align-center content-center justify-center
-              flex
-              text-neutral-400 dark:text-neutral-50
-            "
-          />
-        }
-        isLoading={false}
-        label="download"
-        onClick={() => onClickDownload()}
-      />
-      <div className="basis-1/3 h-1/3 rounded-full"></div>
-      <ClickCircleButton
-        icon={!sessionData
-          ? (
-            <UserCircleIcon
-              className="
-                h-6 w-6 text-center align-center content-center justify-center
-                flex
-                text-neutral-400 dark:text-neutral-50
-              "
+        ) : null
+      }
+      leftButton={
+        <ClickCircleButton
+          icon={null}
+          isLoading={false}
+          label=""
+          onClick={() => undefined}
+        />
+      }
+      rightButton={
+        <ClickCircleButton
+          icon={<CloudArrowUpIcon className={CLICK_CIRCLE_STYLE} />}
+          isLoading={isLoading}
+          label="save chart"
+          onClick={(e) => {
+            e.stopPropagation();
+            save();
+          }}
+        />
+      }
+      topButton={
+        <div className="flex justify-center">
+          {sessionData && r.pathname === '/mobile' ? (
+            <ClickCircleButton
+              icon={<ListBulletIcon className={CLICK_CIRCLE_STYLE} />}
+              isLoading={false}
+              label="your charts"
+              onClick={(e) => {
+                e.stopPropagation();
+                r.push('/mobile/your-charts')
+              }}
             />
-          )
-          : (
-            <ArrowRightOnRectangleIcon
-              className="
-                h-6 w-6 text-center align-center content-center justify-center
-                flex
-                text-neutral-700 dark:text-neutral-50
-              "
+          ) : null}
+          {sessionData && r.pathname === '/mobile/your-charts' ? (
+            <ClickCircleButton
+              icon={<PaintBrushIcon className={CLICK_CIRCLE_STYLE} />}
+              isLoading={false}
+              label="create chart"
+              onClick={(e) => {
+                e.stopPropagation();
+                r.push('/mobile')
+              }}
             />
-          )
-        }
-        isLoading={false}
-        label={!sessionData ? "log in" : "sign out"}
-        onClick={onClickLogin}
-      />
-      <div className="basis-1/3 h-1/3 rounded-full"></div>
-    </div>
-    </>
+          ) : null}
+        </div>
+      }
+    /> 
   );
 };
 
 export default ClickCircle;
+
+/* {isPreviewOverlayVisible && (
+  const [isPreviewOverlayVisible, setIsPreviewOverlayVisible] = useState(false);
+  
+  <div
+  className="bg-transparent fixed top-0 left-0 bottom-0 right-0 h-screen w-screen -translate-x-4 z-50"
+  id="preview"
+  >
+  <button
+  onClick={(e) => { 
+    e.stopPropagation();
+            setIsPreviewOverlayVisible(false)
+          }}
+          >
+          isPreviewOverlayVisible</button>
+          </div>
+          )} */
+          //     html2canvas(document.getElementById('editor'), {
+            // // 
+            //       // windowHeight: 800*1,
+            //       windowWidth: 414/2,
+            //       // height: 800*1,
+          //       width: 414*2,
+          //       scale: 1
+          //     }).then((canvas) => {
+          //       document?.getElementById('preview')?.appendChild(canvas);
+          //     });
