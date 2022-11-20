@@ -5,24 +5,34 @@ import SearchAlbums from "./SearchAlbums/SearchAlbums";
 import MobileSettings from "./MobileSettings/MobileSettings";
 import { ActionBar } from "./ActionBar/ActionBar";
 import Title from "./Title/Title";
-import useChartList from "../../../frontend/hooks/use-chart-list";
+import useChartList, { UseChartListContext } from "../../../frontend/hooks/use-chart-list";
 import { ChartSettings } from "@prisma/client";
 import MobilePage from "../../lib/MobilePage/MobilePage";
+import { Album } from "../../../styles/types/Albums";
 
 export interface Props {
   chartName?: string;
-  readonly?: boolean;
+  chartUuid: string;
+  context?: UseChartListContext;
+  initialList?: Album[];
   initialSettings?: ChartSettings | null;
+  isReadOnly?: boolean;
 }
 
 const MobileEditor: React.FC<Props> = ({
   chartName = 'My chart',
-  readonly = false,
+  chartUuid = '',
+  context,
+  initialList,
   initialSettings = null,
+  isReadOnly = false,
 }) => {
   const { actions, sheet, state } = useChartList({
+    chartUuid,
     chartName,
-    defaultSettings: initialSettings
+    context,
+    defaultSettings: initialSettings,
+    initialList,
   });
 
   return (
@@ -35,7 +45,7 @@ const MobileEditor: React.FC<Props> = ({
         {state.settings.showTitle ? (
           <Title
             textColor={state.settings.textColor}
-            isReadOnly={readonly}
+            isReadOnly={isReadOnly}
             chartTitle={state.chartTitle}
             setValue={(value: string) => actions.setChartTitle(value)}
             showIntroduction={state.showIntroduction}
@@ -52,6 +62,7 @@ const MobileEditor: React.FC<Props> = ({
         />
         <ActionBar
           className="-translate-x-4"
+          editChart={actions.editChart}
           isLoading={state.isLoading}
           listMode={state.listMode}
           onClickSettings={actions.onClickSettings}
@@ -60,6 +71,7 @@ const MobileEditor: React.FC<Props> = ({
           onClickRearrangeMode={actions.onClickRearrangeMode}
           hasNonEmptyList={state.list.length > 0}
           isActive={state.isActive}
+          isReadOnly={isReadOnly}
           setIsActive={actions.setIsActive}
           saveChart={actions.saveChart}
         />

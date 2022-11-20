@@ -12,8 +12,10 @@ import {
 } from '@heroicons/react/24/solid';
 import html2canvas from 'html2canvas';
 import { PaintBrushIcon } from "@heroicons/react/20/solid";
-import ClickCircleLayout from "./ClickCircleTwo";
+import ClickCircleLayout from "./ClickCircleLayout";
+
 export interface Props {
+  editChart: () => Promise<string>;
   isLoading: boolean;
   saveChart: () => Promise<string>;
 }
@@ -25,6 +27,7 @@ export const CLICK_CIRCLE_STYLE = `
 `;
 
 export const ClickCircle: React.FC<Props> = ({
+  editChart,
   isLoading,
   saveChart,
 }) => {
@@ -70,14 +73,22 @@ export const ClickCircle: React.FC<Props> = ({
           </Link>
         ) : null
       }
-      leftButton={
-        <ClickCircleButton
-          icon={null}
-          isLoading={false}
-          label=""
-          onClick={() => undefined}
-        />
-      }
+      leftButton={r.pathname.includes('/mobile/charts/') ? (
+          <ClickCircleButton
+            icon={<PaintBrushIcon className={CLICK_CIRCLE_STYLE} />}
+            isLoading={false}
+            label="save changes"
+            onClick={(e) => {
+              e.stopPropagation();
+              editChart();
+            }}
+          />
+        ) : <ClickCircleButton
+        icon={null}
+        isLoading={false}
+        label=""
+        onClick={() => undefined}
+      />}
       rightButton={
         <ClickCircleButton
           icon={<CloudArrowUpIcon className={CLICK_CIRCLE_STYLE} />}
@@ -102,7 +113,7 @@ export const ClickCircle: React.FC<Props> = ({
               }}
             />
           ) : null}
-          {sessionData && r.pathname === '/mobile/your-charts' ? (
+          {sessionData && r.pathname !== '/mobile' ? (
             <ClickCircleButton
               icon={<PaintBrushIcon className={CLICK_CIRCLE_STYLE} />}
               isLoading={false}

@@ -7,7 +7,7 @@ export interface Props {
   topButton: React.ReactNode;
 }
 
-export const ClickCircle: React.FC<Props> = ({
+export const ClickCircleLayout: React.FC<Props> = ({
   bottomButton,
   centerButton,
   leftButton,
@@ -54,4 +54,4 @@ export const ClickCircle: React.FC<Props> = ({
   </div>
 );
 
-export default ClickCircle;
+export default ClickCircleLayout;

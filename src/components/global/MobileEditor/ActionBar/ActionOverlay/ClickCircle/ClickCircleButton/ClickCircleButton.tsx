@@ -5,7 +5,7 @@ export interface Props {
   icon: React.ReactNode;
   isLoading: boolean;
   label: React.ReactNode;
-  onClick:  MouseEventHandler<HTMLButtonElement>;
+  onClick: MouseEventHandler<HTMLButtonElement>;
 }
 
 export const ClickCircleButton: React.FC<Props> = ({

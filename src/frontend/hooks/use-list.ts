@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Album } from "../../styles/types/Albums";
 
-export interface Props {
+export interface UseListState {
   list: Album[];
   mutations: {
     addAlbumToList: (album: Album) => void;
@@ -17,8 +17,8 @@ export interface Props {
   };
 }
 
-const useList = (): Props => {
-  const [list, setList] = useState<Album[]>([]);
+const useList = (initialList: Album[] = []): UseListState => {
+  const [list, setList] = useState<Album[]>(initialList);
 
   const removeAlbumAtIndex = (index: number) => {
     setList((list) =>{

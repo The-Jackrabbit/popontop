@@ -1,6 +1,7 @@
 import { NextPage } from 'next';
 import { useRouter } from 'next/router'
 import List from '../../../components/global/MobileEditor/List/List';
+import MobileEditor from '../../../components/global/MobileEditor/MobileEditor';
 import { ListRowMode } from '../../../components/lib/Mobile/ListRow/ListRow';
 import { trpc } from '../../../utils/trpc';
 
@@ -20,33 +21,20 @@ const ChartPage: NextPage = () => {
   const { data } = trpc.charts.getById.useQuery({ uuid: n }, {
     enabled: true, // disable this query from automatically running
   });
+
+  if (!data) {
+    return <p>loading</p>;
+  }
   
   return (
-
-    <div className="w-screen p-4">
-      <div className="rounded-lg bg-white dark:bg-[#0a0a0a]
-        px-6 py-4 sm:px-4 sm:py-3
-        overflow-hidden">
-        <div
-          className="
-            flex justify-between text-lg  text-neutral-500 dark:text-neutral-200
-          "
-        >
-          <p>{data?.name}</p>
-        </div>
-      </div>
-     
-      <List
-        listMode={ListRowMode.NORMAL}
-        showAlbums={data?.settings?.show_albums ?? false}
-        isInteractive={false}
-        list={data?.albums ?? []}
-        onRearrangeClick={()=>undefined}
-        removeAlbumAtIndex={()=>undefined}
-        textColor={data?.settings?.text_color ?? ''}
-      />
-    </div>
-  )
+    <MobileEditor
+      chartName={data.name}
+      chartUuid={uuid as string}
+      initialList={data.albums}
+      initialSettings={data.settings}
+      isReadOnly={false}
+    />
+  );
 }
 
 export default ChartPage;

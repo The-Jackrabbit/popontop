@@ -11,18 +11,28 @@ import { useDragSheetDown } from "./use-drag-sheet-down";
 import useList from "./use-list";
 
 const height = 667;
+
+export enum UseChartListContext {
+  ADD = 'ADD',
+  EDIT = 'EDIT',
+}
+
 const useChartList = ({
   chartName = 'My sick ass chart',
-  // readonly = false,
+  chartUuid,
   defaultSettings,
+  initialList,
 }: {
-  chartName: string;
-  readonly?: boolean;
+  chartName?: string;
+  chartUuid: string;
+  context?: UseChartListContext;
   defaultSettings: ChartSettings | null;
+  initialList?: Album[];
 }) => {
   const mutation = trpc.charts.create.useMutation();
+  const editMutation = trpc.charts.edit.useMutation();
   const settings = useChartSettings(defaultSettings);
-  const { list, mutations: listMutations } = useList();
+  const { list, mutations: listMutations } = useList(initialList);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isFirstCloseDone, setIsFirstCloseDone] = useState(false);
@@ -30,7 +40,7 @@ const useChartList = ({
   const [listMode, setListMode] = useState<ListRowMode>(ListRowMode.NORMAL);
   const [chartTitle, setChartTitle] = useState(chartName);
   const [titleHeightStyle, titleHeightAnimation] = useSpring(() => ({
-    height: '250px',
+    height: list.length === 0 ? '250px' : '60px',
     config: {
       bounce: 2,
       friction: 20,
@@ -62,6 +72,24 @@ const useChartList = ({
 
     return result.chart.uuid ?? '';
   };
+
+  const editChart = async (): Promise<string> => {
+    const result = await editMutation.mutateAsync({
+      uuid: chartUuid,
+      albums: list,
+      name: chartTitle,
+      settings: {
+        backgroundColor: settings.backgroundColor,
+        borderColor: settings.borderColor,
+        borderSize: settings.borderSize,
+        showAlbums: settings.showAlbums,
+        showTitle: settings.showTitle,
+        textColor: settings.textColor,
+      },
+    });
+
+    return result?.chart?.uuid ?? '';
+  };
   
   const isSheetOpen = isSettingsOpen || isSearchOpen;
   const {
@@ -81,10 +109,9 @@ const useChartList = ({
   });
 
   const onClickSheetDeadArea = () => {
-    if (!isSheetOpen) {
-      return;
+    if (isSheetOpen) {
+      close();
     }
-    close();
   };
 
   const onRearrangeClick = (rowMovementType: RowMovementType, index: number) => {
@@ -98,21 +125,6 @@ const useChartList = ({
       min,
       max,
     );
-
-    console.table({
-      unboundIndex,
-      length,
-      min,
-      max,
-      indexToMoveTo,
-    });
-    // ], [
-    //   'unboundIndex',
-    //   'length',
-    //   'min',
-    //   'max',
-    //   'indexToMoveTo',
-    // ]);
 
     listMutations.insertAlbumAtIndex(list[index] as Album, index, indexToMoveTo);
   };
@@ -129,6 +141,7 @@ const useChartList = ({
 
   return {
     actions: {
+      editChart,
       listMutations,
       onClickRearrangeMode: () => setListMode(
         (listMode) => listMode !== ListRowMode.REARRANGE
@@ -176,7 +189,7 @@ const useChartList = ({
           toggleTitle();
         },
       },
-      showIntroduction: !isFirstCloseDone,
+      showIntroduction: !isFirstCloseDone && list.length === 0,
       titleHeightStyle,
     },
   };

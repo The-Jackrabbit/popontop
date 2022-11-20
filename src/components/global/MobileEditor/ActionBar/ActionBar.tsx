@@ -13,10 +13,12 @@ import { ListRowMode } from "../../../lib/Mobile/ListRow/ListRow";
 export interface Props {
   actionOverlayClassName?: string;
   className?: string;
+  editChart: () => Promise<string>;
   hasNonEmptyList: boolean;
   isActive: boolean;
   isLoading: boolean;
   listMode: ListRowMode;
+  isReadOnly?: boolean;
   onClickSettings: () => void;
   onClickSearch: () => void;
   onClickDeleteMode: () => void;
@@ -28,9 +30,11 @@ export interface Props {
 export const ActionBar: React.FC<Props> = ({
   actionOverlayClassName,
   className = '',
+  editChart,
   hasNonEmptyList,
   isActive,
   isLoading,
+  isReadOnly = false,
   listMode,
   onClickDeleteMode,
   onClickRearrangeMode,
@@ -74,18 +78,20 @@ export const ActionBar: React.FC<Props> = ({
         `}
         style={{...actionOverlayOpacity}}
       >
-        <FilterButton
-          ariaLabel="chart settings"
-          hasGradientIndicator={false}
-          onClick={(e) => {
-            e.stopPropagation();
-            onClickSettings();
-          }}
-        >
-          <CogIcon className={ICON_STYLE} />
-        </FilterButton>
+        {!isReadOnly ? (
+          <FilterButton
+            ariaLabel="chart settings"
+            hasGradientIndicator={false}
+            onClick={(e) => {
+              e.stopPropagation();
+              onClickSettings();
+            }}
+            >
+            <CogIcon className={ICON_STYLE} />
+          </FilterButton>
+        ) : <div></div>}
         <div className="flex gap-2">
-          {hasNonEmptyList && (
+          {!isReadOnly && hasNonEmptyList && (
             <FilterButton
               ariaLabel="toggle delete mode"
               isActive={listMode === ListRowMode.DELETE}
@@ -99,7 +105,7 @@ export const ActionBar: React.FC<Props> = ({
             isActive={isActive}
             start={() => start()}
           />
-          {hasNonEmptyList && (
+          {!isReadOnly && hasNonEmptyList && (
             <FilterButton
               ariaLabel="toggle rearrange mode"
               isActive={listMode === ListRowMode.REARRANGE}
@@ -109,16 +115,18 @@ export const ActionBar: React.FC<Props> = ({
             </FilterButton>
           )}
         </div>
-        <FilterButton
-          ariaLabel="search albums"
-          onClick={(e) => {
-            e.stopPropagation();
-            onClickSearch();
-          }}
-          hasGradientIndicator={false}
-        >
-          <PlusIcon className={ICON_STYLE} />
-        </FilterButton>
+        {!isReadOnly ? (
+          <FilterButton
+            ariaLabel="search albums"
+            onClick={(e) => {
+              e.stopPropagation();
+              onClickSearch();
+            }}
+            hasGradientIndicator={false}
+          >
+            <PlusIcon className={ICON_STYLE} />
+          </FilterButton>
+        ) : <div></div>}
       </a.div>
       <a.div
         className="fixed left-0 bottom-0"
@@ -126,13 +134,14 @@ export const ActionBar: React.FC<Props> = ({
       >
         <ActionOverlay
           className={actionOverlayClassName}
-          saveChart={saveChart}
+          editChart={editChart}
           isLoading={isLoading}
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           onExit={(e: any) => {
             e.stopPropagation()
             end();
           }}
+          saveChart={saveChart}
         />
       </a.div>
     </>
