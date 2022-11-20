@@ -2,7 +2,7 @@ import FilterButton, { ICON_STYLE } from "../../../lib/FilterButton/FilterButton
 import { TrashIcon } from '@heroicons/react/20/solid';
 import { ListRowMode } from "../../../lib/Mobile/ListRow/ListRow";
 import ActionBarLayout from "./ActionBarLayout";
-import ViewChartsClickCircle from "./ActionOverlay/ClickCircle/ViewChartsClickCircle/VIewChartsClickCircle";
+import ViewChartsClickCircle from "./ActionOverlay/ClickCircle/ViewChartsClickCircle/ViewChartsClickCircle";
 
 export interface Props {
   actionOverlayClassName?: string;
