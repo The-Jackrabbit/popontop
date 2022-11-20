@@ -48,47 +48,20 @@ export const ListRow: React.FC<Props> = ({
     onClick: () => undefined
   });
 
-  const leftSwipeAction = () => {
-    toggleRowVisibility();
-    removeSelfFromList();
-  };
-
-  const rightSwipeAction = () => {
-    alert(JSON.stringify(album));
-  };
-
-  const { bind, bg, isActionLayerVisible, x } = useRowSwipeActions({
-    leftSwipeAction,
-    rightSwipeAction,
-  });
-
-  const binding = mode === ListRowMode.NORMAL ? bind() : {};
-
   return (
     <>
       <a.div
-        {...binding}
         className="
           touch-pan-x
           px-6 mb-2
           relative 
           grid items-center
           origin-[50%_50%_0px]
-
           overflow-hidden
         "
-        style={{ background: bg, ...style }}
+        style={{ ...style }}
       >
         <div
-          className={`
-            ${isActionLayerVisible ? 'opacity-100' : 'opacity-0'}
-            flex justify-between
-          `}
-        >
-          <div>💿</div>
-          <div>🗑</div>
-        </div>
-        <a.div
           className={`
             absolute ${ROW_HEIGHT_WITH_UNIT}
             w-full overflow-hidden 
@@ -97,7 +70,6 @@ export const ListRow: React.FC<Props> = ({
             flex justify-between gap-2
             my-0
           `}
-          style={isInteractive ? { x } : {}}
         >
           {mode === ListRowMode.NORMAL ? (
             <ListView
@@ -135,8 +107,7 @@ export const ListRow: React.FC<Props> = ({
               }}
             />
           ) : null}
-          
-        </a.div>
+        </div>
       </a.div>
        {/* {isBreakVisible && (<hr className="my-1 border-neutral-200 dark:border-transparent" />)} */}
     </>

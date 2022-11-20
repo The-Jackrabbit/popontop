@@ -20,6 +20,7 @@ export enum UseChartListContext {
 const useChartList = ({
   chartName = 'My sick ass chart',
   chartUuid,
+  context,
   defaultSettings,
   initialList,
 }: {
@@ -40,7 +41,7 @@ const useChartList = ({
   const [listMode, setListMode] = useState<ListRowMode>(ListRowMode.NORMAL);
   const [chartTitle, setChartTitle] = useState(chartName);
   const [titleHeightStyle, titleHeightAnimation] = useSpring(() => ({
-    height: list.length === 0 ? '250px' : '60px',
+    height: list.length === 0 && context !== UseChartListContext.EDIT  ? '250px' : '60px',
     config: {
       bounce: 2,
       friction: 20,
@@ -189,7 +190,7 @@ const useChartList = ({
           toggleTitle();
         },
       },
-      showIntroduction: !isFirstCloseDone && list.length === 0,
+      showIntroduction: context === UseChartListContext.EDIT ? false : !isFirstCloseDone && list.length === 0,
       titleHeightStyle,
     },
   };

@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { ListBulletIcon, PaintBrushIcon } from "@heroicons/react/20/solid";
+import { ListBulletIcon, PaintBrushIcon, CloudArrowUpIcon } from "@heroicons/react/20/solid";
 import AccountCircleButton from "../ClickCircleButton/AccountCircleButton/AccountCircleButton";
 import ClickCircleButton, { CLICK_CIRCLE_STYLE } from "../ClickCircleButton/ClickCircleButton";
 import ClickCircleLayout from "../ClickCircleLayout";
@@ -43,7 +43,7 @@ export const EditChartClickCircle: React.FC<Props> = ({
       }
       rightButton={
         <ClickCircleButton
-          icon={<PaintBrushIcon className={CLICK_CIRCLE_STYLE} />}
+          icon={<CloudArrowUpIcon className={CLICK_CIRCLE_STYLE} />}
           isLoading={false}
           label="save changes"
           onClick={onClickSaveChanges}

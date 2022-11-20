@@ -4,8 +4,11 @@ import Link from "next/link";
 import ActionBar from "../../../components/global/MobileEditor/ActionBar/ActionBar";
 import { ListRowMode } from "../../../components/lib/Mobile/ListRow/ListRow";
 import MobilePage from "../../../components/lib/MobilePage/MobilePage";
-import { ROW_HEIGHT_WITH_UNIT } from "../../../frontend/hooks/use-disappear-row";
 import { trpc } from "../../../utils/trpc";
+import Row from '../../../components/lib/Mobile/Row/Row';
+import { DeleteRowButton } from '../../../components/lib/Mobile/Row/DeleteRowButton/DeleteRowButton';
+import { colorMap } from '../../../constants/colors';
+import { Color } from '../../../components/global/DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
 
 const YourCharts: NextPage = () => {
   const { data } = trpc.charts.getUserCharts.useQuery();
@@ -20,38 +23,90 @@ const YourCharts: NextPage = () => {
     deleteChartMutation.mutateAsync({ uuid: chartUuid ? chartUuid : ''});
   }
   
-  if (!data) {
-    return <p>loading...</p>
-  }
-  
   return (
     <MobilePage>
+      <h1 className="text-4xl font-bold">your charts</h1>
+      <div
+        className={`
+          ${colorMap[Color.fuchsia]}
+          shadow-md
+          rounded-full w-full h-1 my-4 
+        `}
+      ></div>
       <div>
-        {data.map((chart, index) => (
-          <Link
-            href={`/mobile/charts/${chart.uuid}`}
-            key={JSON.stringify(chart) + index.toString()}
-          >
-            <div
-              className={`
-                ${ROW_HEIGHT_WITH_UNIT}
-                w-full overflow-hidden 
-                last-of-type:border-b-0
-                text-neutral-900 dark:text-neutral-50
-                flex justify-between gap-2
-                my-0
-              `}
-            >
-              <p>{chart.name}</p>
-              <p>{chart.created_at ? chart.created_at.toDateString() : ''}</p>
-              {listMode === ListRowMode.DELETE && (
-                <button onClick={(e) => onClickDeleteChart(e, chart.uuid as string)}>
-                  x
-                </button>
-              )}
-            </div>
-          </Link>
-        ))}
+        {data ? (
+          <>
+            {data.map((chart, index) => (
+              <Link
+                href={`/mobile/charts/${chart.uuid}`}
+                key={JSON.stringify(chart) + index.toString()}
+              >
+                <div 
+                  className="
+                    flex justify-between
+                    mb-2 h-16
+
+                    cursor-pointer
+                    hover:bg-neutral-300 active:bg-neutral-400
+                    dark:hover:bg-neutral-800 dark:active:bg-neutral-700
+                  "
+                > 
+                  <div 
+                    className="
+                      basis-5/6
+                    "
+                  >
+                    <p className="text-2xl ">{chart.name}</p>
+                    <p className='text-xs dark:text-neutral-400 font-light'>
+                      created: {chart.created_at ? chart.created_at.toDateString() : ''}
+                    </p>
+                  </div>
+                  <div className="basis-1/6">
+                    {listMode === ListRowMode.DELETE && (
+                      <DeleteRowButton
+                        className="
+                          h-full w-full
+                        "
+                        onClick={(e) => onClickDeleteChart(e, chart.uuid as string)}
+                      />
+                    )}
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </>
+        ) :
+          <>
+           {[...new Array(10)].map((_, index) => (
+              <div
+                key={index}
+                className="
+                  flex justify-between
+                  mb-2 h-16
+
+                  cursor-pointer
+                  hover:bg-neutral-300 active:bg-neutral-400
+                  dark:hover:bg-neutral-800 dark:active:bg-neutral-700
+                "
+              > 
+                <div className="basis-full">
+                  <p
+                    className="
+                      animate-pulse text-2xl w-full bg-neutral-200 dark:bg-neutral-700
+                      h-[36px]
+                    "
+                  />
+                  <p
+                    className="
+                      animate-pulse text-xs mt-1 w-36 h-[16px] bg-neutral-200 dark:bg-neutral-700
+                    "
+                  />
+                </div>
+              </div>
+            ))}
+          </>
+        }
+      
         <ActionBar
           actionOverlayClassName="-translate-x-0 asdf"
           hasNonEmptyList={false}

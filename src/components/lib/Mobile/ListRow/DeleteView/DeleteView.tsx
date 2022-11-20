@@ -2,9 +2,8 @@ import React, { useEffect } from "react";
 import Image from 'next/image';
 import { Album } from '../../../../../styles/types/Albums';
 import { ROW_HEIGHT } from "../../../../../frontend/hooks/use-disappear-row";
-import FilterButton, { ICON_STYLE } from "../../../FilterButton/FilterButton.tsx/FilterButton";
-import { XMarkIcon } from "@heroicons/react/20/solid";
 import { a, config, useSpring } from "react-spring";
+import { DeleteRowButton } from "../../Row/DeleteRowButton/DeleteRowButton";
 
 export interface Props {
   album: Album;
@@ -21,34 +20,20 @@ export const DeleteView: React.FC<Props> = ({
   showAlbums,
   textColor,
 }) => {
-  const [rotateX, animateRotationY] = useSpring(() => ({
-    rotateX: '90deg',
-    config: config.wobbly
-  }))
-
-  useEffect(() => {
-    animateRotationY.start({ rotateX: '0deg' });
-  }, [animateRotationY]);
-
   return (
-    <div
-      className="
-        w-full
-        flex justify-between
-      "
-    >
+    <div className="w-fullflex justify-between">
       {showAlbums && (
-
-      <div
-        className="
-        text-xs basis-1/12 
-          w-12
-          flex flex-col shrink-0 justify-center content-center items-center
+        <div
+          className="
+            text-xs
+            basis-1/12 
+            w-12
+            flex flex-col shrink-0 justify-center content-center items-center
           "
-          >
-        <p>{ index + 1 }</p>
-      </div>
-        )}
+        >
+          <p>{ index + 1 }</p>
+        </div>
+      )}
       <div className="basis-2/12 justify-start">
         <Image
           width={ROW_HEIGHT}
@@ -73,16 +58,9 @@ export const DeleteView: React.FC<Props> = ({
         </p>
       </div>
 
-      <a.button
-        className="basis-3/12 justify-center grow-0 flex items-center bg-red-600" 
-        onClick={() => onClick()}
-        style={{...rotateX}}
-      >
-        <XMarkIcon className="h-6 w-6 translate-y-[1px] text-neutral-50" />
-      </a.button>
+      <DeleteRowButton onClick={onClick}/>
     </div>
   );
 }
 
 export default DeleteView;
-
