@@ -83,7 +83,6 @@ const YourCharts: NextPage = () => {
                 className="
                   flex justify-between
                   mb-2 h-16
-
                   cursor-pointer
                   hover:bg-neutral-300 active:bg-neutral-400
                   dark:hover:bg-neutral-800 dark:active:bg-neutral-700
@@ -98,7 +97,8 @@ const YourCharts: NextPage = () => {
                   />
                   <p
                     className="
-                      animate-pulse text-xs mt-1 w-36 h-[16px] bg-neutral-200 dark:bg-neutral-700
+                      animate-pulse text-xs mt-1 w-36 h-[16px]
+                    bg-neutral-200 dark:bg-neutral-700
                     "
                   />
                 </div>

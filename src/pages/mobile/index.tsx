@@ -4,7 +4,7 @@ import { UseChartListContext } from "../../frontend/hooks/use-chart-list";
 
 const Mobile: NextPage = () => {
   return (
-    <MobileEditor context={UseChartListContext.ADD} />
+    <MobileEditor isLoading={false} context={UseChartListContext.ADD} />
   );
 };
 

@@ -19,22 +19,19 @@ const ChartPage: NextPage = () => {
 
   const n = genUuid(uuid);
 
-  const { data } = trpc.charts.getById.useQuery({ uuid: n }, {
+  const { data, isLoading } = trpc.charts.getById.useQuery({ uuid: n }, {
     enabled: true, // disable this query from automatically running
   });
 
-  if (!data) {
-    return <p>loading</p>;
-  }
-  
   return (
     <MobileEditor
-      chartName={data.name}
+      chartName={data?.name}
       chartUuid={uuid as string}
       context={UseChartListContext.EDIT}
-      initialList={data.albums}
-      initialSettings={data.settings}
-      isReadOnly={data.isReadOnly}
+      initialList={data?.albums}
+      initialSettings={data?.settings}
+      isLoading={isLoading}
+      isReadOnly={data?.isReadOnly}
     />
   );
 }

@@ -9,6 +9,7 @@ import useChartList, { UseChartListContext } from "../../../frontend/hooks/use-c
 import { ChartSettings } from "@prisma/client";
 import MobilePage from "../../lib/MobilePage/MobilePage";
 import { Album } from "../../../styles/types/Albums";
+import { useEffect } from "react";
 
 export interface Props {
   chartName?: string;
@@ -16,6 +17,7 @@ export interface Props {
   context?: UseChartListContext;
   initialList?: Album[];
   initialSettings?: ChartSettings | null;
+  isLoading?: boolean;
   isReadOnly?: boolean;
 }
 
@@ -25,6 +27,7 @@ const MobileEditor: React.FC<Props> = ({
   context,
   initialList,
   initialSettings = null,
+  isLoading = true,
   isReadOnly = false,
 }) => {
   const { actions, sheet, state } = useChartList({
@@ -34,7 +37,11 @@ const MobileEditor: React.FC<Props> = ({
     defaultSettings: initialSettings,
     initialList,
   });
-
+  useEffect(() => {
+    if (initialList) {
+      actions.listMutations.setList(initialList);
+    }
+  }, [initialList, actions.listMutations]);
   return (
     <MobilePage>
       <a.div
@@ -46,20 +53,70 @@ const MobileEditor: React.FC<Props> = ({
           <Title
             textColor={state.settings.textColor}
             isReadOnly={isReadOnly}
-            chartTitle={state.chartTitle}
+            chartTitle={state.chartTitle ?? ''}
             setValue={(value: string) => actions.setChartTitle(value)}
             showIntroduction={state.showIntroduction}
             titleHeightStyle={state.titleHeightStyle}
           />
         ) : null}
-        <List
-          list={state.list}
-          listMode={state.listMode}
-          onRearrangeClick={actions.onRearrangeClick}
-          removeAlbumAtIndex={actions.listMutations.removeAlbumAtIndex}
-          showAlbums={state.settings.showAlbums}
-          textColor={state.settings.textColor}
-        />
+        {isLoading ? (
+          <div>
+            {[...new Array(10)].map((_, index) => (
+              <div
+                key={index+'loadingchart'}
+                className="w-full flex justify-between mb-1"
+              >
+                <div
+                  className="
+                    text-xs basis-1/12 
+                    w-12
+                    flex flex-col shrink-0 justify-center content-center items-center
+                  "
+                >
+                  <p>{1 + index}</p>
+                </div>
+                <div className="basis-2/12 justify-start">
+                  <div
+                    className="
+                      w-[60px] h-[60px]
+                      bg-neutral-200 dark:bg-neutral-700 animate-pulse
+                    "></div>
+                </div>
+                <div
+                  className="basis-8/12 content-start grow-0 overflow-x-hidden justify-end flex flex-col"
+                >
+                  <div
+                    className="
+                      text-xs
+                      w-48 h-[16px]
+                     bg-neutral-200 dark:bg-neutral-700 mb-1
+                      animate-pulse
+                    "
+                  />
+                  <div
+                    className="
+                      text-xs
+                      w-36 h-[16px]
+                     bg-neutral-200 dark:bg-neutral-700
+                     animate-pulse
+                    "
+                  />
+               </div>
+               <div className="basis-1/12"></div>
+             </div>
+            ))}
+          </div>
+        ) : (
+            <List
+              list={state.list}
+              listMode={state.listMode}
+              onRearrangeClick={actions.onRearrangeClick}
+              removeAlbumAtIndex={actions.listMutations.removeAlbumAtIndex}
+              showAlbums={state.settings.showAlbums}
+              textColor={state.settings.textColor}
+            />
+          )
+        }
         <ActionBar
           className="-translate-x-4"
           editChart={actions.editChart}

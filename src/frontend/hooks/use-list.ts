@@ -13,6 +13,7 @@ export interface UseListState {
     ) => void;
     lowerAlbumAtIndex: (index: number) => void;
     removeAlbumAtIndex: (index: number) => void;
+    setList: (list: Album[]) => void;
     swapAlbumsAtIndices: (oldIndex: number, newIndex: number) => void;
   };
 }
@@ -100,6 +101,7 @@ const useList = (initialList: Album[] = []): UseListState => {
       insertAlbumAtIndex,
       lowerAlbumAtIndex,
       removeAlbumAtIndex,
+      setList,
       swapAlbumsAtIndices,
     },
   };

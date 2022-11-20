@@ -21,7 +21,7 @@ export const DeleteView: React.FC<Props> = ({
   textColor,
 }) => {
   return (
-    <div className="w-fullflex justify-between">
+    <div className="w-full flex justify-between">
       {showAlbums && (
         <div
           className="
