@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
-import { PaintBrushIcon } from "@heroicons/react/20/solid";
+import { ListBulletIcon, PaintBrushIcon } from "@heroicons/react/20/solid";
 import AccountCircleButton from "../ClickCircleButton/AccountCircleButton/AccountCircleButton";
-import ClickCircleButton, { CLICK_CIRCLE_STYLE, EMPTY_CIRCLE_PROPS } from "../ClickCircleButton/ClickCircleButton";
+import ClickCircleButton, { CLICK_CIRCLE_STYLE } from "../ClickCircleButton/ClickCircleButton";
 import ClickCircleLayout from "../ClickCircleLayout";
 import React from "react";
 
@@ -24,11 +24,23 @@ export const EditChartClickCircle: React.FC<Props> = ({
     router.push('/mobile')
   };
 
+  const onClickYourCharts = (event: React.BaseSyntheticEvent<MouseEvent>) => {
+    event.stopPropagation();
+    router.push('/mobile/your-charts')
+  };
+
   return (
     <ClickCircleLayout
       bottomButton={<AccountCircleButton />}
       centerButton={null}
-      leftButton={<ClickCircleButton {...EMPTY_CIRCLE_PROPS} />}
+      leftButton={
+        <ClickCircleButton
+          icon={<ListBulletIcon className={CLICK_CIRCLE_STYLE} />}
+          isLoading={false}
+          label="your charts"
+          onClick={onClickYourCharts}
+        />
+      }
       rightButton={
         <ClickCircleButton
           icon={<PaintBrushIcon className={CLICK_CIRCLE_STYLE} />}

@@ -4,6 +4,7 @@ import { getChartById } from "./charts/getById";
 import { createChart } from "./charts/create";
 import { editChart } from "./charts/edit";
 import { getChartsForUser } from "./charts/getChartsForUser";
+import { deleteChart } from "./charts/delete";
 
 
 export const chartsRouter = router({
@@ -44,7 +45,7 @@ export const chartsRouter = router({
       );
     }),
 
-  edit: publicProcedure
+    edit: publicProcedure
     .input(
       z.object({
         albums: z.array(z.any()),
@@ -69,6 +70,22 @@ export const chartsRouter = router({
         req.input.name,
         req.input.settings,
         ctx?.session?.user?.id,
+      );
+    }),
+
+  
+  delete: publicProcedure
+    .input(
+      z.object({
+        uuid: z.string(),
+      })
+    )
+    .mutation(async (req)  => {
+      const { ctx } = req;
+
+      return deleteChart(
+        req.input.uuid,
+        ctx?.session?.user?.id as string,
       );
     }),
 });

@@ -55,14 +55,14 @@ export const CreateChartClickCircle: React.FC<Props> = ({ isLoading, saveChart }
       leftButton={
         sessionData ? ( 
           <ClickCircleButton
-          icon={<ListBulletIcon className={CLICK_CIRCLE_STYLE} />}
-          isLoading={false}
-          label="your charts"
-          onClick={(e: React.BaseSyntheticEvent) => {
-            e.stopPropagation();
-            r.push('/mobile/your-charts')
-          }}
-        />
+            icon={<ListBulletIcon className={CLICK_CIRCLE_STYLE} />}
+            isLoading={false}
+            label="your charts"
+            onClick={(e: React.BaseSyntheticEvent) => {
+              e.stopPropagation();
+              r.push('/mobile/your-charts')
+            }}
+          />
         ) : <ClickCircleButton {...EMPTY_CIRCLE_PROPS} />
       }
     /> 
