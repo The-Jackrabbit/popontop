@@ -56,7 +56,7 @@ const YourCharts: NextPage = () => {
                       basis-5/6
                     "
                   >
-                    <p className="text-2xl ">{chart.name}</p>
+                    <p className="text-2xl font-semibold">{chart.name}</p>
                     <p className='text-xs dark:text-neutral-400 font-light'>
                       created: {chart.created_at ? chart.created_at.toDateString() : ''}
                     </p>
@@ -76,8 +76,8 @@ const YourCharts: NextPage = () => {
             ))}
           </>
         ) :
-          <>
-           {[...new Array(10)].map((_, index) => (
+          <div className="max-h-[80vh] overflow-y-scroll">
+           {[...new Array(100)].map((_, index) => (
               <div
                 key={index}
                 className="
@@ -97,14 +97,13 @@ const YourCharts: NextPage = () => {
                   />
                   <p
                     className="
-                      animate-pulse text-xs mt-1 w-36 h-[16px]
-                    bg-neutral-200 dark:bg-neutral-700
+                      animate-pulse text-xs mt-1 w-36 h-[16px] bg-neutral-200 dark:bg-neutral-700
                     "
                   />
                 </div>
               </div>
             ))}
-          </>
+          </div>
         }
       
         <ActionBar
