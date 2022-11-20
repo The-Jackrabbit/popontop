@@ -9,8 +9,8 @@ import { getChartsForUser } from "./charts/getChartsForUser";
 export const chartsRouter = router({
   getById: publicProcedure
     .input(z.object({ uuid: z.string() }))
-    .query(async ({ input }) => {
-      return getChartById(input.uuid);
+    .query(async ({ ctx, input }) => {
+      return getChartById(input.uuid, ctx?.session?.user?.id as string);
     }),
 
   getUserCharts: protectedProcedure

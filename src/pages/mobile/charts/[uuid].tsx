@@ -32,7 +32,7 @@ const ChartPage: NextPage = () => {
       chartUuid={uuid as string}
       initialList={data.albums}
       initialSettings={data.settings}
-      isReadOnly={false}
+      isReadOnly={data.isReadOnly}
     />
   );
 }

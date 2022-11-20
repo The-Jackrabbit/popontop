@@ -8,6 +8,19 @@ export interface Props {
   onClick: MouseEventHandler<HTMLButtonElement>;
 }
 
+export const CLICK_CIRCLE_STYLE = `
+  h-6 w-6
+  flex text-center align-center content-center justify-center
+  text-neutral-400 dark:text-neutral-50
+  `;
+  
+export const EMPTY_CIRCLE_PROPS = {
+  icon: null,
+  isLoading: false,
+  label: '',
+  onClick: () => undefined,
+};
+
 export const ClickCircleButton: React.FC<Props> = ({
   icon,
   isLoading,

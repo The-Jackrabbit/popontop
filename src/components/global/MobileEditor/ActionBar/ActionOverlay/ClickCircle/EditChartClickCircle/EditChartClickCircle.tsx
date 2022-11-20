@@ -1,30 +1,28 @@
 import { useRouter } from "next/router";
 import { PaintBrushIcon } from "@heroicons/react/20/solid";
 import AccountCircleButton from "../ClickCircleButton/AccountCircleButton/AccountCircleButton";
-import ClickCircleButton from "../ClickCircleButton/ClickCircleButton";
+import ClickCircleButton, { CLICK_CIRCLE_STYLE, EMPTY_CIRCLE_PROPS } from "../ClickCircleButton/ClickCircleButton";
 import ClickCircleLayout from "../ClickCircleLayout";
+import React from "react";
 
 export interface Props {
   editChart: () => Promise<string>;
 }
 
-export const CLICK_CIRCLE_STYLE = `
-  h-6 w-6
-  flex text-center align-center content-center justify-center
-  text-neutral-400 dark:text-neutral-50
-  `;
-  
-export const EMPTY_CIRCLE_PROPS = {
-  icon: null,
-  isLoading: false,
-  label: '',
-  onClick: () => undefined,
-};
-
 export const EditChartClickCircle: React.FC<Props> = ({
   editChart,
 }) => {
-  const r = useRouter();
+  const router = useRouter();
+
+  const onClickSaveChanges = (event: React.BaseSyntheticEvent<MouseEvent>) => {
+    event.stopPropagation();
+    editChart();
+  };
+
+  const onClickCreateChart = (event: React.BaseSyntheticEvent<MouseEvent>) => {
+    event.stopPropagation();
+    router.push('/mobile')
+  };
 
   return (
     <ClickCircleLayout
@@ -36,10 +34,7 @@ export const EditChartClickCircle: React.FC<Props> = ({
           icon={<PaintBrushIcon className={CLICK_CIRCLE_STYLE} />}
           isLoading={false}
           label="save changes"
-          onClick={(e: any) => {
-            e.stopPropagation();
-            editChart();
-          }}
+          onClick={onClickSaveChanges}
         />
       }
       topButton={
@@ -47,10 +42,7 @@ export const EditChartClickCircle: React.FC<Props> = ({
           icon={<PaintBrushIcon className={CLICK_CIRCLE_STYLE} />}
           isLoading={false}
           label="create chart"
-          onClick={(e: any) => {
-            e.stopPropagation();
-            r.push('/mobile')
-          }}
+          onClick={onClickCreateChart}
         />
       }
     /> 

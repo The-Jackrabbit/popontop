@@ -1,12 +1,13 @@
 import { useRouter } from "next/router";
 import CreateChartClickCircle from "./ClickCircle/CreateChartClickCircle/CreateChartClickCircle";
 import { EditChartClickCircle } from "./ClickCircle/EditChartClickCircle/EditChartClickCircle";
+import ViewChartsClickCircle from "./ClickCircle/ViewChartsClickCircle/VIewChartsClickCircle";
 
 export interface Props {
   className?: string;
   editChart?: () => Promise<string>;
   isLoading: boolean;
-  onExit: (a: any) => void;
+  onExit: (event: React.BaseSyntheticEvent<MouseEvent>) => void;
   saveChart: () => Promise<string>;
 }
 
@@ -20,6 +21,7 @@ export const ActionOverlay: React.FC<Props> = ({
   const router = useRouter();
   const isOnEditPage = router.pathname.includes('/mobile/charts/');
   const isOnCreateChartPage = router.pathname === '/mobile';
+  const isOnViewChartsPage = router.pathname === '/mobile/your-charts';
 
   return (
     <div
@@ -32,7 +34,6 @@ export const ActionOverlay: React.FC<Props> = ({
         dark:from-[rgba(23,23,23,0)]
         dark:to-[rgba(23,23,23,1)]
         h-[110vh] w-[100vw] fixed top-0 left-0 
-      
         flex flex-col items-center justify-center
         z-50
         ${className}
@@ -46,6 +47,9 @@ export const ActionOverlay: React.FC<Props> = ({
         ) : null}
         {isOnCreateChartPage ? (
           <CreateChartClickCircle saveChart={saveChart} isLoading={isLoading} />
+        ) : null}
+        {isOnViewChartsPage ? (
+          <ViewChartsClickCircle />
         ) : null}
       </div>
     </div>

@@ -2,10 +2,11 @@ import { prisma } from "../../../../server/db/client";
 import { Album } from "../../../../styles/types/Albums";
 import { Chart } from "../../../../styles/types/Charts";
 
-export const getChartById = async (uuid: string): Promise<Chart> => {
+export const getChartById = async (uuid: string, userId: string): Promise<Chart & { isReadOnly: boolean }> => {
   if (uuid.length === 0) {
     return {
       albums: [],
+      isReadOnly: false,
       name:  '',
       settings: null,
       uuid:   '',
@@ -14,6 +15,9 @@ export const getChartById = async (uuid: string): Promise<Chart> => {
   const chart = await prisma.chart.findFirst({
     where: {
       uuid,
+    },
+    include: {
+      chart_to_user: true,
     }
   });
   const albums = await prisma.album.findMany({
@@ -26,6 +30,7 @@ export const getChartById = async (uuid: string): Promise<Chart> => {
       chart_id: chart?.uuid,
     }
   });
+  const userIdAssociatedWithChart = chart?.chart_to_user[0]?.user_id;
 
   return {
     albums: albums.map((album): Album => ({
@@ -34,6 +39,7 @@ export const getChartById = async (uuid: string): Promise<Chart> => {
       imageUrl: album?.album_art_url ?? '',
       lastfmId: ''
     })),
+    isReadOnly: userIdAssociatedWithChart !== userId,
     name: chart?.name ?? '',
     settings: chartSettings,
     uuid: chart?.uuid ?? '',
