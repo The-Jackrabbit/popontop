@@ -12,7 +12,7 @@ import { Album } from "../../../styles/types/Albums";
 
 export interface Props {
   chartName?: string;
-  chartUuid: string;
+  chartUuid?: string;
   context?: UseChartListContext;
   initialList?: Album[];
   initialSettings?: ChartSettings | null;

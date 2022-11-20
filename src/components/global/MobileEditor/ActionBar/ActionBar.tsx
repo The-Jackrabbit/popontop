@@ -13,7 +13,7 @@ import { ListRowMode } from "../../../lib/Mobile/ListRow/ListRow";
 export interface Props {
   actionOverlayClassName?: string;
   className?: string;
-  editChart: () => Promise<string>;
+  editChart?: () => Promise<string>;
   hasNonEmptyList: boolean;
   isActive: boolean;
   isLoading: boolean;

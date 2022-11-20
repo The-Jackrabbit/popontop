@@ -1,13 +1,10 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
-import { useSpring, animated } from "react-spring";
-import ClickCircle from "./ClickCircle/ClickCircle";
 import CreateChartClickCircle from "./ClickCircle/CreateChartClickCircle/CreateChartClickCircle";
 import { EditChartClickCircle } from "./ClickCircle/EditChartClickCircle/EditChartClickCircle";
 
 export interface Props {
   className?: string;
-  editChart: () => Promise<string>;
+  editChart?: () => Promise<string>;
   isLoading: boolean;
   onExit: (a: any) => void;
   saveChart: () => Promise<string>;
@@ -44,7 +41,7 @@ export const ActionOverlay: React.FC<Props> = ({
     >
       <div className="basis-1/2" />
       <div className="basis-1/2">
-        {isOnEditPage ? (
+        {isOnEditPage && editChart ? (
           <EditChartClickCircle editChart={editChart} />
         ) : null}
         {isOnCreateChartPage ? (

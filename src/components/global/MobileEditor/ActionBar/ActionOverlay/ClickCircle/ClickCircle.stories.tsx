@@ -21,6 +21,7 @@ export const Single: ComponentStory<typeof ClickCircle> = () => {
     <SessionProvider session={null}>
       <div className="m-8">
         <ClickCircle
+          editChart={() => new Promise((res) => res('edit hello'))}
           isLoading={false}
           saveChart={() => new Promise((res) => res('hello'))}
         />
