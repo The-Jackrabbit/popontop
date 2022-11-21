@@ -64,7 +64,7 @@ const MobileEditor: React.FC<Props> = ({
             {[...new Array(10)].map((_, index) => (
               <div
                 key={index+'loadingchart'}
-                className="w-full flex justify-between mb-1"
+                className="w-full flex justify-between mb-2"
               >
                 <div
                   className="
@@ -83,7 +83,7 @@ const MobileEditor: React.FC<Props> = ({
                     "></div>
                 </div>
                 <div
-                  className="basis-8/12 content-start grow-0 overflow-x-hidden justify-end flex flex-col"
+                  className="basis-8/12 ml-2 content-start grow-0 overflow-x-hidden justify-end flex flex-col"
                 >
                   <div
                     className="
