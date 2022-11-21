@@ -41,7 +41,7 @@ const MobileEditor: React.FC<Props> = ({
     if (initialList) {
       actions.listMutations.setList(initialList);
     }
-  }, [initialList, actions.listMutations]);
+  }, [initialList]);
   return (
     <MobilePage>
       <a.div

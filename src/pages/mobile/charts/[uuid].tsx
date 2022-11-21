@@ -4,6 +4,7 @@ import List from '../../../components/global/MobileEditor/List/List';
 import MobileEditor from '../../../components/global/MobileEditor/MobileEditor';
 import { ListRowMode } from '../../../components/lib/Mobile/ListRow/ListRow';
 import { UseChartListContext } from '../../../frontend/hooks/use-chart-list';
+import { Album } from '../../../styles/types/Albums';
 import { trpc } from '../../../utils/trpc';
 
 export const genUuid = (uuid: string | string[] | undefined): string  => {
@@ -21,6 +22,7 @@ const ChartPage: NextPage = () => {
 
   const { data, isLoading } = trpc.charts.getById.useQuery({ uuid: n }, {
     enabled: true, // disable this query from automatically running
+    refetchOnWindowFocus: false,
   });
 
   return (
@@ -28,7 +30,7 @@ const ChartPage: NextPage = () => {
       chartName={data?.name}
       chartUuid={uuid as string}
       context={UseChartListContext.EDIT}
-      initialList={data?.albums}
+      initialList={data?.albums?.length && data?.albums?.length > 0 ? data?.albums : [] as Album[]}
       initialSettings={data?.settings}
       isLoading={isLoading}
       isReadOnly={data?.isReadOnly}

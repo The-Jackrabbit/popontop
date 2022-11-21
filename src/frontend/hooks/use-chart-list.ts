@@ -104,7 +104,7 @@ const useChartList = ({
   } = useDragSheetDown(height, () => {
     setIsSettingsOpen(false);
     setIsSearchOpen(false);
-    if (!isFirstCloseDone && list.length > 0) {
+    if (!isFirstCloseDone && list.length === 0) {
       toggleTitle();
     }
   });

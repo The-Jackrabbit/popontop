@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Album } from "../../styles/types/Albums";
 
 export interface UseListState {
@@ -92,7 +92,9 @@ const useList = (initialList: Album[] = []): UseListState => {
       return newAlbums;
     });
   };
-  
+  useEffect(() => {
+    console.log({ list })
+  }, [list]);
   return {
     list,
     mutations: {
