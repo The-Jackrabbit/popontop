@@ -185,11 +185,13 @@ const useChartList = ({
       list,
       listMode,
       settings: {
-        ...settings.actions,
-        ...settings.state,
-        setShowTitle: (value: boolean) => {
-          settings.actions.setShowTitle(value);
-          toggleTitle();
+        ...settings,
+        actions: {
+          ...settings.actions,
+          setShowTitle: (value: boolean) => {
+            settings.actions.setShowTitle(value);
+            toggleTitle();
+          },
         },
       },
       showIntroduction: context === UseChartListContext.EDIT ? false : !isFirstCloseDone && list.length === 0,

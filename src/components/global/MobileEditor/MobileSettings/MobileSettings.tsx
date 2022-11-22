@@ -9,20 +9,7 @@ export interface Props {
 
 
 export const MobileSettings: React.FC<Props> = ({ 
-  settings: {
-    borderColor,
-    setBorderColor,
-    borderSize,
-    setBorderSize,
-    backgroundColor,
-    setBackgroundColor,
-    textColor,
-    setTextColor,
-    showTitle,
-    setShowTitle,
-    showAlbums,
-    setShowAlbums,
-  }
+  settings,
 }) => {
   return (
     <div className="h-full">
@@ -30,18 +17,18 @@ export const MobileSettings: React.FC<Props> = ({
         <div className="flex flex-col">
           <PageTwo
             key="page-two"
-            showTitle={showTitle}
-            setShowTitle={setShowTitle}
-            listAlbums={showAlbums}
-            setListAlbums={setShowAlbums}
-            borderColor={borderColor}
-            setBorderColor={setBorderColor}
-            borderSize={borderSize}
-            setBorderSize={setBorderSize}
-            backgroundColor={backgroundColor}
-            setBackgroundColor={setBackgroundColor}
-            textColor={textColor}
-            setTextColor={setTextColor}
+            showTitle={settings.state.showTitle}
+            setShowTitle={settings.actions.setShowTitle}
+            listAlbums={settings.state.showAlbums}
+            setListAlbums={settings.actions.setShowAlbums}
+            borderColor={settings.state.borderColor}
+            setBorderColor={settings.actions.setBorderColor}
+            borderSize={settings.state.borderSize}
+            setBorderSize={settings.actions.setBorderSize}
+            backgroundColor={settings.state.backgroundColor}
+            setBackgroundColor={settings.actions.setBackgroundColor}
+            textColor={settings.state.textColor}
+            setTextColor={settings.actions.setTextColor}
           />
         </div>
       {/* </HorizontalSwipe> */}

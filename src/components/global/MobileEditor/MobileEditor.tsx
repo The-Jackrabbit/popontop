@@ -54,9 +54,9 @@ const MobileEditor: React.FC<Props> = ({
         onClick={() => actions.onClickSheetDeadArea()}
         style={{ ...sheet.bgStyle, height: sheet.windowHeight }}
       >
-        {state.settings.showTitle ? (
+        {state.settings.state.showTitle ? (
           <Title
-            textColor={state.settings.textColor}
+            textColor={state.settings.state.textColor}
             isReadOnly={isReadOnly}
             chartTitle={state.chartTitle ?? ''}
             setValue={(value: string) => actions.setChartTitle(value)}
@@ -117,8 +117,8 @@ const MobileEditor: React.FC<Props> = ({
               listMode={state.listMode}
               onRearrangeClick={actions.onRearrangeClick}
               removeAlbumAtIndex={actions.listMutations.removeAlbumAtIndex}
-              showAlbums={state.settings.showAlbums}
-              textColor={state.settings.textColor}
+              showAlbums={state.settings.state.showAlbums}
+              textColor={state.settings.state.textColor}
             />
           )
         }
