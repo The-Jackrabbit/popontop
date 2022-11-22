@@ -20,10 +20,10 @@ export enum RowMovementType {
 }
 
 export const JUMP_VALUES = {
-  [RowMovementType.UP_FIVE]: 5,
+  [RowMovementType.UP_FIVE]: 6,
   [RowMovementType.UP_ONE]:  1,
   [RowMovementType.DOWN_ONE]: -1,
-  [RowMovementType.DOWN_FIVE]: -5,
+  [RowMovementType.DOWN_FIVE]: -6,
 };
 
 export const RearrangeView: React.FC<Props> = ({

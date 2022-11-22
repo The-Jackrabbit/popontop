@@ -119,7 +119,7 @@ const useChartList = ({
     const unboundIndex = index - JUMP_VALUES[rowMovementType];
     const length = list.length;
     const min = 0;
-    const max = length - 1;
+    const max = length;
 
     const indexToMoveTo = clamp(
       unboundIndex,
