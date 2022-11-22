@@ -42,6 +42,11 @@ const MobileEditor: React.FC<Props> = ({
       actions.listMutations.setList(initialList);
     }
   }, [initialList]);
+  useEffect(() => {
+    if (chartName) {
+      actions.setChartTitle(chartName);
+    }
+  }, [chartName])
   return (
     <MobilePage>
       <a.div

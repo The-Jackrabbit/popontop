@@ -1,52 +1,74 @@
 import { ChartSettings } from "@prisma/client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export interface Settings {
-  backgroundColor: string;
-  borderColor: string;
-  borderSize: number;
-  setBorderColor: (value: string) => void;
-  setBorderSize: (value: number) => void;
-  showAlbums: boolean;
-  setShowAlbums: (value: boolean) => void;
-  setBackgroundColor: (value: string) => void;
-  setShowTitle: (value: boolean) => void;
-  setTextColor: (value: string) => void;
-  showTitle: boolean;
-  textColor: string;
+  actions: {
+    setBorderColor: (value: string) => void;
+    setBorderSize: (value: number) => void;
+    setShowAlbums: (value: boolean) => void;
+    setBackgroundColor: (value: string) => void;
+    setShowTitle: (value: boolean) => void;
+    setTextColor: (value: string) => void;
+  };
+  state: {
+    backgroundColor: string;
+    borderColor: string;
+    borderSize: number;
+    showAlbums: boolean;
+    showTitle: boolean;
+    textColor: string;
+  };
 }
 
 const useChartSettings = (defaultSettings: ChartSettings | null): Settings => {
-  const [backgroundColor, setBackgroundColor] = useState(
-    defaultSettings?.background_color ?? ''
-  );
-  const [borderColor, setBorderColor] = useState(
-    defaultSettings?.border_color ?? ''
-  );
-  const [borderSize, setBorderSize] = useState(1);
-  const [showAlbums, setShowAlbums] = useState(
-    defaultSettings?.show_albums ? defaultSettings?.show_albums : false
-  );
-  const [textColor, setTextColor] = useState(
-    defaultSettings?.text_color ?? ''
-  );
-  const [showTitle, setShowTitle] = useState(
-    defaultSettings?.show_title ?? true
-  );
+  const [settings, setSettings] = useState<Settings['state']>({
+    backgroundColor:  defaultSettings?.background_color ?? '',
+    borderColor: defaultSettings?.border_color ?? '',
+    borderSize: 1,
+    showAlbums: defaultSettings?.show_albums ?? false,
+    showTitle: defaultSettings?.show_title ?? false,
+    textColor: defaultSettings?.text_color ?? '',
+  });
+
+  useEffect(() => {
+    setSettings({
+      backgroundColor:  defaultSettings?.background_color ?? '',
+      borderColor: defaultSettings?.border_color ?? '',
+      borderSize: 1,
+      showAlbums: defaultSettings?.show_albums ?? false,
+      showTitle: defaultSettings?.show_title ?? false,
+      textColor: defaultSettings?.text_color ?? '',
+    });
+  }, [defaultSettings]);
 
   return {
-    backgroundColor,
-    setBackgroundColor,
-    borderColor,
-    setBorderColor,
-    borderSize,
-    setBorderSize,
-    showAlbums,
-    setShowAlbums,
-    textColor,
-    setTextColor,
-    showTitle,
-    setShowTitle,
+    actions: {
+      setBorderColor: (value: string) => setSettings((settings) => ({
+        ...settings,
+        borderColor: value,
+      })),
+      setBorderSize: (value: number) => setSettings((settings) => ({
+        ...settings,
+        borderSize: value,
+      })),
+      setShowAlbums: (value: boolean) => setSettings((settings) => ({
+        ...settings,
+        showAlbums: value,
+      })),
+      setBackgroundColor: (value: string) => setSettings((settings) => ({
+        ...settings,
+        backgroundColor: value,
+      })),
+      setShowTitle: (value: boolean) => setSettings((settings) => ({
+        ...settings,
+        showTitle: value,
+      })),
+      setTextColor: (value: string) => setSettings((settings) => ({
+        ...settings,
+        textColor: value,
+      })),
+    },
+    state: settings,
   }
 };
 

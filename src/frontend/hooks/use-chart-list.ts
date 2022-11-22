@@ -59,12 +59,12 @@ const useChartList = ({
       albums: list,
       name: chartTitle,
       settings: {
-        backgroundColor: settings.backgroundColor,
-        borderColor: settings.borderColor,
-        borderSize: settings.borderSize,
-        showAlbums: settings.showAlbums,
-        showTitle: settings.showTitle,
-        textColor: settings.textColor,
+        backgroundColor: settings.state.backgroundColor,
+        borderColor: settings.state.borderColor,
+        borderSize: settings.state.borderSize,
+        showAlbums: settings.state.showAlbums,
+        showTitle: settings.state.showTitle,
+        textColor: settings.state.textColor,
       },
     });
 
@@ -77,12 +77,12 @@ const useChartList = ({
       albums: list,
       name: chartTitle,
       settings: {
-        backgroundColor: settings.backgroundColor,
-        borderColor: settings.borderColor,
-        borderSize: settings.borderSize,
-        showAlbums: settings.showAlbums,
-        showTitle: settings.showTitle,
-        textColor: settings.textColor,
+        backgroundColor: settings.state.backgroundColor,
+        borderColor: settings.state.borderColor,
+        borderSize: settings.state.borderSize,
+        showAlbums: settings.state.showAlbums,
+        showTitle: settings.state.showTitle,
+        textColor: settings.state.textColor,
       },
     });
 
@@ -185,9 +185,10 @@ const useChartList = ({
       list,
       listMode,
       settings: {
-        ...settings,
+        ...settings.actions,
+        ...settings.state,
         setShowTitle: (value: boolean) => {
-          settings.setShowTitle(value);
+          settings.actions.setShowTitle(value);
           toggleTitle();
         },
       },

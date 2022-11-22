@@ -8,6 +8,7 @@ import {
 import { ListRowMode } from "../../../lib/Mobile/ListRow/ListRow";
 import ActionBarLayout from "./ActionBarLayout";
 import EditChartClickCircle from "./ActionOverlay/ClickCircle/EditChartClickCircle/EditChartClickCircle";
+import ViewChartClickCircle from "./ViewChartClickCircle";
 
 export interface Props {
   actionOverlayClassName?: string;
@@ -55,7 +56,9 @@ export const EditChartActionBar: React.FC<Props> = ({
   return (
     <ActionBarLayout
       actionOverlay={
-        !isReadOnly ? <EditChartClickCircle editChart={editChart} isLoading={isLoading} /> : <div />
+        !isReadOnly
+          ? <EditChartClickCircle editChart={editChart} isLoading={isLoading} />
+          : <ViewChartClickCircle />
       }
       actionOverlayClassName={actionOverlayClassName}
       className={className}
