@@ -22,7 +22,7 @@ const useChartList = ({
   chartUuid,
   context,
   defaultSettings,
-  initialList,
+  initialList = [],
 }: {
   chartName?: string;
   chartUuid: string;
@@ -36,7 +36,7 @@ const useChartList = ({
   const { list, mutations: listMutations } = useList(initialList);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [isFirstCloseDone, setIsFirstCloseDone] = useState(false);
+  const [isFirstCloseDone, setIsFirstCloseDone] = useState(initialList.length > 0 || context === UseChartListContext.EDIT);
   const [isActive, setIsActive] = useState(true); 
   const [listMode, setListMode] = useState<ListRowMode>(ListRowMode.NORMAL);
   const [chartTitle, setChartTitle] = useState(chartName);
@@ -52,9 +52,6 @@ const useChartList = ({
   
   const toggleTitle = () => {
     setIsFirstCloseDone(true);
-    const cHeight =  titleHeightStyle.height.get();
-    const height = cHeight === '60px' ? '0px' : '60px';
-    titleHeightAnimation.start({ height });
   };
 
   const saveChart = async (): Promise<string> => {
@@ -104,7 +101,10 @@ const useChartList = ({
   } = useDragSheetDown(height, () => {
     setIsSettingsOpen(false);
     setIsSearchOpen(false);
-    if (!isFirstCloseDone && list.length === 0) {
+    if (!isFirstCloseDone && list.length > 0) {
+      const cHeight = titleHeightStyle.height.get(); 
+      const height = cHeight === '60px' ? '0px' : '60px';
+      titleHeightAnimation.start({ height });
       toggleTitle();
     }
   });
