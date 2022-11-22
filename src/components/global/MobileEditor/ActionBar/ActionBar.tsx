@@ -10,6 +10,7 @@ export interface Props {
   editChart?: () => Promise<string>;
   hasNonEmptyList: boolean;
   isActive: boolean;
+  isEditLoading: boolean;
   isLoading: boolean;
   listMode: ListRowMode;
   isReadOnly?: boolean;
@@ -27,6 +28,7 @@ export const ActionBar: React.FC<Props> = ({
   editChart,
   hasNonEmptyList,
   isActive,
+  isEditLoading,
   isLoading,
   isReadOnly = false,
   listMode,
@@ -76,6 +78,7 @@ export const ActionBar: React.FC<Props> = ({
           {...SHARED_ACTION_BAR_PROPS}
           {...SHARED_EDITOR_ACTION_BAR_PROPS}
           editChart={editChart}
+          isLoading={isEditLoading}
           isReadOnly={isReadOnly}
         />
       ) : null}

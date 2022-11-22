@@ -15,6 +15,7 @@ export interface Props {
   editChart: () => Promise<string>;
   hasNonEmptyList: boolean;
   isActive: boolean;
+  isLoading: boolean;
   isReadOnly: boolean;
   listMode: ListRowMode;
   onClickSettings: () => void;
@@ -30,6 +31,7 @@ export const EditChartActionBar: React.FC<Props> = ({
   editChart,
   hasNonEmptyList,
   isActive,
+  isLoading,
   isReadOnly,
   listMode,
   onClickDeleteMode,
@@ -53,7 +55,7 @@ export const EditChartActionBar: React.FC<Props> = ({
   return (
     <ActionBarLayout
       actionOverlay={
-        !isReadOnly ? <EditChartClickCircle editChart={editChart} /> : <div />
+        !isReadOnly ? <EditChartClickCircle editChart={editChart} isLoading={isLoading} /> : <div />
       }
       actionOverlayClassName={actionOverlayClassName}
       className={className}

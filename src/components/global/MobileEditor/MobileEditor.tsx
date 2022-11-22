@@ -118,6 +118,7 @@ const MobileEditor: React.FC<Props> = ({
           )
         }
         <ActionBar
+          isEditLoading={state.isEditLoading}
           className="-translate-x-4"
           editChart={actions.editChart}
           isLoading={state.isLoading}

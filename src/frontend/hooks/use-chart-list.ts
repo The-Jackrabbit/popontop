@@ -129,7 +129,7 @@ const useChartList = ({
 
     listMutations.insertAlbumAtIndex(list[index] as Album, index, indexToMoveTo);
   };
-
+  
   const onClickSettings = () => {
     setIsSettingsOpen(true);
     open({ canceled: false });
@@ -139,7 +139,7 @@ const useChartList = ({
     setIsSearchOpen(true);
     open({ canceled: false });
   };
-
+  
   return {
     actions: {
       editChart,
@@ -180,6 +180,7 @@ const useChartList = ({
       isSearchOpen,
       isFirstCloseDone,
       isActive,
+      isEditLoading: editMutation.isLoading,
       isLoading: mutation.isLoading,
       list,
       listMode,

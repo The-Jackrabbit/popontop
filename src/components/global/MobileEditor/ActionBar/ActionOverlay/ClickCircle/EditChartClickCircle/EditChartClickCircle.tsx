@@ -7,10 +7,12 @@ import React from "react";
 
 export interface Props {
   editChart: () => Promise<string>;
+  isLoading: boolean;
 }
 
 export const EditChartClickCircle: React.FC<Props> = ({
   editChart,
+  isLoading,
 }) => {
   const router = useRouter();
 
@@ -44,7 +46,7 @@ export const EditChartClickCircle: React.FC<Props> = ({
       rightButton={
         <ClickCircleButton
           icon={<CloudArrowUpIcon className={CLICK_CIRCLE_STYLE} />}
-          isLoading={false}
+          isLoading={isLoading}
           label="save changes"
           onClick={onClickSaveChanges}
         />
