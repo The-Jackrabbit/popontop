@@ -25,8 +25,8 @@ const useChartSettings = (defaultSettings: ChartSettings | null): Settings => {
     backgroundColor:  defaultSettings?.background_color ?? '',
     borderColor: defaultSettings?.border_color ?? '',
     borderSize: 1,
-    showAlbums: defaultSettings?.show_albums ?? false,
-    showTitle: defaultSettings?.show_title ?? false,
+    showAlbums: defaultSettings?.show_albums ?? !false,
+    showTitle: defaultSettings?.show_title ?? !false,
     textColor: defaultSettings?.text_color ?? '',
   });
 
