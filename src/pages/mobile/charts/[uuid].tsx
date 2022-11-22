@@ -1,8 +1,6 @@
 import { NextPage } from 'next';
 import { useRouter } from 'next/router'
-import List from '../../../components/global/MobileEditor/List/List';
 import MobileEditor from '../../../components/global/MobileEditor/MobileEditor';
-import { ListRowMode } from '../../../components/lib/Mobile/ListRow/ListRow';
 import { UseChartListContext } from '../../../frontend/hooks/use-chart-list';
 import { Album } from '../../../styles/types/Albums';
 import { trpc } from '../../../utils/trpc';

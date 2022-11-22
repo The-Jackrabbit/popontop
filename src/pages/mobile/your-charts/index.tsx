@@ -112,6 +112,7 @@ const YourCharts: NextPage = () => {
           listMode={listMode}
           onClickDeleteMode={() => setListMode(listMode === ListRowMode.DELETE ? ListRowMode.NORMAL : ListRowMode.DELETE)}
           onClickRearrangeMode={() => undefined} 
+          isEditLoading={false}
           isLoading={false}
           onClickSettings={() => undefined}
           onClickSearch={() => undefined}
