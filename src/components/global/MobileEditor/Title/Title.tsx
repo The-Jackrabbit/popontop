@@ -25,12 +25,11 @@ const Title: React.FC<Props> = ({
 
   return (
     <a.div
-      style={titleHeightStyle ? { ...titleHeightStyle } : undefined}
       className={`
         rounded-lg bg-white dark:bg-[#0a0a0a]
         shadow-xl
         box-content
-        px-6 sm:px-4 
+        py-6  px-6 sm:px-4 
         mb-4 z-30
         overflow-hidden
         w-auto

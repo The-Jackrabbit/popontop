@@ -47,6 +47,12 @@ const MobileEditor: React.FC<Props> = ({
       actions.setChartTitle(chartName);
     }
   }, [chartName])
+  useEffect(() => {
+    console.log(state.showIntroduction);
+    console.log({
+      'state.anim': state.titleHeightStyle.height.get()
+    })
+  }, [state.showIntroduction])
   return (
     <MobilePage>
       <a.div

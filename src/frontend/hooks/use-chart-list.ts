@@ -41,7 +41,7 @@ const useChartList = ({
   const [listMode, setListMode] = useState<ListRowMode>(ListRowMode.NORMAL);
   const [chartTitle, setChartTitle] = useState(chartName);
   const [titleHeightStyle, titleHeightAnimation] = useSpring(() => ({
-    height: list.length === 0 && context !== UseChartListContext.EDIT  ? '250px' : '60px',
+    height: list.length === 0 && context !== UseChartListContext.EDIT  ? '100%' : '100%',
     config: {
       bounce: 2,
       friction: 20,
@@ -102,9 +102,6 @@ const useChartList = ({
     setIsSettingsOpen(false);
     setIsSearchOpen(false);
     if (!isFirstCloseDone && list.length > 0) {
-      const cHeight = titleHeightStyle.height.get(); 
-      const height = cHeight === '60px' ? '0px' : '60px';
-      titleHeightAnimation.start({ height });
       toggleTitle();
     }
   });
@@ -194,7 +191,7 @@ const useChartList = ({
           },
         },
       },
-      showIntroduction: context === UseChartListContext.EDIT ? false : !isFirstCloseDone && list.length === 0,
+      showIntroduction: context === UseChartListContext.EDIT ? false : list.length === 0,
       titleHeightStyle,
     },
   };
