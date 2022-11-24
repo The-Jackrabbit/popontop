@@ -8,6 +8,7 @@ import Layout from "./Layout";
 import useChart, { DraggedAlbum } from '../../frontend/hooks/use-chart';
 import { DndContext } from "@dnd-kit/core";
 import DesktopEditor from "../../components/global/DesktopEditor/DesktopEditor";
+import { ListOfCharts } from "../../components/lib/ListOfCharts/ListOfCharts";
 
 const CreateChart: NextPage = () => {
   const [page, setPage] = useState('editor');
@@ -22,7 +23,6 @@ const CreateChart: NextPage = () => {
     listStyles,
     chart,
   } = useChart({});
-
   return (
     <DndContext
       autoScroll={false}
@@ -40,12 +40,12 @@ const CreateChart: NextPage = () => {
           style={pageOpacity}
           className="overflow-x-visible h-full"
         >
-          {page === 'editor' 
-            ? (
-                <DesktopSidebar settings={chart.settings} />
-              )
-            : null
-          }
+          {page === 'editor' ? (
+            <DesktopSidebar settings={chart.settings} />
+          ) : null}
+          {page === 'your-charts' ? (
+            <ListOfCharts />
+          ) : null}
         </a.div>
         <SidebarNav
           page={page}
@@ -57,17 +57,14 @@ const CreateChart: NextPage = () => {
           }}
         />
         <a.div style={pageOpacity} className="h-full">
-          {page === 'editor' 
-            ? (
-                <DesktopEditor
-                  chart={chart}
-                  listStyles={listStyles}
-                  isLoading={isLoading}
-                  titleStyle={titleStyle}
-                />
-              )
-            : null
-          }
+          {page === 'editor' ? (
+            <DesktopEditor
+              chart={chart}
+              listStyles={listStyles}
+              isLoading={isLoading}
+              titleStyle={titleStyle}
+            />
+          ) : null}
         </a.div>
       </Layout>
     </DndContext>

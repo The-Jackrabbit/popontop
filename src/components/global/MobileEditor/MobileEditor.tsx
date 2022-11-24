@@ -1,6 +1,5 @@
 import { a } from "react-spring";
 import MobileSheet from "../../lib/MobileSheet/MobileSheet";
-import List from "./List/List";
 import SearchAlbums from "./SearchAlbums/SearchAlbums";
 import MobileSettings from "./MobileSettings/MobileSettings";
 import { ActionBar } from "./ActionBar/ActionBar";
@@ -10,6 +9,7 @@ import { ChartSettings } from "@prisma/client";
 import MobilePage from "../../lib/MobilePage/MobilePage";
 import { Album } from "../../../styles/types/Albums";
 import { useEffect } from "react";
+import Image from 'next/image';
 
 export interface Props {
   chartName?: string;
@@ -41,24 +41,27 @@ const MobileEditor: React.FC<Props> = ({
     if (initialList) {
       actions.listMutations.setList(initialList);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialList]);
   useEffect(() => {
     if (chartName) {
       actions.setChartTitle(chartName);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chartName])
   useEffect(() => {
     console.log(state.showIntroduction);
     console.log({
       'state.anim': state.titleHeightStyle.height.get()
     })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.showIntroduction])
   return (
     <MobilePage>
       <a.div
         id="editor"
         onClick={() => actions.onClickSheetDeadArea()}
-        style={{ ...sheet.bgStyle, height: sheet.windowHeight }}
+        style={{ ...sheet.bgStyle, height: sheet.windowHeight, }}
       >
         {state.settings.state.showTitle ? (
           <Title
@@ -118,14 +121,35 @@ const MobileEditor: React.FC<Props> = ({
             ))}
           </div>
         ) : (
-            <List
-              list={state.list}
-              listMode={state.listMode}
-              onRearrangeClick={actions.onRearrangeClick}
-              removeAlbumAtIndex={actions.listMutations.removeAlbumAtIndex}
-              showAlbums={state.settings.state.showAlbums}
-              textColor={state.settings.state.textColor}
-            />
+            // <List
+            //   list={state.list}
+            //   listMode={state.listMode}
+            //   onRearrangeClick={actions.onRearrangeClick}
+            //   removeAlbumAtIndex={actions.listMutations.removeAlbumAtIndex}
+            //   showAlbums={state.settings.state.showAlbums}
+            //   textColor={state.settings.state.textColor}
+            // />
+            <div
+              className="
+                flex flex-wrap justify-center
+             max-h-[80vh]
+                overflow-y-scroll
+              "
+            >
+              {state.list.map((album, index) => (
+                <div 
+                  className="basis-1/3 relative max-w-[50px]"
+                  key={index+'gfrdi'}
+                  style={{ height: '40px'}}
+                >
+                  <Image
+                    layout='fill'
+                    src={album.imageUrl}
+                    alt={album.artist}
+                  />
+                </div>
+              ))}
+            </div>
           )
         }
         <ActionBar

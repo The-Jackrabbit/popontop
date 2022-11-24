@@ -8,6 +8,8 @@ import { Album } from '../../../../styles/types/Albums';
 import TextExpandingPill from '../../../lib/ExpandingPill/TextExpandingPill/TextExpandingPill';
 import { SwitchExpandingPill } from '../../../lib/ExpandingPill/SwitchExpandingPill/SwitchExpandingPill';
 import NumericExpandingPill from '../../../lib/ExpandingPill/NumericExpandingPill/NumericExpandingPill';
+import { colorMap } from '../../../../constants/colors';
+import { Color } from './SidebarNav/NavDot/NavDot';
 
 export interface Props {
   initialValues?: string[];
@@ -40,6 +42,14 @@ export const DesktopSidebar: React.FC<Props> = ({ settings }) => {
 
   return (
     <>
+      <h1 className="text-4xl font-bold">create chart</h1>
+      <div
+        className={`
+          ${colorMap[Color.green]}
+          shadow-md
+          rounded-full w-full h-1 my-4 
+        `}
+      />
       <div className='flex flex-col justify-center mb-2'>
         <TextExpandingPill
           label="Search albums"

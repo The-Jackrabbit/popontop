@@ -5,7 +5,6 @@ import ActionBar from "../../../components/global/MobileEditor/ActionBar/ActionB
 import { ListRowMode } from "../../../components/lib/Mobile/ListRow/ListRow";
 import MobilePage from "../../../components/lib/MobilePage/MobilePage";
 import { trpc } from "../../../utils/trpc";
-import Row from '../../../components/lib/Mobile/Row/Row';
 import { DeleteRowButton } from '../../../components/lib/Mobile/Row/DeleteRowButton/DeleteRowButton';
 import { colorMap } from '../../../constants/colors';
 import { Color } from '../../../components/global/DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
