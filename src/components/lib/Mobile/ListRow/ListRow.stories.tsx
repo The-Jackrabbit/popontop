@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import ListRow, { ListRowMode } from './ListRow';
 import { ALBUM_RESULTS } from '../../../../constants/test-data/search-results';
@@ -25,10 +25,8 @@ export const DeleteView: ComponentStory<typeof ListRow> = () => {
   
         <ListRow
           album={ALBUM_RESULTS[0] as Album}
-          isDragged={false}
           mode={ListRowMode.DELETE}
           index={0}
-          isInteractive={true}
           isLastRowInList={true}
           removeSelfFromList={() => setIsActive(false)}
           onRearrangeClick={() => undefined}
@@ -45,12 +43,10 @@ export const Multiple: ComponentStory<typeof ListRow> = () => {
     <div className="m-4 w-96 overflow-x-hidden">
       {ALBUM_RESULTS.map((album, index) => (
         <ListRow
-          isDragged={false}
           key={JSON.stringify(album) + index}
           mode={ListRowMode.REARRANGE}
           album={album}
           index={index}
-          isInteractive={true}
           showAlbums={true}
           isLastRowInList={index === ALBUM_RESULTS.length - 1}
           removeSelfFromList={(): void =>  undefined}
@@ -66,13 +62,11 @@ export const RearrangeView: ComponentStory<typeof ListRow> = () => {
     <div className="m-4 w-96 overflow-x-hidden">
       {ALBUM_RESULTS.map((album, index) => (
         <ListRow
-          isDragged={false}
           key={JSON.stringify(album) + index}
           mode={ListRowMode.REARRANGE}
           album={album}
           index={index}
           showAlbums={true}
-          isInteractive={false}
           isLastRowInList={index === ALBUM_RESULTS.length - 1}
           removeSelfFromList={(): void =>  undefined}
           textColor={'green'}
@@ -87,12 +81,10 @@ export const SearchView: ComponentStory<typeof ListRow> = () => {
     <div className="m-4 w-96 overflow-x-hidden">
       {ALBUM_RESULTS.map((album, index) => (
         <ListRow
-          isDragged={false}
           key={JSON.stringify(album) + index}
           mode={ListRowMode.SEARCH}
           album={album}
           index={index}
-          isInteractive={false}
           showAlbums={true}
           isLastRowInList={index === ALBUM_RESULTS.length - 1}
           removeSelfFromList={(): void =>  undefined}

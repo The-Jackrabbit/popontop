@@ -1,4 +1,3 @@
-import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import FilterButton from './FilterButton';
 import { ChevronUpDownIcon, TrashIcon } from '@heroicons/react/24/solid';

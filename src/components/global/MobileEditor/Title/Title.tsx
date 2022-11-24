@@ -1,4 +1,4 @@
-import { a, useSpring, SpringValue } from "react-spring";
+import { a } from "react-spring";
 import { useState } from "react";
 
 export interface Props {
@@ -7,7 +7,6 @@ export interface Props {
   setValue: (value: string) => void;
   showIntroduction: boolean;
   textColor: string;
-  titleHeightStyle?: { height: SpringValue<string>; };
 }
 
 const Title: React.FC<Props> = ({ 
@@ -16,7 +15,6 @@ const Title: React.FC<Props> = ({
   setValue,
   showIntroduction,
   textColor,
-  titleHeightStyle,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const clickEditTitleButton = () => {
@@ -44,23 +42,24 @@ const Title: React.FC<Props> = ({
             text-lg text-neutral-500 dark:text-neutral-200
           "
         >
-          {!isEditing
-            ? <p className="basis-full">{chartTitle}</p>
-            : (
-              <input
-                autoFocus
-                value={chartTitle}
-                style={{ color: textColor }}
-                onBlur={() => setIsEditing(false)}
-                onChange={(e) => { setValue(e.target.value) }}
-                placeholder="New title"
-                className=" focus-visible:outline-none active:outline-none bg-transparent border-bottom-2 border-b-2 
-                basis-full grow-1"
-              />
-            )
-          }
+          {isEditing ? (
+            <input
+              autoFocus
+              value={chartTitle}
+              style={{ color: textColor }}
+              onBlur={() => setIsEditing(false)}
+              onChange={(e) => { setValue(e.target.value) }}
+              placeholder="New title"
+              className="
+                focus-visible:outline-none active:outline-none
+                bg-transparent
+                border-bottom-2 border-b-2 
+                basis-full grow-1
+              "
+            />
+          ) : <p className="basis-full">{chartTitle}</p>}
 
-          {isReadOnly ? null : (
+          {!isReadOnly ? (
             <button
               onClick={() => clickEditTitleButton()}
               className="
@@ -73,12 +72,14 @@ const Title: React.FC<Props> = ({
             >
               ✎
             </button>
-          )}
+          ) : null}
         </div>
       ) : (
         <div>
           <h1 className="leading-loose text-4xl">Hi :-)</h1>
-          <p className="leading-normal text-xl">To get started, click the ➕. Search the name or your favorite albums, and add them to your list!</p>
+          <p className="leading-normal text-xl">
+            To get started, click the ➕. Search the name or your favorite albums, and add them to your list!
+          </p>
         </div>
       )}
     </a.div>

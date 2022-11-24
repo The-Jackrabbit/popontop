@@ -1,7 +1,6 @@
 import { ChartSettings } from "@prisma/client";
 import clamp from "lodash.clamp";
 import { useState } from "react";
-import { useSpring } from "react-spring";
 import { ListRowMode } from "../../components/lib/Mobile/ListRow/ListRow";
 import { JUMP_VALUES, RowMovementType } from "../../components/lib/Mobile/ListRow/RearrangeView/RearrangeView";
 import { Album } from "../../styles/types/Albums";
@@ -40,16 +39,6 @@ const useChartList = ({
   const [isActive, setIsActive] = useState(true); 
   const [listMode, setListMode] = useState<ListRowMode>(ListRowMode.NORMAL);
   const [chartTitle, setChartTitle] = useState(chartName);
-  const [titleHeightStyle, titleHeightAnimation] = useSpring(() => ({
-    height: list.length === 0 && context !== UseChartListContext.EDIT  ? '100%' : '100%',
-    config: {
-      bounce: 2,
-      friction: 20,
-      mass: 1,
-      tension: 200,
-    },
-  }));
-  
   const toggleTitle = () => {
     setIsFirstCloseDone(true);
   };
@@ -192,7 +181,6 @@ const useChartList = ({
         },
       },
       showIntroduction: context === UseChartListContext.EDIT ? false : list.length === 0,
-      titleHeightStyle,
     },
   };
 };

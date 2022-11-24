@@ -1,7 +1,7 @@
 
 import { PaintBrushIcon } from "@heroicons/react/20/solid";
 import { useState } from "react";
-import { ICON_STYLE } from "../../FilterButton/FilterButton.tsx/FilterButton";
+import { ICON_STYLE } from "../../FilterButton/FilterButton";
 import Input from "../../Input/Input";
 import { ExpandingPill } from "../ExpandingPill";
 

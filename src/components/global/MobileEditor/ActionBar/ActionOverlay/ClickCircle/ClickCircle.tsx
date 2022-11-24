@@ -1,17 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from 'next/link';
 import ClickCircleButton from "./ClickCircleButton/ClickCircleButton";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import {
-  ArrowDownCircleIcon,
   ArrowRightOnRectangleIcon,
   CloudArrowUpIcon,
   ListBulletIcon,
+  PaintBrushIcon,
   UserCircleIcon
 } from '@heroicons/react/24/solid';
-import html2canvas from 'html2canvas';
-import { PaintBrushIcon } from "@heroicons/react/20/solid";
 import ClickCircleLayout from "./ClickCircleLayout";
 
 export interface Props {
@@ -44,10 +42,6 @@ export const ClickCircle: React.FC<Props> = ({
     sessionData ?  signOut() : signIn('google')
   };
 
-  const onClickDownload = () => {
-    // setIsPreviewOverlayVisible(true);
-  }
-  
   return (
     <ClickCircleLayout
       bottomButton={
@@ -131,30 +125,3 @@ export const ClickCircle: React.FC<Props> = ({
 };
 
 export default ClickCircle;
-
-/* {isPreviewOverlayVisible && (
-  const [isPreviewOverlayVisible, setIsPreviewOverlayVisible] = useState(false);
-  
-  <div
-  className="bg-transparent fixed top-0 left-0 bottom-0 right-0 h-screen w-screen -translate-x-4 z-50"
-  id="preview"
-  >
-  <button
-  onClick={(e) => { 
-    e.stopPropagation();
-            setIsPreviewOverlayVisible(false)
-          }}
-          >
-          isPreviewOverlayVisible</button>
-          </div>
-          )} */
-          //     html2canvas(document.getElementById('editor'), {
-            // // 
-            //       // windowHeight: 800*1,
-            //       windowWidth: 414/2,
-            //       // height: 800*1,
-          //       width: 414*2,
-          //       scale: 1
-          //     }).then((canvas) => {
-          //       document?.getElementById('preview')?.appendChild(canvas);
-          //     });

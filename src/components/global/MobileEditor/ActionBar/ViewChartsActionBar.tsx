@@ -1,4 +1,4 @@
-import FilterButton, { ICON_STYLE } from "../../../lib/FilterButton/FilterButton.tsx/FilterButton";
+import FilterButton, { ICON_STYLE } from "../../../lib/FilterButton/FilterButton";
 import { TrashIcon } from '@heroicons/react/20/solid';
 import { ListRowMode } from "../../../lib/Mobile/ListRow/ListRow";
 import ActionBarLayout from "./ActionBarLayout";

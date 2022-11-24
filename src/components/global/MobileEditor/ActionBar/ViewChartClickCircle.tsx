@@ -1,4 +1,4 @@
-import { ListBulletIcon, CloudArrowUpIcon, PaintBrushIcon } from "@heroicons/react/20/solid";
+import { ListBulletIcon, PaintBrushIcon } from "@heroicons/react/20/solid";
 import { useRouter } from "next/router";
 import { CLICK_CIRCLE_STYLE } from "./ActionOverlay/ClickCircle/ClickCircle";
 import AccountCircleButton from "./ActionOverlay/ClickCircle/ClickCircleButton/AccountCircleButton/AccountCircleButton";

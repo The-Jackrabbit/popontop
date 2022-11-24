@@ -65,7 +65,6 @@ const MobileEditor: React.FC<Props> = ({
             chartTitle={state.chartTitle ?? ''}
             setValue={(value: string) => actions.setChartTitle(value)}
             showIntroduction={state.showIntroduction}
-            titleHeightStyle={state.titleHeightStyle}
           />
         ) : null}
 

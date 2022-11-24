@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { MouseEventHandler } from 'react';
 import { a, useSpring } from 'react-spring';
-import { ListRowMode } from '../../Mobile/ListRow/ListRow';
 
 export interface Props {
   ariaLabel: string;
@@ -10,7 +9,6 @@ export interface Props {
   className?: string;
   hasGradientIndicator?: boolean;
   onClick: MouseEventHandler<HTMLButtonElement>;
-  setIsActive?: (value: boolean) => void;
 }
 
 export const ICON_STYLE = "h-6 w-6 translate-y-[1px] text-neutral-900 dark:text-neutral-50";
@@ -22,7 +20,6 @@ const FilterButton: React.FC<Props> = ({
   className = 'w-8 h-8 p-[2px]',
   hasGradientIndicator = true,
   onClick,
-  setIsActive = (value: boolean) => undefined
 }) => {
   const fromGradient = 'linear-gradient(0deg, gray 0%, gray 100%)';
   const toGradient = hasGradientIndicator
@@ -37,7 +34,6 @@ const FilterButton: React.FC<Props> = ({
   }));
 
   const onClickButton = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
-    setIsActive(!isActive);
     onClick(e);
   };
 
@@ -45,6 +41,7 @@ const FilterButton: React.FC<Props> = ({
     animateBackgroundStyle.start({
       bg: !isActive ? fromGradient : toGradient,
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isActive]);
 
   return (
@@ -64,11 +61,7 @@ const FilterButton: React.FC<Props> = ({
     >
       <a.div
         className="
-          absolute
-          -top-1/2
-          -bottom-1/2
-          -left-1/2
-          -right-1/2
+          absolute -top-1/2 -bottom-1/2 -left-1/2 -right-1/2
           z-0
           rounded-full
           opacity-0

@@ -1,4 +1,4 @@
-import FilterButton, { ICON_STYLE } from "../../../lib/FilterButton/FilterButton.tsx/FilterButton";
+import FilterButton, { ICON_STYLE } from "../../../lib/FilterButton/FilterButton";
 import { 
   ChevronUpDownIcon, 
   CogIcon,

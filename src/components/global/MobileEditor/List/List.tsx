@@ -1,11 +1,8 @@
 import { Album } from "../../../../styles/types/Albums";
-import { ALBUM_RESULTS } from "../../../../constants/test-data/search-results";
 import ListRow, { ListRowMode } from "../../../lib/Mobile/ListRow/ListRow";
 import { RowMovementType } from "../../../lib/Mobile/ListRow/RearrangeView/RearrangeView";
 
 export interface Props {
-  currentValue?: number | null;
-  isInteractive?: boolean;
   list: Album[];
   listMode: ListRowMode;
   onRearrangeClick: (rowMovementType: RowMovementType, index: number) => void;
@@ -15,8 +12,6 @@ export interface Props {
 }
 
 const List: React.FC<Props> = ({ 
-  currentValue = null,
-  isInteractive = true ,
   list,
   listMode,
   onRearrangeClick,
@@ -24,13 +19,13 @@ const List: React.FC<Props> = ({
   showAlbums,
   textColor,
 }) => (
-  <div className={`
-    ${list.length > 5 ? 'pb-[270px]' : ''}
+  <div
+    className={`
+      ${list.length > 5 ? 'pb-[270px]' : ''}
       h-[calc(100vh_-_10px)]
       overflow-y-scroll
-       z-10
+      z-10
     `}
-    // style={{scrollb}}
   >
     <div className="overflow-x-hidden">
       {list.map((album, index) => (
@@ -38,8 +33,6 @@ const List: React.FC<Props> = ({
           album={album}
           index={index}
           key={JSON.stringify(album) + index}
-          isDragged={currentValue === index}
-          isInteractive={isInteractive}
           isLastRowInList={index === list.length - 1}
           mode={listMode}
           onRearrangeClick={(rowMovementType: RowMovementType) => 
