@@ -1,7 +1,6 @@
 import { a } from '@react-spring/web'
 import React from "react";
 import { Album } from '../../../../styles/types/Albums';
-import { useRowSwipeActions } from '../../../../frontend/hooks/use-row-swipe-actions';
 import { ROW_HEIGHT, ROW_HEIGHT_WITH_UNIT, useDisappearRow } from '../../../../frontend/hooks/use-disappear-row';
 import ListView from './ListView/ListView';
 import RearrangeView, { RowMovementType } from './RearrangeView/RearrangeView';
@@ -17,22 +16,19 @@ export enum ListRowMode {
 
 export interface Props {
   album: Album;
-  isDragged: boolean;
-  isLastRowInList?: boolean;
   index?: number;
-  isInteractive: boolean;
+  isLastRowInList?: boolean;
   mode: ListRowMode;
-  textColor?: string;
-  removeSelfFromList?: () => void;
   onClick?: () => void;
   onRearrangeClick?: (rowMovementType: RowMovementType) => void;
+  removeSelfFromList?: () => void;
   showAlbums: boolean;
+  textColor?: string;
 }
 
 export const ListRow: React.FC<Props> = ({
   album,
   index = 0,
-  isInteractive,
   isLastRowInList = true,
   mode,
   onClick,
@@ -42,7 +38,7 @@ export const ListRow: React.FC<Props> = ({
   textColor,
 }) => {
   const initialHeight = ROW_HEIGHT;
-  const { isBreakVisible, style, toggleRowVisibility } = useDisappearRow({
+  const { style, toggleRowVisibility } = useDisappearRow({
     initialHeight,
     isLastRowInList,
     onClick: () => undefined
@@ -87,7 +83,7 @@ export const ListRow: React.FC<Props> = ({
               showAlbums={showAlbums}
             />
           ) : null}
-           {mode === ListRowMode.SEARCH && onClick ? (
+          {mode === ListRowMode.SEARCH && onClick ? (
             <SearchView
               album={album}
               onClick={() => {

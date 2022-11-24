@@ -9,7 +9,8 @@ import { ChartSettings } from "@prisma/client";
 import MobilePage from "../../lib/MobilePage/MobilePage";
 import { Album } from "../../../styles/types/Albums";
 import { useEffect } from "react";
-import Image from 'next/image';
+import { Loader as ListLoader } from '../../global/MobileEditor/List/Loader'
+import List from "./List/List";
 
 export interface Props {
   chartName?: string;
@@ -49,13 +50,7 @@ const MobileEditor: React.FC<Props> = ({
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chartName])
-  useEffect(() => {
-    console.log(state.showIntroduction);
-    console.log({
-      'state.anim': state.titleHeightStyle.height.get()
-    })
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.showIntroduction])
+
   return (
     <MobilePage>
       <a.div
@@ -73,85 +68,18 @@ const MobileEditor: React.FC<Props> = ({
             titleHeightStyle={state.titleHeightStyle}
           />
         ) : null}
-        {isLoading ? (
-          <div>
-            {[...new Array(10)].map((_, index) => (
-              <div
-                key={index+'loadingchart'}
-                className="w-full flex justify-between mb-2"
-              >
-                <div
-                  className="
-                    text-xs basis-1/12 
-                    w-12
-                    flex flex-col shrink-0 justify-center content-center items-center
-                  "
-                >
-                  <p>{1 + index}</p>
-                </div>
-                <div className="basis-2/12 justify-start">
-                  <div
-                    className="
-                      w-[60px] h-[60px]
-                      bg-neutral-200 dark:bg-neutral-700 animate-pulse
-                    "></div>
-                </div>
-                <div
-                  className="basis-8/12 ml-2 content-start grow-0 overflow-x-hidden justify-end flex flex-col"
-                >
-                  <div
-                    className="
-                      text-xs
-                      w-48 h-[16px]
-                     bg-neutral-200 dark:bg-neutral-700 mb-1
-                      animate-pulse
-                    "
-                  />
-                  <div
-                    className="
-                      text-xs
-                      w-36 h-[16px]
-                     bg-neutral-200 dark:bg-neutral-700
-                     animate-pulse
-                    "
-                  />
-               </div>
-               <div className="basis-1/12"></div>
-             </div>
-            ))}
-          </div>
-        ) : (
-            // <List
-            //   list={state.list}
-            //   listMode={state.listMode}
-            //   onRearrangeClick={actions.onRearrangeClick}
-            //   removeAlbumAtIndex={actions.listMutations.removeAlbumAtIndex}
-            //   showAlbums={state.settings.state.showAlbums}
-            //   textColor={state.settings.state.textColor}
-            // />
-            <div
-              className="
-                flex flex-wrap justify-center
-             max-h-[80vh]
-                overflow-y-scroll
-              "
-            >
-              {state.list.map((album, index) => (
-                <div 
-                  className="basis-1/3 relative max-w-[50px]"
-                  key={index+'gfrdi'}
-                  style={{ height: '40px'}}
-                >
-                  <Image
-                    layout='fill'
-                    src={album.imageUrl}
-                    alt={album.artist}
-                  />
-                </div>
-              ))}
-            </div>
-          )
-        }
+
+        {!isLoading ? (
+          <List
+            list={state.list}
+            listMode={state.listMode}
+            onRearrangeClick={actions.onRearrangeClick}
+            removeAlbumAtIndex={actions.listMutations.removeAlbumAtIndex}
+            showAlbums={state.settings.state.showAlbums}
+            textColor={state.settings.state.textColor}
+          />
+        ) : <ListLoader />}
+
         <ActionBar
           isEditLoading={state.isEditLoading}
           className="-translate-x-4"
