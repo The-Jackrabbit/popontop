@@ -1,12 +1,10 @@
 import { ListBulletIcon, PaintBrushIcon } from "@heroicons/react/20/solid";
 import { useRouter } from "next/router";
-import { CLICK_CIRCLE_STYLE } from "./ActionOverlay/ClickCircle/ClickCircle";
 import AccountCircleButton from "./ActionOverlay/ClickCircle/ClickCircleButton/AccountCircleButton/AccountCircleButton";
-import ClickCircleButton from "./ActionOverlay/ClickCircle/ClickCircleButton/ClickCircleButton";
+import ClickCircleButton, { CLICK_CIRCLE_STYLE } from "./ActionOverlay/ClickCircle/ClickCircleButton/ClickCircleButton";
 import ClickCircleLayout from "./ActionOverlay/ClickCircle/ClickCircleLayout";
 
 export const ViewChartClickCircle = () => {
-  
   const router = useRouter();
   const onClickCreateChart = (event: React.BaseSyntheticEvent<MouseEvent>) => {
     event.stopPropagation();
@@ -31,12 +29,12 @@ export const ViewChartClickCircle = () => {
         />
       }
       rightButton={
-       <ClickCircleButton
-        icon={<ListBulletIcon className={CLICK_CIRCLE_STYLE} />}
-        isLoading={false}
-        label="your charts"
-        onClick={onClickYourCharts}
-      />
+        <ClickCircleButton
+          icon={<ListBulletIcon className={CLICK_CIRCLE_STYLE} />}
+          isLoading={false}
+          label="your charts"
+          onClick={onClickYourCharts}
+        />
       }
       topButton={
         <ClickCircleButton

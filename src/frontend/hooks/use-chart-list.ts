@@ -125,7 +125,13 @@ const useChartList = ({
     setIsSearchOpen(true);
     open({ canceled: false });
   };
-  
+
+  const [isViewModeActive, setIsViewModeActive] = useState(!true) 
+  const onClickView = () =>{
+    console.log('hi')
+    setIsViewModeActive(!isViewModeActive)
+  };
+
   return {
     actions: {
       editChart,
@@ -143,6 +149,7 @@ const useChartList = ({
       onClickSheetDeadArea,
       onClickSearch,
       onClickSettings,
+      onClickView,
       onRearrangeClick,
       openSearchView: () => {
         setIsSearchOpen(true);
@@ -168,6 +175,7 @@ const useChartList = ({
       isActive,
       isEditLoading: editMutation.isLoading,
       isLoading: mutation.isLoading,
+      isViewModeActive,
       list,
       listMode,
       settings: {

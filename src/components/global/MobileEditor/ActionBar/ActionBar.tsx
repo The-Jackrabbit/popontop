@@ -19,6 +19,7 @@ export interface Props {
   onClickDeleteMode: () => void;
   onClickRearrangeMode: () => void;
   saveChart: () => Promise<string>;
+  onClickView: () => void;
   setIsActive: (val: boolean) =>  void;
 }
 
@@ -36,6 +37,7 @@ export const ActionBar: React.FC<Props> = ({
   onClickRearrangeMode,
   onClickSearch,
   onClickSettings,
+  onClickView,
   saveChart,
   setIsActive,
 }) => { 
@@ -67,6 +69,7 @@ export const ActionBar: React.FC<Props> = ({
           {...SHARED_ACTION_BAR_PROPS}
           {...SHARED_EDITOR_ACTION_BAR_PROPS}
           isLoading={isLoading}
+          onClickView={onClickView}
           saveChart={saveChart}
         />
       ) : null}

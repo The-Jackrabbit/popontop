@@ -1,7 +1,9 @@
 {
-  "name":"popontop",
-  "short_name":"popontop",
-  "icons":[
+  "name": "Popontop",
+  "short_name": "Popontop",
+  "start_url": "index.html",
+  "scope": "./",
+  "icons": [
     {
       "src":"/android-chrome-192x192.png",
       "sizes":"192x192",
@@ -13,6 +15,7 @@
       "type":"image/png"
     }
   ],
-  "background_color":"#ffffff",
-  "display":"standalone"
+  "theme_color": "#ffd31d",
+  "background_color": "#ffffff",
+  "display": "standalone"
 }

@@ -42,6 +42,13 @@ const MyApp: AppType<{ session: Session | null }> = ({
         <title>popontop</title>
       </Head>
       <div className=""><Component {...pageProps} /></div>
+      <div 
+        id="modal-root"
+        className="
+          fixed top-0 left-0 bottom-0
+          w-[100%] h-0
+         " 
+      />
     </SessionProvider>
   );
 };

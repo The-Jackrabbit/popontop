@@ -11,6 +11,7 @@ import { Album } from "../../../styles/types/Albums";
 import { useEffect } from "react";
 import { Loader as ListLoader } from '../../global/MobileEditor/List/Loader'
 import List from "./List/List";
+import ViewModeModal from "./ViewModeModal/ViewModeModal";
 
 export interface Props {
   chartName?: string;
@@ -79,6 +80,12 @@ const MobileEditor: React.FC<Props> = ({
           />
         ) : <ListLoader />}
 
+        {/* {state.isViewModeActive ? (
+          <ViewModeModal
+          
+          />
+        ) : null} 
+ */}
         <ActionBar
           isEditLoading={state.isEditLoading}
           className="-translate-x-4"
@@ -89,6 +96,7 @@ const MobileEditor: React.FC<Props> = ({
           onClickSearch={actions.onClickSearch}
           onClickDeleteMode={actions.onClickDeleteMode}
           onClickRearrangeMode={actions.onClickRearrangeMode}
+          onClickView={actions.onClickView}
           hasNonEmptyList={state.list.length > 0}
           isActive={state.isActive}
           isReadOnly={isReadOnly}

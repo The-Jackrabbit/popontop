@@ -3,8 +3,7 @@ import {
   ArrowRightOnRectangleIcon,
   UserCircleIcon,
 } from '@heroicons/react/24/solid';
-import { CLICK_CIRCLE_STYLE } from "../../ClickCircle";
-import ClickCircleButton from "../ClickCircleButton";
+import ClickCircleButton, { CLICK_CIRCLE_STYLE } from "../ClickCircleButton";
 
 export const AccountCircleButton: React.FC = () => {
   const { data: sessionData } = useSession();
