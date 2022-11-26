@@ -12,12 +12,13 @@ export interface Props {
 }
 
 export const ICON_STYLE = "h-6 w-6 translate-y-[1px] text-neutral-900 dark:text-neutral-50";
+export const DEFAULT_CLASSNAME = 'w-8 h-8 p-[2px]';
 
 const FilterButton: React.FC<Props> = ({
   ariaLabel,
   isActive = false,
   children,
-  className = 'w-8 h-8 p-[2px]',
+  className = DEFAULT_CLASSNAME,
   hasGradientIndicator = true,
   onClick,
 }) => {

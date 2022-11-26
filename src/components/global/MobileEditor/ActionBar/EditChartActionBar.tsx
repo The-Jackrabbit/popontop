@@ -1,4 +1,4 @@
-import FilterButton, { ICON_STYLE } from "../../../lib/FilterButton/FilterButton";
+import FilterButton, { DEFAULT_CLASSNAME, ICON_STYLE } from "../../../lib/FilterButton/FilterButton";
 import { 
   ChevronUpDownIcon, 
   CogIcon,
@@ -99,7 +99,7 @@ export const EditChartActionBar: React.FC<Props> = ({
             </FilterButton>  
             <FilterButton
               ariaLabel="toggle rearrange mode"
-              // className="translate-x-2jjjjjjjj"
+              className={`${DEFAULT_CLASSNAME} mx-2`}
               isActive={false}
               onClick={onClickView}
               >

@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import { Loader as ListLoader } from '../../global/MobileEditor/List/Loader'
 import List from "./List/List";
 import ViewModeModal from "./ViewModeModal/ViewModeModal";
+import ShareTab from "./ShareTab/ShareTab";
 
 export interface Props {
   chartName?: string;
@@ -98,6 +99,12 @@ const MobileEditor: React.FC<Props> = ({
           saveChart={actions.saveChart}
         />
       </a.div>
+      <ShareTab
+        columns={state.settings.state.columns}
+        list={state.list}
+        rows={state.settings.state.rows} 
+        chartTitle={state.chartTitle}
+      /> 
       <MobileSheet bind={sheet.bind} display={sheet.display} y={sheet.y}>
         {state.isSearchOpen && (
           <SearchAlbums
@@ -113,7 +120,13 @@ const MobileEditor: React.FC<Props> = ({
         </div>
         {state.isViewModeActive ? (
           <ViewModeModal
+            onDecrementColumns={state.settings.actions.onDecrementColumns}
+            onIncrementColumns={state.settings.actions.onIncrementColumns}
+            onDecrementRows={state.settings.actions.onDecrementRows}
+            onIncrementRows={state.settings.actions.onIncrementRows}
+            columns={state.settings.state.columns}
             list={state.list} 
+            rows={state.settings.state.rows} 
           />
         ) : null} 
      </MobileSheet>

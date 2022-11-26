@@ -1,8 +1,13 @@
 import { ChartSettings } from "@prisma/client";
 import { useEffect, useState } from "react";
+import { useIncrementer } from "../../../components/lib/NumberInput/NumberInput";
 
 export interface Settings {
   actions: {
+    onDecrementColumns: () => void;
+    onIncrementColumns: () => void;
+    onDecrementRows: () => void;
+    onIncrementRows: () => void;
     setBorderColor: (value: string) => void;
     setBorderSize: (value: number) => void;
     setShowAlbums: (value: boolean) => void;
@@ -14,6 +19,8 @@ export interface Settings {
     backgroundColor: string;
     borderColor: string;
     borderSize: number;
+    columns: number;
+    rows: number;
     showAlbums: boolean;
     showTitle: boolean;
     textColor: string;
@@ -21,54 +28,51 @@ export interface Settings {
 }
 
 const useChartSettings = (defaultSettings: ChartSettings | null): Settings => {
-  const [settings, setSettings] = useState<Settings['state']>({
-    backgroundColor:  defaultSettings?.background_color ?? '',
-    borderColor: defaultSettings?.border_color ?? '',
-    borderSize: 1,
-    showAlbums: defaultSettings?.show_albums ?? !false,
-    showTitle: defaultSettings?.show_title ?? !false,
-    textColor: defaultSettings?.text_color ?? '',
+  const [rows, onIncrementRows, onDecrementRows] = useIncrementer({
+    initialAmount: 5, // TODO: persist to backend
   });
+  const [columns, onIncrementColumns, onDecrementColumns] = useIncrementer({
+    initialAmount: 2, // TODO: persist to backend
+  }); 
+  const [backgroundColor, setBackgroundColor] = useState(defaultSettings?.background_color ?? '');
+  const [borderColor, setBorderColor] = useState(defaultSettings?.border_color ?? '');
+  const [borderSize, setBorderSize] = useState(1); // need to convert the sql sschema for this value from a decimal to a regualr number before unhardcoding this
+  const [showAlbums, setShowAlbums] = useState(defaultSettings?.show_albums ?? true);
+  const [showTitle, setShowTitle] = useState(defaultSettings?.show_title ?? true);
+  const [textColor, setTextColor] = useState(defaultSettings?.text_color ?? '');
 
   useEffect(() => {
-    setSettings({
-      backgroundColor:  defaultSettings?.background_color ?? '',
-      borderColor: defaultSettings?.border_color ?? '',
-      borderSize: 1,
-      showAlbums: defaultSettings?.show_albums ?? !false,
-      showTitle: defaultSettings?.show_title ?? !false,
-      textColor: defaultSettings?.text_color ?? '',
-    });
+    setBackgroundColor(defaultSettings?.background_color ?? '');
+    setBorderColor( defaultSettings?.border_color ?? '');
+    setBorderSize( 1);
+    setShowAlbums( defaultSettings?.show_albums ?? !false);
+    setShowTitle( defaultSettings?.show_title ?? !false);
+    setTextColor( defaultSettings?.text_color ?? '');
   }, [defaultSettings]);
 
   return {
     actions: {
-      setBorderColor: (value: string) => setSettings((settings) => ({
-        ...settings,
-        borderColor: value,
-      })),
-      setBorderSize: (value: number) => setSettings((settings) => ({
-        ...settings,
-        borderSize: value,
-      })),
-      setShowAlbums: (value: boolean) => setSettings((settings) => ({
-        ...settings,
-        showAlbums: value,
-      })),
-      setBackgroundColor: (value: string) => setSettings((settings) => ({
-        ...settings,
-        backgroundColor: value,
-      })),
-      setShowTitle: (value: boolean) => setSettings((settings) => ({
-        ...settings,
-        showTitle: value,
-      })),
-      setTextColor: (value: string) => setSettings((settings) => ({
-        ...settings,
-        textColor: value,
-      })),
+      onDecrementColumns,
+      onDecrementRows,
+      onIncrementColumns,
+      onIncrementRows,
+      setBackgroundColor,
+      setBorderColor,
+      setBorderSize,
+      setShowAlbums,
+      setShowTitle,
+      setTextColor,
     },
-    state: settings,
+    state: {
+      backgroundColor,
+      borderColor,
+      borderSize,
+      columns,
+      rows,
+      showAlbums,
+      showTitle,
+      textColor ,
+    }
   }
 };
 

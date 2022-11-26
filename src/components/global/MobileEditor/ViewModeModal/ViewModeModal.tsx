@@ -3,11 +3,23 @@ import Grid from "../../../lib/Grid/Grid";
 import NumberInput, { useIncrementer } from "../../../lib/NumberInput/NumberInput";
 
 export interface Props {
+  columns: number;
   list: Album[];
+  onDecrementColumns: () => void;
+  onIncrementColumns: () => void;
+  onDecrementRows: () => void;
+  onIncrementRows: () => void;
+  rows: number;
 }
-export const ViewModeModal: React.FC<Props> = ({ list }) => {
-  const [rows, onIncrementRows, onDecrementRows] = useIncrementer({ });
-  const [columns, onIncrementColumns, onDecrementColumns] = useIncrementer({ }); 
+export const ViewModeModal: React.FC<Props> = ({
+  columns,
+  list,
+  onDecrementColumns,
+  onIncrementColumns,
+  onDecrementRows,
+  onIncrementRows,
+  rows,
+}) => {
   return (
     <div
       className="
