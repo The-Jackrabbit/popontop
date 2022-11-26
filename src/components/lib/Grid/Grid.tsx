@@ -23,7 +23,7 @@ const Grid: React.FC<Props> = ({
         Math.floor(
           Math.min(
             containerWidth/columns - 6, 
-            containerHeight/rows - 6,
+            (containerHeight-40)/rows - 6,
           )
         )
       );
