@@ -39,6 +39,7 @@ const useChartList = ({
   const [isActive, setIsActive] = useState(true); 
   const [listMode, setListMode] = useState<ListRowMode>(ListRowMode.NORMAL);
   const [chartTitle, setChartTitle] = useState(chartName);
+  const [isViewModeActive, setIsViewModeActive] = useState(!true) 
   const toggleTitle = () => {
     setIsFirstCloseDone(true);
   };
@@ -90,6 +91,7 @@ const useChartList = ({
   } = useDragSheetDown(height, () => {
     setIsSettingsOpen(false);
     setIsSearchOpen(false);
+    setIsViewModeActive(false);
     if (!isFirstCloseDone && list.length > 0) {
       toggleTitle();
     }
@@ -126,7 +128,6 @@ const useChartList = ({
     open({ canceled: false });
   };
 
-  const [isViewModeActive, setIsViewModeActive] = useState(!true) 
   const onClickView = () =>{
     setIsViewModeActive(!isViewModeActive);
     open({ canceled: false });

@@ -22,8 +22,8 @@ const Grid: React.FC<Props> = ({
       setSquareWidth(
         Math.floor(
           Math.min(
-            containerWidth/columns - 2, 
-            containerHeight/rows - 2,
+            containerWidth/columns - 6, 
+            containerHeight/rows - 6,
           )
         )
       );
@@ -37,7 +37,7 @@ const Grid: React.FC<Props> = ({
         flex flex-wrap justify-center
         h-[80vh] w-full
         overflow-y-scroll
-        content-center 
+      
       "
     >
           {[...new Array(columns)].map((_, index) => (
