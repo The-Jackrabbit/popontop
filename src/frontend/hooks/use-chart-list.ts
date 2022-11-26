@@ -128,8 +128,8 @@ const useChartList = ({
 
   const [isViewModeActive, setIsViewModeActive] = useState(!true) 
   const onClickView = () =>{
-    console.log('hi')
-    setIsViewModeActive(!isViewModeActive)
+    setIsViewModeActive(!isViewModeActive);
+    open({ canceled: false });
   };
 
   return {

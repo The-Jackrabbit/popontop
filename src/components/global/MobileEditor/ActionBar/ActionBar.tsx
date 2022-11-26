@@ -80,6 +80,7 @@ export const ActionBar: React.FC<Props> = ({
         <EditChartActionBar
           {...SHARED_ACTION_BAR_PROPS}
           {...SHARED_EDITOR_ACTION_BAR_PROPS}
+          onClickView={onClickView}
           editChart={editChart}
           isLoading={isEditLoading}
           isReadOnly={isReadOnly}

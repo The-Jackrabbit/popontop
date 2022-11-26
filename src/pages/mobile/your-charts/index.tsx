@@ -130,10 +130,11 @@ const YourCharts: NextPage = () => {
           listMode={listMode}
           onClickDeleteMode={() => setListMode(listMode === ListRowMode.DELETE ? ListRowMode.NORMAL : ListRowMode.DELETE)}
           onClickRearrangeMode={() => undefined} 
-isEditLoading={false}
+          isEditLoading={false}
           isLoading={false}
           onClickSettings={() => undefined}
           onClickSearch={() => undefined}
+          onClickView={() => undefined}
           isActive={true}
           setIsActive={() => undefined}
           saveChart={() => new Promise((res) => res(''))}

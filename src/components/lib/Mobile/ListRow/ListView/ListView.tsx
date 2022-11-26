@@ -35,12 +35,12 @@ export const ListView: React.FC<Props> = ({
     </div>
       )}
     <div className="basis-2/12 justify-start">
-      <Image
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
         width={ROW_HEIGHT}
         height={ROW_HEIGHT}
         src={album.imageUrl}
         alt={album.artist}
-        
       />
     </div>
     <div

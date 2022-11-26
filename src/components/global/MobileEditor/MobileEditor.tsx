@@ -80,12 +80,6 @@ const MobileEditor: React.FC<Props> = ({
           />
         ) : <ListLoader />}
 
-        {/* {state.isViewModeActive ? (
-          <ViewModeModal
-          
-          />
-        ) : null} 
- */}
         <ActionBar
           isEditLoading={state.isEditLoading}
           className="-translate-x-4"
@@ -117,7 +111,12 @@ const MobileEditor: React.FC<Props> = ({
             settings={state.settings}
           />
         </div>
-      </MobileSheet>
+        {state.isViewModeActive ? (
+          <ViewModeModal
+            list={state.list} 
+          />
+        ) : null} 
+     </MobileSheet>
     </MobilePage>
   );
 };

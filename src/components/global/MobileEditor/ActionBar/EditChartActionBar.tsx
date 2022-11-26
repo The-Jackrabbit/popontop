@@ -9,7 +9,7 @@ import { ListRowMode } from "../../../lib/Mobile/ListRow/ListRow";
 import ActionBarLayout from "./ActionBarLayout";
 import EditChartClickCircle from "./ActionOverlay/ClickCircle/EditChartClickCircle/EditChartClickCircle";
 import ViewChartClickCircle from "./ViewChartClickCircle";
-
+import { EyeIcon } from "@heroicons/react/24/solid";
 export interface Props {
   actionOverlayClassName?: string;
   className?: string;
@@ -23,6 +23,7 @@ export interface Props {
   onClickSearch: () => void;
   onClickDeleteMode: () => void;
   onClickRearrangeMode: () => void;
+  onClickView: () => void;
   setIsActive: (val: boolean) =>  void;
 }
 
@@ -39,6 +40,7 @@ export const EditChartActionBar: React.FC<Props> = ({
   onClickRearrangeMode,
   onClickSearch,
   onClickSettings,
+  onClickView,
   setIsActive,
 }) => {
   const onClickSearchAlbums = (event: React.BaseSyntheticEvent<MouseEvent>) => {
@@ -87,13 +89,23 @@ export const EditChartActionBar: React.FC<Props> = ({
       }
       rightBadgeButton={
         hasNonEmptyList && !isReadOnly ? (
-          <FilterButton
-            ariaLabel="toggle rearrange mode"
-            isActive={listMode === ListRowMode.REARRANGE}
-            onClick={onClickRearrangeMode}
-          >
-            <ChevronUpDownIcon className={ICON_STYLE} />
-          </FilterButton>
+          <div>       
+            <FilterButton
+              ariaLabel="toggle rearrange mode"
+              isActive={listMode === ListRowMode.REARRANGE}
+              onClick={onClickRearrangeMode}
+            >
+              <ChevronUpDownIcon className={ICON_STYLE} />
+            </FilterButton>  
+            <FilterButton
+              ariaLabel="toggle rearrange mode"
+              // className="translate-x-2jjjjjjjj"
+              isActive={false}
+              onClick={onClickView}
+              >
+              <EyeIcon className={ICON_STYLE} />
+            </FilterButton>
+            </div>
         ) : undefined
       }
       rightCornerButton={

@@ -1,19 +1,34 @@
-import Modal from "../../../lib/Modal/Modal";
+import { useState } from "react";
+import { Album } from "../../../../styles/types/Albums";
+import Grid from "../../../lib/Grid/Grid";
+import NumberInput from "../../../lib/NumberInput/NumberInput";
 
-export const ViewModeModal: React.FC = () => {
+export interface Props {
+  list: Album[];
+}
+export const ViewModeModal: React.FC<Props> = ({ list }) => {
+  const [numberOfColumns, setNumberOfColumns] = useState(5);
+
+  
+  const onDecrement = () => setNumberOfColumns(numberOfColumns - 1);
+  const onIncrement = () => setNumberOfColumns(numberOfColumns + 1);
   return (
-    <Modal>
-      <div
-        className="
-          fixed top-0 left-0 bottom-0
-          w-[100%] 
-          bg-red-300
-          m-4
-        "
-      >
-        <h1>hello</h1>
-      </div>
-    </Modal>
+    <div
+      className="
+        w-[calc(100%_-_24px)] m-4
+        dark:text-white
+      "
+    >
+      <NumberInput
+        className="flex w-full justify-between mb-4"
+        currentValue={numberOfColumns}
+        label="number of rows"
+        onDecrement={onDecrement}
+        onIncrement={onIncrement}
+      />
+
+      <Grid list={list} columns={numberOfColumns} />
+    </div>
   )
 };
 
