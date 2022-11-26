@@ -47,8 +47,8 @@ const Grid: React.FC<Props> = ({
             style={{ width: squareWidth, height: squareWidth}}
             >
               <img
-                src={list[cindex+(rows*index)]?.imageUrl ?? ''}
-                alt={list[cindex+(rows*index)]?.artist ?? ''}
+                src={list[index+(columns*cindex)]?.imageUrl ?? ''}
+                alt={list[index+(columns*cindex)]?.artist ?? ''}
               />              
             </div>
           ))}
