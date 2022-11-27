@@ -35,7 +35,7 @@ export const ShareTab: React.FC<Props> = ({
 
   return (
     <div className="fixed top-0 left-0">
-      <div className="fixed bottom-[20vh] right-0">
+      <div className="fixed bottom-[20vh] flex justify-end w-screen">
         <p
           className="
             px-2 py-1
@@ -47,6 +47,7 @@ export const ShareTab: React.FC<Props> = ({
           style={{ 
             textOrientation: 'upright',
             writingMode: 'vertical-rl',
+            border: !isMainOverlayVisible ? 'none' : '2px solid white'
           }}
         >
           {!isMainOverlayVisible ? 'share' : 'back to editor' }

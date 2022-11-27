@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Album } from "../../../../../styles/types/Albums";
 import { startScreenshotMode } from "../../../../../utils/mobile-theme";
 import Button from "../../../../lib/Button/Button";
-import FilterButton from "../../../../lib/FilterButton/FilterButton";
+import FilterButton, { DEFAULT_CLASSNAME } from "../../../../lib/FilterButton/FilterButton";
 import Grid from "../../../../lib/Grid/Grid";
 import NumberInput from "../../../../lib/NumberInput/NumberInput";
 import { ScreenshotMode } from "./ScreenshotMode/ScreenshotMode"
@@ -37,13 +37,13 @@ export const PreviewEditor: React.FC<Props> = ({
 
   return (
     <div
-      className="
+      className={`
         dark:text-white
-        bg-black
+        bg-white dark:bg-black
         h-screen w-screen
         p-12
         flex flex-col
-      "
+      `}
     >
       <div className="basis-[3%] z-30">
         <NumberInput
@@ -54,7 +54,7 @@ export const PreviewEditor: React.FC<Props> = ({
           onIncrement={onIncrementRows}
         />
       </div>
-      <div className="basis-[3%]">
+      <div className="basis-[3%] grow-0 shrink">
         <NumberInput
           className="flex w-full justify-between mb-4"
           currentValue={columns}
@@ -63,7 +63,7 @@ export const PreviewEditor: React.FC<Props> = ({
           onIncrement={onIncrementColumns}
         />
       </div>
-      <FilterButton ariaLabel="Enter screenshot mode" className="basis-[4%] mb-4" onClick={onClickPreview} isActive={true}>
+      <FilterButton ariaLabel="Enter screenshot mode" className={" p-[2px] basis-[4%] mb-4 "} onClick={onClickPreview} isActive={true}>
         Enter screenshot mode
       </FilterButton>
       {/* <div > */}

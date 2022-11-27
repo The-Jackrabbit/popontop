@@ -44,22 +44,21 @@ export const NumberInput: React.FC<Props> = ({
   onIncrement,
 }) => (
   <div className={className}>
-    <div>
+    <div className="text-xs">
       {label}
     </div>
     <div
       className="
-        -neutral-300
+        bg-neutral-300
         min-w-[150px] max-w-[200px]
         rounded-full
-        [2px]
         flex flex-row justify-between align-middle content-center
       "
     >
       <button 
         className="
-        w-auto
-          bg-neutral-800
+          w-auto
+          bg-neutral-200 dark:bg-neutral-800
           grow
           mr-[2px]
           rounded-tl-full rounded-bl-full
@@ -70,7 +69,7 @@ export const NumberInput: React.FC<Props> = ({
       </button>
       <p 
         className="
-          bg-neutral-800
+          bg-neutral-200 dark:bg-neutral-800
           shrink-0 w-10
           grow text-center
         "
@@ -79,7 +78,7 @@ export const NumberInput: React.FC<Props> = ({
       </p>
       <button 
         className="
-          bg-neutral-800
+          bg-neutral-200 dark:bg-neutral-800
           ml-[2px]
           rounded-tr-full rounded-br-full
           w-auto
