@@ -7,6 +7,7 @@ import { trpc } from "../utils/trpc";
 import Head from "next/head";
 import "../styles/globals.css";
 import ismobile from 'is-mobile';
+import { DARK_MODE_META_TAG, DARK_MODE_THEME_COLOR, LIGHT_MODE_META_TAG, LIGHT_MODE_THEME_COLOR } from "../utils/mobile-theme";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -22,20 +23,19 @@ const MyApp: AppType<{ session: Session | null }> = ({
         <link rel="manifest" href="./site.webmanifest" />
         <meta
           name="description"
-          content={`
-            Popontop lets you create and customize lists of your favorite music.
-          `}
+          content="Popontop lets you create and customize lists of your favorite music."
         />
         <meta
+          id={LIGHT_MODE_META_TAG}
           name="theme-color"
           media="(prefers-color-scheme: light)"
-          content="#f8fafc"
+          content={LIGHT_MODE_THEME_COLOR}
         />
         <meta
-          id="test-dark-meta"
+          id={DARK_MODE_META_TAG}
           name="theme-color"
           media="(prefers-color-scheme: dark)"
-          content="#171717"
+          content={DARK_MODE_THEME_COLOR}
         />
         {ismobile() && (
           <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale = 1.0, initial-scale=1.0, viewport-fit=cover" />
