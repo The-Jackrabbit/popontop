@@ -30,6 +30,7 @@ export interface Settings {
 const useChartSettings = (defaultSettings: ChartSettings | null): Settings => {
   const [rows, onIncrementRows, onDecrementRows] = useIncrementer({
     initialAmount: 5, // TODO: persist to backend
+    max: 18
   });
   const [columns, onIncrementColumns, onDecrementColumns] = useIncrementer({
     initialAmount: 2, // TODO: persist to backend

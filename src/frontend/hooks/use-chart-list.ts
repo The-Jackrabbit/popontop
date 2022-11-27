@@ -39,7 +39,7 @@ const useChartList = ({
   const [isActive, setIsActive] = useState(true); 
   const [listMode, setListMode] = useState<ListRowMode>(ListRowMode.NORMAL);
   const [chartTitle, setChartTitle] = useState(chartName);
-  const [isViewModeActive, setIsViewModeActive] = useState(!true) 
+  const [isViewModeActive, setIsViewModeActive] = useState(false) 
   const toggleTitle = () => {
     setIsFirstCloseDone(true);
   };

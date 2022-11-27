@@ -120,6 +120,7 @@ const MobileEditor: React.FC<Props> = ({
         </div>
         {state.isViewModeActive ? (
           <ViewModeModal
+            chartTitle={state.chartTitle}
             onDecrementColumns={state.settings.actions.onDecrementColumns}
             onIncrementColumns={state.settings.actions.onIncrementColumns}
             onDecrementRows={state.settings.actions.onDecrementRows}

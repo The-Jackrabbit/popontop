@@ -16,7 +16,7 @@ export const ShareTab: React.FC<Props> = ({
   rows,
   chartTitle,
 }) => {
-  const [isOverlayVisible, setIsOverlayVisible] = useState(!false);
+  const [isOverlayVisible, setIsOverlayVisible] = useState(false);
   const onClick = (event: React.BaseSyntheticEvent) => {
     event.stopPropagation();
     setIsOverlayVisible(true);
@@ -34,7 +34,7 @@ export const ShareTab: React.FC<Props> = ({
             px-2 py-1
             leading-tight
             rounded-tl-lg rounded-bl-lg shadow-lg
-            bg-white text-xs
+            bg-white dark:bg-black text-xs
           "
           onClick={onClick}
           style={{ 

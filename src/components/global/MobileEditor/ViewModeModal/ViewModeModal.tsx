@@ -1,8 +1,12 @@
+import { useState } from "react";
 import { Album } from "../../../../styles/types/Albums";
+import Button from "../../../lib/Button/Button";
 import Grid from "../../../lib/Grid/Grid";
-import NumberInput, { useIncrementer } from "../../../lib/NumberInput/NumberInput";
+import NumberInput from "../../../lib/NumberInput/NumberInput";
+import Title from "../Title/Title";
 
 export interface Props {
+  chartTitle: string;
   columns: number;
   list: Album[];
   onDecrementColumns: () => void;
@@ -11,7 +15,9 @@ export interface Props {
   onIncrementRows: () => void;
   rows: number;
 }
+
 export const ViewModeModal: React.FC<Props> = ({
+  chartTitle,
   columns,
   list,
   onDecrementColumns,
@@ -20,36 +26,107 @@ export const ViewModeModal: React.FC<Props> = ({
   onIncrementRows,
   rows,
 }) => {
+  const [isOverlayVisible, setIsOverlayVisible] = useState(true);
+  const listColumns = 1;
+  const aa = (columns*rows)/listColumns 
+  const firstColumn = list.filter((_, index) => index < aa);
+  const secondColumn = list.filter((_, index) => index >= aa && index < 2*aa);
+  const thirdColumn = list.filter((_, index) => index >= 2*aa && index < 3*aa);
   return (
     <div
       className="
         w-[calc(100%_-_24px)] m-4
         dark:text-white
+        h-screen
+        flex flex-col
       "
     >
-      <NumberInput
-        className="flex w-full justify-between mb-4"
-        currentValue={rows}
-        label="number of rows"
-        onDecrement={onDecrementRows}
-        onIncrement={onIncrementRows}
-      />
-
-      <NumberInput
-        className="flex w-full justify-between mb-4"
-        currentValue={columns}
-        label="number of columns"
-        onDecrement={onDecrementColumns}
-        onIncrement={onIncrementColumns}
-      />
-
+      <div className="basis-[3%] z-30">
+        <NumberInput
+          className="flex w-full justify-between mb-4"
+          currentValue={rows}
+          label="number of rows"
+          onDecrement={onDecrementRows}
+          onIncrement={onIncrementRows}
+        />
+      </div>
+      <div className="basis-[3%]">
+        <NumberInput
+          className="flex w-full justify-between mb-4"
+          currentValue={columns}
+          label="number of columns"
+          onDecrement={onDecrementColumns}
+          onIncrement={onIncrementColumns}
+        />
+      </div>
+      <Button className="basis-[4%] mb-4" onClick={() => setIsOverlayVisible(true)}>
+        Preview
+      </Button>
       <Grid
         list={list}
         columns={columns}
         rows={rows}
       />
+      {isOverlayVisible ? (
+        <div className="fixed top-0 left-0 z-50">
+          <div
+            className="
+              fixed right-0
+            "
+          >
+            <div
+              className="
+                bg-[rgba(0,0,0,0.98)]
+                h-screen w-screen
+                p-1 z-50
+              "
+              onClick={() => setIsOverlayVisible(false)}
+            >
+              <div className="h-full w-full flex flex-col">
+                <Title
+                  chartTitle={chartTitle}
+                  isReadOnly={true}
+                  setValue={() => undefined}
+                  showIntroduction={false}
+                  textColor="white"
+                /> 
+                <Grid
+                  columns={columns}
+                  rows={rows}
+                  list={list}
+                />
+                <div className="flex flex-row basis-[30%]">
+
+                <ol className="basis-1/3" style={{ listStyle: 'inside', listStyleType: 'inherit'}}>
+                  {firstColumn.map((album, index) => 
+                    <li className="text-[8px]" key={JSON.stringify(album)}>
+                      {album.name}
+                    </li>
+                  )}
+                </ol>
+                <ol className="basis-1/3" style={{ listStyle: 'inside', listStyleType: 'inherit'}}>
+                  {secondColumn.map((album, index) => 
+                    <li className="text-[8px]" key={JSON.stringify(album)}>
+                      {album.name}
+                    </li>
+                  )}
+                </ol>
+                  <ol className="basis-1/3" style={{ listStyle: 'inside', listStyleType: 'inherit'}}>
+                  {thirdColumn.map((album, index) => 
+                    <li className="text-[8px]" key={JSON.stringify(album)}>
+                      {album.name}
+                    </li>
+                  )}
+                </ol>
+                </div>
+              </div> 
+            </div>
+          </div>
+        </div>
+      ) : null}
     </div>
   )
 };
+
 
 export default ViewModeModal;

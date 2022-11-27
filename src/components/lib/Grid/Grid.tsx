@@ -38,8 +38,11 @@ const Grid: React.FC<Props> = ({
       ref={ref}
       id="container"
       className="
+        basis-[50%]
         flex flex-wrap justify-center
-        h-[80vh] w-full
+        w-full
+        grow shrink-0
+        h-fit
         overflow-y-scroll
       "
     >
