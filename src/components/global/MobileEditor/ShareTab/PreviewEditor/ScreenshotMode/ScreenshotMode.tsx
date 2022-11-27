@@ -24,7 +24,7 @@ export const ScreenshotMode: React.FC<Props> = ({
         <div
           className="
           bg-[rgba(255,255,255,0.98)] dark:bg-[rgba(0,0,0,0.98)]
-            h-screen w-screen
+            h-[calc(100vh_-_30px)] w-screen
             p-1 z-50
           "
           onClick={() => onExit()}
