@@ -43,6 +43,7 @@ export const PreviewEditor: React.FC<Props> = ({
         h-screen w-screen
         p-12
         flex flex-col
+        align-middle items-stretch
       `}
     >
       <div className="basis-[3%] z-30">
@@ -63,8 +64,12 @@ export const PreviewEditor: React.FC<Props> = ({
           onIncrement={onIncrementColumns}
         />
       </div>
-      <FilterButton ariaLabel="Enter screenshot mode" className={" p-[2px] basis-[4%] mb-4 "} onClick={onClickPreview} isActive={true}>
-        Enter screenshot mode
+      <FilterButton
+        ariaLabel="Enter screenshot mode"
+        className={"w-min whitespace-nowrap p-1 basis-[4%] mb-4 "}
+        onClick={onClickPreview}
+      >
+        <p className="p-2 py-1">Enter screenshot mode</p>
       </FilterButton>
       {/* <div > */}
         <Grid preview={true} list={list} columns={columns} rows={rows} />

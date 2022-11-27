@@ -4,6 +4,8 @@ import { ROW_HEIGHT } from "../../../../../frontend/hooks/use-disappear-row";
 import { Album } from "../../../../../styles/types/Albums";
 import RearrangeViewButton from "./RearrangeViewButton/RearrangeViewButton";
 import { useSpring, a, config } from "react-spring";
+import { ArrowDownIcon, ArrowUpIcon } from "@heroicons/react/20/solid";
+import { ICON_STYLE } from "../../../FilterButton/FilterButton";
 
 export interface Props {
   album: Album;
@@ -72,25 +74,33 @@ export const RearrangeView: React.FC<Props> = ({
           className="shrink-0 basis-3/12"
           onClick={() => onClick(RowMovementType.DOWN_FIVE)}
         >
-          -5
+          <p>
+            <ArrowDownIcon className="h-4 w-4  text-neutral-900 dark:text-neutral-50 inline" />5
+          </p>
         </RearrangeViewButton>
         <RearrangeViewButton
           className="shrink-0 basis-3/12"
           onClick={() => onClick(RowMovementType.DOWN_ONE)}
         >
-          -1
+           <p>
+            <ArrowDownIcon className="h-4 w-4  text-neutral-900 dark:text-neutral-50 inline" />1
+          </p>
         </RearrangeViewButton>
         <RearrangeViewButton
           className="shrink-0 basis-3/12"
           onClick={() => onClick(RowMovementType.UP_ONE)}
         >
-          +1
+          <p>
+            <ArrowUpIcon className="h-4 w-4  text-neutral-900 dark:text-neutral-50 inline" />1
+          </p>
         </RearrangeViewButton>
         <RearrangeViewButton
           className="shrink-0 basis-3/12"
           onClick={() => onClick(RowMovementType.UP_FIVE)}
         >
-          +5
+          <p>
+            <ArrowUpIcon className="h-4 w-4  text-neutral-900 dark:text-neutral-50 inline" />5
+          </p>
         </RearrangeViewButton>
       </a.div>
     </a.div>
