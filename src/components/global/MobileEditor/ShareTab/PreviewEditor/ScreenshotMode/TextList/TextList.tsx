@@ -47,7 +47,7 @@ export const TextList: React.FC<Props> = ({ list }) => {
         <div
           key={'column'+columnIndex}
           className={basis}
-          style={{ listStyle: 'inside', listStyleType: 'inherit'}}
+          style={{ listStyle: 'inside', listStyleType: 'inherit', paddingBottom: '80px' }}
         >
           {column.map((album, index) => 
             <div className={fontSize} key={JSON.stringify(album)}>
