@@ -25,7 +25,7 @@ const Title: React.FC<Props> = ({
     <a.div
       className={`
         rounded-lg bg-white dark:bg-[#0a0a0a]
-        shadow-xl
+        shadow-lg dark:shadow-neutral-800
         box-content
         py-6  px-6 sm:px-4 
         mb-4 z-30

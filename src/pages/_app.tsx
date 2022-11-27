@@ -32,6 +32,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
           content="#f8fafc"
         />
         <meta
+          id="test-dark-meta"
           name="theme-color"
           media="(prefers-color-scheme: dark)"
           content="#171717"

@@ -100,10 +100,14 @@ const MobileEditor: React.FC<Props> = ({
         />
       </a.div>
       <ShareTab
-        columns={state.settings.state.columns}
-        list={state.list}
-        rows={state.settings.state.rows} 
         chartTitle={state.chartTitle}
+        onDecrementColumns={state.settings.actions.onDecrementColumns}
+        onIncrementColumns={state.settings.actions.onIncrementColumns}
+        onDecrementRows={state.settings.actions.onDecrementRows}
+        onIncrementRows={state.settings.actions.onIncrementRows}
+        columns={state.settings.state.columns}
+        list={state.list} 
+        rows={state.settings.state.rows} 
       /> 
       <MobileSheet bind={sheet.bind} display={sheet.display} y={sheet.y}>
         {state.isSearchOpen && (

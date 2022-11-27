@@ -97,15 +97,7 @@ export const EditChartActionBar: React.FC<Props> = ({
             >
               <ChevronUpDownIcon className={ICON_STYLE} />
             </FilterButton>  
-            <FilterButton
-              ariaLabel="toggle rearrange mode"
-              className={`${DEFAULT_CLASSNAME} mx-2`}
-              isActive={false}
-              onClick={onClickView}
-              >
-              <EyeIcon className={ICON_STYLE} />
-            </FilterButton>
-            </div>
+           </div>
         ) : undefined
       }
       rightCornerButton={

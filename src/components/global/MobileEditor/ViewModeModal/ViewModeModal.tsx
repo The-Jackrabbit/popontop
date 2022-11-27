@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Album } from "../../../../styles/types/Albums";
 import Button from "../../../lib/Button/Button";
 import Grid from "../../../lib/Grid/Grid";
@@ -32,6 +32,15 @@ export const ViewModeModal: React.FC<Props> = ({
   const firstColumn = list.filter((_, index) => index < aa);
   const secondColumn = list.filter((_, index) => index >= aa && index < 2*aa);
   const thirdColumn = list.filter((_, index) => index >= 2*aa && index < 3*aa);
+  const onClickPreview = () => {
+    setIsOverlayVisible(true);
+    const t = document.getElementById('test-dark-meta');
+    t?.setAttribute('content', 'rgba(0,0,0,0.98)');
+  }
+  useEffect(() => {
+    const t = document.getElementById('test-dark-meta');
+    return () => t?.setAttribute('content', '#171717');
+  }, [])
   return (
     <div
       className="
@@ -59,7 +68,7 @@ export const ViewModeModal: React.FC<Props> = ({
           onIncrement={onIncrementColumns}
         />
       </div>
-      <Button className="basis-[4%] mb-4" onClick={() => setIsOverlayVisible(true)}>
+      <Button className="basis-[4%] mb-4" onClick={onClickPreview}>
         Preview
       </Button>
       <Grid
