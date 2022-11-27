@@ -73,7 +73,7 @@ export const ActionBarLayout: React.FC<Props> = ({
         {rightCornerButton ? rightCornerButton : <div className="w-8 h-8" />}
       </a.div>
       <a.div
-        className="fixed left-0 bottom-0"
+        className="fixed left-0 bottom-0 z-50"
         style={{ ...overlayPosition }}
       >
         <ActionOverlayLayout

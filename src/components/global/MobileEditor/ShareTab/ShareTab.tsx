@@ -34,7 +34,7 @@ export const ShareTab: React.FC<Props> = ({
   };
 
   return (
-    <div className="fixed top-0 left-0">
+    <div className="fixed top-0 left-0 z-20">
       <div className="fixed bottom-[20vh] flex justify-end w-screen">
         <p
           className="

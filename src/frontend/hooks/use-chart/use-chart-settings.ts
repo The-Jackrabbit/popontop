@@ -34,6 +34,7 @@ const useChartSettings = (defaultSettings: ChartSettings | null): Settings => {
   });
   const [columns, onIncrementColumns, onDecrementColumns] = useIncrementer({
     initialAmount: 2, // TODO: persist to backend
+    max: 18,
   }); 
   const [backgroundColor, setBackgroundColor] = useState(defaultSettings?.background_color ?? '');
   const [borderColor, setBorderColor] = useState(defaultSettings?.border_color ?? '');

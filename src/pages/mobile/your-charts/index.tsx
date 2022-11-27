@@ -134,7 +134,6 @@ const YourCharts: NextPage = () => {
           isLoading={false}
           onClickSettings={() => undefined}
           onClickSearch={() => undefined}
-          onClickView={() => undefined}
           isActive={true}
           setIsActive={() => undefined}
           saveChart={() => new Promise((res) => res(''))}

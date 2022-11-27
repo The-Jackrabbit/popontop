@@ -91,7 +91,6 @@ const MobileEditor: React.FC<Props> = ({
           onClickSearch={actions.onClickSearch}
           onClickDeleteMode={actions.onClickDeleteMode}
           onClickRearrangeMode={actions.onClickRearrangeMode}
-          onClickView={actions.onClickView}
           hasNonEmptyList={state.list.length > 0}
           isActive={state.isActive}
           isReadOnly={isReadOnly}
@@ -99,7 +98,9 @@ const MobileEditor: React.FC<Props> = ({
           saveChart={actions.saveChart}
         />
       </a.div>
-      <ShareTab
+
+      {state.isActive ? (
+        <ShareTab
         chartTitle={state.chartTitle}
         onDecrementColumns={state.settings.actions.onDecrementColumns}
         onIncrementColumns={state.settings.actions.onIncrementColumns}
@@ -108,7 +109,8 @@ const MobileEditor: React.FC<Props> = ({
         columns={state.settings.state.columns}
         list={state.list} 
         rows={state.settings.state.rows} 
-      /> 
+        /> 
+      ) : null}
       <MobileSheet bind={sheet.bind} display={sheet.display} y={sheet.y}>
         {state.isSearchOpen && (
           <SearchAlbums

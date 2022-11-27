@@ -1,7 +1,7 @@
-import FilterButton, { DEFAULT_CLASSNAME, ICON_STYLE } from "../../../lib/FilterButton/FilterButton";
+import FilterButton, { ICON_STYLE } from "../../../lib/FilterButton/FilterButton";
 import { 
   ChevronUpDownIcon, 
-  CogIcon,
+  PaintBrushIcon,
   PlusIcon, 
   TrashIcon,
 } from '@heroicons/react/20/solid';
@@ -9,7 +9,7 @@ import { ListRowMode } from "../../../lib/Mobile/ListRow/ListRow";
 import ActionBarLayout from "./ActionBarLayout";
 import EditChartClickCircle from "./ActionOverlay/ClickCircle/EditChartClickCircle/EditChartClickCircle";
 import ViewChartClickCircle from "./ViewChartClickCircle";
-import { EyeIcon } from "@heroicons/react/24/solid";
+
 export interface Props {
   actionOverlayClassName?: string;
   className?: string;
@@ -23,7 +23,6 @@ export interface Props {
   onClickSearch: () => void;
   onClickDeleteMode: () => void;
   onClickRearrangeMode: () => void;
-  onClickView: () => void;
   setIsActive: (val: boolean) =>  void;
 }
 
@@ -40,7 +39,6 @@ export const EditChartActionBar: React.FC<Props> = ({
   onClickRearrangeMode,
   onClickSearch,
   onClickSettings,
-  onClickView,
   setIsActive,
 }) => {
   const onClickSearchAlbums = (event: React.BaseSyntheticEvent<MouseEvent>) => {
@@ -83,21 +81,19 @@ export const EditChartActionBar: React.FC<Props> = ({
             hasGradientIndicator={false}
             onClick={onClickChartSettings}
             >
-            <CogIcon className={ICON_STYLE} />
+            <PaintBrushIcon className={`${ICON_STYLE} p-1`} />
           </FilterButton>
         ) : null
       }
       rightBadgeButton={
         hasNonEmptyList && !isReadOnly ? (
-          <div>       
-            <FilterButton
-              ariaLabel="toggle rearrange mode"
-              isActive={listMode === ListRowMode.REARRANGE}
-              onClick={onClickRearrangeMode}
-            >
-              <ChevronUpDownIcon className={ICON_STYLE} />
-            </FilterButton>  
-           </div>
+          <FilterButton
+            ariaLabel="toggle rearrange mode"
+            isActive={listMode === ListRowMode.REARRANGE}
+            onClick={onClickRearrangeMode}
+          >
+            <ChevronUpDownIcon className={ICON_STYLE} />
+          </FilterButton>  
         ) : undefined
       }
       rightCornerButton={

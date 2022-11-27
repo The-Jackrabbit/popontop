@@ -42,9 +42,8 @@ const Grid: React.FC<Props> = ({
       className={`
       ${preview ? 'scale-95' : ''}
         flex justify-center
-        grow
+        grow h-fit
         overflow-y-scroll
-        basis-[80%]
       `}
     >
       {/* <div className={preview ? 'scale-50' : ''}> */}

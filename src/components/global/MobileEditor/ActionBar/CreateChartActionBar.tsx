@@ -1,19 +1,20 @@
 import FilterButton, { ICON_STYLE } from "../../../lib/FilterButton/FilterButton";
 import { 
   ChevronUpDownIcon, 
-  CogIcon,
+  PaintBrushIcon,
   PlusIcon, 
   TrashIcon,
 } from '@heroicons/react/20/solid';
 import { ListRowMode } from "../../../lib/Mobile/ListRow/ListRow";
 import ActionBarLayout from "./ActionBarLayout";
 import CreateChartClickCircle from "./ActionOverlay/ClickCircle/CreateChartClickCircle/CreateChartClickCircle";
-import { EyeIcon } from "@heroicons/react/24/solid";
+import SearchButton from "./ChartButtons/SearchButton/SearchButton";
+import SettingsButton from "./ChartButtons/SettingsButton/SettingsButton";
+
 
 export interface Props {
   actionOverlayClassName?: string;
   className?: string;
-  editChart?: () => Promise<string>;
   hasNonEmptyList: boolean;
   isActive: boolean;
   isLoading: boolean;
@@ -22,7 +23,6 @@ export interface Props {
   onClickSearch: () => void;
   onClickDeleteMode: () => void;
   onClickRearrangeMode: () => void;
-  onClickView: () => void;
   saveChart: () => Promise<string>;
   setIsActive: (val: boolean) =>  void;
 }
@@ -38,19 +38,18 @@ export const CreateChartActionBar: React.FC<Props> = ({
   onClickRearrangeMode,
   onClickSearch,
   onClickSettings,
-  onClickView,
   saveChart,
   setIsActive,
 }) => {
-  const onClickSearchAlbums = (event: React.BaseSyntheticEvent<MouseEvent>) => {
-    event.stopPropagation();
+  const onClickSearchAlbums = () => {
+    // event.stopPropagation();
     onClickSearch();
   };
 
   const onClickChartSettings = (
-    event: React.BaseSyntheticEvent<MouseEvent>
+    // event: React.BaseSyntheticEvent<MouseEvent>
   ) => {
-    event.stopPropagation();
+    // event.stopPropagation();
     onClickSettings();
   };
 
@@ -73,45 +72,19 @@ export const CreateChartActionBar: React.FC<Props> = ({
           </FilterButton>
         ) : undefined
       }
-      leftCornerButton={
-        <FilterButton
-          ariaLabel="chart settings"
-          hasGradientIndicator={false}
-          onClick={onClickChartSettings}
-        >
-          <CogIcon className={ICON_STYLE} />
-        </FilterButton>
-      }
+      leftCornerButton={<SettingsButton onClick={onClickChartSettings} />}
       rightBadgeButton={
         hasNonEmptyList ? (
-          <div>       
-            <FilterButton
-              ariaLabel="toggle rearrange mode"
-              isActive={listMode === ListRowMode.REARRANGE}
-              onClick={onClickRearrangeMode}
-            >
-              <ChevronUpDownIcon className={ICON_STYLE} />
-            </FilterButton>  
-            <FilterButton
-              ariaLabel="toggle rearrange mode"
-              // className="translate-x-2jjjjjjjj"
-              isActive={false}
-              onClick={onClickView}
-              >
-              <EyeIcon className={ICON_STYLE} />
-            </FilterButton>
-            </div>
+          <FilterButton
+            ariaLabel="toggle rearrange mode"
+            isActive={listMode === ListRowMode.REARRANGE}
+            onClick={onClickRearrangeMode}
+          >
+            <ChevronUpDownIcon className={ICON_STYLE} />
+          </FilterButton>  
         ) : undefined
       }
-      rightCornerButton={
-        <FilterButton
-          ariaLabel="search albums"
-          onClick={onClickSearchAlbums}
-          hasGradientIndicator={false}
-        >
-          <PlusIcon className={ICON_STYLE} />
-        </FilterButton>
-      }
+      rightCornerButton={<SearchButton onClick={onClickSearchAlbums} />}
       setIsActive={setIsActive}
     />
   );
