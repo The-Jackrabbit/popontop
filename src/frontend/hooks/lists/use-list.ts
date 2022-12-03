@@ -1,5 +1,5 @@
 import { DragEndEvent } from "@dnd-kit/core";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { EMPTY_ALBUM } from "../../../constants/empty-album";
 import { Album } from "../../../styles/types/Albums";
 import { HookNode } from "../hook-node";
@@ -41,12 +41,17 @@ const useList = (initialList: Album[] = []): ListHookNode => {
 
     setList((oldList) => {
       const newContainers = [...oldList];
-
+      if (newContainers.length < droppedIndex) {
+        for (let i = newContainers.length ; i < droppedIndex + 1 ; i++) {
+          newContainers.push(EMPTY_ALBUM);
+        }       
+      }
       if (draggedAlbum.origin === 'chart') {
         newContainers[draggedAlbum.index] = EMPTY_ALBUM; 
       }
 
       if (droppedIndex !== -1) {
+        
         newContainers.splice(droppedIndex, 1, draggedAlbum.data);
       }
 

@@ -26,7 +26,7 @@ const DesktopEditor: React.FC<Props> = ({
     <Layout
       isReadonly={readonly}
       title={
-        <a.div style={titleStyle} className="w-full mb-2">
+        <a.div style={titleStyle} className="w-full mb-2 overflow-y-hidden">
           <Title
             chartTitle={chart.state.chartTitle}
             isReadOnly={readonly}

@@ -1,5 +1,5 @@
 import { ChartSettings } from "@prisma/client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useIncrementer } from "../../../components/lib/NumberInput/NumberInput";
 import { HookNode } from "../hook-node";
 

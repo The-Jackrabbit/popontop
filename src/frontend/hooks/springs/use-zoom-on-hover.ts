@@ -8,7 +8,7 @@ export function useZoomOnHover() {
       bounce: 1.2
     },
   }));
-  const onMouseOver = () => animateZoomOnHover.start({ scale: 1.1 });
+  const onMouseOver = () => animateZoomOnHover.start({ scale: 1.05 });
   const onMouseLeave = () => animateZoomOnHover.start({ scale: 1.0 });
 
   return {
