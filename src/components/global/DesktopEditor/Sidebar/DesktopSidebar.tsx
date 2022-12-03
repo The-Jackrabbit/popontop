@@ -80,23 +80,13 @@ export const DesktopSidebar: React.FC<Props> = ({
                           data={{ data: album as Album, index, origin: 'search' }}
                           id={`results-${index.toString()}`}
                           key={'search-results-' + JSON.stringify(album) + index}
-                          className=" relative basis-1/2 p-5 pl-4 pb-4 bg-black rounded-xl"
+                          className="cursor-grab relative basis-1/2 p-5 pl-4 pb-4 bg-black rounded-xl"
                         >
-                          <p 
-                            className="
-                              absolute right-0 top-0 
-                              p-3
-                              -translate-y-2
-                              cursor-move
-                            "
-                          >
-                            +
-                          </p>
                           <Image
                             width="100px"
                             height="100px"
                             src={album?.imageUrl}
-                            className="rounded-tr-full absolute text-white"
+                            className="rounded-tr-lg absolute text-white"
                             alt={album?.artist}
                           />
                         </Draggable>
@@ -144,7 +134,10 @@ export const DesktopSidebar: React.FC<Props> = ({
           className="inline-block"
           label="show title?"
           labelClassName='pr-2'
-          setValue={(value: boolean | null) => toggleTitle(Boolean(value))}
+          setValue={(value: boolean | null) => {
+            debugger;
+            toggleTitle(Boolean(value))
+          }}
           value={settings.state.showTitle}
         />
 

@@ -26,12 +26,12 @@ const DesktopEditor: React.FC<Props> = ({
     <Layout
       isReadonly={readonly}
       title={
-        <a.div style={titleStyle} className="w-full">
+        <a.div style={titleStyle} className="w-full mb-2">
           <Title
             chartTitle={chart.state.chartTitle}
             isReadOnly={readonly}
             setValue={(val: string) => chart.actions.setChartTitle(val)}
-            showIntroduction={true}
+            showIntroduction={!true}
             textColor="black"
           />
         </a.div>

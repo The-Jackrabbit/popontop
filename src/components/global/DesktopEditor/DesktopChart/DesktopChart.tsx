@@ -44,7 +44,8 @@ export const DesktopChart: React.FC<Props> = ({
       {[...new Array(rowCount)].map((v, rowIndex) => (
         <div
           className="flex flex-row"
-          id={`editor-row-${rowIndex}`} key={`editor-row-${rowIndex}`}>
+          id={`editor-row-${rowIndex}`} key={`editor-row-${rowIndex}`}
+        >
           {[...new Array(columnCount)].map((v, columnIndex ) => {
             const index = rowIndex*rowCount + columnIndex;
             const album = containers[index] ?? EMPTY_ALBUM;
