@@ -50,6 +50,7 @@ export const Input: React.FC<Props> = ({
           outline-2 w-full h-12 
           text-lg text-neutral-900 dark:text-white placeholder:dark:text-neutral-600
           flex justify-between
+          overflow-x-hidden
         "
       >
         <a.input

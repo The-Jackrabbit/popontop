@@ -6,6 +6,7 @@ export interface Props {
   children: [React.ReactNode, React.ReactNode, React.ReactNode];
   className?: string;
   isActive: boolean;
+  isOpenByDefault?: boolean;
   toggleVisibility: () => void;
 }
 
@@ -13,6 +14,7 @@ export const ExpandingPill: React.FC<Props> = ({
   children,
   className = '',
   isActive,
+  isOpenByDefault = false,
   toggleVisibility,
 }) => {
   const {
@@ -21,6 +23,7 @@ export const ExpandingPill: React.FC<Props> = ({
     rowHeightStyle,
     togglePill,
   } = useExpandingPill({
+    isOpenByDefault,
     onExpand: () => toggleVisibility(),
     onMinimize: () =>  toggleVisibility(),
   });
@@ -37,7 +40,7 @@ export const ExpandingPill: React.FC<Props> = ({
     <a.div
       className={`
         ${className}
-        h-max
+        h-max max-w-full
         cursor-pointer
         bg-white dark:bg-black
         px-2 py-1

@@ -34,7 +34,7 @@ const Grid: React.FC<Props> = ({
   const ref = createRef<HTMLDivElement>();
   useEffect(() => {
     setSquareWidth(getAlbumSize(ref, columns, rows));
-  }, [columns, rows, ref.current]);
+  }, [columns, rows, ref.current, ref]);
   return (
     <div
       ref={ref}
@@ -43,7 +43,7 @@ const Grid: React.FC<Props> = ({
       ${preview ? 'scale-95' : ''}
         flex justify-center
         grow h-fit
-        overflow-y-scroll
+        overflow-y-scroll overflow-x-hidden
       `}
     >
       {/* <div className={preview ? 'scale-50' : ''}> */}

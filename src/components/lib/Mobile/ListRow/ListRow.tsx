@@ -1,7 +1,7 @@
 import { a } from '@react-spring/web'
 import React from "react";
 import { Album } from '../../../../styles/types/Albums';
-import { ROW_HEIGHT, ROW_HEIGHT_WITH_UNIT, useDisappearRow } from '../../../../frontend/hooks/use-disappear-row';
+import { ROW_HEIGHT, ROW_HEIGHT_WITH_UNIT, useDisappearRow } from '../../../../frontend/hooks/springs/use-disappear-row';
 import ListView from './ListView/ListView';
 import RearrangeView, { RowMovementType } from './RearrangeView/RearrangeView';
 import SearchView from './SearchView/SearchView';

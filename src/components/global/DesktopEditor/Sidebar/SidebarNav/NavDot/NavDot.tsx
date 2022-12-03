@@ -38,7 +38,6 @@ export const NavDot: React.FC<Props> = ({
     <ButtonWithAccessory
       {...TOP_POSITION_STYLE}
       label={label ?? ''}
-      isVisible={isHovered && label !== null}
     > 
       <button
         aria-label={ariaLabel}

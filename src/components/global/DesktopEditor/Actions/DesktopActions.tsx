@@ -1,4 +1,6 @@
+import { ArrowRightIcon, CloudArrowUpIcon } from '@heroicons/react/20/solid';
 import Link from 'next/link';
+import { ICON_STYLE } from '../../../lib/FilterButton/FilterButton';
 import LoadingBouncer from '../../../lib/LoadingBouncer/LoadingBouncer';
 import ActionButton from './ActionButton/ActionButton';
 import ProfileCircle from './ProfileCircle/ProfileCircle';
@@ -24,7 +26,7 @@ const DesktopActions: React.FC<Props> = ({
           text={
             !isLoading
               ? (
-                <p>💾</p>
+                <CloudArrowUpIcon className={ICON_STYLE} />
               )
               : <LoadingBouncer />
           }
@@ -35,7 +37,9 @@ const DesktopActions: React.FC<Props> = ({
             <ActionButton
               label="View newly saved chart"
               onClick={() => undefined}
-              text="➾"
+              text={
+                <ArrowRightIcon className={ICON_STYLE} />
+              }
               variant="regular"
             />
           </Link>

@@ -1,70 +1,49 @@
 import type { NextPage } from "next";
-import { useState } from "react";
 import { a } from "react-spring";
 import DesktopSidebar from "../../components/global/DesktopEditor/Sidebar/DesktopSidebar";
 import { SidebarNav } from "../../components/global/DesktopEditor/Sidebar/SidebarNav/SidebarNav";
 import { usePageFadeIn } from "../../frontend/hooks/springs/use-page-fade-in";
 import Layout from "./Layout";
-import useChart, { DraggedAlbum } from '../../frontend/hooks/use-chart';
 import { DndContext } from "@dnd-kit/core";
 import DesktopEditor from "../../components/global/DesktopEditor/DesktopEditor";
-import { ListOfCharts } from "../../components/lib/ListOfCharts/ListOfCharts";
+import { DraggedAlbum } from "../../frontend/hooks/use-chart/use-chart";
+import useDesktopChartEditor from "../../frontend/hooks/singletons/use-desktop-chart-editor";
 
 const CreateChart: NextPage = () => {
-  const [page, setPage] = useState('editor');
-  const {
-    pageOpacity,
-    animateFadeOut,
-    animateFadeIn,
-  } = usePageFadeIn();
-  const {
-    isLoading,
-    titleStyle,
-    listStyles,
-    chart,
-  } = useChart({});
+  const { pageOpacity, animateFadeOut, animateFadeIn } = usePageFadeIn();
+  const { actions, childrenNodes: { chart }, state } = useDesktopChartEditor({});
+
   return (
     <DndContext
       autoScroll={false}
-      onDragStart={
-        (event) => {
-          chart.actions.setDraggedAlbum(event.active.data.current as DraggedAlbum)
-        }
-      }
+      onDragStart={(event) => {
+        chart.childrenNodes.list.actions.setDraggedAlbum(event.active.data.current as DraggedAlbum)
+      }}
       onDragEnd={(args) => {
-        chart.actions.handleDragEnd(args)
+        chart.childrenNodes.list.actions.handleDragEnd(args)
       }}
     >
       <Layout>
-        <a.div
-          style={pageOpacity}
-          className="overflow-x-visible h-full"
-        >
-          {page === 'editor' ? (
-            <DesktopSidebar settings={chart.settings} />
-          ) : null}
-          {page === 'your-charts' ? (
-            <ListOfCharts />
-          ) : null}
+        <a.div style={pageOpacity} className="overflow-x-visible h-full">
+          <DesktopSidebar
+            settings={chart.childrenNodes.settings}
+            toggleAlbums={actions.toggleAlbums}
+            toggleTitle={actions.toggleTitle}
+          />
         </a.div>
+        
         <SidebarNav
-          page={page}
-          setPage={(page) => {
-            animateFadeOut(() => {
-              setPage(page);
-              animateFadeIn();
-            });  
-          }}
+          page="editor"
+          setPage={() => animateFadeOut(() => animateFadeIn())}
         />
+
         <a.div style={pageOpacity} className="h-full">
-          {page === 'editor' ? (
-            <DesktopEditor
-              chart={chart}
-              listStyles={listStyles}
-              isLoading={isLoading}
-              titleStyle={titleStyle}
-            />
-          ) : null}
+          <DesktopEditor
+            chart={chart}
+            listStyles={state.listStyle}
+            isLoading={chart.state.isCreateLoading}
+            titleStyle={state.titleStyle}
+          />
         </a.div>
       </Layout>
     </DndContext>

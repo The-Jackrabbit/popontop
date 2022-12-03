@@ -1,5 +1,7 @@
+import { HomeIcon, ShareIcon } from "@heroicons/react/20/solid";
 import React, { useEffect, useState } from "react";
 import { Album } from "../../../../styles/types/Albums";
+import { ICON_STYLE } from "../../../lib/FilterButton/FilterButton";
 import { PreviewEditor } from "./PreviewEditor/PreviewEditor";
 
 export interface Props {
@@ -50,7 +52,7 @@ export const ShareTab: React.FC<Props> = ({
             border: !isMainOverlayVisible ? 'none' : '2px solid white'
           }}
         >
-          {!isMainOverlayVisible ? 'share' : 'back to editor' }
+          {!isMainOverlayVisible ? <ShareIcon className={ICON_STYLE} />  : <HomeIcon className={ICON_STYLE}  />}
         </p>
       </div>
       {isMainOverlayVisible ? (

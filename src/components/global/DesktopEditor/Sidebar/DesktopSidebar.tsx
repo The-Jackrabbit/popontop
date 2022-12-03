@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { trpc } from '../../../../utils/trpc';
 import Draggable from '../DragNDrop/Draggable/Draggable';
 import Image from 'next/image';
-import { Settings } from '../../../../frontend/hooks/use-chart';
+import { Settings } from '../../../../frontend/hooks/editor/use-desktop-editor';
 import { EMPTY_ALBUM } from '../../../../constants/empty-album';
 import { Album } from '../../../../styles/types/Albums';
 import TextExpandingPill from '../../../lib/ExpandingPill/TextExpandingPill/TextExpandingPill';
@@ -10,13 +10,20 @@ import { SwitchExpandingPill } from '../../../lib/ExpandingPill/SwitchExpandingP
 import NumericExpandingPill from '../../../lib/ExpandingPill/NumericExpandingPill/NumericExpandingPill';
 import { colorMap } from '../../../../constants/colors';
 import { Color } from './SidebarNav/NavDot/NavDot';
+import { SettingsHookNode } from '../../../../frontend/hooks/use-chart/use-chart-settings';
 
 export interface Props {
   initialValues?: string[];
-  settings: Settings;
+  settings: SettingsHookNode;
+  toggleAlbums: (value: boolean) => void;
+  toggleTitle: (value: boolean) => void;
 }
 
-export const DesktopSidebar: React.FC<Props> = ({ settings }) => {
+export const DesktopSidebar: React.FC<Props> = ({
+  settings,
+  toggleAlbums,
+  toggleTitle,
+}) => {
   const [searchText, setSearchText] = useState('');
   const [timeoutId, setTimeoutId] = useState<null | NodeJS.Timeout>(null);
 
@@ -54,6 +61,8 @@ export const DesktopSidebar: React.FC<Props> = ({ settings }) => {
         <TextExpandingPill
           label="Search albums"
           labelClassName='pr-2'
+          isActive={true}
+          placeholder="Emotion, Dedicated, The Loneliest Time"
           setValue={(value: string) => onType(value)}
           value={searchText}
         />
@@ -107,37 +116,37 @@ export const DesktopSidebar: React.FC<Props> = ({ settings }) => {
           label="Background color"
           labelClassName='pr-2'
           setValue={(value: string) => settings.actions.setBackgroundColor(value)}
-          value={settings.data.backgroundColor}
+          value={settings.state.backgroundColor}
         />
    
         <TextExpandingPill
           label="Text color"
           labelClassName='pr-2'
           setValue={(value: string) => settings.actions.setTextColor(value)}
-          value={settings.data.textColor}
+          value={settings.state.textColor}
         />
    
         <TextExpandingPill
           label="Border color"
           labelClassName='pr-2'
           setValue={(value: string) => settings.actions.setBorderColor(value)}
-          value={settings.data.borderColor}
+          value={settings.state.borderColor}
         />
 
         <SwitchExpandingPill
           className="inline-block"
           label="list albums?"
           labelClassName='pr-2'
-          setValue={(value: boolean | null) =>settings.actions.toggleAlbums(Boolean(value))}
-          value={settings.data.showAlbums}
+          setValue={(value: boolean | null) => toggleAlbums(Boolean(value))}
+          value={settings.state.showAlbums}
         />
 
         <SwitchExpandingPill
           className="inline-block"
           label="show title?"
           labelClassName='pr-2'
-          setValue={(value: boolean | null) =>settings.actions.toggleTitle(Boolean(value))}
-          value={settings.data.showTitle}
+          setValue={(value: boolean | null) => toggleTitle(Boolean(value))}
+          value={settings.state.showTitle}
         />
 
         <NumericExpandingPill
@@ -146,7 +155,7 @@ export const DesktopSidebar: React.FC<Props> = ({ settings }) => {
           min={0}
           max={10}
           setValue={(value: number) => settings.actions.setBorderSize(value)}
-          value={settings.data.borderSize}
+          value={settings.state.borderSize}
         />
       </div>
     </>

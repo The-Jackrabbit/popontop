@@ -1,6 +1,6 @@
 import { SpringValue, useSpring } from 'react-spring';
 import { usePageFadeIn } from './use-page-fade-in';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export interface ExpandingPillHookState {
   borderRadiusStyle: {
@@ -39,9 +39,11 @@ const styles = {
 };
 
 export function useExpandingPill({
+  isOpenByDefault = false,
   onExpand = () => undefined,
   onMinimize = () => undefined,
 }: {
+  isOpenByDefault?: boolean;
   onExpand?: () => void;
   onMinimize?: () => void;
 }): ExpandingPillHookState {
@@ -101,6 +103,12 @@ export function useExpandingPill({
       animateFadeIn();
     });
   };
+
+  useEffect(() => {
+    if (isOpenByDefault) {
+      expandPill();
+    }
+  }, []);
 
   return {
     borderRadiusStyle,

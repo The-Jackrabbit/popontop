@@ -1,14 +1,14 @@
 import React from 'react';
 import { a, SpringValue } from "react-spring";
+import { ChartHookNode } from '../../../frontend/hooks/use-chart/use-chart';
 import Title from '../MobileEditor/Title/Title';
 import DesktopActions from './Actions/DesktopActions';
 import ChartList from './ChartList/ChartList';
 import DesktopChart from './DesktopChart/DesktopChart';
 import Layout from './Layout';
-import { Chart } from '../../../frontend/hooks/use-chart';
 
 export interface Props {
-  chart: Chart;
+  chart: ChartHookNode;
   isLoading: boolean;
   listStyles: { width: SpringValue<string>; };
   readonly?: boolean;
@@ -26,9 +26,9 @@ const DesktopEditor: React.FC<Props> = ({
     <Layout
       isReadonly={readonly}
       title={
-        <a.div style={titleStyle} className="overflow-y-hidden w-full">
+        <a.div style={titleStyle} className="w-full">
           <Title
-            chartTitle={chart.data.chartTitle}
+            chartTitle={chart.state.chartTitle}
             isReadOnly={readonly}
             setValue={(val: string) => chart.actions.setChartTitle(val)}
             showIntroduction={true}
@@ -37,28 +37,31 @@ const DesktopEditor: React.FC<Props> = ({
         </a.div>
       }
       chart={
-        <DesktopChart
-          isReadOnly={readonly}
-          numberOfColumns={chart.settings.data.numberOfColumns}
-          numberOfRows={chart.settings.data.numberOfRows}
-          containers={chart.data.entries ?? []}
-          backgroundColor={chart.settings.data.backgroundColor}
-          borderColor={chart.settings.data.borderColor}
-          borderSize={chart.settings.data.borderSize}
-        />
+        // TODO : Implement beginning instructions for desktop
+        true ? (
+          <DesktopChart
+            isReadOnly={readonly}
+            numberOfColumns={chart.childrenNodes.settings.state.columns}
+            numberOfRows={chart.childrenNodes.settings.state.rows}
+            containers={chart.childrenNodes.list.state ?? []}
+            backgroundColor={chart.childrenNodes.settings.state.backgroundColor}
+            borderColor={chart.childrenNodes.settings.state.borderColor}
+            borderSize={chart.childrenNodes.settings.state.borderSize}
+          />
+        ) : null
       }
       list={
         <ChartList
           listStyles={listStyles}
-          containers={chart.data.entries ?? []}
-          textColor={chart.settings.data.textColor}
+          containers={chart.childrenNodes.list.state ?? []}
+          textColor={chart.childrenNodes.settings.state.textColor}
         />
       }
       actions={
         <DesktopActions
           isLoading={isLoading}
-          save={chart.actions.save}
-          savedChartId={chart.data.savedChartId}
+          save={chart.actions.saveChart}
+          savedChartId={chart.state.savedChartId}
         />
       }
     />

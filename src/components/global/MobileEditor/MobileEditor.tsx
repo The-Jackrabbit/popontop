@@ -4,7 +4,6 @@ import SearchAlbums from "./SearchAlbums/SearchAlbums";
 import MobileSettings from "./MobileSettings/MobileSettings";
 import { ActionBar } from "./ActionBar/ActionBar";
 import Title from "./Title/Title";
-import useChartList, { UseChartListContext } from "../../../frontend/hooks/use-chart-list";
 import { ChartSettings } from "@prisma/client";
 import MobilePage from "../../lib/MobilePage/MobilePage";
 import { Album } from "../../../styles/types/Albums";
@@ -13,6 +12,7 @@ import { Loader as ListLoader } from '../../global/MobileEditor/List/Loader'
 import List from "./List/List";
 import ViewModeModal from "./ViewModeModal/ViewModeModal";
 import ShareTab from "./ShareTab/ShareTab";
+import useMobileChartEditor, { UseChartListContext } from "../../../frontend/hooks/singletons/use-mobile-chart-editor";
 
 export interface Props {
   chartName?: string;
@@ -33,7 +33,7 @@ const MobileEditor: React.FC<Props> = ({
   isLoading = true,
   isReadOnly = false,
 }) => {
-  const { actions, sheet, state } = useChartList({
+  const { actions, state } = useMobileChartEditor({
     chartUuid,
     chartName,
     context,
@@ -42,13 +42,13 @@ const MobileEditor: React.FC<Props> = ({
   });
   useEffect(() => {
     if (initialList) {
-      actions.listMutations.setList(initialList);
+      actions.chart.list.setList(initialList);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialList]);
   useEffect(() => {
     if (chartName) {
-      actions.setChartTitle(chartName);
+      actions.chart.setChartTitle(chartName);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chartName])
@@ -58,82 +58,89 @@ const MobileEditor: React.FC<Props> = ({
       <a.div
         id="editor"
         onClick={() => actions.onClickSheetDeadArea()}
-        style={{ ...sheet.bgStyle, height: sheet.windowHeight, }}
+        style={{
+          ...state.editor.sheet.bgStyle,
+          height: state.editor.sheet.windowHeight
+        }}
       >
-        {state.settings.state.showTitle ? (
+        {state.chart.settings.state.showTitle ? (
           <Title
-            textColor={state.settings.state.textColor}
+            textColor={state.chart.settings.state.textColor}
             isReadOnly={isReadOnly}
-            chartTitle={state.chartTitle ?? ''}
-            setValue={(value: string) => actions.setChartTitle(value)}
+            chartTitle={state.chart.chartTitle ?? ''}
+            setValue={(value: string) => actions.chart.setChartTitle(value)}
             showIntroduction={state.showIntroduction}
           />
         ) : null}
 
         {!isLoading ? (
           <List
-            list={state.list}
-            listMode={state.listMode}
+            list={state.chart.list}
+            listMode={state.editor.listMode}
             onRearrangeClick={actions.onRearrangeClick}
-            removeAlbumAtIndex={actions.listMutations.removeAlbumAtIndex}
-            showAlbums={state.settings.state.showAlbums}
-            textColor={state.settings.state.textColor}
+            removeAlbumAtIndex={actions.chart.list.removeAlbumAtIndex}
+            showAlbums={state.chart.settings.state.showAlbums}
+            textColor={state.chart.settings.state.textColor}
           />
         ) : <ListLoader />}
 
         <ActionBar
-          isEditLoading={state.isEditLoading}
+          isEditLoading={state.chart.isEditLoading}
           className="-translate-x-4"
-          editChart={actions.editChart}
-          isLoading={state.isLoading}
-          listMode={state.listMode}
-          onClickSettings={actions.onClickSettings}
-          onClickSearch={actions.onClickSearch}
-          onClickDeleteMode={actions.onClickDeleteMode}
-          onClickRearrangeMode={actions.onClickRearrangeMode}
-          hasNonEmptyList={state.list.length > 0}
-          isActive={state.isActive}
+          editChart={actions.chart.editChart}
+          isLoading={state.chart.isCreateLoading}
+          listMode={state.editor.listMode}
+          onClickSettings={actions.editor.onClickSettings}
+          onClickSearch={actions.editor.onClickSearch}
+          onClickDeleteMode={actions.editor.onClickDeleteMode}
+          onClickRearrangeMode={actions.editor.onClickRearrangeMode}
+          hasNonEmptyList={state.chart.list.length > 0}
+          isActive={state.editor.isActive}
           isReadOnly={isReadOnly}
-          setIsActive={actions.setIsActive}
-          saveChart={actions.saveChart}
+          setIsActive={actions.editor.setIsActive}
+          saveChart={actions.chart.saveChart}
         />
       </a.div>
 
-      {state.isActive ? (
+      {state.editor.isActive ? (
         <ShareTab
-        chartTitle={state.chartTitle}
-        onDecrementColumns={state.settings.actions.onDecrementColumns}
-        onIncrementColumns={state.settings.actions.onIncrementColumns}
-        onDecrementRows={state.settings.actions.onDecrementRows}
-        onIncrementRows={state.settings.actions.onIncrementRows}
-        columns={state.settings.state.columns}
-        list={state.list} 
-        rows={state.settings.state.rows} 
+          chartTitle={state.chart.chartTitle}
+          onDecrementColumns={state.chart.settings.actions.onDecrementColumns}
+          onIncrementColumns={state.chart.settings.actions.onIncrementColumns}
+          onDecrementRows={state.chart.settings.actions.onDecrementRows}
+          onIncrementRows={state.chart.settings.actions.onIncrementRows}
+          columns={state.chart.settings.state.columns}
+          list={state.chart.list} 
+          rows={state.chart.settings.state.rows} 
         /> 
       ) : null}
-      <MobileSheet bind={sheet.bind} display={sheet.display} y={sheet.y}>
-        {state.isSearchOpen && (
+      <MobileSheet
+        bind={state.editor.sheet.bind}
+        display={state.editor.sheet.display}
+        y={state.editor.sheet.y}
+      >
+        {state.editor.isSearchOpen && (
           <SearchAlbums
-            onClick={(album) => actions.listMutations.addAlbumToList(album)}
+            onClick={(album) => actions.chart.list.addAlbumToList(album)}
           />
         )}
-        <div style={{ display: state.isSettingsOpen ? 'initial' : 'none' }}>
+        <div style={{ display: state.editor.isSettingsOpen ? 'initial' : 'none' }}>
           <MobileSettings
-            isSaveLoading={state.isLoading}
-            onSave={actions.saveChart}
-            settings={state.settings}
+            isSaveLoading={state.chart.isCreateLoading}
+            onSave={actions.chart.saveChart}
+            settings={state.chart.settings}
           />
         </div>
-        {state.isViewModeActive ? (
+        {state.editor.isViewModeActive ? (
           <ViewModeModal
-            chartTitle={state.chartTitle}
-            onDecrementColumns={state.settings.actions.onDecrementColumns}
-            onIncrementColumns={state.settings.actions.onIncrementColumns}
-            onDecrementRows={state.settings.actions.onDecrementRows}
-            onIncrementRows={state.settings.actions.onIncrementRows}
-            columns={state.settings.state.columns}
-            list={state.list} 
-            rows={state.settings.state.rows} 
+            chartTitle={state.chart.chartTitle}
+            onDecrementColumns={state.chart.settings.actions.onDecrementColumns}
+            onIncrementColumns={state.chart.settings.actions.onIncrementColumns}
+            onDecrementRows={state.chart.settings.actions.onDecrementRows}
+            onIncrementRows={state.chart.settings.actions.onIncrementRows}
+            columns={state.chart.settings.state.columns}
+            list={state.chart.list} 
+            rows={state.chart.settings.state.rows} 
           />
         ) : null} 
      </MobileSheet>

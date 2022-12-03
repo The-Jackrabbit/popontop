@@ -1,16 +1,15 @@
 import { ChartSettings } from "@prisma/client";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import { a } from "react-spring";
 import DesktopEditor from "../../components/global/DesktopEditor/DesktopEditor";
 import SidebarNav from "../../components/global/DesktopEditor/Sidebar/SidebarNav/SidebarNav";
 import { usePageFadeIn } from "../../frontend/hooks/springs/use-page-fade-in";
-import useChart from "../../frontend/hooks/use-chart";
 import { Album } from "../../styles/types/Albums";
 import { trpc } from "../../utils/trpc";
 import Layout from "../create-chart/Layout";
 import { genUuid } from "../mobile/charts/[uuid]";
+import useDesktopChartEditor from "../../frontend/hooks/singletons/use-desktop-chart-editor";
 
 const ApiWrapper: NextPage = () => {
   const router = useRouter();
@@ -46,21 +45,15 @@ const Chart = ({
   chartName: string;
   settings: ChartSettings | null;
 }) => {
-  const [page, setPage] = useState('editor');
   const {
     pageOpacity,
     animateFadeOut,
     animateFadeIn,
   } = usePageFadeIn();
-  const {
-    isLoading,
-    titleStyle,
-    listStyles,
-    chart,
-  } = useChart({
-    albums,
+  const { childrenNodes: { chart }, state } = useDesktopChartEditor({
+    initialList: albums,
     chartName,
-    settings,
+    defaultSettings: settings, 
   });
   
   return (
@@ -71,27 +64,19 @@ const Chart = ({
       >
       </a.div>
       <SidebarNav
-       page={page}
-       setPage={(page) => {
-         animateFadeOut(() => {
-           setPage(page);
-           animateFadeIn();
-         });  
-       }}
+        page={'editor'}
+        setPage={() => {
+          animateFadeOut(() => animateFadeIn());  
+        }}
       />
       <a.div style={pageOpacity} className="h-full">
-        {page === 'editor' 
-          ? (
-              <DesktopEditor
-                chart={chart}
-                listStyles={listStyles}
-                readonly={true}
-                isLoading={isLoading}
-                titleStyle={titleStyle}
-              />
-            )
-          : null
-        }
+        <DesktopEditor
+          chart={chart}
+          listStyles={state.listStyle}
+          readonly={true}
+          isLoading={chart.state.isEditLoading}
+          titleStyle={state.titleStyle}
+        />
       </a.div>
     </Layout>
   )

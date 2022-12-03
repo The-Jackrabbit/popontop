@@ -1,30 +1,39 @@
 
 import { PaintBrushIcon } from "@heroicons/react/20/solid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ICON_STYLE } from "../../FilterButton/FilterButton";
 import Input from "../../Input/Input";
 import { ExpandingPill } from "../ExpandingPill";
 
 export interface Props {
   className?: string;
+  isActive?: boolean;
   label: string;
   labelClassName?: string;
+  placeholder?: string;
   setValue: (value: string) => void;
   value: string;
 }
 
 export const TextExpandingPill: React.FC<Props> = ({
   className = '',
+  isActive = false,
   label,
   labelClassName = 'text-xs',
+  placeholder = '#adf2da',
   setValue,
   value,
 }) => {
-  const [isExpanded, setIsExpanded] = useState<boolean>(false);
+  const [isExpanded, setIsExpanded] = useState<boolean>(isActive);
+  useEffect(() => {
+    if (isActive) {
+    }
+  }, []);
   return (
     <ExpandingPill
       className={className}
       isActive={isExpanded}
+      isOpenByDefault={isActive}
       toggleVisibility={() => setIsExpanded(!isExpanded)}
     >
       <p className={labelClassName}>{label}</p>
@@ -36,7 +45,7 @@ export const TextExpandingPill: React.FC<Props> = ({
       </div>
       <Input
         onChange={(event) => setValue(event.target.value)}
-        placeholder="#adf2da"
+        placeholder={placeholder}
         value={value}
       />
     </ExpandingPill>

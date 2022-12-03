@@ -9,6 +9,7 @@ export interface Props {
   className?: string;
   hasGradientIndicator?: boolean;
   onClick: MouseEventHandler<HTMLButtonElement>;
+  rounding?: string;
 }
 
 export const ICON_STYLE = "h-6 w-6 translate-y-[1px] text-neutral-900 dark:text-neutral-50";
@@ -21,6 +22,7 @@ const FilterButton: React.FC<Props> = ({
   className = DEFAULT_CLASSNAME,
   hasGradientIndicator = true,
   onClick,
+  rounding = 'rounded-full'
 }) => {
   const fromGradient = 'linear-gradient(0deg, gray 0%, gray 100%)';
   const toGradient = hasGradientIndicator
@@ -50,7 +52,7 @@ const FilterButton: React.FC<Props> = ({
       aria-label={ariaLabel}
       className={` 
         ${className}
-        rounded-full
+        ${rounding}
         relative
       text-black dark:text-white
         dark:bg-neutral-600
@@ -61,22 +63,22 @@ const FilterButton: React.FC<Props> = ({
       style={{ background:  background.bg }}
     >
       <a.div
-        className="
+        className={`
           absolute -top-1/2 -bottom-1/2 -left-1/2 -right-1/2
           z-0
-          rounded-full
+          ${rounding}
           opacity-0
           bg-neutral-200
-        "
+        `}
         style={{ ...buttonOverlayOpacity }}
       />
       <div
-        className="
+        className={`
         bg-white hover:bg-neutral-50 dark:bg-neutral-900 hover:dark:bg-black
-          w-full h-full rounded-full
+          w-full h-full ${rounding} 
           flex justify-center items-center
           leading-none
-        "
+        `}
       >
         <p className="-translate-y-[1px]">{children}</p>
       </div>

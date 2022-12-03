@@ -30,7 +30,7 @@ const Title: React.FC<Props> = ({
         py-6  px-6 sm:px-4 
         mb-4 z-30
         overflow-hidden
-        w-auto
+        w-auto h-auto
         flex justify-between items-center 
       `}
       onClick={() => clickEditTitleButton()}

@@ -1,33 +1,35 @@
 import { ChartSettings } from "@prisma/client";
 import { useEffect, useState } from "react";
 import { useIncrementer } from "../../../components/lib/NumberInput/NumberInput";
+import { HookNode } from "../hook-node";
 
-export interface Settings {
-  actions: {
-    onDecrementColumns: () => void;
-    onIncrementColumns: () => void;
-    onDecrementRows: () => void;
-    onIncrementRows: () => void;
-    setBorderColor: (value: string) => void;
-    setBorderSize: (value: number) => void;
-    setShowAlbums: (value: boolean) => void;
-    setBackgroundColor: (value: string) => void;
-    setShowTitle: (value: boolean) => void;
-    setTextColor: (value: string) => void;
-  };
-  state: {
-    backgroundColor: string;
-    borderColor: string;
-    borderSize: number;
-    columns: number;
-    rows: number;
-    showAlbums: boolean;
-    showTitle: boolean;
-    textColor: string;
-  };
+export type SettingsHookNode = HookNode<State, Actions>;
+
+export interface Actions {
+  onDecrementColumns: () => void;
+  onIncrementColumns: () => void;
+  onDecrementRows: () => void;
+  onIncrementRows: () => void;
+  setBorderColor: (value: string) => void;
+  setBorderSize: (value: number) => void;
+  setShowAlbums: (value: boolean) => void;
+  setBackgroundColor: (value: string) => void;
+  setShowTitle: (value: boolean) => void;
+  setTextColor: (value: string) => void;
 }
 
-const useChartSettings = (defaultSettings: ChartSettings | null): Settings => {
+export interface State {
+  backgroundColor: string;
+  borderColor: string;
+  borderSize: number;
+  columns: number;
+  rows: number;
+  showAlbums: boolean;
+  showTitle: boolean;
+  textColor: string;
+}
+
+const useChartSettings = (defaultSettings: ChartSettings | null): SettingsHookNode => {
   const [rows, onIncrementRows, onDecrementRows] = useIncrementer({
     initialAmount: 5, // TODO: persist to backend
     max: 18
@@ -73,7 +75,7 @@ const useChartSettings = (defaultSettings: ChartSettings | null): Settings => {
       rows,
       showAlbums,
       showTitle,
-      textColor ,
+      textColor,
     }
   }
 };

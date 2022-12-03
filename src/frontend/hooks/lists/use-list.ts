@@ -1,25 +1,58 @@
-import { useEffect, useState } from "react";
-import { Album } from "../../styles/types/Albums";
+import { DragEndEvent } from "@dnd-kit/core";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { EMPTY_ALBUM } from "../../../constants/empty-album";
+import { Album } from "../../../styles/types/Albums";
+import { HookNode } from "../hook-node";
+import { DraggedAlbum } from "../use-chart/use-chart";
 
-export interface UseListState {
-  list: Album[];
-  mutations: {
-    addAlbumToList: (album: Album) => void;
-    advanceAlbumAtIndex: (index: number) => void;
-    insertAlbumAtIndex:  (
-      album: Album,
-      oldIndex: number,
-      newIndex: number
-    ) => void;
-    lowerAlbumAtIndex: (index: number) => void;
-    removeAlbumAtIndex: (index: number) => void;
-    setList: (list: Album[]) => void;
-    swapAlbumsAtIndices: (oldIndex: number, newIndex: number) => void;
-  };
+export type ListHookNode = HookNode<State, Actions>;
+
+export type State = Album[];
+
+export interface Actions {
+  addAlbumToList: (album: Album) => void;
+  advanceAlbumAtIndex: (index: number) => void;
+  handleDragEnd: (event: DragEndEvent) => void;
+  insertAlbumAtIndex:  (
+    album: Album,
+    oldIndex: number,
+    newIndex: number
+  ) => void;
+  lowerAlbumAtIndex: (index: number) => void;
+  removeAlbumAtIndex: (index: number) => void;
+  setDraggedAlbum: Dispatch<SetStateAction<DraggedAlbum>>;
+  setList: (list: Album[]) => void;
+  swapAlbumsAtIndices: (oldIndex: number, newIndex: number) => void;
 }
 
-const useList = (initialList: Album[] = []): UseListState => {
+const useList = (initialList: Album[] = []): ListHookNode => {
   const [list, setList] = useState<Album[]>(initialList);
+  const [draggedAlbum, setDraggedAlbum] = useState<DraggedAlbum>({
+    data: EMPTY_ALBUM,
+    origin: 'search',
+    index: -1,
+  });
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { over } = event;
+
+    if (!over) { return; }
+    
+    const droppedIndex = over ? parseInt(over.id as string) : -1;
+
+    setList((oldList) => {
+      const newContainers = [...oldList];
+
+      if (draggedAlbum.origin === 'chart') {
+        newContainers[draggedAlbum.index] = EMPTY_ALBUM; 
+      }
+
+      if (droppedIndex !== -1) {
+        newContainers.splice(droppedIndex, 1, draggedAlbum.data);
+      }
+
+      return newContainers;
+    });
+  };
 
   const removeAlbumAtIndex = (index: number) => {
     setList((list) =>{
@@ -92,20 +125,20 @@ const useList = (initialList: Album[] = []): UseListState => {
       return newAlbums;
     });
   };
-  useEffect(() => {
-    console.log({ list })
-  }, [list]);
+
   return {
-    list,
-    mutations: {
+    actions: {
       addAlbumToList,
       advanceAlbumAtIndex,
+      handleDragEnd,
       insertAlbumAtIndex,
       lowerAlbumAtIndex,
       removeAlbumAtIndex,
+      setDraggedAlbum,
       setList,
       swapAlbumsAtIndices,
     },
+    state: list,
   };
 };
 

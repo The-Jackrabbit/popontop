@@ -54,6 +54,9 @@ const Draggable: React.FC<Props> = ({
       onClick={() => {
         console.log({ draggableButtonProps });
       }}
+      onContextMenu={(e: React.BaseSyntheticEvent) => {
+        e.preventDefault();
+      }}
     >
       {children}
     </button>

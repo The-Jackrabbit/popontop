@@ -41,7 +41,6 @@ const ProfileCircle: React.FC = () => {
               />
             </div>
       }
-      isVisible={isHovered}
     >
       <a.button
         className="shadow-xl 

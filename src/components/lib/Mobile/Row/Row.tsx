@@ -1,5 +1,5 @@
 import React from "react";
-import { ROW_HEIGHT_WITH_UNIT } from '../../../../frontend/hooks/use-disappear-row';
+import { ROW_HEIGHT_WITH_UNIT } from '../../../../frontend/hooks/springs/use-disappear-row';
 
 export enum ListRowMode {
   DELETE = 'DELETE',
