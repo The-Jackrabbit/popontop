@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import { useRouter } from 'next/router'
 import MobileEditor from '../../../components/global/MobileEditor/MobileEditor';
-import { UseChartListContext } from '../../../frontend/hooks/editor/use-mobile-editor';
+import { UseChartListContext } from '../../../frontend/hooks/singletons/use-mobile-chart-editor';
 import { Album } from '../../../styles/types/Albums';
 import { trpc } from '../../../utils/trpc';
 

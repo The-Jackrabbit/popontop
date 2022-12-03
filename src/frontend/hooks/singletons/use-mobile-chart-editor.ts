@@ -3,13 +3,28 @@ import clamp from "lodash.clamp";
 import { useState } from "react";
 import { JUMP_VALUES, RowMovementType } from "../../../components/lib/Mobile/ListRow/RearrangeView/RearrangeView";
 import { Album } from "../../../styles/types/Albums";
-import { useChart } from "../use-chart/use-chart";
+import { ChartHookNode, useChart } from "../use-chart/use-chart";
 import useMobileEditor from "../editor/use-mobile-editor";
+import { ParentHookNode } from "../hook-node";
 
 export enum UseChartListContext {
   ADD = 'ADD',
   EDIT = 'EDIT',
 }
+
+export type DesktopChartEditorHookNode = ParentHookNode<State, Actions, {
+  chart: ChartHookNode;
+}
+>
+export type Actions = {
+  onRearrangeClick: () => void;
+  onClickSheetDeadArea: () => void;
+  toggleTitle: () => void;
+
+};
+
+export type State = void;
+
 
 const useMobileChartEditor = ({
   chartName = 'My sick ass chart',
@@ -33,7 +48,7 @@ const useMobileChartEditor = ({
     initialChartTitle: chartName,
   });
   const editor = useMobileEditor(() => {
-    if (!isFirstCloseDone && chart.state.list.length > 0) {
+    if (!isFirstCloseDone && chart.childrenNodes.list.state.length > 0) {
       toggleTitle();
     }
   });
@@ -46,7 +61,7 @@ const useMobileChartEditor = ({
 
   const onRearrangeClick = (rowMovementType: RowMovementType, index: number) => {
     const unboundIndex = index - JUMP_VALUES[rowMovementType];
-    const length = chart.state.list.length;
+    const length = chart.childrenNodes.list.state.length;
     const min = 0;
     const max = length;
 
@@ -56,8 +71,8 @@ const useMobileChartEditor = ({
       max,
     );
 
-    chart.actions.list.insertAlbumAtIndex(
-      chart.state.list[index] as Album,
+    chart.childrenNodes.list.actions.insertAlbumAtIndex(
+      chart.childrenNodes.list.state[index] as Album,
       index,
       indexToMoveTo,
     );
@@ -66,19 +81,19 @@ const useMobileChartEditor = ({
   const showIntroduction =
     context === UseChartListContext.EDIT
       ? false
-      : chart.state.list.length === 0;
+      : chart.childrenNodes.list.state.length === 0;
   
   return {
     actions: {
-      chart: chart.actions,
-      editor: editor.actions,
       onRearrangeClick,
       onClickSheetDeadArea,
       toggleTitle,
     },
+    childrenNodes: {
+      chart,
+      editor,
+    },
     state: {
-      chart: chart.state,
-      editor: editor.state,
       showIntroduction,
     },
   };

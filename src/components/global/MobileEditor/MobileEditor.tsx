@@ -33,7 +33,7 @@ const MobileEditor: React.FC<Props> = ({
   isLoading = true,
   isReadOnly = false,
 }) => {
-  const { actions, state } = useMobileChartEditor({
+  const { actions, childrenNodes, state } = useMobileChartEditor({
     chartUuid,
     chartName,
     context,
@@ -42,13 +42,13 @@ const MobileEditor: React.FC<Props> = ({
   });
   useEffect(() => {
     if (initialList) {
-      actions.chart.list.setList(initialList);
+      childrenNodes.chart.childrenNodes.list.actions.setList(initialList);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialList]);
   useEffect(() => {
     if (chartName) {
-      actions.chart.setChartTitle(chartName);
+      childrenNodes.chart.actions.setChartTitle(chartName);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chartName])
@@ -59,88 +59,88 @@ const MobileEditor: React.FC<Props> = ({
         id="editor"
         onClick={() => actions.onClickSheetDeadArea()}
         style={{
-          ...state.editor.sheet.bgStyle,
-          height: state.editor.sheet.windowHeight
+          ...childrenNodes.editor.state.sheet.bgStyle,
+          height: childrenNodes.editor.state.sheet.windowHeight
         }}
       >
-        {state.chart.settings.state.showTitle ? (
+        {childrenNodes.chart.childrenNodes.settings.state.showTitle ? (
           <Title
-            textColor={state.chart.settings.state.textColor}
+            textColor={childrenNodes.chart.childrenNodes.settings.state.textColor}
             isReadOnly={isReadOnly}
-            chartTitle={state.chart.chartTitle ?? ''}
-            setValue={(value: string) => actions.chart.setChartTitle(value)}
+            chartTitle={childrenNodes.chart.state.chartTitle ?? ''}
+            setValue={(value: string) => childrenNodes.chart.actions.setChartTitle(value)}
             showIntroduction={state.showIntroduction}
           />
         ) : null}
 
         {!isLoading ? (
           <List
-            list={state.chart.list}
-            listMode={state.editor.listMode}
+            list={childrenNodes.chart.childrenNodes.list.state}
+            listMode={childrenNodes.editor.state.listMode}
             onRearrangeClick={actions.onRearrangeClick}
-            removeAlbumAtIndex={actions.chart.list.removeAlbumAtIndex}
-            showAlbums={state.chart.settings.state.showAlbums}
-            textColor={state.chart.settings.state.textColor}
+            removeAlbumAtIndex={childrenNodes.chart.childrenNodes.list.actions.removeAlbumAtIndex}
+            showAlbums={childrenNodes.chart.childrenNodes.settings.state.showAlbums}
+            textColor={childrenNodes.chart.childrenNodes.settings.state.textColor}
           />
         ) : <ListLoader />}
 
         <ActionBar
-          isEditLoading={state.chart.isEditLoading}
+          isEditLoading={childrenNodes.chart.state.isEditLoading}
           className="-translate-x-4"
-          editChart={actions.chart.editChart}
-          isLoading={state.chart.isCreateLoading}
-          listMode={state.editor.listMode}
-          onClickSettings={actions.editor.onClickSettings}
-          onClickSearch={actions.editor.onClickSearch}
-          onClickDeleteMode={actions.editor.onClickDeleteMode}
-          onClickRearrangeMode={actions.editor.onClickRearrangeMode}
-          hasNonEmptyList={state.chart.list.length > 0}
-          isActive={state.editor.isActive}
+          editChart={childrenNodes.chart.actions.editChart}
+          isLoading={childrenNodes.chart.state.isCreateLoading}
+          listMode={childrenNodes.editor.state.listMode}
+          onClickSettings={childrenNodes.editor.actions.onClickSettings}
+          onClickSearch={childrenNodes.editor.actions.onClickSearch}
+          onClickDeleteMode={childrenNodes.editor.actions.onClickDeleteMode}
+          onClickRearrangeMode={childrenNodes.editor.actions.onClickRearrangeMode}
+          hasNonEmptyList={childrenNodes.chart.childrenNodes.list.state.length > 0}
+          isActive={childrenNodes.editor.state.isActive}
           isReadOnly={isReadOnly}
-          setIsActive={actions.editor.setIsActive}
-          saveChart={actions.chart.saveChart}
+          setIsActive={childrenNodes.editor.actions.setIsActive}
+          saveChart={childrenNodes.chart.actions.saveChart}
         />
       </a.div>
 
-      {state.editor.isActive ? (
+      {childrenNodes.editor.state.isActive ? (
         <ShareTab
-          chartTitle={state.chart.chartTitle}
-          onDecrementColumns={state.chart.settings.actions.onDecrementColumns}
-          onIncrementColumns={state.chart.settings.actions.onIncrementColumns}
-          onDecrementRows={state.chart.settings.actions.onDecrementRows}
-          onIncrementRows={state.chart.settings.actions.onIncrementRows}
-          columns={state.chart.settings.state.columns}
-          list={state.chart.list} 
-          rows={state.chart.settings.state.rows} 
+          chartTitle={childrenNodes.chart.state.chartTitle}
+          onDecrementColumns={childrenNodes.chart.childrenNodes.settings.actions.onDecrementColumns}
+          onIncrementColumns={childrenNodes.chart.childrenNodes.settings.actions.onIncrementColumns}
+          onDecrementRows={childrenNodes.chart.childrenNodes.settings.actions.onDecrementRows}
+          onIncrementRows={childrenNodes.chart.childrenNodes.settings.actions.onIncrementRows}
+          columns={childrenNodes.chart.childrenNodes.settings.state.columns}
+          list={childrenNodes.chart.childrenNodes.list.state} 
+          rows={childrenNodes.chart.childrenNodes.settings.state.rows} 
         /> 
       ) : null}
       <MobileSheet
-        bind={state.editor.sheet.bind}
-        display={state.editor.sheet.display}
-        y={state.editor.sheet.y}
+        bind={childrenNodes.editor.state.sheet.bind}
+        display={childrenNodes.editor.state.sheet.display}
+        y={childrenNodes.editor.state.sheet.y}
       >
-        {state.editor.isSearchOpen && (
+        {childrenNodes.editor.state.isSearchOpen && (
           <SearchAlbums
-            onClick={(album) => actions.chart.list.addAlbumToList(album)}
+            onClick={(album) => childrenNodes.chart.childrenNodes.list.actions.addAlbumToList(album)}
           />
         )}
-        <div style={{ display: state.editor.isSettingsOpen ? 'initial' : 'none' }}>
+        <div style={{ display: childrenNodes.editor.state.isSettingsOpen ? 'initial' : 'none' }}>
           <MobileSettings
-            isSaveLoading={state.chart.isCreateLoading}
-            onSave={actions.chart.saveChart}
-            settings={state.chart.settings}
+            isSaveLoading={childrenNodes.chart.state.isCreateLoading}
+            onSave={childrenNodes.chart.actions.saveChart}
+            settings={childrenNodes.chart.childrenNodes.settings}
           />
         </div>
-        {state.editor.isViewModeActive ? (
+        {childrenNodes.editor.state.isViewModeActive ? (
           <ViewModeModal
-            chartTitle={state.chart.chartTitle}
-            onDecrementColumns={state.chart.settings.actions.onDecrementColumns}
-            onIncrementColumns={state.chart.settings.actions.onIncrementColumns}
-            onDecrementRows={state.chart.settings.actions.onDecrementRows}
-            onIncrementRows={state.chart.settings.actions.onIncrementRows}
-            columns={state.chart.settings.state.columns}
-            list={state.chart.list} 
-            rows={state.chart.settings.state.rows} 
+            chartTitle={childrenNodes.chart.state.chartTitle}
+            onDecrementColumns={childrenNodes.chart.childrenNodes.settings.actions.onDecrementColumns}
+            onIncrementColumns={childrenNodes.chart.childrenNodes.settings.actions.onIncrementColumns}
+            onDecrementRows={childrenNodes.chart.childrenNodes.settings.actions.onDecrementRows}
+            onIncrementRows={childrenNodes.chart.childrenNodes.settings.actions.onIncrementRows}
+            columns={childrenNodes.chart.childrenNodes.settings.state.columns}
+            list={childrenNodes.chart.childrenNodes.list.state} 
+            rows={childrenNodes.chart.childrenNodes.settings.state.rows} 
           />
         ) : null} 
      </MobileSheet>

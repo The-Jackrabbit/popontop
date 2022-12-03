@@ -1,10 +1,10 @@
-import { Settings } from "../../../../frontend/hooks/use-chart/use-chart-settings";
+import { SettingsHookNode } from "../../../../frontend/hooks/use-chart/use-chart-settings";
 import PageTwo from "./PageTwo/PageTwo";
 
 export interface Props {
   isSaveLoading: boolean;
   onSave: () => Promise<string>;
-  settings: Settings;
+  settings: SettingsHookNode
 }
 
 
