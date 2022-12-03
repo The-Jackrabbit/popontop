@@ -45,15 +45,6 @@ const useChartSettings = (defaultSettings: ChartSettings | null): SettingsHookNo
   const [showTitle, setShowTitle] = useState(defaultSettings?.show_title ?? true);
   const [textColor, setTextColor] = useState(defaultSettings?.text_color ?? '');
 
-  useEffect(() => {
-    setBackgroundColor(defaultSettings?.background_color ?? '');
-    setBorderColor( defaultSettings?.border_color ?? '');
-    setBorderSize( 1);
-    setShowAlbums( defaultSettings?.show_albums ?? !false);
-    setShowTitle( defaultSettings?.show_title ?? !false);
-    setTextColor( defaultSettings?.text_color ?? '');
-  }, [defaultSettings]);
-
   return {
     actions: {
       onDecrementColumns,

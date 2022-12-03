@@ -41,7 +41,7 @@ const ButtonWithAccessory: React.FC<Props> = ({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {isVisible ? (
+      {isVisible && label !== ''  ? (
         <div className={`absolute ${containerPositionStyle}`}>
           <div
             // Bubble content
