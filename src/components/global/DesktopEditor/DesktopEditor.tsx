@@ -24,13 +24,14 @@ const DesktopEditor: React.FC<Props> = ({
 }) => {
   return (
     <Layout
+      backgroundColor={chart.childrenNodes.settings.state.backgroundColor}
       isReadonly={readonly}
       title={
         <a.div style={titleStyle} className="w-full mb-2 overflow-y-hidden">
           <Title
             chartTitle={chart.state.chartTitle}
-            isReadOnly={readonly}
-            setValue={(val: string) => chart.actions.setChartTitle(val)}
+            isReadOnly={false}
+            setValue={(val: string) => undefined}
             showIntroduction={!true}
             textColor="black"
           />

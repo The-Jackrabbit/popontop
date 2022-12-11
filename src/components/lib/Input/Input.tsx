@@ -42,12 +42,11 @@ export const Input: React.FC<Props> = ({
         className="
           dark:bg-neutral-900
           rounded-lg
-          mb-4
           shadow-lg
           outline-offset-2
           focus-within:outline focus-within:outline-rose-200
           py-2 px-4
-          outline-2 w-full h-12 
+          outline-2  h-12 
           text-lg text-neutral-900 dark:text-white placeholder:dark:text-neutral-600
           flex justify-between
           overflow-x-hidden
@@ -59,8 +58,10 @@ export const Input: React.FC<Props> = ({
           style={{ ...buttonStyle }}
           className={`
             ${className}
+            max-w-[90%]
             bg-transparent
             outline-none
+            shrink
           `}
           onChange={onChange}
           placeholder={placeholder}

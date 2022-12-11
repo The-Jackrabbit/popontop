@@ -10,6 +10,7 @@ import NumericExpandingPill from '../../../lib/ExpandingPill/NumericExpandingPil
 import { colorMap } from '../../../../constants/colors';
 import { Color } from './SidebarNav/NavDot/NavDot';
 import { SettingsHookNode } from '../../../../frontend/hooks/use-chart/use-chart-settings';
+import { SearchResults } from './SearchResults/SearchResults';
 
 export interface Props {
   initialValues?: string[];
@@ -56,48 +57,18 @@ export const DesktopSidebar: React.FC<Props> = ({
           rounded-full w-full h-1 my-4 
         `}
       />
-      <div className='flex flex-col justify-center mb-2'>
+      <div className="flex flex-col justify-center mb-2">
         <TextExpandingPill
           label="Search albums"
-          labelClassName='pr-2'
+          labelClassName="pr-2"
           isActive={true}
           placeholder="Emotion, Dedicated, The Loneliest Time"
           setValue={(value: string) => onType(value)}
           value={searchText}
         />
-
-        <div className="flex ">
-          {data && data.length > 5 
-          ? (
-              <div className="mt-4 flex flex-col">
-                {[...new Array(5)].map((v, rowIndex) => (
-                  <div className="flex gap-2 my-1" key={`sr-row-${rowIndex}`}>
-                    {[...new Array(2)].map((v, columnIndex ) => {
-                      const index = rowIndex*2 + columnIndex;
-                      const album: Album = data ? data[index] as Album : EMPTY_ALBUM;
-                      return (
-                        <Draggable
-                          data={{ data: album as Album, index, origin: 'search' }}
-                          id={`results-${index.toString()}`}
-                          key={'search-results-' + JSON.stringify(album) + index}
-                          className="cursor-grab relative basis-1/2 p-5 pl-4 pb-4 bg-black rounded-xl"
-                        >
-                          <Image
-                            width="100px"
-                            height="100px"
-                            src={album?.imageUrl}
-                            className="rounded-tr-lg absolute text-white"
-                            alt={album?.artist}
-                          />
-                        </Draggable>
-                      );
-                    })}
-                  </div>
-                ))}
-              </div>
-            )
-          : null}
-        </div>
+        {data ? (
+          <SearchResults searchResults={data} />
+        ): null}
       </div>
 
       <div className="flex flex-row flex-wrap gap-2 items-center ">

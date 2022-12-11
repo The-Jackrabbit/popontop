@@ -1,13 +1,11 @@
+import { DndContext } from "@dnd-kit/core";
 import type { NextPage } from "next";
 import { a } from "react-spring";
-import DesktopSidebar from "../../components/global/DesktopEditor/Sidebar/DesktopSidebar";
-import { SidebarNav } from "../../components/global/DesktopEditor/Sidebar/SidebarNav/SidebarNav";
-import { usePageFadeIn } from "../../frontend/hooks/springs/use-page-fade-in";
-import Layout from "./Layout";
-import { DndContext } from "@dnd-kit/core";
-import DesktopEditor from "../../components/global/DesktopEditor/DesktopEditor";
-import { DraggedAlbum } from "../../frontend/hooks/use-chart/use-chart";
+import SidebarNav from "../../components/global/DesktopEditor/Sidebar/SidebarNav/SidebarNav";
 import useDesktopChartEditor from "../../frontend/hooks/singletons/use-desktop-chart-editor";
+import { usePageFadeIn } from "../../frontend/hooks/springs/use-page-fade-in";
+import { DraggedAlbum } from "../../frontend/hooks/use-chart/use-chart";
+import Layout from "../create-chart/Layout";
 
 const CreateChart: NextPage = () => {
   const { pageOpacity, animateFadeOut, animateFadeIn } = usePageFadeIn();
@@ -25,22 +23,13 @@ const CreateChart: NextPage = () => {
     >
       <Layout>
         <a.div style={pageOpacity} className="overflow-x-visible h-full">
-          <DesktopSidebar
-            settings={chart.childrenNodes.settings}
-            toggleAlbums={actions.toggleAlbums}
-            toggleTitle={actions.toggleTitle}
-          />
+         
         </a.div>
         
         <SidebarNav />
 
         <a.div style={pageOpacity} className="h-full">
-          <DesktopEditor
-            chart={chart}
-            listStyles={state.listStyle}
-            isLoading={chart.state.isCreateLoading}
-            titleStyle={state.titleStyle}
-          />
+         
         </a.div>
       </Layout>
     </DndContext>
@@ -48,4 +37,3 @@ const CreateChart: NextPage = () => {
 };
 
 export default CreateChart;
-

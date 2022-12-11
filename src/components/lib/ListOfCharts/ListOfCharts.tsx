@@ -5,8 +5,14 @@ import { useEffect, useState } from 'react';
 import { IChartListItem } from '../../../server/trpc/router/charts/getChartsForUser';
 import { colorMap } from '../../../constants/colors';
 import { Color } from '../../global/DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
-
-export const ListOfCharts: React.FC = () => {
+export interface Props {
+  isMobile: boolean;
+  setChartBeingViewed?: () => void; 
+}
+export const ListOfCharts: React.FC<Props> = ({ 
+  isMobile,
+  setChartBeingViewed = () => undefined,
+}) => {
   const { data } = trpc.charts.getUserCharts.useQuery(undefined, {
     refetchOnWindowFocus: false,
   });
@@ -46,8 +52,9 @@ export const ListOfCharts: React.FC = () => {
                 : (
                   <ChartListItem
                     chart={chart}
+                    isMobile={isMobile}
                     listMode={listMode}
-                    onClick={() => onClickDeleteChart(chart, index)} 
+                    onClickDeleteChart={() => onClickDeleteChart(chart, index)} 
                   />
                 )
               }

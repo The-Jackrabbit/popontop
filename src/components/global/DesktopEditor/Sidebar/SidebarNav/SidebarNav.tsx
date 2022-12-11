@@ -1,14 +1,15 @@
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { a } from "react-spring";
 import { useZoomOnHover } from "../../../../../frontend/hooks/springs/use-zoom-on-hover";
 import NavDot, { Color } from "./NavDot/NavDot";
 
-export interface Props {
-  page: string;
-  setPage: (page: string) => void;
-}
-
-export const SidebarNav: React.FC<Props> = ({ page, setPage }) => {
+export const SidebarNav: React.FC = () => {
   const { zoomOnHoverStyle, onMouseLeave, onMouseOver } = useZoomOnHover();
+  const router = useRouter();
+  useEffect(() => {
+    console.log(router.route)
+  }, []);
   return (
     <div className="flex flex-row justify-between items-end">
       <div className="text-5xl">
@@ -36,22 +37,22 @@ export const SidebarNav: React.FC<Props> = ({ page, setPage }) => {
       <div className="flex flex-row gap-1 justify-between -translate-y-2">
         <NavDot
           ariaLabel="editor page"
-          isActive={page === 'editor'}
-          onClick={() => setPage('editor')}
+          isActive={router.route === '/'}
+          onClick={() => router.push('/')}
           color={Color.green}
           label="Editor"
         />
         <NavDot
           ariaLabel="charts page"
-          isActive={page === 'your-charts'}
-          onClick={() => setPage('your-charts')}
+          isActive={router.route === '/your-charts'}
+          onClick={() => router.push('your-charts')}
           color={Color.fuchsia}
           label="Your charts"
         />
         <NavDot
           ariaLabel="credits page"
-          isActive={page === 'credits'}
-          onClick={() => setPage('credits')}
+          isActive={router.route === '/credits'}
+          onClick={() => router.push('credits')}
           color={Color.violet}
           label="Credits"
         />

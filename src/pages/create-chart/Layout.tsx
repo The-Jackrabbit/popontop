@@ -20,7 +20,7 @@ const Layout: React.FC<Props> = ({ children }) => {
       className="
         h-screen w-screen
         flex justify-center
-        overflow-x-visible
+        overflow-hidden
       "
     >
       <div
@@ -41,7 +41,7 @@ const Layout: React.FC<Props> = ({ children }) => {
             flex flex-col justify-between
             px-4
             border-neutral-300  dark:border-neutral-800 border-r-2
-            "
+          "
         >
           <div
           // border-4 border-green-500

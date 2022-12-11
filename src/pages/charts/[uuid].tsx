@@ -63,12 +63,7 @@ const Chart = ({
         className="overflow-x-visible h-full"
       >
       </a.div>
-      <SidebarNav
-        page={'editor'}
-        setPage={() => {
-          animateFadeOut(() => animateFadeIn());  
-        }}
-      />
+      <SidebarNav />
       <a.div style={pageOpacity} className="h-full">
         <DesktopEditor
           chart={chart}

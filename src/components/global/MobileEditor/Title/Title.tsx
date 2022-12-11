@@ -1,5 +1,6 @@
 import { a } from "react-spring";
 import { useState } from "react";
+import React from "react";
 
 export interface Props {
   chartTitle: string;
