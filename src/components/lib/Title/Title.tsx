@@ -47,7 +47,6 @@ const Title: React.FC<Props> = ({
           <input
             autoFocus
             value={chartTitle}
-            style={{ color: textColor }}
             onBlur={() => setIsEditing(false)}
             onChange={(e) => { setValue(e.target.value) }}
             placeholder="New title"
@@ -59,6 +58,7 @@ const Title: React.FC<Props> = ({
             "
           />
         ) : <p className="basis-full">{chartTitle}</p>
+
       }
       toggleButton={
         !isReadOnly ? (

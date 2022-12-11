@@ -1,5 +1,5 @@
 
-import { PaintBrushIcon } from "@heroicons/react/20/solid";
+import { PaintBrushIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 import { ICON_STYLE } from "../../FilterButton/FilterButton";
 import Input from "../../Input/Input";
@@ -39,7 +39,7 @@ export const TextExpandingPill: React.FC<Props> = ({
       <p className={labelClassName}>{label}</p>
         <div className="text-sm">
           {!isExpanded
-            ? <PaintBrushIcon className={ICON_STYLE} />
+            ? <PaintBrushIcon className="h-4 w-4 text-neutral-900 dark:text-neutral-50" />
             : '-'
           } 
       </div>

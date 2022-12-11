@@ -13,3 +13,5 @@ export const colorMap = {
     border-neutral-300 dark:border-neutral-600
   `
 }
+
+export const LOADER_ANIMATED_BACKGROUND = 'bg-neutral-200 dark:bg-neutral-800 animate-pulse';
