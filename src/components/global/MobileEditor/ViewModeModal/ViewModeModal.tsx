@@ -3,7 +3,7 @@ import { Album } from "../../../../styles/types/Albums";
 import Button from "../../../lib/Button/Button";
 import Grid from "../../../lib/Grid/Grid";
 import NumberInput from "../../../lib/NumberInput/NumberInput";
-import Title from "../Title/Title";
+import Title from "../../../lib/Title/Title";
 
 export interface Props {
   chartTitle: string;

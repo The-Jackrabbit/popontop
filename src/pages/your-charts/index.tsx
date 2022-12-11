@@ -5,6 +5,7 @@ import { usePageFadeIn } from "../../frontend/hooks/springs/use-page-fade-in";
 import Layout from "../create-chart/Layout";
 import { ListOfCharts } from "../../components/lib/ListOfCharts/ListOfCharts";
 import { useState } from "react";
+import { ViewChart } from "../../components/global/Desktop/YourCharts/ViewChart/ViewChart";
 
 const YourCharts: NextPage = () => {
   const { pageOpacity, animateFadeOut, animateFadeIn } = usePageFadeIn();
@@ -12,7 +13,10 @@ const YourCharts: NextPage = () => {
   return (
     <Layout>
       <a.div style={pageOpacity} className="overflow-x-visible h-full">
-        <ListOfCharts isMobile={false}/>
+        <ListOfCharts
+          isMobile={false}
+          setChartBeingViewed={setSelectedChartUuid}
+        />
       </a.div>
       <SidebarNav /> 
       <a.div style={pageOpacity} className="h-full">

@@ -7,7 +7,7 @@ import { colorMap } from '../../../constants/colors';
 import { Color } from '../../global/DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
 export interface Props {
   isMobile: boolean;
-  setChartBeingViewed?: () => void; 
+  setChartBeingViewed?: (chartUuid: string) => void; 
 }
 export const ListOfCharts: React.FC<Props> = ({ 
   isMobile,
@@ -54,6 +54,10 @@ export const ListOfCharts: React.FC<Props> = ({
                     chart={chart}
                     isMobile={isMobile}
                     listMode={listMode}
+                    onClick={() => {
+                      debugger;
+                      setChartBeingViewed(chart.uuid ?? '')}
+                    }
                     onClickDeleteChart={() => onClickDeleteChart(chart, index)} 
                   />
                 )

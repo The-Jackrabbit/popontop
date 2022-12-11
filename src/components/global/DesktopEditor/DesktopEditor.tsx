@@ -1,7 +1,7 @@
 import React from 'react';
 import { a, SpringValue } from "react-spring";
 import { ChartHookNode } from '../../../frontend/hooks/use-chart/use-chart';
-import Title from '../MobileEditor/Title/Title';
+import Title from '../../lib/Title/Title';
 import DesktopActions from './Actions/DesktopActions';
 import ChartList from './ChartList/ChartList';
 import DesktopChart from './DesktopChart/DesktopChart';

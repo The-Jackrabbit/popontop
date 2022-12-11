@@ -1,6 +1,6 @@
 import { Album } from "../../../../../../styles/types/Albums";
 import Grid from "../../../../../lib/Grid/Grid";
-import Title from "../../../Title/Title";
+import Title from "../../../../../lib/Title/Title";
 import { TextList } from "./TextList/TextList";
 
 export interface Props {

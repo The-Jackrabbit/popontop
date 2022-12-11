@@ -28,12 +28,12 @@ export const ChartListItem: React.FC<Props & { isMobile: boolean }> = ({
       onClickDeleteChart={onClickDeleteChart}
     />
   );
-  if (!isMobile) {
-    <div onClick={onClick}>{contentComponent}</div>
+  
+  if (!isMobile && onClick) {
+    return <div onClick={onClick}>{contentComponent}</div>;
   }
-  return (
-    <Link href={`/charts/${chart.uuid}`}>{contentComponent}</Link>
-  );
+  
+  return <Link href={`/charts/${chart.uuid}`}>{contentComponent}</Link>;
 };
 
 export interface ChartListItemContentProps {
