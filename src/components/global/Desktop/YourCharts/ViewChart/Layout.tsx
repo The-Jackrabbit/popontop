@@ -1,7 +1,9 @@
+import { useState } from "react";
+import { useSize } from "../../../../lib/Grid/Grid";
 
 export interface Props {
   backgroundColor: string;
-  chart: React.ReactNode;
+  chart: (size: DOMRect) => JSX.Element;
   title: React.ReactNode;
 }
 
@@ -10,6 +12,8 @@ export const Layout: React.FC<Props> = ({
   chart,
   title,
 }) => {
+  const [target, setTarget] = useState<HTMLDivElement | null>(null);
+  const size = useSize(target);
   return (
     <div
       className="flex flex-row h-full justify-between"
@@ -19,8 +23,8 @@ export const Layout: React.FC<Props> = ({
           <div className="pb-4">
             {title}
           </div>
-          <div>
-            {chart}
+          <div ref={setTarget}>
+            {size ? chart(size) : null}
           </div>
         </div>
 

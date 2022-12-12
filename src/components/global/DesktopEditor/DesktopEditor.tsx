@@ -31,23 +31,25 @@ const DesktopEditor: React.FC<Props> = ({
           <Title
             chartTitle={chart.state.chartTitle}
             isReadOnly={false}
-            setValue={(val: string) => undefined}
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            setValue={(_val: string) => undefined}
             showIntroduction={!true}
             textColor="black"
           />
         </a.div>
       }
-      chart={
+      chart={(size: DOMRect) =>
         // TODO : Implement beginning instructions for desktop
         true ? (
           <DesktopChart
-            isReadOnly={readonly}
-            numberOfColumns={chart.childrenNodes.settings.state.columns}
-            numberOfRows={chart.childrenNodes.settings.state.rows}
-            containers={chart.childrenNodes.list.state ?? []}
             backgroundColor={chart.childrenNodes.settings.state.backgroundColor}
             borderColor={chart.childrenNodes.settings.state.borderColor}
             borderSize={chart.childrenNodes.settings.state.borderSize}
+            isReadOnly={readonly}
+            items={chart.childrenNodes.list.state ?? []}
+            numberOfColumns={chart.childrenNodes.settings.state.columns}
+            numberOfRows={chart.childrenNodes.settings.state.rows}
+            size={size}
           />
         ) : null
       }

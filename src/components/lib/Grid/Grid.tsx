@@ -1,70 +1,80 @@
 import { Album } from "../../../styles/types/Albums";
-import { createRef, useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useState } from "react";
+import useResizeObserver from "@react-hook/resize-observer";
 
 export interface Props {
   columns: number;
-  list: Album[];
+  itemComponent: ({ index, x, y }: {  index: number; x: number;  y: number }) => JSX.Element;
   preview?: boolean;
   rows: number;
-}
-
-export const getAlbumSize = (ref: any, columns: number, rows: number) => {
-  const container = ref.current;
-  if (!container?.clientWidth) {
-    return 0;
-  }
-
-  const containerWidth = document.body.clientWidth ?? 0;
-  const containerHeight = container.clientHeight ?? 0;
-  return Math.floor(
-    Math.min(
-      containerWidth/columns , 
-      (containerHeight-40)/rows ,
-    )
-  );
+  size: DOMRect;
 }
 
 const Grid: React.FC<Props> = ({
   columns,
-  list,
+  itemComponent,
   preview = false,
   rows,
+  size,
 }) => {
   const [squareWidth, setSquareWidth] = useState(40);
-  const ref = createRef<HTMLDivElement>();
   useEffect(() => {
-    setSquareWidth(getAlbumSize(ref, columns, rows));
-  }, [columns, rows, ref.current, ref]);
+    const containerWidth = size.width;
+    const containerHeight = size.height;
+    const minDimension = Math.floor(
+      Math.min(
+        (containerWidth)/columns, 
+        (containerHeight)/rows ,
+      )
+    );
+    setSquareWidth(minDimension === 0 ? 40 : minDimension);
+  }, [columns, rows]);
+
+  const emptyRows = useMemo(() => ([...new Array(rows)]), [rows]);
+  const emptyColumns = useMemo<undefined[]>(() => ([...new Array(columns)]), [columns]);
+
   return (
     <div
-      ref={ref}
       id="container"
       className={`
-      ${preview ? 'scale-95' : ''}
-        flex justify-center
-        grow h-fit
+        ${preview ? 'scale-95' : ''}
+        flex justify-center align-middle
+        h-full
+        items-stretch
         overflow-y-scroll overflow-x-hidden
       `}
     >
-      {/* <div className={preview ? 'scale-50' : ''}> */}
-        {[...new Array(columns)].map((_, index) => (
-          <div className="row" key={'row'+index}>
-            {[...new Array(rows)].map((_, cindex) => (
-              <div className="value" key={'row'+index+cindex}
-                style={{ width: squareWidth, height: squareWidth}}
+      {emptyColumns.map((_, y) => (
+        <div className="x" key={`row-${y}`}>
+          {emptyRows.map((_, x) => {
+            const index = x + columns*y;
+            return (
+              <div
+                className="value"
+                key={`item-${index}`}
+                style={{ width: squareWidth, height: squareWidth }}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={list[index+(columns*cindex)]?.imageUrl ?? ''}
-                  alt={list[index+(columns*cindex)]?.artist ?? ''}
-                />              
+                {itemComponent({ index, x, y })}    
               </div>
-            ))}
-          </div>
-        ))}
-      {/* </div> */}
+            );
+          })}
+        </div>
+      ))}
     </div>
   );
 };
 
+                    
 export default Grid; 
+
+export function useSize(target: HTMLDivElement | null) {
+  const [size, setSize] = useState<DOMRect>();
+
+  useLayoutEffect(() => {
+    target && setSize(target.getBoundingClientRect());
+  }, [target]);
+
+  // Where the magic happens
+  useResizeObserver(target, (entry) => setSize(entry.contentRect));
+  return size;
+}

@@ -33,17 +33,17 @@ export const ViewChart: React.FC<Props> = ({
         <Title
           chartTitle={chart.name}
           isReadOnly={true}
-          setValue={(val: string) => undefined}
           showIntroduction={!true}
           textColor="black"
         />
       }
-      chart={
+      chart={(size: DOMRect) =>
         <DesktopChart
+          size={size}
           isReadOnly={chart.isReadOnly}
           numberOfColumns={10}
           numberOfRows={10}
-          containers={chart.albums ?? []}
+          items={chart.albums ?? []}
           backgroundColor={chart?.settings?.background_color ?? ''}
           borderColor={chart?.settings?.border_color ?? ''}
           borderSize={ 1}

@@ -4,11 +4,14 @@ import { SidebarNav } from "../../components/global/DesktopEditor/Sidebar/Sideba
 import { usePageFadeIn } from "../../frontend/hooks/springs/use-page-fade-in";
 import Layout from "../create-chart/Layout";
 import { ListOfCharts } from "../../components/lib/ListOfCharts/ListOfCharts";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ViewChart } from "../../components/global/Desktop/YourCharts/ViewChart/ViewChart";
 
 const YourCharts: NextPage = () => {
   const { pageOpacity, animateFadeOut, animateFadeIn } = usePageFadeIn();
+  useEffect(() => {
+    animateFadeIn();
+  }, []);
   const [selectedChartUuid, setSelectedChartUuid] = useState<string | null>(null);
   return (
     <Layout>
@@ -22,7 +25,7 @@ const YourCharts: NextPage = () => {
       <a.div style={pageOpacity} className="h-full">
         {selectedChartUuid !== null ? (
           <ViewChart chartUuid={selectedChartUuid} />
-        ) : null}
+        ) : <p>hello world</p>}
       </a.div>
     </Layout>
   );

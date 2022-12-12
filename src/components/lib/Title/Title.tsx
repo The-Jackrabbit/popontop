@@ -10,7 +10,7 @@ export interface Props {
   isActiveByDefault?: boolean;
   isLoading?: boolean;
   isReadOnly: boolean;
-  setValue: (value: string) => void;
+  setValue?: (value: string) => void;
   showIntroduction: boolean;
   textColor: string;
 }
@@ -48,7 +48,9 @@ const Title: React.FC<Props> = ({
             autoFocus
             value={chartTitle}
             onBlur={() => setIsEditing(false)}
-            onChange={(e) => { setValue(e.target.value) }}
+            onChange={(e) => {
+              setValue && setValue(e.target.value);
+            }}
             placeholder="New title"
             className="
               focus-visible:outline-none active:outline-none

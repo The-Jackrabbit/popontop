@@ -31,11 +31,11 @@ export interface State {
 
 const useChartSettings = (defaultSettings: ChartSettings | null): SettingsHookNode => {
   const [rows, onIncrementRows, onDecrementRows] = useIncrementer({
-    initialAmount: 5, // TODO: persist to backend
+    initialAmount: 10, // TODO: persist to backend
     max: 18
   });
   const [columns, onIncrementColumns, onDecrementColumns] = useIncrementer({
-    initialAmount: 2, // TODO: persist to backend
+    initialAmount: 10, // TODO: persist to backend
     max: 18,
   }); 
   const [backgroundColor, setBackgroundColor] = useState(defaultSettings?.background_color ?? '');
