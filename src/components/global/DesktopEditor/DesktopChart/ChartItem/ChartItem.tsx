@@ -37,7 +37,7 @@ export const ChartItem: React.FC<Props> = ({
       <Droppable
         className="
           border-neutral-300 dark:border-neutral-600
-          border border-1
+          border border-1 h-full
         " 
         id={index.toString()}
         album={album}
