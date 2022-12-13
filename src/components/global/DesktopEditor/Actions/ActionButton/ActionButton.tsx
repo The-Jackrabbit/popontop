@@ -11,11 +11,11 @@ export interface Props {
 }
 
 export const ActionButton: React.FC<Props> = ({
-  disabled = false,
+  // disabled = false,
   label,
   onClick,
   text,
-  variant = 'regular',
+  // variant = 'regular',
 }) => {
   return (
     <ButtonWithAccessory

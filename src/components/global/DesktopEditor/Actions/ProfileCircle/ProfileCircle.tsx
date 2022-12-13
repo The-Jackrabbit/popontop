@@ -1,29 +1,14 @@
 import Image from "next/image";
 import { a } from 'react-spring';
 import { signIn, signOut, useSession } from "next-auth/react";
-import { useState } from "react";
 import { useZoomOnHover } from "../../../../../frontend/hooks/springs/use-zoom-on-hover";
 import ButtonWithAccessory, { LEFT_POSITION_STYLE } from "../../../../lib/ButtonWithAccessory/ButtonWithAccessory";
 
 const ProfileCircle: React.FC = () => {
   const { data: sessionData } = useSession();
-  const [isHovered, setIsHovered] = useState(false);
   const {
     zoomOnHoverStyle,
-    onMouseLeave: _onMouseLeave,
-    onMouseOver: _onMouseOver,
   } = useZoomOnHover();
-
-  const mouseEventListeners = {
-    onMouseEnter: () => {
-      _onMouseOver();
-      setIsHovered(!false);
-    },
-    onMouseLeave: () => {
-      _onMouseLeave();
-      setIsHovered(!true);
-    },  
-  };
   
   return (
     <ButtonWithAccessory
@@ -51,7 +36,6 @@ const ProfileCircle: React.FC = () => {
         style={{
           ...zoomOnHoverStyle,
         }}
-        {...mouseEventListeners}
         onClick={sessionData ? () => signOut() : () => signIn('google')}
       >
         {sessionData

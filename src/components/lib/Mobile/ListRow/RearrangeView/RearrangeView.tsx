@@ -5,7 +5,6 @@ import { Album } from "../../../../../styles/types/Albums";
 import RearrangeViewButton from "./RearrangeViewButton/RearrangeViewButton";
 import { useSpring, a, config } from "react-spring";
 import { ArrowDownIcon, ArrowUpIcon } from "@heroicons/react/20/solid";
-import { ICON_STYLE } from "../../../FilterButton/FilterButton";
 
 export interface Props {
   album: Album;

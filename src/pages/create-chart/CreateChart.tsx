@@ -10,7 +10,7 @@ import { DraggedAlbum } from "../../frontend/hooks/use-chart/use-chart";
 import useDesktopChartEditor from "../../frontend/hooks/singletons/use-desktop-chart-editor";
 
 const CreateChart: NextPage = () => {
-  const { pageOpacity, animateFadeOut, animateFadeIn } = usePageFadeIn();
+  const { pageOpacity } = usePageFadeIn();
   const { actions, childrenNodes: { chart }, state } = useDesktopChartEditor({});
 
   return (

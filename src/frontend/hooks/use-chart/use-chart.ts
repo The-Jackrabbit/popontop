@@ -1,5 +1,5 @@
 import { ChartSettings } from "@prisma/client";
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Album } from "../../../styles/types/Albums";
 import { trpc } from "../../../utils/trpc";
 import { ParentHookNode } from "../hook-node";
@@ -87,7 +87,7 @@ export function useChart({
     isCreateLoading: createMutation.isLoading,
     isEditLoading: editMutation.isLoading,
     savedChartId,
-  }), [chartTitle]);
+  }), [chartTitle, createMutation.isLoading, editMutation.isLoading, savedChartId]);
   return { 
     actions: {
       editChart,

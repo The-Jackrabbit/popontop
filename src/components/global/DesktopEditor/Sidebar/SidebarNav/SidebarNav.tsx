@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import { useEffect } from "react";
 import { a } from "react-spring";
 import { useZoomOnHover } from "../../../../../frontend/hooks/springs/use-zoom-on-hover";
 import NavDot, { Color } from "./NavDot/NavDot";
@@ -7,9 +6,6 @@ import NavDot, { Color } from "./NavDot/NavDot";
 export const SidebarNav: React.FC = () => {
   const { zoomOnHoverStyle, onMouseLeave, onMouseOver } = useZoomOnHover();
   const router = useRouter();
-  useEffect(() => {
-    console.log(router.route)
-  }, []);
   return (
     <div className="flex flex-row justify-between items-end">
       <div className="text-5xl">

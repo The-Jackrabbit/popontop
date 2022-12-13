@@ -1,7 +1,3 @@
-
-
-
-import { useState } from 'react';
 import { colorMap } from '../../../../../../constants/colors';
 import ButtonWithAccessory, { TOP_POSITION_STYLE } from '../../../../../lib/ButtonWithAccessory/ButtonWithAccessory';
 
@@ -33,7 +29,6 @@ export const NavDot: React.FC<Props> = ({
   onClick,
 }) => {
   const activeClasses = colorMap[color];
-  const [isHovered, setIsHovered] = useState(false);
   return (
     <ButtonWithAccessory
       {...TOP_POSITION_STYLE}
@@ -50,8 +45,6 @@ export const NavDot: React.FC<Props> = ({
           ${isActive ? activeClasses : colorMap.neutral}
         `}
         onClick={() => onClick()}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
       />
     </ButtonWithAccessory>
   );

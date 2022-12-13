@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useSpring } from "react-spring";
 
 export function usePageFadeIn() {

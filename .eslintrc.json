@@ -4,5 +4,13 @@
     "project": "./tsconfig.json"
   },
   "plugins": ["@typescript-eslint"],
+  "overrides": [
+    {
+      "files": ["*"],
+      "rules": {
+        "@next/next/no-img-element": "off"
+      }
+    }
+  ],
   "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended"]
 }

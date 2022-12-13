@@ -2,8 +2,8 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Grid, { useSize } from './Grid';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import { ALBUM_RESULTS } from '../../../constants/test-data/search-results';
-import { Album } from '../../../styles/types/Albums';
 import { useState } from 'react';
+
 // thanks chat gpt :)
 function randomIntegerInRange(min: number, max: number): number {
   // Generate a random number in the range [min, max]
@@ -58,8 +58,7 @@ export const Mobile: ComponentStory<typeof Grid> = (args) => {
         <Grid
           {...args}
           itemComponent={
-            ({ index, x, y }) => (
-               // eslint-disable-next-line @next/next/no-img-element
+            ({ index }) => (
               <img
                 src={list[index]?.imageUrl ?? ''}
                 alt={list[index]?.artist ?? ''}
@@ -74,50 +73,6 @@ export const Mobile: ComponentStory<typeof Grid> = (args) => {
     </div>
   )
 }
-
-// export const VariantsDesktop: ComponentStory<typeof Grid> = (args) => {
-//   const [value, setValue] = useState('My storybook Grid');
-//   return (
-//     <div className="m-4">
-//       <p className="text-3xl my-4">view</p>
-//       <Grid
-//         isReadOnly={false}
-//         textColor="black"
-//         showIntroduction={false}
-//         chartGrid={value}
-//         setValue={setValue}
-//       />
-//       <p className="text-3xl my-4">readonly</p>
-//       <Grid
-//         isReadOnly={true}
-//         textColor="black"
-//         showIntroduction={false}
-//         chartGrid={value}
-//         setValue={setValue}
-//       />
-//       <p className="text-3xl my-4">editing</p>
-//       <Grid
-//         isActiveByDefault={true}
-//         isReadOnly={false}
-//         textColor="black"
-//         showIntroduction={false}
-//         chartGrid={value}
-//         setValue={setValue}
-//       />
-//       <p className="text-3xl my-4">loading</p>
-//       <Grid
-//         isLoading={true}
-//         isReadOnly={false}
-//         textColor="black"
-//         showIntroduction={false}
-//         chartGrid={value}
-//         setValue={setValue}
-//       />
-//     </div>
-//   )
-// }
-
-// VariantsDesktop.parameters = DESKTOP_PARAMETERS; 
 
 export const Desktop: ComponentStory<typeof Grid> = Mobile.bind({}); 
 

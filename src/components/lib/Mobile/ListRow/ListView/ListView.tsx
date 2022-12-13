@@ -1,5 +1,4 @@
 import React from "react";
-import Image from 'next/image';
 import { Album } from '../../../../../styles/types/Albums';
 import { ROW_HEIGHT } from "../../../../../frontend/hooks/springs/use-disappear-row";
 

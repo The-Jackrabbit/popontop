@@ -1,7 +1,6 @@
 
 import { PaintBrushIcon } from "@heroicons/react/24/outline";
-import { useEffect, useState } from "react";
-import { ICON_STYLE } from "../../FilterButton/FilterButton";
+import { useState } from "react";
 import Input from "../../Input/Input";
 import { ExpandingPill } from "../ExpandingPill";
 
@@ -25,10 +24,6 @@ export const TextExpandingPill: React.FC<Props> = ({
   value,
 }) => {
   const [isExpanded, setIsExpanded] = useState<boolean>(isActive);
-  useEffect(() => {
-    if (isActive) {
-    }
-  }, []);
   return (
     <ExpandingPill
       className={className}

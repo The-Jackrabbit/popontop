@@ -107,7 +107,7 @@ export function useExpandingPill({
   useEffect(() => {
     if (isOpenByDefault) {
       expandPill();
-    }
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return {

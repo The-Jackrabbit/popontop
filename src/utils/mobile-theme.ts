@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 export const LIGHT_MODE_META_TAG = 'light-mode-meta-tag';
 export const DARK_MODE_META_TAG = 'dark-mode-meta-tag';
 export const LIGHT_MODE_THEME_COLOR = '#F8FAFC';

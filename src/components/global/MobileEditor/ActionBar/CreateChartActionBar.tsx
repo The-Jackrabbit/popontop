@@ -1,8 +1,6 @@
 import FilterButton, { ICON_STYLE } from "../../../lib/FilterButton/FilterButton";
 import { 
   ChevronUpDownIcon, 
-  PaintBrushIcon,
-  PlusIcon, 
   TrashIcon,
 } from '@heroicons/react/20/solid';
 import { ListRowMode } from "../../../lib/Mobile/ListRow/ListRow";

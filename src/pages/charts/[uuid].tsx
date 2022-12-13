@@ -47,8 +47,6 @@ const Chart = ({
 }) => {
   const {
     pageOpacity,
-    animateFadeOut,
-    animateFadeIn,
   } = usePageFadeIn();
   const { childrenNodes: { chart }, state } = useDesktopChartEditor({
     initialList: albums,

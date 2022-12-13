@@ -8,9 +8,10 @@ import { useEffect, useState } from "react";
 import { ViewChart } from "../../components/global/Desktop/YourCharts/ViewChart/ViewChart";
 
 const YourCharts: NextPage = () => {
-  const { pageOpacity, animateFadeOut, animateFadeIn } = usePageFadeIn();
+  const { pageOpacity, animateFadeIn } = usePageFadeIn();
   useEffect(() => {
     animateFadeIn();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const [selectedChartUuid, setSelectedChartUuid] = useState<string | null>(null);
   return (

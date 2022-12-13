@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { Album } from "../../../../../styles/types/Albums";
 import { startScreenshotMode } from "../../../../../utils/mobile-theme";
-import Button from "../../../../lib/Button/Button";
-import FilterButton, { DEFAULT_CLASSNAME } from "../../../../lib/FilterButton/FilterButton";
+import FilterButton from "../../../../lib/FilterButton/FilterButton";
 import Grid, { useSize } from "../../../../lib/Grid/Grid";
 import NumberInput from "../../../../lib/NumberInput/NumberInput";
 import { ScreenshotMode } from "./ScreenshotMode/ScreenshotMode"
@@ -77,8 +76,7 @@ export const PreviewEditor: React.FC<Props> = ({
       {size ? (
         <Grid
           preview={true}
-          itemComponent={({ index , x, y}) => (
-            // eslint-disable-next-line @next/next/no-img-element
+          itemComponent={({ index }) => (
             <img
               src={list[index]?.imageUrl ?? ''}
               alt={list[index]?.artist ?? ''}

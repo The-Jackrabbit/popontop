@@ -29,7 +29,6 @@ const DESKTOP_PARAMETERS = {
 };
 
 export const Mobile: ComponentStory<typeof Title> = (args) => {
-  const toggleTitle = () => console.log('changing');
   const [value, setValue] = useState('My storybook title');
 
   return (
@@ -43,7 +42,7 @@ export const Mobile: ComponentStory<typeof Title> = (args) => {
   )
 }
 
-export const VariantsDesktop: ComponentStory<typeof Title> = (args) => {
+export const VariantsDesktop: ComponentStory<typeof Title> = () => {
   const [value, setValue] = useState('My storybook title');
   return (
     <div className="m-4">

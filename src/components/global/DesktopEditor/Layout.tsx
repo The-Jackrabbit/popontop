@@ -11,7 +11,7 @@ export interface Props {
 }
 
 const Layout: React.FC<Props> = ({ 
-  backgroundColor,
+  // backgroundColor,
   isReadonly,
   title,
   chart,

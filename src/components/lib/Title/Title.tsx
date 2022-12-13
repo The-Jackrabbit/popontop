@@ -25,7 +25,7 @@ const Title: React.FC<Props> = ({
   isReadOnly,
   setValue,
   showIntroduction,
-  textColor,
+  // textColor,
 }) => {
   const [isEditing, setIsEditing] = useState(isActiveByDefault);
   const clickEditTitleButton = () => {

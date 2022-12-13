@@ -16,7 +16,7 @@ export interface Props {
 }
 
 export const DesktopChart: React.FC<Props> = ({
-  backgroundColor,
+  // backgroundColor,
   borderColor,
   borderSize,
   isReadOnly,

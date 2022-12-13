@@ -47,7 +47,7 @@ export const ScreenshotMode: React.FC<Props> = ({
                 columns={columns}
                 rows={rows}
                 size={size}
-                itemComponent={({ index, x, y }) =>  // eslint-disable-next-line @next/next/no-img-element
+                itemComponent={({ index }) =>  
                   <img
                     src={list[index]?.imageUrl ?? ''}
                     alt={list[index]?.artist ?? ''}

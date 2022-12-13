@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { trpc } from "../../../../../utils/trpc";
 import DesktopChart from "../../../DesktopEditor/DesktopChart/DesktopChart";
 import Title from "../../../../lib/Title/Title";
