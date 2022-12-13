@@ -37,26 +37,36 @@ const DESKTOP_PARAMETERS = {
   },
 };
 
-const list = [...new Array(100)].map(() => ALBUM_RESULTS[randomIntegerInRange(0, 9)]);
-export const Mobile: ComponentStory<typeof Grid> = (args) => {
+export const useResizer = () => {
   const [target, setTarget] = useState<HTMLDivElement | null>(null);
   const size = useSize(target);
 
+  return {
+    containerRef: {
+      ref: setTarget,
+    },
+    size,
+  }
+}
+
+const list = [...new Array(100)].map(() => ALBUM_RESULTS[randomIntegerInRange(0, 9)]);
+export const Mobile: ComponentStory<typeof Grid> = (args) => {
+  const { containerRef, size } = useResizer();
   return (
-    <div ref={setTarget} className="m-4 h-full w-full">
+    <div {...containerRef} className="m-4 h-full w-full">
       {size ? (
         <Grid
           {...args}
           itemComponent={
             ({ index, x, y }) => (
-              // eslint-disable-next-line @next/next/no-img-element
+               // eslint-disable-next-line @next/next/no-img-element
               <img
                 src={list[index]?.imageUrl ?? ''}
                 alt={list[index]?.artist ?? ''}
                 width={size.height}
                 height={size.width}
               /> 
-            )
+           )
           }
           size={size}
         />

@@ -1,5 +1,6 @@
 import { Album } from "../../../../../../styles/types/Albums";
 import Grid from "../../../../../lib/Grid/Grid";
+import { useResizer } from "../../../../../lib/Grid/Grid.stories";
 import Title from "../../../../../lib/Title/Title";
 import { TextList } from "./TextList/TextList";
 
@@ -18,6 +19,7 @@ export const ScreenshotMode: React.FC<Props> = ({
   onExit,
   rows,
 }) => {
+  const { containerRef, size } = useResizer();
   return (
     <div className="fixed top-0 left-0 z-50">
       <div className="fixed right-0">
@@ -29,7 +31,10 @@ export const ScreenshotMode: React.FC<Props> = ({
           "
           onClick={() => onExit()}
         >
-          <div className="h-full w-full flex flex-col items-stretch">
+          <div
+            {...containerRef}
+            className="h-full w-full flex flex-col items-stretch"
+          >
             <Title
               chartTitle={chartTitle}
               isReadOnly={true}
@@ -37,11 +42,21 @@ export const ScreenshotMode: React.FC<Props> = ({
               showIntroduction={false}
               textColor="white"
             /> 
-            <Grid
-              columns={columns}
-              rows={rows}
-              list={list}
-            />
+            {size ? (
+              <Grid
+                columns={columns}
+                rows={rows}
+                size={size}
+                itemComponent={({ index, x, y }) =>  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={list[index]?.imageUrl ?? ''}
+                    alt={list[index]?.artist ?? ''}
+                    width={size.height}
+                    height={size.width}
+                  />
+                }
+              />
+            ) : null}
             <div className="flex flex-row basis-[50%] shrink justify-center">
               <TextList list={list.filter((_, i) => i < columns*rows)} />         
             </div>

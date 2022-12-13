@@ -1,4 +1,3 @@
-import { Album } from "../../../styles/types/Albums";
 import { useEffect, useLayoutEffect, useMemo, useState } from "react";
 import useResizeObserver from "@react-hook/resize-observer";
 
@@ -28,6 +27,7 @@ const Grid: React.FC<Props> = ({
       )
     );
     setSquareWidth(minDimension === 0 ? 40 : minDimension);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [columns, rows]);
 
   const emptyRows = useMemo(() => ([...new Array(rows)]), [rows]);
@@ -41,7 +41,7 @@ const Grid: React.FC<Props> = ({
         flex justify-center align-middle
         h-full
         items-stretch
-        overflow-y-scroll overflow-x-hidden
+        overflow-y-hidden overflow-x-hidden
       `}
     >
       {emptyColumns.map((_, y) => (
