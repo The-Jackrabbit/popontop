@@ -1,6 +1,8 @@
 import { DragEndEvent } from '@dnd-kit/core';
 import { Dispatch, SetStateAction, useState } from 'react';
+import { randomIntegerInRange } from '../../../components/lib/Grid/Grid.stories';
 import { EMPTY_ALBUM } from '../../../constants/empty-album';
+import { ALBUM_RESULTS } from '../../../constants/test-data/search-results';
 import { Album } from '../../../styles/types/Albums';
 import { HookNode } from '../hook-node';
 import { DraggedAlbum } from '../use-chart/use-chart';
@@ -25,8 +27,12 @@ export interface Actions {
   swapAlbumsAtIndices: (oldIndex: number, newIndex: number) => void;
 }
 
+const testlist = [...new Array(100)].map(
+  () => ALBUM_RESULTS[randomIntegerInRange(0, 9)]
+);
+
 const useList = (initialList: Album[] = []): ListHookNode => {
-  const [list, setList] = useState<Album[]>(initialList);
+  const [list, setList] = useState<Album[]>(testlist as Album[]);
   const [draggedAlbum, setDraggedAlbum] = useState<DraggedAlbum>({
     data: EMPTY_ALBUM,
     origin: 'search',

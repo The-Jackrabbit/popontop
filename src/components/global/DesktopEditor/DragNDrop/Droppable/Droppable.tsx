@@ -23,7 +23,7 @@ const Droppable: React.FC<Props> = ({
       className={`
         ${className}
         droppable
-        ${isOver ? 'bg-red-400' : 'bg-transparent'}
+        ${isOver ? 'bg-green-400' : 'bg-transparent'}
       `}
       style={style}
       ref={setNodeRef}

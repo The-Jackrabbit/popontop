@@ -5,7 +5,7 @@ import { ALBUM_RESULTS } from '../../../constants/test-data/search-results';
 import { useState } from 'react';
 
 // thanks chat gpt :)
-function randomIntegerInRange(min: number, max: number): number {
+export function randomIntegerInRange(min: number, max: number): number {
   // Generate a random number in the range [min, max]
   const randomNumber = Math.random() * (max - min + 1) + min;
 

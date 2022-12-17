@@ -4,6 +4,7 @@ import { useSize } from '../../lib/Grid/Grid';
 export interface Props {
   backgroundColor: string;
   isReadonly: boolean;
+  listTwo: React.ReactNode;
   title: React.ReactNode;
   chart: (size: DOMRect) => JSX.Element | null;
   list: React.ReactNode;
@@ -13,6 +14,7 @@ export interface Props {
 const Layout: React.FC<Props> = ({
   // backgroundColor,
   isReadonly,
+  listTwo,
   title,
   chart,
   list,
@@ -23,13 +25,12 @@ const Layout: React.FC<Props> = ({
   return (
     <div className="flex h-full flex-row justify-between">
       <div className="relative flex w-full flex-col items-center px-4">
-        {title}
+        <div className="min-h-min w-full">{title}</div>
         <div ref={setTarget} className="w-full basis-full">
           {size ? chart(size) : null}
         </div>
+        <div>{listTwo}</div>
       </div>
-
-      {list}
       <div
         className="
           flex flex-col justify-between

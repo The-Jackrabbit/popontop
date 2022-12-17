@@ -3,14 +3,12 @@ import { a, SpringValue } from 'react-spring';
 import { ChartHookNode } from '../../../frontend/hooks/use-chart/use-chart';
 import Title from '../../lib/Title/Title';
 import DesktopActions from './Actions/DesktopActions';
-import ChartList from './ChartList/ChartList';
 import DesktopChart from './DesktopChart/DesktopChart';
 import Layout from './Layout';
 
 export interface Props {
   chart: ChartHookNode;
   isLoading: boolean;
-  listStyles: { width: SpringValue<string> };
   readonly?: boolean;
   titleStyle: { height: SpringValue<string> };
 }
@@ -18,9 +16,8 @@ export interface Props {
 const DesktopEditor: React.FC<Props> = ({
   chart,
   isLoading,
-  listStyles,
-  titleStyle,
   readonly = false,
+  titleStyle,
 }) => {
   return (
     <Layout
@@ -31,12 +28,21 @@ const DesktopEditor: React.FC<Props> = ({
           <Title
             chartTitle={chart.state.chartTitle}
             isReadOnly={false}
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            setValue={(_val: string) => undefined}
+            setValue={chart.actions.setChartTitle}
             showIntroduction={!true}
             textColor="black"
           />
         </a.div>
+      }
+      listTwo={
+        <ol className="list-decimal text-sm" style={{ columnCount: 3 }}>
+          {[...new Array(100)].map((_, index) => (
+            <li key={index + 'album-list'} className="text-xs">
+              {chart.childrenNodes?.list?.state[index]?.artist} -{' '}
+              {chart.childrenNodes?.list?.state[index]?.name}
+            </li>
+          ))}
+        </ol>
       }
       chart={(size: DOMRect) =>
         // TODO : Implement beginning instructions for desktop
@@ -53,13 +59,7 @@ const DesktopEditor: React.FC<Props> = ({
           />
         ) : null
       }
-      list={
-        <ChartList
-          listStyles={listStyles}
-          containers={chart.childrenNodes.list.state ?? []}
-          textColor={chart.childrenNodes.settings.state.textColor}
-        />
-      }
+      list={null}
       actions={
         <DesktopActions
           isLoading={isLoading}
