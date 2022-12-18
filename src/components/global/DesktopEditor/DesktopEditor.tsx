@@ -3,6 +3,7 @@ import { a, SpringValue } from 'react-spring';
 import { ChartHookNode } from '../../../frontend/hooks/use-chart/use-chart';
 import Title from '../../lib/Title/Title';
 import DesktopActions from './Actions/DesktopActions';
+import ChartListV2 from './ChartListV2/ChartListV2';
 import DesktopChart from './DesktopChart/DesktopChart';
 import Layout from './Layout';
 
@@ -35,14 +36,7 @@ const DesktopEditor: React.FC<Props> = ({
         </a.div>
       }
       listTwo={
-        <ol className="list-decimal text-sm" style={{ columnCount: 3 }}>
-          {[...new Array(100)].map((_, index) => (
-            <li key={index + 'album-list'} className="text-xs">
-              {chart.childrenNodes?.list?.state[index]?.artist} -{' '}
-              {chart.childrenNodes?.list?.state[index]?.name}
-            </li>
-          ))}
-        </ol>
+        <ChartListV2 columnCount={3} list={chart.childrenNodes.list.state} />
       }
       chart={(size: DOMRect) =>
         // TODO : Implement beginning instructions for desktop
@@ -59,7 +53,6 @@ const DesktopEditor: React.FC<Props> = ({
           />
         ) : null
       }
-      list={null}
       actions={
         <DesktopActions
           isLoading={isLoading}

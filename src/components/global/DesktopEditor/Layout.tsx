@@ -2,23 +2,21 @@ import React, { useState } from 'react';
 import { useSize } from '../../lib/Grid/Grid';
 
 export interface Props {
+  actions: React.ReactNode;
   backgroundColor: string;
+  chart: (size: DOMRect) => JSX.Element | null;
   isReadonly: boolean;
   listTwo: React.ReactNode;
   title: React.ReactNode;
-  chart: (size: DOMRect) => JSX.Element | null;
-  list: React.ReactNode;
-  actions: React.ReactNode;
 }
 
 const Layout: React.FC<Props> = ({
+  actions,
   // backgroundColor,
+  chart,
   isReadonly,
   listTwo,
   title,
-  chart,
-  list,
-  actions,
 }) => {
   const [target, setTarget] = useState<HTMLDivElement | null>(null);
   const size = useSize(target);
@@ -29,10 +27,11 @@ const Layout: React.FC<Props> = ({
         <div ref={setTarget} className="w-full basis-full">
           {size ? chart(size) : null}
         </div>
-        <div>{listTwo}</div>
+        <div className="h-min">{listTwo}</div>
       </div>
       <div
         className="
+
           flex flex-col justify-between
           border-l-2 border-neutral-300 pl-4
           dark:border-neutral-800

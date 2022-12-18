@@ -11,9 +11,8 @@ export const Layout: React.FC<Props> = ({ toggleButton, title }) => (
       items-center
       justify-between overflow-hidden rounded-lg 
       bg-white
-      py-4
-      px-4 shadow-lg
-      dark:bg-[#0a0a0a] dark:shadow-neutral-800 sm:px-4 
+      p-4 shadow-lg
+      dark:bg-[#0a0a0a] dark:shadow-neutral-800 
     "
   >
     <div

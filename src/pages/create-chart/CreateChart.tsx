@@ -43,7 +43,6 @@ const CreateChart: NextPage = () => {
         <a.div style={pageOpacity} className="h-full">
           <DesktopEditor
             chart={chart}
-            listStyles={state.listStyle}
             isLoading={chart.state.isCreateLoading}
             titleStyle={state.titleStyle}
           />

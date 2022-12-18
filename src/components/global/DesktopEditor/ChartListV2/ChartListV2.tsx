@@ -1,34 +1,38 @@
-import React from "react";
-import { Album } from "../../../../styles/types/Albums";
+import React from 'react';
+import { Album } from '../../../../styles/types/Albums';
+import ListColumn from './ListColumn/ListColumn';
 
 export interface Props {
-  columnCount?: number;
+  columnCount: number;
   list: Album[];
 }
 
-const ChartListV2: React.FC<Props> = ({ columnCount = 3, list }) => {
+const ChartListV2: React.FC<Props> = ({ columnCount, list }) => {
+  const getStartIndexOfColumn = (columnIndex: number, listLength: number) => {
+    const lengthOfColumn = Math.floor(listLength / columnCount);
+    return lengthOfColumn * columnIndex;
+  };
+  const getEndIndexOfColumn = (columnIndex: number, listLength: number) => {
+    return getStartIndexOfColumn(columnIndex + 1, listLength) - 1;
+  };
   return (
     <div
       className="
-        oveflow-x-hidden // 
-        <-
-        this
-        is to
-        make sure the numbers on the leftmost row show up in the contianer TODO: find more elegant fix list-decimal text-ellipsis whitespace-nowrap pl-6 text-xs dark:text-neutral-50
+        oveflow-x-hidden
+        flex
+        text-ellipsis whitespace-nowrap text-[9px] dark:text-neutral-50
       "
       role="list"
     >
-      {[...new Array(100)].map((_, index) => (
-        <div
-          className="
-            w-14 overflow-hidden text-ellipsis leading-tight
-            sm:w-24 md:w-64 lg:w-72
-          "
-          key={index + "album-list"}
-          role="listitem"
-        >
-          {list[index]?.artist} - {list[index]?.name}
-        </div>
+      {[...new Array(columnCount)].map((_, index) => (
+        <ListColumn
+          key={index + 'list-column'}
+          list={list.slice(
+            getStartIndexOfColumn(index, list.length),
+            getEndIndexOfColumn(index, list.length) + 1
+          )}
+          startIndexOfColumn={getStartIndexOfColumn(index, list.length) + 1}
+        />
       ))}
     </div>
   );

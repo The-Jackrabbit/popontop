@@ -47,9 +47,7 @@ const Grid: React.FC<Props> = ({
       className={`
         ${preview ? 'scale-95' : ''}
         flex items-stretch justify-center
-        overflow-x-hidden
-        overflow-y-hidden border-2
-        border-neutral-800 align-middle
+        overflow-hidden align-middle
       `}
     >
       {emptyColumns.map((_, y) => (
