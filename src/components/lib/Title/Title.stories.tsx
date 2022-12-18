@@ -19,7 +19,6 @@ export default {
       defaultViewport: 'iphonex',
     },
   },
-
 } as ComponentMeta<typeof Title>;
 
 const DESKTOP_PARAMETERS = {
@@ -33,20 +32,16 @@ export const Mobile: ComponentStory<typeof Title> = (args) => {
 
   return (
     <div className="m-4">
-      <Title
-        {...args}
-        chartTitle={value}
-        setValue={setValue}
-      />
+      <Title {...args} chartTitle={value} setValue={setValue} />
     </div>
-  )
-}
+  );
+};
 
 export const VariantsDesktop: ComponentStory<typeof Title> = () => {
   const [value, setValue] = useState('My storybook title');
   return (
     <div className="m-4">
-      <p className="text-3xl my-4">view</p>
+      <p className="my-4 text-3xl">view</p>
       <Title
         isReadOnly={false}
         textColor="black"
@@ -54,7 +49,7 @@ export const VariantsDesktop: ComponentStory<typeof Title> = () => {
         chartTitle={value}
         setValue={setValue}
       />
-      <p className="text-3xl my-4">readonly</p>
+      <p className="my-4 text-3xl">readonly</p>
       <Title
         isReadOnly={true}
         textColor="black"
@@ -62,7 +57,7 @@ export const VariantsDesktop: ComponentStory<typeof Title> = () => {
         chartTitle={value}
         setValue={setValue}
       />
-      <p className="text-3xl my-4">editing</p>
+      <p className="my-4 text-3xl">editing</p>
       <Title
         isActiveByDefault={true}
         isReadOnly={false}
@@ -71,7 +66,7 @@ export const VariantsDesktop: ComponentStory<typeof Title> = () => {
         chartTitle={value}
         setValue={setValue}
       />
-      <p className="text-3xl my-4">loading</p>
+      <p className="my-4 text-3xl">loading</p>
       <Title
         isLoading={true}
         isReadOnly={false}
@@ -81,11 +76,11 @@ export const VariantsDesktop: ComponentStory<typeof Title> = () => {
         setValue={setValue}
       />
     </div>
-  )
-}
+  );
+};
 
-VariantsDesktop.parameters = DESKTOP_PARAMETERS; 
+VariantsDesktop.parameters = DESKTOP_PARAMETERS;
 
-export const Desktop: ComponentStory<typeof Title> = Mobile.bind({}); 
+export const Desktop: ComponentStory<typeof Title> = Mobile.bind({});
 
-Desktop.parameters = DESKTOP_PARAMETERS; 
+Desktop.parameters = DESKTOP_PARAMETERS;

@@ -1,28 +1,28 @@
-import { trpc } from "../../../../../utils/trpc";
-import DesktopChart from "../../../DesktopEditor/DesktopChart/DesktopChart";
-import Title from "../../../../lib/Title/Title";
-import { Layout } from "./Layout";
-import { Loader } from "./Loader";
-
+import { trpc } from '../../../../../utils/trpc';
+import DesktopChart from '../../../DesktopEditor/DesktopChart/DesktopChart';
+import Title from '../../../../lib/Title/Title';
+import { Layout } from './Layout';
+import { Loader } from './Loader';
 
 export interface Props {
   chartUuid: string;
 }
 
-export const ViewChart: React.FC<Props> = ({
-  chartUuid,
-}) => {
-  const { data: chart, isLoading } = trpc.charts.getById.useQuery({ uuid: chartUuid }, {
-    enabled: true, // disable this query from automatically running
-    refetchOnWindowFocus: false,
-  });
+export const ViewChart: React.FC<Props> = ({ chartUuid }) => {
+  const { data: chart, isLoading } = trpc.charts.getById.useQuery(
+    { uuid: chartUuid },
+    {
+      enabled: true, // disable this query from automatically running
+      refetchOnWindowFocus: false,
+    }
+  );
 
   if (isLoading) {
     return <Loader />;
   }
 
   if (!chart) {
-    return <div>not found</div>
+    return <div>not found</div>;
   }
 
   return (
@@ -36,7 +36,7 @@ export const ViewChart: React.FC<Props> = ({
           textColor="black"
         />
       }
-      chart={(size: DOMRect) =>
+      chart={(size: DOMRect) => (
         <DesktopChart
           size={size}
           isReadOnly={chart.isReadOnly}
@@ -45,9 +45,9 @@ export const ViewChart: React.FC<Props> = ({
           items={chart.albums ?? []}
           backgroundColor={chart?.settings?.background_color ?? ''}
           borderColor={chart?.settings?.border_color ?? ''}
-          borderSize={ 1}
+          borderSize={1}
         />
-      }
+      )}
     />
-  )
-}
+  );
+};

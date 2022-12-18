@@ -1,5 +1,5 @@
-import { Album } from "../../../../../../styles/types/Albums";
-import Draggable from "../../../DragNDrop/Draggable/Draggable";
+import { Album } from '../../../../../../styles/types/Albums';
+import Draggable from '../../../DragNDrop/Draggable/Draggable';
 import Image from 'next/image';
 
 export interface Props {
@@ -7,7 +7,8 @@ export interface Props {
   className?: string;
   index: number;
 }
-export const DEFAULT_CLASSNAME = 'cursor-grab basis-[calc(50%_-_4rem)] p-4 bg-black rounded-xl';
+export const DEFAULT_CLASSNAME =
+  'cursor-grab basis-[calc(50%_-_4rem)] p-4 bg-black rounded-xl';
 
 export const Result: React.FC<Props> = ({
   album,
@@ -29,4 +30,4 @@ export const Result: React.FC<Props> = ({
       />
     </Draggable>
   );
-}
+};

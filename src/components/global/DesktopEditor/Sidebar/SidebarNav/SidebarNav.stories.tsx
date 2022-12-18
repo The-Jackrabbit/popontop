@@ -12,10 +12,9 @@ export default {
 } as ComponentMeta<typeof SidebarNav>;
 
 export const Desktop: ComponentStory<typeof SidebarNav> = (args) => {
-
   return (
     <div className="m-4 mt-[400px] mr-[200px] w-[300px]">
-      <SidebarNav {...args}  />
+      <SidebarNav {...args} />
     </div>
-  )
-}
+  );
+};

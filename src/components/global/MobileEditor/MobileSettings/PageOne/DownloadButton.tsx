@@ -11,9 +11,10 @@ const DownloadButton: React.FC = () => {
         return;
       }
 
-      htmlToImage.toPng(chart, {
-        cacheBust: true,
-      })
+      htmlToImage
+        .toPng(chart, {
+          cacheBust: true,
+        })
         .then(function (dataUrl) {
           const img = new Image();
           img.src = dataUrl;
@@ -27,14 +28,9 @@ const DownloadButton: React.FC = () => {
           console.error('oops, something went wrong!', error);
         });
     }
-  }
+  };
 
-  return (
-    <Button  onClick={() => downloadChart()}>
-      Download chart
-    </Button>
-  );
+  return <Button onClick={() => downloadChart()}>Download chart</Button>;
 };
-
 
 export default DownloadButton;

@@ -15,7 +15,11 @@ export const Template: ComponentStory<typeof Slider> = (args) => {
   const [value, setValue] = useState('0');
   return (
     <div className="m-4">
-      <Slider {...args}  onChange={(event) => setValue(event.target.value)} value={value} />
+      <Slider
+        {...args}
+        onChange={(event) => setValue(event.target.value)}
+        value={value}
+      />
     </div>
-  )
-}
+  );
+};

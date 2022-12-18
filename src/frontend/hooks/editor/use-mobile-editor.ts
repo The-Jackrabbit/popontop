@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { ListRowMode } from "../../../components/lib/Mobile/ListRow/ListRow";
-import { useDragSheetDown } from "../springs/use-drag-sheet-down";
+import { useState } from 'react';
+import { ListRowMode } from '../../../components/lib/Mobile/ListRow/ListRow';
+import { useDragSheetDown } from '../springs/use-drag-sheet-down';
 
 const height = 667;
 
@@ -9,7 +9,7 @@ export const useMobileEditor = (
 ) => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [isActive, setIsActive] = useState(true); 
+  const [isActive, setIsActive] = useState(true);
   const [listMode, setListMode] = useState<ListRowMode>(ListRowMode.NORMAL);
   const [isViewModeActive, setIsViewModeActive] = useState(false);
   const sheet = useDragSheetDown(height, () => {
@@ -19,7 +19,7 @@ export const useMobileEditor = (
     transitionFromInstructionToTitle();
   });
 
-  const onClickSheetDeadArea = () => isSheetOpen ? close() : undefined;
+  const onClickSheetDeadArea = () => (isSheetOpen ? close() : undefined);
 
   const onClickSettings = () => {
     setIsSettingsOpen(true);
@@ -31,22 +31,22 @@ export const useMobileEditor = (
     sheet.open({ canceled: false });
   };
 
-  const onClickView = () =>{
+  const onClickView = () => {
     setIsViewModeActive(!isViewModeActive);
     sheet.open({ canceled: false });
   };
 
-  const onClickRearrangeMode = () => setListMode(
-    (listMode) => listMode !== ListRowMode.REARRANGE
-      ? ListRowMode.REARRANGE
-      : ListRowMode.NORMAL
+  const onClickRearrangeMode = () =>
+    setListMode((listMode) =>
+      listMode !== ListRowMode.REARRANGE
+        ? ListRowMode.REARRANGE
+        : ListRowMode.NORMAL
     );
 
-  const onClickDeleteMode = () => setListMode(
-    (listMode) => listMode !== ListRowMode.DELETE
-      ? ListRowMode.DELETE
-      : ListRowMode.NORMAL
-  );
+  const onClickDeleteMode = () =>
+    setListMode((listMode) =>
+      listMode !== ListRowMode.DELETE ? ListRowMode.DELETE : ListRowMode.NORMAL
+    );
 
   const openSearchView = () => {
     setIsSearchOpen(true);

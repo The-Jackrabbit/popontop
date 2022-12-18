@@ -1,5 +1,5 @@
-import { useSpring, SpringValue } from '@react-spring/web'
-import { useState } from "react";
+import { useSpring, SpringValue } from '@react-spring/web';
+import { useState } from 'react';
 
 export interface Props {
   isInitiallyVisible?: boolean;
@@ -18,17 +18,20 @@ export const useRowSlideInAndOut = ({
   toggleRowVisibility: () => void;
 } => {
   const [isVisible, setIsVisible] = useState(isInitiallyVisible);
-  const [rowHeightStyle, animateRowHeight] = useSpring(() => ({
-    height: isVisible ? '64px' : '0px',
-    padding: isVisible ? '0.5rem 0.5rem' : '0rem 0.5rem',
-    width: isVisible ? '100%' : initialWidth,
-  }), []);
+  const [rowHeightStyle, animateRowHeight] = useSpring(
+    () => ({
+      height: isVisible ? '64px' : '0px',
+      padding: isVisible ? '0.5rem 0.5rem' : '0rem 0.5rem',
+      width: isVisible ? '100%' : initialWidth,
+    }),
+    []
+  );
 
   const toggleRowVisibility = () => {
     setIsVisible((isVisible) => !isVisible);
     animateRowHeight.start({
       height: !isVisible ? '64px' : '0px',
-      padding: !isVisible ?  '0.5rem 0.5rem' : '0rem 0.5rem',
+      padding: !isVisible ? '0.5rem 0.5rem' : '0rem 0.5rem',
       width: !isVisible ? '100%' : initialWidth,
     });
   };
@@ -37,5 +40,4 @@ export const useRowSlideInAndOut = ({
     rowHeightStyle,
     toggleRowVisibility,
   };
-}
-
+};

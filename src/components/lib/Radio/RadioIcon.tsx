@@ -1,12 +1,12 @@
-import NavDot, { Color } from "../../global/DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot";
+import NavDot, {
+  Color,
+} from '../../global/DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
 
 export interface Props {
   variant: boolean | null;
 }
 
-export const RadioIcon: React.FC<Props> = ({
-  variant,
-}) => (
+export const RadioIcon: React.FC<Props> = ({ variant }) => (
   <>
     {variant == null ? (
       <>
@@ -24,7 +24,7 @@ export const RadioIcon: React.FC<Props> = ({
           isActive={true}
           onClick={() => true}
           color={Color.rose}
-          />
+        />
       </>
     ) : null}
     {variant === false ? (
@@ -46,6 +46,6 @@ export const RadioIcon: React.FC<Props> = ({
       />
     ) : null}
   </>
-)
+);
 
 export default RadioIcon;

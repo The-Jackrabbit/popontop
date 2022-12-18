@@ -1,9 +1,7 @@
-import type { NextPage } from "next";
+import type { NextPage } from 'next';
 
 const Charts: NextPage = () => {
-  return (
-    <div>hello</div>
-  );
+  return <div>hello</div>;
 };
 
 export default Charts;

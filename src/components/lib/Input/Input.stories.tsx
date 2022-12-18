@@ -15,7 +15,11 @@ export const Template: ComponentStory<typeof Input> = (args) => {
   const [value, setValue] = useState('');
   return (
     <div className="m-4">
-      <Input {...args}  onChange={(event) => setValue(event.target.value)} value={value} />
+      <Input
+        {...args}
+        onChange={(event) => setValue(event.target.value)}
+        value={value}
+      />
     </div>
-  )
-}
+  );
+};

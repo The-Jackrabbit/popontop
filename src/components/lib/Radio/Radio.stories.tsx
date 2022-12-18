@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import {  ComponentMeta } from '@storybook/react';
+import { ComponentMeta } from '@storybook/react';
 import Radio from './Radio';
 
 export default {
-  args: {
-
-  },
+  args: {},
   title: 'lib/Radio',
   component: Radio,
   parameters: {
@@ -19,10 +17,7 @@ export const Boolean: React.FC = ({}) => {
 
   return (
     <div className="m-4 max-w-[220px]">
-      <Radio
-        value={value}
-        onClick={(value: boolean) => setValue(value)}
-      />
+      <Radio value={value} onClick={(value: boolean) => setValue(value)} />
     </div>
-  )
-}
+  );
+};

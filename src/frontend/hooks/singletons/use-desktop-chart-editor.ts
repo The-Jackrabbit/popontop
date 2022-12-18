@@ -1,16 +1,19 @@
-import { DragEndEvent } from "@dnd-kit/core";
-import { ChartSettings } from "@prisma/client";
-import { SpringValue } from "react-spring";
-import { Album } from "../../../styles/types/Albums";
-import { ParentHookNode } from "../hook-node";
-import { useDesktopAlbumsTextList } from "../springs/use-desktop-albums-text-list";
-import useDesktopTitle from "../springs/use-desktop-title";
-import useChart, { ChartHookNode } from "../use-chart/use-chart";
+import { DragEndEvent } from '@dnd-kit/core';
+import { ChartSettings } from '@prisma/client';
+import { SpringValue } from 'react-spring';
+import { Album } from '../../../styles/types/Albums';
+import { ParentHookNode } from '../hook-node';
+import { useDesktopAlbumsTextList } from '../springs/use-desktop-albums-text-list';
+import useDesktopTitle from '../springs/use-desktop-title';
+import useChart, { ChartHookNode } from '../use-chart/use-chart';
 
-export type DesktopChartEditorHookNode = ParentHookNode<State, Actions, {
-  chart: ChartHookNode;
-}
->
+export type DesktopChartEditorHookNode = ParentHookNode<
+  State,
+  Actions,
+  {
+    chart: ChartHookNode;
+  }
+>;
 export type Actions = void;
 
 export type State = void;
@@ -44,7 +47,7 @@ export const useDesktopChartEditor = ({
   return {
     actions: {
       toggleAlbums,
-      toggleTitle, 
+      toggleTitle,
     },
     childrenNodes: {
       chart,
@@ -52,8 +55,8 @@ export const useDesktopChartEditor = ({
     state: {
       listStyle,
       titleStyle,
-    } 
-  }
+    },
+  };
 };
 
 export default useDesktopChartEditor;
@@ -87,7 +90,6 @@ export interface Settings {
   data: SettingsData;
 }
 
-
 export interface ChartActions {
   save: () => void;
   handleDragEnd: (event: DragEndEvent) => void;
@@ -103,7 +105,7 @@ export interface DraggedAlbum {
 
 export interface ChartData {
   chartTitle: string;
-  entries?: Album[],
+  entries?: Album[];
   savedChartId: string | null;
 }
 
@@ -115,7 +117,7 @@ export interface Chart {
 
 export interface ChartState {
   chart: Chart;
-  listStyles: { width: SpringValue<string>; };
+  listStyles: { width: SpringValue<string> };
   isLoading: boolean;
-  titleStyle: { height: SpringValue<string>; };
+  titleStyle: { height: SpringValue<string> };
 }

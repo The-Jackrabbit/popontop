@@ -12,10 +12,9 @@ export default {
 } as ComponentMeta<typeof Button>;
 
 export const Primary: ComponentStory<typeof Button> = () => {
-   return (
-   <div className="m-8">
-    <Button onClick={() => undefined}>Click me</Button>
-  </div>
-   )
-}
-
+  return (
+    <div className="m-8">
+      <Button onClick={() => undefined}>Click me</Button>
+    </div>
+  );
+};

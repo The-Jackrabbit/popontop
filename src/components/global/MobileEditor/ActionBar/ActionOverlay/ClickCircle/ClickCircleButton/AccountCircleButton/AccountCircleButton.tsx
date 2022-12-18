@@ -1,17 +1,17 @@
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from 'next-auth/react';
 import {
   ArrowRightOnRectangleIcon,
   UserCircleIcon,
 } from '@heroicons/react/24/solid';
-import ClickCircleButton, { CLICK_CIRCLE_STYLE } from "../ClickCircleButton";
+import ClickCircleButton, { CLICK_CIRCLE_STYLE } from '../ClickCircleButton';
 
 export const AccountCircleButton: React.FC = () => {
   const { data: sessionData } = useSession();
 
   const onClickLogin = () => {
-    sessionData ?  signOut() : signIn('google');
+    sessionData ? signOut() : signIn('google');
   };
-  
+
   return (
     <ClickCircleButton
       icon={
@@ -22,7 +22,7 @@ export const AccountCircleButton: React.FC = () => {
         )
       }
       isLoading={false}
-      label={!sessionData ? "log in" : "sign out"}
+      label={!sessionData ? 'log in' : 'sign out'}
       onClick={onClickLogin}
     />
   );

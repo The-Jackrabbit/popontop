@@ -2,7 +2,10 @@ import { ChangeEvent, useState } from 'react';
 
 export interface UsePillListState<T> {
   pillValues: T[];
-  onTypeForInputAtIndex: (event: ChangeEvent<HTMLInputElement>, index: number) => void;
+  onTypeForInputAtIndex: (
+    event: ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => void;
   toggleVisibilityOfInputAtIndex: (index: number) => void;
   visibilityMap: boolean[];
 }
@@ -19,8 +22,9 @@ export function usePillList<T>({
   setterFunctions,
 }: UsePillListProps<T>) {
   const [pillValues, setPillValues] = useState<T[]>(initialValues);
-  const [visibilityMap, setVisibilityMap] = useState<boolean[]>(initialVisibiltyMap);
- 
+  const [visibilityMap, setVisibilityMap] =
+    useState<boolean[]>(initialVisibiltyMap);
+
   const toggleVisibilityOfInputAtIndex = (index: number) => {
     setVisibilityMap((oldVisibilityMap) => {
       const newVisibilityMap = [...oldVisibilityMap];
@@ -38,18 +42,21 @@ export function usePillList<T>({
       }
       return newVisibilityMap;
     });
-  }
-  const onTypeForInputAtIndex = (event: ChangeEvent<HTMLInputElement>, index: number) => {
+  };
+  const onTypeForInputAtIndex = (
+    event: ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
     const updateFunction = setterFunctions[index];
     if (updateFunction) {
-      updateFunction(event.target.value  as T);
+      updateFunction(event.target.value as T);
     }
     setPillValues((oldPillValues) => {
       const newPillValues = [...oldPillValues];
       newPillValues[index] = event.target.value as T;
       return newPillValues;
     });
-  }
+  };
 
   return {
     onTypeForInputAtIndex,

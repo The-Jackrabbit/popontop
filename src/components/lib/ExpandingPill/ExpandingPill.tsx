@@ -25,42 +25,44 @@ export const ExpandingPill: React.FC<Props> = ({
   } = useExpandingPill({
     isOpenByDefault,
     onExpand: () => toggleVisibility(),
-    onMinimize: () =>  toggleVisibility(),
+    onMinimize: () => toggleVisibility(),
   });
   const {
     onMouseLeave,
     onMouseOver: onMouseEnter,
     zoomOnHoverStyle,
   } = useZoomOnHover();
-  const mouseActions = isActive ? {} : {
-    onMouseLeave,
-    onMouseEnter,
-  };
+  const mouseActions = isActive
+    ? {}
+    : {
+        onMouseLeave,
+        onMouseEnter,
+      };
   return (
     <a.div
       className={`
         ${className}
-        h-max max-w-full
+        inline-flex h-max
         w-full 
-        cursor-pointer
-        bg-white dark:bg-black
-        px-2 py-1
-        rounded-lg
-        text-xs
-        shadow-lg dark:shadow-sm dark:shadow-neutral-800
-        inline-flex flex-col
+        max-w-full
+        cursor-pointer flex-col
+        rounded-lg bg-white
+        px-2
+        py-1
+        text-xs shadow-lg dark:bg-black
+        dark:shadow-sm dark:shadow-neutral-800
       `}
       {...mouseActions}
       style={{
-        ...borderRadiusStyle, 
+        ...borderRadiusStyle,
         ...zoomOnHoverStyle,
         // display: isActive ? 'flex' : 'inline-flex',
       }}
     >
       <div
-        className="flex-nowrap flex justify-between content-center items-center px-2"
+        className="flex flex-nowrap content-center items-center justify-between px-2"
         onClick={() => {
-          togglePill(isActive)
+          togglePill(isActive);
           onMouseLeave();
         }}
       >
@@ -81,7 +83,7 @@ export const ExpandingPill: React.FC<Props> = ({
         {children[2]}
       </a.div>
     </a.div>
-  )
-}
+  );
+};
 
 export default ExpandingPill;

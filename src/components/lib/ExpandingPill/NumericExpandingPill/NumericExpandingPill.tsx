@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { useSpring, a } from "react-spring";
-import Slider from "../../Slider/Slider";
-import ExpandingPill from "../ExpandingPill";
+import { useState } from 'react';
+import { useSpring, a } from 'react-spring';
+import Slider from '../../Slider/Slider';
+import ExpandingPill from '../ExpandingPill';
 
 export interface Props {
   className?: string;
@@ -35,13 +35,12 @@ export const NumericExpandingPill: React.FC<Props> = ({
       <div className="">
         <a.div>
           {!isExpanded
-            ? animateValueChange.val.to(val => Math.floor(val))
-            : value
-          }
+            ? animateValueChange.val.to((val) => Math.floor(val))
+            : value}
         </a.div>
       </div>
       <Slider
-        className="h-10 flex "
+        className="flex h-10 "
         max={max}
         min={min}
         onChange={(e) => setValue(parseInt(e.target.value))}
@@ -49,7 +48,7 @@ export const NumericExpandingPill: React.FC<Props> = ({
         value={value.toString()}
       />
     </ExpandingPill>
-  )
-}
+  );
+};
 
 export default NumericExpandingPill;

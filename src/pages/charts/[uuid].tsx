@@ -1,15 +1,15 @@
-import { ChartSettings } from "@prisma/client";
-import type { NextPage } from "next";
-import { useRouter } from "next/router";
-import { a } from "react-spring";
-import DesktopEditor from "../../components/global/DesktopEditor/DesktopEditor";
-import SidebarNav from "../../components/global/DesktopEditor/Sidebar/SidebarNav/SidebarNav";
-import { usePageFadeIn } from "../../frontend/hooks/springs/use-page-fade-in";
-import { Album } from "../../styles/types/Albums";
-import { trpc } from "../../utils/trpc";
-import Layout from "../create-chart/Layout";
-import { genUuid } from "../mobile/charts/[uuid]";
-import useDesktopChartEditor from "../../frontend/hooks/singletons/use-desktop-chart-editor";
+import { ChartSettings } from '@prisma/client';
+import type { NextPage } from 'next';
+import { useRouter } from 'next/router';
+import { a } from 'react-spring';
+import DesktopEditor from '../../components/global/DesktopEditor/DesktopEditor';
+import SidebarNav from '../../components/global/DesktopEditor/Sidebar/SidebarNav/SidebarNav';
+import { usePageFadeIn } from '../../frontend/hooks/springs/use-page-fade-in';
+import { Album } from '../../styles/types/Albums';
+import { trpc } from '../../utils/trpc';
+import Layout from '../create-chart/Layout';
+import { genUuid } from '../mobile/charts/[uuid]';
+import useDesktopChartEditor from '../../frontend/hooks/singletons/use-desktop-chart-editor';
 
 const ApiWrapper: NextPage = () => {
   const router = useRouter();
@@ -17,11 +17,15 @@ const ApiWrapper: NextPage = () => {
 
   const n = genUuid(uuid);
 
-  const { data } = trpc.charts.getById.useQuery({ uuid: n }, {
-    enabled: true, // disable this query from automatically running
-  });
+  const { data } = trpc.charts.getById.useQuery(
+    { uuid: n },
+    {
+      enabled: true, // disable this query from automatically running
+    }
+  );
 
-  const isDoneLoading = data && data?.albums?.length > 0 && data.name && data.settings;
+  const isDoneLoading =
+    data && data?.albums?.length > 0 && data.name && data.settings;
 
   if (!isDoneLoading) {
     return null;
@@ -33,34 +37,31 @@ const ApiWrapper: NextPage = () => {
       chartName={data.name}
       settings={data.settings}
     />
-  )
+  );
 };
 
 const Chart = ({
   albums,
   chartName,
   settings,
-}: { 
+}: {
   albums: Album[];
   chartName: string;
   settings: ChartSettings | null;
 }) => {
+  const { pageOpacity } = usePageFadeIn();
   const {
-    pageOpacity,
-  } = usePageFadeIn();
-  const { childrenNodes: { chart }, state } = useDesktopChartEditor({
+    childrenNodes: { chart },
+    state,
+  } = useDesktopChartEditor({
     initialList: albums,
     chartName,
-    defaultSettings: settings, 
+    defaultSettings: settings,
   });
-  
+
   return (
     <Layout>
-      <a.div
-        style={pageOpacity}
-        className="overflow-x-visible h-full"
-      >
-      </a.div>
+      <a.div style={pageOpacity} className="h-full overflow-x-visible"></a.div>
       <SidebarNav />
       <a.div style={pageOpacity} className="h-full">
         <DesktopEditor
@@ -72,7 +73,7 @@ const Chart = ({
         />
       </a.div>
     </Layout>
-  )
+  );
 };
 
 export default ApiWrapper;

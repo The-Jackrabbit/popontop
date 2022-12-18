@@ -11,11 +11,7 @@ export interface Props {
   savedChartId: string | null;
 }
 
-const DesktopActions: React.FC<Props> = ({
-  isLoading,
-  save,
-  savedChartId,
-}) => {
+const DesktopActions: React.FC<Props> = ({ isLoading, save, savedChartId }) => {
   return (
     <>
       <div className="flex flex-col gap-2">
@@ -24,11 +20,11 @@ const DesktopActions: React.FC<Props> = ({
           disabled={isLoading}
           label="Save chart"
           text={
-            !isLoading
-              ? (
-                <CloudArrowUpIcon className={ICON_STYLE} />
-              )
-              : <LoadingBouncer />
+            !isLoading ? (
+              <CloudArrowUpIcon className={ICON_STYLE} />
+            ) : (
+              <LoadingBouncer />
+            )
           }
           variant="primary"
         />
@@ -37,9 +33,7 @@ const DesktopActions: React.FC<Props> = ({
             <ActionButton
               label="View newly saved chart"
               onClick={() => undefined}
-              text={
-                <ArrowRightIcon className={ICON_STYLE} />
-              }
+              text={<ArrowRightIcon className={ICON_STYLE} />}
               variant="regular"
             />
           </Link>

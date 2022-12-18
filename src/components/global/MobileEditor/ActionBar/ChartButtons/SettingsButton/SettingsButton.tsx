@@ -1,5 +1,7 @@
-import { PaintBrushIcon } from "@heroicons/react/20/solid";
-import FilterButton, { ICON_STYLE } from "../../../../../lib/FilterButton/FilterButton";
+import { PaintBrushIcon } from '@heroicons/react/20/solid';
+import FilterButton, {
+  ICON_STYLE,
+} from '../../../../../lib/FilterButton/FilterButton';
 
 export interface Props {
   onClick: () => void;

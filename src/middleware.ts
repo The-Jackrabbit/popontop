@@ -1,5 +1,4 @@
-
-import { NextResponse, userAgent } from 'next/server'
+import { NextResponse, userAgent } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
@@ -8,7 +7,7 @@ export function middleware(request: NextRequest) {
   const ua = userAgent(request);
   const isMobile = getIsMobile(ua.ua);
   if (pathname === '/' && isMobile) {
-    return NextResponse.redirect(new URL('/mobile', request.url))
+    return NextResponse.redirect(new URL('/mobile', request.url));
   }
   return NextResponse.next();
   // return NextResponse.redirect(new URL('/about-2', request.url))
@@ -16,7 +15,6 @@ export function middleware(request: NextRequest) {
 // export const config = {
 //   matcher: ['/'],
 // }
-
 
 export const getIsMobile = (userAgentString: string) => {
   const platforms = [
@@ -39,5 +37,4 @@ export const getIsMobile = (userAgentString: string) => {
   }
 
   return false;
-}
-  
+};

@@ -26,12 +26,7 @@ const Draggable: React.FC<Props> = ({
   id,
   isReadOnly = false,
 }) => {
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform
-  } = useDraggable({
+  const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id,
     data,
   });
@@ -39,15 +34,15 @@ const Draggable: React.FC<Props> = ({
   const draggableButtonProps = isReadOnly
     ? {}
     : {
-      ...listeners,
-      ...attributes,
-      ref: setNodeRef,
-      style: {
-        transform: CSS.Translate.toString(transform),
-      },
-      className: "interactive " + className,
-    };
-  
+        ...listeners,
+        ...attributes,
+        ref: setNodeRef,
+        style: {
+          transform: CSS.Translate.toString(transform),
+        },
+        className: 'interactive ' + className,
+      };
+
   return (
     <button
       {...draggableButtonProps}
@@ -61,6 +56,6 @@ const Draggable: React.FC<Props> = ({
       {children}
     </button>
   );
-}
+};
 
 export default Draggable;

@@ -1,5 +1,5 @@
-import SwitchExpandingPill from "../../../../lib/ExpandingPill/SwitchExpandingPill/SwitchExpandingPill";
-import TextExpandingPill from "../../../../lib/ExpandingPill/TextExpandingPill/TextExpandingPill";
+import SwitchExpandingPill from '../../../../lib/ExpandingPill/SwitchExpandingPill/SwitchExpandingPill';
+import TextExpandingPill from '../../../../lib/ExpandingPill/TextExpandingPill/TextExpandingPill';
 
 export interface Props {
   backgroundColor: string;
@@ -24,7 +24,7 @@ const PageTwo: React.FC<Props> = ({
   setTextColor,
   textColor,
 }) => (
-  <div className="p-4 flex flex-wrap gap-2">
+  <div className="flex flex-wrap gap-2 p-4">
     <TextExpandingPill
       className="inline-block"
       label="text color"
@@ -40,14 +40,14 @@ const PageTwo: React.FC<Props> = ({
     />
 
     <SwitchExpandingPill
-      className="w-[140px] inline-block"
+      className="inline-block w-[140px]"
       label="show title?"
       value={showTitle}
       setValue={(value) => setShowTitle(Boolean(value))}
     />
 
     <SwitchExpandingPill
-      className="w-[160px] inline-block"
+      className="inline-block w-[160px]"
       label="list albums?"
       value={listAlbums}
       setValue={(value) => setListAlbums(Boolean(value))}

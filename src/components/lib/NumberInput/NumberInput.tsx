@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 export interface Props {
   className?: string;
@@ -18,22 +18,14 @@ export const useIncrementer = ({
   initialAmount?: number;
   max?: number;
   min?: number;
-}): [ number, () => void, () => void] => {
+}): [number, () => void, () => void] => {
   const [value, setValue] = useState(initialAmount);
   const onDecrement = () =>
-    value <= min
-      ? undefined
-      : setValue(value - incrementAmount);
+    value <= min ? undefined : setValue(value - incrementAmount);
   const onIncrement = () =>
-    value >= max 
-    ? undefined
-    : setValue(value + incrementAmount); 
+    value >= max ? undefined : setValue(value + incrementAmount);
 
-  return [
-    value,
-    onIncrement,
-    onDecrement,
-  ];
+  return [value, onIncrement, onDecrement];
 };
 
 export const NumberInput: React.FC<Props> = ({
@@ -44,46 +36,44 @@ export const NumberInput: React.FC<Props> = ({
   onIncrement,
 }) => (
   <div className={className}>
-    <div className="text-xs">
-      {label}
-    </div>
+    <div className="text-xs">{label}</div>
     <div
       className="
-        bg-neutral-300
+        flex
         min-w-[150px] max-w-[200px]
-        rounded-full
-        flex flex-row justify-between align-middle content-center
+        flex-row
+        content-center justify-between rounded-full bg-neutral-300 align-middle
       "
     >
-      <button 
+      <button
         className="
-          w-auto
-          bg-neutral-200 dark:bg-neutral-800
-          grow
           mr-[2px]
-          rounded-tl-full rounded-bl-full
+          w-auto grow
+          rounded-tl-full
+          rounded-bl-full
+          bg-neutral-200 dark:bg-neutral-800
         "
         onClick={() => onDecrement()}
       >
         -
       </button>
-      <p 
+      <p
         className="
-          bg-neutral-200 dark:bg-neutral-800
-          shrink-0 w-10
-          grow text-center
+          w-10 shrink-0
+          grow bg-neutral-200
+          text-center dark:bg-neutral-800
         "
       >
         {currentValue}
       </p>
-      <button 
+      <button
         className="
-          bg-neutral-200 dark:bg-neutral-800
-          ml-[2px]
-          rounded-tr-full rounded-br-full
-          w-auto
+          ml-[2px] w-auto
           grow
-        " 
+          rounded-tr-full rounded-br-full
+          bg-neutral-200
+          dark:bg-neutral-800
+        "
         onClick={() => onIncrement()}
       >
         +
@@ -92,4 +82,4 @@ export const NumberInput: React.FC<Props> = ({
   </div>
 );
 
-export default NumberInput; 
+export default NumberInput;

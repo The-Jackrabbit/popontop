@@ -6,7 +6,7 @@ import { Album } from '../../../../styles/types/Albums';
 
 export default {
   args: {
-    mode: 'DELETE'
+    mode: 'DELETE',
   },
   title: 'lib/ListRow',
   component: ListRow,
@@ -21,8 +21,7 @@ export const DeleteView: ComponentStory<typeof ListRow> = () => {
   return (
     <div className="m-4 ">
       <button onClick={() => setIsActive(!isActive)}>toggle</button>
-        { isActive && (
-  
+      {isActive && (
         <ListRow
           album={ALBUM_RESULTS[0] as Album}
           mode={ListRowMode.DELETE}
@@ -35,8 +34,8 @@ export const DeleteView: ComponentStory<typeof ListRow> = () => {
         />
       )}
     </div>
-  )
-}
+  );
+};
 
 export const Multiple: ComponentStory<typeof ListRow> = () => {
   return (
@@ -49,13 +48,13 @@ export const Multiple: ComponentStory<typeof ListRow> = () => {
           index={index}
           showAlbums={true}
           isLastRowInList={index === ALBUM_RESULTS.length - 1}
-          removeSelfFromList={(): void =>  undefined}
+          removeSelfFromList={(): void => undefined}
           textColor={'green'}
         />
       ))}
     </div>
-  )
-}
+  );
+};
 
 export const RearrangeView: ComponentStory<typeof ListRow> = () => {
   return (
@@ -68,13 +67,13 @@ export const RearrangeView: ComponentStory<typeof ListRow> = () => {
           index={index}
           showAlbums={true}
           isLastRowInList={index === ALBUM_RESULTS.length - 1}
-          removeSelfFromList={(): void =>  undefined}
+          removeSelfFromList={(): void => undefined}
           textColor={'green'}
         />
       ))}
     </div>
-  )
-}
+  );
+};
 
 export const SearchView: ComponentStory<typeof ListRow> = () => {
   return (
@@ -87,11 +86,10 @@ export const SearchView: ComponentStory<typeof ListRow> = () => {
           index={index}
           showAlbums={true}
           isLastRowInList={index === ALBUM_RESULTS.length - 1}
-          removeSelfFromList={(): void =>  undefined}
+          removeSelfFromList={(): void => undefined}
           textColor={'green'}
         />
       ))}
     </div>
-  )
-}
-
+  );
+};

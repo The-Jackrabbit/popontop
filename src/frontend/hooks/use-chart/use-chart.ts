@@ -1,15 +1,19 @@
-import { ChartSettings } from "@prisma/client";
-import { useMemo, useState } from "react";
-import { Album } from "../../../styles/types/Albums";
-import { trpc } from "../../../utils/trpc";
-import { ParentHookNode } from "../hook-node";
-import useList, { ListHookNode } from "../lists/use-list";
-import useChartSettings, { SettingsHookNode } from "./use-chart-settings";
+import { ChartSettings } from '@prisma/client';
+import { useMemo, useState } from 'react';
+import { Album } from '../../../styles/types/Albums';
+import { trpc } from '../../../utils/trpc';
+import { ParentHookNode } from '../hook-node';
+import useList, { ListHookNode } from '../lists/use-list';
+import useChartSettings, { SettingsHookNode } from './use-chart-settings';
 
-export type ChartHookNode = ParentHookNode<State, Actions, {
-  list: ListHookNode;
-  settings: SettingsHookNode;
-}>;
+export type ChartHookNode = ParentHookNode<
+  State,
+  Actions,
+  {
+    list: ListHookNode;
+    settings: SettingsHookNode;
+  }
+>;
 
 export interface Props {
   chartUuid?: string;
@@ -20,8 +24,8 @@ export interface Props {
 
 export interface State {
   chartTitle: string;
-  isCreateLoading: boolean; 
-  isEditLoading: boolean; 
+  isCreateLoading: boolean;
+  isEditLoading: boolean;
   savedChartId: string;
 }
 
@@ -35,8 +39,8 @@ export function useChart({
   chartUuid = '',
   initialChartSettings = {} as ChartSettings,
   initialChartTitle = '',
-  initialList = [] ,
-}: Props)  {
+  initialList = [],
+}: Props) {
   const [chartTitle, setChartTitle] = useState(initialChartTitle);
   const settings = useChartSettings(initialChartSettings);
   const list = useList(initialList);
@@ -82,13 +86,16 @@ export function useChart({
     setSavedChartId(savedChartId);
     return savedChartId;
   };
-  const state = useMemo(() => ({
-    chartTitle,
-    isCreateLoading: createMutation.isLoading,
-    isEditLoading: editMutation.isLoading,
-    savedChartId,
-  }), [chartTitle, createMutation.isLoading, editMutation.isLoading, savedChartId]);
-  return { 
+  const state = useMemo(
+    () => ({
+      chartTitle,
+      isCreateLoading: createMutation.isLoading,
+      isEditLoading: editMutation.isLoading,
+      savedChartId,
+    }),
+    [chartTitle, createMutation.isLoading, editMutation.isLoading, savedChartId]
+  );
+  return {
     actions: {
       editChart,
       saveChart,
@@ -97,9 +104,9 @@ export function useChart({
     childrenNodes: {
       list,
       settings,
-    }, 
+    },
     state,
-  }
+  };
 }
 
 export default useChart;

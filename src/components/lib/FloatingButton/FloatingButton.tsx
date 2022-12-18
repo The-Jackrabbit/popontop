@@ -1,4 +1,4 @@
-import { MouseEventHandler } from "react";
+import { MouseEventHandler } from 'react';
 
 export interface Props {
   isAbsolute?: boolean;
@@ -20,9 +20,9 @@ const FloatingButton: React.FC<Props> = ({
     className={`
       ${backgroundColor}
       ${locationOnScreen} ${isAbsolute ? 'absolute' : ''}
-      rounded-full
-      p-3 my-3 shadow-lg
-      bg-white dark:bg-black
+      my-3
+      rounded-full bg-white p-3
+      shadow-lg dark:bg-black
     `}
   >
     <div className="p-1 text-2xl leading-none">{children}</div>

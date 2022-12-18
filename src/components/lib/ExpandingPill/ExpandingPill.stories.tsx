@@ -9,7 +9,7 @@ import SwitchExpandingPill from './SwitchExpandingPill/SwitchExpandingPill';
 
 export default {
   args: {
-    label: 'Border color'
+    label: 'Border color',
   },
   title: 'lib/ExpandingPill',
   component: ExpandingPill,
@@ -27,20 +27,19 @@ export const TextInput: React.FC = ({}) => {
       setValue={setValue}
       value={value}
     />
-  )
-}
+  );
+};
 
 export const SwitchInput: React.FC = () => {
   const [value, setValue] = useState<boolean | null>(null);
   return (
     <SwitchExpandingPill
-      label='show title?'
+      label="show title?"
       setValue={setValue}
       value={value}
     />
   );
-}
-
+};
 
 export const NumericInput: React.FC = () => {
   const [value, setValue] = useState<number>(0);
@@ -54,8 +53,8 @@ export const NumericInput: React.FC = () => {
       setValue={setValue}
       value={value}
     />
-  )
-}
+  );
+};
 
 const INIT_FRUITS: string[] = [
   'peach',
@@ -65,7 +64,7 @@ const INIT_FRUITS: string[] = [
   'orange',
   'apple',
   'mango',
-  'watermelon'
+  'watermelon',
 ];
 
 export const List: ComponentStory<typeof ExpandingPill> = () => {
@@ -80,8 +79,8 @@ export const List: ComponentStory<typeof ExpandingPill> = () => {
   });
   return (
     <div>
-      <div className="gap-1 flex flex-row m-4 w-[300px] flex-wrap items-center ">
-        {pillValues.map(((pill, index) => (
+      <div className="m-4 flex w-[300px] flex-row flex-wrap items-center gap-1 ">
+        {pillValues.map((pill, index) => (
           <ExpandingPill
             className=""
             isActive={visibilityMap[index] ?? false}
@@ -97,13 +96,15 @@ export const List: ComponentStory<typeof ExpandingPill> = () => {
               value={pillValues[0] as string}
             />
           </ExpandingPill>
-        )))}
+        ))}
       </div>
       <div>
         {INIT_FRUITS.map((fruitLabel, index) => (
-          <p key={fruitLabel}>{fruitLabel}: {pillValues[index]}</p>
+          <p key={fruitLabel}>
+            {fruitLabel}: {pillValues[index]}
+          </p>
         ))}
       </div>
     </div>
-  )
-}
+  );
+};

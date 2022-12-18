@@ -1,19 +1,21 @@
-import { ListBulletIcon, PaintBrushIcon } from "@heroicons/react/20/solid";
-import { useRouter } from "next/router";
-import AccountCircleButton from "./ActionOverlay/ClickCircle/ClickCircleButton/AccountCircleButton/AccountCircleButton";
-import ClickCircleButton, { CLICK_CIRCLE_STYLE } from "./ActionOverlay/ClickCircle/ClickCircleButton/ClickCircleButton";
-import ClickCircleLayout from "./ActionOverlay/ClickCircle/ClickCircleLayout";
+import { ListBulletIcon, PaintBrushIcon } from '@heroicons/react/20/solid';
+import { useRouter } from 'next/router';
+import AccountCircleButton from './ActionOverlay/ClickCircle/ClickCircleButton/AccountCircleButton/AccountCircleButton';
+import ClickCircleButton, {
+  CLICK_CIRCLE_STYLE,
+} from './ActionOverlay/ClickCircle/ClickCircleButton/ClickCircleButton';
+import ClickCircleLayout from './ActionOverlay/ClickCircle/ClickCircleLayout';
 
 export const ViewChartClickCircle = () => {
   const router = useRouter();
   const onClickCreateChart = (event: React.BaseSyntheticEvent<MouseEvent>) => {
     event.stopPropagation();
-    router.push('/mobile')
+    router.push('/mobile');
   };
 
   const onClickYourCharts = (event: React.BaseSyntheticEvent<MouseEvent>) => {
     event.stopPropagation();
-    router.push('/mobile/your-charts')
+    router.push('/mobile/your-charts');
   };
 
   return (
@@ -44,8 +46,8 @@ export const ViewChartClickCircle = () => {
           onClick={() => undefined}
         />
       }
-    /> 
+    />
   );
-}
+};
 
 export default ViewChartClickCircle;

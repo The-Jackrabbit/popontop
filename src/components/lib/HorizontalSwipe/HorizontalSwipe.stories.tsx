@@ -12,7 +12,7 @@ export default {
 } as ComponentMeta<typeof HorizontalSwipe>;
 
 export const Template: ComponentStory<typeof HorizontalSwipe> = () => {
-  const a = [1,2,3];
+  const a = [1, 2, 3];
   return (
     <div className="m-4">
       <HorizontalSwipe>
@@ -23,6 +23,5 @@ export const Template: ComponentStory<typeof HorizontalSwipe> = () => {
         ))}
       </HorizontalSwipe>
     </div>
-  )
-}
-
+  );
+};

@@ -28,23 +28,23 @@ export const DesktopChart: React.FC<Props> = ({
   return (
     <Grid
       columns={numberOfColumns}
-      itemComponent={
-        ({ index, x, y }) => (
-          <ChartItem
-            album={items[index] !== undefined ? items[index] as Album : EMPTY_ALBUM}
-            borderColor={borderColor} 
-            borderSize={borderSize}
-            index={index}
-            isReadOnly={isReadOnly}
-            rowIndex={x}
-            columnIndex={y}
-          /> 
-        )
-      }
+      itemComponent={({ index, x, y }) => (
+        <ChartItem
+          album={
+            items[index] !== undefined ? (items[index] as Album) : EMPTY_ALBUM
+          }
+          borderColor={borderColor}
+          borderSize={borderSize}
+          index={index}
+          isReadOnly={isReadOnly}
+          rowIndex={x}
+          columnIndex={y}
+        />
+      )}
       rows={numberOfRows}
       size={size}
     />
   );
-}
+};
 
 export default DesktopChart;

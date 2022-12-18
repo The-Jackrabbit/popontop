@@ -1,9 +1,15 @@
-import { useRouter } from "next/router";
-import { ListBulletIcon, PaintBrushIcon, CloudArrowUpIcon } from "@heroicons/react/20/solid";
-import AccountCircleButton from "../ClickCircleButton/AccountCircleButton/AccountCircleButton";
-import ClickCircleButton, { CLICK_CIRCLE_STYLE } from "../ClickCircleButton/ClickCircleButton";
-import ClickCircleLayout from "../ClickCircleLayout";
-import React from "react";
+import { useRouter } from 'next/router';
+import {
+  ListBulletIcon,
+  PaintBrushIcon,
+  CloudArrowUpIcon,
+} from '@heroicons/react/20/solid';
+import AccountCircleButton from '../ClickCircleButton/AccountCircleButton/AccountCircleButton';
+import ClickCircleButton, {
+  CLICK_CIRCLE_STYLE,
+} from '../ClickCircleButton/ClickCircleButton';
+import ClickCircleLayout from '../ClickCircleLayout';
+import React from 'react';
 
 export interface Props {
   editChart: () => Promise<string>;
@@ -23,12 +29,12 @@ export const EditChartClickCircle: React.FC<Props> = ({
 
   const onClickCreateChart = (event: React.BaseSyntheticEvent<MouseEvent>) => {
     event.stopPropagation();
-    router.push('/mobile')
+    router.push('/mobile');
   };
 
   const onClickYourCharts = (event: React.BaseSyntheticEvent<MouseEvent>) => {
     event.stopPropagation();
-    router.push('/mobile/your-charts')
+    router.push('/mobile/your-charts');
   };
 
   return (
@@ -59,7 +65,7 @@ export const EditChartClickCircle: React.FC<Props> = ({
           onClick={onClickCreateChart}
         />
       }
-    /> 
+    />
   );
 };
 

@@ -1,8 +1,8 @@
-import { HomeIcon, ShareIcon } from "@heroicons/react/20/solid";
-import React, { useEffect, useState } from "react";
-import { Album } from "../../../../styles/types/Albums";
-import { ICON_STYLE } from "../../../lib/FilterButton/FilterButton";
-import { PreviewEditor } from "./PreviewEditor/PreviewEditor";
+import { HomeIcon, ShareIcon } from '@heroicons/react/20/solid';
+import React, { useEffect, useState } from 'react';
+import { Album } from '../../../../styles/types/Albums';
+import { ICON_STYLE } from '../../../lib/FilterButton/FilterButton';
+import { PreviewEditor } from './PreviewEditor/PreviewEditor';
 
 export interface Props {
   chartTitle: string;
@@ -29,7 +29,7 @@ export const ShareTab: React.FC<Props> = ({
   useEffect(() => {
     const t = document.getElementById('test-dark-meta');
     return () => t?.setAttribute('content', '#171717');
-  }, [])
+  }, []);
   const onClick = (event: React.BaseSyntheticEvent) => {
     event.stopPropagation();
     setIsMainOverlayVisible(!isMainOverlayVisible);
@@ -37,26 +37,30 @@ export const ShareTab: React.FC<Props> = ({
 
   return (
     <div className="fixed top-0 left-0 z-20">
-      <div className="fixed bottom-[20vh] right-0 w-min flex justify-end">
+      <div className="fixed bottom-[20vh] right-0 flex w-min justify-end">
         <p
           className="
-            px-2 py-1
-            leading-tight
-            rounded-tl-lg rounded-bl-lg shadow-lg
-            bg-white dark:bg-black text-xs
+            rounded-tl-lg rounded-bl-lg
+            bg-white
+            px-2 py-1 text-xs
+            leading-tight shadow-lg dark:bg-black
           "
           onClick={onClick}
-          style={{ 
+          style={{
             textOrientation: 'upright',
             writingMode: 'vertical-rl',
-            border: !isMainOverlayVisible ? 'none' : '2px solid white'
+            border: !isMainOverlayVisible ? 'none' : '2px solid white',
           }}
         >
-          {!isMainOverlayVisible ? <ShareIcon className={ICON_STYLE} />  : <HomeIcon className={ICON_STYLE}  />}
+          {!isMainOverlayVisible ? (
+            <ShareIcon className={ICON_STYLE} />
+          ) : (
+            <HomeIcon className={ICON_STYLE} />
+          )}
         </p>
       </div>
       {isMainOverlayVisible ? (
-        <PreviewEditor 
+        <PreviewEditor
           chartTitle={chartTitle}
           columns={columns}
           list={list}

@@ -1,8 +1,9 @@
 export interface HookNode<TState, TActions> {
-  actions: TActions;  
+  actions: TActions;
   state: TState;
 }
 
-export interface ParentHookNode<TState, TActions, TChildrenNodes> extends HookNode<TState, TActions> {
+export interface ParentHookNode<TState, TActions, TChildrenNodes>
+  extends HookNode<TState, TActions> {
   childrenNodes: TChildrenNodes;
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSpring, SpringValue, config } from '@react-spring/web';
-import { useDrag, Vector2 } from '@use-gesture/react'
+import { useDrag, Vector2 } from '@use-gesture/react';
 import { isIntentionalYAxisGesture } from '../../../utils/directions';
 import { Interpolation } from 'react-spring';
 import { ReactDOMAttributes } from '@use-gesture/react/dist/declarations/src/types';
@@ -14,16 +14,17 @@ export interface Props {
 
 export function useDragSheetDown(
   height: number,
-  onCloseCallback: () => void,
+  onCloseCallback: () => void
 ): {
   bgStyle: {
-    transform: Interpolation<number, "translateY(-8%)" | "translateY(0px)">; opacity: Interpolation<number, 0.4 | 1>;
+    transform: Interpolation<number, 'translateY(-8%)' | 'translateY(0px)'>;
+    opacity: Interpolation<number, 0.4 | 1>;
   };
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   bind: (...args: any[]) => ReactDOMAttributes;
   close: (velocity?: number) => void;
-  display: Interpolation<number, "block" | "none">;
-  open: ({ canceled }: { canceled: boolean; }) => void;
+  display: Interpolation<number, 'block' | 'none'>;
+  open: ({ canceled }: { canceled: boolean }) => void;
   windowHeight: string;
   y: SpringValue<number>;
 } {
@@ -34,7 +35,7 @@ export function useDragSheetDown(
     api.start({
       y: 0,
       immediate: false,
-      config: canceled ? config.wobbly : config.stiff
+      config: canceled ? config.wobbly : config.stiff,
     });
   };
 
@@ -45,15 +46,15 @@ export function useDragSheetDown(
       config: { ...config.stiff, velocity },
       onRest: () => {
         onCloseCallback();
-      }
+      },
     });
   };
 
   useEffect(() => {
     if (window) {
-      setWindowHeight(`${window.innerHeight - 16}px`)
+      setWindowHeight(`${window.innerHeight - 16}px`);
     }
-  }, []); 
+  }, []);
 
   const bind = useDrag(
     ({
@@ -62,12 +63,12 @@ export function useDragSheetDown(
       direction: [, dy],
       movement: [mx, my],
       cancel,
-      canceled
+      canceled,
     }) => {
       if (!isIntentionalYAxisGesture(mx, my)) {
         return;
       }
-      if (my < -40){
+      if (my < -40) {
         cancel();
       }
 
@@ -75,8 +76,7 @@ export function useDragSheetDown(
         my > height * 0.5 || (vy > 0.5 && dy > 0)
           ? close(vy)
           : open({ canceled });
-      }
-      else {
+      } else {
         api.start({ y: my, immediate: true });
       }
     },
@@ -85,18 +85,15 @@ export function useDragSheetDown(
       filterTaps: true,
       bounds: { top: 0 },
       threshold: [100, 0] as Vector2,
-      rubberband: true
+      rubberband: true,
     }
   );
 
-  const display = y.to((py) => (py < height ? "block" : "none"));
+  const display = y.to((py) => (py < height ? 'block' : 'none'));
 
   const bgStyle = {
-    transform: y.to(
-      [0, height],
-      ["translateY(-8%)", "translateY(0px)"]
-    ),
-    opacity: y.to([0, height], [0.4, 1], "clamp")
+    transform: y.to([0, height], ['translateY(-8%)', 'translateY(0px)']),
+    opacity: y.to([0, height], [0.4, 1], 'clamp'),
   };
 
   return {

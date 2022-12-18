@@ -1,4 +1,6 @@
-import NavDot, { Color } from "../../../global/DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot";
+import NavDot, {
+  Color,
+} from '../../../global/DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
 
 export interface Props {
   color: Color;
@@ -14,20 +16,17 @@ export const RadioOption: React.FC<Props> = ({
   onClick,
 }) => {
   return (
-    <div
-      className="flex content-center items-center" 
-      onClick={() => onClick()}
-    >
+    <div className="flex content-center items-center" onClick={() => onClick()}>
       <NavDot
         ariaLabel="option"
         color={color}
         isActive={isActive}
-        className="mr-2  border-none h-4 w-4"
+        className="mr-2  h-4 w-4 border-none"
         onClick={() => onClick()}
       />
-      <p className="leading-none translate-y-[2px]">{label}</p>
+      <p className="translate-y-[2px] leading-none">{label}</p>
     </div>
-  )
-}
+  );
+};
 
 export default RadioOption;

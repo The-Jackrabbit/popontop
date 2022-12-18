@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import { Album } from "../../../../styles/types/Albums";
-import Button from "../../../lib/Button/Button";
-import Grid from "../../../lib/Grid/Grid";
-import { useResizer } from "../../../lib/Grid/Grid.stories";
-import NumberInput from "../../../lib/NumberInput/NumberInput";
-import Title from "../../../lib/Title/Title";
+import { useEffect, useState } from 'react';
+import { Album } from '../../../../styles/types/Albums';
+import Button from '../../../lib/Button/Button';
+import Grid from '../../../lib/Grid/Grid';
+import { useResizer } from '../../../lib/Grid/Grid.stories';
+import NumberInput from '../../../lib/NumberInput/NumberInput';
+import Title from '../../../lib/Title/Title';
 
 export interface Props {
   chartTitle: string;
@@ -29,33 +29,35 @@ export const ViewModeModal: React.FC<Props> = ({
 }) => {
   const [isOverlayVisible, setIsOverlayVisible] = useState(true);
   const listColumns = 1;
-  const aa = (columns*rows)/listColumns 
+  const aa = (columns * rows) / listColumns;
   const firstColumn = list.filter((_, index) => index < aa);
-  const secondColumn = list.filter((_, index) => index >= aa && index < 2*aa);
-  const thirdColumn = list.filter((_, index) => index >= 2*aa && index < 3*aa);
+  const secondColumn = list.filter((_, index) => index >= aa && index < 2 * aa);
+  const thirdColumn = list.filter(
+    (_, index) => index >= 2 * aa && index < 3 * aa
+  );
   const onClickPreview = () => {
     setIsOverlayVisible(true);
     const t = document.getElementById('test-dark-meta');
     t?.setAttribute('content', 'rgba(0,0,0,0.98)');
-  }
+  };
   useEffect(() => {
     const t = document.getElementById('test-dark-meta');
     return () => t?.setAttribute('content', '#171717');
-  }, [])
+  }, []);
   const { containerRef, size } = useResizer();
   return (
     <div
       {...containerRef}
       className="
-        w-[calc(100%_-_24px)] m-4
-        dark:text-white
+        m-4 flex
         h-screen
-        flex flex-col
+        w-[calc(100%_-_24px)]
+        flex-col dark:text-white
       "
     >
-      <div className="basis-[3%] z-30">
+      <div className="z-30 basis-[3%]">
         <NumberInput
-          className="flex w-full justify-between mb-4"
+          className="mb-4 flex w-full justify-between"
           currentValue={rows}
           label="number of rows"
           onDecrement={onDecrementRows}
@@ -64,27 +66,27 @@ export const ViewModeModal: React.FC<Props> = ({
       </div>
       <div className="basis-[3%]">
         <NumberInput
-          className="flex w-full justify-between mb-4"
+          className="mb-4 flex w-full justify-between"
           currentValue={columns}
           label="number of columns"
           onDecrement={onDecrementColumns}
           onIncrement={onIncrementColumns}
         />
       </div>
-      <Button className="basis-[4%] mb-4" onClick={onClickPreview}>
+      <Button className="mb-4 basis-[4%]" onClick={onClickPreview}>
         Preview
       </Button>
       {size ? (
         <Grid
-          size={size} 
+          size={size}
           itemComponent={({ index }) => (
             <img
               src={list[index]?.imageUrl ?? ''}
               alt={list[index]?.artist ?? ''}
               width={size.height}
               height={size.width}
-            /> 
-          )} 
+            />
+          )}
           columns={columns}
           rows={rows}
         />
@@ -98,67 +100,74 @@ export const ViewModeModal: React.FC<Props> = ({
           >
             <div
               className="
-                bg-[rgba(0,0,0,0.98)]
+                z-50
                 h-screen w-screen
-                p-1 z-50
+                bg-[rgba(0,0,0,0.98)] p-1
               "
               onClick={() => setIsOverlayVisible(false)}
             >
-              <div className="h-full w-full flex flex-col">
+              <div className="flex h-full w-full flex-col">
                 <Title
                   chartTitle={chartTitle}
                   isReadOnly={true}
                   setValue={() => undefined}
                   showIntroduction={false}
                   textColor="white"
-                /> 
+                />
                 {size ? (
                   <Grid
-                    size={size} 
+                    size={size}
                     itemComponent={({ index }) => (
                       <img
                         src={list[index]?.imageUrl ?? ''}
                         alt={list[index]?.artist ?? ''}
                         width={size.height}
                         height={size.width}
-                      /> 
-                    )} 
+                      />
+                    )}
                     columns={columns}
                     rows={rows}
                   />
                 ) : null}
-                <div className="flex flex-row basis-[30%]">
-
-                <ol className="basis-1/3" style={{ listStyle: 'inside', listStyleType: 'inherit'}}>
-                  {firstColumn.map((album) => 
-                    <li className="text-[8px]" key={JSON.stringify(album)}>
-                      {album.name}
-                    </li>
-                  )}
-                </ol>
-                <ol className="basis-1/3" style={{ listStyle: 'inside', listStyleType: 'inherit'}}>
-                  {secondColumn.map((album) => 
-                    <li className="text-[8px]" key={JSON.stringify(album)}>
-                      {album.name}
-                    </li>
-                  )}
-                </ol>
-                  <ol className="basis-1/3" style={{ listStyle: 'inside', listStyleType: 'inherit'}}>
-                  {thirdColumn.map((album) => 
-                    <li className="text-[8px]" key={JSON.stringify(album)}>
-                      {album.name}
-                    </li>
-                  )}
-                </ol>
+                <div className="flex basis-[30%] flex-row">
+                  <ol
+                    className="basis-1/3"
+                    style={{ listStyle: 'inside', listStyleType: 'inherit' }}
+                  >
+                    {firstColumn.map((album) => (
+                      <li className="text-[8px]" key={JSON.stringify(album)}>
+                        {album.name}
+                      </li>
+                    ))}
+                  </ol>
+                  <ol
+                    className="basis-1/3"
+                    style={{ listStyle: 'inside', listStyleType: 'inherit' }}
+                  >
+                    {secondColumn.map((album) => (
+                      <li className="text-[8px]" key={JSON.stringify(album)}>
+                        {album.name}
+                      </li>
+                    ))}
+                  </ol>
+                  <ol
+                    className="basis-1/3"
+                    style={{ listStyle: 'inside', listStyleType: 'inherit' }}
+                  >
+                    {thirdColumn.map((album) => (
+                      <li className="text-[8px]" key={JSON.stringify(album)}>
+                        {album.name}
+                      </li>
+                    ))}
+                  </ol>
                 </div>
-              </div> 
+              </div>
             </div>
           </div>
         </div>
       ) : null}
     </div>
-  )
+  );
 };
-
 
 export default ViewModeModal;

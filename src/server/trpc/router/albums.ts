@@ -1,8 +1,8 @@
-import { router, publicProcedure } from "../trpc";
-import { z } from "zod";
+import { router, publicProcedure } from '../trpc';
+import { z } from 'zod';
 import axios from 'axios';
-import { env } from "../../../env/server.mjs";
-import { Album, LastFmAlbum } from "../../../styles/types/Albums";
+import { env } from '../../../env/server.mjs';
+import { Album, LastFmAlbum } from '../../../styles/types/Albums';
 
 export const albumsRouter = router({
   search: publicProcedure
@@ -13,14 +13,13 @@ export const albumsRouter = router({
     }),
 });
 
-
 const albums = async (input: string): Promise<Album[]> => {
   const url = `http://ws.audioscrobbler.com/2.0/?method=album.search&api_key=${env.LASTFM_API_KEY}&album=${input}&format=json&limit=10`;
 
   try {
-    const response = await axios.get(url)
+    const response = await axios.get(url);
     const results = response.data.results;
-    
+
     const albums: Album[] = [];
 
     if (results.albummatches && results.albummatches.album) {
@@ -30,13 +29,13 @@ const albums = async (input: string): Promise<Album[]> => {
           // name: album.name,
           // artist: album.artist,
           lastfmId: album.mbid,
-          ...album
+          ...album,
         });
       });
     }
-  
+
     return albums;
-  } catch { 
+  } catch {
     return [];
   }
 };

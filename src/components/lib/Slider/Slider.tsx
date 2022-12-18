@@ -1,4 +1,4 @@
-import { ChangeEventHandler } from "react";
+import { ChangeEventHandler } from 'react';
 
 export interface Props {
   className?: string;
@@ -22,21 +22,26 @@ export const Slider: React.FC<Props> = ({
   value = '',
 }) => {
   return (
-    <div className={className+" outline-rose-200 outline-2  rounded-lg focus-within:outline outline-offset-2"}>
+    <div
+      className={
+        className +
+        ' rounded-lg outline-2  outline-offset-2 outline-rose-200 focus-within:outline'
+      }
+    >
       {showValue ? (
-        <label className="text-neutral-400 flex w-full justify-between">
+        <label className="flex w-full justify-between text-neutral-400">
           <span>{label ? label : null}</span>
-          <span>{showValue ? value : null }</span>
+          <span>{showValue ? value : null}</span>
         </label>
       ) : null}
       <input
         className="
-          slider   shadow-lg 
-          p-0 w-full text-lg 
-          appearance-none bg-transparent
-          cursor-pointer
-         focus-within:text-rose-300
-          outline-none
+          slider   w-full 
+          cursor-pointer appearance-none bg-transparent 
+          p-0 text-lg
+          shadow-lg
+         outline-none
+          focus-within:text-rose-300
         "
         onChange={onChange}
         placeholder={placeholder}
@@ -48,6 +53,6 @@ export const Slider: React.FC<Props> = ({
       />
     </div>
   );
-}
+};
 
 export default Slider;

@@ -3,12 +3,12 @@ export interface Props {
 }
 
 export const Loader: React.FC<Props> = ({ index }) => (
-  <div className="w-full flex justify-between mb-2">
+  <div className="mb-2 flex w-full justify-between">
     <div
       className="
-        text-xs basis-1/12 
-        w-12
-        flex flex-col shrink-0 justify-center content-center items-center
+        flex w-12 
+        shrink-0
+        basis-1/12 flex-col content-center items-center justify-center text-xs
       "
     >
       <p>{1 + index}</p>
@@ -16,30 +16,29 @@ export const Loader: React.FC<Props> = ({ index }) => (
     <div className="basis-2/12 justify-start">
       <div
         className="
-          w-[60px] h-[60px]
-          bg-neutral-200 dark:bg-neutral-700 animate-pulse
-        "></div>
+          h-[60px] w-[60px]
+          animate-pulse bg-neutral-200 dark:bg-neutral-700
+        "
+      ></div>
     </div>
-    <div
-      className="basis-8/12 ml-2 content-start grow-0 overflow-x-hidden justify-end flex flex-col"
-    >
+    <div className="ml-2 flex grow-0 basis-8/12 flex-col content-start justify-end overflow-x-hidden">
       <div
         className="
-          text-xs
-          w-48 h-[16px]
-          bg-neutral-200 dark:bg-neutral-700 mb-1
-          animate-pulse
+          mb-1
+          h-[16px] w-48
+          animate-pulse bg-neutral-200 text-xs
+          dark:bg-neutral-700
         "
       />
       <div
         className="
-          text-xs
-          w-36 h-[16px]
-          bg-neutral-200 dark:bg-neutral-700
-          animate-pulse
+          h-[16px]
+          w-36 animate-pulse
+          bg-neutral-200 text-xs
+          dark:bg-neutral-700
         "
       />
-   </div>
-   <div className="basis-1/12"></div>
- </div>
+    </div>
+    <div className="basis-1/12"></div>
+  </div>
 );

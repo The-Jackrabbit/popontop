@@ -1,5 +1,5 @@
-import { ChartSettings } from "@prisma/client";
-import { Album } from "./Albums";
+import { ChartSettings } from '@prisma/client';
+import { Album } from './Albums';
 
 export interface Chart {
   name: string;

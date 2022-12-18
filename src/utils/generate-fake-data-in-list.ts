@@ -7,7 +7,7 @@ export function generateEmptyArrayOfSize<T>({
 }): T[] {
   const ar: T[] = [];
 
-  for (let i = 0 ; i < size ; i++) {
+  for (let i = 0; i < size; i++) {
     ar.push(defaultElement);
   }
 

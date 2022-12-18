@@ -1,8 +1,7 @@
-
-import { PaintBrushIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
-import Input from "../../Input/Input";
-import { ExpandingPill } from "../ExpandingPill";
+import { PaintBrushIcon } from '@heroicons/react/24/outline';
+import { useState } from 'react';
+import Input from '../../Input/Input';
+import { ExpandingPill } from '../ExpandingPill';
 
 export interface Props {
   className?: string;
@@ -32,11 +31,12 @@ export const TextExpandingPill: React.FC<Props> = ({
       toggleVisibility={() => setIsExpanded(!isExpanded)}
     >
       <p className={labelClassName}>{label}</p>
-        <div className="text-sm">
-          {!isExpanded
-            ? <PaintBrushIcon className="h-4 w-4 text-neutral-900 dark:text-neutral-50" />
-            : '-'
-          } 
+      <div className="text-sm">
+        {!isExpanded ? (
+          <PaintBrushIcon className="h-4 w-4 text-neutral-900 dark:text-neutral-50" />
+        ) : (
+          '-'
+        )}
       </div>
       <Input
         onChange={(event) => setValue(event.target.value)}
@@ -44,7 +44,7 @@ export const TextExpandingPill: React.FC<Props> = ({
         value={value}
       />
     </ExpandingPill>
-  )
-}
+  );
+};
 
 export default TextExpandingPill;

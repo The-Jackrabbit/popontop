@@ -1,14 +1,16 @@
-import FilterButton, { ICON_STYLE } from "../../../lib/FilterButton/FilterButton";
-import { 
-  ChevronUpDownIcon, 
+import FilterButton, {
+  ICON_STYLE,
+} from '../../../lib/FilterButton/FilterButton';
+import {
+  ChevronUpDownIcon,
   PaintBrushIcon,
-  PlusIcon, 
+  PlusIcon,
   TrashIcon,
 } from '@heroicons/react/20/solid';
-import { ListRowMode } from "../../../lib/Mobile/ListRow/ListRow";
-import ActionBarLayout from "./ActionBarLayout";
-import EditChartClickCircle from "./ActionOverlay/ClickCircle/EditChartClickCircle/EditChartClickCircle";
-import ViewChartClickCircle from "./ViewChartClickCircle";
+import { ListRowMode } from '../../../lib/Mobile/ListRow/ListRow';
+import ActionBarLayout from './ActionBarLayout';
+import EditChartClickCircle from './ActionOverlay/ClickCircle/EditChartClickCircle/EditChartClickCircle';
+import ViewChartClickCircle from './ViewChartClickCircle';
 
 export interface Props {
   actionOverlayClassName?: string;
@@ -23,7 +25,7 @@ export interface Props {
   onClickSearch: () => void;
   onClickDeleteMode: () => void;
   onClickRearrangeMode: () => void;
-  setIsActive: (val: boolean) =>  void;
+  setIsActive: (val: boolean) => void;
 }
 
 export const EditChartActionBar: React.FC<Props> = ({
@@ -56,9 +58,11 @@ export const EditChartActionBar: React.FC<Props> = ({
   return (
     <ActionBarLayout
       actionOverlay={
-        !isReadOnly
-          ? <EditChartClickCircle editChart={editChart} isLoading={isLoading} />
-          : <ViewChartClickCircle />
+        !isReadOnly ? (
+          <EditChartClickCircle editChart={editChart} isLoading={isLoading} />
+        ) : (
+          <ViewChartClickCircle />
+        )
       }
       actionOverlayClassName={actionOverlayClassName}
       className={className}
@@ -80,7 +84,7 @@ export const EditChartActionBar: React.FC<Props> = ({
             ariaLabel="chart settings"
             hasGradientIndicator={false}
             onClick={onClickChartSettings}
-            >
+          >
             <PaintBrushIcon className={`${ICON_STYLE} p-1`} />
           </FilterButton>
         ) : null
@@ -93,18 +97,18 @@ export const EditChartActionBar: React.FC<Props> = ({
             onClick={onClickRearrangeMode}
           >
             <ChevronUpDownIcon className={ICON_STYLE} />
-          </FilterButton>  
+          </FilterButton>
         ) : undefined
       }
       rightCornerButton={
         !isReadOnly ? (
           <FilterButton
-          ariaLabel="search albums"
-          onClick={onClickSearchAlbums}
-          hasGradientIndicator={false}
-        >
-          <PlusIcon className={ICON_STYLE} />
-        </FilterButton>
+            ariaLabel="search albums"
+            onClick={onClickSearchAlbums}
+            hasGradientIndicator={false}
+          >
+            <PlusIcon className={ICON_STYLE} />
+          </FilterButton>
         ) : null
       }
       setIsActive={setIsActive}

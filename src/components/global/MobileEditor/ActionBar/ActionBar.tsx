@@ -1,8 +1,8 @@
-import { ListRowMode } from "../../../lib/Mobile/ListRow/ListRow";
-import { useRouter } from "next/router";
-import ViewChartsActionBar from "./ViewChartsActionBar";
-import CreateChartActionBar from "./CreateChartActionBar";
-import { EditChartActionBar } from "./EditChartActionBar";
+import { ListRowMode } from '../../../lib/Mobile/ListRow/ListRow';
+import { useRouter } from 'next/router';
+import ViewChartsActionBar from './ViewChartsActionBar';
+import CreateChartActionBar from './CreateChartActionBar';
+import { EditChartActionBar } from './EditChartActionBar';
 
 export interface Props {
   actionOverlayClassName?: string;
@@ -19,7 +19,7 @@ export interface Props {
   onClickDeleteMode: () => void;
   onClickRearrangeMode: () => void;
   saveChart: () => Promise<string>;
-  setIsActive: (val: boolean) =>  void;
+  setIsActive: (val: boolean) => void;
 }
 
 export const ActionBar: React.FC<Props> = ({
@@ -38,7 +38,7 @@ export const ActionBar: React.FC<Props> = ({
   onClickSettings,
   saveChart,
   setIsActive,
-}) => { 
+}) => {
   const router = useRouter();
   const isOnEditPage = router.pathname.includes('/mobile/charts/');
   const isOnCreateChartPage = router.pathname === '/mobile';

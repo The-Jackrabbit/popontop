@@ -1,5 +1,5 @@
 import React from 'react';
-import { a, SpringValue } from "react-spring";
+import { a, SpringValue } from 'react-spring';
 import { ChartHookNode } from '../../../frontend/hooks/use-chart/use-chart';
 import Title from '../../lib/Title/Title';
 import DesktopActions from './Actions/DesktopActions';
@@ -10,9 +10,9 @@ import Layout from './Layout';
 export interface Props {
   chart: ChartHookNode;
   isLoading: boolean;
-  listStyles: { width: SpringValue<string>; };
+  listStyles: { width: SpringValue<string> };
   readonly?: boolean;
-  titleStyle: { height: SpringValue<string>; };
+  titleStyle: { height: SpringValue<string> };
 }
 
 const DesktopEditor: React.FC<Props> = ({
@@ -27,7 +27,7 @@ const DesktopEditor: React.FC<Props> = ({
       backgroundColor={chart.childrenNodes.settings.state.backgroundColor}
       isReadonly={readonly}
       title={
-        <a.div style={titleStyle} className="w-full mb-2 overflow-y-hidden">
+        <a.div style={titleStyle} className="mb-2 w-full overflow-y-hidden">
           <Title
             chartTitle={chart.state.chartTitle}
             isReadOnly={false}

@@ -1,4 +1,6 @@
-import NavDot, { Color } from "../../../DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot";
+import NavDot, {
+  Color,
+} from '../../../DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
 
 export interface Props {
   end: () => void;
@@ -15,11 +17,11 @@ export const LogoButton: React.FC<Props> = ({ end, isActive, start }) => (
       onTouchMove={(e) => e.stopPropagation()}
       onClick={end}
       className="
-        bg-white dark:bg-black
-        px-2 py-1 py-1sm:px-4 sm:py-1
-        rounded-full
-        relative
-        select-none text-lg z-30
+        py-1sm:px-4 relative
+        z-30 select-none rounded-full bg-white
+        px-2
+        py-1
+        text-lg dark:bg-black sm:py-1
       "
     >
       💿popontop
@@ -29,9 +31,9 @@ export const LogoButton: React.FC<Props> = ({ end, isActive, start }) => (
           color={Color.fuchsia}
           isActive={true}
           onClick={() => undefined}
-          className="w-4 h-4 animate-bounce absolute top-[-4px] right-[-2px]"
+          className="absolute top-[-4px] right-[-2px] h-4 w-4 animate-bounce"
         />
-      ): null}
+      ) : null}
     </h1>
   </div>
 );

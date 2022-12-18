@@ -1,8 +1,7 @@
-
-import { useState } from "react";
-import { Radio } from "../../Radio/Radio";
-import { RadioIcon } from "../../Radio/RadioIcon";
-import { ExpandingPill } from "../ExpandingPill";
+import { useState } from 'react';
+import { Radio } from '../../Radio/Radio';
+import { RadioIcon } from '../../Radio/RadioIcon';
+import { ExpandingPill } from '../ExpandingPill';
 
 export interface Props {
   className?: string;
@@ -31,12 +30,12 @@ export const SwitchExpandingPill: React.FC<Props> = ({
       <div className="">
         <RadioIcon variant={value} />
       </div>
-      <Radio 
+      <Radio
         onClick={(value: boolean | null) => setValue(value)}
         value={Boolean(value)}
       />
     </ExpandingPill>
-  )
-}
+  );
+};
 
 export default SwitchExpandingPill;

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export interface Props {
   children: [React.ReactNode, React.ReactNode, React.ReactNode];
@@ -12,14 +12,14 @@ const Layout: React.FC<Props> = ({ children }) => {
   const sidebarComponent = children[0];
   const bottomNavComponent = children[1];
   const subPageComponent = children[2];
- 
+
   return (
     <div
       // full frame
       // border-4 border-black
       className="
-        h-screen w-screen
-        flex justify-center
+        flex h-screen
+        w-screen justify-center
         overflow-hidden
       "
     >
@@ -27,24 +27,24 @@ const Layout: React.FC<Props> = ({ children }) => {
         // app
         // border-4 border-amber-500
         className="
+          flex
           w-[800px]
-          md:w-[945px]
-          lg:w-[1200px]
-          px-4 py-4
-          flex 
+          px-4
+          py-4 md:w-[945px]
+          lg:w-[1200px] 
         "
       >
         <div
           // border-4 border-red-500
           className="
-            w-3/12
-            flex flex-col justify-between
-            px-4
-            border-neutral-300  dark:border-neutral-800 border-r-2
+            flex
+            w-3/12 flex-col justify-between
+            border-r-2
+            border-neutral-300  px-4 dark:border-neutral-800
           "
         >
           <div
-          // border-4 border-green-500
+            // border-4 border-green-500
             className="
            
             "
@@ -55,7 +55,8 @@ const Layout: React.FC<Props> = ({ children }) => {
             // border-4 border-blue-500
             className="
               basis-auto
-            ">
+            "
+          >
             {bottomNavComponent}
           </div>
         </div>
@@ -70,6 +71,6 @@ const Layout: React.FC<Props> = ({ children }) => {
       </div>
     </div>
   );
-}
+};
 
 export default Layout;

@@ -1,9 +1,17 @@
-import { useEffect, useLayoutEffect, useMemo, useState } from "react";
-import useResizeObserver from "@react-hook/resize-observer";
+import { useEffect, useLayoutEffect, useMemo, useState } from 'react';
+import useResizeObserver from '@react-hook/resize-observer';
 
 export interface Props {
   columns: number;
-  itemComponent: ({ index, x, y }: {  index: number; x: number;  y: number }) => JSX.Element;
+  itemComponent: ({
+    index,
+    x,
+    y,
+  }: {
+    index: number;
+    x: number;
+    y: number;
+  }) => JSX.Element;
   preview?: boolean;
   rows: number;
   size: DOMRect;
@@ -21,40 +29,40 @@ const Grid: React.FC<Props> = ({
     const containerWidth = size.width;
     const containerHeight = size.height;
     const minDimension = Math.floor(
-      Math.min(
-        (containerWidth)/columns, 
-        (containerHeight)/rows ,
-      )
+      Math.min(containerWidth / columns, containerHeight / rows)
     );
     setSquareWidth(minDimension === 0 ? 40 : minDimension);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [columns, rows]);
 
-  const emptyRows = useMemo(() => ([...new Array(rows)]), [rows]);
-  const emptyColumns = useMemo<undefined[]>(() => ([...new Array(columns)]), [columns]);
+  const emptyRows = useMemo(() => [...new Array(rows)], [rows]);
+  const emptyColumns = useMemo<undefined[]>(
+    () => [...new Array(columns)],
+    [columns]
+  );
 
   return (
     <div
       id="container"
       className={`
         ${preview ? 'scale-95' : ''}
-        flex justify-center align-middle
-        h-full
-        items-stretch
-        overflow-y-hidden overflow-x-hidden
+        flex h-full items-stretch
+        justify-center
+        overflow-x-hidden
+        overflow-y-hidden align-middle
       `}
     >
       {emptyColumns.map((_, y) => (
         <div className="x" key={`row-${y}`}>
           {emptyRows.map((_, x) => {
-            const index = x + columns*y;
+            const index = x + columns * y;
             return (
               <div
                 className="value"
                 key={`item-${index}`}
                 style={{ width: squareWidth, height: squareWidth }}
               >
-                {itemComponent({ index, x, y })}    
+                {itemComponent({ index, x, y })}
               </div>
             );
           })}
@@ -64,8 +72,7 @@ const Grid: React.FC<Props> = ({
   );
 };
 
-                    
-export default Grid; 
+export default Grid;
 
 export function useSize(target: HTMLDivElement | null) {
   const [size, setSize] = useState<DOMRect>();

@@ -1,7 +1,11 @@
-import { a } from '@react-spring/web'
-import React from "react";
+import { a } from '@react-spring/web';
+import React from 'react';
 import { Album } from '../../../../styles/types/Albums';
-import { ROW_HEIGHT, ROW_HEIGHT_WITH_UNIT, useDisappearRow } from '../../../../frontend/hooks/springs/use-disappear-row';
+import {
+  ROW_HEIGHT,
+  ROW_HEIGHT_WITH_UNIT,
+  useDisappearRow,
+} from '../../../../frontend/hooks/springs/use-disappear-row';
 import ListView from './ListView/ListView';
 import RearrangeView, { RowMovementType } from './RearrangeView/RearrangeView';
 import SearchView from './SearchView/SearchView';
@@ -41,30 +45,30 @@ export const ListRow: React.FC<Props> = ({
   const { style, toggleRowVisibility } = useDisappearRow({
     initialHeight,
     isLastRowInList,
-    onClick: () => undefined
+    onClick: () => undefined,
   });
 
   return (
     <>
       <a.div
         className="
-          touch-pan-x
-          px-6 mb-2
-          relative 
-          grid items-center
-          origin-[50%_50%_0px]
+          relative
+          mb-2 grid
+          origin-[50%_50%_0px] 
+          touch-pan-x items-center
           overflow-hidden
+          px-6
         "
         style={{ ...style }}
       >
         <div
           className={`
             absolute ${ROW_HEIGHT_WITH_UNIT}
-            w-full overflow-hidden 
-            last-of-type:border-b-0
-            text-neutral-900 dark:text-neutral-50
-            flex justify-between gap-2
-            my-0
+            my-0 flex 
+            w-full
+            justify-between gap-2
+            overflow-hidden text-neutral-900 last-of-type:border-b-0
+            dark:text-neutral-50
           `}
         >
           {mode === ListRowMode.NORMAL ? (
@@ -105,9 +109,9 @@ export const ListRow: React.FC<Props> = ({
           ) : null}
         </div>
       </a.div>
-       {/* {isBreakVisible && (<hr className="my-1 border-neutral-200 dark:border-transparent" />)} */}
+      {/* {isBreakVisible && (<hr className="my-1 border-neutral-200 dark:border-transparent" />)} */}
     </>
-  )
-}
+  );
+};
 
 export default ListRow;

@@ -1,9 +1,9 @@
-import { useState } from "react";
-import React from "react";
-import Introduction from "./Introduction/Introduction";
-import { Layout } from "./Layout";
-import { Loader } from "./Loader";
-import { PencilIcon } from "@heroicons/react/24/outline";
+import { useState } from 'react';
+import React from 'react';
+import Introduction from './Introduction/Introduction';
+import { Layout } from './Layout';
+import { Loader } from './Loader';
+import { PencilIcon } from '@heroicons/react/24/outline';
 
 export interface Props {
   chartTitle: string;
@@ -18,7 +18,7 @@ export interface Props {
 /**
  * TODO: move intridcution code outside of title
  */
-const Title: React.FC<Props> = ({ 
+const Title: React.FC<Props> = ({
   chartTitle,
   isActiveByDefault = false,
   isLoading = false,
@@ -35,11 +35,11 @@ const Title: React.FC<Props> = ({
   if (showIntroduction) {
     return <Introduction />;
   }
-  
+
   if (isLoading) {
     return <Loader />;
   }
-  
+
   return (
     <Layout
       title={
@@ -53,25 +53,26 @@ const Title: React.FC<Props> = ({
             }}
             placeholder="New title"
             className="
-              focus-visible:outline-none active:outline-none
-              bg-transparent
-              border-bottom-2 border-b-2 
-              w-full
+              border-bottom-2 w-full
+              border-b-2
+              bg-transparent focus-visible:outline-none 
+              active:outline-none
             "
           />
-        ) : <p className="basis-full">{chartTitle}</p>
-
+        ) : (
+          <p className="basis-full">{chartTitle}</p>
+        )
       }
       toggleButton={
         !isReadOnly ? (
           <button
             onClick={() => clickEditTitleButton()}
             className="
-              active:outline-rose-300
-              active:outline
-              outline-offset-2
-              active:outline-2 outline-solid
+              outline-solid
               rounded
+              outline-offset-2
+              active:outline active:outline-2
+              active:outline-rose-300
             "
           >
             <PencilIcon className="h-6 w-6" />
@@ -80,6 +81,6 @@ const Title: React.FC<Props> = ({
       }
     />
   );
-}
+};
 
 export default Title;

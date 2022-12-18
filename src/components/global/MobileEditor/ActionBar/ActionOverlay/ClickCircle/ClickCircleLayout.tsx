@@ -1,4 +1,3 @@
-
 export interface Props {
   bottomButton: React.ReactNode;
   centerButton: React.ReactNode;
@@ -16,41 +15,40 @@ export const ClickCircleLayout: React.FC<Props> = ({
 }) => (
   <div
     className="
-      bg-[rgba(255,255,255,0.5)]
-      dark:bg-[rgba(0,0,0,0.5)] shadow-lg
       z-50
-      rounded-full h-64 w-64
-      flex flex-wrap
+      flex h-64
+      w-64
+      flex-wrap rounded-full bg-[rgba(255,255,255,0.5)]
+      shadow-lg dark:bg-[rgba(0,0,0,0.5)]
     "
-
     onClick={(e) => e.stopPropagation()}
   >
-    <div className="basis-1/3 h-1/3 rounded-full"></div>
+    <div className="h-1/3 basis-1/3 rounded-full"></div>
     <div
       id="top"
       className="
         flex
-        items-center align-middle content-center justify-center
-        basis-1/3 h-1/3
-        rounded-full
+        h-1/3 basis-1/3 content-center items-center
+        justify-center rounded-full
+        align-middle
       "
     >
       {topButton}
     </div>
-    <div className="basis-1/3 h-1/3 rounded-full"></div>
+    <div className="h-1/3 basis-1/3 rounded-full"></div>
     {leftButton}
     <div
       className="
-      bg-neutral-100 dark:bg-neutral-900 basis-1/3 h-1/3 rounded-full     
-        flex-col text-center flex justify-center
+      flex h-1/3 basis-1/3 flex-col justify-center     
+        rounded-full bg-neutral-100 text-center dark:bg-neutral-900
       "
     >
       {centerButton}
     </div>
     {rightButton}
-    <div className="basis-1/3 h-1/3 rounded-full"></div>
+    <div className="h-1/3 basis-1/3 rounded-full"></div>
     {bottomButton}
-    <div className="basis-1/3 h-1/3 rounded-full"></div>
+    <div className="h-1/3 basis-1/3 rounded-full"></div>
   </div>
 );
 

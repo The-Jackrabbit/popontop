@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import { ROW_HEIGHT_WITH_UNIT } from '../../../../frontend/hooks/springs/use-disappear-row';
 
 export enum ListRowMode {
@@ -13,15 +13,15 @@ export interface Props {
 }
 
 export const Row: React.FC<Props> = ({ children }) => (
-  <div className="px-6 mb-2">
+  <div className="mb-2 px-6">
     <div
       className={`
         ${ROW_HEIGHT_WITH_UNIT}
-        w-full overflow-hidden 
-        last-of-type:border-b-0
-        text-neutral-900 dark:text-neutral-50
-        flex justify-between gap-2
-        my-0
+        my-0 flex 
+        w-full
+        justify-between gap-2
+        overflow-hidden text-neutral-900 last-of-type:border-b-0
+        dark:text-neutral-50
       `}
     >
       {children}

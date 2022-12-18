@@ -1,5 +1,5 @@
-import FloatingButton from "../../../lib/FloatingButton/FloatingButton";
-import { MouseEventHandler } from "react";
+import FloatingButton from '../../../lib/FloatingButton/FloatingButton';
+import { MouseEventHandler } from 'react';
 import { CogIcon } from '@heroicons/react/24/solid';
 
 export interface Props {
@@ -13,7 +13,7 @@ const SettingsButton: React.FC<Props> = ({ onClick }) => (
     locationOnScreen="bottom-0 left-0"
     onClick={(e) => onClick(e)}
   >
-   <CogIcon
+    <CogIcon
       className="
         h-6 w-6 translate-y-[1px]
         text-neutral-900 dark:text-neutral-100

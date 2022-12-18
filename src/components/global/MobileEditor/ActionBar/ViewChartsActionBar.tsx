@@ -1,8 +1,10 @@
-import FilterButton, { ICON_STYLE } from "../../../lib/FilterButton/FilterButton";
+import FilterButton, {
+  ICON_STYLE,
+} from '../../../lib/FilterButton/FilterButton';
 import { TrashIcon } from '@heroicons/react/20/solid';
-import { ListRowMode } from "../../../lib/Mobile/ListRow/ListRow";
-import ActionBarLayout from "./ActionBarLayout";
-import ViewChartsClickCircle from "./ActionOverlay/ClickCircle/ViewChartsClickCircle/ViewChartsClickCircle";
+import { ListRowMode } from '../../../lib/Mobile/ListRow/ListRow';
+import ActionBarLayout from './ActionBarLayout';
+import ViewChartsClickCircle from './ActionOverlay/ClickCircle/ViewChartsClickCircle/ViewChartsClickCircle';
 
 export interface Props {
   actionOverlayClassName?: string;
@@ -10,7 +12,7 @@ export interface Props {
   isActive: boolean;
   listMode: ListRowMode;
   onClickDeleteMode: () => void;
-  setIsActive: (val: boolean) =>  void;
+  setIsActive: (val: boolean) => void;
 }
 
 export const ViewChartsActionBar: React.FC<Props> = ({

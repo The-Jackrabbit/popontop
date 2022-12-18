@@ -1,9 +1,6 @@
-import { prisma } from "../../../../server/db/client";
+import { prisma } from '../../../../server/db/client';
 
-export const deleteChart = async (
-  chartUuid: string,
-  userId: string,
-) => {
+export const deleteChart = async (chartUuid: string, userId: string) => {
   const originalChart = await prisma.chart_to_user.findFirst({
     where: {
       Chart: {
@@ -21,7 +18,7 @@ export const deleteChart = async (
       Chart: {
         uuid: chartUuid,
       },
-    }
+    },
   });
 
   await prisma.chartSettings.delete({
@@ -33,7 +30,7 @@ export const deleteChart = async (
   await prisma.chart_to_user.deleteMany({
     where: {
       chart_id: chartUuid,
-    }
+    },
   });
 
   await prisma.chart.delete({
@@ -45,4 +42,4 @@ export const deleteChart = async (
   return {
     status: 'okiedokie',
   };
-}
+};

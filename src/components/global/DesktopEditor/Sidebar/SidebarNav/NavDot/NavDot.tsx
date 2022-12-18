@@ -1,5 +1,7 @@
 import { colorMap } from '../../../../../../constants/colors';
-import ButtonWithAccessory, { TOP_POSITION_STYLE } from '../../../../../lib/ButtonWithAccessory/ButtonWithAccessory';
+import ButtonWithAccessory, {
+  TOP_POSITION_STYLE,
+} from '../../../../../lib/ButtonWithAccessory/ButtonWithAccessory';
 
 export interface Props {
   ariaLabel: string;
@@ -11,13 +13,13 @@ export interface Props {
 }
 
 export enum Color {
-  amber  = 'amber',
-  green  = 'green',
-  blue  = 'blue',
-  rose  = 'rose',
-  purple  = 'purple',
-  violet  = 'violet',
-  fuchsia  = 'fuchsia',
+  amber = 'amber',
+  green = 'green',
+  blue = 'blue',
+  rose = 'rose',
+  purple = 'purple',
+  violet = 'violet',
+  fuchsia = 'fuchsia',
 }
 
 export const NavDot: React.FC<Props> = ({
@@ -30,16 +32,13 @@ export const NavDot: React.FC<Props> = ({
 }) => {
   const activeClasses = colorMap[color];
   return (
-    <ButtonWithAccessory
-      {...TOP_POSITION_STYLE}
-      label={label ?? ''}
-    > 
+    <ButtonWithAccessory {...TOP_POSITION_STYLE} label={label ?? ''}>
       <button
         aria-label={ariaLabel}
         className={`
-          ${className ?? '  w-4 h-4 '}
-          border-2 
-          rounded-full
+          ${className ?? '  h-4 w-4 '}
+          rounded-full 
+          border-2
           shadow-md 
           outline-offset-4 outline-rose-300
           ${isActive ? activeClasses : colorMap.neutral}
@@ -48,6 +47,6 @@ export const NavDot: React.FC<Props> = ({
       />
     </ButtonWithAccessory>
   );
-}
+};
 
 export default NavDot;

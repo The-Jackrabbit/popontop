@@ -4,15 +4,13 @@ export interface Props {
 
 const MobilePage: React.FC<Props> = ({ children }) => (
   <div
-    className="overflow-y-hidden flex h-screen"
+    className="flex h-screen overflow-y-hidden"
     onScroll={(e) => {
       e.preventDefault();
       e.stopPropagation();
     }}
   >
-    <div className="w-screen p-4 overflow-hidden">
-     {children}
-    </div>
+    <div className="w-screen overflow-hidden p-4">{children}</div>
   </div>
 );
 

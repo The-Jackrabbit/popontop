@@ -15,7 +15,7 @@ function randomIntegerInRange(min: number, max: number): number {
 export default {
   args: {
     columns: 10,
-   
+
     rows: 10,
   },
   title: 'lib/Grid',
@@ -28,7 +28,6 @@ export default {
       defaultViewport: 'iphonex',
     },
   },
-
 } as ComponentMeta<typeof Grid>;
 
 const DESKTOP_PARAMETERS = {
@@ -46,10 +45,11 @@ export const useResizer = () => {
       ref: setTarget,
     },
     size,
-  }
-}
-
-const list = [...new Array(100)].map(() => ALBUM_RESULTS[randomIntegerInRange(0, 9)]);
+  };
+};
+const list = [...new Array(100)].map(
+  () => ALBUM_RESULTS[randomIntegerInRange(0, 9)]
+);
 export const Mobile: ComponentStory<typeof Grid> = (args) => {
   const { containerRef, size } = useResizer();
   return (
@@ -57,23 +57,21 @@ export const Mobile: ComponentStory<typeof Grid> = (args) => {
       {size ? (
         <Grid
           {...args}
-          itemComponent={
-            ({ index }) => (
-              <img
-                src={list[index]?.imageUrl ?? ''}
-                alt={list[index]?.artist ?? ''}
-                width={size.height}
-                height={size.width}
-              /> 
-           )
-          }
+          itemComponent={({ index }) => (
+            <img
+              src={list[index]?.imageUrl ?? ''}
+              alt={list[index]?.artist ?? ''}
+              width={size.height}
+              height={size.width}
+            />
+          )}
           size={size}
         />
       ) : null}
     </div>
-  )
-}
+  );
+};
 
-export const Desktop: ComponentStory<typeof Grid> = Mobile.bind({}); 
+export const Desktop: ComponentStory<typeof Grid> = Mobile.bind({});
 
-Desktop.parameters = DESKTOP_PARAMETERS; 
+Desktop.parameters = DESKTOP_PARAMETERS;

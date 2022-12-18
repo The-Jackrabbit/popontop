@@ -1,39 +1,31 @@
-
 export interface Props {
   toggleButton: React.ReactNode;
   title: React.ReactNode;
 }
 
-export const Layout: React.FC<Props> = ({
-  toggleButton,
-  title,
-}) => (
+export const Layout: React.FC<Props> = ({ toggleButton, title }) => (
   <div
     className="
-      rounded-lg bg-white dark:bg-[#0a0a0a]
-      shadow-lg dark:shadow-neutral-800
-      box-content
-      py-4 px-4 sm:px-4 
-      z-30
-      overflow-hidden
-      w-auto h-auto
-      flex justify-between items-center 
+      z-30 box-content flex
+      h-auto w-auto
+      items-center
+      justify-between overflow-hidden rounded-lg 
+      bg-white
+      py-4
+      px-4 shadow-lg
+      dark:bg-[#0a0a0a] dark:shadow-neutral-800 sm:px-4 
     "
   >
     <div
       className="
-        flex justify-between
-        gap-2
-        min-h-[2rem] w-full
+        flex min-h-[2rem]
+        w-full
+        justify-between gap-2
         text-lg text-neutral-500 dark:text-neutral-200
       "
     >
-      <div className="h-auto basis-11/12">
-        {title}
-      </div>
-      <div className="h-auto basis-1/12 flex justify-end">
-        {toggleButton}
-      </div>
+      <div className="h-auto basis-11/12">{title}</div>
+      <div className="flex h-auto basis-1/12 justify-end">{toggleButton}</div>
     </div>
   </div>
 );

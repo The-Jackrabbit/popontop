@@ -3,32 +3,31 @@
 @tailwind utilities;
 
 /** Start thumb **/
-input[type=range] {
+input[type='range'] {
   appearance: none;
   -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
   background: transparent; /* Otherwise white in Chrome */
 }
 
-input[type=range]::-webkit-slider-thumb,
-input[type=range]::-moz-range-thumb,
-input[type=range]::-ms-thumb {
+input[type='range']::-webkit-slider-thumb,
+input[type='range']::-moz-range-thumb,
+input[type='range']::-ms-thumb {
   background-color: red;
   width: 200px;
 }
-input[type=range]::-moz-range-track,
-input[type=range]::-webkit-slider-runnable-track,
-input[type=range]::-ms-track {
+input[type='range']::-moz-range-track,
+input[type='range']::-webkit-slider-runnable-track,
+input[type='range']::-ms-track {
   background-color: red;
   width: 200px;
   height: 200px;
-} 
+}
 
 /** End thumb **/
 
 li::marker {
-  height:200px
+  height: 200px;
 }
-
 
 .page > div {
   background-position: center center;
@@ -38,12 +37,10 @@ body {
   overscroll-behavior-y: none;
 }
 
-
 @media (prefers-color-scheme: light) {
   body {
-    background-color: #F8F9F8;
+    background-color: #f8f9f8;
   }
-
 }
 
 @media (prefers-color-scheme: dark) {
@@ -51,14 +48,19 @@ body {
     background-color: var(--color-neutral-900);
   }
 
-  p, h1, h2, h3, h4, h5, h6 {
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     color: var(--color-slate-200);
   }
-
 }
 
 .actions-container {
-  flex-basis: 5%
+  flex-basis: 5%;
 }
 
 /* Colors */

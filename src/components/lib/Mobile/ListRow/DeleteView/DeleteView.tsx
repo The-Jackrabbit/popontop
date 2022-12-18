@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 import Image from 'next/image';
 import { Album } from '../../../../../styles/types/Albums';
-import { ROW_HEIGHT } from "../../../../../frontend/hooks/springs/use-disappear-row";
-import { DeleteRowButton } from "../../Row/DeleteRowButton/DeleteRowButton";
+import { ROW_HEIGHT } from '../../../../../frontend/hooks/springs/use-disappear-row';
+import { DeleteRowButton } from '../../Row/DeleteRowButton/DeleteRowButton';
 
 export interface Props {
   album: Album;
@@ -18,20 +18,20 @@ export const DeleteView: React.FC<Props> = ({
   onClick,
   showAlbums,
   textColor,
-}) => ( 
-  <div className="w-full flex justify-between">
+}) => (
+  <div className="flex w-full justify-between">
     {showAlbums ? (
       <div
         className="
-          text-xs
-          basis-1/12 
-          w-12
-          flex flex-col shrink-0 justify-center content-center items-center
+          flex
+          w-12 
+          shrink-0
+          basis-1/12 flex-col content-center items-center justify-center text-xs
         "
       >
-        <p>{ index + 1 }</p>
+        <p>{index + 1}</p>
       </div>
-    ): null}
+    ) : null}
     <div className="basis-2/12 justify-start">
       <Image
         width={ROW_HEIGHT}
@@ -41,18 +41,18 @@ export const DeleteView: React.FC<Props> = ({
       />
     </div>
     <div
-      style={textColor? { color: textColor } : {}}
-      className="basis-6/12 content-start grow-0 overflow-x-hidden justify-end flex flex-col"
+      style={textColor ? { color: textColor } : {}}
+      className="flex grow-0 basis-6/12 flex-col content-start justify-end overflow-x-hidden"
     >
-      <p className="font-sans text-xs overflow-x-hidden whitespace-nowrap">
+      <p className="overflow-x-hidden whitespace-nowrap font-sans text-xs">
         {album.artist}
       </p>
-      <p className="text-xs overflow-x-hidden whitespace-nowrap">
+      <p className="overflow-x-hidden whitespace-nowrap text-xs">
         {album.name}
       </p>
     </div>
 
-    <DeleteRowButton onClick={onClick}/>
+    <DeleteRowButton onClick={onClick} />
   </div>
 );
 

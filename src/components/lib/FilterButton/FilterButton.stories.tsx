@@ -14,10 +14,7 @@ export default {
 export const Single: ComponentStory<typeof FilterButton> = (args) => {
   return (
     <div className="m-16">
-      <FilterButton
-        {...args}
-        onClick={() => undefined}
-      >
+      <FilterButton {...args} onClick={() => undefined}>
         <ChevronUpDownIcon
           className="
             h-6 w-6 translate-y-[1px]
@@ -26,17 +23,14 @@ export const Single: ComponentStory<typeof FilterButton> = (args) => {
         />
       </FilterButton>
     </div>
-   )
+  );
 };
 
 export const Multiple: ComponentStory<typeof FilterButton> = () => {
   return (
     <>
       <div className="m-8">
-        <FilterButton
-          ariaLabel=""
-          onClick={() => undefined}
-        >
+        <FilterButton ariaLabel="" onClick={() => undefined}>
           <ChevronUpDownIcon
             className="
               h-6 w-6 translate-y-[1px]
@@ -46,10 +40,7 @@ export const Multiple: ComponentStory<typeof FilterButton> = () => {
         </FilterButton>
       </div>
       <div className="m-8">
-        <FilterButton
-          ariaLabel=""
-          onClick={() => undefined}
-        >
+        <FilterButton ariaLabel="" onClick={() => undefined}>
           <TrashIcon
             className="
               h-4 w-4 translate-y-[1px]
@@ -59,5 +50,5 @@ export const Multiple: ComponentStory<typeof FilterButton> = () => {
         </FilterButton>
       </div>
     </>
-   )
+  );
 };

@@ -1,5 +1,5 @@
-import { prisma } from "../../../../server/db/client";
-import { Album } from "../../../../styles/types/Albums";
+import { prisma } from '../../../../server/db/client';
+import { Album } from '../../../../styles/types/Albums';
 
 export interface Settings {
   backgroundColor: string;
@@ -10,7 +10,7 @@ export interface Settings {
   textColor: string;
 }
 
-export const lastFmImageOrigin = "https://lastfm.freetls.fastly.net/i/u/174s/";
+export const lastFmImageOrigin = 'https://lastfm.freetls.fastly.net/i/u/174s/';
 
 export const formatUrl = (url: string) => {
   if (url.length < 43) {
@@ -22,7 +22,7 @@ export const formatUrl = (url: string) => {
   }
 
   return url;
-}
+};
 
 export const formatColor = (url: string) => {
   if (url.length > 16) {
@@ -34,13 +34,13 @@ export const formatColor = (url: string) => {
   }
 
   return url;
-}
+};
 
 export const createChart = async (
   albums: Album[],
   name: string,
   settings: Settings,
-  userId?: string,
+  userId?: string
 ) => {
   const chart = await prisma.chart.create({
     data: {
@@ -77,11 +77,11 @@ export const createChart = async (
       chart_id: chart.uuid,
     })),
     skipDuplicates: true, // Skip 'Bobo'
-  })
+  });
 
   return {
     chart,
     chartSettings,
     albumsInChart,
   };
-}
+};

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export interface Props {
   className: string;
@@ -14,23 +14,24 @@ export const RearrangeViewButton: React.FC<Props> = ({
   <button
     className={`
       ${className}  
-      active:bg-neutral-200 dark:active:bg-neutral-700
-      flex justify-center items-center 
-      h-full 
-      border-r-[2px] dark:border-neutral-800
-      last-of-type:border-r-0
+      flex h-full
+      items-center justify-center border-r-[2px] 
+      last-of-type:border-r-0 
+      active:bg-neutral-200 dark:border-neutral-800
+      dark:active:bg-neutral-700
     `}
     onClick={() => onClick()}
   >
-    <p 
+    <p
       className="
         w-full
+        text-2xl
         font-light
-        dark:text-neutral-500
-        text-2xl tracking-widest
-      ">
-        {children}
-      </p>
+        tracking-widest dark:text-neutral-500
+      "
+    >
+      {children}
+    </p>
   </button>
 );
 

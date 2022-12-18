@@ -1,6 +1,6 @@
-import { a, useSpring, config } from "react-spring";
-import LogoButton from "./LogoButton/LogoButton";
-import ActionOverlayLayout from "./ActionOverlay/ActionOverlayLayout";
+import { a, useSpring, config } from 'react-spring';
+import LogoButton from './LogoButton/LogoButton';
+import ActionOverlayLayout from './ActionOverlay/ActionOverlayLayout';
 
 export interface Props {
   actionOverlay: React.ReactNode;
@@ -11,7 +11,7 @@ export interface Props {
   leftCornerButton?: React.ReactNode;
   rightBadgeButton?: React.ReactNode;
   rightCornerButton?: React.ReactNode;
-  setIsActive: (val: boolean) =>  void;
+  setIsActive: (val: boolean) => void;
 }
 
 export const ActionBarLayout: React.FC<Props> = ({
@@ -24,7 +24,7 @@ export const ActionBarLayout: React.FC<Props> = ({
   rightBadgeButton,
   rightCornerButton,
   setIsActive,
-}) => { 
+}) => {
   const [actionOverlayOpacity, animateActionOverlayOpacity] = useSpring(() => ({
     from: { opacity: 0 },
     to: { opacity: 1 },
@@ -33,7 +33,7 @@ export const ActionBarLayout: React.FC<Props> = ({
 
   const [overlayPosition, animateOverlayPosition] = useSpring(() => ({
     transform: 'translateY(0vh)',
-    config: config.stiff
+    config: config.stiff,
   }));
 
   const start = () => {
@@ -43,12 +43,12 @@ export const ActionBarLayout: React.FC<Props> = ({
   };
 
   const end = () => {
-    animateOverlayPosition.start({ transform:  'translateY(0vh)' });
+    animateOverlayPosition.start({ transform: 'translateY(0vh)' });
     animateActionOverlayOpacity.start({ opacity: 1 });
   };
 
   const onExitActionOverlay = (event: React.BaseSyntheticEvent<MouseEvent>) => {
-    event.stopPropagation()
+    event.stopPropagation();
     end();
   };
 
@@ -57,20 +57,20 @@ export const ActionBarLayout: React.FC<Props> = ({
       <a.div
         className={`
           fixed bottom-0 left-0
-          p-4
+          flex
           w-[calc(100vw)]
-          flex flex-row justify-between items-center
+          flex-row items-center justify-between p-4
           ${className}
         `}
-        style={{...actionOverlayOpacity}}
+        style={{ ...actionOverlayOpacity }}
       >
-        {leftCornerButton ? leftCornerButton : <div className="w-8 h-8" />}
+        {leftCornerButton ? leftCornerButton : <div className="h-8 w-8" />}
         <div className="flex gap-2">
-          {leftBadgeButton ? leftBadgeButton : <div className="w-8 h-8" />}
+          {leftBadgeButton ? leftBadgeButton : <div className="h-8 w-8" />}
           <LogoButton end={end} isActive={isActive} start={start} />
-          {rightBadgeButton ? rightBadgeButton : <div className="w-8 h-8" />}
+          {rightBadgeButton ? rightBadgeButton : <div className="h-8 w-8" />}
         </div>
-        {rightCornerButton ? rightCornerButton : <div className="w-8 h-8" />}
+        {rightCornerButton ? rightCornerButton : <div className="h-8 w-8" />}
       </a.div>
       <a.div
         className="fixed left-0 bottom-0 z-50"

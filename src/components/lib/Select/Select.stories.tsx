@@ -8,15 +8,15 @@ export default {
     options: [
       {
         label: 'Peach',
-        value: 'peach'
+        value: 'peach',
       },
       {
         label: 'Plum',
-        value: 'plum'
+        value: 'plum',
       },
       {
         label: 'Pear',
-        value: 'pear'
+        value: 'pear',
       },
     ],
   },
@@ -30,7 +30,7 @@ export default {
 
 export const Select: ComponentStory<typeof SelectComponent> = (args) => {
   const [value, setValue] = useState<string>('');
-  
+
   return (
     <div className="m-4 max-w-[300px]">
       <SelectComponent
@@ -43,17 +43,16 @@ export const Select: ComponentStory<typeof SelectComponent> = (args) => {
       />
       <p>hello</p>
     </div>
-  )
-}
-
+  );
+};
 
 export const LargeList: ComponentStory<typeof SelectComponent> = (args) => {
   const [value, setValue] = useState<string>('');
   const result = [];
-  for (let i = 0; i < 50 ; i++) {
+  for (let i = 0; i < 50; i++) {
     result.push({
       label: i.toString(),
-      value: i.toString()
+      value: i.toString(),
     });
   }
   return (
@@ -68,5 +67,5 @@ export const LargeList: ComponentStory<typeof SelectComponent> = (args) => {
       />
       <p>hello</p>
     </div>
-  )
-}
+  );
+};

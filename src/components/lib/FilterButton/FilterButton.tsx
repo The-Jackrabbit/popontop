@@ -12,7 +12,8 @@ export interface Props {
   rounding?: string;
 }
 
-export const ICON_STYLE = "h-6 w-6 translate-y-[1px] text-neutral-900 dark:text-neutral-50";
+export const ICON_STYLE =
+  'h-6 w-6 translate-y-[1px] text-neutral-900 dark:text-neutral-50';
 export const DEFAULT_CLASSNAME = 'w-8 h-8 p-[2px]';
 
 const FilterButton: React.FC<Props> = ({
@@ -22,7 +23,7 @@ const FilterButton: React.FC<Props> = ({
   className = DEFAULT_CLASSNAME,
   hasGradientIndicator = true,
   onClick,
-  rounding = 'rounded-full'
+  rounding = 'rounded-full',
 }) => {
   const fromGradient = 'linear-gradient(0deg, gray 0%, gray 100%)';
   const toGradient = hasGradientIndicator
@@ -30,13 +31,15 @@ const FilterButton: React.FC<Props> = ({
     : 'linear-gradient(0deg, gray 0%, gray 100%)';
 
   const [background, animateBackgroundStyle] = useSpring(() => ({
-    bg: fromGradient
+    bg: fromGradient,
   }));
   const [buttonOverlayOpacity, animateButtonOverlayOpacity] = useSpring(() => ({
-    opacity: 0
+    opacity: 0,
   }));
 
-  const onClickButton = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
+  const onClickButton = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ): void => {
     onClick(e);
   };
 
@@ -44,7 +47,7 @@ const FilterButton: React.FC<Props> = ({
     animateBackgroundStyle.start({
       bg: !isActive ? fromGradient : toGradient,
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isActive]);
 
   return (
@@ -54,29 +57,29 @@ const FilterButton: React.FC<Props> = ({
         ${className}
         ${rounding}
         relative
-      text-black dark:text-white
-        dark:bg-neutral-600
+      text-black dark:bg-neutral-600
+        dark:text-white
       `}
       onClick={onClickButton}
       onPointerDown={() => animateButtonOverlayOpacity.start({ opacity: 1 })}
       onPointerUp={() => animateButtonOverlayOpacity.start({ opacity: 0 })}
-      style={{ background:  background.bg }}
+      style={{ background: background.bg }}
     >
       <a.div
         className={`
           absolute -top-1/2 -bottom-1/2 -left-1/2 -right-1/2
           z-0
           ${rounding}
-          opacity-0
           bg-neutral-200
+          opacity-0
         `}
         style={{ ...buttonOverlayOpacity }}
       />
       <div
         className={`
-        bg-white hover:bg-neutral-50 dark:bg-neutral-900 hover:dark:bg-black
-          w-full h-full ${rounding} 
-          flex justify-center items-center
+        h-full w-full bg-white hover:bg-neutral-50
+          dark:bg-neutral-900 hover:dark:bg-black ${rounding} 
+          flex items-center justify-center
           leading-none
         `}
       >

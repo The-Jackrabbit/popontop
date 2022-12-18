@@ -1,5 +1,7 @@
 import { MouseEventHandler } from 'react';
-import ButtonWithAccessory, { LEFT_POSITION_STYLE } from '../../../../lib/ButtonWithAccessory/ButtonWithAccessory';
+import ButtonWithAccessory, {
+  LEFT_POSITION_STYLE,
+} from '../../../../lib/ButtonWithAccessory/ButtonWithAccessory';
 import FilterButton from '../../../../lib/FilterButton/FilterButton';
 
 export interface Props {
@@ -18,13 +20,10 @@ export const ActionButton: React.FC<Props> = ({
   // variant = 'regular',
 }) => {
   return (
-    <ButtonWithAccessory
-      {...LEFT_POSITION_STYLE}
-      label={label}
-    >   
+    <ButtonWithAccessory {...LEFT_POSITION_STYLE} label={label}>
       <FilterButton
-        ariaLabel='save chart'
-        className="w-12 h-12 p-[2px]"
+        ariaLabel="save chart"
+        className="h-12 w-12 p-[2px]"
         rounding="rounded-md"
         onClick={onClick}
         hasGradientIndicator={true}
@@ -32,8 +31,8 @@ export const ActionButton: React.FC<Props> = ({
       >
         {text}
       </FilterButton>
-   </ButtonWithAccessory>
+    </ButtonWithAccessory>
   );
-}
+};
 
 export default ActionButton;

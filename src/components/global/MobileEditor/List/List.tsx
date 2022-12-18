@@ -1,6 +1,6 @@
-import { Album } from "../../../../styles/types/Albums";
-import ListRow, { ListRowMode } from "../../../lib/Mobile/ListRow/ListRow";
-import { RowMovementType } from "../../../lib/Mobile/ListRow/RearrangeView/RearrangeView";
+import { Album } from '../../../../styles/types/Albums';
+import ListRow, { ListRowMode } from '../../../lib/Mobile/ListRow/ListRow';
+import { RowMovementType } from '../../../lib/Mobile/ListRow/RearrangeView/RearrangeView';
 
 export interface Props {
   list: Album[];
@@ -11,7 +11,7 @@ export interface Props {
   textColor: string;
 }
 
-const List: React.FC<Props> = ({ 
+const List: React.FC<Props> = ({
   list,
   listMode,
   onRearrangeClick,
@@ -22,9 +22,9 @@ const List: React.FC<Props> = ({
   <div
     className={`
       ${list.length > 5 ? 'pb-[270px]' : ''}
+      z-10
       h-[calc(100vh_-_10px)]
       overflow-y-scroll
-      z-10
     `}
   >
     <div className="overflow-x-hidden">
@@ -35,7 +35,7 @@ const List: React.FC<Props> = ({
           key={JSON.stringify(album) + index}
           isLastRowInList={index === list.length - 1}
           mode={listMode}
-          onRearrangeClick={(rowMovementType: RowMovementType) => 
+          onRearrangeClick={(rowMovementType: RowMovementType) =>
             onRearrangeClick(rowMovementType, index)
           }
           removeSelfFromList={() => removeAlbumAtIndex(index)}
@@ -46,6 +46,5 @@ const List: React.FC<Props> = ({
     </div>
   </div>
 );
-
 
 export default List;

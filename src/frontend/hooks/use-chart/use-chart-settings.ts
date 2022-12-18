@@ -1,7 +1,7 @@
-import { ChartSettings } from "@prisma/client";
-import { useState } from "react";
-import { useIncrementer } from "../../../components/lib/NumberInput/NumberInput";
-import { HookNode } from "../hook-node";
+import { ChartSettings } from '@prisma/client';
+import { useState } from 'react';
+import { useIncrementer } from '../../../components/lib/NumberInput/NumberInput';
+import { HookNode } from '../hook-node';
 
 export type SettingsHookNode = HookNode<State, Actions>;
 
@@ -29,20 +29,30 @@ export interface State {
   textColor: string;
 }
 
-const useChartSettings = (defaultSettings: ChartSettings | null): SettingsHookNode => {
+const useChartSettings = (
+  defaultSettings: ChartSettings | null
+): SettingsHookNode => {
   const [rows, onIncrementRows, onDecrementRows] = useIncrementer({
     initialAmount: 10, // TODO: persist to backend
-    max: 18
+    max: 18,
   });
   const [columns, onIncrementColumns, onDecrementColumns] = useIncrementer({
     initialAmount: 10, // TODO: persist to backend
     max: 18,
-  }); 
-  const [backgroundColor, setBackgroundColor] = useState(defaultSettings?.background_color ?? '');
-  const [borderColor, setBorderColor] = useState(defaultSettings?.border_color ?? '');
+  });
+  const [backgroundColor, setBackgroundColor] = useState(
+    defaultSettings?.background_color ?? ''
+  );
+  const [borderColor, setBorderColor] = useState(
+    defaultSettings?.border_color ?? ''
+  );
   const [borderSize, setBorderSize] = useState(1); // need to convert the sql sschema for this value from a decimal to a regualr number before unhardcoding this
-  const [showAlbums, setShowAlbums] = useState(defaultSettings?.show_albums ?? true);
-  const [showTitle, setShowTitle] = useState(defaultSettings?.show_title ?? true);
+  const [showAlbums, setShowAlbums] = useState(
+    defaultSettings?.show_albums ?? true
+  );
+  const [showTitle, setShowTitle] = useState(
+    defaultSettings?.show_title ?? true
+  );
   const [textColor, setTextColor] = useState(defaultSettings?.text_color ?? '');
 
   return {
@@ -67,8 +77,8 @@ const useChartSettings = (defaultSettings: ChartSettings | null): SettingsHookNo
       showAlbums,
       showTitle,
       textColor,
-    }
-  }
+    },
+  };
 };
 
 export default useChartSettings;

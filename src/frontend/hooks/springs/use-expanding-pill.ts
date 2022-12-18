@@ -6,7 +6,7 @@ export interface ExpandingPillHookState {
   borderRadiusStyle: {
     borderRadius: SpringValue<string>;
   };
-  opacityAnimationStyle: { opacity: SpringValue<number>; };
+  opacityAnimationStyle: { opacity: SpringValue<number> };
   rowHeightStyle: {
     height: SpringValue<string>;
     padding: SpringValue<string>;
@@ -53,42 +53,51 @@ export function useExpandingPill({
     pageOpacity: opacityAnimationStyle,
   } = usePageFadeIn();
   const [isVisible, setIsVisible] = useState(false);
-  const [borderRadiusStyle, animateBorderRadius] = useSpring(() => ({
-    borderRadius: !isVisible ? styles.borderRadius.to : styles.borderRadius.from,
-  }), []);
-  const [rowHeightStyle, animateRowHeight] = useSpring(() => ({
-    height: isVisible ?  styles.height.to : styles.height.from,
-    padding: isVisible ? styles.padding.to  : styles.padding.from,
-    width: isVisible ?  styles.width.to : styles.width.from,
-  }), []);
+  const [borderRadiusStyle, animateBorderRadius] = useSpring(
+    () => ({
+      borderRadius: !isVisible
+        ? styles.borderRadius.to
+        : styles.borderRadius.from,
+    }),
+    []
+  );
+  const [rowHeightStyle, animateRowHeight] = useSpring(
+    () => ({
+      height: isVisible ? styles.height.to : styles.height.from,
+      padding: isVisible ? styles.padding.to : styles.padding.from,
+      width: isVisible ? styles.width.to : styles.width.from,
+    }),
+    []
+  );
 
   const expandPill = () => {
     setIsVisible((isVisible) => !isVisible);
-    animateBorderRadius.start({ borderRadius:  styles.borderRadius.from });
+    animateBorderRadius.start({ borderRadius: styles.borderRadius.from });
     animateRowHeight.start({
       config: styles.config,
-      onRest: () => animateRowHeight.start({
-        height: styles.height.to,
-        padding: styles.padding.to,
-        config: styles.config,
-      }),
+      onRest: () =>
+        animateRowHeight.start({
+          height: styles.height.to,
+          padding: styles.padding.to,
+          config: styles.config,
+        }),
       width: styles.width.to,
     });
-  }
+  };
 
   const minimizePill = () => {
     setIsVisible((isVisible) => !isVisible);
-    animateBorderRadius.start({ borderRadius:  styles.borderRadius.to });
+    animateBorderRadius.start({ borderRadius: styles.borderRadius.to });
     animateRowHeight.start({
       config: styles.config,
       padding: styles.padding.from,
       height: styles.height.from,
       width: styles.width.from,
       // onRest: () => {
-        // animateRowHeight.start({});
+      // animateRowHeight.start({});
       // },
     });
-  }
+  };
 
   const onClickHeader = (isActive: boolean): void => {
     animateFadeOut(() => {
@@ -98,7 +107,7 @@ export function useExpandingPill({
       } else {
         onExpand();
         expandPill();
-      } 
+      }
 
       animateFadeIn();
     });

@@ -4,15 +4,19 @@ import { ListRowMode } from '../../Mobile/ListRow/ListRow';
 import { DeleteRowButton } from '../../Mobile/Row/DeleteRowButton/DeleteRowButton';
 
 export interface Props {
-  chart: IChartListItem; 
+  chart: IChartListItem;
   listMode: ListRowMode;
   onClick?: () => void;
   onClickDeleteChart: () => void;
 }
 
-export const MobileChartListItem: React.FC<Props> = (props) => <ChartListItem {...props} isMobile={false} />;
+export const MobileChartListItem: React.FC<Props> = (props) => (
+  <ChartListItem {...props} isMobile={false} />
+);
 
-export const DesktopChartListItem: React.FC<Props> = (props) => <ChartListItem {...props} isMobile={true} />;
+export const DesktopChartListItem: React.FC<Props> = (props) => (
+  <ChartListItem {...props} isMobile={true} />
+);
 
 export const ChartListItem: React.FC<Props & { isMobile: boolean }> = ({
   chart,
@@ -28,11 +32,11 @@ export const ChartListItem: React.FC<Props & { isMobile: boolean }> = ({
       onClickDeleteChart={onClickDeleteChart}
     />
   );
-  
+
   if (!isMobile && onClick) {
     return <div onClick={onClick}>{contentComponent}</div>;
   }
-  
+
   return <Link href={`/charts/${chart.uuid}`}>{contentComponent}</Link>;
 };
 
@@ -40,7 +44,7 @@ export interface ChartListItemContentProps {
   chart: IChartListItem;
   listMode: ListRowMode;
   onClickDeleteChart: () => void;
-} 
+}
 
 export const ChartListItemContent: React.FC<ChartListItemContentProps> = ({
   chart,
@@ -48,26 +52,26 @@ export const ChartListItemContent: React.FC<ChartListItemContentProps> = ({
   onClickDeleteChart,
 }) => {
   return (
-    <div 
+    <div
       className="
-        flex justify-between
-        mb-2
+        mb-2 flex
         cursor-pointer
+        justify-between
         hover:bg-neutral-300 active:bg-neutral-400
         dark:hover:bg-neutral-800 dark:active:bg-neutral-700
       "
-    > 
+    >
       <div className="basis-5/6 overflow-x-hidden">
         <p
           className="
-            text-2xl truncate
+            truncate text-2xl
             font-semibold
           "
         >
           {chart.name}
         </p>
-        
-        <p className='text-xs dark:text-neutral-400 font-light'>
+
+        <p className="text-xs font-light dark:text-neutral-400">
           created: {chart.created_at ? chart.created_at.toDateString() : ''}
         </p>
       </div>
@@ -82,28 +86,28 @@ export const ChartListItemContent: React.FC<ChartListItemContentProps> = ({
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 export const ChartListItemLoader: React.FC = () => (
   <div
     className="
-      flex justify-between
-      mb-2 h-16
-      cursor-pointer
+      mb-2 flex
+      h-16 cursor-pointer
+      justify-between
       hover:bg-neutral-300 active:bg-neutral-400
       dark:hover:bg-neutral-800 dark:active:bg-neutral-700
     "
-  > 
+  >
     <div className="basis-full">
       <p
         className="
-          animate-pulse text-2xl w-full bg-neutral-200 dark:bg-neutral-700
-          h-[36px]
+          h-[36px] w-full animate-pulse bg-neutral-200 text-2xl
+          dark:bg-neutral-700
         "
       />
       <p
         className="
-          animate-pulse text-xs mt-1 w-36 h-[16px] bg-neutral-200 dark:bg-neutral-700
+          mt-1 h-[16px] w-36 animate-pulse bg-neutral-200 text-xs dark:bg-neutral-700
         "
       />
     </div>

@@ -1,5 +1,8 @@
 import { ListRowMode } from '../Mobile/ListRow/ListRow';
-import { ChartListItem, ChartListItemLoader } from './ChartListItem/ChartListItem';
+import {
+  ChartListItem,
+  ChartListItemLoader,
+} from './ChartListItem/ChartListItem';
 import { trpc } from '../../../utils/trpc';
 import { useEffect, useState } from 'react';
 import { IChartListItem } from '../../../server/trpc/router/charts/getChartsForUser';
@@ -7,9 +10,9 @@ import { colorMap } from '../../../constants/colors';
 import { Color } from '../../global/DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
 export interface Props {
   isMobile: boolean;
-  setChartBeingViewed?: (chartUuid: string) => void; 
+  setChartBeingViewed?: (chartUuid: string) => void;
 }
-export const ListOfCharts: React.FC<Props> = ({ 
+export const ListOfCharts: React.FC<Props> = ({
   isMobile,
   setChartBeingViewed = () => undefined,
 }) => {
@@ -28,8 +31,8 @@ export const ListOfCharts: React.FC<Props> = ({
       const newVizMap = [...visibilityMap];
       newVizMap[index] = !false;
       return newVizMap;
-    })
-    deleteChartMutation.mutateAsync({ uuid: chart.uuid ? chart.uuid : ''});
+    });
+    deleteChartMutation.mutateAsync({ uuid: chart.uuid ? chart.uuid : '' });
   };
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [listMode, setListMode] = useState(ListRowMode.NORMAL);
@@ -39,41 +42,42 @@ export const ListOfCharts: React.FC<Props> = ({
       <div
         className={`
           ${colorMap[Color.fuchsia]}
-          shadow-md
-          rounded-full w-full h-1 my-4 
+          my-4
+          h-1 w-full rounded-full shadow-md 
         `}
       />
       {data ? (
         <>
           {data.map((chart, index) => (
             <div key={`${index}-chart-list-item`}>
-              {visibilityMap[index]
-                ? (<div></div>)
-                : (
-                  <ChartListItem
-                    chart={chart}
-                    isMobile={isMobile}
-                    listMode={listMode}
-                    onClick={() => {
-                      debugger;
-                      setChartBeingViewed(chart.uuid ?? '')}
-                    }
-                    onClickDeleteChart={() => onClickDeleteChart(chart, index)} 
-                  />
-                )
-              }
+              {visibilityMap[index] ? (
+                <div></div>
+              ) : (
+                <ChartListItem
+                  chart={chart}
+                  isMobile={isMobile}
+                  listMode={listMode}
+                  onClick={() => {
+                    debugger;
+                    setChartBeingViewed(chart.uuid ?? '');
+                  }}
+                  onClickDeleteChart={() => onClickDeleteChart(chart, index)}
+                />
+              )}
             </div>
           ))}
         </>
-      ) : <ListOfChartsLoader />}
+      ) : (
+        <ListOfChartsLoader />
+      )}
     </>
   );
-}
+};
 
 export const ListOfChartsLoader: React.FC = ({}) => (
   <div className="max-h-[80vh] overflow-y-scroll">
     {[...new Array(100)].map((_, index) => (
       <ChartListItemLoader key={`${index}-chart-list-loader`} />
-    ))} 
+    ))}
   </div>
 );

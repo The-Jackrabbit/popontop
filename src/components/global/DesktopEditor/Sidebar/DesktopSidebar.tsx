@@ -23,16 +23,19 @@ export const DesktopSidebar: React.FC<Props> = ({
   const [searchText, setSearchText] = useState('');
   const [timeoutId, setTimeoutId] = useState<null | NodeJS.Timeout>(null);
 
-  const { data, refetch } = trpc.albums.search.useQuery({ text: searchText }, {
-    enabled: false,
-  });
+  const { data, refetch } = trpc.albums.search.useQuery(
+    { text: searchText },
+    {
+      enabled: false,
+    }
+  );
 
   const search = async () => {
     await refetch({});
-  }
+  };
 
   const onType = (value: string) => {
-    setSearchText(value)
+    setSearchText(value);
     if (timeoutId) {
       clearTimeout(timeoutId);
     }
@@ -49,11 +52,11 @@ export const DesktopSidebar: React.FC<Props> = ({
       <div
         className={`
           ${colorMap[Color.green]}
-          shadow-md
-          rounded-full w-full h-1 my-4 
+          my-4
+          h-1 w-full rounded-full shadow-md 
         `}
       />
-      <div className="flex flex-col justify-center mb-2">
+      <div className="mb-2 flex flex-col justify-center">
         <TextExpandingPill
           label="Search albums"
           labelClassName="pr-2"
@@ -62,29 +65,29 @@ export const DesktopSidebar: React.FC<Props> = ({
           setValue={(value: string) => onType(value)}
           value={searchText}
         />
-        {data ? (
-          <SearchResults searchResults={data} />
-        ): null}
+        {data ? <SearchResults searchResults={data} /> : null}
       </div>
 
-      <div className="flex flex-row flex-wrap gap-2 items-center ">
+      <div className="flex flex-row flex-wrap items-center gap-2 ">
         <TextExpandingPill
           label="Background color"
-          labelClassName='pr-2'
-          setValue={(value: string) => settings.actions.setBackgroundColor(value)}
+          labelClassName="pr-2"
+          setValue={(value: string) =>
+            settings.actions.setBackgroundColor(value)
+          }
           value={settings.state.backgroundColor}
         />
-   
+
         <TextExpandingPill
           label="Text color"
-          labelClassName='pr-2'
+          labelClassName="pr-2"
           setValue={(value: string) => settings.actions.setTextColor(value)}
           value={settings.state.textColor}
         />
-   
+
         <TextExpandingPill
           label="Border color"
-          labelClassName='pr-2'
+          labelClassName="pr-2"
           setValue={(value: string) => settings.actions.setBorderColor(value)}
           value={settings.state.borderColor}
         />
@@ -92,7 +95,7 @@ export const DesktopSidebar: React.FC<Props> = ({
         <SwitchExpandingPill
           className="inline-block"
           label="list albums?"
-          labelClassName='pr-2'
+          labelClassName="pr-2"
           setValue={(value: boolean | null) => toggleAlbums(Boolean(value))}
           value={settings.state.showAlbums}
         />
@@ -100,17 +103,17 @@ export const DesktopSidebar: React.FC<Props> = ({
         <SwitchExpandingPill
           className="inline-block"
           label="show title?"
-          labelClassName='pr-2'
+          labelClassName="pr-2"
           setValue={(value: boolean | null) => {
             debugger;
-            toggleTitle(Boolean(value))
+            toggleTitle(Boolean(value));
           }}
           value={settings.state.showTitle}
         />
 
         <NumericExpandingPill
           label="Border width"
-          labelClassName='pr-2'
+          labelClassName="pr-2"
           min={0}
           max={10}
           setValue={(value: number) => settings.actions.setBorderSize(value)}
@@ -119,6 +122,6 @@ export const DesktopSidebar: React.FC<Props> = ({
       </div>
     </>
   );
-}
+};
 
 export default DesktopSidebar;

@@ -1,14 +1,12 @@
-import FilterButton, { ICON_STYLE } from "../../../lib/FilterButton/FilterButton";
-import { 
-  ChevronUpDownIcon, 
-  TrashIcon,
-} from '@heroicons/react/20/solid';
-import { ListRowMode } from "../../../lib/Mobile/ListRow/ListRow";
-import ActionBarLayout from "./ActionBarLayout";
-import CreateChartClickCircle from "./ActionOverlay/ClickCircle/CreateChartClickCircle/CreateChartClickCircle";
-import SearchButton from "./ChartButtons/SearchButton/SearchButton";
-import SettingsButton from "./ChartButtons/SettingsButton/SettingsButton";
-
+import FilterButton, {
+  ICON_STYLE,
+} from '../../../lib/FilterButton/FilterButton';
+import { ChevronUpDownIcon, TrashIcon } from '@heroicons/react/20/solid';
+import { ListRowMode } from '../../../lib/Mobile/ListRow/ListRow';
+import ActionBarLayout from './ActionBarLayout';
+import CreateChartClickCircle from './ActionOverlay/ClickCircle/CreateChartClickCircle/CreateChartClickCircle';
+import SearchButton from './ChartButtons/SearchButton/SearchButton';
+import SettingsButton from './ChartButtons/SettingsButton/SettingsButton';
 
 export interface Props {
   actionOverlayClassName?: string;
@@ -22,7 +20,7 @@ export interface Props {
   onClickDeleteMode: () => void;
   onClickRearrangeMode: () => void;
   saveChart: () => Promise<string>;
-  setIsActive: (val: boolean) =>  void;
+  setIsActive: (val: boolean) => void;
 }
 
 export const CreateChartActionBar: React.FC<Props> = ({
@@ -44,12 +42,12 @@ export const CreateChartActionBar: React.FC<Props> = ({
     onClickSearch();
   };
 
-  const onClickChartSettings = (
+  const onClickChartSettings = () =>
     // event: React.BaseSyntheticEvent<MouseEvent>
-  ) => {
-    // event.stopPropagation();
-    onClickSettings();
-  };
+    {
+      // event.stopPropagation();
+      onClickSettings();
+    };
 
   return (
     <ActionBarLayout
@@ -79,7 +77,7 @@ export const CreateChartActionBar: React.FC<Props> = ({
             onClick={onClickRearrangeMode}
           >
             <ChevronUpDownIcon className={ICON_STYLE} />
-          </FilterButton>  
+          </FilterButton>
         ) : undefined
       }
       rightCornerButton={<SearchButton onClick={onClickSearchAlbums} />}

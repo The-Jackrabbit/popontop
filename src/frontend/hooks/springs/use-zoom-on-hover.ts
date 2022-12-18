@@ -5,7 +5,7 @@ export function useZoomOnHover() {
     from: { scale: 1 },
     config: {
       ...config.wobbly,
-      bounce: 1.2
+      bounce: 1.2,
     },
   }));
   const onMouseOver = () => animateZoomOnHover.start({ scale: 1.05 });

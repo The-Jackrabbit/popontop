@@ -16,10 +16,7 @@ const Droppable: React.FC<Props> = ({
   id,
   style,
 }) => {
-  const {
-    isOver,
-    setNodeRef,
-  } = useDroppable({ id });
+  const { isOver, setNodeRef } = useDroppable({ id });
 
   return (
     <div

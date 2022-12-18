@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { Album } from "../../../../../styles/types/Albums";
-import { startScreenshotMode } from "../../../../../utils/mobile-theme";
-import FilterButton from "../../../../lib/FilterButton/FilterButton";
-import Grid, { useSize } from "../../../../lib/Grid/Grid";
-import NumberInput from "../../../../lib/NumberInput/NumberInput";
-import { ScreenshotMode } from "./ScreenshotMode/ScreenshotMode"
+import { useState } from 'react';
+import { Album } from '../../../../../styles/types/Albums';
+import { startScreenshotMode } from '../../../../../utils/mobile-theme';
+import FilterButton from '../../../../lib/FilterButton/FilterButton';
+import Grid, { useSize } from '../../../../lib/Grid/Grid';
+import NumberInput from '../../../../lib/NumberInput/NumberInput';
+import { ScreenshotMode } from './ScreenshotMode/ScreenshotMode';
 
 export interface Props {
   chartTitle: string;
@@ -30,7 +30,7 @@ export const PreviewEditor: React.FC<Props> = ({
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
   const onClickPreview = () => {
     setIsOverlayVisible(true);
-    startScreenshotMode();  
+    startScreenshotMode();
   };
   const onExit = () => setIsOverlayVisible(false);
   const [target, setTarget] = useState<HTMLDivElement | null>(null);
@@ -39,27 +39,27 @@ export const PreviewEditor: React.FC<Props> = ({
   return (
     <div
       className={`
-        dark:text-white
-        bg-white dark:bg-black
+        flex
         h-screen w-screen
-        p-12
-        flex flex-col
-        align-middle items-stretch
+        flex-col items-stretch
+        bg-white
+        p-12 align-middle
+        dark:bg-black dark:text-white
       `}
       ref={setTarget}
     >
-      <div className="basis-[3%] z-30">
+      <div className="z-30 basis-[3%]">
         <NumberInput
-          className="flex w-full justify-between mb-4"
+          className="mb-4 flex w-full justify-between"
           currentValue={rows}
           label="number of rows"
           onDecrement={onDecrementRows}
           onIncrement={onIncrementRows}
         />
       </div>
-      <div className="basis-[3%] grow-0 shrink">
+      <div className="shrink grow-0 basis-[3%]">
         <NumberInput
-          className="flex w-full justify-between mb-4"
+          className="mb-4 flex w-full justify-between"
           currentValue={columns}
           label="number of columns"
           onDecrement={onDecrementColumns}
@@ -68,7 +68,7 @@ export const PreviewEditor: React.FC<Props> = ({
       </div>
       <FilterButton
         ariaLabel="Enter screenshot mode"
-        className={"w-min whitespace-nowrap p-1 basis-[4%] mb-4 "}
+        className={'mb-4 w-min basis-[4%] whitespace-nowrap p-1 '}
         onClick={onClickPreview}
       >
         <p className="p-2 py-1">Enter screenshot mode</p>
@@ -82,7 +82,7 @@ export const PreviewEditor: React.FC<Props> = ({
               alt={list[index]?.artist ?? ''}
               width={size.height}
               height={size.width}
-            /> 
+            />
           )}
           size={size}
           columns={columns}
@@ -94,10 +94,10 @@ export const PreviewEditor: React.FC<Props> = ({
           chartTitle={chartTitle}
           columns={columns}
           list={list}
-          onExit={onExit} 
+          onExit={onExit}
           rows={rows}
-        /> 
+        />
       ) : null}
     </div>
   );
-} 
+};

@@ -10,7 +10,7 @@ export interface Props {
   actions: React.ReactNode;
 }
 
-const Layout: React.FC<Props> = ({ 
+const Layout: React.FC<Props> = ({
   // backgroundColor,
   isReadonly,
   title,
@@ -21,12 +21,10 @@ const Layout: React.FC<Props> = ({
   const [target, setTarget] = useState<HTMLDivElement | null>(null);
   const size = useSize(target);
   return (
-    <div
-      className="flex flex-row h-full justify-between"
-    >
-      <div className="flex flex-col items-center px-4 relative w-full">
+    <div className="flex h-full flex-row justify-between">
+      <div className="relative flex w-full flex-col items-center px-4">
         {title}
-        <div ref={setTarget} className="basis-full w-full">
+        <div ref={setTarget} className="w-full basis-full">
           {size ? chart(size) : null}
         </div>
       </div>
@@ -34,17 +32,14 @@ const Layout: React.FC<Props> = ({
       {list}
       <div
         className="
-          border-neutral-300 dark:border-neutral-800 border-l-2
           flex flex-col justify-between
-          pl-4
+          border-l-2 border-neutral-300 pl-4
+          dark:border-neutral-800
         "
       >
-        {!isReadonly
-          ? actions
-          : null
-        }
+        {!isReadonly ? actions : null}
       </div>
     </div>
   );
-}
+};
 export default Layout;

@@ -12,10 +12,9 @@ export default {
 } as ComponentMeta<typeof DesktopSidebar>;
 
 export const Desktop: ComponentStory<typeof DesktopSidebar> = (args) => {
-
   return (
     <div className="m-4">
-      <DesktopSidebar {...args}  />
+      <DesktopSidebar {...args} />
     </div>
-  )
-}
+  );
+};

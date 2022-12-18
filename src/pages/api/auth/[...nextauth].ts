@@ -1,10 +1,10 @@
-import NextAuth, { type NextAuthOptions } from "next-auth";
-import GoogleProvider, { GoogleProfile } from "next-auth/providers/google"
+import NextAuth, { type NextAuthOptions } from 'next-auth';
+import GoogleProvider, { GoogleProfile } from 'next-auth/providers/google';
 
 // Prisma adapter for NextAuth, optional and can be removed
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { prisma } from "../../../server/db/client";
-import { env } from "../../../env/server.mjs";
+import { PrismaAdapter } from '@next-auth/prisma-adapter';
+import { prisma } from '../../../server/db/client';
+import { env } from '../../../env/server.mjs';
 
 export const authOptions: NextAuthOptions = {
   // Include user.id on session
@@ -28,9 +28,9 @@ export const authOptions: NextAuthOptions = {
           name: profile.name,
           email: profile.email,
           image: profile.picture,
-        }
+        };
       },
-    })
+    }),
     // ...add more providers here
   ],
 };
