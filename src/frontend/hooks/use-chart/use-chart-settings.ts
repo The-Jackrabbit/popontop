@@ -1,7 +1,7 @@
 import { ChartSettings } from '@prisma/client';
 import { useState } from 'react';
-import { useIncrementer } from '../../../components/lib/NumberInput/NumberInput';
 import { HookNode } from '../hook-node';
+import { useIncrementer } from '../use-incrementer';
 
 export type SettingsHookNode = HookNode<State, Actions>;
 
@@ -14,6 +14,8 @@ export interface Actions {
   setBorderSize: (value: number) => void;
   setShowAlbums: (value: boolean) => void;
   setBackgroundColor: (value: string) => void;
+  setColumns: (value: number) => void;
+  setRows: (value: number) => void;
   setShowTitle: (value: boolean) => void;
   setTextColor: (value: string) => void;
 }
@@ -32,11 +34,21 @@ export interface State {
 const useChartSettings = (
   defaultSettings: ChartSettings | null
 ): SettingsHookNode => {
-  const [rows, onIncrementRows, onDecrementRows] = useIncrementer({
+  const {
+    onIncrement: onIncrementRows,
+    onDecrement: onDecrementRows,
+    setValue: setRows,
+    value: rows,
+  } = useIncrementer({
     initialAmount: 10, // TODO: persist to backend
     max: 18,
   });
-  const [columns, onIncrementColumns, onDecrementColumns] = useIncrementer({
+  const {
+    onIncrement: onIncrementColumns,
+    onDecrement: onDecrementColumns,
+    setValue: setColumns,
+    value: columns,
+  } = useIncrementer({
     initialAmount: 10, // TODO: persist to backend
     max: 18,
   });
@@ -64,6 +76,8 @@ const useChartSettings = (
       setBackgroundColor,
       setBorderColor,
       setBorderSize,
+      setColumns,
+      setRows,
       setShowAlbums,
       setShowTitle,
       setTextColor,

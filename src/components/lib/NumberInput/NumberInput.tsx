@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 export interface Props {
   className?: string;
   currentValue: number;
@@ -7,26 +5,6 @@ export interface Props {
   onDecrement: () => void;
   onIncrement: () => void;
 }
-
-export const useIncrementer = ({
-  incrementAmount = 1,
-  initialAmount = 5,
-  max = 10,
-  min = 0,
-}: {
-  incrementAmount?: number;
-  initialAmount?: number;
-  max?: number;
-  min?: number;
-}): [number, () => void, () => void] => {
-  const [value, setValue] = useState(initialAmount);
-  const onDecrement = () =>
-    value <= min ? undefined : setValue(value - incrementAmount);
-  const onIncrement = () =>
-    value >= max ? undefined : setValue(value + incrementAmount);
-
-  return [value, onIncrement, onDecrement];
-};
 
 export const NumberInput: React.FC<Props> = ({
   className = 'flex w-full justify-between',
