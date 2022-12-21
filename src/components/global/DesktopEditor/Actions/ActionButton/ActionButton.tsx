@@ -23,8 +23,8 @@ export const ActionButton: React.FC<Props> = ({
     <ButtonWithAccessory {...LEFT_POSITION_STYLE} label={label}>
       <FilterButton
         ariaLabel="save chart"
-        className="h-12 w-12 p-[2px]"
-        rounding="rounded-md"
+        className="h-12 w-12 p-[2px] shadow-lg"
+        rounding="rounded-full"
         onClick={onClick}
         hasGradientIndicator={true}
         isActive={true}

@@ -18,25 +18,32 @@ const DesktopEditor: React.FC<Props> = ({
   chart,
   isLoading,
   readonly = false,
-  titleStyle,
+  // titleStyle,
 }) => {
   return (
     <Layout
       backgroundColor={chart.childrenNodes.settings.state.backgroundColor}
       isReadonly={readonly}
       title={
-        <a.div style={titleStyle} className="mb-2 w-full overflow-y-hidden">
-          <Title
-            chartTitle={chart.state.chartTitle}
-            isReadOnly={false}
-            setValue={chart.actions.setChartTitle}
-            showIntroduction={!true}
-            textColor="black"
-          />
-        </a.div>
+        <Title
+          chartTitle={chart.state.chartTitle}
+          isReadOnly={false}
+          setValue={chart.actions.setChartTitle}
+          showIntroduction={!true}
+          textColor="black"
+        />
       }
       listTwo={
-        <ChartListV2 columnCount={3} list={chart.childrenNodes.list.state} />
+        <ChartListV2
+          columnCount={3}
+          list={chart.childrenNodes.list.state.filter(
+            (_, index) =>
+              true ||
+              index <
+                chart.childrenNodes.settings.state.rows *
+                  chart.childrenNodes.settings.state.columns
+          )}
+        />
       }
       chart={(size: DOMRect) =>
         // TODO : Implement beginning instructions for desktop

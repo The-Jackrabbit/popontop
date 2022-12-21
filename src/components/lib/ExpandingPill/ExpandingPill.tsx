@@ -49,7 +49,7 @@ export const ExpandingPill: React.FC<Props> = ({
         rounded-lg bg-white
         px-2
         py-1
-        text-xs shadow-lg dark:bg-black
+        text-sm shadow-lg dark:bg-black
         dark:shadow-sm dark:shadow-neutral-800
       `}
       {...mouseActions}

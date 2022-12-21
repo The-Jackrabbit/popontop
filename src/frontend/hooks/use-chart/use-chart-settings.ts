@@ -40,7 +40,7 @@ const useChartSettings = (
     setValue: setRows,
     value: rows,
   } = useIncrementer({
-    initialAmount: 10, // TODO: persist to backend
+    initialAmount: 5, // TODO: persist to backend
     max: 18,
   });
   const {

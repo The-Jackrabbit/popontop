@@ -22,12 +22,12 @@ const Layout: React.FC<Props> = ({
   const size = useSize(target);
   return (
     <div className="flex h-full flex-row justify-between">
-      <div className="relative flex w-full flex-col items-center px-4">
+      <div className="relative flex w-full flex-col items-center gap-8 px-4">
         <div className="min-h-min w-full">{title}</div>
-        <div ref={setTarget} className="w-full basis-full">
+        <div ref={setTarget} className="w-full">
           {size ? chart(size) : null}
         </div>
-        <div className="h-min">{listTwo}</div>
+        <div>{listTwo}</div>
       </div>
       <div
         className="

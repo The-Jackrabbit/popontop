@@ -27,12 +27,12 @@ export interface Actions {
   swapAlbumsAtIndices: (oldIndex: number, newIndex: number) => void;
 }
 
-const testlist = [...new Array(100)].map(
+export const testlist = [...new Array(100)].map(
   () => ALBUM_RESULTS[randomIntegerInRange(0, 9)]
 );
 
 const useList = (initialList: Album[] = []): ListHookNode => {
-  const [list, setList] = useState<Album[]>(testlist as Album[]);
+  const [list, setList] = useState<Album[]>(initialList);
   const [draggedAlbum, setDraggedAlbum] = useState<DraggedAlbum>({
     data: EMPTY_ALBUM,
     origin: 'search',

@@ -71,7 +71,6 @@ export const DesktopSidebar: React.FC<Props> = ({
       <div className="flex flex-row flex-wrap items-center gap-2 ">
         <TextExpandingPill
           label="Background color"
-          labelClassName="pr-2"
           setValue={(value: string) =>
             settings.actions.setBackgroundColor(value)
           }
@@ -79,13 +78,11 @@ export const DesktopSidebar: React.FC<Props> = ({
         />
         <TextExpandingPill
           label="Text color"
-          labelClassName="pr-2"
           setValue={(value: string) => settings.actions.setTextColor(value)}
           value={settings.state.textColor}
         />
         <TextExpandingPill
           label="Border color"
-          labelClassName="pr-2"
           setValue={(value: string) => settings.actions.setBorderColor(value)}
           value={settings.state.borderColor}
         />
@@ -100,10 +97,7 @@ export const DesktopSidebar: React.FC<Props> = ({
           className="inline-block"
           label="show title?"
           labelClassName="pr-2"
-          setValue={(value: boolean | null) => {
-            debugger;
-            toggleTitle(Boolean(value));
-          }}
+          setValue={(value: boolean | null) => toggleTitle(Boolean(value))}
           value={settings.state.showTitle}
         />
         <NumericExpandingPill
@@ -116,7 +110,6 @@ export const DesktopSidebar: React.FC<Props> = ({
         />
         <NumericExpandingPill
           label="Number of columns"
-          labelClassName="pr-2"
           min={0}
           max={10}
           setValue={(value: number) => settings.actions.setColumns(value)}
@@ -125,7 +118,6 @@ export const DesktopSidebar: React.FC<Props> = ({
 
         <NumericExpandingPill
           label="Number of rows"
-          labelClassName="pr-2"
           min={0}
           max={10}
           setValue={(value: number) => settings.actions.setRows(value)}

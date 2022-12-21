@@ -1,15 +1,31 @@
 import { config, useSpring } from 'react-spring';
 
-export function useZoomOnHover() {
+export const START_SCALE = 1;
+export const END_SCALE = 1.02;
+export const BOUNCE = 1.2;
+
+export function useZoomOnHover(
+  zoomConfig: {
+    bounce: number;
+    endScale: number;
+    startScale: number;
+  } = {
+    bounce: BOUNCE,
+    endScale: END_SCALE,
+    startScale: START_SCALE,
+  }
+) {
   const [zoomOnHoverStyle, animateZoomOnHover] = useSpring(() => ({
-    from: { scale: 1 },
+    from: { scale: zoomConfig.startScale },
     config: {
       ...config.wobbly,
-      bounce: 1.2,
+      bounce: zoomConfig.bounce,
     },
   }));
-  const onMouseOver = () => animateZoomOnHover.start({ scale: 1.05 });
-  const onMouseLeave = () => animateZoomOnHover.start({ scale: 1.0 });
+  const onMouseOver = () =>
+    animateZoomOnHover.start({ scale: zoomConfig.endScale });
+  const onMouseLeave = () =>
+    animateZoomOnHover.start({ scale: zoomConfig.startScale });
 
   return {
     zoomOnHoverStyle,

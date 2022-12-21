@@ -1,4 +1,4 @@
-import { ArrowRightIcon, CloudArrowUpIcon } from '@heroicons/react/20/solid';
+import { ArrowRightIcon, CloudArrowUpIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { ICON_STYLE } from '../../../lib/FilterButton/FilterButton';
 import LoadingBouncer from '../../../lib/LoadingBouncer/LoadingBouncer';

@@ -46,13 +46,17 @@ export const NumericInput: React.FC = () => {
   const min = 0;
   const max = 10;
   return (
-    <NumericExpandingPill
-      label="Border width"
-      min={min}
-      max={max}
-      setValue={setValue}
-      value={value}
-    />
+    <div className="m-12 w-96">
+      <NumericExpandingPill
+        isInitiallyExpanded={true}
+        label="Border width"
+        labelClassName="text-2xl"
+        min={min}
+        max={max}
+        setValue={setValue}
+        value={value}
+      />
+    </div>
   );
 };
 

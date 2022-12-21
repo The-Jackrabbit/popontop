@@ -46,13 +46,15 @@ const Grid: React.FC<Props> = ({
       id="container"
       className={`
         ${preview ? 'scale-95' : ''}
-        flex items-stretch justify-center
-        overflow-hidden align-middle
+        flex h-min flex-wrap
+        items-center 
+        justify-center
+        align-middle
       `}
     >
-      {emptyColumns.map((_, y) => (
-        <div className=" h-min" key={`row-${y}`}>
-          {emptyRows.map((_, x) => {
+      {emptyRows.map((_, y) => (
+        <div className="flex w-full justify-center" key={`row-${y}`}>
+          {emptyColumns.map((_, x) => {
             const index = x + columns * y;
             return (
               <div
