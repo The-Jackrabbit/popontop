@@ -66,7 +66,7 @@ const Chart = ({
       <a.div style={pageOpacity} className="h-full">
         <DesktopEditor
           chart={chart}
-          listStyles={state.listStyle}
+          // listStyles={state.listStyle}
           readonly={true}
           isLoading={chart.state.isEditLoading}
           titleStyle={state.titleStyle}
