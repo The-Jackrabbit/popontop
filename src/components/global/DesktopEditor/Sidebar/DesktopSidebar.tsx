@@ -105,14 +105,14 @@ export const DesktopSidebar: React.FC<Props> = ({
           labelClassName="pr-2"
           min={0}
           max={10}
-          setValue={(value: number) => settings.actions.setBorderSize(value)}
+          setValue={((value: number) => settings.actions.setBorderSize(value)) as any}
           value={settings.state.borderSize}
         />
         <NumericExpandingPill
           label="Number of columns"
           min={0}
           max={10}
-          setValue={(value: number) => settings.actions.setColumns(value)}
+          setValue={((value: number) => settings.actions.setColumns(value)) as any}
           value={settings.state.columns}
         />
 
@@ -120,7 +120,7 @@ export const DesktopSidebar: React.FC<Props> = ({
           label="Number of rows"
           min={0}
           max={10}
-          setValue={(value: number) => settings.actions.setRows(value)}
+          setValue={((value: number) => settings.actions.setRows(value)) as any}
           value={settings.state.rows}
         />
       </div>
