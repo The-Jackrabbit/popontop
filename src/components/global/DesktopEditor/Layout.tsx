@@ -24,7 +24,7 @@ const Layout: React.FC<Props> = ({
     <div className="flex h-full flex-row justify-between">
       <div className="relative flex w-full flex-col items-center gap-8 px-4">
         <div className="min-h-min w-full">{title}</div>
-        <div ref={setTarget} className="w-full">
+        <div ref={setTarget} className="w-full basis-1/2">
           {size ? chart(size) : null}
         </div>
         <div>{listTwo}</div>

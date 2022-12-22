@@ -1,6 +1,9 @@
 import React from 'react';
 import { a, SpringValue } from 'react-spring';
+import { addAbortSignal } from 'stream';
+import { EMPTY_ALBUM } from '../../../constants/empty-album';
 import { ChartHookNode } from '../../../frontend/hooks/use-chart/use-chart';
+import { Album } from '../../../styles/types/Albums';
 import Title from '../../lib/Title/Title';
 import DesktopActions from './Actions/DesktopActions';
 import ChartListV2 from './ChartListV2/ChartListV2';
@@ -20,6 +23,17 @@ const DesktopEditor: React.FC<Props> = ({
   readonly = false,
   // titleStyle,
 }) => {
+  const textList: Album[] = (() => {
+    const lengthOfList = chart.childrenNodes.settings.state.rows *
+    chart.childrenNodes.settings.state.columns;
+    const emptyTextList = [...new Array(lengthOfList)];
+    return emptyTextList.map(
+      (_, index) =>
+        index < lengthOfList && chart.childrenNodes.list.state[index]
+          ? chart.childrenNodes.list.state[index] as Album
+          : EMPTY_ALBUM 
+    );
+  })();
   return (
     <Layout
       backgroundColor={chart.childrenNodes.settings.state.backgroundColor}
@@ -36,30 +50,21 @@ const DesktopEditor: React.FC<Props> = ({
       listTwo={
         <ChartListV2
           columnCount={3}
-          list={chart.childrenNodes.list.state.filter(
-            (_, index) =>
-              true ||
-              index <
-                chart.childrenNodes.settings.state.rows *
-                  chart.childrenNodes.settings.state.columns
-          )}
+          list={textList}
         />
       }
-      chart={(size: DOMRect) =>
-        // TODO : Implement beginning instructions for desktop
-        true ? (
-          <DesktopChart
-            backgroundColor={chart.childrenNodes.settings.state.backgroundColor}
-            borderColor={chart.childrenNodes.settings.state.borderColor}
-            borderSize={chart.childrenNodes.settings.state.borderSize}
-            isReadOnly={readonly}
-            items={chart.childrenNodes.list.state ?? []}
-            numberOfColumns={chart.childrenNodes.settings.state.columns}
-            numberOfRows={chart.childrenNodes.settings.state.rows}
-            size={size}
-          />
-        ) : null
-      }
+      chart={(size: DOMRect) => (
+        <DesktopChart
+          backgroundColor={chart.childrenNodes.settings.state.backgroundColor}
+          borderColor={chart.childrenNodes.settings.state.borderColor}
+          borderSize={chart.childrenNodes.settings.state.borderSize}
+          isReadOnly={readonly}
+          items={chart.childrenNodes.list.state ?? []}
+          numberOfColumns={chart.childrenNodes.settings.state.columns}
+          numberOfRows={chart.childrenNodes.settings.state.rows}
+          size={size}
+        />
+      )}
       actions={
         <DesktopActions
           isLoading={isLoading}
