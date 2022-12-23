@@ -99,11 +99,7 @@ export const ViewModeModal: React.FC<Props> = ({
       ) : null}
       {isOverlayVisible ? (
         <div className="fixed top-0 left-0 z-50">
-          <div
-            className="
-              fixed right-0
-            "
-          >
+          <div className="fixed right-0">
             <div
               className="
                 z-50
