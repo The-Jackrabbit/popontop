@@ -5,6 +5,8 @@ import Title from '../../../../../lib/Title/Title';
 import { TextList } from './TextList/TextList';
 
 export interface Props {
+  borderColor: string;
+  borderSize: number;
   chartTitle: string;
   columns: number;
   list: Album[];
@@ -13,6 +15,8 @@ export interface Props {
 }
 
 export const ScreenshotMode: React.FC<Props> = ({
+  borderColor,
+  borderSize,
   chartTitle,
   columns,
   list,
@@ -44,6 +48,8 @@ export const ScreenshotMode: React.FC<Props> = ({
             />
             {size ? (
               <Grid
+                borderColor={borderColor}
+                borderSize={borderSize}
                 columns={columns}
                 rows={rows}
                 size={size}

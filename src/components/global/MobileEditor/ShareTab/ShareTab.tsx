@@ -5,6 +5,8 @@ import { ICON_STYLE } from '../../../lib/FilterButton/FilterButton';
 import { PreviewEditor } from './PreviewEditor/PreviewEditor';
 
 export interface Props {
+  borderColor: string;
+  borderSize: number;
   chartTitle: string;
   columns: number;
   list: Album[];
@@ -16,6 +18,8 @@ export interface Props {
 }
 
 export const ShareTab: React.FC<Props> = ({
+  borderColor,
+  borderSize,
   chartTitle,
   columns,
   list,
@@ -61,6 +65,8 @@ export const ShareTab: React.FC<Props> = ({
       </div>
       {isMainOverlayVisible ? (
         <PreviewEditor
+          borderColor={borderColor}
+          borderSize={borderSize}
           chartTitle={chartTitle}
           columns={columns}
           list={list}

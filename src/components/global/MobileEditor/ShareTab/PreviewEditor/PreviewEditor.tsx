@@ -7,6 +7,8 @@ import NumberInput from '../../../../lib/NumberInput/NumberInput';
 import { ScreenshotMode } from './ScreenshotMode/ScreenshotMode';
 
 export interface Props {
+  borderColor: string;
+  borderSize: number;
   chartTitle: string;
   columns: number;
   list: Album[];
@@ -18,6 +20,8 @@ export interface Props {
 }
 
 export const PreviewEditor: React.FC<Props> = ({
+  borderColor,
+  borderSize,
   chartTitle,
   columns,
   list,
@@ -75,6 +79,8 @@ export const PreviewEditor: React.FC<Props> = ({
       </FilterButton>
       {size ? (
         <Grid
+          borderColor={borderColor}
+          borderSize={borderSize}
           preview={true}
           itemComponent={({ index }) => (
             <img
@@ -91,6 +97,8 @@ export const PreviewEditor: React.FC<Props> = ({
       ) : null}
       {isOverlayVisible ? (
         <ScreenshotMode
+          borderColor={borderColor}
+          borderSize={borderSize}
           chartTitle={chartTitle}
           columns={columns}
           list={list}

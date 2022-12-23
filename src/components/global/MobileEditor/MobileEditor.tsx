@@ -122,6 +122,12 @@ const MobileEditor: React.FC<Props> = ({
 
       {childrenNodes.editor.state.isActive ? (
         <ShareTab
+          borderColor={
+            childrenNodes.chart.childrenNodes.settings.state.borderColor
+          }
+          borderSize={
+            childrenNodes.chart.childrenNodes.settings.state.borderSize
+          }
           chartTitle={childrenNodes.chart.state.chartTitle}
           onDecrementColumns={
             childrenNodes.chart.childrenNodes.settings.actions
@@ -171,6 +177,12 @@ const MobileEditor: React.FC<Props> = ({
         </div>
         {childrenNodes.editor.state.isViewModeActive ? (
           <ViewModeModal
+            borderColor={
+              childrenNodes.chart.childrenNodes.settings.state.borderColor
+            }
+            borderSize={
+              childrenNodes.chart.childrenNodes.settings.state.borderSize
+            }
             chartTitle={childrenNodes.chart.state.chartTitle}
             onDecrementColumns={
               childrenNodes.chart.childrenNodes.settings.actions
