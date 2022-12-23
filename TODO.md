@@ -1,6 +1,5 @@
 ## TODO
-- [ ] fix title visibility toggle
-- [ ] fix list visibilty toggle
+
 - [ ] fix background color
 - [ ] different interface organization (list on right, list on left)
 - [ ] fix save
@@ -8,5 +7,7 @@
 
 ## ICEBOX
 
+## Done
 
-## DONE
+- [x] fix title visibility toggle
+- [x] fix list visibilty toggle

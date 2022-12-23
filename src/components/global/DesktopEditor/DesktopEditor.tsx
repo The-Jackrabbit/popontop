@@ -24,14 +24,14 @@ const DesktopEditor: React.FC<Props> = ({
   // titleStyle,
 }) => {
   const textList: Album[] = (() => {
-    const lengthOfList = chart.childrenNodes.settings.state.rows *
-    chart.childrenNodes.settings.state.columns;
+    const lengthOfList =
+      chart.childrenNodes.settings.state.rows *
+      chart.childrenNodes.settings.state.columns;
     const emptyTextList = [...new Array(lengthOfList)];
-    return emptyTextList.map(
-      (_, index) =>
-        index < lengthOfList && chart.childrenNodes.list.state[index]
-          ? chart.childrenNodes.list.state[index] as Album
-          : EMPTY_ALBUM 
+    return emptyTextList.map((_, index) =>
+      index < lengthOfList && chart.childrenNodes.list.state[index]
+        ? (chart.childrenNodes.list.state[index] as Album)
+        : EMPTY_ALBUM
     );
   })();
   return (
@@ -39,19 +39,20 @@ const DesktopEditor: React.FC<Props> = ({
       backgroundColor={chart.childrenNodes.settings.state.backgroundColor}
       isReadonly={readonly}
       title={
-        <Title
-          chartTitle={chart.state.chartTitle}
-          isReadOnly={false}
-          setValue={chart.actions.setChartTitle}
-          showIntroduction={!true}
-          textColor="black"
-        />
+        chart.childrenNodes.settings.state.showTitle ? (
+          <Title
+            chartTitle={chart.state.chartTitle}
+            isReadOnly={false}
+            setValue={chart.actions.setChartTitle}
+            showIntroduction={!true}
+            textColor="black"
+          />
+        ) : null
       }
       listTwo={
-        <ChartListV2
-          columnCount={3}
-          list={textList}
-        />
+        chart.childrenNodes.settings.state.showAlbums ? (
+          <ChartListV2 columnCount={3} list={textList} />
+        ) : null
       }
       chart={(size: DOMRect) => (
         <DesktopChart
