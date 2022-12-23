@@ -93,9 +93,6 @@ export function useExpandingPill({
       padding: styles.padding.from,
       height: styles.height.from,
       width: styles.width.from,
-      // onRest: () => {
-      // animateRowHeight.start({});
-      // },
     });
   };
 

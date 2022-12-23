@@ -2,6 +2,8 @@ import { useEffect, useLayoutEffect, useMemo, useState } from 'react';
 import useResizeObserver from '@react-hook/resize-observer';
 
 export interface Props {
+  borderColor: string;
+  borderSize: number;
   columns: number;
   itemComponent: ({
     index,
@@ -18,6 +20,8 @@ export interface Props {
 }
 
 const Grid: React.FC<Props> = ({
+  borderColor,
+  borderSize,
   columns,
   itemComponent,
   preview = false,
@@ -43,14 +47,19 @@ const Grid: React.FC<Props> = ({
 
   return (
     <div
-      id="container"
       className={`
         ${preview ? 'scale-95' : ''}
         flex h-min flex-wrap
         items-center 
         justify-center
         align-middle
+        border
+        w-min
       `}
+      style={{
+        borderWidth: borderSize,
+        borderColor: borderColor,
+      }}
     >
       {emptyRows.map((_, y) => (
         <div className="flex w-full justify-center" key={`row-${y}`}>

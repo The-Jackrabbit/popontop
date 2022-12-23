@@ -29,15 +29,13 @@ export const ChartItem: React.FC<Props> = ({
       data-index-column={columnIndex}
       data-index-inchart={index}
       className="
-      border-1 h-full
-      w-full border
-    border-neutral-300 dark:border-neutral-600 
-    "
+        border-1 h-full
+        w-full 
+      "
     >
       <Droppable
         className="
-          border-1 h-full
-          border border-neutral-300 dark:border-neutral-600
+          h-full
         "
         id={index.toString()}
         album={album}

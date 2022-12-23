@@ -78,7 +78,7 @@ export const ExpandingPill: React.FC<Props> = ({
         style={{
           ...rowHeightStyle,
         }}
-        className="overflow-hidden px-2"
+        className="overflow-hidden px-2 w-fulluuuuuu"
       >
         {children[2]}
       </a.div>

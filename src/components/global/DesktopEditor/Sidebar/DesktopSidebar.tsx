@@ -102,7 +102,6 @@ export const DesktopSidebar: React.FC<Props> = ({
         />
         <NumericExpandingPill
           label="Border width"
-          labelClassName="pr-2"
           min={0}
           max={10}
           setValue={((value: number) => settings.actions.setBorderSize(value)) as any}

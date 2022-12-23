@@ -27,6 +27,8 @@ export const DesktopChart: React.FC<Props> = ({
 }) => {
   return (
     <Grid
+      borderColor={borderColor}
+      borderSize={borderSize}
       columns={numberOfColumns}
       itemComponent={({ index, x, y }) => (
         <ChartItem
