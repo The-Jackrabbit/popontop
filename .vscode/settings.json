@@ -4,6 +4,7 @@
   "editor.formatOnSave": true,
   "editor.rulers": [
     {
+      "color": "red",
       "column": 80
     }
   ]

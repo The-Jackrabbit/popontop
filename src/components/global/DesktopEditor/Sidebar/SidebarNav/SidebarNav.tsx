@@ -33,7 +33,7 @@ export const SidebarNav: React.FC = () => {
       <div className="flex -translate-y-2 flex-row justify-between gap-1">
         <NavDot
           ariaLabel="editor page"
-          isActive={router.route === '/'}
+          isActive={router.route === '/' || router.route.includes('/charts/')}
           onClick={() => router.push('/')}
           color={Color.green}
           label="Editor"
@@ -41,14 +41,14 @@ export const SidebarNav: React.FC = () => {
         <NavDot
           ariaLabel="charts page"
           isActive={router.route === '/your-charts'}
-          onClick={() => router.push('your-charts')}
+          onClick={() => router.push('/your-charts')}
           color={Color.fuchsia}
           label="Your charts"
         />
         <NavDot
           ariaLabel="credits page"
           isActive={router.route === '/credits'}
-          onClick={() => router.push('credits')}
+          onClick={() => router.push('/credits')}
           color={Color.violet}
           label="Credits"
         />

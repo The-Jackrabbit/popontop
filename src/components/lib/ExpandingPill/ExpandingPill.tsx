@@ -1,4 +1,5 @@
 import { a } from 'react-spring';
+import { EXPANDING_PILL, PILL } from '../../../constants/shared-styles';
 import { useExpandingPill } from '../../../frontend/hooks/springs/use-expanding-pill';
 import { useZoomOnHover } from '../../../frontend/hooks/springs/use-zoom-on-hover';
 
@@ -42,15 +43,9 @@ export const ExpandingPill: React.FC<Props> = ({
     <a.div
       className={`
         ${className}
-        inline-flex h-max
-        w-full 
-        max-w-full
-        cursor-pointer flex-col
-        rounded-lg bg-white
-        px-2
-        py-1
-        text-sm shadow-lg dark:bg-black
-        dark:shadow-sm dark:shadow-neutral-800
+        ${PILL} 
+        ${EXPANDING_PILL}
+        h-max w-full max-w-full
       `}
       {...mouseActions}
       style={{
@@ -78,7 +73,7 @@ export const ExpandingPill: React.FC<Props> = ({
         style={{
           ...rowHeightStyle,
         }}
-        className="overflow-hidden px-2 w-fulluuuuuu"
+        className="w-fulluuuuuu overflow-hidden px-2"
       >
         {children[2]}
       </a.div>

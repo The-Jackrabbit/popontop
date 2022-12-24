@@ -10,6 +10,7 @@ import { trpc } from '../../utils/trpc';
 import Layout from '../create-chart/Layout';
 import { genUuid } from '../mobile/charts/[uuid]';
 import useDesktopChartEditor from '../../frontend/hooks/singletons/use-desktop-chart-editor';
+import DesktopSidebar from '../../components/global/DesktopEditor/Sidebar/DesktopSidebar';
 
 const ApiWrapper: NextPage = () => {
   const router = useRouter();
@@ -51,6 +52,7 @@ const Chart = ({
 }) => {
   const { pageOpacity } = usePageFadeIn();
   const {
+    actions,
     childrenNodes: { chart },
     state,
   } = useDesktopChartEditor({
@@ -61,7 +63,13 @@ const Chart = ({
 
   return (
     <Layout>
-      <a.div style={pageOpacity} className="h-full overflow-x-visible"></a.div>
+      <a.div style={pageOpacity} className="h-full overflow-x-visible">
+        <DesktopSidebar
+          settings={chart.childrenNodes.settings}
+          toggleAlbums={actions.toggleAlbums}
+          toggleTitle={actions.toggleTitle}
+        />
+      </a.div>
       <SidebarNav />
       <a.div style={pageOpacity} className="h-full">
         <DesktopEditor

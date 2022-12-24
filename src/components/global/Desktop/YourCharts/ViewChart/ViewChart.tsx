@@ -3,6 +3,7 @@ import DesktopChart from '../../../DesktopEditor/DesktopChart/DesktopChart';
 import Title from '../../../../lib/Title/Title';
 import { Layout } from './Layout';
 import { Loader } from './Loader';
+import LinkPill from '../../../../lib/LinkPill/LinkPill';
 
 export interface Props {
   chartUuid: string;
@@ -48,6 +49,9 @@ export const ViewChart: React.FC<Props> = ({ chartUuid }) => {
           borderSize={1}
         />
       )}
+      modifyChartButton={
+        <LinkPill href={`/charts/${chartUuid}`}>open in editor</LinkPill>
+      }
     />
   );
 };
