@@ -4,9 +4,14 @@ import ListItem from './ListItem/ListItem';
 export interface Props {
   list: Album[];
   startIndexOfColumn: number;
+  textColor: string;
 }
 
-export const ListColumn: React.FC<Props> = ({ list, startIndexOfColumn }) => {
+export const ListColumn: React.FC<Props> = ({
+  list,
+  startIndexOfColumn,
+  textColor,
+}) => {
   return (
     <div>
       {list.map((listItem, index) => (
@@ -14,6 +19,7 @@ export const ListColumn: React.FC<Props> = ({ list, startIndexOfColumn }) => {
           key={index + 'list-item'}
           listItem={listItem}
           index={startIndexOfColumn + index}
+          textColor={textColor}
         />
       ))}
     </div>

@@ -45,13 +45,17 @@ const DesktopEditor: React.FC<Props> = ({
             isReadOnly={false}
             setValue={chart.actions.setChartTitle}
             showIntroduction={!true}
-            textColor="black"
+            textColor={chart.childrenNodes.settings.state.textColor}
           />
         ) : null
       }
       listTwo={
         chart.childrenNodes.settings.state.showAlbums ? (
-          <ChartListV2 columnCount={3} list={textList} />
+          <ChartListV2
+            textColor={chart.childrenNodes.settings.state.textColor}
+            columnCount={3}
+            list={textList}
+          />
         ) : null
       }
       chart={(size: DOMRect) => (

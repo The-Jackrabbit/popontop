@@ -8,13 +8,17 @@ import { useEffect, useState } from 'react';
 import { IChartListItem } from '../../../server/trpc/router/charts/getChartsForUser';
 import { colorMap } from '../../../constants/colors';
 import { Color } from '../../global/DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
+
 export interface Props {
   isMobile: boolean;
   setChartBeingViewed?: (chartUuid: string) => void;
+  titleText?: string;
 }
+
 export const ListOfCharts: React.FC<Props> = ({
   isMobile,
   setChartBeingViewed = () => undefined,
+  titleText = 'your charts',
 }) => {
   const { data } = trpc.charts.getUserCharts.useQuery(undefined, {
     refetchOnWindowFocus: false,
@@ -38,7 +42,7 @@ export const ListOfCharts: React.FC<Props> = ({
   const [listMode, setListMode] = useState(ListRowMode.NORMAL);
   return (
     <>
-      <h1 className="text-4xl font-bold">your charts</h1>
+      <h1 className="text-4xl font-bold">{titleText}</h1>
       <div
         className={`
           ${colorMap[Color.fuchsia]}

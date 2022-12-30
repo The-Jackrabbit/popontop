@@ -1,6 +1,10 @@
+## In progress
+
+- [ ] {branchname} (feature/fix/description)
+- [ ] fix text color
+
 ## TODO
 
-- [ ] fix text color
 - [ ] fix background color
 - [ ] different interface organization (list on right, list on left)
 - [ ] fix save

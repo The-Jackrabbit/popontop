@@ -25,7 +25,7 @@ const Title: React.FC<Props> = ({
   isReadOnly,
   setValue,
   showIntroduction,
-  // textColor,
+  textColor,
 }) => {
   const [isEditing, setIsEditing] = useState(isActiveByDefault);
   const clickEditTitleButton = () => {
@@ -58,9 +58,12 @@ const Title: React.FC<Props> = ({
               bg-transparent focus-visible:outline-none 
               active:outline-none
             "
+            style={{ color: textColor }}
           />
         ) : (
-          <p className="basis-full">{chartTitle}</p>
+          <p className="basis-full" style={{ color: textColor }}>
+            {chartTitle}
+          </p>
         )
       }
       toggleButton={

@@ -5,9 +5,10 @@ import ListColumn from './ListColumn/ListColumn';
 export interface Props {
   columnCount: number;
   list: Album[];
+  textColor: string;
 }
 
-const ChartListV2: React.FC<Props> = ({ columnCount, list }) => {
+const ChartListV2: React.FC<Props> = ({ columnCount, list, textColor }) => {
   const getStartIndexOfColumn = (columnIndex: number, listLength: number) => {
     const lengthOfColumn = Math.floor(listLength / columnCount);
     return lengthOfColumn * columnIndex;
@@ -32,6 +33,7 @@ const ChartListV2: React.FC<Props> = ({ columnCount, list }) => {
             getEndIndexOfColumn(index, list.length) + 1
           )}
           startIndexOfColumn={getStartIndexOfColumn(index, list.length) + 1}
+          textColor={textColor}
         />
       ))}
     </div>
