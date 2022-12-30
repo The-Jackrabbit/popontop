@@ -8,6 +8,7 @@ import { DndContext } from '@dnd-kit/core';
 import DesktopEditor from '../../components/global/DesktopEditor/DesktopEditor';
 import { DraggedAlbum } from '../../frontend/hooks/use-chart/use-chart';
 import useDesktopChartEditor from '../../frontend/hooks/singletons/use-desktop-chart-editor';
+import DesktopActions from '../../components/global/DesktopEditor/Actions/DesktopActions';
 
 const CreateChart: NextPage = () => {
   const { pageOpacity } = usePageFadeIn();
@@ -29,25 +30,34 @@ const CreateChart: NextPage = () => {
         chart.childrenNodes.list.actions.handleDragEnd(args);
       }}
     >
-      <Layout>
-        <a.div style={pageOpacity} className="h-full overflow-x-visible">
-          <DesktopSidebar
-            settings={chart.childrenNodes.settings}
-            toggleAlbums={actions.toggleAlbums}
-            toggleTitle={actions.toggleTitle}
+      <Layout
+        actions={
+          <DesktopActions
+            isLoading={chart.state.isCreateLoading || chart.state.isEditLoading}
+            save={chart.actions.saveChart}
+            savedChartId={chart.state.savedChartId}
           />
-        </a.div>
-
-        <SidebarNav />
-
-        <a.div style={pageOpacity} className="h-full">
-          <DesktopEditor
-            chart={chart}
-            isLoading={chart.state.isCreateLoading}
-            titleStyle={state.titleStyle}
-          />
-        </a.div>
-      </Layout>
+        }
+        backgroundColor={chart.childrenNodes.settings.state.backgroundColor}
+        sidebar={
+          <a.div style={pageOpacity} className="h-full overflow-x-visible">
+            <DesktopSidebar
+              settings={chart.childrenNodes.settings}
+              toggleAlbums={actions.toggleAlbums}
+              toggleTitle={actions.toggleTitle}
+            />
+          </a.div>
+        }
+        pageContent={
+          <a.div style={pageOpacity} className="h-full">
+            <DesktopEditor
+              chart={chart}
+              isLoading={chart.state.isCreateLoading}
+              titleStyle={state.titleStyle}
+            />
+          </a.div>
+        }
+      />
     </DndContext>
   );
 };

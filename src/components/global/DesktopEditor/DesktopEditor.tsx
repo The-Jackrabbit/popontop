@@ -70,13 +70,6 @@ const DesktopEditor: React.FC<Props> = ({
           size={size}
         />
       )}
-      actions={
-        <DesktopActions
-          isLoading={isLoading}
-          save={chart.actions.saveChart}
-          savedChartId={chart.state.savedChartId}
-        />
-      }
     />
   );
 };

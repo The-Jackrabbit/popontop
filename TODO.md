@@ -1,7 +1,6 @@
 ## In progress
 
 - [ ] {branchname} (feature/fix/description)
-- [ ] fix text color
 
 ## TODO
 
@@ -21,5 +20,6 @@
 
 ## Done
 
+- [x] fix text color
 - [x] fix title visibility toggle
 - [x] fix list visibilty toggle
