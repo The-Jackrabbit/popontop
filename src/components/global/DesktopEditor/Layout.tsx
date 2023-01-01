@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useSize } from '../../lib/Grid/Grid';
 
 export interface Props {
-  actions: React.ReactNode;
   backgroundColor: string;
   chart: (size: DOMRect) => JSX.Element | null;
   isReadonly: boolean;
@@ -11,7 +10,6 @@ export interface Props {
 }
 
 const Layout: React.FC<Props> = ({
-  actions,
   backgroundColor,
   chart,
   isReadonly,

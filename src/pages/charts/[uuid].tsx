@@ -62,25 +62,30 @@ const Chart = ({
   });
 
   return (
-    <Layout>
-      <a.div style={pageOpacity} className="h-full overflow-x-visible">
-        <DesktopSidebar
-          settings={chart.childrenNodes.settings}
-          toggleAlbums={actions.toggleAlbums}
-          toggleTitle={actions.toggleTitle}
-        />
-      </a.div>
-      <SidebarNav />
-      <a.div style={pageOpacity} className="h-full">
-        <DesktopEditor
-          chart={chart}
-          // listStyles={state.listStyle}
-          readonly={true}
-          isLoading={chart.state.isEditLoading}
-          titleStyle={state.titleStyle}
-        />
-      </a.div>
-    </Layout>
+    <Layout
+      actions={null}
+      backgroundColor={chart.childrenNodes.settings.state.backgroundColor}
+      pageContent={
+        <a.div style={pageOpacity} className="h-full">
+          <DesktopEditor
+            chart={chart}
+            // listStyles={state.listStyle}
+            readonly={true}
+            isLoading={chart.state.isEditLoading}
+            titleStyle={state.titleStyle}
+          />
+        </a.div>
+      }
+      sidebar={
+        <a.div style={pageOpacity} className="h-full overflow-x-visible">
+          <DesktopSidebar
+            settings={chart.childrenNodes.settings}
+            toggleAlbums={actions.toggleAlbums}
+            toggleTitle={actions.toggleTitle}
+          />
+        </a.div>
+      }
+    ></Layout>
   );
 };
 
