@@ -2,18 +2,20 @@ import { Album } from '../../../../../styles/types/Albums';
 import ListItem from './ListItem/ListItem';
 
 export interface Props {
+  className: string;
   list: Album[];
   startIndexOfColumn: number;
   textColor: string;
 }
 
 export const ListColumn: React.FC<Props> = ({
+  className = '',
   list,
   startIndexOfColumn,
   textColor,
 }) => {
   return (
-    <div>
+    <div className={className}>
       {list.map((listItem, index) => (
         <ListItem
           key={index + 'list-item'}

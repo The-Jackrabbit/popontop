@@ -29,16 +29,19 @@ const Layout: React.FC<Props> = ({
         // border-4 border-amber-500
         className="
           flex
-          w-[800px]
-          md:w-[945px]
-          lg:w-[1200px] 
+          w-[90%]
+          max-w-[1200px]
+          md:w-[80%] 
+          lg:w-[70%] 
+          xl:w-[80%]
         "
       >
-        {sidebar}
+        <div className="shrink-0 grow basis-3/12">{sidebar}</div>
         <div
           // border-4 border-purple-500
           className="
-            w-9/12
+            shrink grow-0
+            basis-8/12
             p-4
           "
           style={{ backgroundColor }}
@@ -47,7 +50,8 @@ const Layout: React.FC<Props> = ({
         </div>
         <div
           className="
-          flex flex-col justify-between
+          flex shrink-0
+          basis-1/12 flex-col justify-between
           border-l-2 border-neutral-300 p-4
           pl-4
           dark:border-neutral-800

@@ -27,6 +27,7 @@ const ChartListV2: React.FC<Props> = ({ columnCount, list, textColor }) => {
     >
       {[...new Array(columnCount)].map((_, index) => (
         <ListColumn
+          className={`basis-1/${columnCount}`}
           key={index + 'list-column'}
           list={list.slice(
             getStartIndexOfColumn(index, list.length),

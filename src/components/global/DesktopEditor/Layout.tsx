@@ -28,7 +28,7 @@ const Layout: React.FC<Props> = ({
         <div ref={setTarget} className="w-full basis-1/2">
           {size ? chart(size) : null}
         </div>
-        <div>{listTwo}</div>
+        <div className="w-full">{listTwo}</div>
       </div>
     </div>
   );

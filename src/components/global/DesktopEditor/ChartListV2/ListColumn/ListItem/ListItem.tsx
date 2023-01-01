@@ -12,10 +12,9 @@ export const ListItem: React.FC<Props> = ({ index, listItem, textColor }) => {
   return (
     <div
       className="
-        w-52 overflow-hidden
+        overflow-hidden
         text-ellipsis
         leading-tight
-        sm:w-56 md:w-64 lg:w-72
       "
       role="listitem"
       style={{ color: textColor }}
