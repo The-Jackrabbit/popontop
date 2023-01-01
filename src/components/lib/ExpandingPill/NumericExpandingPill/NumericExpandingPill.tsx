@@ -52,7 +52,7 @@ export const NumericExpandingPill: React.FC<Props> = ({
       isOpenByDefault={isInitiallyExpanded}
       toggleVisibility={() => setIsExpanded(!isExpanded)}
     >
-      <p className="text-lg">{label}</p>
+      <p className={labelClassName}>{label}</p>
       <div className={labelClassName}>
         <a.div>
           {isExpanded

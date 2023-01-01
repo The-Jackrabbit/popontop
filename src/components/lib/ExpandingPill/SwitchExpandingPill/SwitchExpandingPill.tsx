@@ -14,7 +14,7 @@ export interface Props {
 export const SwitchExpandingPill: React.FC<Props> = ({
   className = '',
   label,
-  labelClassName = 'text-xs',
+  labelClassName = 'text-md',
   setValue,
   value,
 }) => {
@@ -27,7 +27,7 @@ export const SwitchExpandingPill: React.FC<Props> = ({
       toggleVisibility={() => setIsExpanded(!isExpanded)}
     >
       <p className={labelClassName}>{label}</p>
-      <div className="">
+      <div className={labelClassName}>
         <RadioIcon variant={value} />
       </div>
       <Radio

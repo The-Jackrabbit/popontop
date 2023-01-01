@@ -64,7 +64,6 @@ export const DesktopSidebar: React.FC<Props> = ({
           <div className="mb-2 flex flex-col justify-center">
             <TextExpandingPill
               label="Search albums"
-              labelClassName="pr-2"
               isActive={true}
               placeholder="Emotion, Dedicated, The Loneliest Time"
               setValue={(value: string) => onType(value)}
@@ -96,14 +95,12 @@ export const DesktopSidebar: React.FC<Props> = ({
             <SwitchExpandingPill
               className="inline-block"
               label="list albums?"
-              labelClassName="pr-2"
               setValue={(value: boolean | null) => toggleAlbums(Boolean(value))}
               value={settings.state.showAlbums}
             />
             <SwitchExpandingPill
               className="inline-block"
               label="show title?"
-              labelClassName="pr-2"
               setValue={(value: boolean | null) => toggleTitle(Boolean(value))}
               value={settings.state.showTitle}
             />

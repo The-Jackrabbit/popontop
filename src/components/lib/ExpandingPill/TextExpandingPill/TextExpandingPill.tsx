@@ -17,7 +17,7 @@ export const TextExpandingPill: React.FC<Props> = ({
   className = '',
   isActive = false,
   label,
-  labelClassName = 'text-xs',
+  labelClassName = 'text-md',
   placeholder = '#adf2da',
   setValue,
   value,
@@ -31,7 +31,7 @@ export const TextExpandingPill: React.FC<Props> = ({
       toggleVisibility={() => setIsExpanded(!isExpanded)}
     >
       <p className={labelClassName}>{label}</p>
-      <div className="text-sm">
+      <div className={labelClassName}>
         {!isExpanded ? (
           <PaintBrushIcon className="h-4 w-4 text-neutral-900 dark:text-neutral-50" />
         ) : (
