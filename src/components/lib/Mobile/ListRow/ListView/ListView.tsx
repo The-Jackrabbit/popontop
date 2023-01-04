@@ -1,5 +1,5 @@
 import React from 'react';
-import { Album } from '../../../../../styles/types/Albums';
+import { Album } from '../../../../../types/Albums';
 import { ROW_HEIGHT } from '../../../../../frontend/hooks/springs/use-disappear-row';
 
 export interface Props {

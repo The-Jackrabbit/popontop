@@ -5,10 +5,10 @@ import {
   JUMP_VALUES,
   RowMovementType,
 } from '../../../components/lib/Mobile/ListRow/RearrangeView/RearrangeView';
-import { Album } from '../../../styles/types/Albums';
+import { Album } from '../../../types/Albums';
 import { ChartHookNode, useChart } from '../use-chart/use-chart';
 import useMobileEditor from '../editor/use-mobile-editor';
-import { ParentHookNode } from '../hook-node';
+import { ParentHookNode } from '../../../types/singletons';
 
 export enum UseChartListContext {
   ADD = 'ADD',

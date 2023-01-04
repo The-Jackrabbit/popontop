@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDraggable } from '@dnd-kit/core';
-import { Album } from '../../../../../styles/types/Albums';
+import { Album } from '../../../../../types/Albums';
 import { CSS } from '@dnd-kit/utilities';
 
 export type DragSubZone = 'search' | 'chart';

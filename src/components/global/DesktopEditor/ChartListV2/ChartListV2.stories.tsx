@@ -3,7 +3,7 @@ import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import ChartListV2 from './ChartListV2';
 import { ALBUM_RESULTS } from '../../../../constants/test-data/search-results';
 import { randomIntegerInRange } from '../../../lib/Grid/Grid.stories';
-import { Album } from '../../../../styles/types/Albums';
+import { Album } from '../../../../types/Albums';
 
 export default {
   args: {

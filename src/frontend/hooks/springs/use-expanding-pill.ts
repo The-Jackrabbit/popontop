@@ -7,10 +7,9 @@ export interface ExpandingPillHookState {
     borderRadius: SpringValue<string>;
   };
   opacityAnimationStyle: { opacity: SpringValue<number> };
-  rowHeightStyle: {
+  pillContentStyle: {
     height: SpringValue<string>;
     padding: SpringValue<string>;
-    width: SpringValue<string>;
   };
   togglePill: (isActive: boolean) => void;
 }
@@ -27,10 +26,6 @@ const styles = {
   height: {
     from: '0px',
     to: '64px',
-  },
-  width: {
-    from: '0px',
-    to: '100%',
   },
   padding: {
     from: '0rem 0.5rem',
@@ -52,7 +47,7 @@ export function useExpandingPill({
     animateFadeOut,
     pageOpacity: opacityAnimationStyle,
   } = usePageFadeIn();
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(isOpenByDefault);
   const [borderRadiusStyle, animateBorderRadius] = useSpring(
     () => ({
       borderRadius: !isVisible
@@ -61,11 +56,10 @@ export function useExpandingPill({
     }),
     []
   );
-  const [rowHeightStyle, animateRowHeight] = useSpring(
+  const [pillContentStyle, animateRowHeight] = useSpring(
     () => ({
       height: isVisible ? styles.height.to : styles.height.from,
       padding: isVisible ? styles.padding.to : styles.padding.from,
-      width: isVisible ? styles.width.to : styles.width.from,
     }),
     []
   );
@@ -81,7 +75,6 @@ export function useExpandingPill({
           padding: styles.padding.to,
           config: styles.config,
         }),
-      width: styles.width.to,
     });
   };
 
@@ -92,7 +85,6 @@ export function useExpandingPill({
       config: styles.config,
       padding: styles.padding.from,
       height: styles.height.from,
-      width: styles.width.from,
     });
   };
 
@@ -119,7 +111,7 @@ export function useExpandingPill({
   return {
     borderRadiusStyle,
     opacityAnimationStyle,
-    rowHeightStyle,
+    pillContentStyle,
     togglePill: onClickHeader,
   };
 }

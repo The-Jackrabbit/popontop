@@ -1,5 +1,5 @@
 import { a, SpringValue } from 'react-spring';
-import { Album } from '../../../../styles/types/Albums';
+import { Album } from '../../../../types/Albums';
 
 export interface Props {
   containers: Album[];

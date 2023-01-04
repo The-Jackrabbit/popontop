@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDroppable } from '@dnd-kit/core';
-import { Album } from '../../../../../styles/types/Albums';
+import { Album } from '../../../../../types/Albums';
 
 export interface Props {
   album: Album;

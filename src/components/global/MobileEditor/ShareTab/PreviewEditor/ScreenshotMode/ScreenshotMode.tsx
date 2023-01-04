@@ -1,4 +1,4 @@
-import { Album } from '../../../../../../styles/types/Albums';
+import { Album } from '../../../../../../types/Albums';
 import Grid from '../../../../../lib/Grid/Grid';
 import { useResizer } from '../../../../../lib/Grid/Grid.stories';
 import Title from '../../../../../lib/Title/Title';

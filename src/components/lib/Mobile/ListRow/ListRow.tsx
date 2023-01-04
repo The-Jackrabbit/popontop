@@ -1,6 +1,6 @@
 import { a } from '@react-spring/web';
 import React from 'react';
-import { Album } from '../../../../styles/types/Albums';
+import { Album } from '../../../../types/Albums';
 import {
   ROW_HEIGHT,
   ROW_HEIGHT_WITH_UNIT,

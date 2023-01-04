@@ -6,7 +6,7 @@ import { ActionBar } from './ActionBar/ActionBar';
 import Title from '../../lib/Title/Title';
 import { ChartSettings } from '@prisma/client';
 import MobilePage from '../../lib/MobilePage/MobilePage';
-import { Album } from '../../../styles/types/Albums';
+import { Album } from '../../../types/Albums';
 import { useEffect } from 'react';
 import { Loader as ListLoader } from '../../global/MobileEditor/List/Loader';
 import List from './List/List';

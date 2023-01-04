@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Image from 'next/image';
 import { ROW_HEIGHT } from '../../../../../frontend/hooks/springs/use-disappear-row';
-import { Album } from '../../../../../styles/types/Albums';
+import { Album } from '../../../../../types/Albums';
 import RearrangeViewButton from './RearrangeViewButton/RearrangeViewButton';
 import { useSpring, a, config } from 'react-spring';
 import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/20/solid';

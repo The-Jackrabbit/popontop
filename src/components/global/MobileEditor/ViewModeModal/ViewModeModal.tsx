@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Album } from '../../../../styles/types/Albums';
+import { Album } from '../../../../types/Albums';
 import Button from '../../../lib/Button/Button';
 import Grid from '../../../lib/Grid/Grid';
 import { useResizer } from '../../../lib/Grid/Grid.stories';

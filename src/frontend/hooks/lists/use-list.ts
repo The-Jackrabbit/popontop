@@ -3,8 +3,8 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { randomIntegerInRange } from '../../../components/lib/Grid/Grid.stories';
 import { EMPTY_ALBUM } from '../../../constants/empty-album';
 import { ALBUM_RESULTS } from '../../../constants/test-data/search-results';
-import { Album } from '../../../styles/types/Albums';
-import { HookNode } from '../hook-node';
+import { Album } from '../../../types/Albums';
+import { HookNode } from '../../../types/singletons';
 import { DraggedAlbum } from '../use-chart/use-chart';
 
 export type ListHookNode = HookNode<State, Actions>;

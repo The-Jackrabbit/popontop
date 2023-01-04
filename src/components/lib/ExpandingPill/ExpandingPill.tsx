@@ -21,7 +21,7 @@ export const ExpandingPill: React.FC<Props> = ({
   const {
     borderRadiusStyle,
     opacityAnimationStyle,
-    rowHeightStyle,
+    pillContentStyle,
     togglePill,
   } = useExpandingPill({
     isOpenByDefault,
@@ -71,9 +71,9 @@ export const ExpandingPill: React.FC<Props> = ({
       </div>
       <a.div
         style={{
-          ...rowHeightStyle,
+          ...pillContentStyle,
         }}
-        className="w-fulluuuuuu overflow-hidden px-2"
+        className="w-full overflow-hidden px-2"
       >
         {children[2]}
       </a.div>

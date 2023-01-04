@@ -1,5 +1,5 @@
 import React from 'react';
-import { Album } from '../../../../styles/types/Albums';
+import { Album } from '../../../../types/Albums';
 import ChartItem from './ChartItem/ChartItem';
 import Grid from '../../../lib/Grid/Grid';
 import { EMPTY_ALBUM } from '../../../../constants/empty-album';

@@ -5,7 +5,7 @@ import { a } from 'react-spring';
 import DesktopEditor from '../../components/global/DesktopEditor/DesktopEditor';
 import SidebarNav from '../../components/global/DesktopEditor/Sidebar/SidebarNav/SidebarNav';
 import { usePageFadeIn } from '../../frontend/hooks/springs/use-page-fade-in';
-import { Album } from '../../styles/types/Albums';
+import { Album } from '../../types/Albums';
 import { trpc } from '../../utils/trpc';
 import Layout from '../create-chart/Layout';
 import { genUuid } from '../mobile/charts/[uuid]';

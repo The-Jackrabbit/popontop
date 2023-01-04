@@ -1,5 +1,5 @@
 import { prisma } from '../../../../server/db/client';
-import { Album } from '../../../../styles/types/Albums';
+import { Album } from '../../../../types/Albums';
 
 export interface Settings {
   backgroundColor: string;

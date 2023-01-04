@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Album } from '../../../styles/types/Albums';
+import { Album } from '../../../types/Albums';
 import { trpc } from '../../../utils/trpc';
 
 export const useSearch = (): {

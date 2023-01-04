@@ -1,4 +1,4 @@
-import { Album } from '../../../../../../styles/types/Albums';
+import { Album } from '../../../../../../types/Albums';
 import Draggable from '../../../DragNDrop/Draggable/Draggable';
 import Image from 'next/image';
 

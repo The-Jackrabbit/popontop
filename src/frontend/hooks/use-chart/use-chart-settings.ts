@@ -1,6 +1,6 @@
 import { ChartSettings } from '@prisma/client';
 import { useState } from 'react';
-import { HookNode } from '../hook-node';
+import { HookNode } from '../../../types/singletons';
 import { useIncrementer } from '../use-incrementer';
 
 export type SettingsHookNode = HookNode<State, Actions>;

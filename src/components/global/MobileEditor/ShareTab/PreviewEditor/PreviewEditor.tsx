@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Album } from '../../../../../styles/types/Albums';
+import { Album } from '../../../../../types/Albums';
 import { startScreenshotMode } from '../../../../../utils/mobile-theme';
 import FilterButton from '../../../../lib/FilterButton/FilterButton';
 import Grid, { useSize } from '../../../../lib/Grid/Grid';

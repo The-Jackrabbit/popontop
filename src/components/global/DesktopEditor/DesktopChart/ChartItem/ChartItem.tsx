@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Draggable from '../../DragNDrop/Draggable/Draggable';
 import Droppable from '../../DragNDrop/Droppable/Droppable';
-import { Album } from '../../../../../styles/types/Albums';
+import { Album } from '../../../../../types/Albums';
 
 export interface Props {
   album: Album;

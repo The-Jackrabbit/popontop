@@ -1,6 +1,6 @@
 import { HomeIcon, ShareIcon } from '@heroicons/react/20/solid';
 import React, { useEffect, useState } from 'react';
-import { Album } from '../../../../styles/types/Albums';
+import { Album } from '../../../../types/Albums';
 import { ICON_STYLE } from '../../../lib/FilterButton/FilterButton';
 import { PreviewEditor } from './PreviewEditor/PreviewEditor';
 

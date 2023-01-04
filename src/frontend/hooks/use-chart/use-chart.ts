@@ -1,25 +1,22 @@
 import { ChartSettings } from '@prisma/client';
 import { useMemo, useState } from 'react';
-import { Album } from '../../../styles/types/Albums';
+import { Album } from '../../../types/Albums';
 import { trpc } from '../../../utils/trpc';
-import { ParentHookNode } from '../hook-node';
+import { ParentHookNode } from '../../../types/singletons';
 import useList, { ListHookNode } from '../lists/use-list';
 import useChartSettings, { SettingsHookNode } from './use-chart-settings';
 
-export type ChartHookNode = ParentHookNode<
-  State,
-  Actions,
-  {
-    list: ListHookNode;
-    settings: SettingsHookNode;
-  }
->;
+export type ChartHookNode = ParentHookNode<State, Actions, ChildrenNodes>;
 
-export interface Props {
-  chartUuid?: string;
-  initialChartSettings?: ChartSettings;
-  initialChartTitle?: string;
-  initialList?: Album[];
+export interface Actions {
+  editChart: () => Promise<string>;
+  saveChart: () => Promise<string>;
+  setChartTitle: (value: string) => void;
+}
+
+export interface ChildrenNodes {
+  list: ListHookNode;
+  settings: SettingsHookNode;
 }
 
 export interface State {
@@ -29,18 +26,19 @@ export interface State {
   savedChartId: string;
 }
 
-export interface Actions {
-  editChart: () => Promise<string>;
-  saveChart: () => Promise<string>;
-  setChartTitle: (value: string) => void;
+export interface Props {
+  chartUuid?: string;
+  initialChartSettings?: ChartSettings;
+  initialChartTitle?: string;
+  initialList?: Album[];
 }
 
-export function useChart({
+export const useChart = ({
   chartUuid = '',
   initialChartSettings = {} as ChartSettings,
   initialChartTitle = '',
   initialList = [],
-}: Props) {
+}: Props): ChartHookNode => {
   const [chartTitle, setChartTitle] = useState(initialChartTitle);
   const settings = useChartSettings(initialChartSettings);
   const list = useList(initialList);
@@ -107,7 +105,7 @@ export function useChart({
     },
     state,
   };
-}
+};
 
 export default useChart;
 

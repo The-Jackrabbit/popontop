@@ -1,5 +1,5 @@
 import React from 'react';
-import { Album } from '../../../../styles/types/Albums';
+import { Album } from '../../../../types/Albums';
 import ListColumn from './ListColumn/ListColumn';
 
 export interface Props {

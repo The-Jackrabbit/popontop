@@ -1,4 +1,4 @@
-import { Album } from '../../../../../../../styles/types/Albums';
+import { Album } from '../../../../../../../types/Albums';
 
 export interface Props {
   list: Album[];

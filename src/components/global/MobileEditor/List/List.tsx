@@ -1,4 +1,4 @@
-import { Album } from '../../../../styles/types/Albums';
+import { Album } from '../../../../types/Albums';
 import ListRow, { ListRowMode } from '../../../lib/Mobile/ListRow/ListRow';
 import { RowMovementType } from '../../../lib/Mobile/ListRow/RearrangeView/RearrangeView';
 

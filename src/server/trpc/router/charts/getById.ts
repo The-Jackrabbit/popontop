@@ -1,6 +1,6 @@
 import { prisma } from '../../../../server/db/client';
-import { Album } from '../../../../styles/types/Albums';
-import { Chart } from '../../../../styles/types/Charts';
+import { Album } from '../../../../types/Albums';
+import { Chart } from '../../../../types/Charts';
 
 export const getChartById = async (
   uuid: string,

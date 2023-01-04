@@ -10,7 +10,7 @@ export const useRowSlideInAndOut = ({
   isInitiallyVisible = true,
   initialWidth = '100%',
 }: Props): {
-  rowHeightStyle: {
+  pillContentStyle: {
     height: SpringValue<string>;
     padding: SpringValue<string>;
     width: SpringValue<string>;
@@ -18,7 +18,7 @@ export const useRowSlideInAndOut = ({
   toggleRowVisibility: () => void;
 } => {
   const [isVisible, setIsVisible] = useState(isInitiallyVisible);
-  const [rowHeightStyle, animateRowHeight] = useSpring(
+  const [pillContentStyle, animateRowHeight] = useSpring(
     () => ({
       height: isVisible ? '64px' : '0px',
       padding: isVisible ? '0.5rem 0.5rem' : '0rem 0.5rem',
@@ -37,7 +37,7 @@ export const useRowSlideInAndOut = ({
   };
 
   return {
-    rowHeightStyle,
+    pillContentStyle,
     toggleRowVisibility,
   };
 };

@@ -3,7 +3,7 @@ import { a, SpringValue } from 'react-spring';
 import { addAbortSignal } from 'stream';
 import { EMPTY_ALBUM } from '../../../constants/empty-album';
 import { ChartHookNode } from '../../../frontend/hooks/use-chart/use-chart';
-import { Album } from '../../../styles/types/Albums';
+import { Album } from '../../../types/Albums';
 import Title from '../../lib/Title/Title';
 import DesktopActions from './Actions/DesktopActions';
 import ChartListV2 from './ChartListV2/ChartListV2';
