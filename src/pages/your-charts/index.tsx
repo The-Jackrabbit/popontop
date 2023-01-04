@@ -21,6 +21,7 @@ const YourCharts: NextPage = () => {
     <Layout
       actions={null}
       backgroundColor={''}
+      hasActions={false}
       pageContent={
         <a.div style={pageOpacity} className="h-full">
           {selectedChartUuid !== null ? (

@@ -49,12 +49,12 @@ const Grid: React.FC<Props> = ({
     <div
       className={`
         ${preview ? 'scale-95' : ''}
-        flex h-min flex-wrap
-        items-center 
+        flex h-min w-min
+        flex-wrap 
+        items-center
         justify-center
-        align-middle
         border
-        w-min
+        align-middle
       `}
       style={{
         borderWidth: borderSize,
