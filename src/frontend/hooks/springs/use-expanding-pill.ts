@@ -65,16 +65,12 @@ export function useExpandingPill({
   );
 
   const expandPill = () => {
-    setIsVisible((isVisible) => !isVisible);
+    setIsVisible(!isVisible);
     animateBorderRadius.start({ borderRadius: styles.borderRadius.from });
     animateRowHeight.start({
       config: styles.config,
-      onRest: () =>
-        animateRowHeight.start({
-          height: styles.height.to,
-          padding: styles.padding.to,
-          config: styles.config,
-        }),
+      height: styles.height.to,
+      padding: styles.padding.to,
     });
   };
 
