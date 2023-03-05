@@ -27,7 +27,7 @@ const ChartListV2: React.FC<Props> = ({ columnCount, list, textColor }) => {
     >
       {[...new Array(columnCount)].map((_, index) => (
         <ListColumn
-          className={`basis-1/${columnCount}`}
+          className={`basis-1/${columnCount} overflow-hidden text-ellipsis`}
           key={index + 'list-column'}
           list={list.slice(
             getStartIndexOfColumn(index, list.length),

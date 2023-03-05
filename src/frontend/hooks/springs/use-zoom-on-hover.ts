@@ -1,7 +1,7 @@
 import { config, useSpring } from 'react-spring';
 
 export const START_SCALE = 1;
-export const END_SCALE = 1.02;
+export const END_SCALE = 1.01;
 export const BOUNCE = 1.2;
 
 export function useZoomOnHover(
