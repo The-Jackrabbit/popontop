@@ -40,6 +40,7 @@ const Layout: React.FC<Props> = ({
         flex h-screen
         w-screen justify-center
         overflow-hidden
+        min-w-[800px]
       "
     >
       <div
@@ -49,13 +50,9 @@ const Layout: React.FC<Props> = ({
           flex
           w-[90%]
           max-w-[1200px]
-          bg-red-900 
           md:w-[768px] 
-          md:bg-green-900
           lg:w-[830px]
-          lg:bg-blue-900
           xl:w-[1200px]
-          xl:bg-yellow-900
         "
       >
         <div className={layoutStyle.sidebar}>{sidebar}</div>
