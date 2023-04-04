@@ -11,3 +11,5 @@ export const EXPANDING_PILL = `
   inline-flex
   rounded-lg
 `;
+
+export const ALBUM_SIZE = '50px';

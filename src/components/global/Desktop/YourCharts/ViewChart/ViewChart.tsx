@@ -26,6 +26,8 @@ export const ViewChart: React.FC<Props> = ({ chartUuid }) => {
     return <div>not found</div>;
   }
 
+  debugger;
+
   return (
     <Layout
       backgroundColor={chart?.settings?.background_color ?? ''}
@@ -37,14 +39,10 @@ export const ViewChart: React.FC<Props> = ({ chartUuid }) => {
           textColor="black"
         />
       }
-      chart={(size: DOMRect) => (
+      chart={() => (
         <DesktopChart
-          size={size}
           isReadOnly={chart.isReadOnly}
-          numberOfColumns={10}
-          numberOfRows={10}
           items={chart.albums ?? []}
-          backgroundColor={chart?.settings?.background_color ?? ''}
           borderColor={chart?.settings?.border_color ?? ''}
           borderSize={1}
         />

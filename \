@@ -48,12 +48,14 @@ const Layout: React.FC<Props> = ({
         // border-4 border-amber-500
         className="
           flex
-          min-w-[870px]
+          w-[90%]
           max-w-[1200px]
-          //md:bg-blue-300
-          //lg:bg-red-300
-          //xl:bg-green-300
-          xl:max-w-[1200px]
+          md:max-w-[768px]
+          lg:max-w-[1030px]
+          md:bg-blue-300
+          lg:bg-red-300
+          xl:bg-green-300
+          xl:w-[1200px]
         "
       >
         <div className={layoutStyle.sidebar}>{sidebar}</div>

@@ -30,8 +30,10 @@ export interface Actions {
 export const testlist = [...new Array(100)].map(
   () => ALBUM_RESULTS[randomIntegerInRange(0, 9)]
 );
+export const initializeEmptyList = (): Album[] => [...new Array(100)].map(() => EMPTY_ALBUM);
 
-const useList = (initialList: Album[] = []): ListHookNode => {
+const useList = (initialList: Album[] = initializeEmptyList()): ListHookNode => {
+  debugger;
   const [list, setList] = useState<Album[]>(initialList);
   const [draggedAlbum, setDraggedAlbum] = useState<DraggedAlbum>({
     data: EMPTY_ALBUM,

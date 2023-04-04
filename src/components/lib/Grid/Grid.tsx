@@ -1,10 +1,11 @@
-import { useEffect, useLayoutEffect, useMemo, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import useResizeObserver from '@react-hook/resize-observer';
+import { Album } from '../../../types/Albums';
 
 export interface Props {
   borderColor: string;
   borderSize: number;
-  columns: number;
+  items: Album[];
   itemComponent: ({
     index,
     x,
@@ -15,67 +16,28 @@ export interface Props {
     y: number;
   }) => JSX.Element;
   preview?: boolean;
-  rows: number;
-  size: DOMRect;
 }
 
 const Grid: React.FC<Props> = ({
-  borderColor,
-  borderSize,
-  columns,
+  // borderColor,
+  // borderSize,
+  items,
   itemComponent,
-  preview = false,
-  rows,
-  size,
+  preview = false
 }) => {
-  const [squareWidth, setSquareWidth] = useState(40);
-  useEffect(() => {
-    const containerWidth = size.width;
-    const containerHeight = size.height;
-    const minDimension = Math.floor(
-      Math.min(containerWidth / columns, containerHeight / rows)
-    );
-    setSquareWidth(minDimension === 0 ? 40 : minDimension);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [columns, rows]);
-
-  const emptyRows = useMemo(() => [...new Array(rows)], [rows]);
-  const emptyColumns = useMemo<undefined[]>(
-    () => [...new Array(columns)],
-    [columns]
-  );
-
   return (
     <div
       className={`
         ${preview ? 'scale-95' : ''}
-        flex h-min w-min
-        flex-wrap 
-        items-center
+        flex
+        flex-wrap
         justify-center
-        border
-        align-middle
       `}
-      style={{
-        borderWidth: borderSize,
-        borderColor: borderColor,
-      }}
     >
-      {emptyRows.map((_, y) => (
-        <div className="flex w-full justify-center" key={`row-${y}`}>
-          {emptyColumns.map((_, x) => {
-            const index = x + columns * y;
-            return (
-              <div
-                className="value"
-                key={`item-${index}`}
-                style={{ width: squareWidth, height: squareWidth }}
-              >
-                {itemComponent({ index, x, y })}
-              </div>
-            );
-          })}
-        </div>
+      {items.map((_item, index) => (
+        <>
+          {itemComponent({ index , x: -1, y: -1 })}
+        </>
       ))}
     </div>
   );

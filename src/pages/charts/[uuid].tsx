@@ -3,7 +3,6 @@ import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { a } from 'react-spring';
 import DesktopEditor from '../../components/global/DesktopEditor/DesktopEditor';
-import SidebarNav from '../../components/global/DesktopEditor/Sidebar/SidebarNav/SidebarNav';
 import { usePageFadeIn } from '../../frontend/hooks/springs/use-page-fade-in';
 import { Album } from '../../types/Albums';
 import { trpc } from '../../utils/trpc';
@@ -22,6 +21,7 @@ const ApiWrapper: NextPage = () => {
     { uuid: n },
     {
       enabled: true, // disable this query from automatically running
+      refetchOnWindowFocus: false,
     }
   );
 
@@ -71,7 +71,6 @@ const Chart = ({
             chart={chart}
             // listStyles={state.listStyle}
             readonly={true}
-            isLoading={chart.state.isEditLoading}
             titleStyle={state.titleStyle}
           />
         </a.div>

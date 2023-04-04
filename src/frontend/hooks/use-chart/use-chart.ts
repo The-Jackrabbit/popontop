@@ -37,7 +37,7 @@ export const useChart = ({
   chartUuid = '',
   initialChartSettings = {} as ChartSettings,
   initialChartTitle = '',
-  initialList = [],
+  initialList,
 }: Props): ChartHookNode => {
   const [chartTitle, setChartTitle] = useState(initialChartTitle);
   const settings = useChartSettings(initialChartSettings);

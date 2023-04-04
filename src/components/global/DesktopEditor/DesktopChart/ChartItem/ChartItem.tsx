@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Draggable from '../../DragNDrop/Draggable/Draggable';
 import Droppable from '../../DragNDrop/Droppable/Droppable';
 import { Album } from '../../../../../types/Albums';
+import { ALBUM_SIZE } from '../../../../../constants/shared-styles';
 
 export interface Props {
   album: Album;
@@ -28,15 +29,8 @@ export const ChartItem: React.FC<Props> = ({
       data-index-row={rowIndex}
       data-index-column={columnIndex}
       data-index-inchart={index}
-      className="
-        border-1 h-full
-        w-full 
-      "
     >
       <Droppable
-        className="
-          h-full
-        "
         id={index.toString()}
         album={album}
         style={{ borderWidth: `${borderSize}px`, borderColor }}
@@ -49,10 +43,9 @@ export const ChartItem: React.FC<Props> = ({
             key={`chart-${index.toString()}-key`}
           >
             <Image
-              className="h-4 w-4"
               src={album.imageUrl}
-              height="100%"
-              width="100%"
+              height={ALBUM_SIZE}
+              width={ALBUM_SIZE}
               alt="profile"
             />
           </Draggable>

@@ -7,14 +7,12 @@ export const Loader: React.FC = () => {
     <Layout
       backgroundColor={''}
       title={<TitleLoader />}
-      chart={(size: DOMRect) => (
+      chart={() => (
         <Grid
           borderColor={''}
           borderSize={1}
-          columns={10}
+          items={[]}
           itemComponent={() => <div></div>}
-          rows={10}
-          size={size}
         />
       )}
       modifyChartButton={null}

@@ -1,7 +1,6 @@
 import type { NextPage } from 'next';
 import { a } from 'react-spring';
 import DesktopSidebar from '../../components/global/DesktopEditor/Sidebar/DesktopSidebar';
-import { SidebarNav } from '../../components/global/DesktopEditor/Sidebar/SidebarNav/SidebarNav';
 import { usePageFadeIn } from '../../frontend/hooks/springs/use-page-fade-in';
 import Layout from './Layout';
 import { DndContext } from '@dnd-kit/core';
@@ -12,6 +11,7 @@ import DesktopActions from '../../components/global/DesktopEditor/Actions/Deskto
 
 const CreateChart: NextPage = () => {
   const { pageOpacity } = usePageFadeIn();
+  debugger;
   const {
     actions,
     childrenNodes: { chart },
@@ -52,7 +52,6 @@ const CreateChart: NextPage = () => {
           <a.div style={pageOpacity} className="h-full">
             <DesktopEditor
               chart={chart}
-              isLoading={chart.state.isCreateLoading}
               titleStyle={state.titleStyle}
             />
           </a.div>

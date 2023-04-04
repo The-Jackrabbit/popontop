@@ -1,4 +1,3 @@
-import { DragEndEvent } from '@dnd-kit/core';
 import { ChartSettings } from '@prisma/client';
 import { SpringValue } from 'react-spring';
 import { Album } from '../../../types/Albums';
@@ -38,8 +37,9 @@ export const useDesktopChartEditor = ({
   chartName = 'My sick ass chart',
   chartUuid = '',
   defaultSettings = null,
-  initialList = [],
+  initialList,
 }: Props): DesktopChartEditorHookNode => {
+  debugger;
   const chart = useChart({
     initialChartSettings: defaultSettings ?? undefined,
     chartUuid,

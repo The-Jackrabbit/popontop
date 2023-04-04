@@ -82,6 +82,7 @@ export const PreviewEditor: React.FC<Props> = ({
           borderColor={borderColor}
           borderSize={borderSize}
           preview={true}
+          items={list}
           itemComponent={({ index }) => (
             <img
               src={list[index]?.imageUrl ?? ''}
@@ -90,9 +91,6 @@ export const PreviewEditor: React.FC<Props> = ({
               height={size.width}
             />
           )}
-          size={size}
-          columns={columns}
-          rows={rows}
         />
       ) : null}
       {isOverlayVisible ? (

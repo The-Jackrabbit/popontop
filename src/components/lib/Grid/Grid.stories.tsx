@@ -65,7 +65,6 @@ export const Mobile: ComponentStory<typeof Grid> = (args) => {
               height={size.width}
             />
           )}
-          size={size}
         />
       ) : null}
     </div>

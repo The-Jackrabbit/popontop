@@ -84,7 +84,7 @@ export const ViewModeModal: React.FC<Props> = ({
         <Grid
           borderColor={borderColor}
           borderSize={borderSize}
-          size={size}
+          items={list}
           itemComponent={({ index }) => (
             <img
               src={list[index]?.imageUrl ?? ''}
@@ -93,8 +93,6 @@ export const ViewModeModal: React.FC<Props> = ({
               height={size.width}
             />
           )}
-          columns={columns}
-          rows={rows}
         />
       ) : null}
       {isOverlayVisible ? (
@@ -120,7 +118,7 @@ export const ViewModeModal: React.FC<Props> = ({
                   <Grid
                     borderColor={borderColor}
                     borderSize={borderSize}
-                    size={size}
+                    items={list}
                     itemComponent={({ index }) => (
                       <img
                         src={list[index]?.imageUrl ?? ''}
@@ -129,8 +127,6 @@ export const ViewModeModal: React.FC<Props> = ({
                         height={size.width}
                       />
                     )}
-                    columns={columns}
-                    rows={rows}
                   />
                 ) : null}
                 <div className="flex basis-[30%] flex-row">

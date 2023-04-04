@@ -47,7 +47,7 @@ export const ListOfCharts: React.FC<Props> = ({
         className={`
           ${colorMap[Color.fuchsia]}
           my-4
-          h-1 w-full rounded-full shadow-md 
+          h-1 w-full rounded-full shadow-md
         `}
       />
       {data ? (
@@ -62,7 +62,6 @@ export const ListOfCharts: React.FC<Props> = ({
                   isMobile={isMobile}
                   listMode={listMode}
                   onClick={() => {
-                    debugger;
                     setChartBeingViewed(chart.uuid ?? '');
                   }}
                   onClickDeleteChart={() => onClickDeleteChart(chart, index)}

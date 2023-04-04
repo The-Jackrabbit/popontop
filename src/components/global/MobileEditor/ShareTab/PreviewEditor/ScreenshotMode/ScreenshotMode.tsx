@@ -50,9 +50,7 @@ export const ScreenshotMode: React.FC<Props> = ({
               <Grid
                 borderColor={borderColor}
                 borderSize={borderSize}
-                columns={columns}
-                rows={rows}
-                size={size}
+                items={list}
                 itemComponent={({ index }) => (
                   <img
                     src={list[index]?.imageUrl ?? ''}
