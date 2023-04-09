@@ -62,7 +62,7 @@ const useChartSettings = (
   );
   const [borderSize, setBorderSize] = useState(1); // need to convert the sql sschema for this value from a decimal to a regualr number before unhardcoding this
   const [numberOfAlbums, setNumberOfAlbums] = useState(
-    defaultSettings?.number_of_albums ?? 50
+    (defaultSettings?.number_of_albums ?? 50) as number
   );
   const [showAlbums, setShowAlbums] = useState(
     defaultSettings?.show_albums ?? true
