@@ -54,6 +54,7 @@ export const chartsRouter = router({
           backgroundColor: z.string(),
           borderColor: z.string(),
           borderSize: z.number(),
+          numberOfAlbums: z.number(),
           showAlbums: z.boolean(),
           showTitle: z.boolean(),
           textColor: z.string(),

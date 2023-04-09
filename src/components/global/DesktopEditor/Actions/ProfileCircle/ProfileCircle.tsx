@@ -20,13 +20,7 @@ const ProfileCircle: React.FC = () => {
           'Sign out'
         ) : (
           <div className="flex flex-row gap-2">
-            Log in with
-            <Image
-              src="/assets/google-logo.png"
-              width="16px"
-              height="16px"
-              alt="google"
-            />
+            Log in
           </div>
         )
       }
@@ -34,7 +28,7 @@ const ProfileCircle: React.FC = () => {
       <a.button
         className="h-12
           w-12
-          rounded-full bg-white
+          rounded-full bg-white dark:bg-black
           shadow-xl
         "
         style={{

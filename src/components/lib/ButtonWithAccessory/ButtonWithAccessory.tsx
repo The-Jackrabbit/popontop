@@ -51,9 +51,9 @@ const ButtonWithAccessory: React.FC<Props> = ({
               overflow-x-hidden whitespace-nowrap
               rounded-xl bg-black
               py-2 pl-4
-              pr-4 text-neutral-50 shadow-lg 
-              dark:bg-white
-              dark:text-neutral-800
+              pr-4 text-neutral-50 shadow-lg
+              dark:bg-neutral-600
+              dark:text-neutral-50
             `}
           >
             {label}
@@ -61,10 +61,10 @@ const ButtonWithAccessory: React.FC<Props> = ({
           <div
             // Caret
             className={`
-            absolute ${pointerPositionStyle}
-            h-3 w-3
-            rotate-45 bg-black
-            dark:bg-white
+              absolute ${pointerPositionStyle}
+              h-3 w-3
+              rotate-45 bg-black
+              dark:bg-neutral-600
             `}
           />
         </div>
