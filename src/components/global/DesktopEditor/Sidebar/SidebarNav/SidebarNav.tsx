@@ -1,10 +1,12 @@
 import { useRouter } from 'next/router';
 import { a } from 'react-spring';
 import { useZoomOnHover } from '../../../../../frontend/hooks/springs/use-zoom-on-hover';
+import { useSession } from 'next-auth/react';
 import NavDot, { Color } from './NavDot/NavDot';
 
 export const SidebarNav: React.FC = () => {
   const { zoomOnHoverStyle, onMouseLeave, onMouseOver } = useZoomOnHover();
+  const { data: sessionData } = useSession();
   const router = useRouter();
   return (
     <div className="flex flex-row items-end justify-between">
@@ -22,7 +24,7 @@ export const SidebarNav: React.FC = () => {
               text-xs
               shadow-lg
               dark:bg-black dark:shadow-neutral-900
-              sm:py-1 
+              sm:py-1
               md:text-sm xl:text-xl
             "
           >
@@ -38,13 +40,15 @@ export const SidebarNav: React.FC = () => {
           color={Color.green}
           label="Editor"
         />
-        <NavDot
-          ariaLabel="charts page"
-          isActive={router.route === '/your-charts'}
-          onClick={() => router.push('/your-charts')}
-          color={Color.fuchsia}
-          label="Your charts"
-        />
+        {!sessionData ? null :
+          <NavDot
+            ariaLabel="charts page"
+            isActive={router.route.includes('/your-charts')}
+            onClick={() => router.push('/your-charts')}
+            color={Color.fuchsia}
+            label="Your charts"
+          />
+        }
         <NavDot
           ariaLabel="credits page"
           isActive={router.route === '/credits'}

@@ -12,13 +12,19 @@ import SidebarNav from './SidebarNav/SidebarNav';
 
 export interface Props {
   initialValues?: string[];
+  isChartOwner: boolean;
+  pageTitle: string;
+  pageTitleBorderBottom: Color;
   settings: SettingsHookNode;
   toggleAlbums: (value: boolean) => void;
   toggleTitle: (value: boolean) => void;
 }
 
 export const DesktopSidebar: React.FC<Props> = ({
+  isChartOwner,
+  pageTitle,
   settings,
+  pageTitleBorderBottom,
   toggleAlbums,
   toggleTitle,
 }) => {
@@ -50,17 +56,21 @@ export const DesktopSidebar: React.FC<Props> = ({
 
   return (
     <Layout
-      nav={<SidebarNav />}
-      sidebarContent={
+      title={
         <>
-          <h1 className="text-4xl font-bold">create chart</h1>
+          <h1 className="text-4xl font-bold">{pageTitle}</h1>
           <div
             className={`
-              ${colorMap[Color.green]}
+              ${colorMap[pageTitleBorderBottom]}
               my-4
-              h-1 w-full rounded-full shadow-md 
+              h-1 w-full rounded-full shadow-md
             `}
           />
+        </>
+      }
+      nav={<SidebarNav />}
+      sidebarContent={!isChartOwner ? null :
+        <>
           <div className="mb-2 flex flex-col justify-center">
             <TextExpandingPill
               label="Search albums"

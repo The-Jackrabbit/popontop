@@ -17,7 +17,7 @@ export const LAYOUT_CONFIG_WITH_ACTIONS = {
 
 export const LAYOUT_CONFIG_WITHOUT_ACTIONS = {
   actions: '',
-  pageContent: 'shrink grow-0 basis-9/12 min-w-9/12 min-w-[75%] p-4',
+  pageContent: 'shrink grow-0 basis-9/12 min-w-9/12 max-w-9/12 min-w-[75%] p-4',
   sidebar: 'shrink-0 grow basis-3/12',
 };
 
@@ -51,8 +51,9 @@ const Layout: React.FC<Props> = ({
           min-w-[870px]
           max-w-[1200px]
           //md:bg-blue-300
+          lg:w-[1000px]
           //lg:bg-red-300
-          //xl:bg-green-300
+          xl:bg-green-300
           xl:max-w-[1200px]
         "
       >

@@ -39,7 +39,6 @@ export const useDesktopChartEditor = ({
   defaultSettings = null,
   initialList,
 }: Props): DesktopChartEditorHookNode => {
-  debugger;
   const chart = useChart({
     initialChartSettings: defaultSettings ?? undefined,
     chartUuid,

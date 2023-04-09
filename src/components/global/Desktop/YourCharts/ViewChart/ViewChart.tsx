@@ -26,8 +26,6 @@ export const ViewChart: React.FC<Props> = ({ chartUuid }) => {
     return <div>not found</div>;
   }
 
-  debugger;
-
   return (
     <Layout
       backgroundColor={chart?.settings?.background_color ?? ''}
@@ -36,7 +34,7 @@ export const ViewChart: React.FC<Props> = ({ chartUuid }) => {
           chartTitle={chart.name}
           isReadOnly={true}
           showIntroduction={!true}
-          textColor="black"
+          textColor={chart?.settings?.text_color ?? ''}
         />
       }
       chart={() => (
@@ -48,7 +46,9 @@ export const ViewChart: React.FC<Props> = ({ chartUuid }) => {
         />
       )}
       modifyChartButton={
-        <LinkPill href={`/charts/${chartUuid}`}>open in editor</LinkPill>
+        <LinkPill href={`/charts/${chartUuid}`}>
+          <h1 className='text-lg'>open in editor</h1>
+        </LinkPill>
       }
     />
   );

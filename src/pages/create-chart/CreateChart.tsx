@@ -8,14 +8,13 @@ import DesktopEditor from '../../components/global/DesktopEditor/DesktopEditor';
 import { DraggedAlbum } from '../../frontend/hooks/use-chart/use-chart';
 import useDesktopChartEditor from '../../frontend/hooks/singletons/use-desktop-chart-editor';
 import DesktopActions from '../../components/global/DesktopEditor/Actions/DesktopActions';
+import { Color } from '../../components/global/DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
 
 const CreateChart: NextPage = () => {
   const { pageOpacity } = usePageFadeIn();
-  debugger;
   const {
     actions,
     childrenNodes: { chart },
-    state,
   } = useDesktopChartEditor({});
 
   return (
@@ -33,6 +32,7 @@ const CreateChart: NextPage = () => {
       <Layout
         actions={
           <DesktopActions
+            isChartOwner={true}
             isLoading={chart.state.isCreateLoading || chart.state.isEditLoading}
             save={chart.actions.saveChart}
             savedChartId={chart.state.savedChartId}
@@ -42,6 +42,9 @@ const CreateChart: NextPage = () => {
         sidebar={
           <a.div style={pageOpacity} className="h-full overflow-x-visible">
             <DesktopSidebar
+              isChartOwner={true}
+              pageTitle='create chart'
+              pageTitleBorderBottom={Color.green}
               settings={chart.childrenNodes.settings}
               toggleAlbums={actions.toggleAlbums}
               toggleTitle={actions.toggleTitle}
@@ -52,7 +55,6 @@ const CreateChart: NextPage = () => {
           <a.div style={pageOpacity} className="h-full">
             <DesktopEditor
               chart={chart}
-              titleStyle={state.titleStyle}
             />
           </a.div>
         }

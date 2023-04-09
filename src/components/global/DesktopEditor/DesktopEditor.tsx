@@ -1,5 +1,4 @@
 import React from 'react';
-import { SpringValue } from 'react-spring';
 import { EMPTY_ALBUM } from '../../../constants/empty-album';
 import { ChartHookNode } from '../../../frontend/hooks/use-chart/use-chart';
 import { Album } from '../../../types/Albums';
@@ -11,13 +10,11 @@ import Layout from './Layout';
 export interface Props {
   chart: ChartHookNode;
   readonly?: boolean;
-  titleStyle: { height: SpringValue<string> };
 }
 
 const DesktopEditor: React.FC<Props> = ({
   chart,
   readonly = false,
-  // titleStyle,
 }) => {
   const textList: Album[] = (() => {
     const lengthOfList =
@@ -33,7 +30,6 @@ const DesktopEditor: React.FC<Props> = ({
   return (
     <Layout
       backgroundColor={chart.childrenNodes.settings.state.backgroundColor}
-      isReadonly={readonly}
       title={
         chart.childrenNodes.settings.state.showTitle ? (
           <Title
@@ -45,7 +41,7 @@ const DesktopEditor: React.FC<Props> = ({
           />
         ) : null
       }
-      listTwo={
+      list={
         chart.childrenNodes.settings.state.showAlbums ? (
           <ChartListV2
             textColor={chart.childrenNodes.settings.state.textColor}

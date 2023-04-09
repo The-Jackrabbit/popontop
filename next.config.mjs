@@ -21,7 +21,16 @@ export default defineNextConfig({
     locales: ['en'],
     defaultLocale: 'en',
   },
+  async headers() {
+    return [
+      {
+        source: '/_next/image',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable', }]
+      }
+    ];
+  },
   images: {
+    minimumCacheTTL: 60,
     domains: ['lastfm.freetls.fastly.net', 'lh3.googleusercontent.com'],
   },
 });

@@ -11,6 +11,7 @@ import { Color } from '../../../components/global/DesktopEditor/Sidebar/SidebarN
 
 const YourCharts: NextPage = () => {
   const { data } = trpc.charts.getUserCharts.useQuery(undefined, {
+    cacheTime: 5000000,
     refetchOnWindowFocus: false,
   });
   const deleteChartMutation = trpc.charts.delete.useMutation();
@@ -39,7 +40,7 @@ const YourCharts: NextPage = () => {
         className={`
           ${colorMap[Color.fuchsia]}
           my-4
-          h-1 w-full rounded-full shadow-md 
+          h-1 w-full rounded-full shadow-md
         `}
       ></div>
       <div>
@@ -58,7 +59,7 @@ const YourCharts: NextPage = () => {
                       className="
                         mb-2 flex
                         h-16 cursor-pointer
-  
+
                         justify-between
                         hover:bg-neutral-300 active:bg-neutral-400
                         dark:hover:bg-neutral-800 dark:active:bg-neutral-700

@@ -1,21 +1,23 @@
 import { ListRowMode } from '../Mobile/ListRow/ListRow';
 import {
   ChartListItem,
-  ChartListItemLoader,
 } from './ChartListItem/ChartListItem';
 import { trpc } from '../../../utils/trpc';
 import { useEffect, useState } from 'react';
 import { IChartListItem } from '../../../server/trpc/router/charts/getChartsForUser';
 import { colorMap } from '../../../constants/colors';
 import { Color } from '../../global/DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
+import { ListOfChartsLoader } from './Loader';
 
 export interface Props {
+  activeChartUuid?: string;
   isMobile: boolean;
   setChartBeingViewed?: (chartUuid: string) => void;
   titleText?: string;
 }
 
 export const ListOfCharts: React.FC<Props> = ({
+  activeChartUuid,
   isMobile,
   setChartBeingViewed = () => undefined,
   titleText = 'your charts',
@@ -23,13 +25,15 @@ export const ListOfCharts: React.FC<Props> = ({
   const { data } = trpc.charts.getUserCharts.useQuery(undefined, {
     refetchOnWindowFocus: false,
   });
+
   const [visibilityMap, setVisibilityMap] = useState(
     new Array(1000).map(() => true)
   );
-  const deleteChartMutation = trpc.charts.delete.useMutation();
   useEffect(() => {
     setVisibilityMap(new Array(1000).map(() => true));
   }, [data]);
+
+  const deleteChartMutation = trpc.charts.delete.useMutation();
   const onClickDeleteChart = (chart: IChartListItem, index: number) => {
     setVisibilityMap((visibilityMap) => {
       const newVizMap = [...visibilityMap];
@@ -58,6 +62,7 @@ export const ListOfCharts: React.FC<Props> = ({
                 <div></div>
               ) : (
                 <ChartListItem
+                  isActive={activeChartUuid && activeChartUuid === chart.uuid}
                   chart={chart}
                   isMobile={isMobile}
                   listMode={listMode}
@@ -71,16 +76,9 @@ export const ListOfCharts: React.FC<Props> = ({
           ))}
         </>
       ) : (
-        <ListOfChartsLoader />
+        <ListOfChartsLoader/>
       )}
     </>
   );
 };
 
-export const ListOfChartsLoader: React.FC = ({}) => (
-  <div className="max-h-[80vh] overflow-y-scroll">
-    {[...new Array(100)].map((_, index) => (
-      <ChartListItemLoader key={`${index}-chart-list-loader`} />
-    ))}
-  </div>
-);

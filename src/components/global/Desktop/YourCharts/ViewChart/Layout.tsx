@@ -19,10 +19,10 @@ export const Layout: React.FC<Props> = ({
   return (
     <div className="flex h-full flex-row justify-between">
       <div style={{ backgroundColor }}>
-        <div className="relative flex flex-col items-stretch px-4">
-          <div>{modifyChartButton}</div>
-          <div className="pb-4">{title}</div>
-          <div ref={setTarget}>{size ? chart(size) : null}</div>
+        <div className="relative flex flex-col h-full px-4">
+          <div className="pb-4 grow-0 basis-0">{title}</div>
+          <div className="grow-0" ref={setTarget}>{size ? chart(size) : null}</div>
+          <div className='flex basis-2/12 grow justify-end items-end align-bottom'>{modifyChartButton}</div>
         </div>
       </div>
     </div>

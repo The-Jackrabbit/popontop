@@ -4,6 +4,7 @@ import { ListRowMode } from '../../Mobile/ListRow/ListRow';
 import { DeleteRowButton } from '../../Mobile/Row/DeleteRowButton/DeleteRowButton';
 
 export interface Props {
+  isActive: boolean;
   chart: IChartListItem;
   listMode: ListRowMode;
   onClick?: () => void;
@@ -20,6 +21,7 @@ export const DesktopChartListItem: React.FC<Props> = (props) => (
 
 export const ChartListItem: React.FC<Props & { isMobile: boolean }> = ({
   chart,
+  isActive,
   isMobile,
   listMode,
   onClick,
@@ -27,6 +29,7 @@ export const ChartListItem: React.FC<Props & { isMobile: boolean }> = ({
 }) => {
   const contentComponent = (
     <ChartListItemContent
+      isActive={isActive}
       chart={chart}
       listMode={listMode}
       onClickDeleteChart={onClickDeleteChart}
@@ -41,12 +44,14 @@ export const ChartListItem: React.FC<Props & { isMobile: boolean }> = ({
 };
 
 export interface ChartListItemContentProps {
+  isActive: boolean;
   chart: IChartListItem;
   listMode: ListRowMode;
   onClickDeleteChart: () => void;
 }
 
 export const ChartListItemContent: React.FC<ChartListItemContentProps> = ({
+  isActive,
   chart,
   listMode,
   onClickDeleteChart,
@@ -60,6 +65,7 @@ export const ChartListItemContent: React.FC<ChartListItemContentProps> = ({
         hover:bg-neutral-300 active:bg-neutral-400
         dark:hover:bg-neutral-800 dark:active:bg-neutral-700
       "
+      style={isActive ? { backgroundColor: 'red' } : {}}
     >
       <div className="basis-5/6 overflow-x-hidden">
         <p

@@ -10,6 +10,8 @@ import Layout from '../create-chart/Layout';
 import { genUuid } from '../mobile/charts/[uuid]';
 import useDesktopChartEditor from '../../frontend/hooks/singletons/use-desktop-chart-editor';
 import DesktopSidebar from '../../components/global/DesktopEditor/Sidebar/DesktopSidebar';
+import { Color } from '../../components/global/DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
+import DesktopActions from '../../components/global/DesktopEditor/Actions/DesktopActions';
 
 const ApiWrapper: NextPage = () => {
   const router = useRouter();
@@ -36,6 +38,8 @@ const ApiWrapper: NextPage = () => {
     <Chart
       albums={data.albums}
       chartName={data.name}
+      chartUuid={uuid as string}
+      isChartOwner={!data.isReadOnly}
       settings={data.settings}
     />
   );
@@ -44,26 +48,37 @@ const ApiWrapper: NextPage = () => {
 const Chart = ({
   albums,
   chartName,
+  chartUuid,
+  isChartOwner,
   settings,
 }: {
   albums: Album[];
   chartName: string;
+  chartUuid: string;
+  isChartOwner: boolean;
   settings: ChartSettings | null;
 }) => {
   const { pageOpacity } = usePageFadeIn();
   const {
     actions,
     childrenNodes: { chart },
-    state,
   } = useDesktopChartEditor({
     initialList: albums,
     chartName,
+    chartUuid,
     defaultSettings: settings,
   });
 
   return (
     <Layout
-      actions={null}
+      actions={
+        <DesktopActions
+          isChartOwner={isChartOwner}
+          isLoading={chart.state.isCreateLoading || chart.state.isEditLoading}
+          save={chart.actions.editChart}
+          savedChartId={chart.state.savedChartId}
+        />
+      }
       backgroundColor={chart.childrenNodes.settings.state.backgroundColor}
       pageContent={
         <a.div style={pageOpacity} className="h-full">
@@ -71,20 +86,22 @@ const Chart = ({
             chart={chart}
             // listStyles={state.listStyle}
             readonly={true}
-            titleStyle={state.titleStyle}
           />
         </a.div>
       }
       sidebar={
         <a.div style={pageOpacity} className="h-full overflow-x-visible">
           <DesktopSidebar
+            isChartOwner={isChartOwner}
+            pageTitleBorderBottom={Color.blue}
+            pageTitle={isChartOwner ? "edit chart" : "viewing chart"}
             settings={chart.childrenNodes.settings}
             toggleAlbums={actions.toggleAlbums}
             toggleTitle={actions.toggleTitle}
           />
         </a.div>
       }
-    ></Layout>
+    />
   );
 };
 
