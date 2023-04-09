@@ -22,6 +22,7 @@ const SharedWrapper: React.FC<{
       pageContent={page}
       sidebar={
         <SidebarLayout
+          title={null}
           nav={<SidebarNav />}
           sidebarContent={
             <div className="h-full overflow-x-visible">

@@ -62,7 +62,7 @@ export const ListOfCharts: React.FC<Props> = ({
                 <div></div>
               ) : (
                 <ChartListItem
-                  isActive={activeChartUuid && activeChartUuid === chart.uuid}
+                  isActive={activeChartUuid !== '' && activeChartUuid === chart.uuid}
                   chart={chart}
                   isMobile={isMobile}
                   listMode={listMode}
