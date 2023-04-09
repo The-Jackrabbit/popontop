@@ -115,6 +115,16 @@ export const DesktopSidebar: React.FC<Props> = ({
               value={settings.state.showTitle}
             />
             <NumericExpandingPill
+              label="Number of albums"
+              min={0}
+              max={100}
+              setValue={
+                ((value: number) =>
+                  settings.actions.setNumberOfAlbums(value)) as any
+              }
+              value={settings.state.numberOfAlbums}
+            />
+            <NumericExpandingPill
               label="Border width"
               min={0}
               max={10}
@@ -124,25 +134,27 @@ export const DesktopSidebar: React.FC<Props> = ({
               }
               value={settings.state.borderSize}
             />
-            <NumericExpandingPill
-              label="Number of columns"
-              min={0}
-              max={10}
-              setValue={
-                ((value: number) => settings.actions.setColumns(value)) as any
-              }
-              value={settings.state.columns}
-            />
+            {/**
+              <NumericExpandingPill
+                label="Number of columns"
+                min={0}
+                max={10}
+                setValue={
+                  ((value: number) => settings.actions.setColumns(value)) as any
+                }
+                value={settings.state.columns}
+              />
 
-            <NumericExpandingPill
-              label="Number of rows"
-              min={0}
-              max={10}
-              setValue={
-                ((value: number) => settings.actions.setRows(value)) as any
-              }
-              value={settings.state.rows}
-            />
+              <NumericExpandingPill
+                label="Number of rows"
+                min={0}
+                max={10}
+                setValue={
+                  ((value: number) => settings.actions.setRows(value)) as any
+                }
+                value={settings.state.rows}
+              />
+            */}
           </div>
         </>
       }

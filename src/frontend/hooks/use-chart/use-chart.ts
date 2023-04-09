@@ -54,6 +54,7 @@ export const useChart = ({
         backgroundColor: settings.state.backgroundColor,
         borderColor: settings.state.borderColor,
         borderSize: settings.state.borderSize,
+        numberOfAlbums: settings.state.numberOfAlbums,
         showAlbums: settings.state.showAlbums,
         showTitle: settings.state.showTitle,
         textColor: settings.state.textColor,
@@ -74,6 +75,7 @@ export const useChart = ({
         backgroundColor: settings.state.backgroundColor,
         borderColor: settings.state.borderColor,
         borderSize: settings.state.borderSize,
+        numberOfAlbums: settings.state.numberOfAlbums,
         showAlbums: settings.state.showAlbums,
         showTitle: settings.state.showTitle,
         textColor: settings.state.textColor,
@@ -100,7 +102,10 @@ export const useChart = ({
       setChartTitle,
     },
     childrenNodes: {
-      list,
+      list: {
+        ...list,
+        state: list.state.filter((_,i) => i < settings.state.numberOfAlbums),
+      },
       settings,
     },
     state,

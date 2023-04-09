@@ -5,6 +5,8 @@ import { useZoomOnHover } from '../../../../../frontend/hooks/springs/use-zoom-o
 import ButtonWithAccessory, {
   LEFT_POSITION_STYLE,
 } from '../../../../lib/ButtonWithAccessory/ButtonWithAccessory';
+import { UserCircleIcon } from '@heroicons/react/24/solid';
+import { ICON_STYLE } from '../../../../lib/FilterButton/FilterButton';
 
 const ProfileCircle: React.FC = () => {
   const { data: sessionData } = useSession();
@@ -30,9 +32,9 @@ const ProfileCircle: React.FC = () => {
       }
     >
       <a.button
-        className="h-12 
+        className="h-12
           w-12
-          rounded-full bg-rose-300
+          rounded-full bg-white
           shadow-xl
         "
         style={{
@@ -49,7 +51,9 @@ const ProfileCircle: React.FC = () => {
             alt="profile"
           />
         ) : (
-          <p className="p-2 text-2xl">🪵</p>
+          <p className="flex align-middle justify-center p-2 text-2xl text-center">
+            <UserCircleIcon className={ICON_STYLE} />
+          </p>
         )}
       </a.button>
     </ButtonWithAccessory>

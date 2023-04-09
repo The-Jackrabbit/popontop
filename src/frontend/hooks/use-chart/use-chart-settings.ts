@@ -15,6 +15,7 @@ export interface Actions {
   setShowAlbums: (value: boolean) => void;
   setBackgroundColor: (value: string) => void;
   setColumns: (value: number) => void;
+  setNumberOfAlbums: (value: number) => void;
   setRows: (value: number) => void;
   setShowTitle: (value: boolean) => void;
   setTextColor: (value: string) => void;
@@ -25,6 +26,7 @@ export interface State {
   borderColor: string;
   borderSize: number;
   columns: number;
+  numberOfAlbums: number;
   rows: number;
   showAlbums: boolean;
   showTitle: boolean;
@@ -59,6 +61,9 @@ const useChartSettings = (
     defaultSettings?.border_color ?? ''
   );
   const [borderSize, setBorderSize] = useState(1); // need to convert the sql sschema for this value from a decimal to a regualr number before unhardcoding this
+  const [numberOfAlbums, setNumberOfAlbums] = useState(
+    defaultSettings?.number_of_albums ?? 50
+  );
   const [showAlbums, setShowAlbums] = useState(
     defaultSettings?.show_albums ?? true
   );
@@ -77,6 +82,7 @@ const useChartSettings = (
       setBorderColor,
       setBorderSize,
       setColumns,
+      setNumberOfAlbums,
       setRows,
       setShowAlbums,
       setShowTitle,
@@ -87,6 +93,7 @@ const useChartSettings = (
       borderColor,
       borderSize,
       columns,
+      numberOfAlbums,
       rows,
       showAlbums,
       showTitle,
