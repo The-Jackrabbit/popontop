@@ -12,6 +12,8 @@ import useDesktopChartEditor from '../../frontend/hooks/singletons/use-desktop-c
 import DesktopSidebar from '../../components/global/DesktopEditor/Sidebar/DesktopSidebar';
 import { Color } from '../../components/global/DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
 import DesktopActions from '../../components/global/DesktopEditor/Actions/DesktopActions';
+import { DndContext } from '@dnd-kit/core';
+import { DraggedAlbum } from '../../frontend/hooks/use-chart/use-chart';
 
 const ApiWrapper: NextPage = () => {
   const router = useRouter();
@@ -70,38 +72,50 @@ const Chart = ({
   });
 
   return (
-    <Layout
-      actions={
-        <DesktopActions
-          isChartOwner={isChartOwner}
-          isLoading={chart.state.isCreateLoading || chart.state.isEditLoading}
-          save={chart.actions.editChart}
-          savedChartId={chart.state.savedChartId}
-        />
-      }
-      backgroundColor={chart.childrenNodes.settings.state.backgroundColor}
-      pageContent={
-        <a.div style={pageOpacity} className="h-full">
-          <DesktopEditor
-            chart={chart}
-            // listStyles={state.listStyle}
-            readonly={true}
-          />
-        </a.div>
-      }
-      sidebar={
-        <a.div style={pageOpacity} className="h-full overflow-x-visible">
-          <DesktopSidebar
+    <DndContext
+      autoScroll={false}
+      onDragStart={(event) => {
+        chart.childrenNodes.list.actions.setDraggedAlbum(
+          event.active.data.current as DraggedAlbum
+        );
+      }}
+      onDragEnd={(args) => {
+        chart.childrenNodes.list.actions.handleDragEnd(args);
+      }}
+    >
+      <Layout
+        actions={
+          <DesktopActions
             isChartOwner={isChartOwner}
-            pageTitleBorderBottom={Color.blue}
-            pageTitle={isChartOwner ? "edit chart" : "viewing chart"}
-            settings={chart.childrenNodes.settings}
-            toggleAlbums={actions.toggleAlbums}
-            toggleTitle={actions.toggleTitle}
+            isLoading={chart.state.isCreateLoading || chart.state.isEditLoading}
+            save={chart.actions.editChart}
+            savedChartId={chart.state.savedChartId}
           />
-        </a.div>
-      }
-    />
+        }
+        backgroundColor={chart.childrenNodes.settings.state.backgroundColor}
+        pageContent={
+          <a.div style={pageOpacity} className="h-full">
+            <DesktopEditor
+              chart={chart}
+              // listStyles={state.listStyle}
+              readonly={false}
+            />
+          </a.div>
+        }
+        sidebar={
+          <a.div style={pageOpacity} className="h-full overflow-x-visible">
+            <DesktopSidebar
+              isChartOwner={isChartOwner}
+              pageTitleBorderBottom={Color.blue}
+              pageTitle={isChartOwner ? "edit chart" : "viewing chart"}
+              settings={chart.childrenNodes.settings}
+              toggleAlbums={actions.toggleAlbums}
+              toggleTitle={actions.toggleTitle}
+            />
+          </a.div>
+        }
+      />
+    </DndContext>
   );
 };
 
