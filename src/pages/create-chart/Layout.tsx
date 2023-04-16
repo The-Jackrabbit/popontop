@@ -2,7 +2,7 @@ import React from 'react';
 
 export interface Props {
   actions: React.ReactNode;
-  backgroundColor: string;
+  backgroundColor?: string;
   hasActions?: boolean;
   pageContent: React.ReactNode;
   sidebar: React.ReactNode;
@@ -39,7 +39,7 @@ const Layout: React.FC<Props> = ({
       className="
         flex h-screen
         w-screen justify-center
-        overflow-hidden
+        overflow-hidder
         min-w-[800px]
       "
     >
@@ -53,7 +53,8 @@ const Layout: React.FC<Props> = ({
           //md:bg-blue-300
           lg:w-[1000px]
           //lg:bg-red-300
-          xl:bg-green-300
+          //xl:bg-green-300
+          xl:w-[1200px]
           xl:max-w-[1200px]
         "
       >
@@ -61,7 +62,7 @@ const Layout: React.FC<Props> = ({
         <div
           // border-4 border-purple-500
           className={layoutStyle.pageContent}
-          style={{ backgroundColor }}
+          style={backgroundColor ? { backgroundColor }: {}}
         >
           {pageContent}
         </div>

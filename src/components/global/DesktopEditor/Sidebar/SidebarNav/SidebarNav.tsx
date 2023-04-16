@@ -37,7 +37,7 @@ export const SidebarNav: React.FC = () => {
           ariaLabel="editor page"
           isActive={router.route === '/' || router.route.includes('/charts/')}
           onClick={() => router.push('/')}
-          color={Color.green}
+          color={Color.fuchsia}
           label="Editor"
         />
         {!sessionData ? null :
@@ -45,7 +45,7 @@ export const SidebarNav: React.FC = () => {
             ariaLabel="charts page"
             isActive={router.route.includes('/your-charts')}
             onClick={() => router.push('/your-charts')}
-            color={Color.fuchsia}
+            color={Color.amber}
             label="Your charts"
           />
         }
@@ -53,7 +53,7 @@ export const SidebarNav: React.FC = () => {
           ariaLabel="credits page"
           isActive={router.route === '/credits'}
           onClick={() => router.push('/credits')}
-          color={Color.violet}
+          color={Color.blue}
           label="Credits"
         />
       </div>

@@ -7,9 +7,12 @@ export const PILL = `
 `;
 
 export const EXPANDING_PILL = `
-  flex-col 
+  flex-col
   inline-flex
   rounded-lg
 `;
 
-export const ALBUM_SIZE = '50px';
+export const SMALL_ALBUM_SIZE = 'w-[50px] h-[50px]';
+export const MEDIUM_ALBUM_SIZE = 'w-[70px] h-[70px]';
+export const LARGE_ALBUM_SIZE = 'w-[90px] h-[90px]';
+export const XL_ALBUM_SIZE = 'w-[110px] h-[110px]';

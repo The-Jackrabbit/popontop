@@ -44,7 +44,7 @@ const CreateChart: NextPage = () => {
             <DesktopSidebar
               isChartOwner={true}
               pageTitle='create chart'
-              pageTitleBorderBottom={Color.green}
+              pageTitleBorderBottom={Color.fuchsia}
               settings={chart.childrenNodes.settings}
               toggleAlbums={actions.toggleAlbums}
               toggleTitle={actions.toggleTitle}

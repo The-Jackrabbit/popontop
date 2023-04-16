@@ -27,7 +27,7 @@ const FilterButton: React.FC<Props> = ({
 }) => {
   const fromGradient = 'linear-gradient(0deg, gray 0%, gray 100%)';
   const toGradient = hasGradientIndicator
-    ? 'linear-gradient(180deg, red 0%, blue 100%)'
+    ? 'linear-gradient(180deg, orange 0%, orange 100%)'
     : 'linear-gradient(0deg, gray 0%, gray 100%)';
 
   const [background, animateBackgroundStyle] = useSpring(() => ({
@@ -53,11 +53,11 @@ const FilterButton: React.FC<Props> = ({
   return (
     <a.button
       aria-label={ariaLabel}
-      className={` 
+      className={`
         ${className}
         ${rounding}
         relative
-      text-black dark:bg-neutral-600
+        text-black dark:bg-neutral-600
         dark:text-white
       `}
       onClick={onClickButton}
@@ -77,8 +77,8 @@ const FilterButton: React.FC<Props> = ({
       />
       <div
         className={`
-        h-full w-full bg-white hover:bg-neutral-50
-          dark:bg-neutral-900 hover:dark:bg-black ${rounding} 
+          h-full w-full bg-white hover:bg-neutral-50
+          dark:bg-neutral-900 hover:dark:bg-black ${rounding}
           flex items-center justify-center
           leading-none
         `}

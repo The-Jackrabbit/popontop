@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDroppable } from '@dnd-kit/core';
 import { Album } from '../../../../../types/Albums';
-import { ALBUM_SIZE } from '../../../../../constants/shared-styles';
+import { LARGE_ALBUM_SIZE } from '../../../../../constants/shared-styles';
 
 export interface Props {
   album: Album;
@@ -24,7 +24,7 @@ const Droppable: React.FC<Props> = ({
       className={`
         ${className}
         droppable
-        w-[50px] h-[50px]
+        ${LARGE_ALBUM_SIZE}
         ${isOver ? 'bg-green-400' : 'bg-transparent'}
       `}
       style={style}
@@ -35,4 +35,4 @@ const Droppable: React.FC<Props> = ({
   );
 };
 
-export default Droppable;
+export default Droppable

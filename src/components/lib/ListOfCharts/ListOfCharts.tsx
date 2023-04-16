@@ -49,7 +49,7 @@ export const ListOfCharts: React.FC<Props> = ({
       <h1 className="text-4xl font-bold">{titleText}</h1>
       <div
         className={`
-          ${colorMap[Color.fuchsia]}
+          ${colorMap[Color.amber]}
           my-4
           h-1 w-full rounded-full shadow-md
         `}
