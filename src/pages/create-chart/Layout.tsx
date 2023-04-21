@@ -53,7 +53,6 @@ const Layout: React.FC<Props> = ({
           //md:bg-blue-300
           lg:w-[1000px]
           //lg:bg-red-300
-          //xl:bg-green-300
           xl:w-[1200px]
           xl:max-w-[1200px]
         "

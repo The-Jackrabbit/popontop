@@ -23,6 +23,7 @@ const List: React.FC<Props> = ({
     className={`
       ${list.length > 5 ? 'pb-[270px]' : ''}
       z-10
+      mt-4
       h-[calc(100vh_-_10px)]
       overflow-y-scroll
     `}

@@ -62,6 +62,7 @@ export const chartsRouter = router({
       })
     )
     .mutation(async (req) => {
+      console.log('start mutation');
       const { ctx } = req;
 
       return editChart(

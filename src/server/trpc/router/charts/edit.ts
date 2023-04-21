@@ -43,6 +43,7 @@ export const editChart = async (
   settings: Settings,
   userId?: string
 ) => {
+  console.log('editCHart');
   const originalChart = await prisma.chart_to_user.findFirst({
     where: {
       Chart: {

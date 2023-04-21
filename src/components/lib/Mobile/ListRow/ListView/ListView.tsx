@@ -24,7 +24,7 @@ export const ListView: React.FC<Props> = ({
     {showAlbums && (
       <div
         className="
-          flex w-12 
+          flex w-12
           shrink-0
           basis-1/12 flex-col content-center items-center justify-center text-xs
         "
@@ -34,12 +34,14 @@ export const ListView: React.FC<Props> = ({
     )}
     <div className="basis-2/12 justify-start">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        width={ROW_HEIGHT}
-        height={ROW_HEIGHT}
-        src={album.imageUrl}
-        alt={album.artist}
-      />
+      {album.imageUrl ? (
+        <img
+          width={ROW_HEIGHT}
+          height={ROW_HEIGHT}
+          src={album.imageUrl}
+          alt={album.artist}
+        />
+      ) : null}
     </div>
     <div
       style={textColor ? { color: textColor } : {}}

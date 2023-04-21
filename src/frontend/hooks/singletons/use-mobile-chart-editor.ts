@@ -50,6 +50,7 @@ const useMobileChartEditor = ({
     initialChartSettings: defaultSettings ?? undefined,
     chartUuid,
     initialChartTitle: chartName,
+    initialList,
   });
   const editor = useMobileEditor(() => {
     if (!isFirstCloseDone && chart.childrenNodes.list.state.length > 0) {
