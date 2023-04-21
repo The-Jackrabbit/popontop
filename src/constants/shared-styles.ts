@@ -12,8 +12,8 @@ export const EXPANDING_PILL = `
   rounded-lg
 `;
 
-export const ALBUM_SIZE = '90px';
+export const ALBUM_SIZE = '60px';
 export const SMALL_ALBUM_SIZE = 'w-[50px] h-[50px]';
-export const MEDIUM_ALBUM_SIZE = 'w-[70px] h-[70px]';
-export const LARGE_ALBUM_SIZE = 'w-[90px] h-[90px]';
+export const MEDIUM_ALBUM_SIZE = 'w-[30px] h-[30px]';
+export const LARGE_ALBUM_SIZE = 'w-[60px] h-[60px]';
 export const XL_ALBUM_SIZE = 'w-[110px] h-[110px]';

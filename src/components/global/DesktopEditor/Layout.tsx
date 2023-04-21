@@ -21,9 +21,9 @@ const Layout: React.FC<Props> = ({
       style={{ backgroundColor }}
       className="flex h-full flex-row justify-between"
     >
-      <div className="relative flex w-full flex-col items-center gap-8 px-4">
+      <div className="overflow-y-scroll h-screen relative flex w-full flex-col items-center gap-8 px-4">
         <div className="min-h-min w-full">{title}</div>
-        <div ref={setTarget} className="w-full basis-1/2">
+        <div ref={setTarget} className="flex w-full basis-1/2 justify-center ">
           {size ? chart(size) : null}
         </div>
         <div className="w-full">{list}</div>

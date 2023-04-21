@@ -53,7 +53,7 @@ const list = [...new Array(100)].map(
 export const Mobile: ComponentStory<typeof Grid> = (args) => {
   const { containerRef, size } = useResizer();
   return (
-    <div {...containerRef} className="m-4 h-full w-full">
+    <div {...containerRef} className="flex m-4 h-full w-full">
       {size ? (
         <Grid
           {...args}
