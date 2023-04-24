@@ -24,6 +24,7 @@ const ChartListV2: React.FC<Props> = ({ columnCount, list, textColor }) => {
         flex
         text-ellipsis whitespace-nowrap text-[9px] dark:text-neutral-50
         pl-8
+        text-[rgb(212_212_212)]
       "
       role="list"
     >

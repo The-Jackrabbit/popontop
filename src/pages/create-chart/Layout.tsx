@@ -39,7 +39,7 @@ const Layout: React.FC<Props> = ({
       className="
         flex h-screen
         w-screen justify-center
-        overflow-hidder
+        overflow-hidden
         min-w-[800px]
       "
     >

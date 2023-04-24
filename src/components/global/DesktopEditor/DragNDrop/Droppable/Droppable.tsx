@@ -19,7 +19,7 @@ index,
       height: '100%',
       backgroundSize: '100% 200%',
       position: 'relative',
-      background: EMPTY_SQUARE_BG_GRADIENT[index%EMPTY_SQUARE_BG_GRADIENT.length],
+      // background: EMPTY_SQUARE_BG_GRADIENT[index%EMPTY_SQUARE_BG_GRADIENT.length],
     }}>
 
     </div>

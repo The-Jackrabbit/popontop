@@ -22,7 +22,7 @@ export const Layout: React.FC<Props> = ({
         <div className="relative flex flex-col h-full px-4">
           <div className="pb-4 grow-0 basis-0">{title}</div>
           <div className="grow-0" ref={setTarget}>{size ? chart(size) : null}</div>
-          <div className='flex basis-2/12 grow justify-end items-end align-bottom'>{modifyChartButton}</div>
+          <div className='fixed bottom-4 right-4 flex basis-2/12 grow justify-end items-end align-bottom'>{modifyChartButton}</div>
         </div>
       </div>
     </div>

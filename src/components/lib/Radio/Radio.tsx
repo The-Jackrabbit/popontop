@@ -15,7 +15,14 @@ export const Radio: React.FC<Props> = ({ onClick, value }) => {
         label="no"
         onClick={() => onClick(false)}
       />
-      <p className='text-[48px] translate-y-1 dark:text-neutral-900'>/</p>
+      <p
+        className='
+          text-[rgb(212_212_212)]
+          text-[48px] translate-y-1 dark:text-neutral-900
+        '
+      >
+        /
+      </p>
       <RadioOption
         color={Color.green}
         isActive={value}
