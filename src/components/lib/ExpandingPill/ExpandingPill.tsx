@@ -39,11 +39,12 @@ export const ExpandingPill: React.FC<Props> = ({
         onMouseLeave,
         onMouseEnter,
       };
+
   return (
     <a.div
       className={`
         ${className}
-        ${PILL} 
+        ${PILL}
         ${EXPANDING_PILL}
         h-max w-full max-w-full
       `}

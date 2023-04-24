@@ -16,7 +16,7 @@ const Credits: NextPage = () => {
           nav={<SidebarNav />}
           title={
             <>
-              <h1 className="text-4xl font-bold">Credits</h1>
+              <h1 className="text-4xl font-bold">credits</h1>
               <div
                 className={`
                   ${colorMap.blue}

@@ -1,9 +1,7 @@
 import { ChartSettings } from '@prisma/client';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { a } from 'react-spring';
 import DesktopEditor from '../../components/global/DesktopEditor/DesktopEditor';
-import { usePageFadeIn } from '../../frontend/hooks/springs/use-page-fade-in';
 import { Album } from '../../types/Albums';
 import { trpc } from '../../utils/trpc';
 import Layout from '../create-chart/Layout';
@@ -60,7 +58,6 @@ const Chart = ({
   isChartOwner: boolean;
   settings: ChartSettings | null;
 }) => {
-  const { pageOpacity } = usePageFadeIn();
   const {
     actions,
     childrenNodes: { chart },
@@ -86,24 +83,28 @@ const Chart = ({
       <Layout
         actions={
           <DesktopActions
+            deleteChart={chart.actions.deleteChart}
             isChartOwner={isChartOwner}
             isLoading={chart.state.isCreateLoading || chart.state.isEditLoading}
+            onEditPage={true}
             save={chart.actions.editChart}
             savedChartId={chart.state.savedChartId}
           />
         }
         backgroundColor={chart.childrenNodes.settings.state.backgroundColor}
         pageContent={
-          <a.div style={pageOpacity} className="h-full">
+          <div className="
+          h-full
+          ">
             <DesktopEditor
               chart={chart}
               // listStyles={state.listStyle}
               readonly={false}
             />
-          </a.div>
+          </div>
         }
         sidebar={
-          <a.div style={pageOpacity} className="h-full overflow-x-visible">
+          <div className="h-full overflow-x-visible">
             <DesktopSidebar
               isChartOwner={isChartOwner}
               pageTitleBorderBottom={Color.blue}
@@ -112,7 +113,7 @@ const Chart = ({
               toggleAlbums={actions.toggleAlbums}
               toggleTitle={actions.toggleTitle}
             />
-          </a.div>
+          </div>
         }
       />
     </DndContext>

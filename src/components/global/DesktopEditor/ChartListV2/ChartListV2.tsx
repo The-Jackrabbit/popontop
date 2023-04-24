@@ -16,12 +16,14 @@ const ChartListV2: React.FC<Props> = ({ columnCount, list, textColor }) => {
   const getEndIndexOfColumn = (columnIndex: number, listLength: number) => {
     return getStartIndexOfColumn(columnIndex + 1, listLength) - 1;
   };
+
   return (
     <div
       className="
         oveflow-x-hidden
         flex
         text-ellipsis whitespace-nowrap text-[9px] dark:text-neutral-50
+        pl-8
       "
       role="list"
     >

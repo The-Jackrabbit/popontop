@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { ChartSettings } from '@prisma/client';
 import { SpringValue } from 'react-spring';
 import { Album } from '../../../types/Albums';
@@ -20,6 +21,7 @@ export interface Actions {
 export interface State {
   listStyle: { width: SpringValue<string> };
   titleStyle: { height: SpringValue<string> };
+  showOnboardingFlow: boolean;
 }
 
 export interface ChildrenNodes {
@@ -33,12 +35,14 @@ export interface Props {
   initialList?: Album[];
 }
 
-export const useDesktopChartEditor = ({
-  chartName = 'My sick ass chart',
-  chartUuid = '',
-  defaultSettings = null,
-  initialList,
-}: Props): DesktopChartEditorHookNode => {
+export const useDesktopChartEditor = (
+  {
+    chartName = 'My sick ass chart',
+    chartUuid = '',
+    defaultSettings = null,
+    initialList,
+  }: Props
+): DesktopChartEditorHookNode => {
   const chart = useChart({
     initialChartSettings: defaultSettings ?? undefined,
     chartUuid,
@@ -54,6 +58,8 @@ export const useDesktopChartEditor = ({
     showAlbums: chart.childrenNodes.settings.state.showAlbums,
   });
 
+  const [showOnboardingFlow, setShowOnboardingFlow] = useState(!true);
+
   return {
     actions: {
       toggleAlbums,
@@ -64,6 +70,7 @@ export const useDesktopChartEditor = ({
     },
     state: {
       listStyle,
+      showOnboardingFlow,
       titleStyle,
     },
   };

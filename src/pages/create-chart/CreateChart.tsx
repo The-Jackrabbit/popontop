@@ -15,6 +15,9 @@ const CreateChart: NextPage = () => {
   const {
     actions,
     childrenNodes: { chart },
+    state: {
+      showOnboardingFlow,
+    },
   } = useDesktopChartEditor({});
 
   return (
@@ -32,10 +35,13 @@ const CreateChart: NextPage = () => {
       <Layout
         actions={
           <DesktopActions
+            deleteChart={async () => undefined}
             isChartOwner={true}
             isLoading={chart.state.isCreateLoading || chart.state.isEditLoading}
+            onEditPage={false}
             save={chart.actions.saveChart}
             savedChartId={chart.state.savedChartId}
+            showOnboardingFlow={showOnboardingFlow}
           />
         }
         backgroundColor={chart.childrenNodes.settings.state.backgroundColor}
@@ -43,9 +49,10 @@ const CreateChart: NextPage = () => {
           <a.div style={pageOpacity} className="h-full overflow-x-visible">
             <DesktopSidebar
               isChartOwner={true}
-              pageTitle='create chart'
+              pageTitle={showOnboardingFlow ? 'getting started' : 'create chart'}
               pageTitleBorderBottom={Color.fuchsia}
               settings={chart.childrenNodes.settings}
+              showOnboardingFlow={showOnboardingFlow}
               toggleAlbums={actions.toggleAlbums}
               toggleTitle={actions.toggleTitle}
             />
@@ -55,6 +62,7 @@ const CreateChart: NextPage = () => {
           <a.div style={pageOpacity} className="h-full">
             <DesktopEditor
               chart={chart}
+              showOnboardingFlow={showOnboardingFlow}
             />
           </a.div>
         }

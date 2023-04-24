@@ -27,7 +27,7 @@ const FilterButton: React.FC<Props> = ({
 }) => {
   const fromGradient = 'linear-gradient(0deg, gray 0%, gray 100%)';
   const toGradient = hasGradientIndicator
-    ? 'linear-gradient(180deg, rgb(251,191,36) 0%, #d946ef 100%)'
+    ? 'linear-gradient(180deg, rgb(251 191 36) 0%, orange 100%)'
     : 'linear-gradient(0deg, gray 0%, gray 100%)';
 
   const [background, animateBackgroundStyle] = useSpring(() => ({

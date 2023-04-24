@@ -8,18 +8,19 @@ export interface Props {
 
 export const Radio: React.FC<Props> = ({ onClick, value }) => {
   return (
-    <div className="flex h-12 w-full flex-col justify-between">
-      <RadioOption
-        color={Color.green}
-        isActive={value}
-        label="yes"
-        onClick={() => onClick(true)}
-      />
+    <div className="flex h-12 w-full justify-between">
       <RadioOption
         color={Color.rose}
         isActive={!value}
         label="no"
         onClick={() => onClick(false)}
+      />
+      <p className='text-[48px] translate-y-1 dark:text-neutral-900'>/</p>
+      <RadioOption
+        color={Color.green}
+        isActive={value}
+        label="yes"
+        onClick={() => onClick(true)}
       />
     </div>
   );

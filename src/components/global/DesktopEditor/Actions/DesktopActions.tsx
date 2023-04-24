@@ -6,52 +6,65 @@ import ActionButton from './ActionButton/ActionButton';
 import ProfileCircle from './ProfileCircle/ProfileCircle';
 
 export interface Props {
+  deleteChart: () => Promise<void>;
   isChartOwner: boolean;
   isLoading: boolean;
+  onEditPage: boolean;
   save: () => void;
   savedChartId: string | null;
+  showOnboardingFlow: boolean;
 }
 
 const DesktopActions: React.FC<Props> = ({
+  deleteChart,
   isLoading,
   isChartOwner,
+  onEditPage,
   save,
-  savedChartId
+  savedChartId,
+  showOnboardingFlow,
 }) => {
   return (
     <>
       <div className="flex flex-col gap-2">
-        <ActionButton
-          onClick={() => save()}
-          disabled={isLoading}
-          label="Save chart"
-          text={
-            !isLoading ? (
-              <CloudArrowUpIcon className={ICON_STYLE} />
-            ) : (
-              <LoadingBouncer />
-            )
-          }
-          variant="primary"
-        />
-        {savedChartId && isChartOwner ? (
+        {showOnboardingFlow ? null : (
           <>
-            <Link href={`/charts/${savedChartId}`}>
-              <ActionButton
-                label="View newly saved chart"
-                onClick={() => undefined}
-                text={<ArrowRightIcon className={ICON_STYLE} />}
-                variant="regular"
-              />
-            </Link>
             <ActionButton
-              label="Delete chart"
-              onClick={() => undefined}
-              text={<TrashIcon className={ICON_STYLE} />}
-              variant="regular"
+              onClick={() => save()}
+              disabled={isLoading}
+              label="Save chart"
+              text={
+                !isLoading ? (
+                  <CloudArrowUpIcon className={ICON_STYLE} />
+                ) : (
+                  <LoadingBouncer />
+                )
+              }
+              variant="primary"
             />
+            {savedChartId && isChartOwner ? (
+              <>
+                {!onEditPage ? (
+                  <Link href={`/charts/${savedChartId}`}>
+                    <ActionButton
+                      label="View newly saved chart"
+                      onClick={() => undefined}
+                      text={<ArrowRightIcon className={ICON_STYLE} />}
+                      variant="regular"
+                    />
+                  </Link>
+                ) : null}
+                <ActionButton
+                  label="Delete chart"
+                  hasGradientIndicator={false}
+                  onClick={() => deleteChart()}
+                  text={<TrashIcon className={ICON_STYLE} />}
+                  variant="regular"
+                />
+              </>
+            ) : null}
           </>
-        ) : null}
+        )}
       </div>
       <ProfileCircle />
     </>

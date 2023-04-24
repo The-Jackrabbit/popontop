@@ -30,11 +30,9 @@ const Grid: React.FC<Props> = ({
       className={`
         ${preview ? 'scale-95' : ''}
         flex
-        lg:w-[500px]
         flex-wrap
+        h-min
         justify-center
-        self-center
-        align-middle
       `}
     >
       {items.map((_item, index) => (

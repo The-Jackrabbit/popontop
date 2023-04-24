@@ -21,10 +21,10 @@ export const RadioOption: React.FC<Props> = ({
         ariaLabel="option"
         color={color}
         isActive={isActive}
-        className="mr-2  h-4 w-4 border-none"
+        className="mr-2 h-8  w-8 border-none"
         onClick={() => onClick()}
       />
-      <p className="translate-y-[2px] leading-none">{label}</p>
+      <p className="text-xl dark:text-neutral-300">{label}</p>
     </div>
   );
 };

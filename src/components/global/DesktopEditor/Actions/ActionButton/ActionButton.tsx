@@ -6,6 +6,7 @@ import FilterButton from '../../../../lib/FilterButton/FilterButton';
 
 export interface Props {
   disabled?: boolean;
+  hasGradientIndicator?: boolean;
   onClick: MouseEventHandler<HTMLButtonElement>;
   text: string | React.ReactNode;
   label: React.ReactNode;
@@ -14,6 +15,7 @@ export interface Props {
 
 export const ActionButton: React.FC<Props> = ({
   // disabled = false,
+  hasGradientIndicator = true,
   label,
   onClick,
   text,
@@ -26,7 +28,7 @@ export const ActionButton: React.FC<Props> = ({
         className="h-12 w-12 p-[2px] shadow-lg"
         rounding="rounded-full"
         onClick={onClick}
-        hasGradientIndicator={true}
+        hasGradientIndicator={hasGradientIndicator}
         isActive={true}
       >
         {text}

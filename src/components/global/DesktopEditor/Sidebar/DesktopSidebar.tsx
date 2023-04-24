@@ -16,6 +16,7 @@ export interface Props {
   pageTitle: string;
   pageTitleBorderBottom: Color;
   settings: SettingsHookNode;
+  showOnboardingFlow: boolean;
   toggleAlbums: (value: boolean) => void;
   toggleTitle: (value: boolean) => void;
 }
@@ -25,6 +26,7 @@ export const DesktopSidebar: React.FC<Props> = ({
   pageTitle,
   settings,
   pageTitleBorderBottom,
+  showOnboardingFlow,
   toggleAlbums,
   toggleTitle,
 }) => {
@@ -74,7 +76,7 @@ export const DesktopSidebar: React.FC<Props> = ({
           <div className="mb-2 flex flex-col justify-center">
             <TextExpandingPill
               label="Search albums"
-              isActive={true}
+              isActive={!showOnboardingFlow}
               placeholder="Emotion, Dedicated, The Loneliest Time"
               setValue={(value: string) => onType(value)}
               value={searchText}
@@ -124,6 +126,8 @@ export const DesktopSidebar: React.FC<Props> = ({
               }
               value={settings.state.numberOfAlbums}
             />
+            {/**
+
             <NumericExpandingPill
               label="Border width"
               min={0}
@@ -134,7 +138,6 @@ export const DesktopSidebar: React.FC<Props> = ({
               }
               value={settings.state.borderSize}
             />
-            {/**
               <NumericExpandingPill
                 label="Number of columns"
                 min={0}

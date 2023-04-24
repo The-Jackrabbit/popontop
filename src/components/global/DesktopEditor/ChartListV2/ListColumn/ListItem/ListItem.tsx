@@ -9,13 +9,18 @@ export interface Props {
 
 export const ListItem: React.FC<Props> = ({ index, listItem, textColor }) => {
   const itemDescription = `${index} ${listItem.artist} - ${listItem.name}`;
+
   return (
     <div
-      className="
+      className={`
         overflow-hidden
         text-ellipsis
         leading-tight
-      "
+        // DESKTOP_CHART_FONT_SIZE
+        text-[17.5px]
+        font-mono
+        whitespace-pre-wrap
+      `}
       role="listitem"
       style={{ color: textColor }}
     >

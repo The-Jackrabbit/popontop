@@ -3,7 +3,6 @@ import Image from 'next/image';
 import Draggable from '../../DragNDrop/Draggable/Draggable';
 import Droppable from '../../DragNDrop/Droppable/Droppable';
 import { Album } from '../../../../../types/Albums';
-import { ALBUM_SIZE } from '../../../../../constants/shared-styles';
 
 export interface Props {
   album: Album;
@@ -14,6 +13,10 @@ export interface Props {
   rowIndex: number;
   columnIndex: number;
 }
+
+export const EMPTY_SQUARE_BG_GRADIENT = [
+  'linear-gradient(to right, rgb(251,191,36), rgb(217,70,239))',
+];
 
 export const ChartItem: React.FC<Props> = ({
   album,
@@ -32,8 +35,12 @@ export const ChartItem: React.FC<Props> = ({
     >
       <Droppable
         id={index.toString()}
+        index={index}
         album={album}
-        style={{ borderWidth: `${borderSize}px`, borderColor }}
+        style={{
+          borderWidth: `${borderSize}px`,
+          borderColor,
+        }}
       >
         {album.imageUrl ? (
           <Draggable
@@ -44,8 +51,8 @@ export const ChartItem: React.FC<Props> = ({
           >
             <Image
               src={album.imageUrl}
-              height={ALBUM_SIZE}
-              width={ALBUM_SIZE}
+              height="100%"
+              width="100%"
               alt="profile"
             />
           </Draggable>

@@ -21,7 +21,8 @@ const ChartList: React.FC<Props> = ({ listStyles, textColor, containers }) => {
       <ol
         className="
           list-item list-disc
-          text-[8px]
+
+          text-2xl
           text-neutral-300
           dark:text-neutral-600
         "
@@ -29,7 +30,7 @@ const ChartList: React.FC<Props> = ({ listStyles, textColor, containers }) => {
       >
         {containers.map((album, index) => (
           <li
-            className="list-item list-inside list-decimal"
+            className="list-item text-[18px] list-inside list-decimal"
             key={index + 'list'}
           >
             {album.artist} - {album.name}

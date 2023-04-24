@@ -5,10 +5,22 @@ import { trpc } from '../../../utils/trpc';
 import { ParentHookNode } from '../../../types/singletons';
 import useList, { ListHookNode } from '../lists/use-list';
 import useChartSettings, { SettingsHookNode } from './use-chart-settings';
+import { EMPTY_ALBUM } from '../../../constants/empty-album';
+
+const getNumberedList = (numberOfAlbums: number, listState: Album[]) => {
+  const emptyTextList = [...new Array(numberOfAlbums)];
+
+  return emptyTextList.map((_, index) =>
+    index < numberOfAlbums && index < listState.length
+      ? (listState[index] as Album)
+      : EMPTY_ALBUM
+  );
+};
 
 export type ChartHookNode = ParentHookNode<State, Actions, ChildrenNodes>;
 
 export interface Actions {
+  deleteChart: () => Promise<void>;
   editChart: () => Promise<string>;
   saveChart: () => Promise<string>;
   setChartTitle: (value: string) => void;
@@ -23,6 +35,7 @@ export interface State {
   chartTitle: string;
   isCreateLoading: boolean;
   isEditLoading: boolean;
+  numberedList: Album[];
   savedChartId: string;
 }
 
@@ -45,6 +58,7 @@ export const useChart = ({
   const [savedChartId, setSavedChartId] = useState(chartUuid);
   const createMutation = trpc.charts.create.useMutation();
   const editMutation = trpc.charts.edit.useMutation();
+  const deleteMutation = trpc.charts.delete.useMutation();
 
   const saveChart = async (): Promise<string> => {
     const result = await createMutation.mutateAsync({
@@ -86,17 +100,39 @@ export const useChart = ({
     setSavedChartId(savedChartId);
     return savedChartId;
   };
-  const state = useMemo(
+
+  const deleteChart = async (): Promise<void> => {
+    await deleteMutation.mutateAsync({
+      uuid: chartUuid,
+    });
+
+    setSavedChartId('');
+  };
+
+  const state = useMemo<State>(
     () => ({
       chartTitle,
       isCreateLoading: createMutation.isLoading,
       isEditLoading: editMutation.isLoading,
+      numberedList: getNumberedList(
+        settings.state.numberOfAlbums,
+        list.state
+      ),
       savedChartId,
     }),
-    [chartTitle, createMutation.isLoading, editMutation.isLoading, savedChartId]
+    [
+      chartTitle,
+      createMutation.isLoading,
+      editMutation.isLoading,
+      savedChartId,
+      settings.state.numberOfAlbums,
+      list.state,
+    ]
   );
+
   return {
     actions: {
+      deleteChart,
       editChart,
       saveChart,
       setChartTitle,
@@ -104,7 +140,7 @@ export const useChart = ({
     childrenNodes: {
       list: {
         ...list,
-        state: list.state.filter((_,i) => i < settings.state.numberOfAlbums),
+        state: list.state.filter((_, index) => index < settings.state.numberOfAlbums),
       },
       settings,
     },

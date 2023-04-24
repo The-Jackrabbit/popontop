@@ -47,7 +47,7 @@ export const Input: React.FC<Props> = ({
           rounded-lg py-2
           px-4 text-lg
           text-neutral-900  shadow-lg
-          outline-2 outline-offset-2 focus-within:outline focus-within:outline-amber-400
+          outline-2 outline-offset-2 focus-within:outline focus-within:outline-blue-400
           dark:bg-neutral-900 dark:text-white
           placeholder:dark:text-neutral-600
         "
