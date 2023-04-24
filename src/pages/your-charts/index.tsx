@@ -1,8 +1,8 @@
-import SharedWrapper from './SharedWrapper';
+import SearchResultsWrapper from "../../components/global/Desktop/YourCharts/SearchResultsWrapper";
 
 export function YourCharts() {
   return (
-    <SharedWrapper
+    <SearchResultsWrapper
       page={
         <div className="h-full">
           <div className="px-4">

@@ -27,7 +27,7 @@ const DesktopEditor: React.FC<Props> = ({
       </div>
     ) : (
     <Layout
-      backgroundColor={chart.childrenNodes.settings.state.backgroundColor}
+      backgroundColor={''}
       title={
         chart.childrenNodes.settings.state.showTitle ? (
           <Title

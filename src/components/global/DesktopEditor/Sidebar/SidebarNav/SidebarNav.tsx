@@ -20,11 +20,10 @@ export const SidebarNav: React.FC = () => {
             className="
               min-w-96
               cursor-pointer rounded-full
-              bg-white px-2 py-1
+              bg-white px-3 py-2
               text-xs
               shadow-lg
               dark:bg-black dark:shadow-neutral-900
-              sm:py-1
               md:text-sm xl:text-xl
             "
           >

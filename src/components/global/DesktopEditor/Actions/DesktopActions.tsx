@@ -9,7 +9,9 @@ export interface Props {
   deleteChart: () => Promise<void>;
   isChartOwner: boolean;
   isLoading: boolean;
-  onEditPage: boolean;
+  onCreatePage?: boolean;
+  onEditPage?: boolean;
+  onPreviewPage?: boolean;
   save: () => void;
   savedChartId: string | null;
   showOnboardingFlow: boolean;
@@ -19,7 +21,9 @@ const DesktopActions: React.FC<Props> = ({
   deleteChart,
   isLoading,
   isChartOwner,
-  onEditPage,
+  onCreatePage = false,
+  onEditPage = false,
+  onPreviewPage = false,
   save,
   savedChartId,
   showOnboardingFlow,
@@ -29,20 +33,34 @@ const DesktopActions: React.FC<Props> = ({
       <div className="flex flex-col gap-2">
         {showOnboardingFlow ? null : (
           <>
-            <ActionButton
-              onClick={() => save()}
-              disabled={isLoading}
-              label="Save chart"
-              text={
-                !isLoading ? (
-                  <CloudArrowUpIcon className={ICON_STYLE} />
-                ) : (
-                  <LoadingBouncer />
-                )
-              }
-              variant="primary"
-            />
-            {savedChartId && isChartOwner ? (
+            {onEditPage || onCreatePage ? (
+              <>
+                <ActionButton
+                  onClick={() => save()}
+                  disabled={isLoading}
+                  label="Save chart"
+                  text={
+                    !isLoading ? (
+                      <CloudArrowUpIcon className={ICON_STYLE} />
+                    ) : (
+                      <LoadingBouncer />
+                    )
+                  }
+                  variant="primary"
+                />
+              </>
+            ) : null}
+            {onPreviewPage && savedChartId ? (
+              <Link href={`/charts/${savedChartId}`}>
+                <ActionButton
+                  label="Edit chart"
+                  onClick={() => undefined}
+                  text={<ArrowRightIcon className={ICON_STYLE} />}
+                  variant="regular"
+                />
+              </Link>
+            ) : null}
+            {onCreatePage && savedChartId && isChartOwner ? (
               <>
                 {!onEditPage ? (
                   <Link href={`/charts/${savedChartId}`}>

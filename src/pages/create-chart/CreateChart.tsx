@@ -38,7 +38,7 @@ const CreateChart: NextPage = () => {
             deleteChart={async () => undefined}
             isChartOwner={true}
             isLoading={chart.state.isCreateLoading || chart.state.isEditLoading}
-            onEditPage={false}
+            onCreatePage={true}
             save={chart.actions.saveChart}
             savedChartId={chart.state.savedChartId}
             showOnboardingFlow={showOnboardingFlow}

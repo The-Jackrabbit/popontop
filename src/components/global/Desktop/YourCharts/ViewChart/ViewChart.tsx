@@ -4,52 +4,92 @@ import Title from '../../../../lib/Title/Title';
 import { Layout } from './Layout';
 import { Loader } from './Loader';
 import LinkPill from '../../../../lib/LinkPill/LinkPill';
+import { useRouter } from 'next/router';
+import { genUuid } from '../../../../../pages/mobile/charts/[uuid]';
+import useDesktopChartEditor from '../../../../../frontend/hooks/singletons/use-desktop-chart-editor';
+import { ChartSettings } from '@prisma/client';
+import { Album } from '../../../../../types/Albums';
+import DesktopEditor from '../../../DesktopEditor/DesktopEditor';
 
-export interface Props {
-  chartUuid: string;
-}
+const ApiWrapper = () => {
+  const router = useRouter();
+  const { uuid } = router.query;
 
-export const ViewChart: React.FC<Props> = ({ chartUuid }) => {
-  const { data: chart, isLoading } = trpc.charts.getById.useQuery(
-    { uuid: chartUuid },
+  const n = genUuid(uuid);
+
+  const { data, isLoading } = trpc.charts.getById.useQuery(
+    { uuid: n },
     {
       enabled: true, // disable this query from automatically running
       refetchOnWindowFocus: false,
     }
   );
 
-  if (isLoading) {
+  const isDoneLoading =
+    data && data?.albums?.length > 0 && data.name && data.settings
+      ? true
+      : false;
+
+  if (isLoading || !isDoneLoading) {
     return <Loader />;
   }
 
-  if (!chart) {
-    return <div>not found</div>;
+  if (!data?.albums || !data.uuid) {
+    return <div>error</div>;
   }
 
+  if (!data) {
+    return <div>not found</div>;
+  }
+  console.log({ data });
+  return (
+    <ViewChart
+      albums={data.albums}
+      name={data?.name}
+      settings={data?.settings}
+      uuid={data.uuid}
+    />
+  );
+}
+
+export const ViewChart: React.FC<{
+  albums: Album[]
+  name: string;
+  settings: ChartSettings | null;
+  uuid: string;
+}> = ({
+  albums,
+  name,
+  settings,
+  uuid,
+}) => {
+  const {
+    childrenNodes: { chart },
+  } = useDesktopChartEditor({
+    initialList: albums,
+    chartName: name,
+    chartUuid: uuid,
+    defaultSettings: settings,
+  });
   return (
     <Layout
-      backgroundColor={chart?.settings?.background_color ?? ''}
-      title={
-        <Title
-          chartTitle={chart.name}
-          isReadOnly={true}
-          showIntroduction={!true}
-          textColor={chart?.settings?.text_color ?? ''}
-        />
-      }
+      backgroundColor={chart.childrenNodes.settings.state.backgroundColor ?? ''}
+      title={null}
       chart={() => (
-        <DesktopChart
-          isReadOnly={chart.isReadOnly}
-          items={chart.albums ?? []}
-          borderColor={chart?.settings?.border_color ?? ''}
-          borderSize={1}
-        />
+        <>
+          <DesktopEditor
+            chart={chart}
+
+            // listStyles={state.listStyle}
+            readonly={false}
+            showOnboardingFlow={false}
+          />
+        </>
       )}
-      modifyChartButton={
-        <LinkPill href={`/charts/${chartUuid}`}>
-          <h1 className='text-lg'>open in editor</h1>
-        </LinkPill>
-      }
+      modifyChartButton={null}
     />
   );
 };
+
+export default ApiWrapper;
+
