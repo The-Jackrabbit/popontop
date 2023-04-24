@@ -11,7 +11,7 @@ export interface Props {
 export const LAYOUT_CONFIG_WITH_ACTIONS = {
   actions:
     'flex shrink-0 basis-1/12 flex-col justify-between border-l-2 border-neutral-300 p-4 pl-4 dark:border-neutral-800',
-  pageContent: 'shrink grow-0 basis-8/12 p-4 min-w-[66.666667%]',
+  pageContent: 'shrink grow-0 basis-8/12  min-w-[66.666667%]',
   sidebar: 'shrink-0 grow basis-3/12 max-w-[25%]',
 };
 

@@ -1,9 +1,6 @@
 import { trpc } from '../../../../../utils/trpc';
-import DesktopChart from '../../../DesktopEditor/DesktopChart/DesktopChart';
-import Title from '../../../../lib/Title/Title';
 import { Layout } from './Layout';
 import { Loader } from './Loader';
-import LinkPill from '../../../../lib/LinkPill/LinkPill';
 import { useRouter } from 'next/router';
 import { genUuid } from '../../../../../pages/mobile/charts/[uuid]';
 import useDesktopChartEditor from '../../../../../frontend/hooks/singletons/use-desktop-chart-editor';
@@ -41,7 +38,7 @@ const ApiWrapper = () => {
   if (!data) {
     return <div>not found</div>;
   }
-  console.log({ data });
+
   return (
     <ViewChart
       albums={data.albums}
@@ -86,7 +83,6 @@ export const ViewChart: React.FC<{
           />
         </>
       )}
-      modifyChartButton={null}
     />
   );
 };

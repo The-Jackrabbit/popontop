@@ -15,7 +15,6 @@ export const Loader: React.FC = () => {
           itemComponent={() => <div></div>}
         />
       )}
-      modifyChartButton={null}
     />
   );
 };

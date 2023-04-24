@@ -24,6 +24,7 @@ const SearchResultsWrapper: React.FC<{
           deleteChart={async () => undefined}
           isChartOwner={true}
           isLoading={false}
+          onEditPage={false}
           onPreviewPage={true}
           save={async () => undefined}
           savedChartId={n}
