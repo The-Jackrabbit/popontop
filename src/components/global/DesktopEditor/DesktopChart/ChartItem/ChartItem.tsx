@@ -14,10 +14,6 @@ export interface Props {
   columnIndex: number;
 }
 
-export const EMPTY_SQUARE_BG_GRADIENT = [
-  'linear-gradient(to right, rgb(251,191,36), rgb(217,70,239))',
-];
-
 export const ChartItem: React.FC<Props> = ({
   album,
   borderColor,
@@ -36,7 +32,6 @@ export const ChartItem: React.FC<Props> = ({
       <Droppable
         id={index.toString()}
         index={index}
-        album={album}
         style={{
           borderWidth: `${borderSize}px`,
           borderColor,

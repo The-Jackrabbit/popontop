@@ -89,6 +89,7 @@ const Chart = ({
             onEditPage={true}
             save={chart.actions.editChart}
             savedChartId={chart.state.savedChartId}
+            showOnboardingFlow={false}
           />
         }
         backgroundColor={chart.childrenNodes.settings.state.backgroundColor}
@@ -100,6 +101,7 @@ const Chart = ({
               chart={chart}
               // listStyles={state.listStyle}
               readonly={false}
+              showOnboardingFlow={false}
             />
           </div>
         }
@@ -110,6 +112,7 @@ const Chart = ({
               pageTitleBorderBottom={Color.blue}
               pageTitle={isChartOwner ? "edit chart" : "viewing chart"}
               settings={chart.childrenNodes.settings}
+              showOnboardingFlow={false}
               toggleAlbums={actions.toggleAlbums}
               toggleTitle={actions.toggleTitle}
             />
