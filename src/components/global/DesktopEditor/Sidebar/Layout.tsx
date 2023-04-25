@@ -42,3 +42,4 @@ const Layout: React.FC<Props> = ({ nav, sidebarContent, title }) => {
 };
 
 export default Layout;
+export const SidebarLayout = Layout;

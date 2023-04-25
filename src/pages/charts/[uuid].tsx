@@ -94,9 +94,7 @@ const Chart = ({
         }
         backgroundColor={chart.childrenNodes.settings.state.backgroundColor}
         pageContent={
-          <div className="
-          h-full
-          ">
+          <div className="h-full">
             <DesktopEditor
               chart={chart}
               // listStyles={state.listStyle}
