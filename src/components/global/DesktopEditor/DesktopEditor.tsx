@@ -16,6 +16,8 @@ const DesktopEditor: React.FC<Props> = ({
   readonly = false,
   showOnboardingFlow,
 }) => {
+  console.log('rendering desktop editor for the following uuid');
+  console.log(chart.state.savedChartId);
   return (
     showOnboardingFlow ? (
       <div>

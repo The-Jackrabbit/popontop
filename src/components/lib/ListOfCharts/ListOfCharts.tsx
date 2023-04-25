@@ -67,6 +67,8 @@ export const ListOfCharts: React.FC<Props> = ({
                   isMobile={isMobile}
                   listMode={listMode}
                   onClick={() => {
+                    console.log('chart.uuid');
+                    console.log(chart.uuid);
                     setChartBeingViewed(chart.uuid ?? '');
                   }}
                   onClickDeleteChart={() => onClickDeleteChart(chart, index)}
