@@ -1,22 +1,8 @@
-import Grid from '../../../../lib/Grid/Grid';
-import TitleLoader from '../../../../lib/Title/Loader';
-import Layout from './Layout';
+import { DesktopEditorLoader } from '../../../DesktopEditor/Loader';
 
 export const Loader: React.FC = () => {
-  return (
-    <Layout
-      backgroundColor={''}
-      title={<TitleLoader />}
-      chart={() => (
-        <Grid
-          borderColor={''}
-          borderSize={1}
-          items={[]}
-          itemComponent={() => <div></div>}
-        />
-      )}
-    />
-  );
+  return <DesktopEditorLoader />
 };
 
 export default Loader;
+export const ViewChartLoader = Loader;
