@@ -76,7 +76,6 @@ export const ViewChart: React.FC<{
       chart={
         <DesktopEditor
           chart={chart}
-          uuid={chart.state.savedChartId}
           // listStyles={state.listStyle}
           readonly={false}
           showOnboardingFlow={false}
