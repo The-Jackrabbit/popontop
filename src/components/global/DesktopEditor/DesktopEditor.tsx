@@ -9,15 +9,17 @@ export interface Props {
   chart: ChartHookNode;
   readonly?: boolean;
   showOnboardingFlow: boolean;
+  uuid: string;
 }
 
 const DesktopEditor: React.FC<Props> = ({
   chart,
   readonly = false,
   showOnboardingFlow,
+  uuid,
 }) => {
   console.log('rendering desktop editor for the following uuid');
-  console.log(chart.state.savedChartId);
+  console.log(uuid);
   return (
     showOnboardingFlow ? (
       <div>

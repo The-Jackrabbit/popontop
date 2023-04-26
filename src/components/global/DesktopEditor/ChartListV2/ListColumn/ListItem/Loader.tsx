@@ -15,10 +15,11 @@ export const Loader: React.FC<Props> = ({ index }) => (
       font-mono
       whitespace-pre-wrap
       animate-pulse
+      dark:text-neutral-600
     `}
     role="listitem"
   >
-    {index+1} - ...
+    {index+1} - ..........................
   </div>
 );
 

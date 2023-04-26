@@ -11,10 +11,13 @@ const Loader: React.FC<Props> = ({
   return (
     <div>
       <Droppable
+
         className="animate-pulse"
         id={index.toString()}
         index={index}
-      />
+      >
+        <div className='bg-neutral-800 w-[98px] h-[98px] border-neutral-700 border-2' />
+      </Droppable>
     </div>
   );
 };

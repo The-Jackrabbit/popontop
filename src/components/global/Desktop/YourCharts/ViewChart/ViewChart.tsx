@@ -17,6 +17,7 @@ const ApiWrapper = () => {
   const { data, isLoading } = trpc.charts.getById.useQuery(
     { uuid: n },
     {
+      cacheTime: 0,
       enabled: true, // disable this query from automatically running
       refetchOnWindowFocus: false,
     }
@@ -72,17 +73,15 @@ export const ViewChart: React.FC<{
     <Layout
       backgroundColor={chart.childrenNodes.settings.state.backgroundColor ?? ''}
       title={null}
-      chart={() => (
-        <>
-          <DesktopEditor
-            chart={chart}
-
-            // listStyles={state.listStyle}
-            readonly={false}
-            showOnboardingFlow={false}
-          />
-        </>
-      )}
+      chart={
+        <DesktopEditor
+          chart={chart}
+          uuid={chart.state.savedChartId}
+          // listStyles={state.listStyle}
+          readonly={false}
+          showOnboardingFlow={false}
+        />
+      }
     />
   );
 };
