@@ -31,6 +31,7 @@ const DesktopEditor: React.FC<Props> = ({
       title={
         chart.childrenNodes.settings.state.showTitle ? (
           <Title
+            backgroundColor={chart.childrenNodes.settings.state.titleBackgroundColor}
             chartTitle={chart.state.chartTitle}
             isReadOnly={false}
             setValue={chart.actions.setChartTitle}

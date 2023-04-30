@@ -12,6 +12,7 @@ export interface Props {
   list: Album[];
   onExit: () => void;
   rows: number;
+  titleBackgroundColor: string;
 }
 
 export const ScreenshotMode: React.FC<Props> = ({
@@ -22,6 +23,7 @@ export const ScreenshotMode: React.FC<Props> = ({
   list,
   onExit,
   rows,
+  titleBackgroundColor,
 }) => {
   const { containerRef, size } = useResizer();
   return (
@@ -40,6 +42,7 @@ export const ScreenshotMode: React.FC<Props> = ({
             className="flex h-full w-full flex-col items-stretch"
           >
             <Title
+              backgroundColor={titleBackgroundColor}
               chartTitle={chartTitle}
               isReadOnly={true}
               setValue={() => undefined}

@@ -17,6 +17,7 @@ export interface Props {
   onDecrementRows: () => void;
   onIncrementRows: () => void;
   rows: number;
+  titleBackgroundColor: string;
 }
 
 export const ViewModeModal: React.FC<Props> = ({
@@ -30,6 +31,7 @@ export const ViewModeModal: React.FC<Props> = ({
   onDecrementRows,
   onIncrementRows,
   rows,
+  titleBackgroundColor,
 }) => {
   const [isOverlayVisible, setIsOverlayVisible] = useState(true);
   const listColumns = 1;
@@ -108,6 +110,7 @@ export const ViewModeModal: React.FC<Props> = ({
             >
               <div className="flex h-full w-full flex-col">
                 <Title
+                  backgroundColor={titleBackgroundColor}
                   chartTitle={chartTitle}
                   isReadOnly={true}
                   setValue={() => undefined}

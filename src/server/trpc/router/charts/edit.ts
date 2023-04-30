@@ -1,14 +1,6 @@
+import { ChartSettings } from '@prisma/client';
 import { prisma } from '../../../../server/db/client';
 import { Album } from '../../../../types/Albums';
-
-export interface Settings {
-  backgroundColor: string;
-  borderColor: string;
-  borderSize: number;
-  showAlbums: boolean;
-  showTitle: boolean;
-  textColor: string;
-}
 
 export const lastFmImageOrigin = 'https://lastfm.freetls.fastly.net/i/u/174s/';
 
@@ -36,11 +28,13 @@ export const formatColor = (url: string) => {
   return url;
 };
 
+export type WritableChartSettings = Omit<Omit<ChartSettings, 'chart_id'>, 'uuid'>;
+
 export const editChart = async (
   chartUuid: string,
   albums: Album[],
   name: string,
-  settings: Settings,
+  settings: WritableChartSettings,
   userId?: string
 ) => {
   console.log('editCHart');
@@ -64,12 +58,13 @@ export const editChart = async (
       name,
       ChartSettings: {
         update: {
-          background_color: settings.backgroundColor,
-          border_color: settings.borderColor,
-          border_size: settings.borderSize,
-          show_albums: settings.showAlbums,
-          show_title: settings.showTitle,
-          text_color: settings.textColor,
+          background_color: settings.background_color,
+          border_color: settings.border_color,
+          border_size: settings.border_size,
+          show_albums: settings.show_albums,
+          show_title: settings.show_title,
+          text_color: settings.text_color,
+          title_background_color: settings.title_background_color,
         },
       },
     },

@@ -17,7 +17,7 @@ export const ListItem: React.FC<Props> = ({ index, listItem, textColor }) => {
         text-ellipsis
         leading-tight
         // DESKTOP_CHART_FONT_SIZE
-        text-[14px]
+        text-[22px]
         font-mono
         whitespace-pre-wrap
       `}

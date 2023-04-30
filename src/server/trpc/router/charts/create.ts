@@ -1,3 +1,4 @@
+import { ChartSettings } from '@prisma/client';
 import { prisma } from '../../../../server/db/client';
 import { Album } from '../../../../types/Albums';
 
@@ -36,10 +37,12 @@ export const formatColor = (url: string) => {
   return url;
 };
 
+export type WritableChartSettings = Omit<Omit<ChartSettings, 'chart_id'>, 'uuid'>;
+
 export const createChart = async (
   albums: Album[],
   name: string,
-  settings: Settings,
+  settings: WritableChartSettings,
   userId?: string
 ) => {
   const chart = await prisma.chart.create({
@@ -59,13 +62,14 @@ export const createChart = async (
 
   const chartSettings = await prisma.chartSettings.create({
     data: {
-      background_color: settings.backgroundColor,
-      border_color: settings.borderColor,
-      border_size: settings.borderSize,
+      background_color: settings.background_color,
+      border_color: settings.border_color,
+      border_size: settings.border_size,
       chart_id: chart.uuid,
-      show_albums: settings.showAlbums,
-      show_title: settings.showTitle,
-      text_color: settings.textColor,
+      show_albums: settings.show_albums,
+      show_title: settings.show_title,
+      text_color: settings.text_color,
+      title_background_color: settings.title_background_color,
     },
   });
 

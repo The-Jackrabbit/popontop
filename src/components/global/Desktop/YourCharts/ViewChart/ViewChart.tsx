@@ -1,3 +1,4 @@
+import React from 'react';
 import { trpc } from '../../../../../utils/trpc';
 import { Layout } from './Layout';
 import { Loader } from './Loader';
@@ -70,18 +71,14 @@ export const ViewChart: React.FC<{
     defaultSettings: settings,
   });
   return (
-    <Layout
-      backgroundColor={chart.childrenNodes.settings.state.backgroundColor ?? ''}
-      title={null}
-      chart={
-        <DesktopEditor
-          chart={chart}
-          // listStyles={state.listStyle}
-          readonly={false}
-          showOnboardingFlow={false}
-        />
-      }
-    />
+    <div style={{ backgroundColor: chart.childrenNodes.settings.state.backgroundColor }}>
+      <DesktopEditor
+        chart={chart}
+        // listStyles={state.listStyle}
+        readonly={false}
+        showOnboardingFlow={false}
+      />
+    </div>
   );
 };
 

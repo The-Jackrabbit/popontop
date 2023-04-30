@@ -46,8 +46,8 @@ export const ChartItem: React.FC<Props> = ({
           >
             <Image
               src={album.imageUrl}
-              height="100%"
-              width="100%"
+              height="200px"
+              width="200px"
               alt="profile"
             />
           </Draggable>

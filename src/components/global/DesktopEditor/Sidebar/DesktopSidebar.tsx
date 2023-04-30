@@ -1,8 +1,8 @@
+import React from 'react';
 import { useState } from 'react';
 import { trpc } from '../../../../utils/trpc';
 import TextExpandingPill from '../../../lib/ExpandingPill/TextExpandingPill/TextExpandingPill';
 import { SwitchExpandingPill } from '../../../lib/ExpandingPill/SwitchExpandingPill/SwitchExpandingPill';
-import NumericExpandingPill from '../../../lib/ExpandingPill/NumericExpandingPill/NumericExpandingPill';
 import { colorMap } from '../../../../constants/colors';
 import { Color } from './SidebarNav/NavDot/NavDot';
 import { SettingsHookNode } from '../../../../frontend/hooks/use-chart/use-chart-settings';
@@ -86,6 +86,13 @@ export const DesktopSidebar: React.FC<Props> = ({
 
           <div className="flex flex-row flex-wrap items-center gap-2 ">
             <TextExpandingPill
+              label="Title background color"
+              setValue={(value: string) =>
+                settings.actions.setTitleBackgroundColor(value)
+              }
+              value={settings.state.titleBackgroundColor}
+            />
+            <TextExpandingPill
               label="Background color"
               setValue={(value: string) =>
                 settings.actions.setBackgroundColor(value)
@@ -116,7 +123,7 @@ export const DesktopSidebar: React.FC<Props> = ({
               setValue={(value: boolean | null) => toggleTitle(Boolean(value))}
               value={settings.state.showTitle}
             />
-            <NumericExpandingPill
+            {/* <NumericExpandingPill
               label="Number of albums"
               min={0}
               max={100}
@@ -125,7 +132,7 @@ export const DesktopSidebar: React.FC<Props> = ({
                   settings.actions.setNumberOfAlbums(value)) as any
               }
               value={settings.state.numberOfAlbums}
-            />
+            /> */}
             {/**
 
             <NumericExpandingPill

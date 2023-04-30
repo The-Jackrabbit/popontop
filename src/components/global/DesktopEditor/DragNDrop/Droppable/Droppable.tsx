@@ -47,7 +47,7 @@ const Droppable: React.FC<Props> = ({
       className={`
         ${className}
         // DESKTOP_CHART_SQUARE_SIZE
-        w-[98px] h-[98px]
+        w-[118px] h-[118px]
         droppable
         ${isOver ? 'bg-green-400' : 'bg-transparent'}
       `}

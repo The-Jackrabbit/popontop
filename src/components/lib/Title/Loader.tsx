@@ -5,6 +5,7 @@ const LOADER_BLOCK_STYLE = `${LOADER_ANIMATED_BACKGROUND} w-full h-full`;
 
 export const Loader: React.FC = () => (
   <Layout
+    backgroundColor='black'
     title={<div className={LOADER_BLOCK_STYLE}/>}
     toggleButton={<div className={LOADER_BLOCK_STYLE} />}
   />

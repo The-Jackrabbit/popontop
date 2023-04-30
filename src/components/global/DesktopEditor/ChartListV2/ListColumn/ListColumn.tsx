@@ -1,3 +1,4 @@
+import React from 'react';
 import { Album } from '../../../../../types/Albums';
 import ListItem from './ListItem/ListItem';
 

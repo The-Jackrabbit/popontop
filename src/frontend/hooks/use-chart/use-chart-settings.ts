@@ -19,6 +19,7 @@ export interface Actions {
   setRows: (value: number) => void;
   setShowTitle: (value: boolean) => void;
   setTextColor: (value: string) => void;
+  setTitleBackgroundColor: (value: string) => void;
 }
 
 export interface State {
@@ -31,6 +32,7 @@ export interface State {
   showAlbums: boolean;
   showTitle: boolean;
   textColor: string;
+  titleBackgroundColor: string;
 }
 
 const useChartSettings = (
@@ -57,6 +59,9 @@ const useChartSettings = (
   const [backgroundColor, setBackgroundColor] = useState(
     defaultSettings?.background_color ?? ''
   );
+  const [titleBackgroundColor, setTitleBackgroundColor] = useState(
+    defaultSettings?.title_background_color ?? ''
+  );
   const [borderColor, setBorderColor] = useState(
     defaultSettings?.border_color ?? 'rgb(212 212 212)'
   );
@@ -64,7 +69,7 @@ const useChartSettings = (
   const [numberOfAlbums, setNumberOfAlbums] = useState<number>(
     (defaultSettings && defaultSettings?.number_of_albums
       ? parseInt(defaultSettings?.number_of_albums as unknown as string)
-      : 20
+      : 10
     ) as number
   );
   const [showAlbums, setShowAlbums] = useState(
@@ -90,6 +95,7 @@ const useChartSettings = (
       setShowAlbums,
       setShowTitle,
       setTextColor,
+      setTitleBackgroundColor,
     },
     state: {
       backgroundColor,
@@ -101,6 +107,7 @@ const useChartSettings = (
       showAlbums,
       showTitle,
       textColor,
+      titleBackgroundColor,
     },
   };
 };

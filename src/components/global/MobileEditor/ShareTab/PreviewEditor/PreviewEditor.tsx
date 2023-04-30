@@ -17,6 +17,7 @@ export interface Props {
   onDecrementRows: () => void;
   onIncrementRows: () => void;
   rows: number;
+  titleBackgroundColor: string;
 }
 
 export const PreviewEditor: React.FC<Props> = ({
@@ -30,6 +31,7 @@ export const PreviewEditor: React.FC<Props> = ({
   onDecrementRows,
   onIncrementRows,
   rows,
+  titleBackgroundColor,
 }) => {
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
   const onClickPreview = () => {
@@ -102,6 +104,7 @@ export const PreviewEditor: React.FC<Props> = ({
           list={list}
           onExit={onExit}
           rows={rows}
+          titleBackgroundColor={titleBackgroundColor}
         />
       ) : null}
     </div>

@@ -1,10 +1,11 @@
+import React from 'react';
 import SearchResultsWrapper from "../../components/global/Desktop/YourCharts/SearchResultsWrapper";
 
 export function YourCharts() {
   return (
     <SearchResultsWrapper
       page={
-        <div className="h-full">
+        <div className="h-full p-4">
           <div className="px-4">
             <h1 className="mb-8 text-4xl font-bold">
               Welcome to your charts list!

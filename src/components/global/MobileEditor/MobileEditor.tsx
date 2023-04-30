@@ -67,6 +67,7 @@ const MobileEditor: React.FC<Props> = ({
       >
         {childrenNodes.chart.childrenNodes.settings.state.showTitle ? (
           <Title
+            backgroundColor={childrenNodes.chart.childrenNodes.settings.state.titleBackgroundColor}
             textColor={
               childrenNodes.chart.childrenNodes.settings.state.textColor
             }
@@ -146,6 +147,7 @@ const MobileEditor: React.FC<Props> = ({
           columns={childrenNodes.chart.childrenNodes.settings.state.columns}
           list={childrenNodes.chart.childrenNodes.list.state}
           rows={childrenNodes.chart.childrenNodes.settings.state.rows}
+          titleBackgroundColor={childrenNodes.chart.childrenNodes.settings.state.titleBackgroundColor}
         />
       ) : null}
       <MobileSheet
@@ -177,6 +179,7 @@ const MobileEditor: React.FC<Props> = ({
         </div>
         {childrenNodes.editor.state.isViewModeActive ? (
           <ViewModeModal
+            titleBackgroundColor={childrenNodes.chart.childrenNodes.settings.state.titleBackgroundColor}
             borderColor={
               childrenNodes.chart.childrenNodes.settings.state.borderColor
             }

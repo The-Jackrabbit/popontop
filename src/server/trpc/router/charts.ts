@@ -23,13 +23,14 @@ export const chartsRouter = router({
         albums: z.array(z.any()),
         name: z.string(),
         settings: z.object({
-          backgroundColor: z.string(),
-          borderColor: z.string(),
-          borderSize: z.number(),
-          numberOfAlbums: z.number(),
-          showAlbums: z.boolean(),
-          showTitle: z.boolean(),
-          textColor: z.string(),
+          background_color: z.string(),
+          border_color: z.string(),
+          border_size: z.number(),
+          number_of_albums: z.number(),
+          show_albums: z.boolean(),
+          show_title: z.boolean(),
+          text_color: z.string(),
+          title_background_color: z.string(),
         }),
       })
     )
@@ -51,13 +52,14 @@ export const chartsRouter = router({
         name: z.string(),
         uuid: z.string(),
         settings: z.object({
-          backgroundColor: z.string(),
-          borderColor: z.string(),
-          borderSize: z.number(),
-          numberOfAlbums: z.number(),
-          showAlbums: z.boolean(),
-          showTitle: z.boolean(),
-          textColor: z.string(),
+          background_color: z.string(),
+          border_color: z.string(),
+          border_size: z.number(),
+          number_of_albums: z.number(),
+          show_albums: z.boolean(),
+          show_title: z.boolean(),
+          text_color: z.string(),
+          title_background_color: z.string(),
         }),
       })
     )
@@ -74,7 +76,7 @@ export const chartsRouter = router({
       );
     }),
 
-  delete: publicProcedure
+  delete: protectedProcedure
     .input(
       z.object({
         uuid: z.string(),

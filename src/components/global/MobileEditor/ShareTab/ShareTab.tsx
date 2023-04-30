@@ -15,6 +15,7 @@ export interface Props {
   onDecrementRows: () => void;
   onIncrementRows: () => void;
   rows: number;
+  titleBackgroundColor: string;
 }
 
 export const ShareTab: React.FC<Props> = ({
@@ -28,6 +29,7 @@ export const ShareTab: React.FC<Props> = ({
   onDecrementRows,
   onIncrementRows,
   rows,
+  titleBackgroundColor,
 }) => {
   const [isMainOverlayVisible, setIsMainOverlayVisible] = useState(false);
   useEffect(() => {
@@ -75,6 +77,7 @@ export const ShareTab: React.FC<Props> = ({
           onDecrementRows={onDecrementRows}
           onIncrementRows={onIncrementRows}
           rows={rows}
+          titleBackgroundColor={titleBackgroundColor}
         />
       ) : null}
     </div>

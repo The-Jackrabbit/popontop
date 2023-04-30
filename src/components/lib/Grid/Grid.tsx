@@ -1,3 +1,4 @@
+import React from 'react';
 import { useLayoutEffect, useState } from 'react';
 import useResizeObserver from '@react-hook/resize-observer';
 import { Album } from '../../../types/Albums';

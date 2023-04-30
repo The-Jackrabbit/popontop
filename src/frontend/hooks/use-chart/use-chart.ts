@@ -65,13 +65,14 @@ export const useChart = ({
       albums: list.state,
       name: chartTitle,
       settings: {
-        backgroundColor: settings.state.backgroundColor,
-        borderColor: settings.state.borderColor,
-        borderSize: settings.state.borderSize,
-        numberOfAlbums: settings.state.numberOfAlbums,
-        showAlbums: settings.state.showAlbums,
-        showTitle: settings.state.showTitle,
-        textColor: settings.state.textColor,
+        background_color: settings.state.backgroundColor,
+        border_color: settings.state.borderColor,
+        border_size: settings.state.borderSize,
+        number_of_albums: settings.state.numberOfAlbums,
+        show_albums: settings.state.showAlbums,
+        show_title: settings.state.showTitle,
+        text_color: settings.state.textColor,
+        title_background_color: settings.state.titleBackgroundColor,
       },
     });
 
@@ -86,13 +87,14 @@ export const useChart = ({
       albums: list.state,
       name: chartTitle,
       settings: {
-        backgroundColor: settings.state.backgroundColor,
-        borderColor: settings.state.borderColor,
-        borderSize: settings.state.borderSize,
-        numberOfAlbums: settings.state.numberOfAlbums,
-        showAlbums: settings.state.showAlbums,
-        showTitle: settings.state.showTitle,
-        textColor: settings.state.textColor,
+        background_color: settings.state.backgroundColor,
+        border_color: settings.state.borderColor,
+        border_size: settings.state.borderSize,
+        number_of_albums: settings.state.numberOfAlbums,
+        show_albums: settings.state.showAlbums,
+        show_title: settings.state.showTitle,
+        text_color: settings.state.textColor,
+        title_background_color: settings.state.titleBackgroundColor,
       },
     });
 

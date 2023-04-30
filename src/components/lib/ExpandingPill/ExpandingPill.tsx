@@ -73,6 +73,7 @@ export const ExpandingPill: React.FC<Props> = ({
       <a.div
         style={{
           ...pillContentStyle,
+          visibility: !isActive ? 'hidden' : 'visible'
         }}
         className="w-full overflow-hidden px-2"
       >

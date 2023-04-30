@@ -31,13 +31,13 @@ export const TextExpandingPill: React.FC<Props> = ({
       toggleVisibility={() => setIsExpanded(!isExpanded)}
     >
       <p className={labelClassName}>{label}</p>
-      <div className={labelClassName}>
+      <button className={labelClassName}>
         {!isExpanded ? (
           <PaintBrushIcon className="h-4 w-4 text-neutral-900 dark:text-neutral-50" />
         ) : (
           '-'
         )}
-      </div>
+      </button>
       <Input
         onChange={(event) => setValue(event.target.value)}
         placeholder={placeholder}

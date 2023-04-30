@@ -6,6 +6,7 @@ import { Loader } from './Loader';
 import { PencilIcon } from '@heroicons/react/24/outline';
 
 export interface Props {
+  backgroundColor: string;
   chartTitle: string;
   isActiveByDefault?: boolean;
   isLoading?: boolean;
@@ -15,10 +16,8 @@ export interface Props {
   textColor: string;
 }
 
-/**
- * TODO: move intridcution code outside of title
- */
 const Title: React.FC<Props> = ({
+  backgroundColor,
   chartTitle,
   isActiveByDefault = false,
   isLoading = false,
@@ -42,6 +41,7 @@ const Title: React.FC<Props> = ({
 
   return (
     <Layout
+      backgroundColor={backgroundColor}
       title={
         isEditing ? (
           <input

@@ -1,9 +1,10 @@
 export interface Props {
+  backgroundColor: string;
   toggleButton: React.ReactNode;
   title: React.ReactNode;
 }
 
-export const Layout: React.FC<Props> = ({ toggleButton, title }) => (
+export const Layout: React.FC<Props> = ({ backgroundColor, toggleButton, title }) => (
   <div
     className="
       z-30 box-content flex
@@ -14,6 +15,7 @@ export const Layout: React.FC<Props> = ({ toggleButton, title }) => (
       p-4 shadow-md
       dark:bg-[#0a0a0a] dark:shadow-neutral-800 
     "
+    style={{ backgroundColor }}
   >
     <div
       className="

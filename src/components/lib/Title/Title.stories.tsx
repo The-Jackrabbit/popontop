@@ -43,6 +43,7 @@ export const VariantsDesktop: ComponentStory<typeof Title> = () => {
     <div className="m-4">
       <p className="my-4 text-3xl">view</p>
       <Title
+        backgroundColor='white'
         isReadOnly={false}
         textColor="black"
         showIntroduction={false}
@@ -51,6 +52,7 @@ export const VariantsDesktop: ComponentStory<typeof Title> = () => {
       />
       <p className="my-4 text-3xl">readonly</p>
       <Title
+        backgroundColor='white'
         isReadOnly={true}
         textColor="black"
         showIntroduction={false}
@@ -59,6 +61,7 @@ export const VariantsDesktop: ComponentStory<typeof Title> = () => {
       />
       <p className="my-4 text-3xl">editing</p>
       <Title
+        backgroundColor='white'
         isActiveByDefault={true}
         isReadOnly={false}
         textColor="black"
@@ -68,6 +71,7 @@ export const VariantsDesktop: ComponentStory<typeof Title> = () => {
       />
       <p className="my-4 text-3xl">loading</p>
       <Title
+        backgroundColor='white'
         isLoading={true}
         isReadOnly={false}
         textColor="black"
