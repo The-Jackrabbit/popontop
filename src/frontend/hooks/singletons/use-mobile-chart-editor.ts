@@ -43,6 +43,9 @@ const useMobileChartEditor = ({
   defaultSettings: ChartSettings | null;
   initialList?: Album[];
 }) => {
+  if (defaultSettings) {
+    debugger;
+  }
   const [isFirstCloseDone, setIsFirstCloseDone] = useState(
     initialList.length > 0 || context === UseChartListContext.EDIT
   );

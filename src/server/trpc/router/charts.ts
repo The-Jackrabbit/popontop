@@ -45,7 +45,7 @@ export const chartsRouter = router({
       );
     }),
 
-  edit: publicProcedure
+  edit: protectedProcedure 
     .input(
       z.object({
         albums: z.array(z.any()),
@@ -63,7 +63,7 @@ export const chartsRouter = router({
         }),
       })
     )
-    .mutation(async (req) => {
+    .mutation((req) => {
       console.log('start mutation');
       const { ctx } = req;
 

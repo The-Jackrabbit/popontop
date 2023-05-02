@@ -1,5 +1,5 @@
 export interface Props {
-  backgroundColor: string;
+  backgroundColor?: string;
   toggleButton: React.ReactNode;
   title: React.ReactNode;
 }
@@ -15,7 +15,7 @@ export const Layout: React.FC<Props> = ({ backgroundColor, toggleButton, title }
       p-4 shadow-md
       dark:bg-[#0a0a0a] dark:shadow-neutral-800 
     "
-    style={{ backgroundColor }}
+    style={backgroundColor ? { backgroundColor } : {}}
   >
     <div
       className="

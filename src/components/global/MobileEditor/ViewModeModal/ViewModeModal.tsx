@@ -7,6 +7,7 @@ import NumberInput from '../../../lib/NumberInput/NumberInput';
 import Title from '../../../lib/Title/Title';
 
 export interface Props {
+  backgroundColor: string;
   borderColor: string;
   borderSize: number;
   chartTitle: string;
@@ -21,6 +22,7 @@ export interface Props {
 }
 
 export const ViewModeModal: React.FC<Props> = ({
+  backgroundColor,
   borderColor,
   borderSize,
   chartTitle,

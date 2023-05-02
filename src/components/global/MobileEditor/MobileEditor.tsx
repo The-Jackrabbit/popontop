@@ -82,6 +82,7 @@ const MobileEditor: React.FC<Props> = ({
 
         {!isLoading ? (
           <List
+            backgroundColor={childrenNodes.chart.childrenNodes.settings.state.backgroundColor}
             list={childrenNodes.chart.childrenNodes.list.state}
             listMode={childrenNodes.editor.state.listMode}
             onRearrangeClick={actions.onRearrangeClick}
@@ -179,6 +180,7 @@ const MobileEditor: React.FC<Props> = ({
         </div>
         {childrenNodes.editor.state.isViewModeActive ? (
           <ViewModeModal
+            backgroundColor={childrenNodes.chart.childrenNodes.settings.state.backgroundColor}
             titleBackgroundColor={childrenNodes.chart.childrenNodes.settings.state.titleBackgroundColor}
             borderColor={
               childrenNodes.chart.childrenNodes.settings.state.borderColor
