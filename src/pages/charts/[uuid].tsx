@@ -9,9 +9,15 @@ import { genUuid } from '../mobile/charts/[uuid]';
 import useDesktopChartEditor from '../../frontend/hooks/singletons/use-desktop-chart-editor';
 import DesktopSidebar from '../../components/global/DesktopEditor/Sidebar/DesktopSidebar';
 import { Color } from '../../components/global/DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
-import DesktopActions from '../../components/global/DesktopEditor/Actions/DesktopActions';
+import { DesktopActions } from '../../components/global/DesktopEditor/Actions/DesktopActions';
 import { DndContext } from '@dnd-kit/core';
 import { DraggedAlbum } from '../../frontend/hooks/use-chart/use-chart';
+import ProfileCircle from '../../components/global/DesktopEditor/Actions/ProfileCircle/ProfileCircle';
+import ActionButton from '../../components/global/DesktopEditor/Actions/ActionButton/ActionButton';
+import { CloudArrowUpIcon, TrashIcon } from '@heroicons/react/20/solid';
+import { ICON_STYLE } from '../../components/lib/FilterButton/FilterButton';
+import LoadingBouncer from '../../components/lib/LoadingBouncer/LoadingBouncer';
+import { deleteChart } from '../../server/trpc/router/charts/delete';
 
 const ApiWrapper: NextPage = () => {
   const router = useRouter();
@@ -68,6 +74,7 @@ const Chart = ({
     defaultSettings: settings,
   });
 
+  const isLoading = chart.state.isEditLoading;
   return (
     <DndContext
       autoScroll={false}
@@ -83,13 +90,31 @@ const Chart = ({
       <Layout
         actions={
           <DesktopActions
-            deleteChart={chart.actions.deleteChart}
-            isChartOwner={isChartOwner}
-            isLoading={chart.state.isCreateLoading || chart.state.isEditLoading}
-            onEditPage={true}
-            save={chart.actions.editChart}
-            savedChartId={chart.state.savedChartId}
-            showOnboardingFlow={false}
+            bottomSection={<ProfileCircle />}
+            topSection={
+              <>
+                <ActionButton
+                  onClick={chart.actions.editChart}
+                  disabled={isLoading}
+                  label="Save changes"
+                  text={
+                    !isLoading ? (
+                      <CloudArrowUpIcon className={ICON_STYLE} />
+                    ) : (
+                      <LoadingBouncer />
+                    )
+                  }
+                  variant="primary"
+                />
+                <ActionButton
+                  label="Delete chart"
+                  hasGradientIndicator={false}
+                  onClick={chart.actions.deleteChart}
+                  text={<TrashIcon className={ICON_STYLE} />}
+                  variant="regular"
+                />
+              </>
+            }
           />
         }
         backgroundColor={chart.childrenNodes.settings.state.backgroundColor}
@@ -97,7 +122,6 @@ const Chart = ({
           <div className="h-full">
             <DesktopEditor
               chart={chart}
-              // listStyles={state.listStyle}
               readonly={false}
               showOnboardingFlow={false}
             />
@@ -108,7 +132,7 @@ const Chart = ({
             <DesktopSidebar
               isChartOwner={isChartOwner}
               pageTitleBorderBottom={Color.blue}
-              pageTitle={isChartOwner ? "edit chart" : "viewing chart"}
+              pageTitle={isChartOwner ? 'edit chart' : 'viewing chart'}
               settings={chart.childrenNodes.settings}
               showOnboardingFlow={false}
               toggleAlbums={actions.toggleAlbums}

@@ -7,18 +7,27 @@ import { DndContext } from '@dnd-kit/core';
 import DesktopEditor from '../../components/global/DesktopEditor/DesktopEditor';
 import { DraggedAlbum } from '../../frontend/hooks/use-chart/use-chart';
 import useDesktopChartEditor from '../../frontend/hooks/singletons/use-desktop-chart-editor';
-import DesktopActions from '../../components/global/DesktopEditor/Actions/DesktopActions';
 import { Color } from '../../components/global/DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
+import {
+  CloudArrowUpIcon,
+  ArrowRightIcon,
+  TrashIcon,
+} from '@heroicons/react/20/solid';
+import Link from 'next/link';
+import ActionButton from '../../components/global/DesktopEditor/Actions/ActionButton/ActionButton';
+import ProfileCircle from '../../components/global/DesktopEditor/Actions/ProfileCircle/ProfileCircle';
+import { ICON_STYLE } from '../../components/lib/FilterButton/FilterButton';
+import LoadingBouncer from '../../components/lib/LoadingBouncer/LoadingBouncer';
+import { DesktopActions } from '../../components/global/DesktopEditor/Actions/DesktopActions';
 
 const CreateChart: NextPage = () => {
   const { pageOpacity } = usePageFadeIn();
   const {
     actions,
     childrenNodes: { chart },
-    state: {
-      showOnboardingFlow,
-    },
+    state: { showOnboardingFlow },
   } = useDesktopChartEditor({});
+  const isLoading = chart.state.isCreateLoading || chart.state.isEditLoading;
 
   return (
     <DndContext
@@ -35,13 +44,43 @@ const CreateChart: NextPage = () => {
       <Layout
         actions={
           <DesktopActions
-            deleteChart={async () => undefined}
-            isChartOwner={true}
-            isLoading={chart.state.isCreateLoading || chart.state.isEditLoading}
-            onCreatePage={true}
-            save={chart.actions.saveChart}
-            savedChartId={chart.state.savedChartId}
-            showOnboardingFlow={showOnboardingFlow}
+            topSection={
+              <>
+                <ActionButton
+                  onClick={chart.actions.saveChart}
+                  disabled={isLoading}
+                  label="Save chart"
+                  text={
+                    !isLoading ? (
+                      <CloudArrowUpIcon className={ICON_STYLE} />
+                    ) : (
+                      <LoadingBouncer />
+                    )
+                  }
+                  variant="primary"
+                />
+                {chart.state.savedChartId ? (
+                  <>
+                    <Link href={`/charts/${chart.state.savedChartId}`}>
+                      <ActionButton
+                        label="View newly saved chart"
+                        onClick={() => undefined}
+                        text={<ArrowRightIcon className={ICON_STYLE} />}
+                        variant="regular"
+                      />
+                    </Link>
+                    <ActionButton
+                      label="Delete chart"
+                      hasGradientIndicator={false}
+                      onClick={() => chart.actions.deleteChart()}
+                      text={<TrashIcon className={ICON_STYLE} />}
+                      variant="regular"
+                    />
+                  </>
+                ) : null}
+              </>
+            }
+            bottomSection={<ProfileCircle />}
           />
         }
         backgroundColor={chart.childrenNodes.settings.state.backgroundColor}
@@ -49,7 +88,9 @@ const CreateChart: NextPage = () => {
           <a.div style={pageOpacity} className="h-full overflow-x-visible">
             <DesktopSidebar
               isChartOwner={true}
-              pageTitle={showOnboardingFlow ? 'getting started' : 'create chart'}
+              pageTitle={
+                showOnboardingFlow ? 'getting started' : 'create chart'
+              }
               pageTitleBorderBottom={Color.fuchsia}
               settings={chart.childrenNodes.settings}
               showOnboardingFlow={showOnboardingFlow}
@@ -59,12 +100,10 @@ const CreateChart: NextPage = () => {
           </a.div>
         }
         pageContent={
-          <a.div style={pageOpacity} className="h-full">
-            <DesktopEditor
-              chart={chart}
-              showOnboardingFlow={showOnboardingFlow}
-            />
-          </a.div>
+          <DesktopEditor
+            chart={chart}
+            showOnboardingFlow={showOnboardingFlow}
+          />
         }
       />
     </DndContext>

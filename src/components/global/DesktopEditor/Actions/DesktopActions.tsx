@@ -1,11 +1,15 @@
-import { ArrowRightIcon, CloudArrowUpIcon, TrashIcon } from '@heroicons/react/24/outline';
+import {
+  ArrowRightIcon,
+  CloudArrowUpIcon,
+  TrashIcon,
+} from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { ICON_STYLE } from '../../../lib/FilterButton/FilterButton';
 import LoadingBouncer from '../../../lib/LoadingBouncer/LoadingBouncer';
 import ActionButton from './ActionButton/ActionButton';
 import ProfileCircle from './ProfileCircle/ProfileCircle';
 
-export interface Props {
+export interface OldProps {
   deleteChart: () => Promise<void>;
   isChartOwner: boolean;
   isLoading: boolean;
@@ -17,7 +21,7 @@ export interface Props {
   showOnboardingFlow: boolean;
 }
 
-const DesktopActions: React.FC<Props> = ({
+const OldDesktopActions: React.FC<OldProps> = ({
   deleteChart,
   isLoading,
   isChartOwner,
@@ -34,21 +38,19 @@ const DesktopActions: React.FC<Props> = ({
         {showOnboardingFlow ? null : (
           <>
             {onEditPage || onCreatePage ? (
-              <>
-                <ActionButton
-                  onClick={() => save()}
-                  disabled={isLoading}
-                  label="Save chart"
-                  text={
-                    !isLoading ? (
-                      <CloudArrowUpIcon className={ICON_STYLE} />
-                    ) : (
-                      <LoadingBouncer />
-                    )
-                  }
-                  variant="primary"
-                />
-              </>
+              <ActionButton
+                onClick={() => save()}
+                disabled={isLoading}
+                label="Save chart"
+                text={
+                  !isLoading ? (
+                    <CloudArrowUpIcon className={ICON_STYLE} />
+                  ) : (
+                    <LoadingBouncer />
+                  )
+                }
+                variant="primary"
+              />
             ) : null}
             {onPreviewPage && savedChartId ? (
               <Link href={`/charts/${savedChartId}`}>
@@ -81,6 +83,15 @@ const DesktopActions: React.FC<Props> = ({
                 />
               </>
             ) : null}
+            {onEditPage ? (
+              <ActionButton
+                label="Delete chart"
+                hasGradientIndicator={false}
+                onClick={() => deleteChart()}
+                text={<TrashIcon className={ICON_STYLE} />}
+                variant="regular"
+              />
+            ) : null}
           </>
         )}
       </div>
@@ -89,4 +100,20 @@ const DesktopActions: React.FC<Props> = ({
   );
 };
 
-export default DesktopActions;
+interface Props {
+  bottomSection: React.ReactNode;
+  topSection: React.ReactNode;
+}
+
+export const DesktopActions: React.FC<Props> = ({
+  bottomSection,
+  topSection,
+}) => {
+  return (
+    <div className="flex h-full flex-col justify-between">
+      <div className="flex flex-col gap-2">{topSection}</div>
+      {bottomSection}
+    </div>
+  );
+};
+export default OldDesktopActions;
