@@ -49,19 +49,14 @@ const ApiWrapper = () => {
       uuid={data.uuid}
     />
   );
-}
+};
 
 export const ViewChart: React.FC<{
-  albums: Album[]
+  albums: Album[];
   name: string;
   settings: ChartSettings | null;
   uuid: string;
-}> = ({
-  albums,
-  name,
-  settings,
-  uuid,
-}) => {
+}> = ({ albums, name, settings, uuid }) => {
   const {
     childrenNodes: { chart },
   } = useDesktopChartEditor({
@@ -71,7 +66,11 @@ export const ViewChart: React.FC<{
     defaultSettings: settings,
   });
   return (
-    <div style={{ backgroundColor: chart.childrenNodes.settings.state.backgroundColor }}>
+    <div
+      style={{
+        backgroundColor: chart.childrenNodes.settings.state.backgroundColor,
+      }}
+    >
       <DesktopEditor
         chart={chart}
         // listStyles={state.listStyle}
@@ -83,4 +82,3 @@ export const ViewChart: React.FC<{
 };
 
 export default ApiWrapper;
-

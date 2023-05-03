@@ -3,23 +3,18 @@ import Grid from '../../../lib/Grid/Grid';
 import { EMPTY_ALBUM } from '../../../../constants/empty-album';
 import { ChartItemLoader } from './ChartItem/Loader';
 
-export interface Props {
-  borderColor: string;
-  borderSize: number;
-  isReadOnly: boolean;
+interface Props {
+  numberOfAlbums: number;
 }
 
-const list = [...new Array(20)].map(() => EMPTY_ALBUM);
-
-const Loader: React.FC = () => {
+const Loader: React.FC<Props> = ({ numberOfAlbums }) => {
+  const list = [...new Array(numberOfAlbums)].map(() => EMPTY_ALBUM);
   return (
     <Grid
       borderSize={1}
       borderColor=""
       items={list}
-      itemComponent={({ index }) => (
-        <ChartItemLoader index={index} />
-      )}
+      itemComponent={({ index }) => <ChartItemLoader index={index} />}
     />
   );
 };
