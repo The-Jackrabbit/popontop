@@ -28,7 +28,10 @@ export const formatColor = (url: string) => {
   return url;
 };
 
-export type WritableChartSettings = Omit<Omit<ChartSettings, 'chart_id'>, 'uuid'>;
+export type WritableChartSettings = Omit<
+  Omit<ChartSettings, 'chart_id'>,
+  'uuid'
+>;
 
 export const editChart = async (
   chartUuid: string,
@@ -50,6 +53,12 @@ export const editChart = async (
     throw new Error();
   }
 
+  await prisma.album.deleteMany({
+    where: {
+      chart_id: chartUuid,
+    },
+  });
+
   console.log('const chart = await prisma.chart.update({');
   const chart = await prisma.chart.update({
     where: {
@@ -68,18 +77,13 @@ export const editChart = async (
           title_background_color: settings.title_background_color,
         },
       },
-    },
-  });
-
-  await prisma.album.deleteMany({
-    where: {
-      Chart: {
-        uuid: chartUuid,
+      Album: {
+        set: [],
       },
     },
   });
 
-  console.log('\n\nconst albumsInChart = await prisma.album.createMany({')
+  console.log('\n\nconst albumsInChart = await prisma.album.createMany({');
   const albumsInChart = await prisma.album.createMany({
     data: albums.map((album: Album) => ({
       name: album.name,

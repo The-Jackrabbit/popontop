@@ -6,6 +6,7 @@ import { ParentHookNode } from '../../../types/singletons';
 import useList, { ListHookNode } from '../lists/use-list';
 import useChartSettings, { SettingsHookNode } from './use-chart-settings';
 import { EMPTY_ALBUM } from '../../../constants/empty-album';
+import { useRouter } from 'next/router';
 
 const getNumberedList = (numberOfAlbums: number, listState: Album[]) => {
   const emptyTextList = [...new Array(numberOfAlbums)];
@@ -34,6 +35,7 @@ export interface ChildrenNodes {
 export interface State {
   chartTitle: string;
   isCreateLoading: boolean;
+  isDeleteLoading: boolean;
   isEditLoading: boolean;
   numberedList: Album[];
   savedChartId: string;
@@ -52,6 +54,7 @@ export const useChart = ({
   initialChartTitle = '',
   initialList,
 }: Props): ChartHookNode => {
+  const router = useRouter();
   const [chartTitle, setChartTitle] = useState(initialChartTitle);
   const settings = useChartSettings(initialChartSettings);
   const list = useList(initialList);
@@ -108,23 +111,22 @@ export const useChart = ({
       uuid: chartUuid,
     });
 
-    setSavedChartId('');
+    router.push(`/your-charts`);
   };
 
   const state = useMemo<State>(
     () => ({
       chartTitle,
       isCreateLoading: createMutation.isLoading,
+      isDeleteLoading: deleteMutation.isLoading,
       isEditLoading: editMutation.isLoading,
-      numberedList: getNumberedList(
-        settings.state.numberOfAlbums,
-        list.state
-      ),
+      numberedList: getNumberedList(settings.state.numberOfAlbums, list.state),
       savedChartId,
     }),
     [
       chartTitle,
       createMutation.isLoading,
+      deleteMutation.isLoading,
       editMutation.isLoading,
       savedChartId,
       settings.state.numberOfAlbums,
@@ -142,7 +144,9 @@ export const useChart = ({
     childrenNodes: {
       list: {
         ...list,
-        state: list.state.filter((_, index) => index < settings.state.numberOfAlbums),
+        state: list.state.filter(
+          (_, index) => index < settings.state.numberOfAlbums
+        ),
       },
       settings,
     },

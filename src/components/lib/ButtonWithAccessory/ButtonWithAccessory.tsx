@@ -52,7 +52,7 @@ const ButtonWithAccessory: React.FC<Props> = ({
               rounded-xl bg-black
               py-2 pl-4
               pr-4 text-neutral-50 shadow-lg
-              dark:bg-neutral-600
+              dark:bg-neutral-800
               dark:text-neutral-50
             `}
           >
@@ -64,7 +64,7 @@ const ButtonWithAccessory: React.FC<Props> = ({
               absolute ${pointerPositionStyle}
               h-3 w-3
               rotate-45 bg-black
-              dark:bg-neutral-600
+              dark:bg-neutral-800
             `}
           />
         </div>

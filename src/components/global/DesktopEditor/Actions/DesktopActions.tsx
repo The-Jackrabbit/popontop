@@ -111,7 +111,7 @@ export const DesktopActions: React.FC<Props> = ({
 }) => {
   return (
     <div className="flex h-full flex-col justify-between">
-      <div className="flex flex-col gap-2">{topSection}</div>
+      <div className=" flex flex-col gap-y-4">{topSection}</div>
       {bottomSection}
     </div>
   );

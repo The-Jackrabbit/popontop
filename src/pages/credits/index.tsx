@@ -14,9 +14,9 @@ const Credits: NextPage = () => {
         <DesktopActions bottomSection={<ProfileCircle />} topSection={null} />
       }
       backgroundColor={undefined}
-      hasActions={false}
+      hasActions={true}
       pageContent={
-        <div>
+        <div className="p-4">
           <div className="float-left mr-8">
             <Image
               src="/assets/dads-record-bin.png"

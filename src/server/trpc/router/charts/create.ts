@@ -37,7 +37,10 @@ export const formatColor = (url: string) => {
   return url;
 };
 
-export type WritableChartSettings = Omit<Omit<ChartSettings, 'chart_id'>, 'uuid'>;
+export type WritableChartSettings = Omit<
+  Omit<ChartSettings, 'chart_id'>,
+  'uuid'
+>;
 
 export const createChart = async (
   albums: Album[],
@@ -80,7 +83,7 @@ export const createChart = async (
       album_art_url: formatUrl(album.imageUrl),
       chart_id: chart.uuid,
     })),
-    skipDuplicates: true, // Skip 'Bobo'
+    skipDuplicates: false, // Skip 'Bobo'
   });
 
   return {
