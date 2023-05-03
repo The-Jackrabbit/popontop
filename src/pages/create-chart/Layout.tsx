@@ -11,13 +11,14 @@ export interface Props {
 export const LAYOUT_CONFIG_WITH_ACTIONS = {
   actions:
     'flex shrink-0 basis-1/12 flex-col justify-between border-l-2 border-neutral-300 p-4 pl-4 dark:border-neutral-800',
-  pageContent: 'shrink grow-0 basis-8/12  min-w-[66.666667%]',
+  pageContent: 'overflow-y-scroll shrink grow-0 basis-8/12  min-w-[66.666667%]',
   sidebar: 'shrink-0 grow basis-3/12 max-w-[25%]',
 };
 
 export const LAYOUT_CONFIG_WITHOUT_ACTIONS = {
   actions: '',
-  pageContent: 'shrink grow-0 basis-9/12 min-w-9/12 max-w-9/12 min-w-[75%] p-4',
+  pageContent:
+    'overflow-y-scroll shrink grow-0 basis-9/12 min-w-9/12 max-w-9/12 min-w-[75%] p-4',
   sidebar: 'shrink-0 grow basis-3/12',
 };
 
@@ -38,21 +39,21 @@ const Layout: React.FC<Props> = ({
       // border-4 border-black
       className="
         flex h-screen
-        w-screen justify-center
+        w-screen min-w-[800px]
+        justify-center
         overflow-hidden
-        min-w-[800px]
       "
     >
       <div
         // app
         // border-4 border-amber-500
         className="
+          //md:bg-blue-300
+          //lg:bg-red-300
           flex
           min-w-[870px]
           max-w-[1200px]
-          //md:bg-blue-300
           lg:w-[1000px]
-          //lg:bg-red-300
           xl:w-[1200px]
           xl:max-w-[1200px]
         "
@@ -61,7 +62,7 @@ const Layout: React.FC<Props> = ({
         <div
           // border-4 border-purple-500
           className={layoutStyle.pageContent}
-          style={backgroundColor ? { backgroundColor }: {}}
+          style={backgroundColor ? { backgroundColor } : {}}
         >
           {pageContent}
         </div>
