@@ -46,23 +46,8 @@ const Credits: NextPage = () => {
               supported.
             </li>
             <li>
-              To toggle whether the chart displays a list of albums, click on
-              the{' '}
-              <code>
-                {'"'}list albums?{'"'}
-              </code>{' '}
-              switch and toggle it on or off.
-            </li>
-            <li>
-              To toggle whether the chart displays a title, click on the{' '}
-              <code>
-                {'"'}show title?{'"'}
-              </code>{' '}
-              switch and toggle it on or off.
-            </li>
-            <li>
-              To add an album to the chart, click on the album in the search
-              results.
+              To add an album to the chart, drag one of the results with your
+              mouse onto one of the spaces in the chart.
             </li>
             <li>
               To save your changes, click the{' '}
@@ -72,6 +57,11 @@ const Credits: NextPage = () => {
               button.
             </li>
           </ol>
+          <h1 className="my-4 text-2xl font-bold">account stuff</h1>
+          <p>
+            You can use google to login to save charts, so your work isn{"'"}t
+            lost.
+          </p>
         </div>
       }
       sidebar={
