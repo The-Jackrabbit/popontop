@@ -17,7 +17,7 @@ export const chartsRouter = router({
     return getChartsForUser(ctx.session.user.id);
   }),
 
-  create: publicProcedure
+  create: protectedProcedure
     .input(
       z.object({
         albums: z.array(z.any()),
@@ -45,7 +45,7 @@ export const chartsRouter = router({
       );
     }),
 
-  edit: protectedProcedure 
+  edit: protectedProcedure
     .input(
       z.object({
         albums: z.array(z.any()),

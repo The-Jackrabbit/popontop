@@ -19,9 +19,11 @@ import ProfileCircle from '../../components/global/DesktopEditor/Actions/Profile
 import { ICON_STYLE } from '../../components/lib/FilterButton/FilterButton';
 import LoadingBouncer from '../../components/lib/LoadingBouncer/LoadingBouncer';
 import { DesktopActions } from '../../components/global/DesktopEditor/Actions/DesktopActions';
+import { useSession } from 'next-auth/react';
 
 const CreateChart: NextPage = () => {
   const { pageOpacity } = usePageFadeIn();
+  const { data: sessionData } = useSession();
   const {
     actions,
     childrenNodes: { chart },
@@ -46,18 +48,20 @@ const CreateChart: NextPage = () => {
           <DesktopActions
             topSection={
               <>
-                <ActionButton
-                  onClick={chart.actions.saveChart}
-                  disabled={isLoading}
-                  label="Save chart"
-                  text={
-                    !isLoading ? (
-                      <CloudArrowUpIcon className={ICON_STYLE} />
-                    ) : (
-                      <LoadingBouncer />
-                    )
-                  }
-                />
+                {sessionData ? (
+                  <ActionButton
+                    onClick={chart.actions.saveChart}
+                    disabled={isLoading}
+                    label="Save chart"
+                    text={
+                      !isLoading ? (
+                        <CloudArrowUpIcon className={ICON_STYLE} />
+                      ) : (
+                        <LoadingBouncer />
+                      )
+                    }
+                  />
+                ) : null}
                 {chart.state.savedChartId ? (
                   <>
                     <Link href={`/charts/${chart.state.savedChartId}`}>
