@@ -20,7 +20,6 @@ const Loader: React.FC<Props> = ({ showOnboardingFlow = false }) => {
     </div>
   ) : (
     <Layout
-      backgroundColor={''}
       uuid=""
       title={<TitleLoader />}
       list={<ChartListV2Loader numberOfAlbums={numberOfAlbums} />}

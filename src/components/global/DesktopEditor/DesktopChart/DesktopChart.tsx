@@ -4,7 +4,7 @@ import ChartItem from './ChartItem/ChartItem';
 import Grid from '../../../lib/Grid/Grid';
 import { EMPTY_ALBUM } from '../../../../constants/empty-album';
 
-function getBorderSizes(index: number, totalAlbums: number): string {
+export function getBorderSizes(index: number, totalAlbums: number): string {
   let borderSizes = '';
 
   if (index % 2 === 0) {

@@ -69,7 +69,6 @@ const EditChart = ({
                         <LoadingBouncer />
                       )
                     }
-                    variant="primary"
                   />
                 ) : null}
                 <ActionButton
@@ -84,7 +83,6 @@ const EditChart = ({
                       <LoadingBouncer />
                     )
                   }
-                  variant="regular"
                 />
                 {isChartOwner ? (
                   <ActionButton
@@ -98,7 +96,6 @@ const EditChart = ({
                         <LoadingBouncer />
                       )
                     }
-                    variant="regular"
                   />
                 ) : null}
               </>
