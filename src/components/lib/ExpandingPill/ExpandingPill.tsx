@@ -65,7 +65,7 @@ export const ExpandingPill: React.FC<Props> = ({
         {children[0]}
         <a.div
           style={opacityAnimationStyle}
-          className="hover:text-rose-300 dark:text-white"
+          className="flex items-center hover:text-rose-300 dark:text-white"
         >
           {children[1]}
         </a.div>
@@ -73,7 +73,7 @@ export const ExpandingPill: React.FC<Props> = ({
       <a.div
         style={{
           ...pillContentStyle,
-          visibility: !isActive ? 'hidden' : 'visible'
+          visibility: !isActive ? 'hidden' : 'visible',
         }}
         className="w-full overflow-hidden px-2"
       >
