@@ -1,25 +1,14 @@
 import React from 'react';
 
 export interface Props {
-  backgroundColor: string;
   chart: React.ReactNode;
   list: React.ReactNode;
   title: React.ReactNode;
   uuid: string;
 }
 
-const Layout: React.FC<Props> = ({
-  backgroundColor,
-  chart,
-  list,
-  title,
-  uuid,
-}) => (
-  <div
-    style={{ backgroundColor }}
-    key={uuid}
-    className="flex h-full flex-row justify-between pt-4"
-  >
+const Layout: React.FC<Props> = ({ chart, list, title, uuid }) => (
+  <div key={uuid} className="flex h-full flex-row justify-between pt-4">
     <div className="relative flex h-screen w-full flex-col items-center gap-8 overflow-y-scroll px-4">
       <div className="min-h-min w-full">{title}</div>
       <div className="flex w-full justify-between">

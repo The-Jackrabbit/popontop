@@ -7,10 +7,9 @@ import FilterButton from '../../../../lib/FilterButton/FilterButton';
 export interface Props {
   disabled?: boolean;
   hasGradientIndicator?: boolean;
+  label: React.ReactNode;
   onClick: MouseEventHandler<HTMLButtonElement>;
   text: string | React.ReactNode;
-  label: React.ReactNode;
-  variant?: 'primary' | 'regular';
 }
 
 export const ActionButton: React.FC<Props> = ({
@@ -19,22 +18,19 @@ export const ActionButton: React.FC<Props> = ({
   label,
   onClick,
   text,
-  // variant = 'regular',
-}) => {
-  return (
-    <ButtonWithAccessory {...LEFT_POSITION_STYLE} label={label}>
-      <FilterButton
-        ariaLabel="save chart"
-        className="h-12 w-12 p-[2px] shadow-lg"
-        rounding="rounded-full"
-        onClick={onClick}
-        hasGradientIndicator={hasGradientIndicator}
-        isActive={true}
-      >
-        {text}
-      </FilterButton>
-    </ButtonWithAccessory>
-  );
-};
+}) => (
+  <ButtonWithAccessory {...LEFT_POSITION_STYLE} label={label}>
+    <FilterButton
+      ariaLabel="save chart"
+      className="h-12 w-12 p-[2px] shadow-lg"
+      rounding="rounded-full"
+      onClick={onClick}
+      hasGradientIndicator={hasGradientIndicator}
+      isActive={true}
+    >
+      {text}
+    </FilterButton>
+  </ButtonWithAccessory>
+);
 
 export default ActionButton;

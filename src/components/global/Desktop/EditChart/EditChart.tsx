@@ -49,9 +49,7 @@ const EditChart = ({
           event.active.data.current as DraggedAlbum
         );
       }}
-      onDragEnd={(args) => {
-        chart.childrenNodes.list.actions.handleDragEnd(args);
-      }}
+      onDragEnd={chart.childrenNodes.list.actions.handleDragEnd}
     >
       <Layout
         actions={

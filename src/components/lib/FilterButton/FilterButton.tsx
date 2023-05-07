@@ -15,6 +15,7 @@ export interface Props {
 export const ICON_STYLE =
   'h-6 w-6 translate-y-[1px] text-neutral-900 dark:text-neutral-50';
 export const DEFAULT_CLASSNAME = 'w-8 h-8 p-[2px]';
+const fromGradient = 'linear-gradient(0deg, gray 0%, gray 100%)';
 
 const FilterButton: React.FC<Props> = ({
   ariaLabel,
@@ -25,7 +26,6 @@ const FilterButton: React.FC<Props> = ({
   onClick,
   rounding = 'rounded-full',
 }) => {
-  const fromGradient = 'linear-gradient(0deg, gray 0%, gray 100%)';
   const toGradient = hasGradientIndicator
     ? 'linear-gradient(180deg, rgb(251,191,36) 0%, #d946ef 100%)'
     : 'linear-gradient(0deg, gray 0%, gray 100%)';

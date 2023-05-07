@@ -15,53 +15,53 @@ const DesktopEditor: React.FC<Props> = ({
   chart,
   readonly = false,
   showOnboardingFlow,
-}) => {
-  console.log('rerunning desktopeditor');
-  return showOnboardingFlow ? (
-    <div>
-      <p className="text-2xl">
-        to get quickly started,
-        <kbd className="mx-4">click</kbd>
-        anywhere on the sidebar
-      </p>
-    </div>
-  ) : (
-    <Layout
-      backgroundColor={''}
-      uuid={chart.state.savedChartId}
-      title={
-        chart.childrenNodes.settings.state.showTitle ? (
-          <Title
-            backgroundColor={
-              chart.childrenNodes.settings.state.titleBackgroundColor
-            }
-            chartTitle={chart.state.chartTitle}
-            isReadOnly={false}
-            setValue={chart.actions.setChartTitle}
-            showIntroduction={!true}
-            textColor={chart.childrenNodes.settings.state.textColor}
+}) => (
+  <>
+    {showOnboardingFlow ? (
+      <div>
+        <p className="text-2xl">
+          to get quickly started,
+          <kbd className="mx-4">click</kbd>
+          anywhere on the sidebar
+        </p>
+      </div>
+    ) : (
+      <Layout
+        uuid={chart.state.savedChartId}
+        title={
+          chart.childrenNodes.settings.state.showTitle ? (
+            <Title
+              backgroundColor={
+                chart.childrenNodes.settings.state.titleBackgroundColor
+              }
+              chartTitle={chart.state.chartTitle}
+              isReadOnly={false}
+              setValue={chart.actions.setChartTitle}
+              showIntroduction={!true}
+              textColor={chart.childrenNodes.settings.state.textColor}
+            />
+          ) : null
+        }
+        list={
+          chart.childrenNodes.settings.state.showAlbums ? (
+            <ChartListV2
+              textColor={chart.childrenNodes.settings.state.textColor}
+              columnCount={1}
+              list={chart.state.numberedList}
+            />
+          ) : null
+        }
+        chart={
+          <DesktopChart
+            borderColor={chart.childrenNodes.settings.state.borderColor}
+            borderSize={chart.childrenNodes.settings.state.borderSize}
+            isReadOnly={readonly}
+            items={chart.state.numberedList}
           />
-        ) : null
-      }
-      list={
-        chart.childrenNodes.settings.state.showAlbums ? (
-          <ChartListV2
-            textColor={chart.childrenNodes.settings.state.textColor}
-            columnCount={1}
-            list={chart.state.numberedList}
-          />
-        ) : null
-      }
-      chart={
-        <DesktopChart
-          borderColor={chart.childrenNodes.settings.state.borderColor}
-          borderSize={chart.childrenNodes.settings.state.borderSize}
-          isReadOnly={readonly}
-          items={chart.state.numberedList}
-        />
-      }
-    />
-  );
-};
+        }
+      />
+    )}
+  </>
+);
 
 export default DesktopEditor;
