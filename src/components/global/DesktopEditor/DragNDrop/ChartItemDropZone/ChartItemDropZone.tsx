@@ -2,6 +2,7 @@ import React from 'react';
 import { useDroppable } from '@dnd-kit/core';
 
 export interface Props {
+  borderSizes: string;
   className?: string;
   children: React.ReactNode;
   id: string;
@@ -9,20 +10,17 @@ export interface Props {
   style?: object;
 }
 
-function WavyGradientDiv({
-index,
-  }: { index: number }) {
+function WavyGradientDiv() {
   return (
     <div
-    className="wavy-gradient hover:visible hover:animate-pulse"
-    style={{
-      height: '100%',
-      backgroundSize: '100% 200%',
-      position: 'relative',
-      // background: EMPTY_SQUARE_BG_GRADIENT[index%EMPTY_SQUARE_BG_GRADIENT.length],
-    }}>
-
-    </div>
+      className="wavy-gradient hover:visible hover:animate-pulse"
+      style={{
+        height: '100%',
+        backgroundSize: '100% 200%',
+        position: 'relative',
+        // background: EMPTY_SQUARE_BG_GRADIENT[index%EMPTY_SQUARE_BG_GRADIENT.length],
+      }}
+    ></div>
   );
 }
 
@@ -33,11 +31,11 @@ export const EMPTY_SQUARE_BG_GRADIENT = [
   'linear-gradient(to right, var(--color-green-500), var(--color-orange-500))',
 ];
 
-const Droppable: React.FC<Props> = ({
+const ChartItemDropZone: React.FC<Props> = ({
+  borderSizes,
   className = '',
   children,
   id,
-  index,
   style,
 }) => {
   const { isOver, setNodeRef } = useDroppable({ id });
@@ -47,18 +45,19 @@ const Droppable: React.FC<Props> = ({
       className={`
         ${className}
         // DESKTOP_CHART_SQUARE_SIZE
-        w-[118px] h-[118px]
-        droppable
+        ChartItemDropZone 
+        h-[118px]
+        w-[118px]
         ${isOver ? 'bg-green-400' : 'bg-transparent'}
+        ${borderSizes}
+        box-content
       `}
       style={style}
       ref={setNodeRef}
     >
-    {children ? (
-      children
-    ) : <WavyGradientDiv index={index} /> }
+      {children ? children : <WavyGradientDiv />}
     </div>
   );
 };
 
-export default Droppable
+export default ChartItemDropZone;

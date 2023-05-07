@@ -4,6 +4,36 @@ import ChartItem from './ChartItem/ChartItem';
 import Grid from '../../../lib/Grid/Grid';
 import { EMPTY_ALBUM } from '../../../../constants/empty-album';
 
+function getBorderSizes(index: number, totalAlbums: number): string {
+  let borderSizes = '';
+
+  if (index % 2 === 0) {
+    borderSizes += ' border-l-8';
+  } else {
+    borderSizes += ' border-l-4';
+  }
+
+  if (index % 2 === 1) {
+    borderSizes += ' border-r-8';
+  } else {
+    borderSizes += ' border-r-4';
+  }
+
+  if (index < 2) {
+    borderSizes += ' border-t-8';
+  } else {
+    borderSizes += ' border-t-4';
+  }
+
+  if (index > 10 - 1 - 2) {
+    borderSizes += ' border-b-8';
+  } else {
+    borderSizes += ' border-b-4';
+  }
+
+  return borderSizes; // 'border-l-4 border border-black';
+}
+
 export interface Props {
   borderColor: string;
   borderSize: number;
@@ -28,7 +58,7 @@ export const DesktopChart: React.FC<Props> = ({
             items[index] !== undefined ? (items[index] as Album) : EMPTY_ALBUM
           }
           borderColor={borderColor}
-          borderSize={borderSize}
+          borderSizes={getBorderSizes(index, items.length)}
           index={index}
           isReadOnly={isReadOnly}
           rowIndex={x}

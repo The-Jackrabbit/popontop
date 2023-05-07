@@ -1,14 +1,13 @@
 import React from 'react';
-import Image from 'next/image';
-import Draggable from '../../DragNDrop/Draggable/Draggable';
-import Droppable from '../../DragNDrop/Droppable/Droppable';
+import ChartItemDropZone from '../../DragNDrop/ChartItemDropZone/ChartItemDropZone';
 import { Album } from '../../../../../types/Albums';
+import DraggableAlbum from '../../DragNDrop/Draggable/DraggableAlbum';
 
 export interface Props {
   album: Album;
   index: number;
   borderColor: string;
-  borderSize: number;
+  borderSizes: string;
   isReadOnly: boolean;
   rowIndex: number;
   columnIndex: number;
@@ -17,44 +16,30 @@ export interface Props {
 export const ChartItem: React.FC<Props> = ({
   album,
   borderColor,
-  borderSize,
+  borderSizes,
   index,
   isReadOnly,
   rowIndex,
   columnIndex,
-}) => {
-  return (
-    <div
-      data-index-row={rowIndex}
-      data-index-column={columnIndex}
-      data-index-inchart={index}
+}) => (
+  <div
+    data-index-row={rowIndex}
+    data-index-column={columnIndex}
+    data-index-inchart={index}
+  >
+    <ChartItemDropZone
+      borderSizes={borderSizes}
+      id={index.toString()}
+      index={index}
+      style={{
+        borderColor,
+      }}
     >
-      <Droppable
-        id={index.toString()}
-        index={index}
-        style={{
-          borderWidth: `${borderSize}px`,
-          borderColor,
-        }}
-      >
-        {album.imageUrl ? (
-          <Draggable
-            data={{ data: album, index, origin: 'chart' }}
-            id={`chart-${index.toString()}`}
-            isReadOnly={isReadOnly}
-            key={`chart-${index.toString()}-key`}
-          >
-            <Image
-              src={album.imageUrl}
-              height="200px"
-              width="200px"
-              alt="profile"
-            />
-          </Draggable>
-        ) : null}
-      </Droppable>
-    </div>
-  );
-};
+      {album.imageUrl ? (
+        <DraggableAlbum album={album} index={index} isReadOnly={isReadOnly} />
+      ) : null}
+    </ChartItemDropZone>
+  </div>
+);
 
 export default ChartItem;

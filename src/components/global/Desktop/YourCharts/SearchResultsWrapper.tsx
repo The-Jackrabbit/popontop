@@ -3,33 +3,19 @@ import SidebarLayout from '../../../../components/global/DesktopEditor/Sidebar/L
 import { useRouter } from 'next/router';
 import Layout from '../../../../pages/create-chart/Layout';
 import { ListOfCharts } from '../../../lib/ListOfCharts/ListOfCharts';
-import DesktopActions from '../../DesktopEditor/Actions/DesktopActions';
-import { genUuid } from '../../../../pages/mobile/charts/[uuid]';
+import { DesktopActions } from '../../DesktopEditor/Actions/DesktopActions';
+import ProfileCircle from '../../DesktopEditor/Actions/ProfileCircle/ProfileCircle';
 
 const SearchResultsWrapper: React.FC<{
   activeChartUuid?: string;
   page: React.ReactNode;
-}> = ({
-  activeChartUuid,
-  page,
-}) => {
+}> = ({ activeChartUuid, page }) => {
   const router = useRouter();
-  const { uuid } = router.query;
-  const n = genUuid(uuid);
 
   return (
     <Layout
       actions={
-        <DesktopActions
-          deleteChart={async () => undefined}
-          isChartOwner={true}
-          isLoading={false}
-          onEditPage={false}
-          onPreviewPage={true}
-          save={async () => undefined}
-          savedChartId={n}
-          showOnboardingFlow={false}
-        />
+        <DesktopActions topSection={<></>} bottomSection={<ProfileCircle />} />
       }
       backgroundColor={''}
       hasActions={true}
@@ -44,7 +30,7 @@ const SearchResultsWrapper: React.FC<{
                 isMobile={false}
                 activeChartUuid={activeChartUuid}
                 setChartBeingViewed={(uuid: string) => {
-                    router.push(`/your-charts/${uuid}`);
+                  router.push(`/your-charts/${uuid}`);
                 }}
               />
             </div>
@@ -56,4 +42,3 @@ const SearchResultsWrapper: React.FC<{
 };
 
 export default SearchResultsWrapper;
-

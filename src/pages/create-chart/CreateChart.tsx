@@ -57,7 +57,6 @@ const CreateChart: NextPage = () => {
                       <LoadingBouncer />
                     )
                   }
-                  variant="primary"
                 />
                 {chart.state.savedChartId ? (
                   <>
@@ -66,7 +65,6 @@ const CreateChart: NextPage = () => {
                         label="View newly saved chart"
                         onClick={() => undefined}
                         text={<ArrowRightIcon className={ICON_STYLE} />}
-                        variant="regular"
                       />
                     </Link>
                     <ActionButton
@@ -74,7 +72,6 @@ const CreateChart: NextPage = () => {
                       hasGradientIndicator={false}
                       onClick={() => chart.actions.deleteChart()}
                       text={<TrashIcon className={ICON_STYLE} />}
-                      variant="regular"
                     />
                   </>
                 ) : null}
