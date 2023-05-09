@@ -39,6 +39,15 @@ const Title: React.FC<Props> = ({
     return <Loader />;
   }
 
+  const onKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      setIsEditing(false);
+    }
+  };
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue && setValue(e.target.value);
+  };
+
   return (
     <Layout
       backgroundColor={backgroundColor}
@@ -48,9 +57,8 @@ const Title: React.FC<Props> = ({
             autoFocus
             value={chartTitle}
             onBlur={() => setIsEditing(false)}
-            onChange={(e) => {
-              setValue && setValue(e.target.value);
-            }}
+            onChange={onChange}
+            onKeyUp={onKeyUp}
             placeholder="New title"
             className="
               border-bottom-2 w-full
