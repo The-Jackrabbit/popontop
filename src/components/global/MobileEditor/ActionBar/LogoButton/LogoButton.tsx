@@ -31,7 +31,7 @@ export const LogoButton: React.FC<Props> = ({ end, isActive, start }) => (
           color={Color.fuchsia}
           isActive={true}
           onClick={() => undefined}
-          className="absolute top-[-4px] right-[-2px] h-4 w-4 animate-bounce"
+          className="absolute top-[-36px] right-[-12px] h-4 w-4 animate-bounce"
         />
       ) : null}
     </h1>
