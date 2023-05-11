@@ -23,13 +23,13 @@ const EditChart = ({
   chartName,
   chartUuid,
   isChartOwner,
-  settings,
+  initialSettings,
 }: {
   albums: Album[];
   chartName: string;
   chartUuid: string;
   isChartOwner: boolean;
-  settings: ChartSettings | null;
+  initialSettings?: ChartSettings;
 }) => {
   const {
     actions,
@@ -38,7 +38,7 @@ const EditChart = ({
     initialList: albums,
     chartName,
     chartUuid,
-    defaultSettings: settings,
+    initialSettings,
   });
 
   return (

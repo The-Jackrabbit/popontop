@@ -1,6 +1,5 @@
 import React from 'react';
 import { trpc } from '../../../../../utils/trpc';
-import { Layout } from './Layout';
 import { Loader } from './Loader';
 import { useRouter } from 'next/router';
 import { genUuid } from '../../../../../pages/mobile/charts/[uuid]';
@@ -45,7 +44,7 @@ const ApiWrapper = () => {
     <ViewChart
       albums={data.albums}
       name={data?.name}
-      settings={data?.settings}
+      settings={data?.settings ?? undefined}
       uuid={data.uuid}
     />
   );
@@ -54,7 +53,7 @@ const ApiWrapper = () => {
 export const ViewChart: React.FC<{
   albums: Album[];
   name: string;
-  settings: ChartSettings | null;
+  settings?: ChartSettings;
   uuid: string;
 }> = ({ albums, name, settings, uuid }) => {
   const {
@@ -63,7 +62,7 @@ export const ViewChart: React.FC<{
     initialList: albums,
     chartName: name,
     chartUuid: uuid,
-    defaultSettings: settings,
+    initialSettings: settings,
   });
   return (
     <div
@@ -73,7 +72,6 @@ export const ViewChart: React.FC<{
     >
       <DesktopEditor
         chart={chart}
-        // listStyles={state.listStyle}
         readonly={false}
         showOnboardingFlow={false}
       />

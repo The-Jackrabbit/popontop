@@ -26,6 +26,10 @@ const ChartPage: NextPage = () => {
     }
   );
 
+  if (isLoading) {
+    return null;
+  }
+
   return (
     <MobileEditor
       chartName={data?.name}
@@ -36,7 +40,7 @@ const ChartPage: NextPage = () => {
           ? data?.albums
           : ([] as Album[])
       }
-      initialSettings={data?.settings}
+      initialSettings={data?.settings ?? undefined}
       isLoading={isLoading}
       isReadOnly={data?.isReadOnly}
     />

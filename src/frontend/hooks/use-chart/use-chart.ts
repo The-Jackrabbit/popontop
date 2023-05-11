@@ -43,20 +43,20 @@ export interface State {
 
 export interface Props {
   chartUuid?: string;
-  initialChartSettings?: ChartSettings;
+  initialSettings?: ChartSettings;
   initialChartTitle?: string;
   initialList?: Album[];
 }
 
 export const useChart = ({
   chartUuid = '',
-  initialChartSettings = {} as ChartSettings,
+  initialSettings,
   initialChartTitle = '',
   initialList,
 }: Props): ChartHookNode => {
   const router = useRouter();
   const [chartTitle, setChartTitle] = useState(initialChartTitle);
-  const settings = useChartSettings(initialChartSettings);
+  const settings = useChartSettings(initialSettings);
   const list = useList(initialList);
   const [savedChartId, setSavedChartId] = useState(chartUuid);
   const createMutation = trpc.charts.create.useMutation();

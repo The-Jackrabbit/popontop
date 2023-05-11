@@ -19,6 +19,7 @@ export const ListView: React.FC<Props> = ({
     className="
       flex
       w-full justify-between
+      text-xs
     "
   >
     {showAlbums && (
@@ -26,8 +27,9 @@ export const ListView: React.FC<Props> = ({
         className="
           flex w-12
           shrink-0
-          basis-1/12 flex-col content-center items-center justify-center text-xs
+          basis-1/12 flex-col content-center items-center justify-center 
         "
+        style={textColor ? { color: textColor } : {}}
       >
         <p>{index + 1}</p>
       </div>
@@ -49,13 +51,13 @@ export const ListView: React.FC<Props> = ({
     >
       <p
         style={textColor ? { color: textColor } : {}}
-        className="overflow-x-hidden whitespace-nowrap font-sans text-xs"
+        className="overflow-x-hidden whitespace-nowrap font-sans"
       >
         {album.artist}
       </p>
       <p
         style={textColor ? { color: textColor } : {}}
-        className="overflow-x-hidden whitespace-nowrap text-xs"
+        className="overflow-x-hidden whitespace-nowrap"
       >
         {album.name}
       </p>

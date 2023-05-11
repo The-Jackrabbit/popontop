@@ -21,7 +21,7 @@ export interface Props {
   chartUuid?: string;
   context?: UseChartListContext;
   initialList?: Album[];
-  initialSettings?: ChartSettings | null;
+  initialSettings?: ChartSettings;
   isLoading?: boolean;
   isReadOnly?: boolean;
 }
@@ -31,7 +31,7 @@ const MobileEditor: React.FC<Props> = ({
   chartUuid = '',
   context,
   initialList,
-  initialSettings = null,
+  initialSettings,
   isLoading = true,
   isReadOnly = false,
 }) => {
@@ -39,7 +39,7 @@ const MobileEditor: React.FC<Props> = ({
     chartUuid,
     chartName,
     context,
-    defaultSettings: initialSettings,
+    initialSettings,
     initialList,
   });
   useEffect(() => {
@@ -56,7 +56,11 @@ const MobileEditor: React.FC<Props> = ({
   }, [chartName]);
 
   return (
-    <MobilePage>
+    <MobilePage
+      backgroundColor={
+        childrenNodes.chart.childrenNodes.settings.state.backgroundColor
+      }
+    >
       <a.div
         id="editor"
         onClick={() => actions.onClickSheetDeadArea()}

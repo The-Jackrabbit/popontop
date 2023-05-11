@@ -1,5 +1,5 @@
 import { ChartSettings } from '@prisma/client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { HookNode } from '../../../types/singletons';
 import { useIncrementer } from '../use-incrementer';
 
@@ -36,7 +36,7 @@ export interface State {
 }
 
 const useChartSettings = (
-  defaultSettings: ChartSettings | null
+  defaultSettings?: ChartSettings
 ): SettingsHookNode => {
   const {
     onIncrement: onIncrementRows,
@@ -69,8 +69,7 @@ const useChartSettings = (
   const [numberOfAlbums, setNumberOfAlbums] = useState<number>(
     (defaultSettings && defaultSettings?.number_of_albums
       ? parseInt(defaultSettings?.number_of_albums as unknown as string)
-      : 10
-    ) as number
+      : 10) as number
   );
   const [showAlbums, setShowAlbums] = useState(
     defaultSettings?.show_albums ?? true

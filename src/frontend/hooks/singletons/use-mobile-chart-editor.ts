@@ -30,27 +30,27 @@ export type Actions = {
 
 export type State = void;
 
+export interface Props {
+  chartName?: string;
+  chartUuid: string;
+  context?: UseChartListContext;
+  initialSettings?: ChartSettings;
+  initialList?: Album[];
+}
+
 const useMobileChartEditor = ({
   chartName = 'My sick ass chart',
   chartUuid,
   context,
-  defaultSettings,
-  initialList = [],
-}: {
-  chartName?: string;
-  chartUuid: string;
-  context?: UseChartListContext;
-  defaultSettings: ChartSettings | null;
-  initialList?: Album[];
-}) => {
-  if (defaultSettings) {
-    debugger;
-  }
+  initialList,
+  initialSettings,
+}: Props) => {
   const [isFirstCloseDone, setIsFirstCloseDone] = useState(
-    initialList.length > 0 || context === UseChartListContext.EDIT
+    (initialList && initialList.length > 0) ||
+      context === UseChartListContext.EDIT
   );
   const chart = useChart({
-    initialChartSettings: defaultSettings ?? undefined,
+    initialSettings,
     chartUuid,
     initialChartTitle: chartName,
     initialList,

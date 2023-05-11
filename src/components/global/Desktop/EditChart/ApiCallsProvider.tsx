@@ -30,7 +30,7 @@ const ApiCallsProvider: React.FC<Props> = ({ uuid }) => {
       chartName={data.name}
       chartUuid={uuid as string}
       isChartOwner={!data.isReadOnly}
-      settings={data.settings}
+      initialSettings={data.settings ?? undefined}
     />
   );
 };

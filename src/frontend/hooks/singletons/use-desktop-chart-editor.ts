@@ -31,20 +31,18 @@ export interface ChildrenNodes {
 export interface Props {
   chartName?: string;
   chartUuid?: string;
-  defaultSettings?: ChartSettings | null;
+  initialSettings?: ChartSettings;
   initialList?: Album[];
 }
 
-export const useDesktopChartEditor = (
-  {
-    chartName = 'My sick ass chart',
-    chartUuid = '',
-    defaultSettings = null,
-    initialList,
-  }: Props
-): DesktopChartEditorHookNode => {
+export const useDesktopChartEditor = ({
+  chartName = 'My sick ass chart',
+  chartUuid = '',
+  initialSettings,
+  initialList,
+}: Props): DesktopChartEditorHookNode => {
   const chart = useChart({
-    initialChartSettings: defaultSettings ?? undefined,
+    initialSettings,
     chartUuid,
     initialChartTitle: chartName,
     initialList,
