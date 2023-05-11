@@ -42,7 +42,7 @@ export const DeleteView: React.FC<Props> = ({
     </div>
     <div
       style={textColor ? { color: textColor } : {}}
-      className="flex grow-0 basis-6/12 flex-col content-start justify-end overflow-x-hidden"
+      className="flex grow-0 basis-6/12 flex-col content-start justify-end overflow-x-hidden pl-3"
     >
       <p className="overflow-x-hidden whitespace-nowrap font-sans text-xs">
         {album.artist}

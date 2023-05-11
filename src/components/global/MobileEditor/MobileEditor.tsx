@@ -136,6 +136,7 @@ const MobileEditor: React.FC<Props> = ({
             childrenNodes.chart.childrenNodes.settings.state.borderSize
           }
           chartTitle={childrenNodes.chart.state.chartTitle}
+          chart={childrenNodes.chart}
           onDecrementColumns={
             childrenNodes.chart.childrenNodes.settings.actions
               .onDecrementColumns

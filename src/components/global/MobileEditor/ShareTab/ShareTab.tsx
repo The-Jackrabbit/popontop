@@ -1,5 +1,6 @@
 import { HomeIcon, ShareIcon } from '@heroicons/react/20/solid';
 import React, { useEffect, useState } from 'react';
+import { ChartHookNode } from '../../../../frontend/hooks/use-chart/use-chart';
 import { Album } from '../../../../types/Albums';
 import { ICON_STYLE } from '../../../lib/FilterButton/FilterButton';
 import { PreviewEditor } from './PreviewEditor/PreviewEditor';
@@ -7,6 +8,7 @@ import { PreviewEditor } from './PreviewEditor/PreviewEditor';
 export interface Props {
   borderColor: string;
   borderSize: number;
+  chart: ChartHookNode;
   chartTitle: string;
   columns: number;
   list: Album[];
@@ -21,7 +23,7 @@ export interface Props {
 export const ShareTab: React.FC<Props> = ({
   borderColor,
   borderSize,
-  chartTitle,
+  chart,
   columns,
   list,
   onDecrementColumns,
@@ -29,7 +31,6 @@ export const ShareTab: React.FC<Props> = ({
   onDecrementRows,
   onIncrementRows,
   rows,
-  titleBackgroundColor,
 }) => {
   const [isMainOverlayVisible, setIsMainOverlayVisible] = useState(false);
   useEffect(() => {
@@ -69,7 +70,7 @@ export const ShareTab: React.FC<Props> = ({
         <PreviewEditor
           borderColor={borderColor}
           borderSize={borderSize}
-          chartTitle={chartTitle}
+          chart={chart}
           columns={columns}
           list={list}
           onDecrementColumns={onDecrementColumns}
@@ -77,7 +78,6 @@ export const ShareTab: React.FC<Props> = ({
           onDecrementRows={onDecrementRows}
           onIncrementRows={onIncrementRows}
           rows={rows}
-          titleBackgroundColor={titleBackgroundColor}
         />
       ) : null}
     </div>

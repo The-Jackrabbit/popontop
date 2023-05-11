@@ -24,22 +24,20 @@ const Grid: React.FC<Props> = ({
   // borderSize,
   items,
   itemComponent,
-  preview = false
+  preview = false,
 }) => {
   return (
     <div
       className={`
         ${preview ? 'scale-95' : ''}
         flex
-        flex-wrap
         h-min
+        flex-wrap
         justify-center
       `}
     >
       {items.map((_item, index) => (
-        <>
-          {itemComponent({ index , x: -1, y: -1 })}
-        </>
+        <>{itemComponent({ index, x: -1, y: -1 })}</>
       ))}
     </div>
   );

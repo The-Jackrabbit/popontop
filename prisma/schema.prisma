@@ -39,6 +39,7 @@ model User {
   emailVerified DateTime?
   image         String?
   uuid          String?         @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  name          String?
   accounts      Account[]
   sessions      Session[]
   chart_to_user chart_to_user[]

@@ -1,15 +1,18 @@
 import { useState } from 'react';
+import { EMPTY_ALBUM } from '../../../../../constants/empty-album';
+import { ChartHookNode } from '../../../../../frontend/hooks/use-chart/use-chart';
 import { Album } from '../../../../../types/Albums';
 import { startScreenshotMode } from '../../../../../utils/mobile-theme';
 import FilterButton from '../../../../lib/FilterButton/FilterButton';
-import Grid, { useSize } from '../../../../lib/Grid/Grid';
-import NumberInput from '../../../../lib/NumberInput/NumberInput';
+import Grid from '../../../../lib/Grid/Grid';
+import ChartItem from '../../../DesktopEditor/DesktopChart/ChartItem/ChartItem';
+import { getBorderSizes } from '../../../DesktopEditor/DesktopChart/DesktopChart';
 import { ScreenshotMode } from './ScreenshotMode/ScreenshotMode';
 
 export interface Props {
   borderColor: string;
   borderSize: number;
-  chartTitle: string;
+  chart: ChartHookNode;
   columns: number;
   list: Album[];
   onDecrementColumns: () => void;
@@ -17,21 +20,19 @@ export interface Props {
   onDecrementRows: () => void;
   onIncrementRows: () => void;
   rows: number;
-  titleBackgroundColor: string;
 }
 
 export const PreviewEditor: React.FC<Props> = ({
   borderColor,
   borderSize,
-  chartTitle,
+  chart,
   columns,
   list,
-  onDecrementColumns,
-  onIncrementColumns,
-  onDecrementRows,
-  onIncrementRows,
+  // onDecrementColumns,
+  // onIncrementColumns,
+  // onDecrementRows,
+  // onIncrementRows,
   rows,
-  titleBackgroundColor,
 }) => {
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
   const onClickPreview = () => {
@@ -39,8 +40,6 @@ export const PreviewEditor: React.FC<Props> = ({
     startScreenshotMode();
   };
   const onExit = () => setIsOverlayVisible(false);
-  const [target, setTarget] = useState<HTMLDivElement | null>(null);
-  const size = useSize(target);
 
   return (
     <div
@@ -52,9 +51,8 @@ export const PreviewEditor: React.FC<Props> = ({
         p-12 align-middle
         dark:bg-black dark:text-white
       `}
-      ref={setTarget}
     >
-      <div className="z-30 basis-[3%]">
+      {/* <div className="z-30 basis-[3%]">
         <NumberInput
           className="mb-4 flex w-full justify-between"
           currentValue={rows}
@@ -71,7 +69,7 @@ export const PreviewEditor: React.FC<Props> = ({
           onDecrement={onDecrementColumns}
           onIncrement={onIncrementColumns}
         />
-      </div>
+      </div> */}
       <FilterButton
         ariaLabel="Enter screenshot mode"
         className={'mb-4 w-min basis-[4%] whitespace-nowrap p-1 '}
@@ -79,32 +77,34 @@ export const PreviewEditor: React.FC<Props> = ({
       >
         <p className="p-2 py-1">Enter screenshot mode</p>
       </FilterButton>
-      {size ? (
-        <Grid
-          borderColor={borderColor}
-          borderSize={borderSize}
-          preview={true}
-          items={list}
-          itemComponent={({ index }) => (
-            <img
-              src={list[index]?.imageUrl ?? ''}
-              alt={list[index]?.artist ?? ''}
-              width={size.height}
-              height={size.width}
-            />
-          )}
-        />
-      ) : null}
+      <Grid
+        borderColor={borderColor}
+        borderSize={borderSize}
+        preview={true}
+        items={list}
+        itemComponent={({ index, x, y }) => (
+          <ChartItem
+            album={
+              list[index] !== undefined ? (list[index] as Album) : EMPTY_ALBUM
+            }
+            borderColor={borderColor}
+            borderSizes={getBorderSizes(index, list.length)}
+            index={index}
+            isReadOnly={true}
+            rowIndex={x}
+            columnIndex={y}
+          />
+        )}
+      />
       {isOverlayVisible ? (
         <ScreenshotMode
           borderColor={borderColor}
           borderSize={borderSize}
-          chartTitle={chartTitle}
+          chart={chart}
           columns={columns}
           list={list}
           onExit={onExit}
           rows={rows}
-          titleBackgroundColor={titleBackgroundColor}
         />
       ) : null}
     </div>
