@@ -1,4 +1,5 @@
 import { DragEndEvent } from '@dnd-kit/core';
+import ismobile from 'is-mobile';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { randomIntegerInRange } from '../../../components/lib/Grid/Grid.stories';
 import { EMPTY_ALBUM } from '../../../constants/empty-album';
@@ -7,9 +8,7 @@ import { Album } from '../../../types/Albums';
 import { HookNode } from '../../../types/singletons';
 import { DraggedAlbum } from '../use-chart/use-chart';
 
-export type ListHookNode = HookNode<State, Actions>;
-
-export type State = Album[];
+export type ListHookNode = HookNode<Album[], Actions>;
 
 export interface Actions {
   addAlbumToList: (album: Album) => void;
@@ -30,10 +29,13 @@ export interface Actions {
 export const testlist = [...new Array(100)].map(
   () => ALBUM_RESULTS[randomIntegerInRange(0, 9)]
 );
-export const initializeEmptyList = (): Album[] => [...new Array(25)].map(() => EMPTY_ALBUM);
+export const initializeEmptyList = (ismobile: boolean): Album[] =>
+  [...new Array(ismobile ? 0 : 25)].map(() => EMPTY_ALBUM);
 
-const useList = (initialList: Album[] = initializeEmptyList()): ListHookNode => {
-  const [list, setList] = useState<Album[]>(initialList);
+const useList = (initialList: Album[], ismobile: boolean): ListHookNode => {
+  const [list, setList] = useState<Album[]>(
+    initialList ?? initializeEmptyList(ismobile)
+  );
   const [draggedAlbum, setDraggedAlbum] = useState<DraggedAlbum>({
     data: EMPTY_ALBUM,
     origin: 'search',

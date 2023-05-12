@@ -1,3 +1,4 @@
+import { EMPTY_ALBUM } from '../../../constants/empty-album';
 import { ChartHookNode } from '../../../frontend/hooks/use-chart/use-chart';
 import { Album } from '../../../types/Albums';
 import Title from '../../lib/Title/Title';
@@ -11,27 +12,34 @@ const AlbumOverlay = ({
 }: {
   album: Album;
   textColor: string;
-}) => (
-  <div
-    className="box-content flex aspect-square basis-1/2 items-center justify-center bg-opacity-10 bg-cover bg-center"
-    style={{ backgroundImage: `url(${album.imageUrl})` }}
-  >
-    <p
-      style={{ color: textColor }}
-      className="flex h-full w-full items-center self-center bg-opacity-75 bg-gradient-to-t from-[rgba(0,0,0,0.8)] to-[rgba(255,255,255,0.05)] p-4 text-center align-middle text-sm"
-    >{`${album.artist} - ${album.name}`}</p>
-  </div>
-);
-
+}) => {
+  const albumDescription =
+    album.artist !== '' || album.name !== ''
+      ? `${album.artist} - ${album.name}`
+      : 'No album';
+  return (
+    <div
+      className="box-content flex aspect-square basis-1/2 items-center justify-center bg-opacity-10 bg-cover bg-center"
+      style={{ backgroundImage: `url(${album.imageUrl})` }}
+    >
+      <p
+        style={{ color: textColor }}
+        className="flex h-full w-full items-center  self-center bg-opacity-75 bg-gradient-to-t from-[rgba(0,0,0,0.8)] to-[rgba(255,255,255,0.05)] p-4 text-center align-middle text-sm"
+      >
+        {albumDescription}
+      </p>
+    </div>
+  );
+};
 const ScreenShot = ({ chart }: Props) => {
   return (
     <div
       style={{
         backgroundColor: chart.childrenNodes.settings.state.backgroundColor,
       }}
-      className="flex h-screen justify-center"
+      className="flex h-screen w-screen justify-center"
     >
-      <div className="h-screen origin-top scale-90 p-4">
+      <div className="h-screen w-screen origin-top scale-90 p-4">
         {chart.childrenNodes.settings.state.showTitle ? (
           <div className="pb-4">
             <Title
@@ -48,49 +56,49 @@ const ScreenShot = ({ chart }: Props) => {
         ) : null}
         <div className="flex w-full bg-red-300">
           <AlbumOverlay
-            album={chart.childrenNodes.list.state[0] as Album}
+            album={chart.childrenNodes.list.state.at(0) ?? EMPTY_ALBUM}
             textColor={chart.childrenNodes.settings.state.textColor}
           />
           <AlbumOverlay
-            album={chart.childrenNodes.list.state[1] as Album}
+            album={chart.childrenNodes.list.state.at(1) ?? EMPTY_ALBUM}
             textColor={chart.childrenNodes.settings.state.textColor}
           />
         </div>
         <div className="flex w-full bg-green-300">
           <AlbumOverlay
-            album={chart.childrenNodes.list.state[2] as Album}
+            album={chart.childrenNodes.list.state.at(2) ?? EMPTY_ALBUM}
             textColor={chart.childrenNodes.settings.state.textColor}
           />
           <AlbumOverlay
-            album={chart.childrenNodes.list.state[3] as Album}
+            album={chart.childrenNodes.list.state.at(3) ?? EMPTY_ALBUM}
             textColor={chart.childrenNodes.settings.state.textColor}
           />
         </div>
         <div className="flex w-full bg-blue-300">
           <AlbumOverlay
-            album={chart.childrenNodes.list.state[4] as Album}
+            album={chart.childrenNodes.list.state.at(4) ?? EMPTY_ALBUM}
             textColor={chart.childrenNodes.settings.state.textColor}
           />
           <AlbumOverlay
-            album={chart.childrenNodes.list.state[5] as Album}
+            album={chart.childrenNodes.list.state.at(5) ?? EMPTY_ALBUM}
             textColor={chart.childrenNodes.settings.state.textColor}
           />
           <AlbumOverlay
-            album={chart.childrenNodes.list.state[6] as Album}
+            album={chart.childrenNodes.list.state.at(6) ?? EMPTY_ALBUM}
             textColor={chart.childrenNodes.settings.state.textColor}
           />
         </div>
         <div className="flex w-full bg-amber-300">
           <AlbumOverlay
-            album={chart.childrenNodes.list.state[7] as Album}
+            album={chart.childrenNodes.list.state.at(7) ?? EMPTY_ALBUM}
             textColor={chart.childrenNodes.settings.state.textColor}
           />
           <AlbumOverlay
-            album={chart.childrenNodes.list.state[8] as Album}
+            album={chart.childrenNodes.list.state.at(8) ?? EMPTY_ALBUM}
             textColor={chart.childrenNodes.settings.state.textColor}
           />
           <AlbumOverlay
-            album={chart.childrenNodes.list.state[9] as Album}
+            album={chart.childrenNodes.list.state.at(9) ?? EMPTY_ALBUM}
             textColor={chart.childrenNodes.settings.state.textColor}
           />
         </div>

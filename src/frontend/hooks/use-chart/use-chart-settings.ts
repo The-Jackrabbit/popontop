@@ -1,6 +1,7 @@
 import { ChartSettings } from '@prisma/client';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { HookNode } from '../../../types/singletons';
+import { setThemeColorMetaTag } from '../../../utils/mobile-theme';
 import { useIncrementer } from '../use-incrementer';
 
 export type SettingsHookNode = HookNode<State, Actions>;
@@ -56,9 +57,13 @@ const useChartSettings = (
     initialAmount: 10, // TODO: persist to backend
     max: 18,
   });
-  const [backgroundColor, setBackgroundColor] = useState(
+  const [backgroundColor, _setBackgroundColor] = useState(
     defaultSettings?.background_color ?? ''
   );
+  const setBackgroundColor = (color: string) => {
+    setThemeColorMetaTag(color);
+    _setBackgroundColor(color);
+  };
   const [titleBackgroundColor, setTitleBackgroundColor] = useState(
     defaultSettings?.title_background_color ?? ''
   );

@@ -3,7 +3,10 @@ import { useState } from 'react';
 import { colorMap } from '../../../../../constants/colors';
 import { ChartHookNode } from '../../../../../frontend/hooks/use-chart/use-chart';
 import { Album } from '../../../../../types/Albums';
-import { startScreenshotMode } from '../../../../../utils/mobile-theme';
+import {
+  resetThemeColorMetaTag,
+  startScreenshotMode,
+} from '../../../../../utils/mobile-theme';
 import FilterButton from '../../../../lib/FilterButton/FilterButton';
 import { Color } from '../../../DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
 import { ScreenshotMode } from './ScreenshotMode/ScreenshotMode';
@@ -24,20 +27,22 @@ export const PreviewEditor: React.FC<Props> = ({
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
   const onClickPreview = () => {
     setIsOverlayVisible(true);
-    startScreenshotMode();
+    startScreenshotMode(chart.childrenNodes.settings.state.backgroundColor);
   };
-  const onExit = () => setIsOverlayVisible(false);
+  const onExit = () => {
+    resetThemeColorMetaTag();
+    setIsOverlayVisible(false);
+  };
 
   return (
     <div
       className={`
         flex
-        h-screen w-screen
+        h-[calc(100vh_-_80px)] w-screen
         flex-col items-stretch
         justify-between
-        bg-white
         p-12 align-middle
-        dark:bg-black dark:text-white
+        dark:bg-neutral-900
       `}
     >
       <div>

@@ -7,10 +7,9 @@ import { trpc } from '../utils/trpc';
 import Head from 'next/head';
 import '../styles/globals.css';
 import ismobile from 'is-mobile';
+import { useClientInitialization } from '../frontend/hooks/use-client-initialization';
 import {
-  DARK_MODE_META_TAG,
-  DARK_MODE_THEME_COLOR,
-  LIGHT_MODE_META_TAG,
+  THEME_COLOR_META_TAG,
   LIGHT_MODE_THEME_COLOR,
 } from '../utils/mobile-theme';
 
@@ -18,6 +17,8 @@ const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
+  useClientInitialization();
+
   return (
     <SessionProvider session={session}>
       <Head>
@@ -44,17 +45,11 @@ const MyApp: AppType<{ session: Session | null }> = ({
           name="description"
           content="Popontop lets you create and customize lists of your favorite music."
         />
+
         <meta
-          id={LIGHT_MODE_META_TAG}
+          id={THEME_COLOR_META_TAG}
           name="theme-color"
-          media="(prefers-color-scheme: light)"
           content={LIGHT_MODE_THEME_COLOR}
-        />
-        <meta
-          id={DARK_MODE_META_TAG}
-          name="theme-color"
-          media="(prefers-color-scheme: dark)"
-          content={DARK_MODE_THEME_COLOR}
         />
         {ismobile() && (
           <meta
