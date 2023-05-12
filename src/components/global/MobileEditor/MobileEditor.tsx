@@ -7,7 +7,6 @@ import Title from '../../lib/Title/Title';
 import { ChartSettings } from '@prisma/client';
 import MobilePage from '../../lib/MobilePage/MobilePage';
 import { Album } from '../../../types/Albums';
-import { useEffect } from 'react';
 import { Loader as ListLoader } from '../../global/MobileEditor/List/Loader';
 import List from './List/List';
 import ViewModeModal from './ViewModeModal/ViewModeModal';
@@ -42,18 +41,6 @@ const MobileEditor: React.FC<Props> = ({
     initialSettings,
     initialList,
   });
-  useEffect(() => {
-    if (initialList) {
-      childrenNodes.chart.childrenNodes.list.actions.setList(initialList);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [initialList]);
-  useEffect(() => {
-    if (chartName) {
-      childrenNodes.chart.actions.setChartTitle(chartName);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chartName]);
 
   return (
     <MobilePage
@@ -131,39 +118,18 @@ const MobileEditor: React.FC<Props> = ({
         />
       </a.div>
 
-      {childrenNodes.editor.state.isActive ? (
-        <ShareTab
-          borderColor={
-            childrenNodes.chart.childrenNodes.settings.state.borderColor
-          }
-          borderSize={
-            childrenNodes.chart.childrenNodes.settings.state.borderSize
-          }
-          chartTitle={childrenNodes.chart.state.chartTitle}
-          chart={childrenNodes.chart}
-          onDecrementColumns={
-            childrenNodes.chart.childrenNodes.settings.actions
-              .onDecrementColumns
-          }
-          onIncrementColumns={
-            childrenNodes.chart.childrenNodes.settings.actions
-              .onIncrementColumns
-          }
-          onDecrementRows={
-            childrenNodes.chart.childrenNodes.settings.actions.onDecrementRows
-          }
-          onIncrementRows={
-            childrenNodes.chart.childrenNodes.settings.actions.onIncrementRows
-          }
-          columns={childrenNodes.chart.childrenNodes.settings.state.columns}
-          list={childrenNodes.chart.childrenNodes.list.state}
-          rows={childrenNodes.chart.childrenNodes.settings.state.rows}
-          titleBackgroundColor={
-            childrenNodes.chart.childrenNodes.settings.state
-              .titleBackgroundColor
-          }
-        />
-      ) : null}
+      <ShareTab
+        borderColor={
+          childrenNodes.chart.childrenNodes.settings.state.borderColor
+        }
+        borderSize={childrenNodes.chart.childrenNodes.settings.state.borderSize}
+        chartTitle={childrenNodes.chart.state.chartTitle}
+        chart={childrenNodes.chart}
+        list={childrenNodes.chart.childrenNodes.list.state}
+        titleBackgroundColor={
+          childrenNodes.chart.childrenNodes.settings.state.titleBackgroundColor
+        }
+      />
 
       <MobileSheet
         bind={childrenNodes.editor.state.sheet.bind}

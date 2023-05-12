@@ -1,38 +1,25 @@
+import { HomeIcon } from '@heroicons/react/20/solid';
 import { useState } from 'react';
-import { EMPTY_ALBUM } from '../../../../../constants/empty-album';
+import { colorMap } from '../../../../../constants/colors';
 import { ChartHookNode } from '../../../../../frontend/hooks/use-chart/use-chart';
 import { Album } from '../../../../../types/Albums';
 import { startScreenshotMode } from '../../../../../utils/mobile-theme';
 import FilterButton from '../../../../lib/FilterButton/FilterButton';
-import Grid from '../../../../lib/Grid/Grid';
-import ChartItem from '../../../DesktopEditor/DesktopChart/ChartItem/ChartItem';
-import { getBorderSizes } from '../../../DesktopEditor/DesktopChart/DesktopChart';
+import { Color } from '../../../DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
 import { ScreenshotMode } from './ScreenshotMode/ScreenshotMode';
 
 export interface Props {
   borderColor: string;
   borderSize: number;
   chart: ChartHookNode;
-  columns: number;
   list: Album[];
-  onDecrementColumns: () => void;
-  onIncrementColumns: () => void;
-  onDecrementRows: () => void;
-  onIncrementRows: () => void;
-  rows: number;
 }
 
 export const PreviewEditor: React.FC<Props> = ({
   borderColor,
   borderSize,
   chart,
-  columns,
   list,
-  // onDecrementColumns,
-  // onIncrementColumns,
-  // onDecrementRows,
-  // onIncrementRows,
-  rows,
 }) => {
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
   const onClickPreview = () => {
@@ -47,64 +34,53 @@ export const PreviewEditor: React.FC<Props> = ({
         flex
         h-screen w-screen
         flex-col items-stretch
+        justify-between
         bg-white
         p-12 align-middle
         dark:bg-black dark:text-white
       `}
     >
-      {/* <div className="z-30 basis-[3%]">
-        <NumberInput
-          className="mb-4 flex w-full justify-between"
-          currentValue={rows}
-          label="number of rows"
-          onDecrement={onDecrementRows}
-          onIncrement={onIncrementRows}
-        />
-      </div>
-      <div className="shrink grow-0 basis-[3%]">
-        <NumberInput
-          className="mb-4 flex w-full justify-between"
-          currentValue={columns}
-          label="number of columns"
-          onDecrement={onDecrementColumns}
-          onIncrement={onIncrementColumns}
-        />
-      </div> */}
-      <FilterButton
-        ariaLabel="Enter screenshot mode"
-        className={'mb-4 w-min basis-[4%] whitespace-nowrap p-1 '}
-        onClick={onClickPreview}
-      >
-        <p className="p-2 py-1">Enter screenshot mode</p>
-      </FilterButton>
-      <Grid
-        borderColor={borderColor}
-        borderSize={borderSize}
-        preview={true}
-        items={list}
-        itemComponent={({ index, x, y }) => (
-          <ChartItem
-            album={
-              list[index] !== undefined ? (list[index] as Album) : EMPTY_ALBUM
+      <div>
+        <h2 className="text-3xl font-bold">share</h2>
+        <div
+          className={`
+          ${colorMap[Color.green]}
+          my-4
+          h-1 w-full rounded-full shadow-md
+        `}
+        ></div>
+        <p className="my-4">
+          Once in screenshot mode, tap anywhere on your screen to exit out
+        </p>
+        <p>
+          Click the{' '}
+          <HomeIcon
+            className={
+              'inline h-6 w-6 translate-y-[1px] text-neutral-900 dark:text-neutral-50'
             }
-            borderColor={borderColor}
-            borderSizes={getBorderSizes(index, list.length)}
-            index={index}
-            isReadOnly={true}
-            rowIndex={x}
-            columnIndex={y}
-          />
-        )}
-      />
+          />{' '}
+          button to go back to the list editor
+        </p>
+      </div>
+      <FilterButton
+        ariaLabel="save chart"
+        className="h-12  p-[2px] shadow-lg"
+        rounding="rounded-full"
+        onClick={onClickPreview}
+        hasGradientIndicator={true}
+        isActive={true}
+      >
+        Enter screenshot mode
+      </FilterButton>
       {isOverlayVisible ? (
         <ScreenshotMode
           borderColor={borderColor}
           borderSize={borderSize}
           chart={chart}
-          columns={columns}
+          columns={-2}
           list={list}
           onExit={onExit}
-          rows={rows}
+          rows={-2}
         />
       ) : null}
     </div>
