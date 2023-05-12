@@ -1,6 +1,6 @@
 import { ChartHookNode } from '../../../../../../frontend/hooks/use-chart/use-chart';
 import { Album } from '../../../../../../types/Albums';
-import ScreenShotApiCalls from '../../../../ScreenShot';
+import ScreenShot from '../../../../ScreenShot/ScreenShot';
 
 export interface Props {
   borderColor: string;
@@ -24,7 +24,7 @@ export const ScreenshotMode: React.FC<Props> = ({ chart, onExit }) => (
           "
         onClick={() => onExit()}
       >
-        <ScreenShotApiCalls uuid={chart.state.savedChartId} />
+        <ScreenShot chart={chart} />
       </div>
     </div>
   </div>

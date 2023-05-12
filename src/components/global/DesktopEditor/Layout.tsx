@@ -9,7 +9,7 @@ export interface Props {
 
 const Layout: React.FC<Props> = ({ chart, list, title, uuid }) => (
   <div key={uuid} className="flex h-full flex-row justify-between pt-4">
-    <div className="relative flex h-screen w-full flex-col items-center gap-8 overflow-y-scroll px-4">
+    <div className="relative flex h-screen w-full flex-col items-center gap-8 overflow-y-hidden px-4">
       <div className="min-h-min w-full">{title}</div>
       <div className="flex w-full justify-between">
         {/** DESKTOP_CHART_WIDTH */}
