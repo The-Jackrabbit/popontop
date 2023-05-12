@@ -39,7 +39,7 @@ const ScreenShot = ({ chart }: Props) => {
       }}
       className="flex h-screen w-screen justify-center"
     >
-      <div className="h-screen w-screen origin-top scale-90 p-4">
+      <div className=" h-screen w-screen origin-top scale-90">
         {chart.childrenNodes.settings.state.showTitle ? (
           <div className="pb-4">
             <Title

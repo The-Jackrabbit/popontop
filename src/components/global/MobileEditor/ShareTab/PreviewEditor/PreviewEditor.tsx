@@ -30,7 +30,7 @@ export const PreviewEditor: React.FC<Props> = ({
     startScreenshotMode(chart.childrenNodes.settings.state.backgroundColor);
   };
   const onExit = () => {
-    resetThemeColorMetaTag();
+    resetThemeColorMetaTag(chart.childrenNodes.settings.state.backgroundColor);
     setIsOverlayVisible(false);
   };
 
@@ -38,11 +38,11 @@ export const PreviewEditor: React.FC<Props> = ({
     <div
       className={`
         flex
-        h-[calc(100vh_-_80px)] w-screen
+        h-full w-screen
         flex-col items-stretch
         justify-between
-        p-12 align-middle
-        dark:bg-neutral-900
+        bg-[#f8f9f8] p-4
+        align-middle dark:bg-neutral-900
       `}
     >
       <div>

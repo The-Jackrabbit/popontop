@@ -40,7 +40,10 @@ export const startScreenshotMode = (backgroundColor: string) => {
   // themeColorMetaTag.setAttribute('content', LIGHT_MODE_SCREENSHOT_THEME_COLOR);
 };
 
-export const resetThemeColorMetaTag = () => {
+export const resetThemeColorMetaTag = (chartColor?: string) => {
+  if (chartColor) {
+    return setThemeColorMetaTag(chartColor);
+  }
   if (prefersDark()) {
     setThemeColorMetaTag(DARK_MODE_THEME_COLOR);
   } else {

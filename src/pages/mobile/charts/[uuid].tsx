@@ -26,10 +26,6 @@ const ChartPage: NextPage = () => {
     }
   );
 
-  if (isLoading) {
-    return null;
-  }
-
   return (
     <MobileEditor
       chartName={data?.name}
