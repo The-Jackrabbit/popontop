@@ -31,4 +31,4 @@ const Loader: React.FC<Props> = ({ numberOfAlbums }) => {
   );
 };
 
-export const ChartListV2Loader = Loader;
+export const ListOfAlbumsLoader = Loader;

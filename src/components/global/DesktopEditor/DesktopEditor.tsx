@@ -1,7 +1,7 @@
 import React from 'react';
 import { ChartHookNode } from '../../../frontend/hooks/use-chart/use-chart';
 import Title from '../../lib/Title/Title';
-import ChartListV2 from './ChartListV2/ChartListV2';
+import ListOfAlbums from './ListOfAlbums/ListOfAlbums';
 import DesktopChart from './DesktopChart/DesktopChart';
 import Layout from './Layout';
 
@@ -42,7 +42,7 @@ const DesktopEditor: React.FC<Props> = ({
         }
         list={
           chart.settings.state.showAlbums ? (
-            <ChartListV2
+            <ListOfAlbums
               textColor={chart.settings.state.textColor}
               columnCount={1}
               list={chart.state.numberedList}

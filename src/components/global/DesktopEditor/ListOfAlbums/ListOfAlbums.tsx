@@ -8,7 +8,7 @@ export interface Props {
   textColor: string;
 }
 
-const ChartListV2: React.FC<Props> = ({ columnCount, list, textColor }) => {
+const ListOfAlbums: React.FC<Props> = ({ columnCount, list, textColor }) => {
   const getStartIndexOfColumn = (columnIndex: number, listLength: number) => {
     const lengthOfColumn = Math.floor(listLength / columnCount);
     return lengthOfColumn * columnIndex;
@@ -22,9 +22,9 @@ const ChartListV2: React.FC<Props> = ({ columnCount, list, textColor }) => {
       className="
         oveflow-x-hidden
         flex
-        text-ellipsis whitespace-nowrap text-[9px] dark:text-neutral-50
-        pl-8
+        text-ellipsis whitespace-nowrap pl-8 text-[9px]
         text-[rgb(212_212_212)]
+        dark:text-neutral-50
       "
       role="list"
     >
@@ -44,4 +44,4 @@ const ChartListV2: React.FC<Props> = ({ columnCount, list, textColor }) => {
   );
 };
 
-export default ChartListV2;
+export default ListOfAlbums;

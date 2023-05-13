@@ -1,7 +1,5 @@
 import { ListRowMode } from '../Mobile/ListRow/ListRow';
-import {
-  ChartListItem,
-} from './ChartListItem/ChartListItem';
+import { ChartListItem } from './ChartListItem/ChartListItem';
 import { trpc } from '../../../utils/trpc';
 import { useEffect, useState } from 'react';
 import { IChartListItem } from '../../../server/trpc/router/charts/getChartsForUser';
@@ -62,13 +60,13 @@ export const ListOfCharts: React.FC<Props> = ({
                 <div></div>
               ) : (
                 <ChartListItem
-                  isActive={activeChartUuid !== '' && activeChartUuid === chart.uuid}
+                  isActive={
+                    activeChartUuid !== '' && activeChartUuid === chart.uuid
+                  }
                   chart={chart}
                   isMobile={isMobile}
                   listMode={listMode}
                   onClick={() => {
-                    console.log('chart.uuid');
-                    console.log(chart.uuid);
                     setChartBeingViewed(chart.uuid ?? '');
                   }}
                   onClickDeleteChart={() => onClickDeleteChart(chart, index)}
@@ -78,9 +76,8 @@ export const ListOfCharts: React.FC<Props> = ({
           ))}
         </>
       ) : (
-        <ListOfChartsLoader/>
+        <ListOfChartsLoader />
       )}
     </>
   );
 };
-

@@ -1,6 +1,6 @@
 import React from 'react';
 import { TitleLoader } from '../../lib/Title/Loader';
-import { ChartListV2Loader } from './ChartListV2/Loader';
+import { ListOfAlbumsLoader } from './ListOfAlbums/Loader';
 import { DesktopChartLoader } from './DesktopChart/Loader';
 import Layout from './Layout';
 
@@ -22,7 +22,7 @@ const Loader: React.FC<Props> = ({ showOnboardingFlow = false }) => {
     <Layout
       uuid=""
       title={<TitleLoader />}
-      list={<ChartListV2Loader numberOfAlbums={numberOfAlbums} />}
+      list={<ListOfAlbumsLoader numberOfAlbums={numberOfAlbums} />}
       chart={<DesktopChartLoader numberOfAlbums={numberOfAlbums} />}
     />
   );
