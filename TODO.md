@@ -11,6 +11,7 @@
 - [ ] show success/error banner for chart delete
 - [ ] allow users in desktop to see mobile variant of a chart and vice versa
 - [ ] rename `isActive`
+- [ ] fix input focus outline jitter
 
 ## ICEBOX
 

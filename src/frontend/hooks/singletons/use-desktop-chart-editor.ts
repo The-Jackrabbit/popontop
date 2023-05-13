@@ -56,6 +56,9 @@ export const useDesktopChartEditor = ({
   useEffect(() => {
     setThemeColorMetaTag(chart.settings.state.backgroundColor);
   }, [chart.settings.state.backgroundColor]);
+  useEffect(() => {
+    setThemeColorMetaTag(chart.settings.state.backgroundColor);
+  }, []);
 
   return {
     actions: {

@@ -1,6 +1,6 @@
 import { ChartSettings } from '@prisma/client';
 import clamp from 'lodash.clamp';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   JUMP_VALUES,
   RowMovementType,
@@ -11,6 +11,7 @@ import useMobileEditor, {
   MobileEditorHookNode,
 } from '../editor/use-mobile-editor';
 import { HookNode } from '../../../types/singletons';
+import { setThemeColorMetaTag } from '../../../utils/mobile-theme';
 
 export enum UseChartListContext {
   ADD = 'ADD',
@@ -90,6 +91,9 @@ const useMobileChartEditor = ({
       ? false
       : chart.list.state.length === 0;
 
+  useEffect(() => {
+    setThemeColorMetaTag(chart.settings.state.backgroundColor);
+  }, [chart.settings.state.backgroundColor]);
   return {
     actions: {
       onRearrangeClick,

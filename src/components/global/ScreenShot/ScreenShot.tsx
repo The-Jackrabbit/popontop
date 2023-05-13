@@ -8,9 +8,11 @@ export interface Props {
 }
 const AlbumOverlay = ({
   album,
+  count,
   textColor,
 }: {
   album: Album;
+  count: number;
   textColor: string;
 }) => {
   const albumDescription =
@@ -19,7 +21,7 @@ const AlbumOverlay = ({
       : 'No album';
   return (
     <div
-      className="box-content flex aspect-square basis-1/2 items-center justify-center bg-opacity-10 bg-cover bg-center"
+      className={`box-content flex aspect-square w-1/${count} basis-1/${count} items-center justify-center bg-opacity-10 bg-cover bg-center`}
       style={{ backgroundImage: `url(${album.imageUrl})` }}
     >
       <p
@@ -37,9 +39,9 @@ const ScreenShot = ({ chart }: Props) => {
       style={{
         backgroundColor: chart.settings.state.backgroundColor,
       }}
-      className="flex h-screen w-screen justify-center pt-4"
+      className="flex h-screen w-screen justify-center self-center pt-4 align-middle"
     >
-      <div className=" h-screen w-screen origin-top scale-90">
+      <div className=" h-screen w-screen origin-top scale-[89%] p-6">
         {chart.settings.state.showTitle ? (
           <div className="pb-4">
             <Title
@@ -55,64 +57,61 @@ const ScreenShot = ({ chart }: Props) => {
         <div className="flex w-full bg-red-300">
           <AlbumOverlay
             album={chart.list.state.at(0) ?? EMPTY_ALBUM}
+            count={2}
             textColor={chart.settings.state.textColor}
           />
           <AlbumOverlay
             album={chart.list.state.at(1) ?? EMPTY_ALBUM}
+            count={2}
             textColor={chart.settings.state.textColor}
           />
         </div>
         <div className="flex w-full bg-green-300">
           <AlbumOverlay
             album={chart.list.state.at(2) ?? EMPTY_ALBUM}
+            count={2}
             textColor={chart.settings.state.textColor}
           />
           <AlbumOverlay
             album={chart.list.state.at(3) ?? EMPTY_ALBUM}
+            count={2}
             textColor={chart.settings.state.textColor}
           />
         </div>
         <div className="flex w-full bg-blue-300">
           <AlbumOverlay
             album={chart.list.state.at(4) ?? EMPTY_ALBUM}
+            count={3}
             textColor={chart.settings.state.textColor}
           />
           <AlbumOverlay
             album={chart.list.state.at(5) ?? EMPTY_ALBUM}
+            count={3}
             textColor={chart.settings.state.textColor}
           />
           <AlbumOverlay
             album={chart.list.state.at(6) ?? EMPTY_ALBUM}
+            count={3}
             textColor={chart.settings.state.textColor}
           />
         </div>
         <div className="flex w-full bg-amber-300">
           <AlbumOverlay
             album={chart.list.state.at(7) ?? EMPTY_ALBUM}
+            count={3}
             textColor={chart.settings.state.textColor}
           />
           <AlbumOverlay
             album={chart.list.state.at(8) ?? EMPTY_ALBUM}
+            count={3}
             textColor={chart.settings.state.textColor}
           />
           <AlbumOverlay
             album={chart.list.state.at(9) ?? EMPTY_ALBUM}
+            count={3}
             textColor={chart.settings.state.textColor}
           />
         </div>
-        {/* <List
-        backgroundColor={
-          chart.settings.state.backgroundColor
-        }
-        list={chart.list.state}
-        listMode={ListRowMode.NORMAL}
-        onRearrangeClick={() => undefined}
-        removeAlbumAtIndex={
-          chart.list.actions.removeAlbumAtIndex
-        }
-        showAlbums={chart.settings.state.showAlbums}
-        textColor={chart.settings.state.textColor}
-      /> */}
       </div>
     </div>
   );
