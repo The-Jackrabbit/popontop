@@ -56,9 +56,7 @@ export const ViewChart: React.FC<{
   settings?: ChartSettings;
   uuid: string;
 }> = ({ albums, name, settings, uuid }) => {
-  const {
-    childrenNodes: { chart },
-  } = useDesktopChartEditor({
+  const { chart } = useDesktopChartEditor({
     initialList: albums,
     chartName: name,
     chartUuid: uuid,

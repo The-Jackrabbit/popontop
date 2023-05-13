@@ -11,12 +11,12 @@
 - [ ] show success/error banner for chart delete
 - [ ] allow users in desktop to see mobile variant of a chart and vice versa
 - [ ] rename `isActive`
-- [ ] (maybe) remove childrenNode pattern
 
 ## ICEBOX
 
 ## Done
 
+- [x] (maybe) remove childrenNode pattern
 - [x] fix screenshot mode in mobile
 - [x] edit existing chart page
 - [x] fix pink bubble position on mobile

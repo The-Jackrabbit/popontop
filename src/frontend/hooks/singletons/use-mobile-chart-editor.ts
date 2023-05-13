@@ -8,20 +8,17 @@ import {
 import { Album } from '../../../types/Albums';
 import { ChartHookNode, useChart } from '../use-chart/use-chart';
 import useMobileEditor from '../editor/use-mobile-editor';
-import { ParentHookNode } from '../../../types/singletons';
+import { HookNode } from '../../../types/singletons';
 
 export enum UseChartListContext {
   ADD = 'ADD',
   EDIT = 'EDIT',
 }
 
-export type DesktopChartEditorHookNode = ParentHookNode<
-  State,
-  Actions,
-  {
-    chart: ChartHookNode;
-  }
->;
+export interface DesktopChartEditorHookNode extends HookNode<State, Actions> {
+  chart: ChartHookNode;
+}
+
 export type Actions = {
   onRearrangeClick: () => void;
   onClickSheetDeadArea: () => void;
@@ -94,10 +91,8 @@ const useMobileChartEditor = ({
       onClickSheetDeadArea,
       toggleTitle,
     },
-    childrenNodes: {
-      chart,
-      editor,
-    },
+    chart,
+    editor,
     state: {
       showIntroduction,
     },

@@ -31,10 +31,7 @@ const EditChart = ({
   isChartOwner: boolean;
   initialSettings?: ChartSettings;
 }) => {
-  const {
-    actions,
-    childrenNodes: { chart },
-  } = useDesktopChartEditor({
+  const { actions, chart } = useDesktopChartEditor({
     initialList: albums,
     chartName,
     chartUuid,
@@ -118,7 +115,7 @@ const EditChart = ({
               isChartOwner={isChartOwner}
               pageTitleBorderBottom={Color.blue}
               pageTitle={isChartOwner ? 'edit chart' : 'viewing chart'}
-              settings={chart.childrenNodes.settings}
+              settings={chart.settings}
               showOnboardingFlow={false}
               toggleAlbums={actions.toggleAlbums}
               toggleTitle={actions.toggleTitle}

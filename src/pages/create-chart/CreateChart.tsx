@@ -26,7 +26,7 @@ const CreateChart: NextPage = () => {
   const { data: sessionData } = useSession();
   const {
     actions,
-    childrenNodes: { chart },
+    chart,
     state: { showOnboardingFlow },
   } = useDesktopChartEditor({});
   const isLoading = chart.state.isCreateLoading || chart.state.isEditLoading;

@@ -2,16 +2,14 @@ import { useState } from 'react';
 import { ChartSettings } from '@prisma/client';
 import { SpringValue } from 'react-spring';
 import { Album } from '../../../types/Albums';
-import { ParentHookNode } from '../../../types/singletons';
+import { HookNode } from '../../../types/singletons';
 import { useDesktopAlbumsTextList } from '../springs/use-desktop-albums-text-list';
 import useDesktopTitle from '../springs/use-desktop-title';
 import useChart, { ChartHookNode } from '../use-chart/use-chart';
 
-export type DesktopChartEditorHookNode = ParentHookNode<
-  State,
-  Actions,
-  ChildrenNodes
->;
+export interface DesktopChartEditorHookNode extends HookNode<State, Actions> {
+  chart: ChartHookNode;
+}
 
 export interface Actions {
   toggleAlbums: (value: boolean) => void;
@@ -22,10 +20,6 @@ export interface State {
   listStyle: { width: SpringValue<string> };
   titleStyle: { height: SpringValue<string> };
   showOnboardingFlow: boolean;
-}
-
-export interface ChildrenNodes {
-  chart: ChartHookNode;
 }
 
 export interface Props {
@@ -56,16 +50,14 @@ export const useDesktopChartEditor = ({
     showAlbums: chart.settings.state.showAlbums,
   });
 
-  const [showOnboardingFlow, setShowOnboardingFlow] = useState(!true);
+  const [showOnboardingFlow] = useState(!true);
 
   return {
     actions: {
       toggleAlbums,
       toggleTitle,
     },
-    childrenNodes: {
-      chart,
-    },
+    chart,
     state: {
       listStyle,
       showOnboardingFlow,
