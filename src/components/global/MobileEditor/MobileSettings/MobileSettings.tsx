@@ -24,6 +24,8 @@ export const MobileSettings: React.FC<Props> = ({ settings }) => {
           setBackgroundColor={settings.actions.setBackgroundColor}
           textColor={settings.state.textColor}
           setTextColor={settings.actions.setTextColor}
+          titleBackgroundColor={settings.state.titleBackgroundColor}
+          setTitleBackgroundColor={settings.actions.setTitleBackgroundColor}
         />
       </div>
       {/* </HorizontalSwipe> */}

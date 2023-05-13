@@ -12,8 +12,9 @@ export interface Props {
   setTextColor: (value: string) => void;
   showTitle: boolean;
   textColor: string;
+  titleBackgroundColor: string;
+  setTitleBackgroundColor: (value: string) => void;
 }
-
 const PageTwo: React.FC<Props> = ({
   showTitle,
   listAlbums,
@@ -22,7 +23,9 @@ const PageTwo: React.FC<Props> = ({
   setListAlbums,
   setShowTitle,
   setTextColor,
+  setTitleBackgroundColor,
   textColor,
+  titleBackgroundColor,
 }) => (
   <div className="flex flex-wrap gap-2 p-4">
     <TextExpandingPill
@@ -37,6 +40,13 @@ const PageTwo: React.FC<Props> = ({
       label="background color"
       setValue={(value: string) => setBackgroundColor(value)}
       value={backgroundColor}
+    />
+
+    <TextExpandingPill
+      className="inline-block"
+      label="title background color"
+      setValue={(value: string) => setTitleBackgroundColor(value)}
+      value={titleBackgroundColor}
     />
 
     <SwitchExpandingPill
