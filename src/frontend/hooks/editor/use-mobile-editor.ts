@@ -1,8 +1,33 @@
 import { useState } from 'react';
 import { ListRowMode } from '../../../components/lib/Mobile/ListRow/ListRow';
+import { HookNode } from '../../../types/singletons';
 import { useDragSheetDown } from '../springs/use-drag-sheet-down';
 
 const height = 667;
+
+interface State {
+  isActive: boolean;
+  isSearchOpen: boolean;
+  isSettingsOpen: boolean;
+  isSheetOpen: boolean;
+  isViewModeActive: boolean;
+  listMode: ListRowMode;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  sheet: any; // replace with actual type of the 'sheet' returned by useDragSheetDown
+}
+
+interface Actions {
+  onClickRearrangeMode: () => void;
+  onClickDeleteMode: () => void;
+  onClickSearch: () => void;
+  onClickSettings: () => void;
+  onClickView: () => void;
+  openSearchView: () => void;
+  onClickSheetDeadArea: () => void;
+  setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export type MobileEditorHookNode = HookNode<State, Actions>;
 
 export const useMobileEditor = (
   transitionFromInstructionToTitle: () => void

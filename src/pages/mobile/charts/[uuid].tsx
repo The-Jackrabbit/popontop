@@ -19,15 +19,13 @@ const ChartPage: NextPage = () => {
 
   const n = genUuid(uuid);
 
-  const { ...queryprops } = trpc.charts.getById.useQuery(
+  const { data, isLoading } = trpc.charts.getById.useQuery(
     { uuid: n },
     {
       refetchOnWindowFocus: false,
     }
   );
-  console.log({ queryprops });
-  const { data, isLoading } = queryprops;
-  debugger;
+
   if (isLoading) {
     return <MobileEditorLoader />;
   }
@@ -43,7 +41,6 @@ const ChartPage: NextPage = () => {
           : ([] as Album[])
       }
       initialSettings={data?.settings ?? undefined}
-      isLoading={false}
       isReadOnly={data?.isReadOnly}
     />
   );

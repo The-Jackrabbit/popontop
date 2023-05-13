@@ -7,7 +7,9 @@ import {
 } from '../../../components/lib/Mobile/ListRow/RearrangeView/RearrangeView';
 import { Album } from '../../../types/Albums';
 import { ChartHookNode, useChart } from '../use-chart/use-chart';
-import useMobileEditor from '../editor/use-mobile-editor';
+import useMobileEditor, {
+  MobileEditorHookNode,
+} from '../editor/use-mobile-editor';
 import { HookNode } from '../../../types/singletons';
 
 export enum UseChartListContext {
@@ -15,17 +17,20 @@ export enum UseChartListContext {
   EDIT = 'EDIT',
 }
 
-export interface DesktopChartEditorHookNode extends HookNode<State, Actions> {
+export interface MobileChartEditorHookNode extends HookNode<State, Actions> {
   chart: ChartHookNode;
+  editor: MobileEditorHookNode;
 }
 
 export type Actions = {
-  onRearrangeClick: () => void;
+  onRearrangeClick: (rowMovementType: RowMovementType, index: number) => void;
   onClickSheetDeadArea: () => void;
   toggleTitle: () => void;
 };
 
-export type State = void;
+export interface State {
+  showIntroduction: boolean;
+}
 
 export interface Props {
   chartName?: string;
@@ -41,7 +46,7 @@ const useMobileChartEditor = ({
   context,
   initialList,
   initialSettings,
-}: Props) => {
+}: Props): MobileChartEditorHookNode => {
   const [isFirstCloseDone, setIsFirstCloseDone] = useState(
     (initialList && initialList.length > 0) ||
       context === UseChartListContext.EDIT

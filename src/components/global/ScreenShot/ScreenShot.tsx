@@ -37,7 +37,7 @@ const ScreenShot = ({ chart }: Props) => {
       style={{
         backgroundColor: chart.settings.state.backgroundColor,
       }}
-      className="flex h-screen w-screen justify-center"
+      className="flex h-screen w-screen justify-center pt-4"
     >
       <div className=" h-screen w-screen origin-top scale-90">
         {chart.settings.state.showTitle ? (
