@@ -44,9 +44,7 @@ const MobileEditor: React.FC<Props> = ({
 
   return (
     <MobilePage
-      backgroundColor={
-        childrenNodes.chart.childrenNodes.settings.state.backgroundColor
-      }
+      backgroundColor={childrenNodes.chart.settings.state.backgroundColor}
     >
       <a.div
         id="editor"
@@ -56,15 +54,12 @@ const MobileEditor: React.FC<Props> = ({
           height: childrenNodes.editor.state.sheet.windowHeight,
         }}
       >
-        {childrenNodes.chart.childrenNodes.settings.state.showTitle ? (
+        {childrenNodes.chart.settings.state.showTitle ? (
           <Title
             backgroundColor={
-              childrenNodes.chart.childrenNodes.settings.state
-                .titleBackgroundColor
+              childrenNodes.chart.settings.state.titleBackgroundColor
             }
-            textColor={
-              childrenNodes.chart.childrenNodes.settings.state.textColor
-            }
+            textColor={childrenNodes.chart.settings.state.textColor}
             isReadOnly={isReadOnly}
             chartTitle={childrenNodes.chart.state.chartTitle ?? ''}
             setValue={(value: string) =>
@@ -76,21 +71,15 @@ const MobileEditor: React.FC<Props> = ({
 
         {!isLoading ? (
           <List
-            backgroundColor={
-              childrenNodes.chart.childrenNodes.settings.state.backgroundColor
-            }
-            list={childrenNodes.chart.childrenNodes.list.state}
+            backgroundColor={childrenNodes.chart.settings.state.backgroundColor}
+            list={childrenNodes.chart.list.state}
             listMode={childrenNodes.editor.state.listMode}
             onRearrangeClick={actions.onRearrangeClick}
             removeAlbumAtIndex={
-              childrenNodes.chart.childrenNodes.list.actions.removeAlbumAtIndex
+              childrenNodes.chart.list.actions.removeAlbumAtIndex
             }
-            showAlbums={
-              childrenNodes.chart.childrenNodes.settings.state.showAlbums
-            }
-            textColor={
-              childrenNodes.chart.childrenNodes.settings.state.textColor
-            }
+            showAlbums={childrenNodes.chart.settings.state.showAlbums}
+            textColor={childrenNodes.chart.settings.state.textColor}
           />
         ) : (
           <ListLoader />
@@ -108,9 +97,7 @@ const MobileEditor: React.FC<Props> = ({
           onClickRearrangeMode={
             childrenNodes.editor.actions.onClickRearrangeMode
           }
-          hasNonEmptyList={
-            childrenNodes.chart.childrenNodes.list.state.length > 0
-          }
+          hasNonEmptyList={childrenNodes.chart.list.state.length > 0}
           isActive={childrenNodes.editor.state.isActive}
           isReadOnly={isReadOnly}
           setIsActive={childrenNodes.editor.actions.setIsActive}
@@ -119,15 +106,13 @@ const MobileEditor: React.FC<Props> = ({
       </a.div>
 
       <ShareTab
-        borderColor={
-          childrenNodes.chart.childrenNodes.settings.state.borderColor
-        }
-        borderSize={childrenNodes.chart.childrenNodes.settings.state.borderSize}
+        borderColor={childrenNodes.chart.settings.state.borderColor}
+        borderSize={childrenNodes.chart.settings.state.borderSize}
         chartTitle={childrenNodes.chart.state.chartTitle}
         chart={childrenNodes.chart}
-        list={childrenNodes.chart.childrenNodes.list.state}
+        list={childrenNodes.chart.list.state}
         titleBackgroundColor={
-          childrenNodes.chart.childrenNodes.settings.state.titleBackgroundColor
+          childrenNodes.chart.settings.state.titleBackgroundColor
         }
       />
 
@@ -139,9 +124,7 @@ const MobileEditor: React.FC<Props> = ({
         {childrenNodes.editor.state.isSearchOpen && (
           <SearchAlbums
             onClick={(album) =>
-              childrenNodes.chart.childrenNodes.list.actions.addAlbumToList(
-                album
-              )
+              childrenNodes.chart.list.actions.addAlbumToList(album)
             }
           />
         )}
@@ -155,41 +138,28 @@ const MobileEditor: React.FC<Props> = ({
           <MobileSettings
             isSaveLoading={childrenNodes.chart.state.isCreateLoading}
             onSave={childrenNodes.chart.actions.saveChart}
-            settings={childrenNodes.chart.childrenNodes.settings}
+            settings={childrenNodes.chart.settings}
           />
         </div>
         <ViewModeModal
-          backgroundColor={
-            childrenNodes.chart.childrenNodes.settings.state.backgroundColor
-          }
+          backgroundColor={childrenNodes.chart.settings.state.backgroundColor}
           titleBackgroundColor={
-            childrenNodes.chart.childrenNodes.settings.state
-              .titleBackgroundColor
+            childrenNodes.chart.settings.state.titleBackgroundColor
           }
-          borderColor={
-            childrenNodes.chart.childrenNodes.settings.state.borderColor
-          }
-          borderSize={
-            childrenNodes.chart.childrenNodes.settings.state.borderSize
-          }
+          borderColor={childrenNodes.chart.settings.state.borderColor}
+          borderSize={childrenNodes.chart.settings.state.borderSize}
           chartTitle={childrenNodes.chart.state.chartTitle}
           onDecrementColumns={
-            childrenNodes.chart.childrenNodes.settings.actions
-              .onDecrementColumns
+            childrenNodes.chart.settings.actions.onDecrementColumns
           }
           onIncrementColumns={
-            childrenNodes.chart.childrenNodes.settings.actions
-              .onIncrementColumns
+            childrenNodes.chart.settings.actions.onIncrementColumns
           }
-          onDecrementRows={
-            childrenNodes.chart.childrenNodes.settings.actions.onDecrementRows
-          }
-          onIncrementRows={
-            childrenNodes.chart.childrenNodes.settings.actions.onIncrementRows
-          }
-          columns={childrenNodes.chart.childrenNodes.settings.state.columns}
-          list={childrenNodes.chart.childrenNodes.list.state}
-          rows={childrenNodes.chart.childrenNodes.settings.state.rows}
+          onDecrementRows={childrenNodes.chart.settings.actions.onDecrementRows}
+          onIncrementRows={childrenNodes.chart.settings.actions.onIncrementRows}
+          columns={childrenNodes.chart.settings.state.columns}
+          list={childrenNodes.chart.list.state}
+          rows={childrenNodes.chart.settings.state.rows}
         />
       </MobileSheet>
     </MobilePage>

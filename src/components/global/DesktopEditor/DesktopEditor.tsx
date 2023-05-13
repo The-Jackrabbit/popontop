@@ -29,23 +29,21 @@ const DesktopEditor: React.FC<Props> = ({
       <Layout
         uuid={chart.state.savedChartId}
         title={
-          chart.childrenNodes.settings.state.showTitle ? (
+          chart.settings.state.showTitle ? (
             <Title
-              backgroundColor={
-                chart.childrenNodes.settings.state.titleBackgroundColor
-              }
+              backgroundColor={chart.settings.state.titleBackgroundColor}
               chartTitle={chart.state.chartTitle}
               isReadOnly={false}
               setValue={chart.actions.setChartTitle}
               showIntroduction={!true}
-              textColor={chart.childrenNodes.settings.state.textColor}
+              textColor={chart.settings.state.textColor}
             />
           ) : null
         }
         list={
-          chart.childrenNodes.settings.state.showAlbums ? (
+          chart.settings.state.showAlbums ? (
             <ChartListV2
-              textColor={chart.childrenNodes.settings.state.textColor}
+              textColor={chart.settings.state.textColor}
               columnCount={1}
               list={chart.state.numberedList}
             />
@@ -53,8 +51,8 @@ const DesktopEditor: React.FC<Props> = ({
         }
         chart={
           <DesktopChart
-            borderColor={chart.childrenNodes.settings.state.borderColor}
-            borderSize={chart.childrenNodes.settings.state.borderSize}
+            borderColor={chart.settings.state.borderColor}
+            borderSize={chart.settings.state.borderSize}
             isReadOnly={readonly}
             items={chart.state.numberedList}
           />

@@ -2,7 +2,7 @@ import { ChartSettings } from '@prisma/client';
 import { useMemo, useState } from 'react';
 import { Album } from '../../../types/Albums';
 import { trpc } from '../../../utils/trpc';
-import { ParentHookNode } from '../../../types/singletons';
+import { HookNode } from '../../../types/singletons';
 import useList, { ListHookNode } from '../lists/use-list';
 import useChartSettings, { SettingsHookNode } from './use-chart-settings';
 import { EMPTY_ALBUM } from '../../../constants/empty-album';
@@ -18,18 +18,16 @@ const getNumberedList = (numberOfAlbums: number, listState: Album[]) => {
   );
 };
 
-export type ChartHookNode = ParentHookNode<State, Actions, ChildrenNodes>;
+export interface ChartHookNode extends HookNode<State, Actions> {
+  list: ListHookNode;
+  settings: SettingsHookNode;
+}
 
 export interface Actions {
   deleteChart: () => Promise<void>;
   editChart: () => Promise<string>;
   saveChart: () => Promise<string>;
   setChartTitle: (value: string) => void;
-}
-
-export interface ChildrenNodes {
-  list: ListHookNode;
-  settings: SettingsHookNode;
 }
 
 export interface State {
@@ -141,15 +139,13 @@ export const useChart = ({
       saveChart,
       setChartTitle,
     },
-    childrenNodes: {
-      list: {
-        ...list,
-        state: list.state.filter(
-          (_, index) => index < settings.state.numberOfAlbums
-        ),
-      },
-      settings,
+    list: {
+      ...list,
+      state: list.state.filter(
+        (_, index) => index < settings.state.numberOfAlbums
+      ),
     },
+    settings,
     state,
   };
 };

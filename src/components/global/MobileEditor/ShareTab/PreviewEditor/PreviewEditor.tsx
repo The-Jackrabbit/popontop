@@ -27,10 +27,10 @@ export const PreviewEditor: React.FC<Props> = ({
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
   const onClickPreview = () => {
     setIsOverlayVisible(true);
-    startScreenshotMode(chart.childrenNodes.settings.state.backgroundColor);
+    startScreenshotMode(chart.settings.state.backgroundColor);
   };
   const onExit = () => {
-    resetThemeColorMetaTag(chart.childrenNodes.settings.state.backgroundColor);
+    resetThemeColorMetaTag(chart.settings.state.backgroundColor);
     setIsOverlayVisible(false);
   };
 

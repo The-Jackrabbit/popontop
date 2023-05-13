@@ -35,12 +35,12 @@ const CreateChart: NextPage = () => {
     <DndContext
       autoScroll={false}
       onDragStart={(event) => {
-        chart.childrenNodes.list.actions.setDraggedAlbum(
+        chart.list.actions.setDraggedAlbum(
           event.active.data.current as DraggedAlbum
         );
       }}
       onDragEnd={(args) => {
-        chart.childrenNodes.list.actions.handleDragEnd(args);
+        chart.list.actions.handleDragEnd(args);
       }}
     >
       <Layout
@@ -84,7 +84,7 @@ const CreateChart: NextPage = () => {
             bottomSection={<ProfileCircle />}
           />
         }
-        backgroundColor={chart.childrenNodes.settings.state.backgroundColor}
+        backgroundColor={chart.settings.state.backgroundColor}
         sidebar={
           <a.div style={pageOpacity} className="h-full overflow-x-visible">
             <DesktopSidebar
@@ -93,7 +93,7 @@ const CreateChart: NextPage = () => {
                 showOnboardingFlow ? 'getting started' : 'create chart'
               }
               pageTitleBorderBottom={Color.fuchsia}
-              settings={chart.childrenNodes.settings}
+              settings={chart.settings}
               showOnboardingFlow={showOnboardingFlow}
               toggleAlbums={actions.toggleAlbums}
               toggleTitle={actions.toggleTitle}

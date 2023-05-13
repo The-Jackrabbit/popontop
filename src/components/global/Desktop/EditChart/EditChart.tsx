@@ -45,11 +45,11 @@ const EditChart = ({
     <DndContext
       autoScroll={false}
       onDragStart={(event) => {
-        chart.childrenNodes.list.actions.setDraggedAlbum(
+        chart.list.actions.setDraggedAlbum(
           event.active.data.current as DraggedAlbum
         );
       }}
-      onDragEnd={chart.childrenNodes.list.actions.handleDragEnd}
+      onDragEnd={chart.list.actions.handleDragEnd}
     >
       <Layout
         actions={
@@ -102,7 +102,7 @@ const EditChart = ({
             }
           />
         }
-        backgroundColor={chart.childrenNodes.settings.state.backgroundColor}
+        backgroundColor={chart.settings.state.backgroundColor}
         pageContent={
           <div className="h-full">
             <DesktopEditor

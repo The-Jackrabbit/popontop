@@ -35,18 +35,16 @@ const ScreenShot = ({ chart }: Props) => {
   return (
     <div
       style={{
-        backgroundColor: chart.childrenNodes.settings.state.backgroundColor,
+        backgroundColor: chart.settings.state.backgroundColor,
       }}
       className="flex h-screen w-screen justify-center"
     >
       <div className=" h-screen w-screen origin-top scale-90">
-        {chart.childrenNodes.settings.state.showTitle ? (
+        {chart.settings.state.showTitle ? (
           <div className="pb-4">
             <Title
-              backgroundColor={
-                chart.childrenNodes.settings.state.titleBackgroundColor
-              }
-              textColor={chart.childrenNodes.settings.state.textColor}
+              backgroundColor={chart.settings.state.titleBackgroundColor}
+              textColor={chart.settings.state.textColor}
               isReadOnly={true}
               chartTitle={chart.state.chartTitle ?? ''}
               setValue={(value: string) => chart.actions.setChartTitle(value)}
@@ -56,64 +54,64 @@ const ScreenShot = ({ chart }: Props) => {
         ) : null}
         <div className="flex w-full bg-red-300">
           <AlbumOverlay
-            album={chart.childrenNodes.list.state.at(0) ?? EMPTY_ALBUM}
-            textColor={chart.childrenNodes.settings.state.textColor}
+            album={chart.list.state.at(0) ?? EMPTY_ALBUM}
+            textColor={chart.settings.state.textColor}
           />
           <AlbumOverlay
-            album={chart.childrenNodes.list.state.at(1) ?? EMPTY_ALBUM}
-            textColor={chart.childrenNodes.settings.state.textColor}
+            album={chart.list.state.at(1) ?? EMPTY_ALBUM}
+            textColor={chart.settings.state.textColor}
           />
         </div>
         <div className="flex w-full bg-green-300">
           <AlbumOverlay
-            album={chart.childrenNodes.list.state.at(2) ?? EMPTY_ALBUM}
-            textColor={chart.childrenNodes.settings.state.textColor}
+            album={chart.list.state.at(2) ?? EMPTY_ALBUM}
+            textColor={chart.settings.state.textColor}
           />
           <AlbumOverlay
-            album={chart.childrenNodes.list.state.at(3) ?? EMPTY_ALBUM}
-            textColor={chart.childrenNodes.settings.state.textColor}
+            album={chart.list.state.at(3) ?? EMPTY_ALBUM}
+            textColor={chart.settings.state.textColor}
           />
         </div>
         <div className="flex w-full bg-blue-300">
           <AlbumOverlay
-            album={chart.childrenNodes.list.state.at(4) ?? EMPTY_ALBUM}
-            textColor={chart.childrenNodes.settings.state.textColor}
+            album={chart.list.state.at(4) ?? EMPTY_ALBUM}
+            textColor={chart.settings.state.textColor}
           />
           <AlbumOverlay
-            album={chart.childrenNodes.list.state.at(5) ?? EMPTY_ALBUM}
-            textColor={chart.childrenNodes.settings.state.textColor}
+            album={chart.list.state.at(5) ?? EMPTY_ALBUM}
+            textColor={chart.settings.state.textColor}
           />
           <AlbumOverlay
-            album={chart.childrenNodes.list.state.at(6) ?? EMPTY_ALBUM}
-            textColor={chart.childrenNodes.settings.state.textColor}
+            album={chart.list.state.at(6) ?? EMPTY_ALBUM}
+            textColor={chart.settings.state.textColor}
           />
         </div>
         <div className="flex w-full bg-amber-300">
           <AlbumOverlay
-            album={chart.childrenNodes.list.state.at(7) ?? EMPTY_ALBUM}
-            textColor={chart.childrenNodes.settings.state.textColor}
+            album={chart.list.state.at(7) ?? EMPTY_ALBUM}
+            textColor={chart.settings.state.textColor}
           />
           <AlbumOverlay
-            album={chart.childrenNodes.list.state.at(8) ?? EMPTY_ALBUM}
-            textColor={chart.childrenNodes.settings.state.textColor}
+            album={chart.list.state.at(8) ?? EMPTY_ALBUM}
+            textColor={chart.settings.state.textColor}
           />
           <AlbumOverlay
-            album={chart.childrenNodes.list.state.at(9) ?? EMPTY_ALBUM}
-            textColor={chart.childrenNodes.settings.state.textColor}
+            album={chart.list.state.at(9) ?? EMPTY_ALBUM}
+            textColor={chart.settings.state.textColor}
           />
         </div>
         {/* <List
         backgroundColor={
-          chart.childrenNodes.settings.state.backgroundColor
+          chart.settings.state.backgroundColor
         }
-        list={chart.childrenNodes.list.state}
+        list={chart.list.state}
         listMode={ListRowMode.NORMAL}
         onRearrangeClick={() => undefined}
         removeAlbumAtIndex={
-          chart.childrenNodes.list.actions.removeAlbumAtIndex
+          chart.list.actions.removeAlbumAtIndex
         }
-        showAlbums={chart.childrenNodes.settings.state.showAlbums}
-        textColor={chart.childrenNodes.settings.state.textColor}
+        showAlbums={chart.settings.state.showAlbums}
+        textColor={chart.settings.state.textColor}
       /> */}
       </div>
     </div>

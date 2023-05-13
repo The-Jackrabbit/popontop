@@ -67,7 +67,7 @@ export const ViewChart: React.FC<{
   return (
     <div
       style={{
-        backgroundColor: chart.childrenNodes.settings.state.backgroundColor,
+        backgroundColor: chart.settings.state.backgroundColor,
       }}
     >
       <DesktopEditor

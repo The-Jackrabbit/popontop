@@ -56,7 +56,7 @@ const useMobileChartEditor = ({
     initialList,
   });
   const editor = useMobileEditor(() => {
-    if (!isFirstCloseDone && chart.childrenNodes.list.state.length > 0) {
+    if (!isFirstCloseDone && chart.list.state.length > 0) {
       toggleTitle();
     }
   });
@@ -70,14 +70,14 @@ const useMobileChartEditor = ({
     index: number
   ) => {
     const unboundIndex = index - JUMP_VALUES[rowMovementType];
-    const length = chart.childrenNodes.list.state.length;
+    const length = chart.list.state.length;
     const min = 0;
     const max = length;
 
     const indexToMoveTo = clamp(unboundIndex, min, max);
 
-    chart.childrenNodes.list.actions.insertAlbumAtIndex(
-      chart.childrenNodes.list.state[index] as Album,
+    chart.list.actions.insertAlbumAtIndex(
+      chart.list.state[index] as Album,
       index,
       indexToMoveTo
     );
@@ -86,7 +86,7 @@ const useMobileChartEditor = ({
   const showIntroduction =
     context === UseChartListContext.EDIT
       ? false
-      : chart.childrenNodes.list.state.length === 0;
+      : chart.list.state.length === 0;
 
   return {
     actions: {

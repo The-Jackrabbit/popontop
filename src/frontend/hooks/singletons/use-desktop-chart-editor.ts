@@ -48,12 +48,12 @@ export const useDesktopChartEditor = ({
     initialList,
   });
   const { titleStyle, toggleTitle } = useDesktopTitle({
-    setShowTitle: chart.childrenNodes.settings.actions.setShowTitle,
-    showTitle: chart.childrenNodes.settings.state.showTitle,
+    setShowTitle: chart.settings.actions.setShowTitle,
+    showTitle: chart.settings.state.showTitle,
   });
   const { listStyle, toggleAlbums } = useDesktopAlbumsTextList({
-    setShowAlbums: chart.childrenNodes.settings.actions.setShowAlbums,
-    showAlbums: chart.childrenNodes.settings.state.showAlbums,
+    setShowAlbums: chart.settings.actions.setShowAlbums,
+    showAlbums: chart.settings.state.showAlbums,
   });
 
   const [showOnboardingFlow, setShowOnboardingFlow] = useState(!true);
