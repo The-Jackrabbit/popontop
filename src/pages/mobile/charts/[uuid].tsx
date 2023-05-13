@@ -1,5 +1,6 @@
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
+import { MobileEditorLoader } from '../../../components/global/MobileEditor/Loader';
 import MobileEditor from '../../../components/global/MobileEditor/MobileEditor';
 import { UseChartListContext } from '../../../frontend/hooks/singletons/use-mobile-chart-editor';
 import { Album } from '../../../types/Albums';
@@ -18,13 +19,18 @@ const ChartPage: NextPage = () => {
 
   const n = genUuid(uuid);
 
-  const { data, isLoading } = trpc.charts.getById.useQuery(
+  const { ...queryprops } = trpc.charts.getById.useQuery(
     { uuid: n },
     {
-      enabled: true, // disable this query from automatically running
       refetchOnWindowFocus: false,
     }
   );
+  console.log({ queryprops });
+  const { data, isLoading } = queryprops;
+  debugger;
+  if (isLoading) {
+    return <MobileEditorLoader />;
+  }
 
   return (
     <MobileEditor
@@ -37,7 +43,7 @@ const ChartPage: NextPage = () => {
           : ([] as Album[])
       }
       initialSettings={data?.settings ?? undefined}
-      isLoading={isLoading}
+      isLoading={false}
       isReadOnly={data?.isReadOnly}
     />
   );

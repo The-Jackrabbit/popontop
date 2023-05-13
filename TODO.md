@@ -15,6 +15,8 @@
 - [ ] fix screenshot mode in mobile
 - [ ] allow users in desktop to see mobile variant of a chart and vice versa
 - [ ] edit existing chart page
+- [ ] rename `isActive`
+- [ ] (maybe) remove childrenNode pattern
 
 ## ICEBOX
 

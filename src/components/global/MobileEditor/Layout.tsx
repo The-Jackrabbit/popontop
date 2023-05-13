@@ -158,6 +158,39 @@ const MobileEditor: React.FC<Props> = ({
             settings={childrenNodes.chart.childrenNodes.settings}
           />
         </div>
+        <ViewModeModal
+          backgroundColor={
+            childrenNodes.chart.childrenNodes.settings.state.backgroundColor
+          }
+          titleBackgroundColor={
+            childrenNodes.chart.childrenNodes.settings.state
+              .titleBackgroundColor
+          }
+          borderColor={
+            childrenNodes.chart.childrenNodes.settings.state.borderColor
+          }
+          borderSize={
+            childrenNodes.chart.childrenNodes.settings.state.borderSize
+          }
+          chartTitle={childrenNodes.chart.state.chartTitle}
+          onDecrementColumns={
+            childrenNodes.chart.childrenNodes.settings.actions
+              .onDecrementColumns
+          }
+          onIncrementColumns={
+            childrenNodes.chart.childrenNodes.settings.actions
+              .onIncrementColumns
+          }
+          onDecrementRows={
+            childrenNodes.chart.childrenNodes.settings.actions.onDecrementRows
+          }
+          onIncrementRows={
+            childrenNodes.chart.childrenNodes.settings.actions.onIncrementRows
+          }
+          columns={childrenNodes.chart.childrenNodes.settings.state.columns}
+          list={childrenNodes.chart.childrenNodes.list.state}
+          rows={childrenNodes.chart.childrenNodes.settings.state.rows}
+        />
       </MobileSheet>
     </MobilePage>
   );
