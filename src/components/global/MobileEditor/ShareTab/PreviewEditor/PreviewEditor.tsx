@@ -30,7 +30,7 @@ export const PreviewEditor: React.FC<Props> = ({
     startScreenshotMode(chart.settings.state.backgroundColor);
   };
   const onExit = () => {
-    resetThemeColorMetaTag(chart.settings.state.backgroundColor);
+    resetThemeColorMetaTag();
     setIsOverlayVisible(false);
   };
 

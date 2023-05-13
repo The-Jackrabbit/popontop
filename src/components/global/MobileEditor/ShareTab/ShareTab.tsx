@@ -2,6 +2,10 @@ import { HomeIcon, ShareIcon } from '@heroicons/react/20/solid';
 import React, { useEffect, useState } from 'react';
 import { ChartHookNode } from '../../../../frontend/hooks/use-chart/use-chart';
 import { Album } from '../../../../types/Albums';
+import {
+  resetThemeColorMetaTag,
+  setThemeColorMetaTag,
+} from '../../../../utils/mobile-theme';
 import { ICON_STYLE } from '../../../lib/FilterButton/FilterButton';
 import { PreviewEditor } from './PreviewEditor/PreviewEditor';
 
@@ -21,13 +25,15 @@ export const ShareTab: React.FC<Props> = ({
   list,
 }) => {
   const [isMainOverlayVisible, setIsMainOverlayVisible] = useState(false);
-  useEffect(() => {
-    const t = document.getElementById('test-dark-meta');
-    return () => t?.setAttribute('content', '#171717');
-  }, []);
 
   const onClick = (event: React.BaseSyntheticEvent) => {
     event.stopPropagation();
+    resetThemeColorMetaTag();
+
+    if (!isMainOverlayVisible) resetThemeColorMetaTag();
+    else {
+      setThemeColorMetaTag(chart.settings.state.backgroundColor);
+    }
     setIsMainOverlayVisible(!isMainOverlayVisible);
   };
 
