@@ -4,16 +4,19 @@ export interface Props {
   title: React.ReactNode;
 }
 
-export const Layout: React.FC<Props> = ({ backgroundColor, toggleButton, title }) => (
+export const Layout: React.FC<Props> = ({
+  backgroundColor,
+  toggleButton,
+  title,
+}) => (
   <div
     className="
       z-30 box-content flex
       h-auto w-auto
       items-center
       justify-between overflow-hidden rounded-lg 
-      bg-white
       p-4 shadow-md
-      dark:bg-[#0a0a0a] dark:shadow-neutral-800 
+      dark:bg-neutral-800 dark:shadow-neutral-800 
     "
     style={backgroundColor ? { backgroundColor } : {}}
   >

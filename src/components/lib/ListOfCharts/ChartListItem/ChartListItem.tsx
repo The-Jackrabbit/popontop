@@ -55,45 +55,46 @@ export const ChartListItemContent: React.FC<ChartListItemContentProps> = ({
   chart,
   listMode,
   onClickDeleteChart,
-}) => {
-  return (
-    <div
-      className="
+}) => (
+  <div
+    className={`
         mb-2 flex
         cursor-pointer
         justify-between
+        rounded-md
+        p-1
         hover:bg-neutral-300 active:bg-neutral-400
         dark:hover:bg-neutral-800 dark:active:bg-neutral-700
-      "
-      style={isActive ? { backgroundColor: 'red' } : {}}
-    >
-      <div className="basis-5/6 overflow-x-hidden">
-        <p
-          className="
+        ${isActive ? 'bg-neutral-200 dark:bg-neutral-700' : {}}
+      `}
+  >
+    <div className="basis-5/6 overflow-x-hidden">
+      <p
+        className="
             truncate text-2xl
             font-semibold
           "
-        >
-          {chart.name}
-        </p>
+      >
+        {chart.name}
+      </p>
 
-        <p className="text-xs font-light dark:text-neutral-400">
-          created: {chart.created_at ? chart.created_at.toDateString() : ''}
-        </p>
-      </div>
-      <div className="basis-1/6">
-        {listMode === ListRowMode.DELETE && (
-          <DeleteRowButton
-            onClick={onClickDeleteChart}
-            className="
+      <p className="text-xs font-light dark:text-neutral-400">
+        created: {chart.created_at ? chart.created_at.toDateString() : ''}
+      </p>
+    </div>
+    <div className="basis-1/6">
+      {listMode === ListRowMode.DELETE && (
+        <DeleteRowButton
+          onClick={onClickDeleteChart}
+          className="
               h-full w-full
             "
-          />
-        )}
-      </div>
+        />
+      )}
     </div>
-  );
-};
+  </div>
+);
+
 export const ChartListItemLoader: React.FC = () => (
   <div
     className="

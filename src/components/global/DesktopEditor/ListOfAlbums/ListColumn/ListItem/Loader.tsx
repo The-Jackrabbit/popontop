@@ -19,7 +19,7 @@ export const Loader: React.FC<Props> = ({ index }) => (
     `}
     role="listitem"
   >
-    {index + 1} - ....................
+    {index + 1} - ................
   </div>
 );
 

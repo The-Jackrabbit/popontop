@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.wavy-gradient:nth-of-type(1) {
-}
-
 /** Start thumb **/
 input[type='range'] {
   appearance: none;

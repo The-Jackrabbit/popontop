@@ -29,6 +29,7 @@ export const ChartItem: React.FC<Props> = ({
   >
     <ChartItemDropZone
       borderSizes={borderSizes}
+      className="dark:border-neutral-700"
       id={index.toString()}
       index={index}
       style={{

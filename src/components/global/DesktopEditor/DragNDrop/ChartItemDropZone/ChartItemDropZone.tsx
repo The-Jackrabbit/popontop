@@ -10,20 +10,6 @@ export interface Props {
   style?: object;
 }
 
-function WavyGradientDiv() {
-  return (
-    <div
-      className="wavy-gradient hover:visible hover:animate-pulse"
-      style={{
-        height: '100%',
-        backgroundSize: '100% 200%',
-        position: 'relative',
-        // background: EMPTY_SQUARE_BG_GRADIENT[index%EMPTY_SQUARE_BG_GRADIENT.length],
-      }}
-    ></div>
-  );
-}
-
 export const EMPTY_SQUARE_BG_GRADIENT = [
   'linear-gradient(to right, rgb(251,191,36), rgb(217,70,239))',
   'linear-gradient(to bottom, var(--color-pink-500), var(--color-blue-500)',
@@ -55,7 +41,7 @@ const ChartItemDropZone: React.FC<Props> = ({
       style={style}
       ref={setNodeRef}
     >
-      {children ? children : <WavyGradientDiv />}
+      {children}
     </div>
   );
 };

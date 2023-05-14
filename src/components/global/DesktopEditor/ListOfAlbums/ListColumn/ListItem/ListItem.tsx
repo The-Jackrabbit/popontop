@@ -13,13 +13,13 @@ export const ListItem: React.FC<Props> = ({ index, listItem, textColor }) => {
   return (
     <div
       className={`
-        overflow-hidden
+        //
+        DESKTOP_CHART_FONT_SIZE overflow-hidden
         text-ellipsis
-        leading-tight
-        // DESKTOP_CHART_FONT_SIZE
-        text-[22px]
-        font-mono
         whitespace-pre-wrap
+        font-mono
+        text-[22px] leading-tight
+        dark:text-neutral-600
       `}
       role="listitem"
       style={{ color: textColor }}

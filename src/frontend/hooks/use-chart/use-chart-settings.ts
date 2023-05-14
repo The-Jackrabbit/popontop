@@ -68,7 +68,7 @@ const useChartSettings = (
     defaultSettings?.title_background_color ?? ''
   );
   const [borderColor, setBorderColor] = useState(
-    defaultSettings?.border_color ?? 'rgb(212 212 212)'
+    defaultSettings?.border_color ?? ''
   );
   const [borderSize, setBorderSize] = useState(1); // need to convert the sql sschema for this value from a decimal to a regualr number before unhardcoding this
   const [numberOfAlbums, setNumberOfAlbums] = useState<number>(

@@ -1,8 +1,8 @@
 import React from 'react';
 import { TitleLoader } from '../../lib/Title/Loader';
-import { ListOfAlbumsLoader } from './ListOfAlbums/Loader';
 import { DesktopChartLoader } from './DesktopChart/Loader';
 import Layout from './Layout';
+import { ListOfAlbumsLoader } from './ListOfAlbums/Loader';
 
 export interface Props {
   showOnboardingFlow?: boolean;
