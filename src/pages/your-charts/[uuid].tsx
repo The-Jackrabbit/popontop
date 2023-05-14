@@ -11,22 +11,20 @@ import { ICON_STYLE } from '../../components/lib/FilterButton/FilterButton';
 import { ListOfCharts } from '../../components/lib/ListOfCharts/ListOfCharts';
 import { trpc } from '../../utils/trpc';
 import DesktopPage from '../../components/lib/DesktopPage/DesktopPage';
-import { genUuid } from '../mobile/charts/[uuid]';
 
 const YourCharts: React.FC = () => {
   const router = useRouter();
-  const { uuid } = router.query;
-  const n = genUuid(uuid);
+  const uuid = router.query.uuid as string;
   const { data } = trpc.charts.getUserCharts.useQuery(undefined, {
     refetchOnWindowFocus: false,
   });
 
   return (
-    <Layout
+    <DesktopPage
       actions={
         <DesktopActions
           topSection={
-            <Link href={`/charts/${n}`}>
+            <Link href={`/charts/${uuid}`}>
               <ActionButton
                 label="Edit chart"
                 onClick={() => undefined}
@@ -51,7 +49,7 @@ const YourCharts: React.FC = () => {
           sidebarContent={
             <div className="h-full overflow-x-visible">
               <ListOfCharts
-                activeChartUuid={n}
+                activeChartUuid={uuid}
                 listOfCharts={data}
                 setChartBeingViewed={(uuid: string) => {
                   router.push(`/your-charts/${uuid}`);
