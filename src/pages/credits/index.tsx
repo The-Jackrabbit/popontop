@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import Layout from '../create-chart/Layout';
+import DesktopPage from '../../components/lib/DesktopPage/DesktopPage';
 import SidebarLayout from '../../components/global/DesktopEditor/Sidebar/Layout';
 import SidebarNav from '../../components/global/DesktopEditor/Sidebar/SidebarNav/SidebarNav';
 import { colorMap } from '../../constants/colors';

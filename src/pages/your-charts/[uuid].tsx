@@ -10,7 +10,7 @@ import SidebarNav from '../../components/global/DesktopEditor/Sidebar/SidebarNav
 import { ICON_STYLE } from '../../components/lib/FilterButton/FilterButton';
 import { ListOfCharts } from '../../components/lib/ListOfCharts/ListOfCharts';
 import { trpc } from '../../utils/trpc';
-import Layout from '../create-chart/Layout';
+import DesktopPage from '../../components/lib/DesktopPage/DesktopPage';
 import { genUuid } from '../mobile/charts/[uuid]';
 
 const YourCharts: React.FC = () => {

@@ -7,8 +7,8 @@ import {
 import { ChartSettings } from '@prisma/client';
 import useDesktopChartEditor from '../../../../frontend/hooks/singletons/use-desktop-chart-editor';
 import { DraggedAlbum } from '../../../../frontend/hooks/use-chart/use-chart';
-import Layout from '../../../../pages/create-chart/Layout';
 import { Album } from '../../../../types/Albums';
+import DesktopPage from '../../../lib/DesktopPage/DesktopPage';
 import { ICON_STYLE } from '../../../lib/FilterButton/FilterButton';
 import LoadingBouncer from '../../../lib/LoadingBouncer/LoadingBouncer';
 import ActionButton from '../../DesktopEditor/Actions/ActionButton/ActionButton';
@@ -48,7 +48,7 @@ const EditChart = ({
       }}
       onDragEnd={chart.list.actions.handleDragEnd}
     >
-      <Layout
+      <DesktopPage
         actions={
           <DesktopActions
             bottomSection={<ProfileCircle />}

@@ -2,18 +2,18 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { SidebarLayout } from '../../components/global/DesktopEditor/Sidebar/Layout';
 import SidebarNav from '../../components/global/DesktopEditor/Sidebar/SidebarNav/SidebarNav';
+import DesktopPage from '../../components/lib/DesktopPage/DesktopPage';
 import { ListOfCharts } from '../../components/lib/ListOfCharts/ListOfCharts';
 import { trpc } from '../../utils/trpc';
-import Layout from '../create-chart/Layout';
 
 export function YourCharts() {
   const router = useRouter();
-  const { data } = trpc.charts.getUserCharts.useQuery(undefined, {
+  const { data, isLoading } = trpc.charts.getUserCharts.useQuery(undefined, {
     refetchOnWindowFocus: false,
   });
 
   return (
-    <Layout
+    <DesktopPage
       actions={null}
       hasActions={false}
       pageContent={
@@ -38,7 +38,7 @@ export function YourCharts() {
           sidebarContent={
             <div className="h-full overflow-x-visible">
               <ListOfCharts
-                activeChartUuid=""
+                isLoading={isLoading}
                 listOfCharts={data}
                 setChartBeingViewed={(uuid: string) => {
                   router.push(`/your-charts/${uuid}`);
