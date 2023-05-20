@@ -1,5 +1,4 @@
 import { DragEndEvent } from '@dnd-kit/core';
-import ismobile from 'is-mobile';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { randomIntegerInRange } from '../../../components/lib/Grid/Grid.stories';
 import { EMPTY_ALBUM } from '../../../constants/empty-album';

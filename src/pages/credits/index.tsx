@@ -9,7 +9,7 @@ import ProfileCircle from '../../components/global/DesktopEditor/Actions/Profile
 
 const Credits: NextPage = () => {
   return (
-    <Layout
+    <DesktopPage
       actions={
         <DesktopActions bottomSection={<ProfileCircle />} topSection={null} />
       }

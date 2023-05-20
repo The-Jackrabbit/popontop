@@ -1,12 +1,8 @@
-import { a } from 'react-spring';
 import SearchAlbums from './SearchAlbums/SearchAlbums';
 import MobileSettings from './MobileSettings/MobileSettings';
-import { ActionBar } from './ActionBar/ActionBar';
-import Title from '../../lib/Title/Title';
 import { ChartSettings } from '@prisma/client';
 import MobilePage from '../../lib/MobilePage/MobilePage';
 import { Album } from '../../../types/Albums';
-import List from './List/List';
 import ShareTab from './ShareTab/ShareTab';
 import useMobileChartEditor, {
   UseChartListContext,
