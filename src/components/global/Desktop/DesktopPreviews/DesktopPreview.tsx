@@ -1,7 +1,9 @@
 import { ChartHookNode } from '../../../../frontend/hooks/use-chart/use-chart';
 import { AlbumOverlay } from '../../MobileEditor/ScreenShot/ScreenShot';
 import { EMPTY_ALBUM } from '../../../../constants/empty-album';
-import NumericExpandingPill from '../../../lib/ExpandingPill/NumericExpandingPill/NumericExpandingPill';
+import NumericExpandingPill, {
+  NumericExpandingPillContent,
+} from '../../../lib/ExpandingPill/NumericExpandingPill/NumericExpandingPill';
 import { Dispatch, SetStateAction } from 'react';
 
 export interface Props {
@@ -120,9 +122,7 @@ export const DesktopPreview = ({
         ))}
       </div>
       <div className="mt-4 h-min shrink basis-9">
-        <NumericExpandingPill
-          isInitiallyExpanded={true}
-          label="Template"
+        <NumericExpandingPillContent
           max={values.length - 1}
           min={0}
           setValue={setPreviewIndex}
