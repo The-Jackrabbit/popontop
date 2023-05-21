@@ -12,7 +12,7 @@ const Loader: React.FC<Props> = ({ index }) => {
       className="animate-pulse dark:border-neutral-800"
       id={index.toString()}
       index={index}
-      borderSizes={getBorderSizes(index, 10)}
+      borderSizes={getBorderSizes(index)}
     >
       <div className="h-[118px] w-[118px] border-2 dark:border-neutral-800  " />
     </ChartItemDropZone>
