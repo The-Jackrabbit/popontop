@@ -126,6 +126,7 @@ export const DesktopPreview = ({
           max={values.length - 1}
           min={0}
           setValue={setPreviewIndex}
+          textColor={chart.settings.state.textColor}
           value={previewIndex}
         />
       </div>
