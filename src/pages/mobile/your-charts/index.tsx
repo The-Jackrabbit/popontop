@@ -146,7 +146,7 @@ const YourCharts: NextPage = () => {
           onClickSearch={() => undefined}
           isActive={true}
           setIsActive={() => undefined}
-          saveChart={() => new Promise((res) => res(''))}
+          createChart={() => new Promise((res) => res(''))}
         />
       </div>
     </MobilePage>

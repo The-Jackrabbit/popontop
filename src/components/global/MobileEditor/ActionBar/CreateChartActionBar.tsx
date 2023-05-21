@@ -19,7 +19,7 @@ export interface Props {
   onClickSearch: () => void;
   onClickDeleteMode: () => void;
   onClickRearrangeMode: () => void;
-  saveChart: () => Promise<string>;
+  createChart: () => Promise<string>;
   setIsActive: (val: boolean) => void;
 }
 
@@ -34,7 +34,7 @@ export const CreateChartActionBar: React.FC<Props> = ({
   onClickRearrangeMode,
   onClickSearch,
   onClickSettings,
-  saveChart,
+  createChart,
   setIsActive,
 }) => {
   const onClickSearchAlbums = () => {
@@ -52,7 +52,10 @@ export const CreateChartActionBar: React.FC<Props> = ({
   return (
     <ActionBarLayout
       actionOverlay={
-        <CreateChartClickCircle saveChart={saveChart} isLoading={isLoading} />
+        <CreateChartClickCircle
+          createChart={createChart}
+          isLoading={isLoading}
+        />
       }
       actionOverlayClassName={actionOverlayClassName}
       className={className}

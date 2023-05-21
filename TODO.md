@@ -6,7 +6,6 @@
 
 - [ ] (maybe) add redo and undo (might be a big ish lift, could hack a history object together as an array and just push instances of the chart object)
 - [ ] add clone to mobile
-- [ ] clone should redirect to new chart with modal
 - [ ] different interface organization (list on right, list on left)
 - [ ] fix mobile save for settings
 - [ ] fix bottom margin for title on mobile, alternatively, just create a <Layout /> for the mobile editor
@@ -20,6 +19,7 @@
 
 ## Done
 
+- [x] clone should redirect to new chart with modal
 - [x] (maybe) remove childrenNode pattern
 - [x] fix screenshot mode in mobile
 - [x] edit existing chart page

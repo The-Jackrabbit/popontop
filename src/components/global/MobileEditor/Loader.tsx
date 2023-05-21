@@ -37,7 +37,7 @@ const Loader: React.FC<Props> = () => (
         isActive={false}
         isReadOnly={true}
         setIsActive={() => undefined}
-        saveChart={async () => ''}
+        createChart={async () => ''}
       />
     </div>
   </MobilePage>

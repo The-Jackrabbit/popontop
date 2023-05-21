@@ -83,7 +83,7 @@ export const createChart = async (
       album_art_url: formatUrl(album.imageUrl),
       chart_id: chart.uuid,
     })),
-    skipDuplicates: false, // Skip 'Bobo'
+    skipDuplicates: false,
   });
 
   return {

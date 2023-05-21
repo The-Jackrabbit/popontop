@@ -50,7 +50,7 @@ const Home: NextPage = () => {
               <>
                 {sessionData ? (
                   <ActionButton
-                    onClick={chart.actions.saveChart}
+                    onClick={chart.actions.createChart}
                     disabled={isLoading}
                     label="Save chart"
                     text={

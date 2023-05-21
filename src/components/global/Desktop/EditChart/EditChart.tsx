@@ -69,12 +69,12 @@ const EditChart = ({
                   />
                 ) : null}
                 <ActionButton
-                  onClick={chart.actions.saveChart}
-                  disabled={chart.state.isCreateLoading}
+                  onClick={chart.actions.copyChart}
+                  disabled={chart.state.isCopyLoading}
                   hasGradientIndicator={false}
                   label="Copy chart"
                   text={
-                    !chart.state.isCreateLoading ? (
+                    !chart.state.isCopyLoading ? (
                       <PencilSquareIcon className={ICON_STYLE} />
                     ) : (
                       <LoadingBouncer />

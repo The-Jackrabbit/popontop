@@ -26,12 +26,14 @@ export interface ChartHookNode extends HookNode<State, Actions> {
 export interface Actions {
   deleteChart: () => Promise<void>;
   editChart: () => Promise<string>;
-  saveChart: () => Promise<string>;
+  copyChart: () => Promise<void>;
+  createChart: () => Promise<string>;
   setChartTitle: (value: string) => void;
 }
 
 export interface State {
   chartTitle: string;
+  isCopyLoading: boolean;
   isCreateLoading: boolean;
   isDeleteLoading: boolean;
   isEditLoading: boolean;
@@ -58,10 +60,11 @@ export const useChart = ({
   const list = useList(initialList ?? [], router.asPath.includes('mobile'));
   const [savedChartId, setSavedChartId] = useState(chartUuid);
   const createMutation = trpc.charts.create.useMutation();
+  const copyMutation = trpc.charts.create.useMutation();
   const editMutation = trpc.charts.edit.useMutation();
   const deleteMutation = trpc.charts.delete.useMutation();
 
-  const saveChart = async (): Promise<string> => {
+  const createChart = async (): Promise<string> => {
     const result = await createMutation.mutateAsync({
       albums: list.state,
       name: chartTitle,
@@ -80,6 +83,27 @@ export const useChart = ({
     const savedChartId = result.chart.uuid ?? '';
     setSavedChartId(savedChartId);
     return savedChartId;
+  };
+
+  const copyChart = async (): Promise<void> => {
+    const result = await copyMutation.mutateAsync({
+      albums: list.state,
+      name: chartTitle,
+      settings: {
+        background_color: settings.state.backgroundColor,
+        border_color: settings.state.borderColor,
+        border_size: settings.state.borderSize,
+        number_of_albums: settings.state.numberOfAlbums,
+        show_albums: settings.state.showAlbums,
+        show_title: settings.state.showTitle,
+        text_color: settings.state.textColor,
+        title_background_color: settings.state.titleBackgroundColor,
+      },
+    });
+
+    const savedChartId = result.chart.uuid ?? '';
+
+    router.push(savedChartId);
   };
 
   const editChart = async (): Promise<string> => {
@@ -115,6 +139,7 @@ export const useChart = ({
   const state = useMemo<State>(
     () => ({
       chartTitle,
+      isCopyLoading: copyMutation.isLoading,
       isCreateLoading: createMutation.isLoading,
       isDeleteLoading: deleteMutation.isLoading,
       isEditLoading: editMutation.isLoading,
@@ -123,6 +148,7 @@ export const useChart = ({
     }),
     [
       chartTitle,
+      copyMutation.isLoading,
       createMutation.isLoading,
       deleteMutation.isLoading,
       editMutation.isLoading,
@@ -136,7 +162,8 @@ export const useChart = ({
     actions: {
       deleteChart,
       editChart,
-      saveChart,
+      copyChart,
+      createChart,
       setChartTitle,
     },
     list: {

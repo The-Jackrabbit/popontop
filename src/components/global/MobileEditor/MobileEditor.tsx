@@ -69,7 +69,7 @@ const MobileEditor: React.FC<Props> = ({
             {editor.state.isSettingsOpen ? (
               <MobileSettings
                 isSaveLoading={chart.state.isCreateLoading}
-                onSave={chart.actions.saveChart}
+                onSave={chart.actions.createChart}
                 settings={chart.settings}
               />
             ) : null}

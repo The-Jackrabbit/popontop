@@ -67,7 +67,7 @@ const MobileChart: React.FC<Props> = ({
       isActive={editor.state.isActive}
       isReadOnly={isReadOnly}
       setIsActive={editor.actions.setIsActive}
-      saveChart={chart.actions.saveChart}
+      createChart={chart.actions.createChart}
     />
   </a.div>
 );

@@ -12,19 +12,19 @@ import ClickCircleLayout from '../ClickCircleLayout';
 
 export interface Props {
   isLoading: boolean;
-  saveChart: () => Promise<string>;
+  createChart: () => Promise<string>;
 }
 
 export const CreateChartClickCircle: React.FC<Props> = ({
   isLoading,
-  saveChart,
+  createChart,
 }) => {
   const { data: sessionData } = useSession();
   const r = useRouter();
 
   const [savedChartId, setSavedChartId] = useState<null | string>('null');
   const save = async () => {
-    const uuid = await saveChart();
+    const uuid = await createChart();
     setSavedChartId(uuid);
   };
 
