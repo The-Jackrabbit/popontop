@@ -1,9 +1,7 @@
 import { ChartHookNode } from '../../../../frontend/hooks/use-chart/use-chart';
 import { AlbumOverlay } from '../../MobileEditor/ScreenShot/ScreenShot';
 import { EMPTY_ALBUM } from '../../../../constants/empty-album';
-import NumericExpandingPill, {
-  NumericExpandingPillContent,
-} from '../../../lib/ExpandingPill/NumericExpandingPill/NumericExpandingPill';
+import { NumericExpandingPillContent } from '../../../lib/ExpandingPill/NumericExpandingPill/NumericExpandingPill';
 import { Dispatch, SetStateAction } from 'react';
 
 export interface Props {
@@ -111,6 +109,11 @@ export const DesktopPreview = ({
                 {row.map((albumIndex) => (
                   <AlbumOverlay
                     album={chart.list.state.at(albumIndex) ?? EMPTY_ALBUM}
+                    albumOverlayColor={
+                      chart.settings.state.albumOverlayColor === ''
+                        ? undefined
+                        : chart.settings.state.albumOverlayColor
+                    }
                     count={row.length}
                     key={`album-${albumIndex}`}
                     textColor={chart.settings.state.textColor}

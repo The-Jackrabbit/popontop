@@ -5,7 +5,7 @@ import { Album } from '../../../../types/Albums';
 import {
   resetThemeColorMetaTag,
   setThemeColorMetaTag,
-} from '../../../../utils/mobile-theme';
+} from '../../../../server/utils/mobile-theme';
 import { ICON_STYLE } from '../../../lib/FilterButton/FilterButton';
 import { PreviewEditor } from './PreviewEditor/PreviewEditor';
 

@@ -11,7 +11,7 @@ import useMobileEditor, {
   MobileEditorHookNode,
 } from '../editor/use-mobile-editor';
 import { HookNode } from '../../../types/singletons';
-import { setThemeColorMetaTag } from '../../../utils/mobile-theme';
+import { setThemeColorMetaTag } from '../../../server/utils/mobile-theme';
 
 export enum UseChartListContext {
   ADD = 'ADD',

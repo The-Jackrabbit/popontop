@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { useSprings, animated } from '@react-spring/web';
 import { useDrag, Vector2 } from '@use-gesture/react';
 import clamp from 'lodash.clamp';
-import { isIntentionalXAxisGesture } from '../../../utils/directions';
+import { isIntentionalXAxisGesture } from '../../../server/utils/directions';
 // import '../../../styles/globals.css';
 
 export interface Props {

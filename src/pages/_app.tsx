@@ -3,7 +3,7 @@ import '../styles/globals.css';
 import { SessionProvider } from 'next-auth/react';
 import type { Session } from 'next-auth';
 import type { AppType } from 'next/app';
-import { trpc } from '../utils/trpc';
+import { trpc } from '../server/utils/trpc';
 import Head from 'next/head';
 import '../styles/globals.css';
 import ismobile from 'is-mobile';
@@ -11,7 +11,7 @@ import { useClientInitialization } from '../frontend/hooks/use-client-initializa
 import {
   THEME_COLOR_META_TAG,
   LIGHT_MODE_THEME_COLOR,
-} from '../utils/mobile-theme';
+} from '../server/utils/mobile-theme';
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,

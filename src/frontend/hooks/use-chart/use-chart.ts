@@ -1,7 +1,7 @@
 import { ChartSettings } from '@prisma/client';
 import { useMemo, useState } from 'react';
 import { Album } from '../../../types/Albums';
-import { trpc } from '../../../utils/trpc';
+import { trpc } from '../../../server/utils/trpc';
 import { HookNode } from '../../../types/singletons';
 import useList, { ListHookNode } from '../lists/use-list';
 import useChartSettings, { SettingsHookNode } from './use-chart-settings';

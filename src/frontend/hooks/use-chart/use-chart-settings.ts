@@ -1,7 +1,7 @@
 import { ChartSettings } from '@prisma/client';
 import { useState } from 'react';
 import { HookNode } from '../../../types/singletons';
-import { setThemeColorMetaTag } from '../../../utils/mobile-theme';
+import { setThemeColorMetaTag } from '../../../server/utils/mobile-theme';
 import { useIncrementer } from '../use-incrementer';
 
 export type SettingsHookNode = HookNode<State, Actions>;
@@ -11,6 +11,7 @@ export interface Actions {
   onIncrementColumns: () => void;
   onDecrementRows: () => void;
   onIncrementRows: () => void;
+  setAlbumOverlayColor: (value: string) => void;
   setBorderColor: (value: string) => void;
   setBorderSize: (value: number) => void;
   setShowAlbums: (value: boolean) => void;
@@ -24,6 +25,7 @@ export interface Actions {
 }
 
 export interface State {
+  albumOverlayColor: string;
   backgroundColor: string;
   borderColor: string;
   borderSize: number;
@@ -83,6 +85,7 @@ const useChartSettings = (
     defaultSettings?.show_title ?? true
   );
   const [textColor, setTextColor] = useState(defaultSettings?.text_color ?? '');
+  const [albumOverlayColor, setAlbumOverlayColor] = useState('');
 
   return {
     actions: {
@@ -90,6 +93,7 @@ const useChartSettings = (
       onDecrementRows,
       onIncrementColumns,
       onIncrementRows,
+      setAlbumOverlayColor,
       setBackgroundColor,
       setBorderColor,
       setBorderSize,
@@ -102,6 +106,7 @@ const useChartSettings = (
       setTitleBackgroundColor,
     },
     state: {
+      albumOverlayColor,
       backgroundColor,
       borderColor,
       borderSize,

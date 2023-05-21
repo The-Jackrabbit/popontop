@@ -1,5 +1,5 @@
 import React from 'react';
-import { trpc } from '../../../../../utils/trpc';
+import { trpc } from '../../../../../server/utils/trpc';
 import { Loader } from './Loader';
 import { useRouter } from 'next/router';
 import { genUuid } from '../../../../../pages/mobile/charts/[uuid]';

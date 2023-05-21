@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import { useState } from 'react';
-import { trpc } from '../../../../../utils/trpc';
+import { trpc } from '../../../../../server/utils/trpc';
 import TextExpandingPill from '../../../../lib/ExpandingPill/TextExpandingPill/TextExpandingPill';
 import { SwitchExpandingPill } from '../../../../lib/ExpandingPill/SwitchExpandingPill/SwitchExpandingPill';
 import { colorMap } from '../../../../../constants/colors';

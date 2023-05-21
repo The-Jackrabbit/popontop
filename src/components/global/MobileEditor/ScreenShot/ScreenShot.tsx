@@ -9,10 +9,12 @@ export interface Props {
 }
 export const AlbumOverlay = ({
   album,
+  albumOverlayColor = 'rgba(0,0,0,0.8)',
   count,
   textColor,
 }: {
   album: Album;
+  albumOverlayColor?: string;
   count: number;
   textColor: string;
 }) => {
@@ -29,8 +31,10 @@ export const AlbumOverlay = ({
       }}
     >
       <p
-        style={{ color: textColor }}
-        className="flex h-full w-full items-center justify-center self-center overflow-hidden bg-opacity-75 bg-gradient-to-t from-[rgba(0,0,0,0.8)] to-[rgba(255,255,255,0.05)] text-center align-middle text-xs"
+        style={{
+          color: textColor,
+        }}
+        className={`flex h-full w-full items-center justify-center self-center overflow-hidden bg-opacity-75 bg-gradient-to-t from-[${albumOverlayColor}] to-[rgba(255,255,255,0.05)] text-center align-middle text-xs`}
       >
         {albumDescription}
       </p>

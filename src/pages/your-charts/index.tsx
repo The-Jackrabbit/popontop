@@ -4,7 +4,7 @@ import { SidebarLayout } from '../../components/global/Desktop/DesktopEditor/Sid
 import SidebarNav from '../../components/global/Desktop/DesktopEditor/Sidebar/SidebarNav/SidebarNav';
 import DesktopPage from '../../components/lib/DesktopPage/DesktopPage';
 import { ListOfCharts } from '../../components/lib/ListOfCharts/ListOfCharts';
-import { trpc } from '../../utils/trpc';
+import { trpc } from '../../server/utils/trpc';
 
 export function YourCharts() {
   const router = useRouter();

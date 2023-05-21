@@ -51,6 +51,13 @@ export const DesktopSettings: React.FC<Props> = ({
         setValue={(value: string) => settings.actions.setBorderColor(value)}
         value={settings.state.borderColor}
       />
+      <TextExpandingPill
+        label="Album overlay color"
+        setValue={(value: string) =>
+          settings.actions.setAlbumOverlayColor(value)
+        }
+        value={settings.state.albumOverlayColor}
+      />
       <SwitchExpandingPill
         className="inline-block"
         label="list albums?"

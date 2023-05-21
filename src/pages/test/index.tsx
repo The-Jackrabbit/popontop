@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import { getThemeColorMetaTag } from '../../utils/mobile-theme';
+import { getThemeColorMetaTag } from '../../server/utils/mobile-theme';
 
 const Credits: NextPage = () => {
   const change = (color: string) => {

@@ -1,5 +1,5 @@
 import { genUuid } from '../../../../pages/mobile/charts/[uuid]';
-import { trpc } from '../../../../utils/trpc';
+import { trpc } from '../../../../server/utils/trpc';
 import EditChart from './EditChart';
 
 export interface Props {

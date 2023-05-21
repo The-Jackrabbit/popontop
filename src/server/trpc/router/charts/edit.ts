@@ -1,37 +1,11 @@
-import { ChartSettings } from '@prisma/client';
 import { prisma } from '../../../../server/db/client';
 import { Album } from '../../../../types/Albums';
-
-export const lastFmImageOrigin = 'https://lastfm.freetls.fastly.net/i/u/174s/';
-
-export const formatUrl = (url: string) => {
-  if (url.length < 43) {
-    return '';
-  }
-
-  if (url.substring(0, 43) !== lastFmImageOrigin) {
-    return '';
-  }
-
-  return url;
-};
-
-export const formatColor = (url: string) => {
-  if (url.length > 16) {
-    return '';
-  }
-
-  if (url.substring(0, 1) === '#' && url.length > 7) {
-    return '';
-  }
-
-  return url;
-};
-
-export type WritableChartSettings = Omit<
-  Omit<ChartSettings, 'chart_id'>,
-  'uuid'
->;
+import { WritableChartSettings } from '../../../../types/Charts';
+import {
+  buildDataForAlbums,
+  buildSettingsForChart,
+  sanitizeToString,
+} from '../../../utils/sanitization';
 
 export const editChart = async (
   chartUuid: string,
@@ -63,18 +37,9 @@ export const editChart = async (
       uuid: chartUuid,
     },
     data: {
-      name,
+      name: sanitizeToString(name),
       ChartSettings: {
-        update: {
-          background_color: settings.background_color,
-          border_color: settings.border_color,
-          border_size: settings.border_size,
-          number_of_albums: settings.number_of_albums,
-          show_albums: settings.show_albums,
-          show_title: settings.show_title,
-          text_color: settings.text_color,
-          title_background_color: settings.title_background_color,
-        },
+        update: buildSettingsForChart(settings),
       },
       Album: {
         set: [],
@@ -83,12 +48,7 @@ export const editChart = async (
   });
 
   const albumsInChart = await prisma.album.createMany({
-    data: albums.map((album: Album) => ({
-      name: album.name,
-      artist: album.artist,
-      album_art_url: formatUrl(album.imageUrl),
-      chart_id: chartUuid,
-    })),
+    data: buildDataForAlbums(albums, chartUuid),
     skipDuplicates: true,
   });
 

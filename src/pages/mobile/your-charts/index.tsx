@@ -4,7 +4,7 @@ import Link from 'next/link';
 import ActionBar from '../../../components/global/MobileEditor/ActionBar/ActionBar';
 import { ListRowMode } from '../../../components/lib/Mobile/ListRow/ListRow';
 import MobilePage from '../../../components/lib/MobilePage/MobilePage';
-import { trpc } from '../../../utils/trpc';
+import { trpc } from '../../../server/utils/trpc';
 import { DeleteRowButton } from '../../../components/lib/Mobile/Row/DeleteRowButton/DeleteRowButton';
 import { colorMap } from '../../../constants/colors';
 import { Color } from '../../../components/global/Desktop/DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';

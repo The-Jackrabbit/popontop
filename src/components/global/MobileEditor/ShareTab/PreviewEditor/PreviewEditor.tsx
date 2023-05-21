@@ -6,7 +6,7 @@ import { Album } from '../../../../../types/Albums';
 import {
   resetThemeColorMetaTag,
   startScreenshotMode,
-} from '../../../../../utils/mobile-theme';
+} from '../../../../../server/utils/mobile-theme';
 import FilterButton from '../../../../lib/FilterButton/FilterButton';
 import { Color } from '../../../Desktop/DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
 import { ScreenshotMode } from './ScreenshotMode/ScreenshotMode';

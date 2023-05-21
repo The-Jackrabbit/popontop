@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Album } from '../../../types/Albums';
-import { trpc } from '../../../utils/trpc';
+import { trpc } from '../../../server/utils/trpc';
 
 export const useSearch = (): {
   data: Album[] | undefined;

@@ -7,3 +7,8 @@ export interface Chart {
   settings: ChartSettings | null;
   uuid: string;
 }
+
+export type WritableChartSettings = Omit<
+  Omit<ChartSettings, 'chart_id'>,
+  'uuid'
+>;

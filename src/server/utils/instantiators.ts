@@ -1,4 +1,4 @@
-import { EMPTY_ALBUM } from '../constants/empty-album';
+import { EMPTY_ALBUM } from '../../constants/empty-album';
 
 export const generateBoard = (length = 10, width = 10) => {
   const squares = [];

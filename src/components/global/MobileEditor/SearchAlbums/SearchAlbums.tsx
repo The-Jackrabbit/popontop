@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Album } from '../../../../types/Albums';
-import { trpc } from '../../../../utils/trpc';
+import { trpc } from '../../../../server/utils/trpc';
 import Input from '../../../lib/Input/Input';
 import { SearchResults } from './SearchResults/SearchResults';
 

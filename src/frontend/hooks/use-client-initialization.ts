@@ -4,7 +4,7 @@ import {
   DARK_MODE_THEME_COLOR,
   LIGHT_MODE_THEME_COLOR,
   setThemeColorMetaTag,
-} from '../../utils/mobile-theme';
+} from '../../server/utils/mobile-theme';
 
 function initializeClient() {
   if (prefersDark()) {

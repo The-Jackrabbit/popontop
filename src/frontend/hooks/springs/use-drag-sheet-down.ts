@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSpring, SpringValue, config } from '@react-spring/web';
 import { useDrag, Vector2 } from '@use-gesture/react';
-import { isIntentionalYAxisGesture } from '../../../utils/directions';
+import { isIntentionalYAxisGesture } from '../../../server/utils/directions';
 import { Interpolation } from 'react-spring';
 import { ReactDOMAttributes } from '@use-gesture/react/dist/declarations/src/types';
 

@@ -4,7 +4,7 @@ import { MobileEditorLoader } from '../../../components/global/MobileEditor/Load
 import MobileEditor from '../../../components/global/MobileEditor/MobileEditor';
 import { UseChartListContext } from '../../../frontend/hooks/singletons/use-mobile-chart-editor';
 import { Album } from '../../../types/Albums';
-import { trpc } from '../../../utils/trpc';
+import { trpc } from '../../../server/utils/trpc';
 
 export const genUuid = (uuid: string | string[] | undefined): string => {
   if (typeof uuid === 'string') {
