@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { ChartSettings } from '@prisma/client';
 import { SpringValue } from 'react-spring';
 import { Album } from '../../../types/Albums';
@@ -13,8 +13,8 @@ export interface DesktopChartEditorHookNode extends HookNode<State, Actions> {
 }
 
 export interface Actions {
-  setIsPreviewVisible: (value: boolean) => void;
-  setPreviewIndex: (value: number) => void;
+  setIsPreviewVisible: Dispatch<SetStateAction<boolean>>;
+  setPreviewIndex: Dispatch<SetStateAction<number>>;
   toggleAlbums: (value: boolean) => void;
   toggleTitle: (value: boolean) => void;
 }

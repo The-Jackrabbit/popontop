@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { useState } from 'react';
 import { trpc } from '../../../../../utils/trpc';
 import TextExpandingPill from '../../../../lib/ExpandingPill/TextExpandingPill/TextExpandingPill';
@@ -11,11 +11,12 @@ import Layout from './Layout';
 import SidebarNav from './SidebarNav/SidebarNav';
 
 export interface Props {
-  initialValues?: string[];
   isChartOwner: boolean;
   pageTitle: string;
   pageTitleBorderBottom: Color;
   settings: SettingsHookNode;
+  setIsPreviewVisible: Dispatch<SetStateAction<boolean>>;
+  isPreviewVisible: boolean;
   showOnboardingFlow: boolean;
   toggleAlbums: (value: boolean) => void;
   toggleTitle: (value: boolean) => void;
@@ -27,6 +28,8 @@ export const DesktopSidebar: React.FC<Props> = ({
   settings,
   pageTitleBorderBottom,
   showOnboardingFlow,
+  setIsPreviewVisible,
+  isPreviewVisible,
   toggleAlbums,
   toggleTitle,
 }) => {
@@ -86,6 +89,14 @@ export const DesktopSidebar: React.FC<Props> = ({
             </div>
 
             <div className="flex flex-row flex-wrap items-center gap-2 ">
+              <SwitchExpandingPill
+                className="inline-block"
+                label="show screenshot mode"
+                setValue={(value: boolean | null) =>
+                  setIsPreviewVisible(Boolean(value))
+                }
+                value={isPreviewVisible}
+              />
               <TextExpandingPill
                 label="Title background color"
                 setValue={(value: string) =>

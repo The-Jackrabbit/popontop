@@ -27,7 +27,7 @@ const Home: NextPage = () => {
   const {
     actions,
     chart,
-    state: { showOnboardingFlow },
+    state: { isPreviewVisible, showOnboardingFlow },
   } = useDesktopChartEditor({});
   const isLoading = chart.state.isCreateLoading || chart.state.isEditLoading;
 
@@ -92,6 +92,8 @@ const Home: NextPage = () => {
               pageTitle={
                 showOnboardingFlow ? 'getting started' : 'create chart'
               }
+              isPreviewVisible={isPreviewVisible}
+              setIsPreviewVisible={actions.setIsPreviewVisible}
               pageTitleBorderBottom={Color.fuchsia}
               settings={chart.settings}
               showOnboardingFlow={showOnboardingFlow}

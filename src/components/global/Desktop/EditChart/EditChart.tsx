@@ -17,6 +17,7 @@ import ProfileCircle from '../DesktopEditor/Actions/ProfileCircle/ProfileCircle'
 import DesktopEditor from '../DesktopEditor/DesktopEditor';
 import DesktopSidebar from '../DesktopEditor/Sidebar/DesktopSidebar';
 import { Color } from '../DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
+import { DesktopPreview } from '../DesktopPreviews/DesktopPreview';
 
 const EditChart = ({
   albums,
@@ -103,7 +104,11 @@ const EditChart = ({
         pageContent={
           <div className="h-full">
             {state.isPreviewVisible ? (
-              <div></div>
+              <DesktopPreview
+                chart={chart}
+                setPreviewIndex={actions.setPreviewIndex}
+                previewIndex={state.previewIndex}
+              />
             ) : (
               <DesktopEditor
                 chart={chart}
@@ -120,6 +125,8 @@ const EditChart = ({
               pageTitleBorderBottom={Color.blue}
               pageTitle={isChartOwner ? 'edit chart' : 'viewing chart'}
               settings={chart.settings}
+              setIsPreviewVisible={actions.setIsPreviewVisible}
+              isPreviewVisible={state.isPreviewVisible}
               showOnboardingFlow={false}
               toggleAlbums={actions.toggleAlbums}
               toggleTitle={actions.toggleTitle}

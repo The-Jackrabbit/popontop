@@ -1,3 +1,4 @@
+import isMobile from 'is-mobile';
 import { EMPTY_ALBUM } from '../../../../constants/empty-album';
 import { ChartHookNode } from '../../../../frontend/hooks/use-chart/use-chart';
 import { Album } from '../../../../types/Albums';
@@ -6,7 +7,7 @@ import Title from '../../../lib/Title/Title';
 export interface Props {
   chart: ChartHookNode;
 }
-const AlbumOverlay = ({
+export const AlbumOverlay = ({
   album,
   count,
   textColor,
@@ -22,11 +23,14 @@ const AlbumOverlay = ({
   return (
     <div
       className={`box-content flex aspect-square w-1/${count} basis-1/${count} items-center justify-center bg-opacity-10 bg-cover bg-center`}
-      style={{ backgroundImage: `url(${album.imageUrl})` }}
+      style={{
+        width: `${(1 / count) * 100}%`,
+        backgroundImage: `url(${album.imageUrl})`,
+      }}
     >
       <p
         style={{ color: textColor }}
-        className="flex h-full w-full items-center  self-center bg-opacity-75 bg-gradient-to-t from-[rgba(0,0,0,0.8)] to-[rgba(255,255,255,0.05)] p-4 text-center align-middle text-sm"
+        className="flex h-full w-full items-center justify-center self-center bg-opacity-75 bg-gradient-to-t from-[rgba(0,0,0,0.8)] to-[rgba(255,255,255,0.05)] text-center align-middle text-xs"
       >
         {albumDescription}
       </p>
@@ -34,14 +38,15 @@ const AlbumOverlay = ({
   );
 };
 const ScreenShot = ({ chart }: Props) => {
+  const size = isMobile() ? 'h-screen w-screen' : '';
   return (
     <div
       style={{
         backgroundColor: chart.settings.state.backgroundColor,
       }}
-      className="flex h-screen w-screen justify-center self-center pt-4 align-middle"
+      className={`flex ${size} justify-center self-center pt-4 align-middle`}
     >
-      <div className=" h-screen w-screen origin-top scale-[89%] p-6">
+      <div className={`${size} origin-top scale-[89%] p-6`}>
         {chart.settings.state.showTitle ? (
           <div className="pb-4">
             <Title
