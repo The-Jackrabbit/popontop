@@ -30,7 +30,7 @@ export const AlbumOverlay = ({
     >
       <p
         style={{ color: textColor }}
-        className="flex h-full w-full items-center justify-center self-center bg-opacity-75 bg-gradient-to-t from-[rgba(0,0,0,0.8)] to-[rgba(255,255,255,0.05)] text-center align-middle text-xs"
+        className="flex h-full w-full items-center justify-center self-center overflow-hidden bg-opacity-75 bg-gradient-to-t from-[rgba(0,0,0,0.8)] to-[rgba(255,255,255,0.05)] text-center align-middle text-xs"
       >
         {albumDescription}
       </p>

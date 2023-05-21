@@ -4,7 +4,7 @@ import ChartItem from './ChartItem/ChartItem';
 import Grid from '../../../../lib/Grid/Grid';
 import { EMPTY_ALBUM } from '../../../../../constants/empty-album';
 
-export function getBorderSizes(index: number, totalAlbums: number): string {
+export function getBorderSizes(index: number): string {
   let borderSizes = '';
 
   if (index % 2 === 0) {
@@ -46,27 +46,25 @@ export const DesktopChart: React.FC<Props> = ({
   borderSize,
   isReadOnly,
   items,
-}) => {
-  return (
-    <Grid
-      borderColor={borderColor}
-      borderSize={borderSize}
-      items={items}
-      itemComponent={({ index, x, y }) => (
-        <ChartItem
-          album={
-            items[index] !== undefined ? (items[index] as Album) : EMPTY_ALBUM
-          }
-          borderColor={borderColor}
-          borderSizes={getBorderSizes(index, items.length)}
-          index={index}
-          isReadOnly={isReadOnly}
-          rowIndex={x}
-          columnIndex={y}
-        />
-      )}
-    />
-  );
-};
+}) => (
+  <Grid
+    borderColor={borderColor}
+    borderSize={borderSize}
+    items={items}
+    itemComponent={({ index, x, y }) => (
+      <ChartItem
+        album={
+          items[index] !== undefined ? (items[index] as Album) : EMPTY_ALBUM
+        }
+        borderColor={borderColor}
+        borderSizes={getBorderSizes(index)}
+        index={index}
+        isReadOnly={isReadOnly}
+        rowIndex={x}
+        columnIndex={y}
+      />
+    )}
+  />
+);
 
 export default DesktopChart;

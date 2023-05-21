@@ -5,7 +5,7 @@ import { trpc } from '../../../utils/trpc';
 export const useSearch = (): {
   data: Album[] | undefined;
   onType: (value: string) => void;
-  search: () => Promise<void>;
+  searchText: string;
 } => {
   const [searchText, setSearchText] = useState('');
   const [timeoutId, setTimeoutId] = useState<null | NodeJS.Timeout>(null);
@@ -36,6 +36,6 @@ export const useSearch = (): {
   return {
     data,
     onType,
-    search,
+    searchText,
   };
 };

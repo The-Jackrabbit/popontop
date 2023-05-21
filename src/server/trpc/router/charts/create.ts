@@ -69,6 +69,7 @@ export const createChart = async (
       border_color: settings.border_color,
       border_size: settings.border_size,
       chart_id: chart.uuid,
+      number_of_albums: settings.number_of_albums,
       show_albums: settings.show_albums,
       show_title: settings.show_title,
       text_color: settings.text_color,

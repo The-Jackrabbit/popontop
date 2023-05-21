@@ -40,7 +40,6 @@ export const editChart = async (
   settings: WritableChartSettings,
   userId?: string
 ) => {
-  console.log('\n\n\neditChart');
   const originalChart = await prisma.chart_to_user.findFirst({
     where: {
       Chart: {
@@ -59,7 +58,6 @@ export const editChart = async (
     },
   });
 
-  console.log('const chart = await prisma.chart.update({');
   const chart = await prisma.chart.update({
     where: {
       uuid: chartUuid,
@@ -71,6 +69,7 @@ export const editChart = async (
           background_color: settings.background_color,
           border_color: settings.border_color,
           border_size: settings.border_size,
+          number_of_albums: settings.number_of_albums,
           show_albums: settings.show_albums,
           show_title: settings.show_title,
           text_color: settings.text_color,
@@ -83,7 +82,6 @@ export const editChart = async (
     },
   });
 
-  console.log('\n\nconst albumsInChart = await prisma.album.createMany({');
   const albumsInChart = await prisma.album.createMany({
     data: albums.map((album: Album) => ({
       name: album.name,

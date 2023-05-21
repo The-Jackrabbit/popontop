@@ -7,6 +7,7 @@ import useList, { ListHookNode } from '../lists/use-list';
 import useChartSettings, { SettingsHookNode } from './use-chart-settings';
 import { EMPTY_ALBUM } from '../../../constants/empty-album';
 import { useRouter } from 'next/router';
+import { debug } from 'console';
 
 const getNumberedList = (numberOfAlbums: number, listState: Album[]) => {
   const emptyTextList = [...new Array(numberOfAlbums)];
@@ -107,20 +108,22 @@ export const useChart = ({
   };
 
   const editChart = async (): Promise<string> => {
+    const _settings = {
+      background_color: settings.state.backgroundColor,
+      border_color: settings.state.borderColor,
+      border_size: settings.state.borderSize,
+      number_of_albums: settings.state.numberOfAlbums,
+      show_albums: settings.state.showAlbums,
+      show_title: settings.state.showTitle,
+      text_color: settings.state.textColor,
+      title_background_color: settings.state.titleBackgroundColor,
+    };
+    debugger;
     const result = await editMutation.mutateAsync({
       uuid: chartUuid,
       albums: list.state,
       name: chartTitle,
-      settings: {
-        background_color: settings.state.backgroundColor,
-        border_color: settings.state.borderColor,
-        border_size: settings.state.borderSize,
-        number_of_albums: settings.state.numberOfAlbums,
-        show_albums: settings.state.showAlbums,
-        show_title: settings.state.showTitle,
-        text_color: settings.state.textColor,
-        title_background_color: settings.state.titleBackgroundColor,
-      },
+      settings: _settings,
     });
 
     const savedChartId = result?.chart?.uuid ?? '';
