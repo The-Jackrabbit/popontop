@@ -1,7 +1,7 @@
-import { DesktopEditorLoader } from '../../../DesktopEditor/Loader';
+import { DesktopEditorLoader } from '../../DesktopEditor/Loader';
 
 export const Loader: React.FC = () => {
-  return <DesktopEditorLoader />
+  return <DesktopEditorLoader />;
 };
 
 export default Loader;

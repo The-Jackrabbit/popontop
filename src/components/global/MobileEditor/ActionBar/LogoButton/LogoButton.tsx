@@ -1,6 +1,6 @@
 import NavDot, {
   Color,
-} from '../../../DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
+} from '../../../Desktop/DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
 
 export interface Props {
   end: () => void;

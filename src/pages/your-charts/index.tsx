@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import React from 'react';
-import { SidebarLayout } from '../../components/global/DesktopEditor/Sidebar/Layout';
-import SidebarNav from '../../components/global/DesktopEditor/Sidebar/SidebarNav/SidebarNav';
+import { SidebarLayout } from '../../components/global/Desktop/DesktopEditor/Sidebar/Layout';
+import SidebarNav from '../../components/global/Desktop/DesktopEditor/Sidebar/SidebarNav/SidebarNav';
 import DesktopPage from '../../components/lib/DesktopPage/DesktopPage';
 import { ListOfCharts } from '../../components/lib/ListOfCharts/ListOfCharts';
 import { trpc } from '../../utils/trpc';

@@ -13,11 +13,15 @@ export interface DesktopChartEditorHookNode extends HookNode<State, Actions> {
 }
 
 export interface Actions {
+  setIsPreviewVisible: (value: boolean) => void;
+  setPreviewIndex: (value: number) => void;
   toggleAlbums: (value: boolean) => void;
   toggleTitle: (value: boolean) => void;
 }
 
 export interface State {
+  isPreviewVisible: boolean;
+  previewIndex: number;
   listStyle: { width: SpringValue<string> };
   titleStyle: { height: SpringValue<string> };
   showOnboardingFlow: boolean;
@@ -53,18 +57,25 @@ export const useDesktopChartEditor = ({
 
   const [showOnboardingFlow] = useState(!true);
 
+  const [isPreviewVisible, setIsPreviewVisible] = useState(false);
+  const [previewIndex, setPreviewIndex] = useState(0);
+
   useEffect(() => {
     setThemeColorMetaTag(chart.settings.state.backgroundColor);
   }, [chart.settings.state.backgroundColor]);
 
   return {
     actions: {
+      setIsPreviewVisible,
+      setPreviewIndex,
       toggleAlbums,
       toggleTitle,
     },
     chart,
     state: {
+      isPreviewVisible,
       listStyle,
+      previewIndex,
       showOnboardingFlow,
       titleStyle,
     },

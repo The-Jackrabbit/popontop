@@ -1,11 +1,11 @@
 import type { NextPage } from 'next';
 import DesktopPage from '../../components/lib/DesktopPage/DesktopPage';
-import SidebarLayout from '../../components/global/DesktopEditor/Sidebar/Layout';
-import SidebarNav from '../../components/global/DesktopEditor/Sidebar/SidebarNav/SidebarNav';
+import SidebarLayout from '../../components/global/Desktop/DesktopEditor/Sidebar/Layout';
+import SidebarNav from '../../components/global/Desktop/DesktopEditor/Sidebar/SidebarNav/SidebarNav';
 import { colorMap } from '../../constants/colors';
 import Image from 'next/image';
-import { DesktopActions } from '../../components/global/DesktopEditor/Actions/DesktopActions';
-import ProfileCircle from '../../components/global/DesktopEditor/Actions/ProfileCircle/ProfileCircle';
+import { DesktopActions } from '../../components/global/Desktop/DesktopEditor/Actions/DesktopActions';
+import ProfileCircle from '../../components/global/Desktop/DesktopEditor/Actions/ProfileCircle/ProfileCircle';
 
 const Credits: NextPage = () => {
   return (

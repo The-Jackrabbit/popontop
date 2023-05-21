@@ -2,7 +2,7 @@ import { ListRowMode } from '../Mobile/ListRow/ListRow';
 import { ChartListItem } from './ChartListItem/ChartListItem';
 import { IChartListItem } from '../../../server/trpc/router/charts/getChartsForUser';
 import { colorMap } from '../../../constants/colors';
-import { Color } from '../../global/DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
+import { Color } from '../../global/Desktop/DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
 import { ListOfChartsLoader } from './Loader';
 
 export interface Props {

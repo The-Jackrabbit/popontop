@@ -11,12 +11,12 @@ import { Album } from '../../../../types/Albums';
 import DesktopPage from '../../../lib/DesktopPage/DesktopPage';
 import { ICON_STYLE } from '../../../lib/FilterButton/FilterButton';
 import LoadingBouncer from '../../../lib/LoadingBouncer/LoadingBouncer';
-import ActionButton from '../../DesktopEditor/Actions/ActionButton/ActionButton';
-import { DesktopActions } from '../../DesktopEditor/Actions/DesktopActions';
-import ProfileCircle from '../../DesktopEditor/Actions/ProfileCircle/ProfileCircle';
-import DesktopEditor from '../../DesktopEditor/DesktopEditor';
-import DesktopSidebar from '../../DesktopEditor/Sidebar/DesktopSidebar';
-import { Color } from '../../DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
+import ActionButton from '../DesktopEditor/Actions/ActionButton/ActionButton';
+import { DesktopActions } from '../DesktopEditor/Actions/DesktopActions';
+import ProfileCircle from '../DesktopEditor/Actions/ProfileCircle/ProfileCircle';
+import DesktopEditor from '../DesktopEditor/DesktopEditor';
+import DesktopSidebar from '../DesktopEditor/Sidebar/DesktopSidebar';
+import { Color } from '../DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
 
 const EditChart = ({
   albums,
@@ -31,7 +31,7 @@ const EditChart = ({
   isChartOwner: boolean;
   initialSettings?: ChartSettings;
 }) => {
-  const { actions, chart } = useDesktopChartEditor({
+  const { actions, chart, state } = useDesktopChartEditor({
     initialList: albums,
     chartName,
     chartUuid,
@@ -102,11 +102,15 @@ const EditChart = ({
         backgroundColor={chart.settings.state.backgroundColor}
         pageContent={
           <div className="h-full">
-            <DesktopEditor
-              chart={chart}
-              readonly={false}
-              showOnboardingFlow={false}
-            />
+            {state.isPreviewVisible ? (
+              <div></div>
+            ) : (
+              <DesktopEditor
+                chart={chart}
+                readonly={false}
+                showOnboardingFlow={false}
+              />
+            )}
           </div>
         }
         sidebar={

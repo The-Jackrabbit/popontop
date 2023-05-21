@@ -6,7 +6,7 @@ import { genUuid } from '../../../../../pages/mobile/charts/[uuid]';
 import useDesktopChartEditor from '../../../../../frontend/hooks/singletons/use-desktop-chart-editor';
 import { ChartSettings } from '@prisma/client';
 import { Album } from '../../../../../types/Albums';
-import DesktopEditor from '../../../DesktopEditor/DesktopEditor';
+import DesktopEditor from '../../DesktopEditor/DesktopEditor';
 
 const ApiWrapper = () => {
   const router = useRouter();

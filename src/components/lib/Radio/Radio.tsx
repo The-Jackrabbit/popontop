@@ -1,4 +1,4 @@
-import { Color } from '../../global/DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
+import { Color } from '../../global/Desktop/DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
 import { RadioOption } from './RadioOption/RadioOption';
 
 export interface Props {
@@ -16,10 +16,10 @@ export const Radio: React.FC<Props> = ({ onClick, value }) => {
         onClick={() => onClick(false)}
       />
       <p
-        className='
-          text-[rgb(212_212_212)]
-          text-[48px] translate-y-1 dark:text-neutral-900
-        '
+        className="
+          translate-y-1
+          text-[48px] text-[rgb(212_212_212)] dark:text-neutral-900
+        "
       >
         /
       </p>
