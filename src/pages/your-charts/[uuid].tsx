@@ -15,7 +15,7 @@ import DesktopPage from '../../components/lib/DesktopPage/DesktopPage';
 const YourCharts: React.FC = () => {
   const router = useRouter();
   const uuid = router.query.uuid as string;
-  const { data } = trpc.charts.getUserCharts.useQuery(undefined, {
+  const { data, isLoading } = trpc.charts.getUserCharts.useQuery(undefined, {
     refetchOnWindowFocus: false,
   });
 
@@ -50,6 +50,7 @@ const YourCharts: React.FC = () => {
             <div className="h-full overflow-x-visible">
               <ListOfCharts
                 activeChartUuid={uuid}
+                isLoading={isLoading}
                 listOfCharts={data}
                 setChartBeingViewed={(uuid: string) => {
                   router.push(`/your-charts/${uuid}`);
