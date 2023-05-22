@@ -5,6 +5,8 @@ import MobileEditor from '../../../components/global/MobileEditor/MobileEditor';
 import { UseChartListContext } from '../../../frontend/hooks/singletons/use-mobile-chart-editor';
 import { Album } from '../../../types/Albums';
 import { trpc } from '../../../server/utils/trpc';
+import { useEffect } from 'react';
+import { resetThemeColorMetaTag } from '../../../server/utils/mobile-theme';
 
 export const genUuid = (uuid: string | string[] | undefined): string => {
   if (typeof uuid === 'string') {
@@ -19,6 +21,9 @@ const ChartPage: NextPage = () => {
 
   const n = genUuid(uuid);
 
+  useEffect(() => {
+    resetThemeColorMetaTag();
+  }, []);
   const { data, isLoading } = trpc.charts.getById.useQuery(
     { uuid: n },
     {
