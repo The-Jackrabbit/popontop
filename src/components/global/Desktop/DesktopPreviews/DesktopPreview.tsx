@@ -7,7 +7,7 @@ import { Dispatch, SetStateAction } from 'react';
 export interface Props {
   chart: ChartHookNode;
   previewIndex: number;
-  setPreviewIndex: Dispatch<SetStateAction<number>>;
+  setPreviewIndex?: Dispatch<SetStateAction<number>>;
 }
 
 const transformRows = (rows: number[][]): number[][] => {
@@ -24,86 +24,82 @@ const transformRows = (rows: number[][]): number[][] => {
   return trows;
 };
 
+export const CHART_TEMPLATES = {
+  honeycomb10: [
+    [0, 1],
+    [0, 1, 2],
+    [0, 1, 2],
+    [0, 1],
+  ],
+  classics: [
+    [0, 1, 2, 3, 4, 5],
+    [0, 1, 2, 3, 4, 5],
+    [],
+    [0, 1, 2, 3, 4, 5, 6, 7, 8],
+    [0, 1, 2, 3, 4, 5, 6, 7, 8],
+    [],
+    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+  ],
+  r50: [
+    [0, 1, 2, 3, 4],
+    [0, 1, 2, 3, 4],
+    [0, 1, 2, 3, 4],
+    [0, 1, 2, 3, 4],
+    [0, 1, 2, 3, 4],
+    [0, 1, 2, 3, 4],
+    [0, 1, 2, 3, 4],
+    [0, 1, 2, 3, 4],
+  ],
+  r100: [
+    [0, 1, 2, 3, 4, 5],
+    [0, 1, 2, 3, 4, 5],
+    [0, 1, 2, 3, 4, 5, 6, 7],
+    [0, 1, 2, 3, 4, 5, 6, 7],
+    [0, 1, 2, 3, 4, 5, 6, 7],
+    [0, 1, 2, 3, 4, 5, 6, 7],
+    [0, 1, 2, 3, 4, 5, 6, 7],
+    [0, 1, 2, 3, 4, 5, 6, 7],
+    [0, 1, 2, 3, 4, 5, 6, 7],
+    [0, 1, 2, 3, 4, 5, 6, 7],
+    [0, 1, 2, 3, 4, 5, 6, 7],
+    [0, 1, 2, 3, 4, 5, 6, 7],
+    [0, 1, 2, 3, 4, 5, 6, 7],
+  ],
+  top50: [
+    [0, 1, 2, 3],
+    [0, 1, 2, 3],
+    [],
+    [0, 1, 2, 3, 4, 5],
+    [0, 1, 2, 3, 4, 5],
+    [0, 1, 2, 3, 4, 5],
+    [],
+    [0, 1, 2, 3, 4, 5, 6, 7],
+    [0, 1, 2, 3, 4, 5, 6, 7],
+    [0, 1, 2, 3, 4, 5, 6, 7],
+  ],
+};
 export const DesktopPreview = ({
   chart,
   previewIndex,
   setPreviewIndex,
 }: Props) => {
-  // const rows = [
-  //   [0, 1, 2, 3, 4],
-  //   [5, 6, 7, 8, 9],
-  // ];
-  const templates = {
-    classics: [
-      [0, 1, 2, 3, 4, 5],
-      [0, 1, 2, 3, 4, 5],
-      [],
-      [0, 1, 2, 3, 4, 5, 6, 7, 8],
-      [0, 1, 2, 3, 4, 5, 6, 7, 8],
-      [],
-      [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-      [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-      [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-      [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-      [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-      [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-      [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-    ],
-    r50: [
-      [0, 1, 2, 3, 4],
-      [0, 1, 2, 3, 4],
-      [0, 1, 2, 3, 4],
-      [0, 1, 2, 3, 4],
-      [0, 1, 2, 3, 4],
-      [0, 1, 2, 3, 4],
-      [0, 1, 2, 3, 4],
-      [0, 1, 2, 3, 4],
-    ],
-    r100: [
-      [0, 1, 2, 3, 4, 5],
-      [0, 1, 2, 3, 4, 5],
-      [0, 1, 2, 3, 4, 5, 6, 7],
-      [0, 1, 2, 3, 4, 5, 6, 7],
-      [0, 1, 2, 3, 4, 5, 6, 7],
-      [0, 1, 2, 3, 4, 5, 6, 7],
-      [0, 1, 2, 3, 4, 5, 6, 7],
-      [0, 1, 2, 3, 4, 5, 6, 7],
-      [0, 1, 2, 3, 4, 5, 6, 7],
-      [0, 1, 2, 3, 4, 5, 6, 7],
-      [0, 1, 2, 3, 4, 5, 6, 7],
-      [0, 1, 2, 3, 4, 5, 6, 7],
-      [0, 1, 2, 3, 4, 5, 6, 7],
-    ],
-    top50: [
-      [0, 1, 2, 3],
-      [0, 1, 2, 3],
-      [],
-      [0, 1, 2, 3, 4, 5],
-      [0, 1, 2, 3, 4, 5],
-      [0, 1, 2, 3, 4, 5],
-      [],
-      [0, 1, 2, 3, 4, 5, 6, 7],
-      [0, 1, 2, 3, 4, 5, 6, 7],
-      [0, 1, 2, 3, 4, 5, 6, 7],
-    ],
-    honeycomb10: [
-      [0, 1],
-      [0, 1, 2],
-      [0, 1, 2],
-      [0, 1],
-    ],
-  };
-  const values = Object.values(templates);
+  const values = Object.values(CHART_TEMPLATES);
   const template = values.at(previewIndex) as number[][];
   const rows = transformRows(template);
 
   return (
-    <div className="flex h-full flex-col justify-between py-8 px-24">
-      <div className="overflow-y-hidden">
+    <div className="flex h-min flex-col justify-between ">
+      <div className={`${setPreviewIndex ? 'max-h-96' : ''} overflow-y-hidden`}>
         {rows.map((row, rowIndex) => (
           <>
             {row.length === 0 ? (
-              <div className="m-4" key={`row-${rowIndex}-empty`}></div>
+              <div className="m-4" key={`row-${rowIndex}-empty`} />
             ) : (
               <div className="flex w-full bg-blue-300" key={`row-${rowIndex}`}>
                 {row.map((albumIndex) => (
@@ -124,15 +120,17 @@ export const DesktopPreview = ({
           </>
         ))}
       </div>
-      <div className="mt-4 h-min shrink basis-9">
-        <NumericExpandingPillContent
-          max={values.length - 1}
-          min={0}
-          setValue={setPreviewIndex}
-          textColor={chart.settings.state.textColor}
-          value={previewIndex}
-        />
-      </div>
+      {setPreviewIndex ? (
+        <div className="mt-4 h-min shrink basis-9">
+          <NumericExpandingPillContent
+            max={values.length - 1}
+            min={0}
+            setValue={setPreviewIndex}
+            textColor={chart.settings.state.textColor}
+            value={previewIndex}
+          />
+        </div>
+      ) : null}
     </div>
   );
 };

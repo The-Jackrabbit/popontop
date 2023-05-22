@@ -1,6 +1,6 @@
 import { ChartSettings } from '@prisma/client';
 import clamp from 'lodash.clamp';
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import {
   JUMP_VALUES,
   RowMovementType,
@@ -26,10 +26,12 @@ export interface MobileChartEditorHookNode extends HookNode<State, Actions> {
 export type Actions = {
   onRearrangeClick: (rowMovementType: RowMovementType, index: number) => void;
   onClickSheetDeadArea: () => void;
+  setPreviewIndex: Dispatch<SetStateAction<number>>;
   toggleTitle: () => void;
 };
 
 export interface State {
+  previewIndex: number;
   showIntroduction: boolean;
 }
 
@@ -52,6 +54,7 @@ const useMobileChartEditor = ({
     (initialList && initialList.length > 0) ||
       context === UseChartListContext.EDIT
   );
+  const [previewIndex, setPreviewIndex] = useState(0);
   const chart = useChart({
     initialSettings,
     chartUuid,
@@ -98,11 +101,13 @@ const useMobileChartEditor = ({
     actions: {
       onRearrangeClick,
       onClickSheetDeadArea,
+      setPreviewIndex,
       toggleTitle,
     },
     chart,
     editor,
     state: {
+      previewIndex,
       showIntroduction,
     },
   };

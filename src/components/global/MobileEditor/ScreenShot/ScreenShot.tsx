@@ -1,12 +1,14 @@
 import isMobile from 'is-mobile';
-import { EMPTY_ALBUM } from '../../../../constants/empty-album';
 import { ChartHookNode } from '../../../../frontend/hooks/use-chart/use-chart';
 import { Album } from '../../../../types/Albums';
 import Title from '../../../lib/Title/Title';
+import { DesktopPreview } from '../../Desktop/DesktopPreviews/DesktopPreview';
 
 export interface Props {
   chart: ChartHookNode;
+  previewIndex: number;
 }
+
 export const AlbumOverlay = ({
   album,
   albumOverlayColor = 'rgba(0,0,0,0.8)',
@@ -41,16 +43,17 @@ export const AlbumOverlay = ({
     </div>
   );
 };
-const ScreenShot = ({ chart }: Props) => {
+const ScreenShot = ({ chart, previewIndex }: Props) => {
   const size = isMobile() ? 'h-screen w-screen' : '';
+
   return (
     <div
       style={{
         backgroundColor: chart.settings.state.backgroundColor,
       }}
-      className={`flex ${size} justify-center self-center pt-4 align-middle`}
+      className={`flex ${size} justify-center self-center  align-middle`}
     >
-      <div className={`${size} origin-top scale-[89%] p-6`}>
+      <div className={`${size} origin-top  p-4`}>
         {chart.settings.state.showTitle ? (
           <div className="pb-4">
             <Title
@@ -63,64 +66,7 @@ const ScreenShot = ({ chart }: Props) => {
             />
           </div>
         ) : null}
-        <div className="flex w-full bg-red-300">
-          <AlbumOverlay
-            album={chart.list.state.at(0) ?? EMPTY_ALBUM}
-            count={2}
-            textColor={chart.settings.state.textColor}
-          />
-          <AlbumOverlay
-            album={chart.list.state.at(1) ?? EMPTY_ALBUM}
-            count={2}
-            textColor={chart.settings.state.textColor}
-          />
-        </div>
-        <div className="flex w-full bg-green-300">
-          <AlbumOverlay
-            album={chart.list.state.at(2) ?? EMPTY_ALBUM}
-            count={2}
-            textColor={chart.settings.state.textColor}
-          />
-          <AlbumOverlay
-            album={chart.list.state.at(3) ?? EMPTY_ALBUM}
-            count={2}
-            textColor={chart.settings.state.textColor}
-          />
-        </div>
-        <div className="flex w-full bg-blue-300">
-          <AlbumOverlay
-            album={chart.list.state.at(4) ?? EMPTY_ALBUM}
-            count={3}
-            textColor={chart.settings.state.textColor}
-          />
-          <AlbumOverlay
-            album={chart.list.state.at(5) ?? EMPTY_ALBUM}
-            count={3}
-            textColor={chart.settings.state.textColor}
-          />
-          <AlbumOverlay
-            album={chart.list.state.at(6) ?? EMPTY_ALBUM}
-            count={3}
-            textColor={chart.settings.state.textColor}
-          />
-        </div>
-        <div className="flex w-full bg-amber-300">
-          <AlbumOverlay
-            album={chart.list.state.at(7) ?? EMPTY_ALBUM}
-            count={3}
-            textColor={chart.settings.state.textColor}
-          />
-          <AlbumOverlay
-            album={chart.list.state.at(8) ?? EMPTY_ALBUM}
-            count={3}
-            textColor={chart.settings.state.textColor}
-          />
-          <AlbumOverlay
-            album={chart.list.state.at(9) ?? EMPTY_ALBUM}
-            count={3}
-            textColor={chart.settings.state.textColor}
-          />
-        </div>
+        <DesktopPreview chart={chart} previewIndex={previewIndex} />
       </div>
     </div>
   );

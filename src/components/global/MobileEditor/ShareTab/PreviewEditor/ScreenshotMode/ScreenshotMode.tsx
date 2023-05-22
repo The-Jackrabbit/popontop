@@ -9,10 +9,15 @@ export interface Props {
   columns: number;
   list: Album[];
   onExit: () => void;
+  previewIndex: number;
   rows: number;
 }
 
-export const ScreenshotMode: React.FC<Props> = ({ chart, onExit }) => (
+export const ScreenshotMode: React.FC<Props> = ({
+  chart,
+  onExit,
+  previewIndex,
+}) => (
   <div className="fixed top-0 left-0 z-50">
     <div className="fixed right-0">
       <div
@@ -24,7 +29,7 @@ export const ScreenshotMode: React.FC<Props> = ({ chart, onExit }) => (
           "
         onClick={() => onExit()}
       >
-        <ScreenShot chart={chart} />
+        <ScreenShot chart={chart} previewIndex={previewIndex} />
       </div>
     </div>
   </div>

@@ -55,7 +55,9 @@ const MobileEditor: React.FC<Props> = ({
             borderSize={chart.settings.state.borderSize}
             chartTitle={chart.state.chartTitle}
             chart={chart}
+            previewIndex={state.previewIndex}
             list={chart.list.state}
+            setPreviewIndex={actions.setPreviewIndex}
             titleBackgroundColor={chart.settings.state.titleBackgroundColor}
           />
         }

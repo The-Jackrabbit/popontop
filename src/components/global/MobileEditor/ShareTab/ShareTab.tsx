@@ -1,5 +1,5 @@
 import { HomeIcon, ShareIcon } from '@heroicons/react/20/solid';
-import React, { useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { ChartHookNode } from '../../../../frontend/hooks/use-chart/use-chart';
 import { Album } from '../../../../types/Albums';
 import {
@@ -15,6 +15,8 @@ export interface Props {
   chart: ChartHookNode;
   chartTitle: string;
   list: Album[];
+  previewIndex: number;
+  setPreviewIndex: Dispatch<SetStateAction<number>>;
   titleBackgroundColor: string;
 }
 
@@ -23,6 +25,8 @@ export const ShareTab: React.FC<Props> = ({
   borderSize,
   chart,
   list,
+  previewIndex,
+  setPreviewIndex,
 }) => {
   const [isMainOverlayVisible, setIsMainOverlayVisible] = useState(false);
 
@@ -67,6 +71,8 @@ export const ShareTab: React.FC<Props> = ({
           borderSize={borderSize}
           chart={chart}
           list={list}
+          previewIndex={previewIndex}
+          setPreviewIndex={setPreviewIndex}
         />
       ) : null}
     </div>

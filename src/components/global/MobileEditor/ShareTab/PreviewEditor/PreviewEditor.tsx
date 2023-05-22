@@ -1,5 +1,5 @@
 import { HomeIcon } from '@heroicons/react/20/solid';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { colorMap } from '../../../../../constants/colors';
 import { ChartHookNode } from '../../../../../frontend/hooks/use-chart/use-chart';
 import { Album } from '../../../../../types/Albums';
@@ -10,12 +10,19 @@ import {
 import FilterButton from '../../../../lib/FilterButton/FilterButton';
 import { Color } from '../../../Desktop/DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
 import { ScreenshotMode } from './ScreenshotMode/ScreenshotMode';
+import {
+  CHART_TEMPLATES,
+  DesktopPreview,
+} from '../../../Desktop/DesktopPreviews/DesktopPreview';
+import { NumericExpandingPillContent } from '../../../../lib/ExpandingPill/NumericExpandingPill/NumericExpandingPill';
 
 export interface Props {
   borderColor: string;
   borderSize: number;
   chart: ChartHookNode;
   list: Album[];
+  previewIndex: number;
+  setPreviewIndex: Dispatch<SetStateAction<number>>;
 }
 
 export const PreviewEditor: React.FC<Props> = ({
@@ -23,6 +30,8 @@ export const PreviewEditor: React.FC<Props> = ({
   borderSize,
   chart,
   list,
+  previewIndex,
+  setPreviewIndex,
 }) => {
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
   const onClickPreview = () => {
@@ -45,7 +54,7 @@ export const PreviewEditor: React.FC<Props> = ({
         align-middle dark:bg-neutral-900
       `}
     >
-      <div>
+      <div className="overflow-y-hidden">
         <h2 className="text-3xl font-bold">share</h2>
         <div
           className={`
@@ -57,7 +66,7 @@ export const PreviewEditor: React.FC<Props> = ({
         <p className="my-4">
           Once in screenshot mode, tap anywhere on your screen to exit out
         </p>
-        <p>
+        <p className="mb-4">
           Click the{' '}
           <HomeIcon
             className={
@@ -66,23 +75,36 @@ export const PreviewEditor: React.FC<Props> = ({
           />{' '}
           button to go back to the list editor
         </p>
+        <DesktopPreview chart={chart} previewIndex={previewIndex} />
       </div>
-      <FilterButton
-        ariaLabel="save chart"
-        className="h-12  p-[2px] shadow-lg"
-        rounding="rounded-full"
-        onClick={onClickPreview}
-        hasGradientIndicator={true}
-        isActive={true}
-      >
-        Enter screenshot mode
-      </FilterButton>
+      <div className="flex gap-8 overflow-y-hidden p-2">
+        <div className="basis-1/3">
+          <NumericExpandingPillContent
+            max={Object.keys(CHART_TEMPLATES).length - 1}
+            min={0}
+            setValue={setPreviewIndex}
+            textColor={chart.settings.state.textColor}
+            value={previewIndex}
+          />
+        </div>
+        <FilterButton
+          ariaLabel="save chart"
+          className="h-12  p-[2px] shadow-lg"
+          rounding="rounded-full"
+          onClick={onClickPreview}
+          hasGradientIndicator={true}
+          isActive={true}
+        >
+          <p className="p-4">Enter screenshot mode</p>
+        </FilterButton>
+      </div>
       {isOverlayVisible ? (
         <ScreenshotMode
           borderColor={borderColor}
           borderSize={borderSize}
           chart={chart}
           columns={-2}
+          previewIndex={previewIndex}
           list={list}
           onExit={onExit}
           rows={-2}
