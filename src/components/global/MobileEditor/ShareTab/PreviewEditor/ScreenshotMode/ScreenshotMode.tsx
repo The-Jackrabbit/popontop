@@ -23,7 +23,7 @@ export const ScreenshotMode: React.FC<Props> = ({
       <div
         className="
             z-50 flex
-            h-screen w-screen
+             w-screen
             justify-center
             bg-[rgba(255,255,255,0.98)] dark:bg-[rgba(0,0,0,0.98)]
           "

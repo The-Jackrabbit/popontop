@@ -2,7 +2,7 @@ import { ChartHookNode } from '../../../../frontend/hooks/use-chart/use-chart';
 import { AlbumOverlay } from '../../MobileEditor/ScreenShot/ScreenShot';
 import { EMPTY_ALBUM } from '../../../../constants/empty-album';
 import { NumericExpandingPillContent } from '../../../lib/ExpandingPill/NumericExpandingPill/NumericExpandingPill';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 export interface Props {
   chart: ChartHookNode;
@@ -92,16 +92,40 @@ export const DesktopPreview = ({
   const values = Object.values(CHART_TEMPLATES);
   const template = values.at(previewIndex) as number[][];
   const rows = transformRows(template);
+  const [fitWidth, setFitWidth] = useState<boolean>(false);
+  const [height, setHeight] = useState<string>('100%');
+  const [width, setWidth] = useState<string>('100%');
+
+  useEffect(() => {
+    const parentElement = document.getElementById('parent');
+    if (parentElement) {
+      const parentWidth = parentElement.offsetWidth;
+      const parentHeight = parentElement.offsetHeight;
+      const fitWidth = parentWidth >= parentHeight;
+      setFitWidth(fitWidth);
+
+      if (fitWidth) {
+        setHeight(`${parentHeight}px`);
+      } else {
+        setWidth(`${parentWidth - 40}px`);
+      }
+    }
+  }, []);
 
   return (
-    <div className="flex h-min flex-col justify-between ">
-      <div className={`${setPreviewIndex ? 'max-h-96' : ''} overflow-y-hidden`}>
+    <div id="parent" className="flex justify-center">
+      <div
+        className={` ${
+          fitWidth ? 'h-auto w-full' : 'h-full w-auto'
+        } } max-h-full max-w-full`}
+        style={{ height, width }}
+      >
         {rows.map((row, rowIndex) => (
           <>
             {row.length === 0 ? (
               <div className="m-4" key={`row-${rowIndex}-empty`} />
             ) : (
-              <div className="flex w-full bg-blue-300" key={`row-${rowIndex}`}>
+              <div className="flex  bg-blue-300" key={`row-${rowIndex}`}>
                 {row.map((albumIndex) => (
                   <AlbumOverlay
                     album={chart.list.state.at(albumIndex) ?? EMPTY_ALBUM}
