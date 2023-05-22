@@ -3,10 +3,10 @@ import { trpc } from '../../../../../server/utils/trpc';
 import { Loader } from './Loader';
 import { useRouter } from 'next/router';
 import { genUuid } from '../../../../../pages/mobile/charts/[uuid]';
-import useDesktopChartEditor from '../../../../../frontend/hooks/singletons/use-desktop-chart-editor';
 import { ChartSettings } from '@prisma/client';
 import { Album } from '../../../../../types/Albums';
 import DesktopEditor from '../../DesktopEditor/DesktopEditor';
+import useChart from '../../../../../frontend/hooks/use-chart/use-chart';
 
 const ApiWrapper = () => {
   const router = useRouter();
@@ -56,12 +56,13 @@ export const ViewChart: React.FC<{
   settings?: ChartSettings;
   uuid: string;
 }> = ({ albums, name, settings, uuid }) => {
-  const { chart } = useDesktopChartEditor({
-    initialList: albums,
-    chartName: name,
-    chartUuid: uuid,
+  const chart = useChart({
     initialSettings: settings,
+    chartUuid: uuid,
+    initialChartTitle: name,
+    initialList: albums,
   });
+
   return (
     <div
       style={{

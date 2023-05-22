@@ -79,7 +79,7 @@ export const DesktopSettings: React.FC<Props> = ({
         }
         value={settings.state.numberOfAlbums}
       />
-      <NumericExpandingPill
+      {/* <NumericExpandingPill
         label="Number of columns"
         min={0}
         max={10}
@@ -94,7 +94,7 @@ export const DesktopSettings: React.FC<Props> = ({
         max={10}
         setValue={((value: number) => settings.actions.setRows(value)) as any}
         value={settings.state.rows}
-      />
+      /> */}
     </div>
   </>
 );

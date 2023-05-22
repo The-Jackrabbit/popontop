@@ -30,6 +30,12 @@ export const setThemeColorMetaTag = (color: string) => {
   themeColorMetaTag.setAttribute('content', color);
 };
 
+export const getThemeColor = () => {
+  const { themeColorMetaTag } = getThemeColorMetaTag();
+
+  return themeColorMetaTag.getAttribute('content');
+};
+
 export const startScreenshotMode = (backgroundColor: string) => {
   setThemeColorMetaTag(backgroundColor);
   // const { darkModeThemeMetaTag, themeColorMetaTag } = getThemeColorMetaTag();
