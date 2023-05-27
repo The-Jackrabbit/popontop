@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  ChartListItemLoader,
-} from './ChartListItem/ChartListItem';
+import { ChartListItemLoader } from './ChartListItem/ChartListItem';
 
 export const ListOfChartsLoader: React.FC = ({}) => (
   <div className="max-h-[80vh] overflow-y-scroll">

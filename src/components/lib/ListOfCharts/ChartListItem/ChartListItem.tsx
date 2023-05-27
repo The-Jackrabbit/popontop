@@ -58,15 +58,15 @@ export const ChartListItemContent: React.FC<ChartListItemContentProps> = ({
 }) => (
   <div
     className={`
-        mb-2 flex
-        cursor-pointer
-        justify-between
-        rounded-md
-        p-1
-        hover:bg-neutral-300 active:bg-neutral-400
-        dark:hover:bg-neutral-800 dark:active:bg-neutral-700
-        ${isActive ? 'bg-neutral-200 dark:bg-neutral-700' : {}}
-      `}
+      mb-2 flex
+      cursor-pointer
+      justify-between
+      rounded-md
+      p-1
+      hover:bg-neutral-300 active:bg-neutral-400
+      dark:hover:bg-neutral-800 dark:active:bg-neutral-700
+      ${isActive ? 'bg-neutral-200 dark:bg-neutral-700' : {}}
+    `}
   >
     <div className="basis-5/6 overflow-x-hidden">
       <p
@@ -98,9 +98,10 @@ export const ChartListItemContent: React.FC<ChartListItemContentProps> = ({
 export const ChartListItemLoader: React.FC = () => (
   <div
     className="
-      mb-2 flex
-      h-16 cursor-pointer
-      justify-between
+      mb-2 flex h-16
+      cursor-pointer
+      justify-between rounded-md
+      p-1
       hover:bg-neutral-300 active:bg-neutral-400
       dark:hover:bg-neutral-800 dark:active:bg-neutral-700
     "
