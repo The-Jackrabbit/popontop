@@ -75,7 +75,11 @@ export const PreviewEditor: React.FC<Props> = ({
           />{' '}
           button to go back to the list editor
         </p>
-        <DesktopPreview chart={chart} previewIndex={previewIndex} />
+        <DesktopPreview
+          isMobile={true}
+          chart={chart}
+          previewIndex={previewIndex}
+        />
       </div>
       <div className="flex gap-8 overflow-y-hidden p-2">
         <div className="basis-1/3">

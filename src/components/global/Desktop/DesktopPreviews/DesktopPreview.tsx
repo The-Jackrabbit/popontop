@@ -1,11 +1,12 @@
 import { ChartHookNode } from '../../../../frontend/hooks/use-chart/use-chart';
-import { AlbumOverlay } from '../../MobileEditor/ScreenShot/ScreenShot';
-import { EMPTY_ALBUM } from '../../../../constants/empty-album';
 import { NumericExpandingPillContent } from '../../../lib/ExpandingPill/NumericExpandingPill/NumericExpandingPill';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
+import { Layout } from './Layout';
+import { ChartTemplate } from './ChartTemplate/ChartTemplate';
 
 export interface Props {
   chart: ChartHookNode;
+  isMobile: boolean;
   previewIndex: number;
   setPreviewIndex?: Dispatch<SetStateAction<number>>;
 }
@@ -84,68 +85,23 @@ export const CHART_TEMPLATES = {
     [0, 1, 2, 3, 4, 5, 6, 7],
   ],
 };
+
 export const DesktopPreview = ({
   chart,
+  isMobile,
   previewIndex,
   setPreviewIndex,
 }: Props) => {
   const values = Object.values(CHART_TEMPLATES);
   const template = values.at(previewIndex) as number[][];
   const rows = transformRows(template);
-  const [fitWidth, setFitWidth] = useState<boolean>(false);
-  const [height, setHeight] = useState<string>('100%');
-  const [width, setWidth] = useState<string>('100%');
-
-  useEffect(() => {
-    const parentElement = document.getElementById('parent');
-    if (parentElement) {
-      const parentWidth = parentElement.offsetWidth;
-      const parentHeight = parentElement.offsetHeight;
-      const fitWidth = parentWidth >= parentHeight;
-      setFitWidth(fitWidth);
-
-      if (fitWidth) {
-        setHeight(`${parentHeight}px`);
-      } else {
-        setWidth(`${parentWidth - 40}px`);
-      }
-    }
-  }, []);
 
   return (
-    <div id="parent" className="flex justify-center">
-      <div
-        className={` ${
-          fitWidth ? 'h-auto w-full' : 'h-full w-auto'
-        } } max-h-full max-w-full`}
-        style={{ height, width }}
-      >
-        {rows.map((row, rowIndex) => (
-          <>
-            {row.length === 0 ? (
-              <div className="m-4" key={`row-${rowIndex}-empty`} />
-            ) : (
-              <div className="flex  bg-blue-300" key={`row-${rowIndex}`}>
-                {row.map((albumIndex) => (
-                  <AlbumOverlay
-                    album={chart.list.state.at(albumIndex) ?? EMPTY_ALBUM}
-                    albumOverlayColor={
-                      chart.settings.state.albumOverlayColor === ''
-                        ? undefined
-                        : chart.settings.state.albumOverlayColor
-                    }
-                    count={row.length}
-                    key={`album-${albumIndex}`}
-                    textColor={chart.settings.state.textColor}
-                  />
-                ))}
-              </div>
-            )}
-          </>
-        ))}
-      </div>
-      {setPreviewIndex ? (
-        <div className="mt-4 h-min shrink basis-9">
+    <Layout
+      chartTemplate={<ChartTemplate chart={chart} rows={rows} />}
+      isMobile={isMobile}
+      previewNavigator={
+        setPreviewIndex ? (
           <NumericExpandingPillContent
             max={values.length - 1}
             min={0}
@@ -153,8 +109,9 @@ export const DesktopPreview = ({
             textColor={chart.settings.state.textColor}
             value={previewIndex}
           />
-        </div>
-      ) : null}
-    </div>
+        ) : null
+      }
+      setPreviewIndex={setPreviewIndex}
+    />
   );
 };

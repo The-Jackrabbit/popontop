@@ -108,6 +108,7 @@ const EditChart = ({
                 chart={chart}
                 setPreviewIndex={actions.setPreviewIndex}
                 previewIndex={state.previewIndex}
+                isMobile={false}
               />
             ) : (
               <DesktopEditor
