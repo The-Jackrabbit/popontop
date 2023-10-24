@@ -1,17 +1,15 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export interface Props {
   chartTemplate: React.ReactNode;
   isMobile: boolean;
   previewNavigator: React.ReactNode;
-  setPreviewIndex?: Dispatch<SetStateAction<number>>;
 }
 
 export const Layout = ({
   chartTemplate,
   isMobile,
   previewNavigator,
-  setPreviewIndex,
 }: Props) => {
   const [fitWidth, setFitWidth] = useState<boolean>(false);
   const [height, setHeight] = useState<string>('100%');
@@ -50,7 +48,7 @@ export const Layout = ({
         </div>
       </div>
 
-      {setPreviewIndex ? (
+      {!isMobile ? (
         <div className="mt-4 h-min shrink basis-9">{previewNavigator}</div>
       ) : null}
     </div>

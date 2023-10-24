@@ -1,12 +1,14 @@
-import { LOADER_ANIMATED_BACKGROUND } from '../../../constants/colors';
+import LoadingBouncer from '../LoadingBouncer/LoadingBouncer';
 import { Layout } from './Layout';
-
-const LOADER_BLOCK_STYLE = `${LOADER_ANIMATED_BACKGROUND} w-full h-full`;
 
 export const Loader: React.FC = () => (
   <Layout
-    title={<div className={LOADER_BLOCK_STYLE}/>}
-    toggleButton={<div className={LOADER_BLOCK_STYLE} />}
+    title={<div className="animate-pulse">Loading the chart</div>}
+    toggleButton={
+      <div className="translate-y-3">
+        <LoadingBouncer />
+      </div>
+    }
   />
 );
 

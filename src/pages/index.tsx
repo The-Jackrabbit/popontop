@@ -14,7 +14,7 @@ import ProfileCircle from '../components/global/Desktop/DesktopEditor/Actions/Pr
 import DesktopEditor from '../components/global/Desktop/DesktopEditor/DesktopEditor';
 import DesktopSidebar from '../components/global/Desktop/DesktopEditor/Sidebar/DesktopSidebar';
 import { Color } from '../components/global/Desktop/DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
-import { DesktopPreview } from '../components/global/Desktop/DesktopPreviews/DesktopPreview';
+import { DesktopPreview } from '../components/global/Desktop/DesktopPreview/DesktopPreview';
 import DesktopPage from '../components/lib/DesktopPage/DesktopPage';
 import { ICON_STYLE } from '../components/lib/FilterButton/FilterButton';
 import LoadingBouncer from '../components/lib/LoadingBouncer/LoadingBouncer';
@@ -106,7 +106,7 @@ const Home: NextPage = () => {
         pageContent={
           isPreviewVisible ? (
             <DesktopPreview
-              isMobile={true}
+              isMobile={false}
               chart={chart}
               setPreviewIndex={actions.setPreviewIndex}
               previewIndex={previewIndex}

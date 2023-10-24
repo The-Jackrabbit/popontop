@@ -17,7 +17,7 @@ import ProfileCircle from '../DesktopEditor/Actions/ProfileCircle/ProfileCircle'
 import DesktopEditor from '../DesktopEditor/DesktopEditor';
 import DesktopSidebar from '../DesktopEditor/Sidebar/DesktopSidebar';
 import { Color } from '../DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
-import { DesktopPreview } from '../DesktopPreviews/DesktopPreview';
+import { DesktopPreview } from '../DesktopPreview/DesktopPreview';
 
 const EditChart = ({
   albums,

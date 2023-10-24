@@ -81,7 +81,7 @@ const sanitizeColorInput = (input: string | null) => {
     return escapeHtml(input);
   }
 
-  return 'transparent'; // Default color if input is invalid
+  return ''; // Default color if input is invalid
 };
 
 function sanitizeToBoolean(value: unknown): boolean {

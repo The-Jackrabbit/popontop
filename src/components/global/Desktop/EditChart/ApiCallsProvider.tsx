@@ -1,6 +1,7 @@
 import { genUuid } from '../../../../pages/mobile/charts/[uuid]';
 import { trpc } from '../../../../server/utils/trpc';
 import EditChart from './EditChart';
+import { EditChartLoader } from './Loader';
 
 export interface Props {
   uuid: string;
@@ -21,7 +22,7 @@ const ApiCallsProvider: React.FC<Props> = ({ uuid }) => {
     data && data?.albums?.length > 0 && data.name && data.settings;
 
   if (!isDoneLoading) {
-    return null;
+    return <EditChartLoader isChartOwner={true} />;
   }
 
   return (

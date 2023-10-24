@@ -111,7 +111,6 @@ export const DesktopPreview = ({
           />
         ) : null
       }
-      setPreviewIndex={setPreviewIndex}
     />
   );
 };

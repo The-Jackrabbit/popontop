@@ -2,7 +2,7 @@ import isMobile from 'is-mobile';
 import { ChartHookNode } from '../../../../frontend/hooks/use-chart/use-chart';
 import { Album } from '../../../../types/Albums';
 import Title from '../../../lib/Title/Title';
-import { DesktopPreview } from '../../Desktop/DesktopPreviews/DesktopPreview';
+import { DesktopPreview } from '../../Desktop/DesktopPreview/DesktopPreview';
 
 export interface Props {
   chart: ChartHookNode;

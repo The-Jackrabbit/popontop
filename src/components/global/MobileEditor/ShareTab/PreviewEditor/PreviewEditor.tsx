@@ -13,7 +13,7 @@ import { ScreenshotMode } from './ScreenshotMode/ScreenshotMode';
 import {
   CHART_TEMPLATES,
   DesktopPreview,
-} from '../../../Desktop/DesktopPreviews/DesktopPreview';
+} from '../../../Desktop/DesktopPreview/DesktopPreview';
 import { NumericExpandingPillContent } from '../../../../lib/ExpandingPill/NumericExpandingPill/NumericExpandingPill';
 
 export interface Props {
