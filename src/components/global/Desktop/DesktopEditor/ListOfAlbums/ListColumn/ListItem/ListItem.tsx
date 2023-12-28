@@ -18,7 +18,7 @@ export const ListItem: React.FC<Props> = ({ index, listItem, textColor }) => {
         text-ellipsis
         whitespace-pre-wrap
         font-mono
-        text-[22px] leading-tight
+        text-[12px] leading-tight
         dark:text-neutral-600
       `}
       role="listitem"

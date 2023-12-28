@@ -3,13 +3,17 @@ import { useEffect, useState } from 'react';
 export interface Props {
   chartTemplate: React.ReactNode;
   isMobile: boolean;
+  list: React.ReactNode;
   previewNavigator: React.ReactNode;
+  title: React.ReactNode;
 }
 
 export const Layout = ({
   chartTemplate,
   isMobile,
+  list,
   previewNavigator,
+  title,
 }: Props) => {
   const [fitWidth, setFitWidth] = useState<boolean>(false);
   const [height, setHeight] = useState<string>('100%');
@@ -32,7 +36,11 @@ export const Layout = ({
   }, []);
 
   return (
-    <div id="parent" className={`flex h-screen flex-col justify-center`}>
+    <div
+      id="parent"
+      className={`flex h-screen flex-col justify-center px-4 pt-4`}
+    >
+      <div className="min-h-min w-full">{title}</div>
       <div
         className={` ${
           isMobile ? '' : '  h-[calc(100vh_-_3.25rem)] max-w-[75%]'
@@ -46,6 +54,7 @@ export const Layout = ({
         >
           {chartTemplate}
         </div>
+        <div className="shrink-0 grow basis-1/3">{list}</div>
       </div>
 
       {!isMobile ? (

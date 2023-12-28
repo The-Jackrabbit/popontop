@@ -39,7 +39,7 @@ const YourCharts: React.FC = () => {
       hasActions={true}
       pageContent={
         <div className="h-full">
-          <ViewChart />
+          <ViewChart uuid={uuid} />
         </div>
       }
       sidebar={

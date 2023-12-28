@@ -1,17 +1,13 @@
 import React from 'react';
 import { trpc } from '../../../../../server/utils/trpc';
 import { Loader } from './Loader';
-import { useRouter } from 'next/router';
 import { genUuid } from '../../../../../pages/mobile/charts/[uuid]';
 import { ChartSettings } from '@prisma/client';
 import { Album } from '../../../../../types/Albums';
 import DesktopEditor from '../../DesktopEditor/DesktopEditor';
 import useChart from '../../../../../frontend/hooks/use-chart/use-chart';
 
-const ApiWrapper = () => {
-  const router = useRouter();
-  const { uuid } = router.query;
-
+const ApiWrapper = ({ uuid }: { uuid: string }) => {
   const n = genUuid(uuid);
 
   const { data, isLoading } = trpc.charts.getById.useQuery(

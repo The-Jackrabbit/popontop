@@ -22,7 +22,7 @@ const ListOfAlbums: React.FC<Props> = ({ columnCount, list, textColor }) => {
       className="
         oveflow-x-hidden
         flex
-        text-ellipsis whitespace-nowrap pl-8 text-[9px]
+        text-ellipsis whitespace-nowrap pl-8
         text-[rgb(212_212_212)]
         dark:text-neutral-50
       "

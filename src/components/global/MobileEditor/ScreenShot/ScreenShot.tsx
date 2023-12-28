@@ -13,11 +13,13 @@ export const AlbumOverlay = ({
   album,
   albumOverlayColor = 'rgba(0,0,0,0.8)',
   count,
+  isMobile,
   textColor,
 }: {
   album: Album;
   albumOverlayColor?: string;
   count: number;
+  isMobile: boolean;
   textColor: string;
 }) => {
   const albumDescription =
@@ -32,14 +34,16 @@ export const AlbumOverlay = ({
         backgroundImage: `url(${album.imageUrl})`,
       }}
     >
-      <p
-        style={{
-          color: textColor,
-        }}
-        className={`flex h-full w-full items-center justify-center self-center overflow-hidden bg-opacity-75 bg-gradient-to-t from-[${albumOverlayColor}] to-[rgba(255,255,255,0.05)] text-center align-middle text-xs`}
-      >
-        {albumDescription}
-      </p>
+      {isMobile ? (
+        <p
+          style={{
+            color: textColor,
+          }}
+          className={`flex h-full w-full items-center justify-center self-center overflow-hidden bg-opacity-75 bg-gradient-to-t from-[${albumOverlayColor}] to-[rgba(255,255,255,0.05)] text-center align-middle text-xs`}
+        >
+          {albumDescription}
+        </p>
+      ) : null}
     </div>
   );
 };

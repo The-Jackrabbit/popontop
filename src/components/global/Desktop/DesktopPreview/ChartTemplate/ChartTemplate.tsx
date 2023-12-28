@@ -4,10 +4,11 @@ import { AlbumOverlay } from '../../../MobileEditor/ScreenShot/ScreenShot';
 
 export interface Props {
   chart: ChartHookNode;
+  isMobile: boolean;
   rows: number[][];
 }
 
-export const ChartTemplate = ({ chart, rows }: Props) => {
+export const ChartTemplate = ({ chart, isMobile, rows }: Props) => {
   return (
     <>
       {rows.map((row, rowIndex) => (
@@ -26,6 +27,7 @@ export const ChartTemplate = ({ chart, rows }: Props) => {
                   }
                   count={row.length}
                   key={`album-${albumIndex}`}
+                  isMobile={isMobile}
                   textColor={chart.settings.state.textColor}
                 />
               ))}

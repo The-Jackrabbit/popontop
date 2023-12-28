@@ -2,6 +2,7 @@ import { Chart } from '@prisma/client';
 import { WritableChartSettings } from '../../types/Charts';
 import escapeHtml from 'escape-html';
 import { Album } from '../../types/Albums';
+import { cssColorNames } from './css-color-names';
 
 export const lastFmImageOrigin = 'https://lastfm.freetls.fastly.net/i/u/174s/';
 
@@ -30,7 +31,7 @@ export const formatColor = (url: string) => {
 };
 
 export const buildSettingsForChart = (settings: WritableChartSettings) => {
-  return {
+  const formattedSettings = {
     background_color: sanitizeColorInput(settings.background_color),
     border_color: sanitizeColorInput(settings.border_color),
     border_size: sanitizeToNumber(settings.border_size),
@@ -40,6 +41,8 @@ export const buildSettingsForChart = (settings: WritableChartSettings) => {
     text_color: sanitizeColorInput(settings.text_color),
     title_background_color: sanitizeColorInput(settings.title_background_color),
   };
+
+  return formattedSettings;
 };
 
 export const buildDataForChart = (
@@ -61,27 +64,32 @@ export const buildDataForAlbums = (albums: Album[], chartUuid?: string) => {
   }));
 };
 
-const sanitizeColorInput = (input: string | null) => {
-  if (input === null) {
-    return '';
+const sanitizeColorInput = (input: string | null): string => {
+  // Default color if input is invalid or null
+  const defaultColor = 'black';
+
+  // Check for null input
+  if (!input) {
+    return defaultColor;
   }
 
-  const colorNames = ['red', 'green']; // Complete this array with all standard CSS color names
-  const hexColorRegex = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/i;
-  const rgbColorRegex = /^rgb\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*\)$/;
-  const rgbaColorRegex =
-    /^rgba\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*(0(\.\d+)?|1(\.0+)?)\s*\)$/;
-
-  if (
-    colorNames.includes(input) ||
-    hexColorRegex.test(input) ||
-    rgbColorRegex.test(input) ||
-    rgbaColorRegex.test(input)
-  ) {
-    return escapeHtml(input);
+  // Check for valid CSS named color
+  if (cssColorNames.has(input.toLowerCase())) {
+    return input;
   }
 
-  return ''; // Default color if input is invalid
+  // Check for valid hex color
+  if (/^#(?:[0-9a-fA-F]{3}){1,2}$/.test(input)) {
+    return input;
+  }
+
+  // Check for valid RGB color
+  if (/^rgb\(\d{1,3},\s*\d{1,3},\s*\d{1,3}\)$/.test(input)) {
+    return input;
+  }
+
+  // Return default color if none of the above checks pass
+  return defaultColor;
 };
 
 function sanitizeToBoolean(value: unknown): boolean {

@@ -3,6 +3,8 @@ import { NumericExpandingPillContent } from '../../../lib/ExpandingPill/NumericE
 import { Dispatch, SetStateAction } from 'react';
 import { Layout } from './Layout';
 import { ChartTemplate } from './ChartTemplate/ChartTemplate';
+import Title from '../../../lib/Title/Title';
+import ListOfAlbums from '../DesktopEditor/ListOfAlbums/ListOfAlbums';
 
 export interface Props {
   chart: ChartHookNode;
@@ -85,6 +87,7 @@ export const CHART_TEMPLATES = {
     [0, 1, 2, 3, 4, 5, 6, 7],
   ],
 };
+const values = Object.values(CHART_TEMPLATES);
 
 export const DesktopPreview = ({
   chart,
@@ -92,14 +95,36 @@ export const DesktopPreview = ({
   previewIndex,
   setPreviewIndex,
 }: Props) => {
-  const values = Object.values(CHART_TEMPLATES);
   const template = values.at(previewIndex) as number[][];
   const rows = transformRows(template);
 
   return (
     <Layout
-      chartTemplate={<ChartTemplate chart={chart} rows={rows} />}
+      title={
+        chart.settings.state.showTitle ? (
+          <Title
+            backgroundColor={chart.settings.state.titleBackgroundColor}
+            chartTitle={chart.state.chartTitle}
+            isReadOnly={false}
+            setValue={chart.actions.setChartTitle}
+            showIntroduction={!true}
+            textColor={chart.settings.state.textColor}
+          />
+        ) : null
+      }
+      chartTemplate={
+        <ChartTemplate isMobile={isMobile} chart={chart} rows={rows} />
+      }
       isMobile={isMobile}
+      list={
+        chart.settings.state.showAlbums ? (
+          <ListOfAlbums
+            textColor={chart.settings.state.textColor}
+            columnCount={1}
+            list={chart.state.numberedList}
+          />
+        ) : null
+      }
       previewNavigator={
         setPreviewIndex ? (
           <NumericExpandingPillContent

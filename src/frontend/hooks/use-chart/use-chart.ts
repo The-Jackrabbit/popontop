@@ -7,7 +7,6 @@ import useList, { ListHookNode } from '../lists/use-list';
 import useChartSettings, { SettingsHookNode } from './use-chart-settings';
 import { EMPTY_ALBUM } from '../../../constants/empty-album';
 import { useRouter } from 'next/router';
-import { debug } from 'console';
 
 const getNumberedList = (numberOfAlbums: number, listState: Album[]) => {
   const emptyTextList = [...new Array(numberOfAlbums)];
@@ -118,7 +117,7 @@ export const useChart = ({
       text_color: settings.state.textColor,
       title_background_color: settings.state.titleBackgroundColor,
     };
-    debugger;
+
     const result = await editMutation.mutateAsync({
       uuid: chartUuid,
       albums: list.state,
