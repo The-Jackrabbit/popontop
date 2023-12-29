@@ -16,6 +16,7 @@ import { DesktopActions } from '../DesktopEditor/Actions/DesktopActions';
 import ProfileCircle from '../DesktopEditor/Actions/ProfileCircle/ProfileCircle';
 import DesktopEditor from '../DesktopEditor/DesktopEditor';
 import DesktopSidebar from '../DesktopEditor/Sidebar/DesktopSidebar';
+import PreviewSidebar from '../DesktopEditor/Sidebar/PreviewSidebar';
 import { Color } from '../DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
 import { DesktopPreview } from '../DesktopPreview/DesktopPreview';
 
@@ -32,12 +33,13 @@ const EditChart = ({
   isChartOwner: boolean;
   initialSettings?: ChartSettings;
 }) => {
-  const { actions, chart, state } = useDesktopChartEditor({
+  const desktopChartEditor = useDesktopChartEditor({
     initialList: albums,
     chartName,
     chartUuid,
     initialSettings,
   });
+  const { actions, chart, state } = desktopChartEditor;
 
   return (
     <DndContext
@@ -121,17 +123,29 @@ const EditChart = ({
         }
         sidebar={
           <div className="h-full overflow-x-visible">
-            <DesktopSidebar
-              isChartOwner={isChartOwner}
-              pageTitleBorderBottom={Color.blue}
-              pageTitle={isChartOwner ? 'edit chart' : 'viewing chart'}
-              settings={chart.settings}
-              setIsPreviewVisible={actions.setIsPreviewVisible}
-              isPreviewVisible={state.isPreviewVisible}
-              showOnboardingFlow={false}
-              toggleAlbums={actions.toggleAlbums}
-              toggleTitle={actions.toggleTitle}
-            />
+            {!state.isPreviewVisible ? (
+              <DesktopSidebar
+                isChartOwner={isChartOwner}
+                pageTitleBorderBottom={Color.blue}
+                pageTitle={isChartOwner ? 'edit chart' : 'viewing chart'}
+                settings={chart.settings}
+                setIsPreviewVisible={actions.setIsPreviewVisible}
+                isPreviewVisible={state.isPreviewVisible}
+                showOnboardingFlow={false}
+                toggleAlbums={actions.toggleAlbums}
+                toggleTitle={actions.toggleTitle}
+              />
+            ) : (
+              <PreviewSidebar
+                chart={chart}
+                desktopChartEditor={desktopChartEditor}
+                isChartOwner={isChartOwner}
+                pageTitleBorderBottom={Color.blue}
+                pageTitle={isChartOwner ? 'edit chart' : 'viewing chart'}
+                setIsPreviewVisible={actions.setIsPreviewVisible}
+                isPreviewVisible={state.isPreviewVisible}
+              />
+            )}
           </div>
         }
       />

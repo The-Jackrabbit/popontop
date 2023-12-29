@@ -10,9 +10,9 @@ export interface Props {
 
 export const LAYOUT_CONFIG_WITH_ACTIONS = {
   actions:
-    'flex shrink-0 basis-1/12 flex-col justify-between border-l-2 border-neutral-300 p-4 pl-4 dark:border-neutral-800',
-  pageContent: 'overflow-y-scroll h-basis-8/12  min-w-[66.666667%]',
-  sidebar: 'shrink-0 grow basis-3/12 max-w-[25%]',
+    'flex shrink-0 basis-1/12 max-w-[5%] flex-col justify-between border-l-2 border-neutral-300 p-4 pl-4 dark:border-neutral-800',
+  pageContent: ' h-basis-8/12  min-w-[66.666667%]',
+  sidebar: 'shrink-0 grow basis-3/12 max-w-[20%]',
 };
 
 export const LAYOUT_CONFIG_WITHOUT_ACTIONS = {
@@ -54,8 +54,8 @@ const DesktopPage: React.FC<Props> = ({
           min-w-[870px]
           max-w-[1200px]
           lg:w-[1000px]
-          xl:w-[1200px]
-          xl:max-w-[1200px]
+          xl:w-[90vw]
+          xl:max-w-[90vw]
         "
       >
         <div className={layoutStyle.sidebar}>{sidebar}</div>
