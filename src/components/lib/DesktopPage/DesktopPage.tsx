@@ -18,7 +18,7 @@ export const LAYOUT_CONFIG_WITH_ACTIONS = {
 export const LAYOUT_CONFIG_WITHOUT_ACTIONS = {
   actions: '',
   pageContent:
-    'overflow-y-scroll shrink grow-0 basis-9/12 min-w-9/12 max-w-9/12 min-w-[75%] p-4',
+    'overflow-y-auto shrink grow-0 basis-9/12 min-w-9/12 max-w-9/12 min-w-[75%] p-4',
   sidebar: 'shrink-0 grow basis-3/12',
 };
 
