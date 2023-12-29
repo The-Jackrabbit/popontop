@@ -88,6 +88,7 @@ export const CHART_TEMPLATES = {
   ],
 };
 const values = Object.values(CHART_TEMPLATES);
+export const CHART_TEMPLATE_VALUES = values;
 
 export const DesktopPreview = ({
   chart,

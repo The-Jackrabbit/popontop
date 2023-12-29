@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDroppable } from '@dnd-kit/core';
+import { DESKTOP_CHART_SQUARE_SIZE } from '../../../../../../constants/sizes';
 
 export interface Props {
   borderSizes: string;
@@ -30,10 +31,7 @@ const ChartItemDropZone: React.FC<Props> = ({
     <div
       className={`
         ${className}
-        // DESKTOP_CHART_SQUARE_SIZE
-        ChartItemDropZone 
-        h-[118px]
-        w-[118px]
+        ${DESKTOP_CHART_SQUARE_SIZE}
         ${isOver ? 'bg-green-400' : 'bg-transparent'}
         ${borderSizes}
         box-content
