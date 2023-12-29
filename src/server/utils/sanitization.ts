@@ -32,7 +32,10 @@ export const formatColor = (url: string) => {
 
 export const buildSettingsForChart = (settings: WritableChartSettings) => {
   const formattedSettings = {
-    background_color: sanitizeColorInput(settings.background_color),
+    background_color: sanitizeColorInput(
+      settings.background_color,
+      'rgba(0,0,0,0.0)'
+    ),
     border_color: sanitizeColorInput(settings.border_color),
     border_size: sanitizeToNumber(settings.border_size),
     number_of_albums: sanitizeToNumber(settings.number_of_albums),
@@ -64,10 +67,10 @@ export const buildDataForAlbums = (albums: Album[], chartUuid?: string) => {
   }));
 };
 
-const sanitizeColorInput = (input: string | null): string => {
-  // Default color if input is invalid or null
-  const defaultColor = 'black';
-
+const sanitizeColorInput = (
+  input: string | null,
+  defaultColor = 'black'
+): string => {
   // Check for null input
   if (!input) {
     return defaultColor;
@@ -85,6 +88,10 @@ const sanitizeColorInput = (input: string | null): string => {
 
   // Check for valid RGB color
   if (/^rgb\(\d{1,3},\s*\d{1,3},\s*\d{1,3}\)$/.test(input)) {
+    return input;
+  }
+  // Check for valid RGB color
+  if (/^rgba\(\d{1,3},\s*\d{1,3},\s*\d{1,3},\s*(0|1|0?\.\d+)\)$/.test(input)) {
     return input;
   }
 
