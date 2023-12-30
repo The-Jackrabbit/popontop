@@ -78,6 +78,9 @@ export const updateList = (
   }
 
   if (over.id === 'delete') {
+    if (albumComingFromSearch) {
+      return newContainers;
+    }
     newContainers[draggedAlbum.index] = { ...EMPTY_ALBUM };
 
     return newContainers;
