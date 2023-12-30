@@ -56,7 +56,7 @@ const MobileEditor: React.FC<Props> = ({
             chartTitle={chart.state.chartTitle}
             chart={chart}
             previewIndex={state.previewIndex}
-            list={chart.list.state}
+            list={chart.list.state.list}
             setPreviewIndex={actions.setPreviewIndex}
             titleBackgroundColor={chart.settings.state.titleBackgroundColor}
           />

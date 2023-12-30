@@ -19,7 +19,7 @@ export const ChartTemplate = ({ chart, isMobile, rows }: Props) => {
             <div className="flex  bg-blue-300" key={`row-${rowIndex}`}>
               {row.map((albumIndex) => (
                 <AlbumOverlay
-                  album={chart.list.state.at(albumIndex) ?? EMPTY_ALBUM}
+                  album={chart.list.state.list.at(albumIndex) ?? EMPTY_ALBUM}
                   albumOverlayColor={
                     chart.settings.state.albumOverlayColor === ''
                       ? undefined

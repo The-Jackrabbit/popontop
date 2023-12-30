@@ -28,7 +28,7 @@ const Home: NextPage = () => {
   const {
     actions,
     chart,
-    state: { previewIndex, isPreviewVisible, showOnboardingFlow },
+    state: { isDragging, previewIndex, isPreviewVisible, showOnboardingFlow },
   } = useDesktopChartEditor({});
   const isLoading = chart.state.isCreateLoading || chart.state.isEditLoading;
 
@@ -39,9 +39,11 @@ const Home: NextPage = () => {
         chart.list.actions.setDraggedAlbum(
           event.active.data.current as DraggedAlbum
         );
+        actions.setIsDragging(true);
       }}
       onDragEnd={(args) => {
         chart.list.actions.handleDragEnd(args);
+        actions.setIsDragging(false);
       }}
     >
       <DesktopPage
@@ -113,6 +115,7 @@ const Home: NextPage = () => {
             />
           ) : (
             <DesktopEditor
+              isDragging={isDragging}
               chart={chart}
               showOnboardingFlow={showOnboardingFlow}
             />

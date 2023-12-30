@@ -48,8 +48,12 @@ const EditChart = ({
         chart.list.actions.setDraggedAlbum(
           event.active.data.current as DraggedAlbum
         );
+        actions.setIsDragging(true);
       }}
-      onDragEnd={chart.list.actions.handleDragEnd}
+      onDragEnd={(args) => {
+        actions.setIsDragging(false);
+        chart.list.actions.handleDragEnd(args);
+      }}
     >
       <DesktopPage
         actions={
@@ -114,6 +118,7 @@ const EditChart = ({
               />
             ) : (
               <DesktopEditor
+                isDragging={state.isDragging}
                 chart={chart}
                 readonly={false}
                 showOnboardingFlow={false}

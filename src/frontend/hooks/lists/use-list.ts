@@ -1,18 +1,22 @@
 import { DragEndEvent, Over } from '@dnd-kit/core';
-import { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { EMPTY_ALBUM } from '../../../constants/empty-album';
 import { ALBUM_RESULTS } from '../../../constants/test-data/search-results';
 import { Album } from '../../../types/Albums';
 import { HookNode } from '../../../types/singletons';
 import { DraggedAlbum } from '../use-chart/use-chart';
 
-export type ListHookNode = HookNode<Album[], Actions>;
+export type ListHookNode = HookNode<State, Actions>;
 export function randomIntegerInRange(min: number, max: number): number {
   // Generate a random number in the range [min, max]
   const randomNumber = Math.random() * (max - min + 1) + min;
 
   // Return the random number as an integer
   return Math.floor(randomNumber);
+}
+export interface State {
+  draggedAlbum: DraggedAlbum | null;
+  list: Album[];
 }
 export interface Actions {
   addAlbumToList: (album: Album) => void;
@@ -25,7 +29,7 @@ export interface Actions {
   ) => void;
   lowerAlbumAtIndex: (index: number) => void;
   removeAlbumAtIndex: (index: number) => void;
-  setDraggedAlbum: Dispatch<SetStateAction<DraggedAlbum>>;
+  setDraggedAlbum: Dispatch<SetStateAction<DraggedAlbum | null>>;
   setList: (list: Album[]) => void;
   swapAlbumsAtIndices: (oldIndex: number, newIndex: number) => void;
 }
@@ -50,7 +54,8 @@ export const initializeEmptyList = (): Album[] =>
 export const updateList = (
   oldList: Album[],
   draggedAlbum: DraggedAlbum,
-  over: Over
+  over: Over,
+  logMetadata = false
 ) => {
   const newContainers = [...oldList];
   const droppedIndex = over ? parseInt(over.id as string) : -1;
@@ -63,12 +68,20 @@ export const updateList = (
     !isEmptyAlbum(newContainers[droppedIndex] as Album);
   const albumComingFromSearch = draggedAlbum.origin === 'search';
 
-  console.log({
-    droppedIndex,
-    droppedIndexOverListLength,
-    droppingOverExistingAlbum,
-    albumComingFromSearch,
-  });
+  if (logMetadata) {
+    console.log({
+      droppedIndex,
+      droppedIndexOverListLength,
+      droppingOverExistingAlbum,
+      albumComingFromSearch,
+    });
+  }
+
+  if (over.id === 'delete') {
+    newContainers[draggedAlbum.index] = { ...EMPTY_ALBUM };
+
+    return newContainers;
+  }
 
   if (albumComingFromSearch) {
     if (droppingOverExistingAlbum) {
@@ -91,10 +104,19 @@ export const updateList = (
       // technically this block will never be reached, this is to make ts happy
       return newContainers;
     }
+
     if (droppingOverExistingAlbum) {
-      // shift existing album down
-      newContainers[originalIndex] = { ...EMPTY_ALBUM };
-      newContainers.splice(droppedIndex, 0, draggedAlbum.data);
+      // dropping onto a lower index
+      if (droppedIndex < originalIndex) {
+        // shift existing album down
+        newContainers[originalIndex] = { ...EMPTY_ALBUM };
+        newContainers.splice(originalIndex, 1);
+        newContainers.splice(droppedIndex, 0, draggedAlbum.data);
+      } else {
+        // delete album at original index
+        newContainers.splice(originalIndex, 1);
+        newContainers.splice(droppedIndex, 0, draggedAlbum.data);
+      }
     } else {
       if (droppedIndexOverListLength) {
         // fill until at index, then insert
@@ -118,15 +140,16 @@ const useList = (initialList: Album[], ismobile: boolean): ListHookNode => {
   const [list, setList] = useState<Album[]>(
     initialList ?? initializeEmptyList()
   );
-  const [draggedAlbum, setDraggedAlbum] = useState<DraggedAlbum>({
-    data: EMPTY_ALBUM,
-    origin: 'search',
-    index: -1,
-  });
+  const [draggedAlbum, setDraggedAlbum] = useState<DraggedAlbum | null>(null);
+
   const handleDragEnd = (event: DragEndEvent) => {
+    setDraggedAlbum(null);
     const { over } = event;
 
     if (!over) {
+      return;
+    }
+    if (!draggedAlbum) {
       return;
     }
 
@@ -217,7 +240,10 @@ const useList = (initialList: Album[], ismobile: boolean): ListHookNode => {
       setList,
       swapAlbumsAtIndices,
     },
-    state: list,
+    state: {
+      draggedAlbum,
+      list,
+    },
   };
 };
 

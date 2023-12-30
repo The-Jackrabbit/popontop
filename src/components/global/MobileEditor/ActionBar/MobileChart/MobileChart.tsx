@@ -45,7 +45,7 @@ const MobileChart: React.FC<Props> = ({
 
     <List
       backgroundColor={chart.settings.state.backgroundColor}
-      list={chart.list.state}
+      list={chart.list.state.list}
       listMode={editor.state.listMode}
       onRearrangeClick={actions.onRearrangeClick}
       removeAlbumAtIndex={chart.list.actions.removeAlbumAtIndex}
@@ -63,7 +63,7 @@ const MobileChart: React.FC<Props> = ({
       onClickSearch={editor.actions.onClickSearch}
       onClickDeleteMode={editor.actions.onClickDeleteMode}
       onClickRearrangeMode={editor.actions.onClickRearrangeMode}
-      hasNonEmptyList={chart.list.state.length > 0}
+      hasNonEmptyList={chart.list.state.list.length > 0}
       isActive={editor.state.isActive}
       isReadOnly={isReadOnly}
       setIsActive={editor.actions.setIsActive}

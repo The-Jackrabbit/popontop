@@ -13,6 +13,7 @@ export interface DesktopChartEditorHookNode extends HookNode<State, Actions> {
 }
 
 export interface Actions {
+  setIsDragging: Dispatch<SetStateAction<boolean>>;
   setIsPreviewVisible: Dispatch<SetStateAction<boolean>>;
   setPreviewIndex: Dispatch<SetStateAction<number>>;
   toggleAlbums: (value: boolean) => void;
@@ -21,6 +22,7 @@ export interface Actions {
 
 export interface State {
   isPreviewVisible: boolean;
+  isDragging: boolean;
   previewIndex: number;
   listStyle: { width: SpringValue<string> };
   titleStyle: { height: SpringValue<string> };
@@ -58,6 +60,7 @@ export const useDesktopChartEditor = ({
   const [showOnboardingFlow] = useState(!true);
 
   const [isPreviewVisible, setIsPreviewVisible] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
   const [previewIndex, setPreviewIndex] = useState(0);
 
   useEffect(() => {
@@ -66,6 +69,7 @@ export const useDesktopChartEditor = ({
 
   return {
     actions: {
+      setIsDragging,
       setIsPreviewVisible,
       setPreviewIndex,
       toggleAlbums,
@@ -73,6 +77,7 @@ export const useDesktopChartEditor = ({
     },
     chart,
     state: {
+      isDragging,
       isPreviewVisible,
       listStyle,
       previewIndex,

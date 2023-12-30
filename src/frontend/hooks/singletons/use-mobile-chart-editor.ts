@@ -62,7 +62,7 @@ const useMobileChartEditor = ({
     initialList,
   });
   const editor = useMobileEditor(() => {
-    if (!isFirstCloseDone && chart.list.state.length > 0) {
+    if (!isFirstCloseDone && chart.list.state.list.length > 0) {
       toggleTitle();
     }
   });
@@ -76,14 +76,14 @@ const useMobileChartEditor = ({
     index: number
   ) => {
     const unboundIndex = index - JUMP_VALUES[rowMovementType];
-    const length = chart.list.state.length;
+    const length = chart.list.state.list.length;
     const min = 0;
     const max = length;
 
     const indexToMoveTo = clamp(unboundIndex, min, max);
 
     chart.list.actions.insertAlbumAtIndex(
-      chart.list.state[index] as Album,
+      chart.list.state.list[index] as Album,
       index,
       indexToMoveTo
     );
@@ -92,7 +92,7 @@ const useMobileChartEditor = ({
   const showIntroduction =
     context === UseChartListContext.EDIT
       ? false
-      : chart.list.state.length === 0;
+      : chart.list.state.list.length === 0;
 
   useEffect(() => {
     setThemeColorMetaTag(chart.settings.state.backgroundColor);

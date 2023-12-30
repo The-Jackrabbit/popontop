@@ -66,7 +66,7 @@ export const useChart = ({
 
   const createChart = async (): Promise<string> => {
     const result = await createMutation.mutateAsync({
-      albums: list.state,
+      albums: list.state.list,
       name: chartTitle,
       settings: {
         background_color: settings.state.backgroundColor,
@@ -87,7 +87,7 @@ export const useChart = ({
 
   const copyChart = async (): Promise<void> => {
     const result = await copyMutation.mutateAsync({
-      albums: list.state,
+      albums: list.state.list,
       name: chartTitle,
       settings: {
         background_color: settings.state.backgroundColor,
@@ -120,7 +120,7 @@ export const useChart = ({
 
     const result = await editMutation.mutateAsync({
       uuid: chartUuid,
-      albums: list.state,
+      albums: list.state.list,
       name: chartTitle,
       settings: _settings,
     });
@@ -145,7 +145,10 @@ export const useChart = ({
       isCreateLoading: createMutation.isLoading,
       isDeleteLoading: deleteMutation.isLoading,
       isEditLoading: editMutation.isLoading,
-      numberedList: getNumberedList(settings.state.numberOfAlbums, list.state),
+      numberedList: getNumberedList(
+        settings.state.numberOfAlbums,
+        list.state.list
+      ),
       savedChartId,
     }),
     [
@@ -156,7 +159,7 @@ export const useChart = ({
       editMutation.isLoading,
       savedChartId,
       settings.state.numberOfAlbums,
-      list.state,
+      list.state.list,
     ]
   );
 
@@ -170,9 +173,12 @@ export const useChart = ({
     },
     list: {
       ...list,
-      state: list.state.filter(
-        (_, index) => index < settings.state.numberOfAlbums
-      ),
+      state: {
+        ...list.state,
+        list: list.state.list.filter(
+          (_, index) => index < settings.state.numberOfAlbums
+        ),
+      },
     },
     settings,
     state,

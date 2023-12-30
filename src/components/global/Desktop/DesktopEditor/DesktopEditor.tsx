@@ -4,15 +4,48 @@ import Title from '../../../lib/Title/Title';
 import ListOfAlbums from './ListOfAlbums/ListOfAlbums';
 import DesktopChart from './DesktopChart/DesktopChart';
 import Layout from './Layout';
+import { useDroppable } from '@dnd-kit/core';
 
 export interface Props {
   chart: ChartHookNode;
+  isDragging: boolean;
   readonly?: boolean;
   showOnboardingFlow: boolean;
 }
 
+const DynamicList = ({
+  chart,
+  isDragging,
+  showAlbums,
+}: {
+  chart: ChartHookNode;
+  isDragging: boolean;
+  showAlbums: boolean;
+}) => {
+  const { setNodeRef } = useDroppable({ id: 'delete' });
+  if (isDragging) {
+    return (
+      <div className="min-h-[300px] bg-red-300 text-white" ref={setNodeRef}>
+        drag here to delete album
+      </div>
+    );
+  }
+  if (showAlbums) {
+    return (
+      <ListOfAlbums
+        textColor={chart.settings.state.textColor}
+        columnCount={1}
+        list={chart.state.numberedList}
+      />
+    );
+  }
+
+  return null;
+};
+
 const DesktopEditor: React.FC<Props> = ({
   chart,
+  isDragging,
   readonly = false,
   showOnboardingFlow,
 }) => (
@@ -41,13 +74,11 @@ const DesktopEditor: React.FC<Props> = ({
           ) : null
         }
         list={
-          chart.settings.state.showAlbums ? (
-            <ListOfAlbums
-              textColor={chart.settings.state.textColor}
-              columnCount={1}
-              list={chart.state.numberedList}
-            />
-          ) : null
+          <DynamicList
+            chart={chart}
+            isDragging={isDragging}
+            showAlbums={chart.settings.state.showAlbums}
+          />
         }
         chart={
           <DesktopChart
