@@ -3,15 +3,8 @@ import Grid, { useSize } from './Grid';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import { ALBUM_RESULTS } from '../../../constants/test-data/search-results';
 import { useState } from 'react';
+import { randomIntegerInRange } from '../../../frontend/hooks/lists/use-list';
 
-// thanks chat gpt :)
-export function randomIntegerInRange(min: number, max: number): number {
-  // Generate a random number in the range [min, max]
-  const randomNumber = Math.random() * (max - min + 1) + min;
-
-  // Return the random number as an integer
-  return Math.floor(randomNumber);
-}
 export default {
   args: {
     columns: 10,
@@ -53,7 +46,7 @@ const list = [...new Array(100)].map(
 export const Mobile: ComponentStory<typeof Grid> = (args) => {
   const { containerRef, size } = useResizer();
   return (
-    <div {...containerRef} className="flex m-4 h-full w-full">
+    <div {...containerRef} className="m-4 flex h-full w-full">
       {size ? (
         <Grid
           {...args}

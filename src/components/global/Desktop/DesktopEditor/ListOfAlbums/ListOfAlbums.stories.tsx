@@ -2,8 +2,8 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import ListOfAlbums from './ListOfAlbums';
 import { ALBUM_RESULTS } from '../../../../../constants/test-data/search-results';
-import { randomIntegerInRange } from '../../../../lib/Grid/Grid.stories';
 import { Album } from '../../../../../types/Albums';
+import { randomIntegerInRange } from '../../../../../frontend/hooks/lists/use-list';
 
 export default {
   args: {

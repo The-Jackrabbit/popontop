@@ -1,6 +1,5 @@
-import { DragEndEvent } from '@dnd-kit/core';
+import { DragEndEvent, Over } from '@dnd-kit/core';
 import { Dispatch, SetStateAction, useState } from 'react';
-import { randomIntegerInRange } from '../../../components/lib/Grid/Grid.stories';
 import { EMPTY_ALBUM } from '../../../constants/empty-album';
 import { ALBUM_RESULTS } from '../../../constants/test-data/search-results';
 import { Album } from '../../../types/Albums';
@@ -8,7 +7,13 @@ import { HookNode } from '../../../types/singletons';
 import { DraggedAlbum } from '../use-chart/use-chart';
 
 export type ListHookNode = HookNode<Album[], Actions>;
+export function randomIntegerInRange(min: number, max: number): number {
+  // Generate a random number in the range [min, max]
+  const randomNumber = Math.random() * (max - min + 1) + min;
 
+  // Return the random number as an integer
+  return Math.floor(randomNumber);
+}
 export interface Actions {
   addAlbumToList: (album: Album) => void;
   advanceAlbumAtIndex: (index: number) => void;
@@ -28,12 +33,90 @@ export interface Actions {
 export const testlist = [...new Array(100)].map(
   () => ALBUM_RESULTS[randomIntegerInRange(0, 9)]
 );
-export const initializeEmptyList = (ismobile: boolean): Album[] =>
-  [...new Array(ismobile ? 0 : 25)].map(() => EMPTY_ALBUM);
+export function isEmptyAlbum(album: Album) {
+  return (
+    album.artist === EMPTY_ALBUM.artist &&
+    album.imageUrl === EMPTY_ALBUM.imageUrl &&
+    album.lastfmId === EMPTY_ALBUM.lastfmId &&
+    album.name === EMPTY_ALBUM.name
+  );
+}
+export const initializeEmptyList = (): Album[] =>
+  [...new Array(0)].map(() => EMPTY_ALBUM);
+
+/**
+ *  {droppedIndex: 7, droppedIndexOverListLength: true, droppingOverExistingAlbum: false, albumComingFromSearch: false}
+ */
+export const updateList = (
+  oldList: Album[],
+  draggedAlbum: DraggedAlbum,
+  over: Over
+) => {
+  const newContainers = [...oldList];
+  const droppedIndex = over ? parseInt(over.id as string) : -1;
+  const droppedIndexOverListLength = droppedIndex >= newContainers.length;
+  const originalIndex =
+    draggedAlbum.origin === 'chart' ? draggedAlbum.index : null;
+  const droppingOverExistingAlbum: boolean =
+    !droppedIndexOverListLength &&
+    newContainers[droppedIndex] !== undefined &&
+    !isEmptyAlbum(newContainers[droppedIndex] as Album);
+  const albumComingFromSearch = draggedAlbum.origin === 'search';
+
+  console.log({
+    droppedIndex,
+    droppedIndexOverListLength,
+    droppingOverExistingAlbum,
+    albumComingFromSearch,
+  });
+
+  if (albumComingFromSearch) {
+    if (droppingOverExistingAlbum) {
+      // shift existing album down
+      newContainers.splice(droppedIndex, 0, draggedAlbum.data);
+    } else {
+      if (droppedIndexOverListLength) {
+        // fill until at index, then insert
+        for (let i = newContainers.length; i < droppedIndex; i++) {
+          newContainers.push({ ...EMPTY_ALBUM });
+        }
+        newContainers.push(draggedAlbum.data);
+      } else {
+        // insert at location (aka replace empty_album with dragged_album)
+        newContainers[droppedIndex] = draggedAlbum.data;
+      }
+    }
+  } else {
+    if (originalIndex === null) {
+      // technically this block will never be reached, this is to make ts happy
+      return newContainers;
+    }
+    if (droppingOverExistingAlbum) {
+      // shift existing album down
+      newContainers[originalIndex] = { ...EMPTY_ALBUM };
+      newContainers.splice(droppedIndex, 0, draggedAlbum.data);
+    } else {
+      if (droppedIndexOverListLength) {
+        // fill until at index, then insert
+        for (let i = newContainers.length; i < droppedIndex; i++) {
+          newContainers.push({ ...EMPTY_ALBUM });
+        }
+        newContainers.push(draggedAlbum.data);
+        newContainers[originalIndex] = { ...EMPTY_ALBUM };
+      } else {
+        // insert at location (aka replace empty_album with dragged_album)
+        newContainers[originalIndex] = { ...EMPTY_ALBUM };
+        newContainers[droppedIndex] = draggedAlbum.data;
+      }
+    }
+  }
+
+  return newContainers;
+};
 
 const useList = (initialList: Album[], ismobile: boolean): ListHookNode => {
   const [list, setList] = useState<Album[]>(
-    initialList ?? initializeEmptyList(ismobile)
+    initialList ?? initializeEmptyList()
   );
   const [draggedAlbum, setDraggedAlbum] = useState<DraggedAlbum>({
     data: EMPTY_ALBUM,
@@ -47,25 +130,7 @@ const useList = (initialList: Album[], ismobile: boolean): ListHookNode => {
       return;
     }
 
-    const droppedIndex = over ? parseInt(over.id as string) : -1;
-
-    setList((oldList) => {
-      const newContainers = [...oldList];
-      if (newContainers.length < droppedIndex) {
-        for (let i = newContainers.length; i < droppedIndex + 1; i++) {
-          newContainers.push(EMPTY_ALBUM);
-        }
-      }
-      if (draggedAlbum.origin === 'chart') {
-        newContainers[draggedAlbum.index] = EMPTY_ALBUM;
-      }
-
-      if (droppedIndex !== -1) {
-        newContainers.splice(droppedIndex, 1, draggedAlbum.data);
-      }
-
-      return newContainers;
-    });
+    setList((oldList) => updateList(oldList, draggedAlbum, over));
   };
 
   const removeAlbumAtIndex = (index: number) => {

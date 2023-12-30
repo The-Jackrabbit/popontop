@@ -184,5 +184,5 @@ export default useChart;
 export interface DraggedAlbum {
   index: number;
   data: Album;
-  origin: string;
+  origin: 'chart' | 'search';
 }

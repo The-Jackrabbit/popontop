@@ -1,6 +1,17 @@
 import { Album } from '../../types/Albums';
 
-export const ALBUM_RESULTS: Album[] = [
+export const ALBUM_RESULTS: [
+  Album,
+  Album,
+  Album,
+  Album,
+  Album,
+  Album,
+  Album,
+  Album,
+  Album,
+  Album
+] = [
   {
     artist: 'Neutral Milk Hotel',
     imageUrl:
