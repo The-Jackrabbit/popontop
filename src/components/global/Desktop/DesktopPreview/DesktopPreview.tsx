@@ -5,6 +5,8 @@ import { Layout } from './Layout';
 import { ChartTemplate } from './ChartTemplate/ChartTemplate';
 import Title from '../../../lib/Title/Title';
 import ListOfAlbums from '../DesktopEditor/ListOfAlbums/ListOfAlbums';
+import { AlbumOverlay } from '../../MobileEditor/ScreenShot/ScreenShot';
+import { EMPTY_ALBUM } from '../../../../constants/empty-album';
 
 export interface Props {
   chart: ChartHookNode;
@@ -13,7 +15,7 @@ export interface Props {
   setPreviewIndex?: Dispatch<SetStateAction<number>>;
 }
 
-const transformRows = (rows: number[][]): number[][] => {
+export const transformRows = (rows: number[][]): number[][] => {
   const trows: number[][] = [];
   let currentLength = 0;
   rows.forEach((row) => {
@@ -114,7 +116,25 @@ export const DesktopPreview = ({
         ) : null
       }
       chartTemplate={
-        <ChartTemplate isMobile={isMobile} chart={chart} rows={rows} />
+        <ChartTemplate
+          itemComponent={({ indexIntoList, lengthOfCurrentRow }) => (
+            <AlbumOverlay
+              album={chart.list.state.list.at(indexIntoList) ?? EMPTY_ALBUM}
+              albumOverlayColor={
+                chart.settings.state.albumOverlayColor === ''
+                  ? undefined
+                  : chart.settings.state.albumOverlayColor
+              }
+              count={lengthOfCurrentRow}
+              key={`album-${indexIntoList}`}
+              isMobile={isMobile}
+              textColor={chart.settings.state.textColor}
+            />
+          )}
+          isMobile={isMobile}
+          chart={chart}
+          rows={rows}
+        />
       }
       isMobile={isMobile}
       list={
@@ -126,17 +146,7 @@ export const DesktopPreview = ({
           />
         ) : null
       }
-      previewNavigator={
-        setPreviewIndex ? (
-          <NumericExpandingPillContent
-            max={values.length - 1}
-            min={0}
-            setValue={setPreviewIndex}
-            textColor={chart.settings.state.textColor}
-            value={previewIndex}
-          />
-        ) : null
-      }
+      previewNavigator={null}
     />
   );
 };
