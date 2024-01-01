@@ -1,5 +1,5 @@
 import { MinusIcon, PlusIcon } from '@heroicons/react/24/outline';
-import { ChangeEvent, Dispatch, SetStateAction, useRef, useState } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 import { useSpring, a } from 'react-spring';
 import { ICON_STYLE } from '../../FilterButton/FilterButton';
 import ExpandingPill from '../ExpandingPill';

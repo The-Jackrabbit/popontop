@@ -155,6 +155,7 @@ function sanitizeToNumber(value: unknown): number {
   return 0;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function sanitizeToString(value: any): string {
   if (typeof value === 'string') {
     return escapeHtml(value);
