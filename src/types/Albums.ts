@@ -11,6 +11,7 @@ export interface LastFmAlbum {
 
 export interface Album {
   imageUrl: string;
+  images?: any[];
   name: string;
   artist: string;
   lastfmId: string;

@@ -25,12 +25,21 @@ export default defineNextConfig({
     return [
       {
         source: '/_next/image',
-        headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable', }]
-      }
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
     ];
   },
   images: {
     minimumCacheTTL: 60,
-    domains: ['lastfm.freetls.fastly.net', 'lh3.googleusercontent.com'],
+    domains: [
+      'i.scdn.co',
+      'lastfm.freetls.fastly.net',
+      'lh3.googleusercontent.com',
+    ],
   },
 });

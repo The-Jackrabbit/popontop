@@ -10,7 +10,7 @@ export const useSearch = (): {
   const [searchText, setSearchText] = useState('');
   const [timeoutId, setTimeoutId] = useState<null | NodeJS.Timeout>(null);
 
-  const { data, refetch } = trpc.albums.search.useQuery(
+  const { data, refetch } = trpc.albums.searchArtists.useQuery(
     { text: searchText },
     {
       enabled: false,
