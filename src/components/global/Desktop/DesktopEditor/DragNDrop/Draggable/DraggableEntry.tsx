@@ -17,7 +17,7 @@ export interface Props {
   isReadOnly?: boolean;
 }
 
-const DraggableAlbum: React.FC<Props> = ({
+const DraggableEntry: React.FC<Props> = ({
   album,
   index,
   isReadOnly = false,
@@ -38,4 +38,4 @@ const DraggableAlbum: React.FC<Props> = ({
   </Draggable>
 );
 
-export default DraggableAlbum;
+export default DraggableEntry;

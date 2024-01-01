@@ -1,7 +1,7 @@
 import React from 'react';
 import ChartItemDropZone from '../../DragNDrop/ChartItemDropZone/ChartItemDropZone';
 import { Album } from '../../../../../../types/Albums';
-import DraggableAlbum from '../../DragNDrop/Draggable/DraggableAlbum';
+import DraggableEntry from '../../DragNDrop/Draggable/DraggableEntry';
 import { EMPTY_ALBUM } from '../../../../../../constants/empty-album';
 
 export interface Props {
@@ -25,9 +25,9 @@ export const ChartItem: React.FC<Props> = ({
     }}
   >
     {album.imageUrl ? (
-      <DraggableAlbum album={album} index={index} isReadOnly={isReadOnly} />
+      <DraggableEntry album={album} index={index} isReadOnly={isReadOnly} />
     ) : (
-      <DraggableAlbum index={index} isReadOnly={true} album={EMPTY_ALBUM} />
+      <DraggableEntry index={index} isReadOnly={true} album={EMPTY_ALBUM} />
     )}
   </ChartItemDropZone>
 );
