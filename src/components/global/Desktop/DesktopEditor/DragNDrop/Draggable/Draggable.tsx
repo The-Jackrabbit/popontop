@@ -12,6 +12,7 @@ export interface DraggableDataNode<T> {
 }
 
 export interface Props {
+  className?: string;
   children: React.ReactNode;
   data: DraggableDataNode<Album>;
   id: string;
@@ -19,6 +20,7 @@ export interface Props {
 }
 
 const Draggable: React.FC<Props> = ({
+  className = '',
   children,
   data,
   id,
@@ -43,6 +45,7 @@ const Draggable: React.FC<Props> = ({
   return (
     <button
       {...draggableButtonProps}
+      className={className}
       onContextMenu={(e: React.BaseSyntheticEvent) => {
         e.preventDefault();
       }}

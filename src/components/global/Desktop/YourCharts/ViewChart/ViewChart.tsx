@@ -66,6 +66,7 @@ export const ViewChart: React.FC<{
       }}
     >
       <DesktopEditor
+        isDragging={false}
         chart={chart}
         readonly={false}
         showOnboardingFlow={false}
