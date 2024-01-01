@@ -17,7 +17,7 @@ export interface Props {
   setIsPreviewVisible: Dispatch<SetStateAction<boolean>>;
   isPreviewVisible: boolean;
   showOnboardingFlow: boolean;
-  toggleAlbums: (value: boolean) => void;
+  toggleEntries: (value: boolean) => void;
   toggleTitle: (value: boolean) => void;
 }
 
@@ -29,7 +29,7 @@ export const DesktopSidebar: React.FC<Props> = ({
   showOnboardingFlow,
   setIsPreviewVisible,
   isPreviewVisible,
-  toggleAlbums,
+  toggleEntries,
   toggleTitle,
 }) => {
   const { data, onType, searchText } = useSearch();
@@ -67,7 +67,7 @@ export const DesktopSidebar: React.FC<Props> = ({
               isPreviewVisible={isPreviewVisible}
               setIsPreviewVisible={setIsPreviewVisible}
               settings={settings}
-              toggleAlbums={toggleAlbums}
+              toggleEntries={toggleEntries}
               toggleTitle={toggleTitle}
             />
           </>

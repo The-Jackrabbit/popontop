@@ -136,7 +136,7 @@ const EditChart = ({
                 setIsPreviewVisible={actions.setIsPreviewVisible}
                 isPreviewVisible={state.isPreviewVisible}
                 showOnboardingFlow={false}
-                toggleAlbums={actions.toggleAlbums}
+                toggleEntries={actions.toggleEntries}
                 toggleTitle={actions.toggleTitle}
               />
             ) : (

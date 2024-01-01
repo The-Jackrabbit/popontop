@@ -9,13 +9,13 @@ export interface Props {
   settings: SettingsHookNode;
   setIsPreviewVisible: Dispatch<SetStateAction<boolean>>;
   isPreviewVisible: boolean;
-  toggleAlbums: (value: boolean) => void;
+  toggleEntries: (value: boolean) => void;
   toggleTitle: (value: boolean) => void;
 }
 
 export const DesktopSettings: React.FC<Props> = ({
   settings,
-  toggleAlbums,
+  toggleEntries,
   toggleTitle,
 }) => (
   <>
@@ -81,7 +81,7 @@ export const DesktopSettings: React.FC<Props> = ({
       <SwitchExpandingPill
         className="inline-block"
         label="list albums?"
-        setValue={(value: boolean | null) => toggleAlbums(Boolean(value))}
+        setValue={(value: boolean | null) => toggleEntries(Boolean(value))}
         value={settings.state.showEntries}
       />
       <SwitchExpandingPill

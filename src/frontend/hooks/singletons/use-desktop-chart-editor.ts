@@ -16,7 +16,7 @@ export interface Actions {
   setIsDragging: Dispatch<SetStateAction<boolean>>;
   setIsPreviewVisible: Dispatch<SetStateAction<boolean>>;
   setPreviewIndex: Dispatch<SetStateAction<number>>;
-  toggleAlbums: (value: boolean) => void;
+  toggleEntries: (value: boolean) => void;
   toggleTitle: (value: boolean) => void;
 }
 
@@ -52,7 +52,7 @@ export const useDesktopChartEditor = ({
     setShowTitle: chart.settings.actions.setShowTitle,
     showTitle: chart.settings.state.showTitle,
   });
-  const { listStyle, toggleAlbums } = useDesktopEntriesTextList({
+  const { listStyle, toggleEntries } = useDesktopEntriesTextList({
     setShowEntries: chart.settings.actions.setShowEntries,
     showEntries: chart.settings.state.showEntries,
   });
@@ -72,7 +72,7 @@ export const useDesktopChartEditor = ({
       setIsDragging,
       setIsPreviewVisible,
       setPreviewIndex,
-      toggleAlbums,
+      toggleEntries,
       toggleTitle,
     },
     chart,

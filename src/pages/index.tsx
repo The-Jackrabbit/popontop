@@ -100,7 +100,7 @@ const Home: NextPage = () => {
               pageTitleBorderBottom={Color.fuchsia}
               settings={chart.settings}
               showOnboardingFlow={showOnboardingFlow}
-              toggleAlbums={actions.toggleAlbums}
+              toggleEntries={actions.toggleEntries}
               toggleTitle={actions.toggleTitle}
             />
           </a.div>
