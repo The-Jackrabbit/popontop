@@ -12,7 +12,6 @@ export interface DraggableDataNode<T> {
 }
 
 export interface Props {
-  className?: string;
   children: React.ReactNode;
   data: DraggableDataNode<Album>;
   id: string;
@@ -21,7 +20,6 @@ export interface Props {
 
 const Draggable: React.FC<Props> = ({
   children,
-  className = '',
   data,
   id,
   isReadOnly = false,
@@ -40,7 +38,6 @@ const Draggable: React.FC<Props> = ({
         style: {
           transform: CSS.Translate.toString(transform),
         },
-        className: 'interactive ' + className,
       };
 
   return (

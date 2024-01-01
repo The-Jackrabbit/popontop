@@ -2,6 +2,7 @@ import React from 'react';
 import ChartItemDropZone from '../../DragNDrop/ChartItemDropZone/ChartItemDropZone';
 import { Album } from '../../../../../../types/Albums';
 import DraggableAlbum from '../../DragNDrop/Draggable/DraggableAlbum';
+import { EMPTY_ALBUM } from '../../../../../../constants/empty-album';
 
 export interface Props {
   album: Album;
@@ -16,13 +17,11 @@ export const ChartItem: React.FC<Props> = ({
   album,
   albumsInRow,
   borderColor,
-  borderSizes,
   index,
   isReadOnly,
 }) => (
   <ChartItemDropZone
     albumsInRow={albumsInRow}
-    borderSizes={borderSizes}
     id={index.toString()}
     index={index}
     style={{
@@ -37,7 +36,14 @@ export const ChartItem: React.FC<Props> = ({
         index={index}
         isReadOnly={isReadOnly}
       />
-    ) : null}
+    ) : (
+      <DraggableAlbum
+        index={index}
+        isReadOnly={true}
+        album={EMPTY_ALBUM}
+        albumsInRow={albumsInRow}
+      />
+    )}
   </ChartItemDropZone>
 );
 

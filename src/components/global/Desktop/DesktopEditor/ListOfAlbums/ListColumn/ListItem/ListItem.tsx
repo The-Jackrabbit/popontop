@@ -2,6 +2,7 @@ import React from 'react';
 import { DESKTOP_CHART_FONT_SIZE } from '../../../../../../../constants/sizes';
 import { ChartHookNode } from '../../../../../../../frontend/hooks/use-chart/use-chart';
 import { Album } from '../../../../../../../types/Albums';
+import { CHART_TEMPLATES } from '../../../../DesktopPreview/DesktopPreview';
 
 export interface Props {
   chart: ChartHookNode;
@@ -22,6 +23,9 @@ export const ListItem: React.FC<Props> = ({
     <div
       className={`
         ${DESKTOP_CHART_FONT_SIZE} overflow-hidden
+        text-[${
+          CHART_TEMPLATES.get(chart.settings.state.chartFormat)?.list.fontSize
+        }px]
         text-ellipsis
         whitespace-pre-wrap
         font-mono

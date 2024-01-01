@@ -35,7 +35,7 @@ const DraggableAlbum: React.FC<Props> = ({
       // the dimensions below are required but dont do anything
       height="200px"
       width="200px"
-      alt="profile"
+      alt={album.name}
     />
   </Draggable>
 );

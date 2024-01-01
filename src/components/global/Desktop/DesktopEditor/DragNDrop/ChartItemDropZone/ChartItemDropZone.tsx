@@ -3,8 +3,6 @@ import { useDroppable } from '@dnd-kit/core';
 import { DESKTOP_CHART_SQUARE_SIZE } from '../../../../../../constants/sizes';
 
 export interface Props {
-  borderSizes: string;
-  className?: string;
   albumsInRow: number;
   children: React.ReactNode;
   id: string;
@@ -20,8 +18,6 @@ export const EMPTY_SQUARE_BG_GRADIENT = [
 ];
 
 const ChartItemDropZone: React.FC<Props> = ({
-  borderSizes,
-  className = '',
   children,
   id,
   style,
@@ -32,9 +28,7 @@ const ChartItemDropZone: React.FC<Props> = ({
   return (
     <div
       className={`
-        ${className}
         ${isOver ? 'bg-green-400' : 'bg-transparent'}
-        ${borderSizes}
         box-content
       `}
       style={style}
