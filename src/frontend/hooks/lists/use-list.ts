@@ -4,7 +4,7 @@ import { EMPTY_ALBUM } from '../../../constants/empty-album';
 import { ALBUM_RESULTS } from '../../../constants/test-data/search-results';
 import { Album } from '../../../types/Albums';
 import { HookNode } from '../../../types/singletons';
-import { DraggedAlbum } from '../use-chart/use-chart';
+import { DraggedEntry } from '../use-chart/use-chart';
 
 export type ListHookNode = HookNode<State, Actions>;
 export function randomIntegerInRange(min: number, max: number): number {
@@ -15,7 +15,7 @@ export function randomIntegerInRange(min: number, max: number): number {
   return Math.floor(randomNumber);
 }
 export interface State {
-  draggedAlbum: DraggedAlbum | null;
+  draggedEntry: DraggedEntry | null;
   list: Album[];
 }
 export interface Actions {
@@ -29,7 +29,7 @@ export interface Actions {
   ) => void;
   lowerAlbumAtIndex: (index: number) => void;
   removeAlbumAtIndex: (index: number) => void;
-  setDraggedAlbum: Dispatch<SetStateAction<DraggedAlbum | null>>;
+  setDraggedEntry: Dispatch<SetStateAction<DraggedEntry | null>>;
   setList: (list: Album[]) => void;
   swapAlbumsAtIndices: (oldIndex: number, newIndex: number) => void;
 }
@@ -53,7 +53,7 @@ export const initializeEmptyList = (): Album[] =>
  */
 export const updateList = (
   oldList: Album[],
-  draggedAlbum: DraggedAlbum,
+  draggedEntry: DraggedEntry,
   over: Over,
   logMetadata = !false
 ) => {
@@ -61,12 +61,12 @@ export const updateList = (
   const droppedIndex = over ? parseInt(over.id as string) : -1;
   const droppedIndexOverListLength = droppedIndex >= newContainers.length;
   const originalIndex =
-    draggedAlbum.origin === 'chart' ? draggedAlbum.index : null;
+    draggedEntry.origin === 'chart' ? draggedEntry.index : null;
   const droppingOverExistingAlbum: boolean =
     !droppedIndexOverListLength &&
     newContainers[droppedIndex] !== undefined &&
     !isEmptyAlbum(newContainers[droppedIndex] as Album);
-  const albumComingFromSearch = draggedAlbum.origin === 'search';
+  const albumComingFromSearch = draggedEntry.origin === 'search';
 
   if (logMetadata) {
     console.log({
@@ -81,7 +81,7 @@ export const updateList = (
     if (albumComingFromSearch) {
       return newContainers;
     }
-    newContainers[draggedAlbum.index] = { ...EMPTY_ALBUM };
+    newContainers[draggedEntry.index] = { ...EMPTY_ALBUM };
 
     return newContainers;
   }
@@ -89,17 +89,17 @@ export const updateList = (
   if (albumComingFromSearch) {
     if (droppingOverExistingAlbum) {
       // shift existing album down
-      newContainers.splice(droppedIndex, 0, draggedAlbum.data);
+      newContainers.splice(droppedIndex, 0, draggedEntry.data);
     } else {
       if (droppedIndexOverListLength) {
         // fill until at index, then insert
         for (let i = newContainers.length; i < droppedIndex; i++) {
           newContainers.push({ ...EMPTY_ALBUM });
         }
-        newContainers.push(draggedAlbum.data);
+        newContainers.push(draggedEntry.data);
       } else {
         // insert at location (aka replace empty_album with dragged_album)
-        newContainers[droppedIndex] = draggedAlbum.data;
+        newContainers[droppedIndex] = draggedEntry.data;
       }
     }
   } else {
@@ -114,11 +114,11 @@ export const updateList = (
         // shift existing album down
         newContainers[originalIndex] = { ...EMPTY_ALBUM };
         newContainers.splice(originalIndex, 1);
-        newContainers.splice(droppedIndex, 0, draggedAlbum.data);
+        newContainers.splice(droppedIndex, 0, draggedEntry.data);
       } else {
         // delete album at original index
         newContainers.splice(originalIndex, 1);
-        newContainers.splice(droppedIndex, 0, draggedAlbum.data);
+        newContainers.splice(droppedIndex, 0, draggedEntry.data);
       }
     } else {
       if (droppedIndexOverListLength) {
@@ -126,12 +126,12 @@ export const updateList = (
         for (let i = newContainers.length; i < droppedIndex; i++) {
           newContainers.push({ ...EMPTY_ALBUM });
         }
-        newContainers.push(draggedAlbum.data);
+        newContainers.push(draggedEntry.data);
         newContainers[originalIndex] = { ...EMPTY_ALBUM };
       } else {
         // insert at location (aka replace empty_album with dragged_album)
         newContainers[originalIndex] = { ...EMPTY_ALBUM };
-        newContainers[droppedIndex] = draggedAlbum.data;
+        newContainers[droppedIndex] = draggedEntry.data;
       }
     }
   }
@@ -143,20 +143,20 @@ const useList = (initialList: Album[]): ListHookNode => {
   const [list, setList] = useState<Album[]>(
     initialList ?? initializeEmptyList()
   );
-  const [draggedAlbum, setDraggedAlbum] = useState<DraggedAlbum | null>(null);
+  const [draggedEntry, setDraggedEntry] = useState<DraggedEntry | null>(null);
 
   const handleDragEnd = (event: DragEndEvent) => {
-    setDraggedAlbum(null);
+    setDraggedEntry(null);
     const { over } = event;
 
     if (!over) {
       return;
     }
-    if (!draggedAlbum) {
+    if (!draggedEntry) {
       return;
     }
 
-    setList((oldList) => updateList(oldList, draggedAlbum, over));
+    setList((oldList) => updateList(oldList, draggedEntry, over));
   };
 
   const removeAlbumAtIndex = (index: number) => {
@@ -239,12 +239,12 @@ const useList = (initialList: Album[]): ListHookNode => {
       insertAlbumAtIndex,
       lowerAlbumAtIndex,
       removeAlbumAtIndex,
-      setDraggedAlbum,
+      setDraggedEntry,
       setList,
       swapAlbumsAtIndices,
     },
     state: {
-      draggedAlbum,
+      draggedEntry,
       list,
     },
   };

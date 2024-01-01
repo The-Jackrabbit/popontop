@@ -2,7 +2,7 @@ import { Over } from '@dnd-kit/core';
 import { EMPTY_ALBUM } from '../../../constants/empty-album';
 import { ALBUM_RESULTS } from '../../../constants/test-data/search-results';
 import { Album } from '../../../types/Albums';
-import { DraggedAlbum } from '../use-chart/use-chart';
+import { DraggedEntry } from '../use-chart/use-chart';
 import { updateList } from './use-list';
 
 const getOver = (droppedIndex: number): Over => ({
@@ -14,11 +14,11 @@ const getOver = (droppedIndex: number): Over => ({
   disabled: false,
 });
 
-const getDraggedAlbum = (
+const getDraggedEntry = (
   oldList: Album[],
   originalIndex: number,
-  origin: DraggedAlbum['origin']
-): DraggedAlbum => ({
+  origin: DraggedEntry['origin']
+): DraggedEntry => ({
   data: {
     ...(oldList[originalIndex] as Album),
   },
@@ -32,13 +32,13 @@ describe('updateList', () => {
       test('drop onto empty list', () => {
         const droppedIndex = 2;
         const over = getOver(droppedIndex);
-        const draggedAlbum: DraggedAlbum = getDraggedAlbum(
+        const draggedEntry: DraggedEntry = getDraggedEntry(
           ALBUM_RESULTS,
           0,
           'search'
         );
         const oldList: Album[] = [];
-        const newList = updateList(oldList, draggedAlbum, over);
+        const newList = updateList(oldList, draggedEntry, over);
 
         expect(newList).toEqual([EMPTY_ALBUM, EMPTY_ALBUM, ALBUM_RESULTS[0]]);
       });
@@ -52,12 +52,12 @@ describe('updateList', () => {
         const originalIndex = 1;
         const over = getOver(droppedIndex);
         const oldList: Album[] = [ALBUM_RESULTS[1], ALBUM_RESULTS[0]];
-        const draggedAlbum: DraggedAlbum = getDraggedAlbum(
+        const draggedEntry: DraggedEntry = getDraggedEntry(
           oldList,
           originalIndex,
           'chart'
         );
-        const newList = updateList(oldList, draggedAlbum, over);
+        const newList = updateList(oldList, draggedEntry, over);
 
         expect(newList.length).toEqual(2);
         expect(newList).toEqual([ALBUM_RESULTS[0], ALBUM_RESULTS[1]]);
@@ -73,12 +73,12 @@ describe('updateList', () => {
           ALBUM_RESULTS[1],
           ALBUM_RESULTS[2],
         ];
-        const draggedAlbum: DraggedAlbum = getDraggedAlbum(
+        const draggedEntry: DraggedEntry = getDraggedEntry(
           oldList,
           originalIndex,
           'chart'
         );
-        const newList = updateList(oldList, draggedAlbum, over);
+        const newList = updateList(oldList, draggedEntry, over);
 
         expect(newList).toEqual([
           ALBUM_RESULTS[0],
@@ -100,12 +100,12 @@ describe('updateList', () => {
           ALBUM_RESULTS[2],
           ALBUM_RESULTS[3],
         ];
-        const draggedAlbum: DraggedAlbum = getDraggedAlbum(
+        const draggedEntry: DraggedEntry = getDraggedEntry(
           oldList,
           originalIndex,
           'chart'
         );
-        const newList = updateList(oldList, draggedAlbum, over);
+        const newList = updateList(oldList, draggedEntry, over);
 
         expect(newList).toEqual([
           ALBUM_RESULTS[0],
@@ -125,12 +125,12 @@ describe('updateList', () => {
           ALBUM_RESULTS[3],
         ];
         const over = getOver(droppedIndex);
-        const draggedAlbum: DraggedAlbum = getDraggedAlbum(
+        const draggedEntry: DraggedEntry = getDraggedEntry(
           oldList,
           originalIndex,
           'chart'
         );
-        const newList = updateList(oldList, draggedAlbum, over);
+        const newList = updateList(oldList, draggedEntry, over);
 
         expect(newList).toEqual([
           ALBUM_RESULTS[0],

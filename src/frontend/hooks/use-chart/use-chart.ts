@@ -182,7 +182,7 @@ export const useChart = ({
 
 export default useChart;
 
-export interface DraggedAlbum {
+export interface DraggedEntry {
   index: number;
   data: Album;
   origin: 'chart' | 'search';

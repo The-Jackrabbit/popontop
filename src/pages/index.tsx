@@ -20,7 +20,7 @@ import { ICON_STYLE } from '../components/lib/FilterButton/FilterButton';
 import LoadingBouncer from '../components/lib/LoadingBouncer/LoadingBouncer';
 import useDesktopChartEditor from '../frontend/hooks/singletons/use-desktop-chart-editor';
 import { usePageFadeIn } from '../frontend/hooks/springs/use-page-fade-in';
-import { DraggedAlbum } from '../frontend/hooks/use-chart/use-chart';
+import { DraggedEntry } from '../frontend/hooks/use-chart/use-chart';
 
 const Home: NextPage = () => {
   const { pageOpacity } = usePageFadeIn();
@@ -36,8 +36,8 @@ const Home: NextPage = () => {
     <DndContext
       autoScroll={false}
       onDragStart={(event) => {
-        chart.list.actions.setDraggedAlbum(
-          event.active.data.current as DraggedAlbum
+        chart.list.actions.setDraggedEntry(
+          event.active.data.current as DraggedEntry
         );
         actions.setIsDragging(true);
       }}

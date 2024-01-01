@@ -6,7 +6,7 @@ import {
 } from '@heroicons/react/20/solid';
 import { ChartSettings } from '@prisma/client';
 import useDesktopChartEditor from '../../../../frontend/hooks/singletons/use-desktop-chart-editor';
-import { DraggedAlbum } from '../../../../frontend/hooks/use-chart/use-chart';
+import { DraggedEntry } from '../../../../frontend/hooks/use-chart/use-chart';
 import { Album } from '../../../../types/Albums';
 import DesktopPage from '../../../lib/DesktopPage/DesktopPage';
 import { ICON_STYLE } from '../../../lib/FilterButton/FilterButton';
@@ -45,8 +45,8 @@ const EditChart = ({
     <DndContext
       autoScroll={false}
       onDragStart={(event) => {
-        chart.list.actions.setDraggedAlbum(
-          event.active.data.current as DraggedAlbum
+        chart.list.actions.setDraggedEntry(
+          event.active.data.current as DraggedEntry
         );
         actions.setIsDragging(true);
       }}
