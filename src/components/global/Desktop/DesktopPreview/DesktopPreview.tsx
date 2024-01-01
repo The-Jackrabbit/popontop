@@ -26,6 +26,7 @@ export const transformRows = (rows: number[][]): number[][] => {
 
 export type ChartFormatKey =
   | 'honeycomb10'
+  | 'honeycomb'
   | 'classics'
   | 'r50'
   | 'r100'
@@ -42,6 +43,7 @@ export interface ChartFormat {
 
 export const chartFormatKeys: ChartFormatKey[] = [
   'honeycomb10',
+  'honeycomb',
   'classics',
   'r50',
   'r100',
@@ -61,6 +63,21 @@ export const CHART_TEMPLATES: Map<ChartFormatKey, ChartFormat> = new Map([
         fontSize: 12,
         columnCount: 1,
         count: 10,
+      },
+    },
+  ],
+  [
+    'honeycomb',
+    {
+      chart: [
+        [0, 1],
+        [0, 1, 2],
+        [0, 1],
+      ],
+      list: {
+        fontSize: 24,
+        columnCount: 1,
+        count: 7,
       },
     },
   ],

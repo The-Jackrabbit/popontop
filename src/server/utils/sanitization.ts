@@ -59,7 +59,7 @@ export const buildSettingsForChart = (settings: WritableChartSettings) => {
     ),
     border_color: sanitizeColorInput(settings.border_color),
     border_size: sanitizeToNumber(settings.border_size),
-    // chart_format: sanitizeChartFormat(settings.chart_format ?? ''),
+    chart_format: sanitizeChartFormat(settings.chart_format ?? ''),
     number_of_albums: sanitizeToNumber(settings.number_of_albums),
     show_albums: sanitizeToBoolean(settings.show_albums),
     show_title: sanitizeToBoolean(settings.show_title),

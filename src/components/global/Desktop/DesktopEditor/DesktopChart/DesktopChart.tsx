@@ -49,24 +49,25 @@ export const DesktopChart: React.FC<Props> = ({
   borderColor,
   chart,
   isReadOnly,
-}) => (
-  <ChartTemplate
-    itemComponent={({ indexIntoList }) => (
-      <ChartItem
-        key={`entryin-chart-${indexIntoList}`}
-        album={chart.list.state.list.at(indexIntoList) ?? EMPTY_ALBUM}
-        borderColor={borderColor}
-        index={indexIntoList}
-        isReadOnly={isReadOnly}
-      />
-    )}
-    isMobile={false}
-    chart={chart}
-    rows={transformRows(
-      (CHART_TEMPLATES.get(chart.settings.state.chartFormat) as ChartFormat)
-        .chart
-    )}
-  />
-);
-
+}) => {
+  return (
+    <ChartTemplate
+      itemComponent={({ indexIntoList }) => (
+        <ChartItem
+          key={`entryin-chart-${indexIntoList}`}
+          album={chart.list.state.list.at(indexIntoList) ?? EMPTY_ALBUM}
+          borderColor={borderColor}
+          index={indexIntoList}
+          isReadOnly={isReadOnly}
+        />
+      )}
+      isMobile={false}
+      chart={chart}
+      rows={transformRows(
+        (CHART_TEMPLATES.get(chart.settings.state.chartFormat) as ChartFormat)
+          .chart
+      )}
+    />
+  );
+};
 export default DesktopChart;
