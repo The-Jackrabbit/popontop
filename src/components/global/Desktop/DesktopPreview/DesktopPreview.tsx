@@ -88,8 +88,8 @@ export const CHART_TEMPLATES: Map<ChartFormatKey, ChartFormat> = new Map([
         [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
       ],
       list: {
-        fontSize: 12,
-        columnCount: 1,
+        fontSize: 7,
+        columnCount: 2,
         count: 100,
       },
     },
@@ -219,7 +219,6 @@ export const DesktopPreview = ({
             chart={chart}
             textColor={chart.settings.state.textColor}
             columnCount={1}
-            list={chart.state.numberedList}
           />
         ) : null
       }

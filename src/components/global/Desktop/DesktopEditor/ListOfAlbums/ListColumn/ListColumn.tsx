@@ -8,36 +8,56 @@ import ListItem from './ListItem/ListItem';
 export interface Props {
   chart: ChartHookNode;
   className: string;
-  list: Album[];
-  startIndexOfColumn: number;
+  columnCount: number;
+  columnIndex: number;
   textColor: string;
 }
 
 export const ListColumn: React.FC<Props> = ({
   chart,
   className = '',
-  startIndexOfColumn,
+  columnCount,
+  columnIndex,
   textColor,
 }) => {
-  return (
-    <div className={className}>
-      {Array(CHART_TEMPLATES.get(chart.settings.state.chartFormat)?.list.count)
-        .fill(null)
-        .map((_, index) => (
-          <ListItem
-            chart={chart}
-            key={index + 'list-item'}
-            listItem={
-              chart.list.state.list[index]
-                ? (chart.list.state.list[index] as Album)
-                : EMPTY_ALBUM
-            }
-            index={startIndexOfColumn + index}
-            textColor={textColor}
-          />
-        ))}
-    </div>
-  );
+  const listLength = CHART_TEMPLATES.get(chart.settings.state.chartFormat)?.list
+    .count as number;
+  const getStartIndexOfColumn = (columnIndex: number, listLength: number) => {
+    const lengthOfColumn = Math.floor(listLength / columnCount);
+    return lengthOfColumn * columnIndex;
+  };
+  const getEndIndexOfColumn = (columnIndex: number, listLength: number) => {
+    return getStartIndexOfColumn(columnIndex + 1, listLength) - 1;
+  };
+  const startIndexOfColumn = getStartIndexOfColumn(columnIndex, listLength);
+  const endIndexOfColumn = getEndIndexOfColumn(columnIndex, listLength);
+  console.log({
+    columnIndex,
+    columnCount,
+    startIndexOfColumn,
+    endIndexOfColumn,
+  });
+  const listItemsForColumn = [];
+  for (
+    let index = startIndexOfColumn;
+    index <= Math.min(endIndexOfColumn + 1, listLength - 1);
+    index++
+  ) {
+    listItemsForColumn.push(
+      <ListItem
+        chart={chart}
+        key={index + 'list-item'}
+        listItem={
+          chart.list.state.list[index]
+            ? (chart.list.state.list[index] as Album)
+            : EMPTY_ALBUM
+        }
+        index={index + 1}
+        textColor={textColor}
+      />
+    );
+  }
+  return <div className={className}>{listItemsForColumn}</div>;
 };
 
 export default ListColumn;

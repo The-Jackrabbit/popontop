@@ -5,6 +5,7 @@ import ListOfAlbums from './ListOfAlbums/ListOfAlbums';
 import DesktopChart from './DesktopChart/DesktopChart';
 import Layout from './Layout';
 import { useDroppable } from '@dnd-kit/core';
+import { CHART_TEMPLATES } from '../DesktopPreview/DesktopPreview';
 
 export interface Props {
   chart: ChartHookNode;
@@ -35,8 +36,10 @@ const DynamicList = ({
       <ListOfAlbums
         chart={chart}
         textColor={chart.settings.state.textColor}
-        columnCount={1}
-        list={chart.state.numberedList}
+        columnCount={
+          CHART_TEMPLATES.get(chart.settings.state.chartFormat)?.list
+            .columnCount as number
+        }
       />
     );
   }

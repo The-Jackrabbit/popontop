@@ -22,7 +22,6 @@ export const ListItem: React.FC<Props> = ({
   return (
     <div
       className={`
-        ${DESKTOP_CHART_FONT_SIZE} overflow-hidden
         text-[${
           CHART_TEMPLATES.get(chart.settings.state.chartFormat)?.list.fontSize
         }px]
@@ -35,6 +34,7 @@ export const ListItem: React.FC<Props> = ({
       role="listitem"
       style={{ color: textColor }}
     >
+      <div className="text-[7px]"></div>
       {itemDescription}
     </div>
   );

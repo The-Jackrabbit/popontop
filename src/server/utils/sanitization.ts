@@ -29,6 +29,27 @@ export const formatColor = (url: string) => {
 
   return url;
 };
+export type ChartFormatKey =
+  | 'honeycomb10'
+  | 'classics'
+  | 'r50'
+  | 'r100'
+  | 'top50';
+
+export const chartFormatKeys: ChartFormatKey[] = [
+  'honeycomb10',
+  'classics',
+  'r50',
+  'r100',
+  'top50',
+];
+export const sanitizeChartFormat = (chart_format: string) => {
+  if (!chartFormatKeys.includes(chart_format as ChartFormatKey)) {
+    return 'honeycomb10';
+  }
+
+  return chart_format;
+};
 
 export const buildSettingsForChart = (settings: WritableChartSettings) => {
   const formattedSettings = {
@@ -38,6 +59,7 @@ export const buildSettingsForChart = (settings: WritableChartSettings) => {
     ),
     border_color: sanitizeColorInput(settings.border_color),
     border_size: sanitizeToNumber(settings.border_size),
+    // chart_format: sanitizeChartFormat(settings.chart_format ?? ''),
     number_of_albums: sanitizeToNumber(settings.number_of_albums),
     show_albums: sanitizeToBoolean(settings.show_albums),
     show_title: sanitizeToBoolean(settings.show_title),

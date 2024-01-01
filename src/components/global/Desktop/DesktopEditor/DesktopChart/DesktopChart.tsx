@@ -60,6 +60,7 @@ export const DesktopChart: React.FC<Props> = ({
   <ChartTemplate
     itemComponent={({ indexIntoList, lengthOfCurrentRow }) => (
       <ChartItem
+        key={`entryin-chart-${indexIntoList}`}
         albumsInRow={lengthOfCurrentRow}
         album={chart.list.state.list.at(indexIntoList) ?? EMPTY_ALBUM}
         borderColor={borderColor}
