@@ -292,3 +292,17 @@ body {
   --color-rose-800: #9f1239;
   --color-rose-900: #881337;
 }
+
+.flex-child::before {
+  content: '';
+  display: block;
+  padding-top: 100%; /* Aspect ratio 1:1 */
+  position: relative;
+}
+.flex-child-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}

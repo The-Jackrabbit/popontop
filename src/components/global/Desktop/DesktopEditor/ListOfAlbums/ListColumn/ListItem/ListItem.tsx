@@ -1,14 +1,21 @@
 import React from 'react';
 import { DESKTOP_CHART_FONT_SIZE } from '../../../../../../../constants/sizes';
+import { ChartHookNode } from '../../../../../../../frontend/hooks/use-chart/use-chart';
 import { Album } from '../../../../../../../types/Albums';
 
 export interface Props {
+  chart: ChartHookNode;
   index: number;
   listItem: Album;
   textColor: string;
 }
 
-export const ListItem: React.FC<Props> = ({ index, listItem, textColor }) => {
+export const ListItem: React.FC<Props> = ({
+  chart,
+  index,
+  listItem,
+  textColor,
+}) => {
   const itemDescription = `${index} ${listItem.artist} - ${listItem.name}`;
 
   return (

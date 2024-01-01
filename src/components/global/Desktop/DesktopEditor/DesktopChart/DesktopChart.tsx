@@ -3,6 +3,14 @@ import { Album } from '../../../../../types/Albums';
 import ChartItem from './ChartItem/ChartItem';
 import Grid from '../../../../lib/Grid/Grid';
 import { EMPTY_ALBUM } from '../../../../../constants/empty-album';
+import { ChartTemplate } from '../../DesktopPreview/ChartTemplate/ChartTemplate';
+import {
+  ChartFormat,
+  CHART_TEMPLATES,
+  CHART_TEMPLATE_VALUES,
+  transformRows,
+} from '../../DesktopPreview/DesktopPreview';
+import { ChartHookNode } from '../../../../../frontend/hooks/use-chart/use-chart';
 
 export function getBorderSizes(index: number): string {
   let borderSizes = '';
@@ -35,6 +43,7 @@ export function getBorderSizes(index: number): string {
 }
 
 export interface Props {
+  chart: ChartHookNode;
   borderColor: string;
   borderSize: number;
   isReadOnly: boolean;
@@ -42,27 +51,28 @@ export interface Props {
 }
 
 export const DesktopChart: React.FC<Props> = ({
+  chart,
   borderColor,
   borderSize,
   isReadOnly,
   items,
 }) => (
-  <Grid
-    borderColor={borderColor}
-    borderSize={borderSize}
-    items={items}
-    itemComponent={({ index, x, y }) => (
+  <ChartTemplate
+    itemComponent={({ indexIntoList, lengthOfCurrentRow }) => (
       <ChartItem
-        album={
-          items[index] !== undefined ? (items[index] as Album) : EMPTY_ALBUM
-        }
+        albumsInRow={lengthOfCurrentRow}
+        album={chart.list.state.list.at(indexIntoList) ?? EMPTY_ALBUM}
         borderColor={borderColor}
-        borderSizes={getBorderSizes(index)}
-        index={index}
+        borderSizes={getBorderSizes(indexIntoList)}
+        index={indexIntoList}
         isReadOnly={isReadOnly}
-        rowIndex={x}
-        columnIndex={y}
       />
+    )}
+    isMobile={false}
+    chart={chart}
+    rows={transformRows(
+      (CHART_TEMPLATES.get(chart.settings.state.chartFormat) as ChartFormat)
+        .chart
     )}
   />
 );

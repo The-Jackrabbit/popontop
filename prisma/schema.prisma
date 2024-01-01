@@ -80,6 +80,7 @@ model ChartSettings {
   text_color             String?  @db.VarChar
   number_of_albums       Int?     @db.SmallInt
   title_background_color String?
+  chart_format           String?  @default("honeycomb")
   Chart                  Chart?   @relation(fields: [chart_id], references: [uuid], onDelete: NoAction, onUpdate: NoAction)
 }
 

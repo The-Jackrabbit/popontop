@@ -33,6 +33,7 @@ const DynamicList = ({
   if (showAlbums) {
     return (
       <ListOfAlbums
+        chart={chart}
         textColor={chart.settings.state.textColor}
         columnCount={1}
         list={chart.state.numberedList}
@@ -82,6 +83,7 @@ const DesktopEditor: React.FC<Props> = ({
         }
         chart={
           <DesktopChart
+            chart={chart}
             borderColor={chart.settings.state.borderColor}
             borderSize={chart.settings.state.borderSize}
             isReadOnly={readonly}

@@ -7,40 +7,38 @@ export interface Props {
   album: Album;
   index: number;
   borderColor: string;
+  albumsInRow: number;
   borderSizes: string;
   isReadOnly: boolean;
-  rowIndex: number;
-  columnIndex: number;
 }
 
 export const ChartItem: React.FC<Props> = ({
   album,
+  albumsInRow,
   borderColor,
   borderSizes,
   index,
   isReadOnly,
-  rowIndex,
-  columnIndex,
 }) => (
-  <div
-    data-index-row={rowIndex}
-    data-index-column={columnIndex}
-    data-index-inchart={index}
+  <ChartItemDropZone
+    albumsInRow={albumsInRow}
+    borderSizes={borderSizes}
+    id={index.toString()}
+    index={index}
+    style={{
+      borderColor,
+      lineHeight: '0px',
+    }}
   >
-    <ChartItemDropZone
-      borderSizes={borderSizes}
-      className="dark:border-neutral-700"
-      id={index.toString()}
-      index={index}
-      style={{
-        borderColor,
-      }}
-    >
-      {album.imageUrl ? (
-        <DraggableAlbum album={album} index={index} isReadOnly={isReadOnly} />
-      ) : null}
-    </ChartItemDropZone>
-  </div>
+    {album.imageUrl ? (
+      <DraggableAlbum
+        albumsInRow={albumsInRow}
+        album={album}
+        index={index}
+        isReadOnly={isReadOnly}
+      />
+    ) : null}
+  </ChartItemDropZone>
 );
 
 export default ChartItem;

@@ -15,9 +15,11 @@ export interface Props {
   album: Album;
   index: number;
   isReadOnly?: boolean;
+  albumsInRow: number;
 }
 
 const DraggableAlbum: React.FC<Props> = ({
+  albumsInRow,
   album,
   index,
   isReadOnly = false,
@@ -28,7 +30,13 @@ const DraggableAlbum: React.FC<Props> = ({
     isReadOnly={isReadOnly}
     key={`chart-${index.toString()}-key`}
   >
-    <Image src={album.imageUrl} height="200px" width="200px" alt="profile" />
+    <Image
+      src={album.imageUrl}
+      // the dimensions below are required but dont do anything
+      height="200px"
+      width="200px"
+      alt="profile"
+    />
   </Draggable>
 );
 

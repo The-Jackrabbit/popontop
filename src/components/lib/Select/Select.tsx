@@ -1,29 +1,30 @@
 import { useState } from 'react';
 import { a, useSpring } from 'react-spring';
+import { ChartFormatKey } from '../../global/Desktop/DesktopPreview/DesktopPreview';
 
 export interface Option {
   label: string;
   value: string;
 }
 
-export interface Props {
+export interface Props<T> {
   label?: string;
   isMobile?: boolean;
   isOpenByDefault: boolean;
   options: Option[];
   placeholder?: string;
-  setChosenValue: (value: string) => void;
+  setChosenValue: (value: T) => void;
   value: string;
 }
 
-export const Select: React.FC<Props> = ({
+export const Select = <T extends string>({
   label = 'Label',
   isOpenByDefault,
   options = [],
   placeholder = 'Type here',
   setChosenValue,
   value,
-}) => {
+}: Props<T>) => {
   const [isOpen, setIsOpen] = useState(isOpenByDefault);
   const selectedValueLabel = options.find(
     (option: Option): boolean => value === option.value

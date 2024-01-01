@@ -3,6 +3,11 @@ import { SettingsHookNode } from '../../../../../../frontend/hooks/use-chart/use
 import NumericExpandingPill from '../../../../../lib/ExpandingPill/NumericExpandingPill/NumericExpandingPill';
 import SwitchExpandingPill from '../../../../../lib/ExpandingPill/SwitchExpandingPill/SwitchExpandingPill';
 import TextExpandingPill from '../../../../../lib/ExpandingPill/TextExpandingPill/TextExpandingPill';
+import Select from '../../../../../lib/Select/Select';
+import {
+  ChartFormatKey,
+  CHART_TEMPLATES,
+} from '../../../DesktopPreview/DesktopPreview';
 
 export interface Props {
   settings: SettingsHookNode;
@@ -28,6 +33,25 @@ export const DesktopSettings: React.FC<Props> = ({
           setIsPreviewVisible(Boolean(value))
         }
         value={isPreviewVisible}
+      />
+      <NumericExpandingPill
+        label="Chart format"
+        min={0}
+        max={10}
+        setValue={
+          ((value: number) => settings.actions.setColumns(value)) as any
+        }
+        value={settings.state.columns}
+      />
+      <Select<ChartFormatKey>
+        isOpenByDefault={true}
+        options={Array.from(CHART_TEMPLATES).map(([chartFormat]) => ({
+          label: chartFormat,
+          value: chartFormat,
+        }))}
+        setChosenValue={settings.actions.setChartFormat}
+        value={settings.state.chartFormat}
+        isMobile={false}
       />
       <TextExpandingPill
         label="Title background color"

@@ -29,66 +29,140 @@ export const transformRows = (rows: number[][]): number[][] => {
   return trows;
 };
 
-export const CHART_TEMPLATES = {
-  honeycomb10: [
-    [0, 1],
-    [0, 1, 2],
-    [0, 1, 2],
-    [0, 1],
+export type ChartFormatKey =
+  | 'honeycomb10'
+  | 'classics'
+  | 'r50'
+  | 'r100'
+  | 'top50';
+
+export interface ChartFormat {
+  chart: number[][];
+  list: {
+    fontSize: number;
+    columnCount: number;
+    count: number;
+  };
+}
+
+export const chartFormatKeys: ChartFormatKey[] = [
+  'honeycomb10',
+  'classics',
+  'r50',
+  'r100',
+  'top50',
+];
+export const CHART_TEMPLATES: Map<ChartFormatKey, ChartFormat> = new Map([
+  [
+    'honeycomb10',
+    {
+      chart: [
+        [0, 1],
+        [0, 1, 2],
+        [0, 1, 2],
+        [0, 1],
+      ],
+      list: {
+        fontSize: 12,
+        columnCount: 1,
+        count: 10,
+      },
+    },
   ],
-  classics: [
-    [0, 1, 2, 3, 4, 5],
-    [0, 1, 2, 3, 4, 5],
-    [],
-    [0, 1, 2, 3, 4, 5, 6, 7, 8],
-    [0, 1, 2, 3, 4, 5, 6, 7, 8],
-    [],
-    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+  [
+    'classics',
+    {
+      chart: [
+        [0, 1, 2, 3, 4, 5],
+        [0, 1, 2, 3, 4, 5],
+        [],
+        [0, 1, 2, 3, 4, 5, 6, 7, 8],
+        [0, 1, 2, 3, 4, 5, 6, 7, 8],
+        [],
+        [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+        [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+        [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+        [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+        [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+        [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+        [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+      ],
+      list: {
+        fontSize: 12,
+        columnCount: 1,
+        count: 100,
+      },
+    },
   ],
-  r50: [
-    [0, 1, 2, 3, 4],
-    [0, 1, 2, 3, 4],
-    [0, 1, 2, 3, 4],
-    [0, 1, 2, 3, 4],
-    [0, 1, 2, 3, 4],
-    [0, 1, 2, 3, 4],
-    [0, 1, 2, 3, 4],
-    [0, 1, 2, 3, 4],
+  [
+    'r50',
+    {
+      chart: [
+        [0, 1, 2, 3, 4],
+        [0, 1, 2, 3, 4],
+        [0, 1, 2, 3, 4],
+        [0, 1, 2, 3, 4],
+        [0, 1, 2, 3, 4],
+        [0, 1, 2, 3, 4],
+        [0, 1, 2, 3, 4],
+        [0, 1, 2, 3, 4],
+      ],
+      list: {
+        fontSize: 12,
+        columnCount: 1,
+        count: 50,
+      },
+    },
   ],
-  r100: [
-    [0, 1, 2, 3, 4, 5],
-    [0, 1, 2, 3, 4, 5],
-    [0, 1, 2, 3, 4, 5, 6, 7],
-    [0, 1, 2, 3, 4, 5, 6, 7],
-    [0, 1, 2, 3, 4, 5, 6, 7],
-    [0, 1, 2, 3, 4, 5, 6, 7],
-    [0, 1, 2, 3, 4, 5, 6, 7],
-    [0, 1, 2, 3, 4, 5, 6, 7],
-    [0, 1, 2, 3, 4, 5, 6, 7],
-    [0, 1, 2, 3, 4, 5, 6, 7],
-    [0, 1, 2, 3, 4, 5, 6, 7],
-    [0, 1, 2, 3, 4, 5, 6, 7],
-    [0, 1, 2, 3, 4, 5, 6, 7],
+  [
+    'r100',
+    {
+      chart: [
+        [0, 1, 2, 3, 4, 5],
+        [0, 1, 2, 3, 4, 5],
+        [0, 1, 2, 3, 4, 5, 6, 7],
+        [0, 1, 2, 3, 4, 5, 6, 7],
+        [0, 1, 2, 3, 4, 5, 6, 7],
+        [0, 1, 2, 3, 4, 5, 6, 7],
+        [0, 1, 2, 3, 4, 5, 6, 7],
+        [0, 1, 2, 3, 4, 5, 6, 7],
+        [0, 1, 2, 3, 4, 5, 6, 7],
+        [0, 1, 2, 3, 4, 5, 6, 7],
+        [0, 1, 2, 3, 4, 5, 6, 7],
+        [0, 1, 2, 3, 4, 5, 6, 7],
+        [0, 1, 2, 3, 4, 5, 6, 7],
+      ],
+      list: {
+        fontSize: 12,
+        columnCount: 1,
+        count: 100,
+      },
+    },
   ],
-  top50: [
-    [0, 1, 2, 3],
-    [0, 1, 2, 3],
-    [],
-    [0, 1, 2, 3, 4, 5],
-    [0, 1, 2, 3, 4, 5],
-    [0, 1, 2, 3, 4, 5],
-    [],
-    [0, 1, 2, 3, 4, 5, 6, 7],
-    [0, 1, 2, 3, 4, 5, 6, 7],
-    [0, 1, 2, 3, 4, 5, 6, 7],
+  [
+    'top50',
+    {
+      chart: [
+        [0, 1, 2, 3],
+        [0, 1, 2, 3],
+        [],
+        [0, 1, 2, 3, 4, 5],
+        [0, 1, 2, 3, 4, 5],
+        [0, 1, 2, 3, 4, 5],
+        [],
+        [0, 1, 2, 3, 4, 5, 6, 7],
+        [0, 1, 2, 3, 4, 5, 6, 7],
+        [0, 1, 2, 3, 4, 5, 6, 7],
+      ],
+      list: {
+        fontSize: 12,
+        columnCount: 1,
+        count: 50,
+      },
+    },
   ],
-};
+]);
+
 const values = Object.values(CHART_TEMPLATES);
 export const CHART_TEMPLATE_VALUES = values;
 
@@ -98,7 +172,9 @@ export const DesktopPreview = ({
   previewIndex,
   setPreviewIndex,
 }: Props) => {
-  const template = values.at(previewIndex) as number[][];
+  const template = values
+    .map((template) => template.chart)
+    .at(previewIndex) as number[][];
   const rows = transformRows(template);
 
   return (
@@ -140,6 +216,7 @@ export const DesktopPreview = ({
       list={
         chart.settings.state.showAlbums ? (
           <ListOfAlbums
+            chart={chart}
             textColor={chart.settings.state.textColor}
             columnCount={1}
             list={chart.state.numberedList}

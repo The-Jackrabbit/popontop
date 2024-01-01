@@ -5,6 +5,7 @@ import { DESKTOP_CHART_SQUARE_SIZE } from '../../../../../../constants/sizes';
 export interface Props {
   borderSizes: string;
   className?: string;
+  albumsInRow: number;
   children: React.ReactNode;
   id: string;
   index: number;
@@ -24,6 +25,7 @@ const ChartItemDropZone: React.FC<Props> = ({
   children,
   id,
   style,
+  albumsInRow = 2,
 }) => {
   const { isOver, setNodeRef } = useDroppable({ id });
 
@@ -31,7 +33,6 @@ const ChartItemDropZone: React.FC<Props> = ({
     <div
       className={`
         ${className}
-        ${DESKTOP_CHART_SQUARE_SIZE}
         ${isOver ? 'bg-green-400' : 'bg-transparent'}
         ${borderSizes}
         box-content

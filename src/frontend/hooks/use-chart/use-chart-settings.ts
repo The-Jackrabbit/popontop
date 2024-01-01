@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { HookNode } from '../../../types/singletons';
 import { setThemeColorMetaTag } from '../../../server/utils/mobile-theme';
 import { useIncrementer } from '../use-incrementer';
+import { ChartFormatKey } from '../../../components/global/Desktop/DesktopPreview/DesktopPreview';
 
 export type SettingsHookNode = HookNode<State, Actions>;
 
@@ -16,6 +17,7 @@ export interface Actions {
   setBorderSize: (value: number) => void;
   setShowAlbums: (value: boolean) => void;
   setBackgroundColor: (value: string) => void;
+  setChartFormat: (value: ChartFormatKey) => void;
   setColumns: (value: number) => void;
   setNumberOfAlbums: (value: number) => void;
   setRows: (value: number) => void;
@@ -29,6 +31,7 @@ export interface State {
   backgroundColor: string;
   borderColor: string;
   borderSize: number;
+  chartFormat: ChartFormatKey;
   columns: number;
   numberOfAlbums: number;
   rows: number;
@@ -69,6 +72,9 @@ const useChartSettings = (
   const [titleBackgroundColor, setTitleBackgroundColor] = useState(
     defaultSettings?.title_background_color ?? ''
   );
+  const [chartFormat, setChartFormat] = useState<ChartFormatKey>(
+    (defaultSettings?.chart_format as ChartFormatKey) ?? 'honeycomb10'
+  );
   const [borderColor, setBorderColor] = useState(
     defaultSettings?.border_color ?? ''
   );
@@ -97,6 +103,7 @@ const useChartSettings = (
       setBackgroundColor,
       setBorderColor,
       setBorderSize,
+      setChartFormat,
       setColumns,
       setNumberOfAlbums,
       setRows,
@@ -110,6 +117,7 @@ const useChartSettings = (
       backgroundColor,
       borderColor,
       borderSize,
+      chartFormat,
       columns,
       numberOfAlbums,
       rows,
