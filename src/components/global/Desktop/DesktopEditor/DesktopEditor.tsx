@@ -88,9 +88,7 @@ const DesktopEditor: React.FC<Props> = ({
           <DesktopChart
             chart={chart}
             borderColor={chart.settings.state.borderColor}
-            borderSize={chart.settings.state.borderSize}
             isReadOnly={readonly}
-            items={chart.state.numberedList}
           />
         }
       />

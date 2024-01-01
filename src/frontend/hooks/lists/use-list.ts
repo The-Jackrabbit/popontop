@@ -1,5 +1,5 @@
 import { DragEndEvent, Over } from '@dnd-kit/core';
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { EMPTY_ALBUM } from '../../../constants/empty-album';
 import { ALBUM_RESULTS } from '../../../constants/test-data/search-results';
 import { Album } from '../../../types/Albums';
@@ -139,7 +139,7 @@ export const updateList = (
   return newContainers;
 };
 
-const useList = (initialList: Album[], ismobile: boolean): ListHookNode => {
+const useList = (initialList: Album[]): ListHookNode => {
   const [list, setList] = useState<Album[]>(
     initialList ?? initializeEmptyList()
   );

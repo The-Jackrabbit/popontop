@@ -1,8 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import { useState } from 'react';
-import { trpc } from '../../../../../server/utils/trpc';
 import TextExpandingPill from '../../../../lib/ExpandingPill/TextExpandingPill/TextExpandingPill';
-import { SwitchExpandingPill } from '../../../../lib/ExpandingPill/SwitchExpandingPill/SwitchExpandingPill';
 import { colorMap } from '../../../../../constants/colors';
 import { Color } from './SidebarNav/NavDot/NavDot';
 import { SettingsHookNode } from '../../../../../frontend/hooks/use-chart/use-chart-settings';

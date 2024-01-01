@@ -8,10 +8,7 @@ import { trpc } from '../../../server/utils/trpc';
 import { DeleteRowButton } from '../../../components/lib/Mobile/Row/DeleteRowButton/DeleteRowButton';
 import { colorMap } from '../../../constants/colors';
 import { Color } from '../../../components/global/Desktop/DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
-import {
-  getThemeColor,
-  resetThemeColorMetaTag,
-} from '../../../server/utils/mobile-theme';
+import { resetThemeColorMetaTag } from '../../../server/utils/mobile-theme';
 
 const YourCharts: NextPage = () => {
   const { data } = trpc.charts.getUserCharts.useQuery(undefined, {

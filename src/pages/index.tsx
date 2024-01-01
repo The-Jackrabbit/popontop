@@ -110,7 +110,6 @@ const Home: NextPage = () => {
             <DesktopPreview
               isMobile={false}
               chart={chart}
-              setPreviewIndex={actions.setPreviewIndex}
               previewIndex={previewIndex}
             />
           ) : (

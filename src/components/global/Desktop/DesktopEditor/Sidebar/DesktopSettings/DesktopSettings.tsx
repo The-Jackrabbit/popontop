@@ -1,14 +1,9 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import { SettingsHookNode } from '../../../../../../frontend/hooks/use-chart/use-chart-settings';
-import NumericExpandingPill from '../../../../../lib/ExpandingPill/NumericExpandingPill/NumericExpandingPill';
 import SelectExpandingPill from '../../../../../lib/ExpandingPill/SelectExpandingPill/SelectExpandingPill';
 import SwitchExpandingPill from '../../../../../lib/ExpandingPill/SwitchExpandingPill/SwitchExpandingPill';
 import TextExpandingPill from '../../../../../lib/ExpandingPill/TextExpandingPill/TextExpandingPill';
-import Select from '../../../../../lib/Select/Select';
-import {
-  ChartFormatKey,
-  CHART_TEMPLATES,
-} from '../../../DesktopPreview/DesktopPreview';
+import { CHART_TEMPLATES } from '../../../DesktopPreview/DesktopPreview';
 
 export interface Props {
   settings: SettingsHookNode;
@@ -20,8 +15,6 @@ export interface Props {
 
 export const DesktopSettings: React.FC<Props> = ({
   settings,
-  setIsPreviewVisible,
-  isPreviewVisible,
   toggleAlbums,
   toggleTitle,
 }) => (
@@ -78,13 +71,13 @@ export const DesktopSettings: React.FC<Props> = ({
         setValue={(value: string) => settings.actions.setBorderColor(value)}
         value={settings.state.borderColor}
       />
-      <TextExpandingPill
+      {/* <TextExpandingPill
         label="Album overlay color"
         setValue={(value: string) =>
           settings.actions.setAlbumOverlayColor(value)
         }
         value={settings.state.albumOverlayColor}
-      />
+      /> */}
       <SwitchExpandingPill
         className="inline-block"
         label="list albums?"
@@ -97,15 +90,16 @@ export const DesktopSettings: React.FC<Props> = ({
         setValue={(value: boolean | null) => toggleTitle(Boolean(value))}
         value={settings.state.showTitle}
       />
-      <NumericExpandingPill
+      {/* <NumericExpandingPill
         label="Number of albums"
         min={0}
         max={100}
         setValue={
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           ((value: number) => settings.actions.setNumberOfAlbums(value)) as any
         }
         value={settings.state.numberOfAlbums}
-      />
+      /> */}
       {/* <NumericExpandingPill
         label="Number of columns"
         min={0}

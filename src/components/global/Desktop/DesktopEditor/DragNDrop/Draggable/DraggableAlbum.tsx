@@ -15,11 +15,9 @@ export interface Props {
   album: Album;
   index: number;
   isReadOnly?: boolean;
-  albumsInRow: number;
 }
 
 const DraggableAlbum: React.FC<Props> = ({
-  albumsInRow,
   album,
   index,
   isReadOnly = false,

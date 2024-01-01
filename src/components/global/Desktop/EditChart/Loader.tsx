@@ -1,5 +1,4 @@
 import DesktopPage from '../../../lib/DesktopPage/DesktopPage';
-import LoadingBouncer from '../../../lib/LoadingBouncer/LoadingBouncer';
 import {
   CloudArrowUpIcon,
   PencilSquareIcon,

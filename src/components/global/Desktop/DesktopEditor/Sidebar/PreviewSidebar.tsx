@@ -4,15 +4,11 @@ import { colorMap } from '../../../../../constants/colors';
 import { Color } from './SidebarNav/NavDot/NavDot';
 import Layout from './Layout';
 import SidebarNav from './SidebarNav/SidebarNav';
-import NumericExpandingPill, {
-  NumericExpandingPillContent,
-} from '../../../../lib/ExpandingPill/NumericExpandingPill/NumericExpandingPill';
+import NumericExpandingPill from '../../../../lib/ExpandingPill/NumericExpandingPill/NumericExpandingPill';
 import { DesktopChartEditorHookNode } from '../../../../../frontend/hooks/singletons/use-desktop-chart-editor';
 import { CHART_TEMPLATE_VALUES } from '../../DesktopPreview/DesktopPreview';
-import { ChartHookNode } from '../../../../../frontend/hooks/use-chart/use-chart';
 
 export interface Props {
-  chart: ChartHookNode;
   isChartOwner: boolean;
   desktopChartEditor: DesktopChartEditorHookNode;
   pageTitle: string;
@@ -22,7 +18,6 @@ export interface Props {
 }
 
 export const PreviewSidebar: React.FC<Props> = ({
-  chart,
   desktopChartEditor,
   isChartOwner,
   pageTitle,
@@ -58,7 +53,6 @@ export const PreviewSidebar: React.FC<Props> = ({
                 value={desktopChartEditor.state.previewIndex}
               />
               <SwitchExpandingPill
-                isInitiallyExpanded={true}
                 className="inline-block"
                 label="show screenshot mode"
                 setValue={(value: boolean | null) =>

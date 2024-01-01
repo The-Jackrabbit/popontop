@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { a, useSpring } from 'react-spring';
-import { ChartFormatKey } from '../../global/Desktop/DesktopPreview/DesktopPreview';
 
 export interface Option {
   label: string;

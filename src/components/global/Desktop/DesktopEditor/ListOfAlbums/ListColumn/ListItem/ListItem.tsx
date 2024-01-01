@@ -1,5 +1,4 @@
 import React from 'react';
-import { DESKTOP_CHART_FONT_SIZE } from '../../../../../../../constants/sizes';
 import { ChartHookNode } from '../../../../../../../frontend/hooks/use-chart/use-chart';
 import { Album } from '../../../../../../../types/Albums';
 import { CHART_TEMPLATES } from '../../../../DesktopPreview/DesktopPreview';

@@ -3,7 +3,6 @@ import { a } from 'react-spring';
 import NavDot, {
   Color,
 } from '../../../global/Desktop/DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
-import Select from '../../Select/Select';
 import { ExpandingPill } from '../ExpandingPill';
 
 export interface Props<T> {

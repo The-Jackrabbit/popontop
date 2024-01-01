@@ -1,6 +1,4 @@
 import { ChartHookNode } from '../../../../frontend/hooks/use-chart/use-chart';
-import { NumericExpandingPillContent } from '../../../lib/ExpandingPill/NumericExpandingPill/NumericExpandingPill';
-import { Dispatch, SetStateAction } from 'react';
 import { Layout } from './Layout';
 import { ChartTemplate } from './ChartTemplate/ChartTemplate';
 import Title from '../../../lib/Title/Title';
@@ -12,7 +10,6 @@ export interface Props {
   chart: ChartHookNode;
   isMobile: boolean;
   previewIndex: number;
-  setPreviewIndex?: Dispatch<SetStateAction<number>>;
 }
 
 export const transformRows = (rows: number[][]): number[][] => {
@@ -164,12 +161,7 @@ export const CHART_TEMPLATES: Map<ChartFormatKey, ChartFormat> = new Map([
 const values = Object.values(CHART_TEMPLATES);
 export const CHART_TEMPLATE_VALUES = values;
 
-export const DesktopPreview = ({
-  chart,
-  isMobile,
-  previewIndex,
-  setPreviewIndex,
-}: Props) => {
+export const DesktopPreview = ({ chart, isMobile, previewIndex }: Props) => {
   const template = values
     .map((template) => template.chart)
     .at(previewIndex) as number[][];

@@ -112,7 +112,6 @@ const EditChart = ({
             {state.isPreviewVisible ? (
               <DesktopPreview
                 chart={chart}
-                setPreviewIndex={actions.setPreviewIndex}
                 previewIndex={state.previewIndex}
                 isMobile={false}
               />
@@ -142,7 +141,6 @@ const EditChart = ({
               />
             ) : (
               <PreviewSidebar
-                chart={chart}
                 desktopChartEditor={desktopChartEditor}
                 isChartOwner={isChartOwner}
                 pageTitleBorderBottom={Color.blue}

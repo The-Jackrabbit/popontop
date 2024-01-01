@@ -1,12 +1,9 @@
 import React from 'react';
 import { useDroppable } from '@dnd-kit/core';
-import { DESKTOP_CHART_SQUARE_SIZE } from '../../../../../../constants/sizes';
 
 export interface Props {
-  albumsInRow: number;
   children: React.ReactNode;
   id: string;
-  index: number;
   style?: object;
 }
 
@@ -17,12 +14,7 @@ export const EMPTY_SQUARE_BG_GRADIENT = [
   'linear-gradient(to right, var(--color-green-500), var(--color-orange-500))',
 ];
 
-const ChartItemDropZone: React.FC<Props> = ({
-  children,
-  id,
-  style,
-  albumsInRow = 2,
-}) => {
+const ChartItemDropZone: React.FC<Props> = ({ children, id, style }) => {
   const { isOver, setNodeRef } = useDroppable({ id });
 
   return (
