@@ -2,7 +2,7 @@ import { ChartHookNode } from '../../../../frontend/hooks/use-chart/use-chart';
 import { Layout } from './Layout';
 import { ChartTemplate } from './ChartTemplate/ChartTemplate';
 import Title from '../../../lib/Title/Title';
-import ListOfAlbums from '../DesktopEditor/ListOfAlbums/ListOfAlbums';
+import ListOfEntries from '../DesktopEditor/ListOfEntries/ListOfEntries';
 import { AlbumOverlay } from '../../MobileEditor/ScreenShot/ScreenShot';
 import { EMPTY_ALBUM } from '../../../../constants/empty-album';
 
@@ -222,7 +222,7 @@ export const DesktopPreview = ({ chart, isMobile, previewIndex }: Props) => {
       isMobile={isMobile}
       list={
         chart.settings.state.showAlbums ? (
-          <ListOfAlbums
+          <ListOfEntries
             chart={chart}
             textColor={chart.settings.state.textColor}
             columnCount={1}

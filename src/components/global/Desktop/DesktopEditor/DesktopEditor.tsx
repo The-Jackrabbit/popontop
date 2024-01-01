@@ -1,7 +1,7 @@
 import React from 'react';
 import { ChartHookNode } from '../../../../frontend/hooks/use-chart/use-chart';
 import Title from '../../../lib/Title/Title';
-import ListOfAlbums from './ListOfAlbums/ListOfAlbums';
+import ListOfEntries from './ListOfEntries/ListOfEntries';
 import DesktopChart from './DesktopChart/DesktopChart';
 import Layout from './Layout';
 import { useDroppable } from '@dnd-kit/core';
@@ -33,7 +33,7 @@ const DynamicList = ({
   }
   if (showAlbums) {
     return (
-      <ListOfAlbums
+      <ListOfEntries
         chart={chart}
         textColor={chart.settings.state.textColor}
         columnCount={

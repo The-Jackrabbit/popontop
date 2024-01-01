@@ -8,7 +8,7 @@ export interface Props {
   textColor: string;
 }
 
-const ListOfAlbums: React.FC<Props> = ({ chart, columnCount, textColor }) => {
+const ListOfEntries: React.FC<Props> = ({ chart, columnCount, textColor }) => {
   return (
     <div
       className="
@@ -36,4 +36,4 @@ const ListOfAlbums: React.FC<Props> = ({ chart, columnCount, textColor }) => {
   );
 };
 
-export default ListOfAlbums;
+export default ListOfEntries;

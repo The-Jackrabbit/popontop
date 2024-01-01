@@ -2,7 +2,7 @@ import React from 'react';
 import { TitleLoader } from '../../../lib/Title/Loader';
 import { DesktopChartLoader } from './DesktopChart/Loader';
 import Layout from './Layout';
-import { ListOfAlbumsLoader } from './ListOfAlbums/Loader';
+import { ListOfEntriesLoader } from './ListOfEntries/Loader';
 
 export interface Props {
   showOnboardingFlow?: boolean;
@@ -22,7 +22,7 @@ const Loader: React.FC<Props> = ({ showOnboardingFlow = false }) => {
     <Layout
       uuid=""
       title={<TitleLoader />}
-      list={<ListOfAlbumsLoader numberOfAlbums={numberOfAlbums} />}
+      list={<ListOfEntriesLoader numberOfAlbums={numberOfAlbums} />}
       chart={<DesktopChartLoader numberOfAlbums={numberOfAlbums} />}
     />
   );
