@@ -40,7 +40,7 @@ export const ListColumn: React.FC<Props> = ({
   const listItemsForColumn = [];
   for (
     let index = startIndexOfColumn;
-    index <= Math.min(endIndexOfColumn + 1, listLength - 1);
+    index < Math.min(endIndexOfColumn + 1, listLength - 1);
     index++
   ) {
     listItemsForColumn.push(

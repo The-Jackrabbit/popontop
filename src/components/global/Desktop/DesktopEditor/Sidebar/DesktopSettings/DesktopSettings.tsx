@@ -26,24 +26,16 @@ export const DesktopSettings: React.FC<Props> = ({
 }) => (
   <>
     <div className="flex flex-row flex-wrap items-center gap-2 ">
-      <SwitchExpandingPill
+      {/* <SwitchExpandingPill
         className="inline-block"
         label="show screenshot mode"
         setValue={(value: boolean | null) =>
           setIsPreviewVisible(Boolean(value))
         }
         value={isPreviewVisible}
-      />
-      <NumericExpandingPill
-        label="Chart format"
-        min={0}
-        max={10}
-        setValue={
-          ((value: number) => settings.actions.setColumns(value)) as any
-        }
-        value={settings.state.columns}
-      />
+      /> */}
       <Select<ChartFormatKey>
+        label="Chart format"
         isOpenByDefault={true}
         options={Array.from(CHART_TEMPLATES).map(([chartFormat]) => ({
           label: chartFormat,

@@ -42,7 +42,7 @@ export const Select = <T extends string>({
   const onMouseLeave = () => animatebuttonStyle.start({ scale: 1.0 });
 
   return (
-    <div className="relative mt-0 flex flex-col pb-4">
+    <div className="relative mt-0 flex w-full flex-col pb-4">
       <label className="text-neutral-400">{label}</label>
       <a.button
         onMouseEnter={() => onMouseOver()}
@@ -51,15 +51,17 @@ export const Select = <T extends string>({
         className={`
           mb
           z-20
-          flex h-12
+          flex h-14
           w-full justify-between
           rounded-lg 
-          border-transparent bg-white
-          p-4  text-lg 
-          text-neutral-400 shadow-lg
-          outline-2 outline-offset-2 outline-rose-200 focus-within:text-rose-300
-          focus-within:outline focus-within:outline-rose-200
-          dark:bg-neutral-600
+          border-4 border-transparent
+          bg-white   
+          p-4 text-lg
+          text-neutral-400 shadow-lg outline-2 outline-offset-2
+          outline-rose-200 focus-within:text-rose-300
+          focus-within:outline 
+          focus-within:outline-rose-200 dark:border-black
+          dark:bg-neutral-900
         `}
         onClick={() => {
           animatebuttonStyle.start({ scale: 1.0 });
