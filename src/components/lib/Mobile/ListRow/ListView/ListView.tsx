@@ -5,13 +5,13 @@ import { ROW_HEIGHT } from '../../../../../frontend/hooks/springs/use-disappear-
 export interface Props {
   album: Album;
   index?: number;
-  showAlbums: boolean;
+  showEntries: boolean;
   textColor?: string;
 }
 
 export const ListView: React.FC<Props> = ({
   album,
-  showAlbums,
+  showEntries,
   index = 0,
   textColor = null,
 }) => (
@@ -22,7 +22,7 @@ export const ListView: React.FC<Props> = ({
       text-xs
     "
   >
-    {showAlbums && (
+    {showEntries && (
       <div
         className="
           flex w-12

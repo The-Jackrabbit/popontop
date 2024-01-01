@@ -82,7 +82,7 @@ export const DesktopSettings: React.FC<Props> = ({
         className="inline-block"
         label="list albums?"
         setValue={(value: boolean | null) => toggleAlbums(Boolean(value))}
-        value={settings.state.showAlbums}
+        value={settings.state.showEntries}
       />
       <SwitchExpandingPill
         className="inline-block"

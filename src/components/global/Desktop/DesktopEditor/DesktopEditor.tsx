@@ -17,11 +17,11 @@ export interface Props {
 const DynamicList = ({
   chart,
   isDragging,
-  showAlbums,
+  showEntries,
 }: {
   chart: ChartHookNode;
   isDragging: boolean;
-  showAlbums: boolean;
+  showEntries: boolean;
 }) => {
   const { setNodeRef } = useDroppable({ id: 'delete' });
   if (isDragging) {
@@ -31,7 +31,7 @@ const DynamicList = ({
       </div>
     );
   }
-  if (showAlbums) {
+  if (showEntries) {
     return (
       <ListOfEntries
         chart={chart}
@@ -81,7 +81,7 @@ const DesktopEditor: React.FC<Props> = ({
           <DynamicList
             chart={chart}
             isDragging={isDragging}
-            showAlbums={chart.settings.state.showAlbums}
+            showEntries={chart.settings.state.showEntries}
           />
         }
         chart={

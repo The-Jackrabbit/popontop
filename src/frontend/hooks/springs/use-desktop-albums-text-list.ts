@@ -6,18 +6,18 @@ export interface DesktopAlbumsTextList {
 }
 
 export const useDesktopAlbumsTextList = ({
-  setShowAlbums,
-  showAlbums,
+  setShowEntries,
+  showEntries,
 }: {
-  setShowAlbums: (value: boolean) => void;
-  showAlbums: boolean;
+  setShowEntries: (value: boolean) => void;
+  showEntries: boolean;
 }): DesktopAlbumsTextList => {
   const [listStyle, animateListStyles] = useSpring(() => ({
-    from: { width: !showAlbums ? '0px' : '200px' },
+    from: { width: !showEntries ? '0px' : '200px' },
   }));
 
   const toggleAlbums = (val: boolean): void => {
-    setShowAlbums(val);
+    setShowEntries(val);
     animateListStyles.start({
       width: val ? '200px' : '0px',
     });

@@ -11,7 +11,7 @@ export interface Settings {
   backgroundColor: string;
   borderColor: string;
   borderSize: number;
-  showAlbums: boolean;
+  showEntries: boolean;
   showTitle: boolean;
   textColor: string;
 }

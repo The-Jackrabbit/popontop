@@ -8,7 +8,7 @@ export interface Props {
   listMode: ListRowMode;
   onRearrangeClick: (rowMovementType: RowMovementType, index: number) => void;
   removeAlbumAtIndex: (index: number) => void;
-  showAlbums: boolean;
+  showEntries: boolean;
   textColor: string;
 }
 
@@ -18,7 +18,7 @@ const List: React.FC<Props> = ({
   listMode,
   onRearrangeClick,
   removeAlbumAtIndex,
-  showAlbums,
+  showEntries,
   textColor,
 }) => (
   <div
@@ -43,7 +43,7 @@ const List: React.FC<Props> = ({
             onRearrangeClick(rowMovementType, index)
           }
           removeSelfFromList={() => removeAlbumAtIndex(index)}
-          showAlbums={showAlbums}
+          showEntries={showEntries}
           textColor={textColor}
         />
       ))}

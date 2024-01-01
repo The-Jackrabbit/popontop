@@ -10,7 +10,7 @@ export interface Props {
   album: Album;
   index: number;
   onClick: (rowMovementType: RowMovementType) => void;
-  showAlbums: boolean;
+  showEntries: boolean;
 }
 
 export enum RowMovementType {
@@ -31,7 +31,7 @@ export const RearrangeView: React.FC<Props> = ({
   album,
   index,
   onClick,
-  showAlbums,
+  showEntries,
 }) => {
   const [rotateX, animateRotationY] = useSpring(() => ({
     rotateX: '90deg',
@@ -44,7 +44,7 @@ export const RearrangeView: React.FC<Props> = ({
 
   return (
     <a.div className="flex w-full justify-between">
-      {showAlbums ? (
+      {showEntries ? (
         <div
           className="
             flex shrink-0 basis-1/12 

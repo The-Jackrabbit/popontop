@@ -38,7 +38,7 @@ export const SearchResults: React.FC<Props> = ({
               album={album}
               index={index}
               key={JSON.stringify(album) + index}
-              showAlbums={true}
+              showEntries={true}
               isLastRowInList={index === albums.length - 1}
               mode={ListRowMode.SEARCH}
               onClick={() => onClick(album)}

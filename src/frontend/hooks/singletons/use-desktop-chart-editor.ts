@@ -53,8 +53,8 @@ export const useDesktopChartEditor = ({
     showTitle: chart.settings.state.showTitle,
   });
   const { listStyle, toggleAlbums } = useDesktopAlbumsTextList({
-    setShowAlbums: chart.settings.actions.setShowAlbums,
-    showAlbums: chart.settings.state.showAlbums,
+    setShowEntries: chart.settings.actions.setShowEntries,
+    showEntries: chart.settings.state.showEntries,
   });
 
   const [showOnboardingFlow] = useState(!true);

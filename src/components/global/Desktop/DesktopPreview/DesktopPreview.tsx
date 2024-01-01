@@ -221,7 +221,7 @@ export const DesktopPreview = ({ chart, isMobile, previewIndex }: Props) => {
       }
       isMobile={isMobile}
       list={
-        chart.settings.state.showAlbums ? (
+        chart.settings.state.showEntries ? (
           <ListOfEntries
             chart={chart}
             textColor={chart.settings.state.textColor}

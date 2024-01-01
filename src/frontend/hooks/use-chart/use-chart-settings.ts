@@ -15,7 +15,7 @@ export interface Actions {
   setAlbumOverlayColor: (value: string) => void;
   setBorderColor: (value: string) => void;
   setBorderSize: (value: number) => void;
-  setShowAlbums: (value: boolean) => void;
+  setShowEntries: (value: boolean) => void;
   setBackgroundColor: (value: string) => void;
   setChartFormat: (value: ChartFormatKey) => void;
   setColumns: (value: number) => void;
@@ -35,7 +35,7 @@ export interface State {
   columns: number;
   numberOfAlbums: number;
   rows: number;
-  showAlbums: boolean;
+  showEntries: boolean;
   showTitle: boolean;
   textColor: string;
   titleBackgroundColor: string;
@@ -84,7 +84,7 @@ const useChartSettings = (
       ? parseInt(defaultSettings?.number_of_albums as unknown as string)
       : 10) as number
   );
-  const [showAlbums, setShowAlbums] = useState(
+  const [showEntries, setShowEntries] = useState(
     defaultSettings?.show_albums ?? true
   );
   const [showTitle, setShowTitle] = useState(
@@ -107,7 +107,7 @@ const useChartSettings = (
       setColumns,
       setNumberOfAlbums,
       setRows,
-      setShowAlbums,
+      setShowEntries,
       setShowTitle,
       setTextColor,
       setTitleBackgroundColor,
@@ -121,7 +121,7 @@ const useChartSettings = (
       columns,
       numberOfAlbums,
       rows,
-      showAlbums,
+      showEntries,
       showTitle,
       textColor,
       titleBackgroundColor,

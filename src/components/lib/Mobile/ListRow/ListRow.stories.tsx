@@ -29,7 +29,7 @@ export const DeleteView: ComponentStory<typeof ListRow> = () => {
           isLastRowInList={true}
           removeSelfFromList={() => setIsActive(false)}
           onRearrangeClick={() => undefined}
-          showAlbums={true}
+          showEntries={true}
           textColor={'green'}
         />
       )}
@@ -46,7 +46,7 @@ export const Multiple: ComponentStory<typeof ListRow> = () => {
           mode={ListRowMode.REARRANGE}
           album={album}
           index={index}
-          showAlbums={true}
+          showEntries={true}
           isLastRowInList={index === ALBUM_RESULTS.length - 1}
           removeSelfFromList={(): void => undefined}
           textColor={'green'}
@@ -65,7 +65,7 @@ export const RearrangeView: ComponentStory<typeof ListRow> = () => {
           mode={ListRowMode.REARRANGE}
           album={album}
           index={index}
-          showAlbums={true}
+          showEntries={true}
           isLastRowInList={index === ALBUM_RESULTS.length - 1}
           removeSelfFromList={(): void => undefined}
           textColor={'green'}
@@ -84,7 +84,7 @@ export const SearchView: ComponentStory<typeof ListRow> = () => {
           mode={ListRowMode.SEARCH}
           album={album}
           index={index}
-          showAlbums={true}
+          showEntries={true}
           isLastRowInList={index === ALBUM_RESULTS.length - 1}
           removeSelfFromList={(): void => undefined}
           textColor={'green'}

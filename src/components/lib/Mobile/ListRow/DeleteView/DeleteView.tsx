@@ -8,7 +8,7 @@ export interface Props {
   album: Album;
   index: number;
   onClick: () => void;
-  showAlbums: boolean;
+  showEntries: boolean;
   textColor: string;
 }
 
@@ -16,11 +16,11 @@ export const DeleteView: React.FC<Props> = ({
   album,
   index,
   onClick,
-  showAlbums,
+  showEntries,
   textColor,
 }) => (
   <div className="flex w-full justify-between">
-    {showAlbums ? (
+    {showEntries ? (
       <div
         className="
           flex

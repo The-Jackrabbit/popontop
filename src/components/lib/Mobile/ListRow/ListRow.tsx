@@ -26,7 +26,7 @@ export interface Props {
   onClick?: () => void;
   onRearrangeClick?: (rowMovementType: RowMovementType) => void;
   removeSelfFromList?: () => void;
-  showAlbums: boolean;
+  showEntries: boolean;
   textColor?: string;
 }
 
@@ -38,7 +38,7 @@ export const ListRow: React.FC<Props> = ({
   onClick,
   onRearrangeClick,
   removeSelfFromList = () => undefined,
-  showAlbums,
+  showEntries,
   textColor,
 }) => {
   const initialHeight = ROW_HEIGHT;
@@ -76,7 +76,7 @@ export const ListRow: React.FC<Props> = ({
               album={album}
               textColor={textColor}
               index={index}
-              showAlbums={showAlbums}
+              showEntries={showEntries}
             />
           ) : null}
           {mode === ListRowMode.REARRANGE && onRearrangeClick ? (
@@ -84,7 +84,7 @@ export const ListRow: React.FC<Props> = ({
               album={album}
               index={index}
               onClick={onRearrangeClick}
-              showAlbums={showAlbums}
+              showEntries={showEntries}
             />
           ) : null}
           {mode === ListRowMode.SEARCH && onClick ? (
@@ -100,7 +100,7 @@ export const ListRow: React.FC<Props> = ({
             <DeleteView
               album={album}
               index={index}
-              showAlbums={showAlbums}
+              showEntries={showEntries}
               textColor={textColor ?? ''}
               onClick={() => {
                 removeSelfFromList();

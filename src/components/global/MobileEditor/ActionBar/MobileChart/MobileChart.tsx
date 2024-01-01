@@ -49,7 +49,7 @@ const MobileChart: React.FC<Props> = ({
       listMode={editor.state.listMode}
       onRearrangeClick={actions.onRearrangeClick}
       removeAlbumAtIndex={chart.list.actions.removeAlbumAtIndex}
-      showAlbums={chart.settings.state.showAlbums}
+      showEntries={chart.settings.state.showEntries}
       textColor={chart.settings.state.textColor}
     />
 

@@ -16,8 +16,8 @@ export const MobileSettings: React.FC<Props> = ({ settings }) => {
           key="page-two"
           showTitle={settings.state.showTitle}
           setShowTitle={settings.actions.setShowTitle}
-          listAlbums={settings.state.showAlbums}
-          setListAlbums={settings.actions.setShowAlbums}
+          listAlbums={settings.state.showEntries}
+          setListAlbums={settings.actions.setShowEntries}
           borderSize={settings.state.borderSize}
           setBorderSize={settings.actions.setBorderSize}
           backgroundColor={settings.state.backgroundColor}
