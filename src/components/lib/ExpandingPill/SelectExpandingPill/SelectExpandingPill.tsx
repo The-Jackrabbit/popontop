@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { a } from 'react-spring';
+import NavDot, {
+  Color,
+} from '../../../global/Desktop/DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
 import Select from '../../Select/Select';
 import { ExpandingPill } from '../ExpandingPill';
 
@@ -27,7 +30,7 @@ export const SelectExpandingPill = <T extends string>({
 
   return (
     <ExpandingPill
-      className={className}
+      className={className + ' h-min-content z-50 '}
       isActive={isExpanded}
       toggleVisibility={() => setIsExpanded(!isExpanded)}
     >
@@ -35,13 +38,24 @@ export const SelectExpandingPill = <T extends string>({
       <div className={labelClassName}>
         <a.div>{isExpanded ? '-' : '+'}</a.div>
       </div>
-      <Select<T>
-        isOpenByDefault={true}
-        options={options}
-        setValue={setValue}
-        value={value}
-        isMobile={false}
-      />
+      <div className="">
+        {options.map((option, index) => (
+          <button
+            key={`option-${index}`}
+            className="mb-2 flex flex-row"
+            onClick={() => setValue(option.value)}
+          >
+            <NavDot
+              ariaLabel="option"
+              color={option.value === value ? Color.amber : Color.blue}
+              isActive={option.value === value}
+              className="mr-2 h-3 w-3 border-none"
+              onClick={() => undefined}
+            />
+            <p className=" dark:text-neutral-300">{option.label}</p>
+          </button>
+        ))}
+      </div>
     </ExpandingPill>
   );
 };

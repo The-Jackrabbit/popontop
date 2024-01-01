@@ -18,7 +18,7 @@ export interface Props<T> {
 }
 
 export const Select = <T extends string>({
-  label = 'Label',
+  label,
   isOpenByDefault,
   options = [],
   placeholder = 'Type here',
@@ -42,8 +42,8 @@ export const Select = <T extends string>({
   const onMouseLeave = () => animatebuttonStyle.start({ scale: 1.0 });
 
   return (
-    <div className="relative mt-0 flex w-full flex-col pb-4">
-      <label className="text-neutral-400">{label}</label>
+    <div className="relative mt-0 flex w-full flex-col overflow-visible pb-4">
+      {label ? <label className="text-neutral-400">{label}</label> : null}
       <a.button
         onMouseEnter={() => onMouseOver()}
         onMouseLeave={() => onMouseLeave()}
@@ -53,10 +53,12 @@ export const Select = <T extends string>({
           z-20
           flex h-14
           w-full justify-between
-          rounded-lg 
-          border-4 border-transparent
-          bg-white   
-          p-4 text-lg
+          overflow-visible 
+          rounded-lg border-4
+          border-transparent   
+          bg-white p-4
+          pb-6
+          text-lg
           text-neutral-400 shadow-lg outline-2 outline-offset-2
           outline-rose-200 focus-within:text-rose-300
           focus-within:outline 
@@ -89,14 +91,15 @@ export const Select = <T extends string>({
               hover:text-rose-300
             `}
           >
-            ▽△
+            {!isOpen ? '▽' : '△'}
           </span>
         </div>
       </a.button>
       <div
+        id="dropdown-options"
         className={`
           absolute top-[80px] 
-          z-50
+          z-[1000]
           mt-2
           w-full rounded-lg
           bg-white shadow-xl dark:bg-neutral-800
@@ -122,7 +125,7 @@ export const Select = <T extends string>({
               text-left text-lg text-neutral-600 dark:text-neutral-200
             `}
               onClick={() => {
-                setChosenValue(value);
+                setChosenValue(value as T);
                 setIsOpen(false);
               }}
               tabIndex={0}
