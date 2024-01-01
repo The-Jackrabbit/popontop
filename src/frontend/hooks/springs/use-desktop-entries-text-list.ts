@@ -5,7 +5,7 @@ export interface DesktopAlbumsTextList {
   toggleAlbums: (value: boolean) => void;
 }
 
-export const useDesktopAlbumsTextList = ({
+export const useDesktopEntriesTextList = ({
   setShowEntries,
   showEntries,
 }: {

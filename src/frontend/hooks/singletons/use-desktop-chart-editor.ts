@@ -3,10 +3,10 @@ import { ChartSettings } from '@prisma/client';
 import { SpringValue } from 'react-spring';
 import { Album } from '../../../types/Albums';
 import { HookNode } from '../../../types/singletons';
-import { useDesktopAlbumsTextList } from '../springs/use-desktop-albums-text-list';
 import useDesktopTitle from '../springs/use-desktop-title';
 import useChart, { ChartHookNode } from '../use-chart/use-chart';
 import { setThemeColorMetaTag } from '../../../server/utils/mobile-theme';
+import { useDesktopEntriesTextList } from '../springs/use-desktop-entries-text-list';
 
 export interface DesktopChartEditorHookNode extends HookNode<State, Actions> {
   chart: ChartHookNode;
@@ -52,7 +52,7 @@ export const useDesktopChartEditor = ({
     setShowTitle: chart.settings.actions.setShowTitle,
     showTitle: chart.settings.state.showTitle,
   });
-  const { listStyle, toggleAlbums } = useDesktopAlbumsTextList({
+  const { listStyle, toggleAlbums } = useDesktopEntriesTextList({
     setShowEntries: chart.settings.actions.setShowEntries,
     showEntries: chart.settings.state.showEntries,
   });
