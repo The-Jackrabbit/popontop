@@ -171,15 +171,7 @@ export const useChart = ({
       createChart,
       setChartTitle,
     },
-    list: {
-      ...list,
-      state: {
-        ...list.state,
-        list: list.state.list.filter(
-          (_, index) => index < settings.state.numberOfAlbums
-        ),
-      },
-    },
+    list,
     settings,
     state,
   };

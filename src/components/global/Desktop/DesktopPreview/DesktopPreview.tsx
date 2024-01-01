@@ -24,8 +24,6 @@ export const transformRows = (rows: number[][]): number[][] => {
     currentLength += transformedRow.length;
   });
 
-  console.log({ currentLength });
-
   return trows;
 };
 
@@ -108,8 +106,8 @@ export const CHART_TEMPLATES: Map<ChartFormatKey, ChartFormat> = new Map([
         [0, 1, 2, 3, 4],
       ],
       list: {
-        fontSize: 12,
-        columnCount: 1,
+        fontSize: 10,
+        columnCount: 2,
         count: 50,
       },
     },
