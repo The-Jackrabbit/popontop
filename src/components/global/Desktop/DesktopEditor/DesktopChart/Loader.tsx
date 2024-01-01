@@ -4,11 +4,11 @@ import { EMPTY_ALBUM } from '../../../../../constants/empty-album';
 import { ChartItemLoader } from './ChartItem/Loader';
 
 interface Props {
-  numberOfAlbums: number;
+  numberOfEntries: number;
 }
 
-const Loader: React.FC<Props> = ({ numberOfAlbums }) => {
-  const list = [...new Array(numberOfAlbums)].map(() => EMPTY_ALBUM);
+const Loader: React.FC<Props> = ({ numberOfEntries }) => {
+  const list = [...new Array(numberOfEntries)].map(() => EMPTY_ALBUM);
   return (
     <Grid
       borderSize={1}

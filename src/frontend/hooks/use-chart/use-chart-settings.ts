@@ -19,7 +19,7 @@ export interface Actions {
   setBackgroundColor: (value: string) => void;
   setChartFormat: (value: ChartFormatKey) => void;
   setColumns: (value: number) => void;
-  setNumberOfAlbums: (value: number) => void;
+  setNumberOfEntries: (value: number) => void;
   setRows: (value: number) => void;
   setShowTitle: (value: boolean) => void;
   setTextColor: (value: string) => void;
@@ -33,7 +33,7 @@ export interface State {
   borderSize: number;
   chartFormat: ChartFormatKey;
   columns: number;
-  numberOfAlbums: number;
+  numberOfEntries: number;
   rows: number;
   showEntries: boolean;
   showTitle: boolean;
@@ -79,7 +79,7 @@ const useChartSettings = (
     defaultSettings?.border_color ?? ''
   );
   const [borderSize, setBorderSize] = useState(1); // need to convert the sql sschema for this value from a decimal to a regualr number before unhardcoding this
-  const [numberOfAlbums, setNumberOfAlbums] = useState<number>(
+  const [numberOfEntries, setNumberOfEntries] = useState<number>(
     (defaultSettings && defaultSettings?.number_of_albums
       ? parseInt(defaultSettings?.number_of_albums as unknown as string)
       : 10) as number
@@ -105,7 +105,7 @@ const useChartSettings = (
       setBorderSize,
       setChartFormat,
       setColumns,
-      setNumberOfAlbums,
+      setNumberOfEntries,
       setRows,
       setShowEntries,
       setShowTitle,
@@ -119,7 +119,7 @@ const useChartSettings = (
       borderSize,
       chartFormat,
       columns,
-      numberOfAlbums,
+      numberOfEntries,
       rows,
       showEntries,
       showTitle,

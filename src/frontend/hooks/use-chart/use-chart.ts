@@ -8,11 +8,11 @@ import useChartSettings, { SettingsHookNode } from './use-chart-settings';
 import { EMPTY_ALBUM } from '../../../constants/empty-album';
 import { useRouter } from 'next/router';
 
-const getNumberedList = (numberOfAlbums: number, listState: Album[]) => {
-  const emptyTextList = [...new Array(numberOfAlbums)];
+const getNumberedList = (numberOfEntries: number, listState: Album[]) => {
+  const emptyTextList = [...new Array(numberOfEntries)];
 
   return emptyTextList.map((_, index) =>
-    index < numberOfAlbums && index < listState.length
+    index < numberOfEntries && index < listState.length
       ? (listState[index] as Album)
       : EMPTY_ALBUM
   );
@@ -72,7 +72,7 @@ export const useChart = ({
         background_color: settings.state.backgroundColor,
         border_color: settings.state.borderColor,
         border_size: settings.state.borderSize,
-        number_of_albums: settings.state.numberOfAlbums,
+        number_of_albums: settings.state.numberOfEntries,
         chart_format: settings.state.chartFormat,
         show_albums: settings.state.showEntries,
         show_title: settings.state.showTitle,
@@ -95,7 +95,7 @@ export const useChart = ({
         border_color: settings.state.borderColor,
         border_size: settings.state.borderSize,
         chart_format: settings.state.chartFormat,
-        number_of_albums: settings.state.numberOfAlbums,
+        number_of_albums: settings.state.numberOfEntries,
         show_albums: settings.state.showEntries,
         show_title: settings.state.showTitle,
         text_color: settings.state.textColor,
@@ -113,7 +113,7 @@ export const useChart = ({
       background_color: settings.state.backgroundColor,
       border_color: settings.state.borderColor,
       border_size: settings.state.borderSize,
-      number_of_albums: settings.state.numberOfAlbums,
+      number_of_albums: settings.state.numberOfEntries,
       chart_format: settings.state.chartFormat,
       show_albums: settings.state.showEntries,
       show_title: settings.state.showTitle,
@@ -149,7 +149,7 @@ export const useChart = ({
       isDeleteLoading: deleteMutation.isLoading,
       isEditLoading: editMutation.isLoading,
       numberedList: getNumberedList(
-        settings.state.numberOfAlbums,
+        settings.state.numberOfEntries,
         list.state.list
       ),
       savedChartId,
@@ -161,7 +161,7 @@ export const useChart = ({
       deleteMutation.isLoading,
       editMutation.isLoading,
       savedChartId,
-      settings.state.numberOfAlbums,
+      settings.state.numberOfEntries,
       list.state.list,
     ]
   );

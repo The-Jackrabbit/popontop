@@ -96,9 +96,9 @@ export const DesktopSettings: React.FC<Props> = ({
         max={100}
         setValue={
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          ((value: number) => settings.actions.setNumberOfAlbums(value)) as any
+          ((value: number) => settings.actions.setNumberOfEntries(value)) as any
         }
-        value={settings.state.numberOfAlbums}
+        value={settings.state.numberOfEntries}
       /> */}
       {/* <NumericExpandingPill
         label="Number of columns"

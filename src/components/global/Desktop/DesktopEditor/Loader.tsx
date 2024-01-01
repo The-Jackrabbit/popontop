@@ -9,7 +9,7 @@ export interface Props {
 }
 
 const Loader: React.FC<Props> = ({ showOnboardingFlow = false }) => {
-  const numberOfAlbums = 10;
+  const numberOfEntries = 10;
   return showOnboardingFlow ? (
     <div>
       <p className="text-2xl">
@@ -22,8 +22,8 @@ const Loader: React.FC<Props> = ({ showOnboardingFlow = false }) => {
     <Layout
       uuid=""
       title={<TitleLoader />}
-      list={<ListOfEntriesLoader numberOfAlbums={numberOfAlbums} />}
-      chart={<DesktopChartLoader numberOfAlbums={numberOfAlbums} />}
+      list={<ListOfEntriesLoader numberOfEntries={numberOfEntries} />}
+      chart={<DesktopChartLoader numberOfEntries={numberOfEntries} />}
     />
   );
 };
