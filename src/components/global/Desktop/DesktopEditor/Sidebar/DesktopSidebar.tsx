@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import TextExpandingPill, {
+import {
   TextAndSwitchExpandingPill,
 } from '../../../../lib/ExpandingPill/TextExpandingPill/TextExpandingPill';
 import { colorMap } from '../../../../../constants/colors';

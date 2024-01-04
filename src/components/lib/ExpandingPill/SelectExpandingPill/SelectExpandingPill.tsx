@@ -7,6 +7,7 @@ import { ExpandingPill } from '../ExpandingPill';
 
 export interface Props<T> {
   className?: string;
+  height?: string;
   isInitiallyExpanded: boolean;
   options: { label: string; value: T }[];
   label: string;
@@ -17,6 +18,7 @@ export interface Props<T> {
 
 export const SelectExpandingPill = <T extends string>({
   className = '',
+  height,
   isInitiallyExpanded = false,
   label,
   labelClassName = 'text-md',
@@ -29,6 +31,7 @@ export const SelectExpandingPill = <T extends string>({
 
   return (
     <ExpandingPill
+      height={height}
       className={className + ' h-min-content z-50 '}
       isActive={isExpanded}
       toggleVisibility={() => setIsExpanded(!isExpanded)}

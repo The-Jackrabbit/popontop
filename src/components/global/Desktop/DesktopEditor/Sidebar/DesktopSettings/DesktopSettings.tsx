@@ -29,8 +29,9 @@ export const DesktopSettings: React.FC<Props> = ({
         value={isPreviewVisible}
       /> */}
       <SelectExpandingPill
-        isInitiallyExpanded={true}
+        isInitiallyExpanded={false}
         label="Chart format"
+        height="180px"
         options={Array.from(CHART_TEMPLATES).map(([chartFormat]) => ({
           label: chartFormat,
           value: chartFormat,
