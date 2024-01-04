@@ -4,10 +4,9 @@ import escapeHtml from 'escape-html';
 import { Album } from '../../types/Albums';
 import { cssColorNames } from './css-color-names';
 
-export const lastFmImageOrigin = 'https://lastfm.freetls.fastly.net/i/u/174s/';
-export const spotifyImageOrigin = 'https://i.scdn.co/';
-
-export const formatUrl = (url) => {
+const lastFmImageOrigin = 'https://lastfm.freetls.fastly.net/i/u/174s/';
+const spotifyImageOrigin = 'https://i.scdn.co/';
+https: const formatUrl = (url: string) => {
   const isLastFmImage =
     url.substring(0, lastFmImageOrigin.length) !== lastFmImageOrigin;
   const isSpotifyImage =
