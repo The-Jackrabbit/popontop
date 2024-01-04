@@ -33,7 +33,7 @@ export const NavDot: React.FC<Props> = ({
   const activeClasses = colorMap[color];
   return (
     <ButtonWithAccessory {...TOP_POSITION_STYLE} label={label ?? ''}>
-      <button
+      <div
         aria-label={ariaLabel}
         className={`
           ${className ?? '  h-4 w-4 '}
