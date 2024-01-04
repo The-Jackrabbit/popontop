@@ -1,12 +1,17 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import TextExpandingPill from '../../../../lib/ExpandingPill/TextExpandingPill/TextExpandingPill';
+import TextExpandingPill, {
+  TextAndSwitchExpandingPill,
+} from '../../../../lib/ExpandingPill/TextExpandingPill/TextExpandingPill';
 import { colorMap } from '../../../../../constants/colors';
-import { Color } from './SidebarNav/NavDot/NavDot';
+import NavDot, { Color } from './SidebarNav/NavDot/NavDot';
 import { SettingsHookNode } from '../../../../../frontend/hooks/use-chart/use-chart-settings';
 import { SearchResults } from './SearchResults/SearchResults';
 import Layout from './Layout';
 import SidebarNav from './SidebarNav/SidebarNav';
-import { useSearch } from '../../../../../frontend/hooks/use-chart/use-search';
+import {
+  SEARCH_TYPES,
+  useSearch,
+} from '../../../../../frontend/hooks/use-chart/use-search';
 import DesktopSettings from './DesktopSettings/DesktopSettings';
 
 export interface Props {
@@ -32,7 +37,7 @@ export const DesktopSidebar: React.FC<Props> = ({
   toggleEntries,
   toggleTitle,
 }) => {
-  const { data, onType, searchText } = useSearch();
+  const { data, onType, searchText, searchType, setSearchType } = useSearch();
 
   return (
     <Layout
@@ -53,13 +58,40 @@ export const DesktopSidebar: React.FC<Props> = ({
         isChartOwner ? (
           <>
             <div className="mb-2 flex flex-col justify-center">
-              <TextExpandingPill
-                label="Search albums"
+              <TextAndSwitchExpandingPill
+                label="Search albums/artists"
                 isActive={!showOnboardingFlow}
                 placeholder="Emotion, Dedicated, The Loneliest Time"
                 setValue={(value: string) => onType(value)}
                 value={searchText}
+                switchComponent={
+                  <>
+                    {SEARCH_TYPES.map((currentSearchType) => (
+                      <button
+                        key={`option-${currentSearchType}`}
+                        className="mb-2 flex flex-row"
+                        onClick={() => setSearchType(currentSearchType)}
+                      >
+                        <NavDot
+                          ariaLabel="option"
+                          color={
+                            searchType === currentSearchType
+                              ? Color.amber
+                              : Color.blue
+                          }
+                          isActive={searchType === currentSearchType}
+                          className="mr-2 h-3 w-3 border-none"
+                          onClick={() => undefined}
+                        />
+                        <p className=" dark:text-neutral-300">
+                          {currentSearchType}
+                        </p>
+                      </button>
+                    ))}
+                  </>
+                }
               />
+
               {data ? <SearchResults searchResults={data} /> : null}
             </div>
 

@@ -6,6 +6,7 @@ import { useZoomOnHover } from '../../../frontend/hooks/springs/use-zoom-on-hove
 export interface Props {
   children: [React.ReactNode, React.ReactNode, React.ReactNode];
   className?: string;
+  height: string;
   isActive: boolean;
   isOpenByDefault?: boolean;
   toggleVisibility: () => void;
@@ -14,6 +15,7 @@ export interface Props {
 export const ExpandingPill: React.FC<Props> = ({
   children,
   className = '',
+  height,
   isActive,
   isOpenByDefault = false,
   toggleVisibility,
@@ -24,6 +26,7 @@ export const ExpandingPill: React.FC<Props> = ({
     pillContentStyle,
     togglePill,
   } = useExpandingPill({
+    height,
     isOpenByDefault,
     onExpand: () => toggleVisibility(),
     onMinimize: () => toggleVisibility(),
@@ -46,7 +49,7 @@ export const ExpandingPill: React.FC<Props> = ({
         ${className}
         ${PILL}
         ${EXPANDING_PILL}
-        h-max w-full max-w-full
+        w-full max-w-full
       `}
       {...mouseActions}
       style={{

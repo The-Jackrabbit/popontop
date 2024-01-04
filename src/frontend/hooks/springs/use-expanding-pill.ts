@@ -34,10 +34,12 @@ const styles = {
 };
 
 export function useExpandingPill({
+  height,
   isOpenByDefault = false,
   onExpand = () => undefined,
   onMinimize = () => undefined,
 }: {
+  height: string;
   isOpenByDefault?: boolean;
   onExpand?: () => void;
   onMinimize?: () => void;
@@ -47,19 +49,18 @@ export function useExpandingPill({
     animateFadeOut,
     pageOpacity: opacityAnimationStyle,
   } = usePageFadeIn();
+  const maxHeight = height ? height : styles.height.to;
   const [isVisible, setIsVisible] = useState(isOpenByDefault);
   const [borderRadiusStyle, animateBorderRadius] = useSpring(
     () => ({
-      borderRadius: !isVisible
-        ? styles.borderRadius.to
-        : styles.borderRadius.from,
+      borderRadius: !isVisible ? maxHeight : styles.borderRadius.from,
     }),
     []
   );
   const [pillContentStyle, animateRowHeight] = useSpring(
     () => ({
-      height: isVisible ? styles.height.to : styles.height.from,
-      padding: isVisible ? styles.padding.to : styles.padding.from,
+      height: isVisible ? maxHeight : styles.height.from,
+      padding: isVisible ? maxHeight : styles.padding.from,
     }),
     []
   );
@@ -69,7 +70,7 @@ export function useExpandingPill({
     animateBorderRadius.start({ borderRadius: styles.borderRadius.from });
     animateRowHeight.start({
       config: styles.config,
-      height: styles.height.to,
+      height: maxHeight,
       padding: styles.padding.to,
     });
   };

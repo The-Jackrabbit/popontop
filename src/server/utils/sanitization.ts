@@ -5,13 +5,15 @@ import { Album } from '../../types/Albums';
 import { cssColorNames } from './css-color-names';
 
 export const lastFmImageOrigin = 'https://lastfm.freetls.fastly.net/i/u/174s/';
+export const spotifyImageOrigin = 'https://i.scdn.co/';
 
-export const formatUrl = (url: string) => {
-  if (url.length < 43) {
-    return '';
-  }
+export const formatUrl = (url) => {
+  const isLastFmImage =
+    url.substring(0, lastFmImageOrigin.length) !== lastFmImageOrigin;
+  const isSpotifyImage =
+    url.substring(0, spotifyImageOrigin.length) !== lastFmImageOrigin;
 
-  if (url.substring(0, 43) !== lastFmImageOrigin) {
+  if (!isLastFmImage && !isSpotifyImage) {
     return '';
   }
 
