@@ -6,7 +6,7 @@ import { useZoomOnHover } from '../../../frontend/hooks/springs/use-zoom-on-hove
 export interface Props {
   children: [React.ReactNode, React.ReactNode, React.ReactNode];
   className?: string;
-  height: string;
+  height?: string;
   isActive: boolean;
   isOpenByDefault?: boolean;
   toggleVisibility: () => void;

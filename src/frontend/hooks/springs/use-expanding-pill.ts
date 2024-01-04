@@ -39,7 +39,7 @@ export function useExpandingPill({
   onExpand = () => undefined,
   onMinimize = () => undefined,
 }: {
-  height: string;
+  height?: string;
   isOpenByDefault?: boolean;
   onExpand?: () => void;
   onMinimize?: () => void;
