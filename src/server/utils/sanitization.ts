@@ -6,7 +6,7 @@ import { cssColorNames } from './css-color-names';
 
 const lastFmImageOrigin = 'https://lastfm.freetls.fastly.net/i/u/174s/';
 const spotifyImageOrigin = 'https://i.scdn.co/';
-https: const formatUrl = (url: string) => {
+export const formatUrl = (url: string) => {
   const isLastFmImage =
     url.substring(0, lastFmImageOrigin.length) !== lastFmImageOrigin;
   const isSpotifyImage =
