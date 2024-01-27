@@ -16,7 +16,9 @@ export const ListItem: React.FC<Props> = ({
   listItem,
   textColor,
 }) => {
-  const itemDescription = `${index} ${listItem.artist} - ${listItem.name}`;
+  const itemDescription = `${index} ${
+    listItem.artist ? `${listItem.artist} - ${listItem.name}}` : listItem.name
+  }`;
 
   return (
     <div
