@@ -54,10 +54,7 @@ export const sanitizeChartFormat = (chart_format: string) => {
 
 export const buildSettingsForChart = (settings: WritableChartSettings) => {
   const formattedSettings = {
-    background_color: sanitizeColorInput(
-      settings.background_color,
-      'rgba(0,0,0,0.0)'
-    ),
+    background_color: sanitizeColorInput(settings.background_color),
     border_color: sanitizeColorInput(settings.border_color),
     border_size: sanitizeToNumber(settings.border_size),
     chart_format: sanitizeChartFormat(settings.chart_format ?? ''),
@@ -92,8 +89,8 @@ export const buildDataForAlbums = (albums: Album[], chartUuid?: string) => {
 
 const sanitizeColorInput = (
   input: string | null,
-  defaultColor = 'black'
-): string => {
+  defaultColor = null
+): string | null => {
   // Check for null input
   if (!input) {
     return defaultColor;
