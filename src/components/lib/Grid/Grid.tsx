@@ -37,7 +37,9 @@ const Grid: React.FC<Props> = ({
       `}
     >
       {items.map((_item, index) => (
-        <>{itemComponent({ index, x: -1, y: -1 })}</>
+        <div key={`grid-row-loader-${index}`}>
+          {itemComponent({ index, x: -1, y: -1 })}
+        </div>
       ))}
     </div>
   );

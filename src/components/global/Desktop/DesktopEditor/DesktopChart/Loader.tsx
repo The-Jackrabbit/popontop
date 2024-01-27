@@ -14,7 +14,11 @@ const Loader: React.FC<Props> = ({ numberOfEntries }) => {
       borderSize={1}
       borderColor=""
       items={list}
-      itemComponent={({ index }) => <ChartItemLoader index={index} />}
+      itemComponent={({ index }) => (
+        <div key={`grid-item-loader-${index}`}>
+          <ChartItemLoader index={index} />
+        </div>
+      )}
     />
   );
 };
