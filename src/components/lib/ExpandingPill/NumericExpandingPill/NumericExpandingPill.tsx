@@ -28,7 +28,7 @@ export const NumericExpandingPillContent = ({
   min: number;
   placeholder?: string;
   setValue: Dispatch<SetStateAction<number>>;
-  textColor?: string;
+  textColor?: string | null;
   value: number;
 }) => {
   const [isTypingModeActive, setIsTypingModeActive] = useState(false);
@@ -75,7 +75,10 @@ export const NumericExpandingPillContent = ({
         "
         onClick={onClickMinus}
       >
-        <MinusIcon className={ICON_STYLE} style={{ color: textColor }} />
+        <MinusIcon
+          className={ICON_STYLE}
+          style={textColor ? { color: textColor } : {}}
+        />
       </button>
       <div className="flex basis-1/3 items-center justify-center text-3xl">
         <button onDoubleClick={onDoubleClick}>
@@ -91,7 +94,7 @@ export const NumericExpandingPillContent = ({
                 outline-1 outline-amber-300
                 dark:text-white
               `}
-              style={{ color: textColor }}
+              style={textColor ? { color: textColor } : {}}
               autoFocus
               onChange={onType}
               onBlur={() => setIsTypingModeActive(false)}
@@ -99,7 +102,7 @@ export const NumericExpandingPillContent = ({
               value={value.toString()}
             />
           ) : (
-            <p style={{ color: textColor }}>{value}</p>
+            <p style={textColor ? { color: textColor } : {}}>{value}</p>
           )}
         </button>
       </div>
@@ -108,10 +111,13 @@ export const NumericExpandingPillContent = ({
           flex basis-1/3 items-center justify-center
           hover:bg-neutral-100 dark:hover:bg-neutral-900
         "
-        style={{ color: textColor }}
+        style={textColor ? { color: textColor } : {}}
         onClick={onClickPlus}
       >
-        <PlusIcon className={ICON_STYLE} style={{ color: textColor }} />
+        <PlusIcon
+          className={ICON_STYLE}
+          style={textColor ? { color: textColor } : {}}
+        />
       </button>
     </div>
   );

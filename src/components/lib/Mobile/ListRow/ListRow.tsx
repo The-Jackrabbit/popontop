@@ -27,7 +27,7 @@ export interface Props {
   onRearrangeClick?: (rowMovementType: RowMovementType) => void;
   removeSelfFromList?: () => void;
   showEntries: boolean;
-  textColor?: string;
+  textColor?: string | null;
 }
 
 export const ListRow: React.FC<Props> = ({

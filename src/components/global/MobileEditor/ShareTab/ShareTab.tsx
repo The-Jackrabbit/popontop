@@ -10,14 +10,14 @@ import { ICON_STYLE } from '../../../lib/FilterButton/FilterButton';
 import { PreviewEditor } from './PreviewEditor/PreviewEditor';
 
 export interface Props {
-  borderColor: string;
+  borderColor: string | null;
   borderSize: number;
   chart: ChartHookNode;
   chartTitle: string;
   list: Album[];
   previewIndex: number;
   setPreviewIndex: Dispatch<SetStateAction<number>>;
-  titleBackgroundColor: string;
+  titleBackgroundColor: string | null;
 }
 
 export const ShareTab: React.FC<Props> = ({
@@ -36,7 +36,9 @@ export const ShareTab: React.FC<Props> = ({
 
     if (!isMainOverlayVisible) resetThemeColorMetaTag();
     else {
-      setThemeColorMetaTag(chart.settings.state.backgroundColor);
+      if (chart.settings.state.backgroundColor) {
+        setThemeColorMetaTag(chart.settings.state.backgroundColor);
+      }
     }
     setIsMainOverlayVisible(!isMainOverlayVisible);
   };

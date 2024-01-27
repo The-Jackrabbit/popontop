@@ -1,5 +1,5 @@
 export interface Props {
-  backgroundColor?: string;
+  backgroundColor?: string | null;
   toggleButton: React.ReactNode;
   title: React.ReactNode;
 }

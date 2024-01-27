@@ -7,7 +7,7 @@ import { EMPTY_ALBUM } from '../../../../../../constants/empty-album';
 export interface Props {
   album: Album;
   index: number;
-  borderColor: string;
+  borderColor: string | null;
   isReadOnly: boolean;
 }
 

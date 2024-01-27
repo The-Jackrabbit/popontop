@@ -2,7 +2,7 @@ import SwitchExpandingPill from '../../../../lib/ExpandingPill/SwitchExpandingPi
 import TextExpandingPill from '../../../../lib/ExpandingPill/TextExpandingPill/TextExpandingPill';
 
 export interface Props {
-  backgroundColor: string;
+  backgroundColor: string | null;
   borderSize: number;
   listAlbums: boolean;
   setBackgroundColor: (value: string) => void;
@@ -11,8 +11,8 @@ export interface Props {
   setShowTitle: (value: boolean) => void;
   setTextColor: (value: string) => void;
   showTitle: boolean;
-  textColor: string;
-  titleBackgroundColor: string;
+  textColor: string | null;
+  titleBackgroundColor: string | null;
   setTitleBackgroundColor: (value: string) => void;
 }
 const PageTwo: React.FC<Props> = ({

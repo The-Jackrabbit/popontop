@@ -6,7 +6,7 @@ export interface Props {
   album: Album;
   index?: number;
   showEntries: boolean;
-  textColor?: string;
+  textColor?: string | null;
 }
 
 export const ListView: React.FC<Props> = ({

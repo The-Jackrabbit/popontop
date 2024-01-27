@@ -3,13 +3,13 @@ import ListRow, { ListRowMode } from '../../../lib/Mobile/ListRow/ListRow';
 import { RowMovementType } from '../../../lib/Mobile/ListRow/RearrangeView/RearrangeView';
 
 export interface Props {
-  backgroundColor: string;
+  backgroundColor: string | null;
   list: Album[];
   listMode: ListRowMode;
   onRearrangeClick: (rowMovementType: RowMovementType, index: number) => void;
   removeAlbumAtIndex: (index: number) => void;
   showEntries: boolean;
-  textColor: string;
+  textColor: string | null;
 }
 
 const List: React.FC<Props> = ({
@@ -29,7 +29,7 @@ const List: React.FC<Props> = ({
       h-[calc(100vh_-_10px)]
       overflow-y-scroll
     `}
-    style={{ backgroundColor }}
+    style={backgroundColor ? { backgroundColor } : {}}
   >
     <div className="overflow-x-hidden">
       {list.map((album, index) => (

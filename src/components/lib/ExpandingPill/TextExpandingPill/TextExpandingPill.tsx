@@ -10,7 +10,7 @@ export interface Props {
   labelClassName?: string;
   placeholder?: string;
   setValue: (value: string) => void;
-  value: string;
+  value: string | null;
 }
 
 export const TextExpandingPill: React.FC<Props> = ({

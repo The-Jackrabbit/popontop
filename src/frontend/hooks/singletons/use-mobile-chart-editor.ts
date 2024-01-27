@@ -95,7 +95,9 @@ const useMobileChartEditor = ({
       : chart.list.state.list.length === 0;
 
   useEffect(() => {
-    setThemeColorMetaTag(chart.settings.state.backgroundColor);
+    if (chart.settings.state.backgroundColor) {
+      setThemeColorMetaTag(chart.settings.state.backgroundColor);
+    }
   }, [chart.settings.state.backgroundColor]);
   return {
     actions: {

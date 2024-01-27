@@ -40,7 +40,7 @@ export function getBorderSizes(index: number): string {
 }
 
 export interface Props {
-  borderColor: string;
+  borderColor: string | null;
   chart: ChartHookNode;
   isReadOnly: boolean;
 }

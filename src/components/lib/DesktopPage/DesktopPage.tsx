@@ -2,7 +2,7 @@ import React from 'react';
 
 export interface Props {
   actions: React.ReactNode;
-  backgroundColor?: string;
+  backgroundColor?: string | null;
   hasActions?: boolean;
   pageContent: React.ReactNode;
   sidebar: React.ReactNode;

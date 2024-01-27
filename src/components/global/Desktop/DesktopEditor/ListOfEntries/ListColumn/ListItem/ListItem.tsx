@@ -7,7 +7,7 @@ export interface Props {
   chart: ChartHookNode;
   index: number;
   listItem: Album;
-  textColor: string;
+  textColor: string | null;
 }
 
 export const ListItem: React.FC<Props> = ({

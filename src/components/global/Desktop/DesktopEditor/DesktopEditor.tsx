@@ -73,7 +73,7 @@ const DesktopEditor: React.FC<Props> = ({
               isReadOnly={false}
               setValue={chart.actions.setChartTitle}
               showIntroduction={!true}
-              textColor={chart.settings.state.textColor}
+              textColor={chart.settings.state.titleTextColor}
             />
           ) : null
         }

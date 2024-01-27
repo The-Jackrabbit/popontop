@@ -58,6 +58,11 @@ export const DesktopSettings: React.FC<Props> = ({
         value={settings.state.titleBackgroundColor}
       />
       <TextExpandingPill
+        label="Title text color"
+        setValue={(value: string) => settings.actions.setTitleTextColor(value)}
+        value={settings.state.titleTextColor}
+      />
+      <TextExpandingPill
         label="Background color"
         setValue={(value: string) => settings.actions.setBackgroundColor(value)}
         value={settings.state.backgroundColor}

@@ -78,6 +78,7 @@ export const useChart = ({
         show_title: settings.state.showTitle,
         text_color: settings.state.textColor,
         title_background_color: settings.state.titleBackgroundColor,
+        title_text_color: settings.state.titleBackgroundColor,
       },
     });
 
@@ -100,6 +101,7 @@ export const useChart = ({
         show_title: settings.state.showTitle,
         text_color: settings.state.textColor,
         title_background_color: settings.state.titleBackgroundColor,
+        title_text_color: settings.state.titleBackgroundColor,
       },
     });
 
@@ -119,6 +121,7 @@ export const useChart = ({
       show_title: settings.state.showTitle,
       text_color: settings.state.textColor,
       title_background_color: settings.state.titleBackgroundColor,
+      title_text_color: settings.state.titleBackgroundColor,
     };
 
     const result = await editMutation.mutateAsync({

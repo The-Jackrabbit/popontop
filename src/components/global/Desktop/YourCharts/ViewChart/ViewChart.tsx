@@ -61,9 +61,13 @@ export const ViewChart: React.FC<{
 
   return (
     <div
-      style={{
-        backgroundColor: chart.settings.state.backgroundColor,
-      }}
+      style={
+        chart.settings.state.backgroundColor
+          ? {
+              backgroundColor: chart.settings.state.backgroundColor,
+            }
+          : {}
+      }
     >
       <DesktopEditor
         isDragging={false}

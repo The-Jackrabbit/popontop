@@ -15,7 +15,7 @@ import { NumericExpandingPillContent } from '../../../../lib/ExpandingPill/Numer
 import { CHART_TEMPLATES } from '../../../../../constants/chart-types';
 
 export interface Props {
-  borderColor: string;
+  borderColor: string | null;
   borderSize: number;
   chart: ChartHookNode;
   list: Album[];
@@ -34,7 +34,9 @@ export const PreviewEditor: React.FC<Props> = ({
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
   const onClickPreview = () => {
     setIsOverlayVisible(true);
-    startScreenshotMode(chart.settings.state.backgroundColor);
+    if (chart.settings.state.backgroundColor) {
+      startScreenshotMode(chart.settings.state.backgroundColor);
+    }
   };
   const onExit = () => {
     resetThemeColorMetaTag();

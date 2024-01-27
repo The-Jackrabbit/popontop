@@ -20,7 +20,7 @@ export const AlbumOverlay = ({
   albumOverlayColor?: string;
   count: number;
   isMobile: boolean;
-  textColor: string;
+  textColor: string | null;
 }) => {
   const albumDescription =
     album.artist !== '' || album.name !== ''
@@ -36,9 +36,13 @@ export const AlbumOverlay = ({
     >
       {isMobile ? (
         <p
-          style={{
-            color: textColor,
-          }}
+          style={
+            textColor
+              ? {
+                  color: textColor,
+                }
+              : {}
+          }
           className={`flex h-full w-full items-center justify-center self-center overflow-hidden bg-opacity-75 bg-gradient-to-t from-[${albumOverlayColor}] to-[rgba(255,255,255,0.05)] text-center align-middle text-xs`}
         >
           {albumDescription}
@@ -52,9 +56,13 @@ const ScreenShot = ({ chart, previewIndex }: Props) => {
 
   return (
     <div
-      style={{
-        backgroundColor: chart.settings.state.backgroundColor,
-      }}
+      style={
+        chart.settings.state.backgroundColor
+          ? {
+              backgroundColor: chart.settings.state.backgroundColor,
+            }
+          : {}
+      }
       className={`flex ${size} justify-center self-center  align-middle`}
     >
       <div className={`${size} origin-top  p-4`}>

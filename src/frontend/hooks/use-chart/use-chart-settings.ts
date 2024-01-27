@@ -24,12 +24,13 @@ export interface Actions {
   setShowTitle: (value: boolean) => void;
   setTextColor: (value: string) => void;
   setTitleBackgroundColor: (value: string) => void;
+  setTitleTextColor: (value: string) => void;
 }
 
 export interface State {
   albumOverlayColor: string;
-  backgroundColor: string;
-  borderColor: string;
+  backgroundColor: string | null;
+  borderColor: string | null;
   borderSize: number;
   chartFormat: ChartFormatKey;
   columns: number;
@@ -37,8 +38,9 @@ export interface State {
   rows: number;
   showEntries: boolean;
   showTitle: boolean;
-  textColor: string;
-  titleBackgroundColor: string;
+  textColor: string | null;
+  titleBackgroundColor: string | null;
+  titleTextColor: string | null;
 }
 
 const useChartSettings = (
@@ -70,7 +72,10 @@ const useChartSettings = (
     _setBackgroundColor(color);
   };
   const [titleBackgroundColor, setTitleBackgroundColor] = useState(
-    defaultSettings?.title_background_color ?? ''
+    defaultSettings?.title_background_color ?? null
+  );
+  const [titleTextColor, setTitleTextColor] = useState(
+    defaultSettings?.title_text_color ?? null
   );
   const [chartFormat, setChartFormat] = useState<ChartFormatKey>(
     (defaultSettings?.chart_format as ChartFormatKey)
@@ -78,7 +83,7 @@ const useChartSettings = (
       : 'honeycomb10'
   );
   const [borderColor, setBorderColor] = useState(
-    defaultSettings?.border_color ?? ''
+    defaultSettings?.border_color ?? null
   );
   const [borderSize, setBorderSize] = useState(1); // need to convert the sql sschema for this value from a decimal to a regualr number before unhardcoding this
   const [numberOfEntries, setNumberOfEntries] = useState<number>(
@@ -92,7 +97,9 @@ const useChartSettings = (
   const [showTitle, setShowTitle] = useState(
     defaultSettings?.show_title ?? true
   );
-  const [textColor, setTextColor] = useState(defaultSettings?.text_color ?? '');
+  const [textColor, setTextColor] = useState(
+    defaultSettings?.text_color ?? null
+  );
   const [albumOverlayColor, setAlbumOverlayColor] = useState('');
 
   return {
@@ -112,6 +119,7 @@ const useChartSettings = (
       setShowEntries,
       setShowTitle,
       setTextColor,
+      setTitleTextColor,
       setTitleBackgroundColor,
     },
     state: {
@@ -127,6 +135,7 @@ const useChartSettings = (
       showTitle,
       textColor,
       titleBackgroundColor,
+      titleTextColor,
     },
   };
 };

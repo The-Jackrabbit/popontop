@@ -10,7 +10,7 @@ export interface Props {
   className: string;
   columnCount: number;
   columnIndex: number;
-  textColor: string;
+  textColor: string | null;
 }
 
 export const ListColumn: React.FC<Props> = ({

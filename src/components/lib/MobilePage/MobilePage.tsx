@@ -1,5 +1,5 @@
 export interface Props {
-  backgroundColor?: string;
+  backgroundColor?: string | null;
   children: React.ReactNode;
 }
 
@@ -10,7 +10,7 @@ const MobilePage: React.FC<Props> = ({ backgroundColor = '', children }) => (
       e.preventDefault();
       e.stopPropagation();
     }}
-    style={{ backgroundColor }}
+    style={backgroundColor ? { backgroundColor } : {}}
   >
     <div className="w-screen overflow-hidden p-4">{children}</div>
   </div>

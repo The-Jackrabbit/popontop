@@ -5,7 +5,7 @@ import ListColumn from './ListColumn/ListColumn';
 export interface Props {
   chart: ChartHookNode;
   columnCount: number;
-  textColor: string;
+  textColor: string | null;
 }
 
 const ListOfEntries: React.FC<Props> = ({ chart, columnCount, textColor }) => {

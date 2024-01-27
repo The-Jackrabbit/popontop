@@ -9,7 +9,7 @@ export interface Props {
   label?: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
   placeholder?: string;
-  value?: string;
+  value: string | null;
 }
 
 export const Input: React.FC<Props> = ({
@@ -65,7 +65,7 @@ export const Input: React.FC<Props> = ({
           `}
           onChange={onChange}
           placeholder={placeholder}
-          value={value}
+          value={value ? value : undefined}
         />
         <a.button
           onClick={() =>

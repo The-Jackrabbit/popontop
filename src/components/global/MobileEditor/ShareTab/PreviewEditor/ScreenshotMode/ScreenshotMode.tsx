@@ -3,7 +3,7 @@ import { Album } from '../../../../../../types/Albums';
 import ScreenShot from '../../../ScreenShot/ScreenShot';
 
 export interface Props {
-  borderColor: string;
+  borderColor: string | null;
   borderSize: number;
   chart: ChartHookNode;
   columns: number;

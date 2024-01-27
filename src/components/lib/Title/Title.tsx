@@ -6,14 +6,14 @@ import { Loader } from './Loader';
 import { PencilIcon } from '@heroicons/react/24/outline';
 
 export interface Props {
-  backgroundColor: string;
+  backgroundColor: string | null;
   chartTitle: string;
   isActiveByDefault?: boolean;
   isLoading?: boolean;
   isReadOnly: boolean;
   setValue?: (value: string) => void;
   showIntroduction: boolean;
-  textColor: string;
+  textColor: string | null;
 }
 
 const Title: React.FC<Props> = ({
@@ -66,7 +66,7 @@ const Title: React.FC<Props> = ({
               bg-transparent focus-visible:outline-none 
               active:outline-none
             "
-            style={{ color: textColor }}
+            style={textColor ? { color: textColor } : {}}
           />
         ) : (
           <p

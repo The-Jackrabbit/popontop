@@ -72,15 +72,16 @@ model Chart {
 model ChartSettings {
   chart_id               String?  @unique @db.Uuid
   uuid                   String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  background_color       String?  @db.VarChar
-  border_color           String?  @db.VarChar
+  background_color       String?
+  border_color           String?
   border_size            Int?     @db.SmallInt
   show_albums            Boolean?
   show_title             Boolean?
-  text_color             String?  @db.VarChar
+  text_color             String?
   number_of_albums       Int?     @db.SmallInt
   title_background_color String?
   chart_format           String?  @default("honeycomb")
+  title_text_color       String?
   Chart                  Chart?   @relation(fields: [chart_id], references: [uuid], onDelete: NoAction, onUpdate: NoAction)
 }
 

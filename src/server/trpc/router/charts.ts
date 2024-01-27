@@ -23,15 +23,16 @@ export const chartsRouter = router({
         albums: z.array(z.any()),
         name: z.string(),
         settings: z.object({
-          background_color: z.string(),
-          border_color: z.string(),
+          background_color: z.nullable(z.string()),
+          border_color: z.nullable(z.string()),
           border_size: z.number(),
           chart_format: z.string(),
           number_of_albums: z.number(),
           show_albums: z.boolean(),
           show_title: z.boolean(),
-          text_color: z.string(),
-          title_background_color: z.string(),
+          text_color: z.nullable(z.string()),
+          title_background_color: z.nullable(z.string()),
+          title_text_color: z.nullable(z.string()),
         }),
       })
     )
@@ -53,15 +54,16 @@ export const chartsRouter = router({
         name: z.string(),
         uuid: z.string(),
         settings: z.object({
-          background_color: z.string(),
-          border_color: z.string(),
+          background_color: z.nullable(z.string()),
+          border_color: z.nullable(z.string()),
           border_size: z.number(),
           chart_format: z.string(),
           number_of_albums: z.number(),
           show_albums: z.boolean(),
           show_title: z.boolean(),
-          text_color: z.string(),
-          title_background_color: z.string(),
+          text_color: z.nullable(z.string()),
+          title_background_color: z.nullable(z.string()),
+          title_text_color: z.nullable(z.string()),
         }),
       })
     )
