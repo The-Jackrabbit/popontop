@@ -4,10 +4,10 @@ import { EMPTY_ALBUM } from '../../../../../constants/empty-album';
 import { ChartTemplate } from '../../DesktopPreview/ChartTemplate/ChartTemplate';
 import {
   ChartFormat,
-  CHART_TEMPLATES,
   transformRows,
 } from '../../DesktopPreview/DesktopPreview';
 import { ChartHookNode } from '../../../../../frontend/hooks/use-chart/use-chart';
+import { CHART_TEMPLATES } from '../../../../../constants/chart-types';
 
 export function getBorderSizes(index: number): string {
   let borderSizes = '';

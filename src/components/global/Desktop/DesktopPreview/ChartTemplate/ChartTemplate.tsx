@@ -20,7 +20,10 @@ export const ChartTemplate = ({ itemComponent, rows }: Props) => (
         {row.length === 0 ? (
           <div className="m-4" key={`row-${rowIndex}-empty`} />
         ) : (
-          <div className="flex h-min  bg-blue-300" key={`row-${rowIndex}`}>
+          <div
+            className="flex h-min  bg-neutral-200 dark:bg-neutral-800"
+            key={`row-${rowIndex}`}
+          >
             {row.map((indexIntoList) =>
               itemComponent({
                 indexIntoList,

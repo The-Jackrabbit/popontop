@@ -1,9 +1,9 @@
 import React, { Dispatch, SetStateAction } from 'react';
+import { CHART_TEMPLATES } from '../../../../../../constants/chart-types';
 import { SettingsHookNode } from '../../../../../../frontend/hooks/use-chart/use-chart-settings';
 import SelectExpandingPill from '../../../../../lib/ExpandingPill/SelectExpandingPill/SelectExpandingPill';
 import SwitchExpandingPill from '../../../../../lib/ExpandingPill/SwitchExpandingPill/SwitchExpandingPill';
 import TextExpandingPill from '../../../../../lib/ExpandingPill/TextExpandingPill/TextExpandingPill';
-import { CHART_TEMPLATES } from '../../../DesktopPreview/DesktopPreview';
 
 export interface Props {
   settings: SettingsHookNode;

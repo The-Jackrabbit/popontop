@@ -33,7 +33,7 @@ const ChartList: React.FC<Props> = ({ listStyles, textColor, containers }) => {
             className="list-item list-inside list-decimal text-[18px]"
             key={index + 'list'}
           >
-            {album.artist} - {album.name}
+            {album.artist ? `${album.artist} - ${album.name}` : album.name}
           </li>
         ))}
       </ol>

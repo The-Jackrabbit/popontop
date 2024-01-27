@@ -78,7 +78,7 @@ export const ExpandingPill: React.FC<Props> = ({
           ...pillContentStyle,
           visibility: !isActive ? 'hidden' : 'visible',
         }}
-        className="w-full overflow-y-scroll px-2"
+        className="w-full px-2"
       >
         {children[2]}
       </a.div>

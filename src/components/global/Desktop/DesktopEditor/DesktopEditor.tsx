@@ -5,7 +5,7 @@ import ListOfEntries from './ListOfEntries/ListOfEntries';
 import DesktopChart from './DesktopChart/DesktopChart';
 import Layout from './Layout';
 import { useDroppable } from '@dnd-kit/core';
-import { CHART_TEMPLATES } from '../DesktopPreview/DesktopPreview';
+import { CHART_TEMPLATES } from '../../../../constants/chart-types';
 
 export interface Props {
   chart: ChartHookNode;

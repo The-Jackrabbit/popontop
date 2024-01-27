@@ -1,8 +1,8 @@
 import React from 'react';
+import { CHART_TEMPLATES } from '../../../../../../constants/chart-types';
 import { EMPTY_ALBUM } from '../../../../../../constants/empty-album';
 import { ChartHookNode } from '../../../../../../frontend/hooks/use-chart/use-chart';
 import { Album } from '../../../../../../types/Albums';
-import { CHART_TEMPLATES } from '../../../DesktopPreview/DesktopPreview';
 import ListItem from './ListItem/ListItem';
 
 export interface Props {

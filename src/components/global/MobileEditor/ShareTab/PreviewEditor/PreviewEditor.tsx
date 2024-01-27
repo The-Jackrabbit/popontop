@@ -10,11 +10,9 @@ import {
 import FilterButton from '../../../../lib/FilterButton/FilterButton';
 import { Color } from '../../../Desktop/DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
 import { ScreenshotMode } from './ScreenshotMode/ScreenshotMode';
-import {
-  CHART_TEMPLATES,
-  DesktopPreview,
-} from '../../../Desktop/DesktopPreview/DesktopPreview';
+import { DesktopPreview } from '../../../Desktop/DesktopPreview/DesktopPreview';
 import { NumericExpandingPillContent } from '../../../../lib/ExpandingPill/NumericExpandingPill/NumericExpandingPill';
+import { CHART_TEMPLATES } from '../../../../../constants/chart-types';
 
 export interface Props {
   borderColor: string;

@@ -1,7 +1,7 @@
 import React from 'react';
+import { CHART_TEMPLATES } from '../../../../../../../constants/chart-types';
 import { ChartHookNode } from '../../../../../../../frontend/hooks/use-chart/use-chart';
 import { Album } from '../../../../../../../types/Albums';
-import { CHART_TEMPLATES } from '../../../../DesktopPreview/DesktopPreview';
 
 export interface Props {
   chart: ChartHookNode;
@@ -31,9 +31,12 @@ export const ListItem: React.FC<Props> = ({
         dark:text-neutral-600
       `}
       role="listitem"
-      style={{ color: textColor }}
+      style={{
+        color: textColor,
+        fontSize: CHART_TEMPLATES.get(chart.settings.state.chartFormat)?.list
+          .fontSize,
+      }}
     >
-      <div className="text-[7px]"></div>
       {itemDescription}
     </div>
   );

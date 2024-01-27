@@ -37,9 +37,10 @@ export const NavDot: React.FC<Props> = ({
         aria-label={ariaLabel}
         className={`
           ${className ?? '  h-4 w-4 '}
-          rounded-full 
-          border-2
-          shadow-md 
+          cursor-pointer 
+          rounded-full
+          border-2 
+          shadow-md
           outline-offset-4 outline-rose-300
           ${isActive ? activeClasses : colorMap.neutral}
         `}
