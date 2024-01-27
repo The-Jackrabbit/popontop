@@ -36,6 +36,7 @@ export const DesktopSidebar: React.FC<Props> = ({
   toggleTitle,
 }) => {
   const { data, onType, searchText, searchType, setSearchType } = useSearch();
+  const [showSearchResults, setShowSearchResults] = React.useState(true);
 
   return (
     <Layout
@@ -60,8 +61,12 @@ export const DesktopSidebar: React.FC<Props> = ({
                 label="Search albums/artists"
                 isActive={!showOnboardingFlow}
                 placeholder="Emotion, Dedicated, The Loneliest Time"
-                setValue={(value: string) => onType(value)}
+                setValue={(value: string) => {
+                  onType(value);
+                }}
                 value={searchText}
+                onClickMinify={() => setShowSearchResults(false)}
+                onClickExpand={() => setShowSearchResults(true)}
                 switchComponent={
                   <>
                     {SEARCH_TYPES.map((currentSearchType) => (
@@ -90,7 +95,9 @@ export const DesktopSidebar: React.FC<Props> = ({
                 }
               />
 
-              {data ? <SearchResults searchResults={data} /> : null}
+              {data && showSearchResults ? (
+                <SearchResults searchResults={data} />
+              ) : null}
             </div>
 
             <DesktopSettings

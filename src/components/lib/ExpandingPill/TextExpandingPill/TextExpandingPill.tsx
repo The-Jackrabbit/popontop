@@ -52,6 +52,8 @@ type PropsTwo = {
   isActive?: boolean;
   label: string;
   labelClassName?: string;
+  onClickExpand: () => void;
+  onClickMinify: () => void;
   placeholder?: string;
   setValue: (value: string) => void;
   switchComponent: React.ReactNode;
@@ -63,6 +65,8 @@ export const TextAndSwitchExpandingPill: React.FC<PropsTwo> = ({
   isActive = false,
   label,
   labelClassName = 'text-md',
+  onClickExpand,
+  onClickMinify,
   placeholder = '#adf2da',
   setValue,
   switchComponent,
@@ -75,7 +79,14 @@ export const TextAndSwitchExpandingPill: React.FC<PropsTwo> = ({
       height="130px"
       isActive={isExpanded}
       isOpenByDefault={isActive}
-      toggleVisibility={() => setIsExpanded(!isExpanded)}
+      toggleVisibility={() => {
+        if (isExpanded) {
+          onClickMinify();
+        } else {
+          onClickExpand();
+        }
+        setIsExpanded(!isExpanded);
+      }}
     >
       <p className={labelClassName}>{label}</p>
       <button className={labelClassName}>

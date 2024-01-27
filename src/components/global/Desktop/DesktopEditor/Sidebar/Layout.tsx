@@ -19,19 +19,21 @@ const Layout: React.FC<Props> = ({ nav, sidebarContent, title }) => {
           p-4  px-4 dark:border-neutral-800
         "
       >
+        <div className="basis-1/12">{title}</div>
         <div
           // border-4 border-green-500
           className="
-
+            basis-10/12
+            overflow-y-auto
+            pr-2
           "
         >
-          <div>{title}</div>
           {sidebarContent}
         </div>
         <div
           // border-4 border-blue-500
           className="
-            basis-auto
+            basis-[4%]
           "
         >
           {nav}
