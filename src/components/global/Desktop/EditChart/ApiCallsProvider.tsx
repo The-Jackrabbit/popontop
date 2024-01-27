@@ -18,8 +18,7 @@ const ApiCallsProvider: React.FC<Props> = ({ uuid }) => {
     }
   );
 
-  const isDoneLoading =
-    data && data?.albums?.length > 0 && data.name && data.settings;
+  const isDoneLoading = data && data.name && data.settings;
 
   if (!isDoneLoading) {
     return <EditChartLoader isChartOwner={true} />;
