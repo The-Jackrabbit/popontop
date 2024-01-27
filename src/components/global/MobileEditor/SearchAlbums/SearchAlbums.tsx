@@ -3,51 +3,56 @@ import { Album } from '../../../../types/Albums';
 import { trpc } from '../../../../server/utils/trpc';
 import Input from '../../../lib/Input/Input';
 import { SearchResults } from './SearchResults/SearchResults';
+import {
+  SEARCH_TYPES,
+  useSearch,
+} from '../../../../frontend/hooks/use-chart/use-search';
+import NavDot, {
+  Color,
+} from '../../Desktop/DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
 
 export interface Props {
   onClick: (album: Album) => void;
 }
 
 const SearchAlbums: React.FC<Props> = ({ onClick }) => {
-  const [searchText, setSearchText] = useState('');
-  const [timeoutId, setTimeoutId] = useState<null | NodeJS.Timeout>(null);
-
-  const { data, isLoading, refetch, isFetching } = trpc.albums.search.useQuery(
-    { text: searchText },
-    {
-      enabled: false, // disable this query from automatically running
-    }
-  );
-
-  const search = async () => {
-    await refetch({});
-  };
-
-  const onType = (event: { target: { value: string } }) => {
-    setSearchText(event.target.value);
-    if (timeoutId) {
-      clearTimeout(timeoutId);
-    }
-    const newTimeoutId = setTimeout(() => {
-      search();
-    }, 500);
-
-    setTimeoutId(newTimeoutId);
-  };
+  const { data, onType, searchText, searchType, setSearchType } = useSearch();
 
   return (
     <div className="bg-red-red-400 h-14 w-full">
       <Input
         isMobile={true}
         value={searchText}
-        placeholder="Search Albums"
-        onChange={(event) => onType(event)}
+        placeholder={`Search ${searchType}`}
+        onChange={(event) => onType(event.target.value)}
       />
+
+      <div className="flex gap-4 pt-4">
+        <span>Search for: </span>
+        {SEARCH_TYPES.map((currentSearchType) => (
+          <button
+            key={`option-${currentSearchType}`}
+            className="mb-2 flex flex-row"
+            onClick={() => setSearchType(currentSearchType)}
+          >
+            <NavDot
+              ariaLabel="option"
+              color={
+                searchType === currentSearchType ? Color.amber : Color.blue
+              }
+              isActive={searchType === currentSearchType}
+              className="mr-2 h-3 w-3 border-none"
+              onClick={() => undefined}
+            />
+            <p className=" dark:text-neutral-300">{currentSearchType}</p>
+          </button>
+        ))}
+      </div>
 
       <div className="mt-4">
         <SearchResults
           albums={data ?? []}
-          isLoading={isLoading && isFetching}
+          isLoading={false}
           onClick={onClick}
         />
       </div>
