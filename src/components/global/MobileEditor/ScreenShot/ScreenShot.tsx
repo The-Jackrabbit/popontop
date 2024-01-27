@@ -78,11 +78,7 @@ const ScreenShot = ({ chart, previewIndex }: Props) => {
             />
           </div>
         ) : null}
-        <DesktopPreview
-          isMobile={true}
-          chart={chart}
-          previewIndex={previewIndex}
-        />
+        <DesktopPreview isMobile={true} chart={chart} previewIndex={0} />
       </div>
     </div>
   );

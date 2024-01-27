@@ -49,6 +49,8 @@ export const DesktopPreview = ({ chart, isMobile, previewIndex }: Props) => {
   const template = values
     .map((template) => template.chart)
     .at(previewIndex) as number[][];
+  const a = CHART_TEMPLATES;
+  debugger;
   const rows = transformRows(template);
 
   return (

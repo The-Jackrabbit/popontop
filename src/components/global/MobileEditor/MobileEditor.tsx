@@ -50,16 +50,17 @@ const MobileEditor: React.FC<Props> = ({
           />
         }
         shareTab={
-          <ShareTab
-            borderColor={chart.settings.state.borderColor}
-            borderSize={chart.settings.state.borderSize}
-            chartTitle={chart.state.chartTitle}
-            chart={chart}
-            previewIndex={state.previewIndex}
-            list={chart.list.state.list}
-            setPreviewIndex={actions.setPreviewIndex}
-            titleBackgroundColor={chart.settings.state.titleBackgroundColor}
-          />
+          // <ShareTab
+          //   borderColor={chart.settings.state.borderColor}
+          //   borderSize={chart.settings.state.borderSize}
+          //   chartTitle={chart.state.chartTitle}
+          //   chart={chart}
+          //   previewIndex={state.previewIndex}
+          //   list={chart.list.state.list}
+          //   setPreviewIndex={actions.setPreviewIndex}
+          //   titleBackgroundColor={chart.settings.state.titleBackgroundColor}
+          // />
+          null
         }
         sheetContents={
           <>
