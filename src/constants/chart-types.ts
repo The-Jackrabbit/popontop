@@ -80,9 +80,11 @@ export const CHART_TEMPLATES: Map<ChartFormatKey, ChartFormat> = new Map([
         [0, 1, 2, 3, 4],
         [0, 1, 2, 3, 4],
         [0, 1, 2, 3, 4],
+        [0, 1, 2, 3, 4],
+        [0, 1, 2, 3, 4],
       ],
       list: {
-        fontSize: 10,
+        fontSize: 14,
         columnCount: 2,
         count: 50,
       },

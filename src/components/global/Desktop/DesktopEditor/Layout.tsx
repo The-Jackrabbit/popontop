@@ -16,7 +16,7 @@ const Layout: React.FC<Props> = ({ chart, list, title, uuid }) => (
       <div className="min-h-min w-full">{title}</div>
       <div className="flex w-full justify-between overflow-y-auto">
         {/** DESKTOP_CHART_WIDTH */}
-        <div className="basis-[260px]">{chart}</div>
+        <div className="basis-[340px]">{chart}</div>
         <div className="shrink-0 grow basis-1/3">{list}</div>
       </div>
     </div>

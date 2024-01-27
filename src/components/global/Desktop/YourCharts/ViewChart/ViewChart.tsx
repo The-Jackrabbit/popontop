@@ -19,12 +19,7 @@ const ApiWrapper = ({ uuid }: { uuid: string }) => {
     }
   );
 
-  const isDoneLoading =
-    data && data?.albums?.length > 0 && data.name && data.settings
-      ? true
-      : false;
-
-  if (isLoading || !isDoneLoading) {
+  if (isLoading || !data) {
     return <Loader />;
   }
 

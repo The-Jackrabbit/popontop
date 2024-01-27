@@ -18,7 +18,7 @@ export const Input: React.FC<Props> = ({
   label,
   onChange,
   placeholder = 'Type here',
-  value = '',
+  value,
 }) => {
   const [buttonStyle, animatebuttonStyle] = useSpring(() => ({
     from: { scale: 1 },
@@ -65,7 +65,7 @@ export const Input: React.FC<Props> = ({
           `}
           onChange={onChange}
           placeholder={placeholder}
-          value={value ? value : undefined}
+          value={value ? value : ''}
         />
         <a.button
           onClick={() =>

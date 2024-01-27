@@ -10,7 +10,7 @@ export interface Props {
 const ApiCallsProvider: React.FC<Props> = ({ uuid }) => {
   const n = genUuid(uuid);
 
-  const { data } = trpc.charts.getById.useQuery(
+  const { data, isLoading } = trpc.charts.getById.useQuery(
     { uuid: n },
     {
       enabled: true, // disable this query from automatically running
@@ -18,9 +18,7 @@ const ApiCallsProvider: React.FC<Props> = ({ uuid }) => {
     }
   );
 
-  const isDoneLoading = data && data.name && data.settings;
-
-  if (!isDoneLoading) {
+  if (isLoading || !data) {
     return <EditChartLoader isChartOwner={true} />;
   }
 
