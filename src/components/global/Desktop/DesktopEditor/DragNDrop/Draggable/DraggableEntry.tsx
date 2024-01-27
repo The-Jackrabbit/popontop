@@ -34,6 +34,7 @@ const DraggableEntry: React.FC<Props> = ({
       height="200px"
       width="200px"
       alt={album.name}
+      priority={false}
     />
   </Draggable>
 );

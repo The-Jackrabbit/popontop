@@ -44,7 +44,7 @@ const Draggable: React.FC<Props> = ({
 
   return (
     <button
-      {...draggableButtonProps}
+      {...(draggableButtonProps ? draggableButtonProps : {})}
       className={className}
       onContextMenu={(e: React.BaseSyntheticEvent) => {
         e.preventDefault();

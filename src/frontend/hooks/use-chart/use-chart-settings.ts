@@ -73,7 +73,9 @@ const useChartSettings = (
     defaultSettings?.title_background_color ?? ''
   );
   const [chartFormat, setChartFormat] = useState<ChartFormatKey>(
-    (defaultSettings?.chart_format as ChartFormatKey) ?? 'honeycomb10'
+    (defaultSettings?.chart_format as ChartFormatKey)
+      ? (defaultSettings?.chart_format as ChartFormatKey)
+      : 'honeycomb10'
   );
   const [borderColor, setBorderColor] = useState(
     defaultSettings?.border_color ?? ''

@@ -31,12 +31,12 @@ export const ListColumn: React.FC<Props> = ({
   };
   const startIndexOfColumn = getStartIndexOfColumn(columnIndex, listLength);
   const endIndexOfColumn = getEndIndexOfColumn(columnIndex, listLength);
-  console.log({
-    columnIndex,
-    columnCount,
-    startIndexOfColumn,
-    endIndexOfColumn,
-  });
+  // console.log({
+  //   columnIndex,
+  //   columnCount,
+  //   startIndexOfColumn,
+  //   endIndexOfColumn,
+  // });
   const listItemsForColumn = [];
   for (
     let index = startIndexOfColumn;

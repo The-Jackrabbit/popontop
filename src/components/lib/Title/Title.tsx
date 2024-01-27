@@ -69,7 +69,10 @@ const Title: React.FC<Props> = ({
             style={{ color: textColor }}
           />
         ) : (
-          <p className="basis-full" style={{ color: textColor }}>
+          <p
+            className="basis-full"
+            style={textColor ? { color: textColor } : {}}
+          >
             {chartTitle}
           </p>
         )

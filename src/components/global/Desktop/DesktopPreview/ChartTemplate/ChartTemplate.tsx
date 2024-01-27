@@ -16,23 +16,25 @@ export interface Props {
 export const ChartTemplate = ({ itemComponent, rows }: Props) => (
   <>
     {rows.map((row, rowIndex) => (
-      <>
-        {row.length === 0 ? (
-          <div className="m-4" key={`row-${rowIndex}-empty`} />
-        ) : (
-          <div
-            className="flex h-min  bg-neutral-200 dark:bg-neutral-800"
-            key={`row-${rowIndex}`}
-          >
+      <div
+        className={
+          row.length === 0
+            ? 'm-4'
+            : 'flex h-min  bg-neutral-200 dark:bg-neutral-800'
+        }
+        key={row.length === 0 ? `row-${rowIndex}-empty` : `row-${rowIndex}`}
+      >
+        {row.length === 0 ? null : (
+          <>
             {row.map((indexIntoList) =>
               itemComponent({
                 indexIntoList,
                 lengthOfCurrentRow: row.length,
               })
             )}
-          </div>
+          </>
         )}
-      </>
+      </div>
     ))}
   </>
 );

@@ -19,10 +19,16 @@ export const ChartItem: React.FC<Props> = ({
 }) => (
   <ChartItemDropZone
     id={index.toString()}
-    style={{
-      borderColor,
-      lineHeight: '0px',
-    }}
+    style={
+      borderColor
+        ? {
+            borderColor,
+            lineHeight: '0px',
+          }
+        : {
+            lineHeight: '0px',
+          }
+    }
   >
     {album.imageUrl ? (
       <DraggableEntry album={album} index={index} isReadOnly={isReadOnly} />

@@ -55,7 +55,7 @@ export const updateList = (
   oldList: Album[],
   draggedEntry: DraggedEntry,
   over: Over,
-  logMetadata = !false
+  logMetadata = false
 ) => {
   const newContainers = [...oldList];
   const droppedIndex = over ? parseInt(over.id as string) : -1;

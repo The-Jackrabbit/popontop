@@ -31,11 +31,18 @@ export const ListItem: React.FC<Props> = ({
         dark:text-neutral-600
       `}
       role="listitem"
-      style={{
-        color: textColor,
-        fontSize: CHART_TEMPLATES.get(chart.settings.state.chartFormat)?.list
-          .fontSize,
-      }}
+      style={
+        textColor
+          ? {
+              color: textColor,
+              fontSize: CHART_TEMPLATES.get(chart.settings.state.chartFormat)
+                ?.list.fontSize,
+            }
+          : {
+              fontSize: CHART_TEMPLATES.get(chart.settings.state.chartFormat)
+                ?.list.fontSize,
+            }
+      }
     >
       {itemDescription}
     </div>

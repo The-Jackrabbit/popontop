@@ -1,7 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import {
-  TextAndSwitchExpandingPill,
-} from '../../../../lib/ExpandingPill/TextExpandingPill/TextExpandingPill';
+import { TextAndSwitchExpandingPill } from '../../../../lib/ExpandingPill/TextExpandingPill/TextExpandingPill';
 import { colorMap } from '../../../../../constants/colors';
 import NavDot, { Color } from './SidebarNav/NavDot/NavDot';
 import { SettingsHookNode } from '../../../../../frontend/hooks/use-chart/use-chart-settings';

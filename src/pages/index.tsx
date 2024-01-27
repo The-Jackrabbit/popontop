@@ -21,8 +21,9 @@ import LoadingBouncer from '../components/lib/LoadingBouncer/LoadingBouncer';
 import useDesktopChartEditor from '../frontend/hooks/singletons/use-desktop-chart-editor';
 import { usePageFadeIn } from '../frontend/hooks/springs/use-page-fade-in';
 import { DraggedEntry } from '../frontend/hooks/use-chart/use-chart';
+import NoSsr from './NoSsr';
 
-const Home: NextPage = () => {
+const Home = () => {
   const { pageOpacity } = usePageFadeIn();
   const { data: sessionData } = useSession();
   const {
@@ -125,4 +126,12 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+const Page = () => {
+  return (
+    <NoSsr>
+      <Home />
+    </NoSsr>
+  );
+};
+
+export default Page;
