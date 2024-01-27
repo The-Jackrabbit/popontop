@@ -1,9 +1,9 @@
 import { Chart } from '@prisma/client';
 import { WritableChartSettings } from '../../types/Charts';
-import escapeHtml from 'escape-html';
+// import escapeHtml from 'escape-html';
 import { Album } from '../../types/Albums';
 import { cssColorNames } from './css-color-names';
-
+import sanitizeHtml from 'sanitize-html';
 const lastFmImageOrigin = 'https://lastfm.freetls.fastly.net/i/u/174s/';
 const spotifyImageOrigin = 'https://i.scdn.co/';
 export const formatUrl = (url: string) => {
@@ -156,12 +156,12 @@ function sanitizeToNumber(value: unknown): number {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function sanitizeToString(value: any): string {
   if (typeof value === 'string') {
-    return escapeHtml(value);
+    return sanitizeHtml(value);
   }
 
   // If the value is not already a string, attempt to convert it
   if (value !== null && value !== undefined) {
-    return escapeHtml(String(value));
+    return sanitizeHtml(String(value));
   }
 
   // If the value is null or undefined, return a default string.

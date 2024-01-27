@@ -110,7 +110,7 @@ export const CHART_TEMPLATES: Map<ChartFormatKey, ChartFormat> = new Map([
       ],
       list: {
         fontSize: 9,
-        columnCount: 2,
+        columnCount: 3,
         count: 100,
       },
     },
@@ -132,7 +132,7 @@ export const CHART_TEMPLATES: Map<ChartFormatKey, ChartFormat> = new Map([
       ],
       list: {
         fontSize: 12,
-        columnCount: 1,
+        columnCount: 2,
         count: 50,
       },
     },

@@ -1,3 +1,4 @@
+import { list } from 'postcss';
 import React from 'react';
 import { CHART_TEMPLATES } from '../../../../../../constants/chart-types';
 import { EMPTY_ALBUM } from '../../../../../../constants/empty-album';
@@ -22,6 +23,9 @@ export const ListColumn: React.FC<Props> = ({
 }) => {
   const listLength = CHART_TEMPLATES.get(chart.settings.state.chartFormat)?.list
     .count as number;
+  const numberOfColumnsForChartType = CHART_TEMPLATES.get(
+    chart.settings.state.chartFormat
+  )?.list.columnCount as number;
   const getStartIndexOfColumn = (columnIndex: number, listLength: number) => {
     const lengthOfColumn = Math.floor(listLength / columnCount);
     return lengthOfColumn * columnIndex;
@@ -31,18 +35,12 @@ export const ListColumn: React.FC<Props> = ({
   };
   const startIndexOfColumn = getStartIndexOfColumn(columnIndex, listLength);
   const endIndexOfColumn = getEndIndexOfColumn(columnIndex, listLength);
-  // console.log({
-  //   columnIndex,
-  //   columnCount,
-  //   startIndexOfColumn,
-  //   endIndexOfColumn,
-  // });
+  const upperIndexForColumn =
+    columnIndex !== numberOfColumnsForChartType - 1
+      ? Math.min(endIndexOfColumn, listLength - 1)
+      : listLength - 1;
   const listItemsForColumn = [];
-  for (
-    let index = startIndexOfColumn;
-    index <= Math.min(endIndexOfColumn, listLength - 1);
-    index++
-  ) {
+  for (let index = startIndexOfColumn; index <= upperIndexForColumn; index++) {
     listItemsForColumn.push(
       <ListItem
         chart={chart}
