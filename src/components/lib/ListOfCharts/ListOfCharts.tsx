@@ -10,6 +10,7 @@ export interface Props {
   isLoading?: boolean;
   listOfCharts: IChartListItem[] | undefined;
   setChartBeingViewed?: (chartUuid: string) => void;
+  showTitle?: boolean;
   titleText?: string;
 }
 
@@ -18,15 +19,20 @@ export const ListOfCharts: React.FC<Props> = ({
   isLoading,
   listOfCharts,
   setChartBeingViewed = () => undefined,
+  showTitle = true,
   titleText,
 }) => (
   <>
-    <h1 className="text-4xl font-bold">{titleText}</h1>
-    <div
-      className={`${
-        colorMap[Color.amber]
-      } my-4 h-1 w-full rounded-full shadow-md`}
-    />
+    {showTitle ? (
+      <>
+        <h1 className="text-4xl font-bold">{titleText}</h1>
+        <div
+          className={`${
+            colorMap[Color.amber]
+          } my-4 h-1 w-full rounded-full shadow-md`}
+        />
+      </>
+    ) : null}
     {!isLoading ? (
       <>
         {listOfCharts

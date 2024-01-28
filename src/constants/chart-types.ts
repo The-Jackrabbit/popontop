@@ -139,6 +139,7 @@ export const CHART_TEMPLATES: Map<ChartFormatKey, ChartFormat> = new Map([
         fontSize: 12,
         columnCount: 2,
         count: 50,
+        width: 340,
       },
     },
   ],

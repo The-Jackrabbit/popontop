@@ -1,9 +1,11 @@
 import { useRouter } from 'next/router';
 import React from 'react';
 import { SidebarLayout } from '../../components/global/Desktop/DesktopEditor/Sidebar/Layout';
+import { Color } from '../../components/global/Desktop/DesktopEditor/Sidebar/SidebarNav/NavDot/NavDot';
 import SidebarNav from '../../components/global/Desktop/DesktopEditor/Sidebar/SidebarNav/SidebarNav';
 import DesktopPage from '../../components/lib/DesktopPage/DesktopPage';
 import { ListOfCharts } from '../../components/lib/ListOfCharts/ListOfCharts';
+import { colorMap } from '../../constants/colors';
 import { trpc } from '../../server/utils/trpc';
 
 export function YourCharts() {
@@ -33,7 +35,16 @@ export function YourCharts() {
       }
       sidebar={
         <SidebarLayout
-          title={null}
+          title={
+            <>
+              <h1 className="text-4xl font-bold">your charts</h1>
+              <div
+                className={`${
+                  colorMap[Color.amber]
+                } my-4 h-1 w-full rounded-full shadow-md`}
+              />
+            </>
+          }
           nav={<SidebarNav />}
           sidebarContent={
             <div className="h-full overflow-x-visible">
@@ -43,6 +54,7 @@ export function YourCharts() {
                 setChartBeingViewed={(uuid: string) => {
                   router.push(`/your-charts/${uuid}`);
                 }}
+                showTitle={false}
                 titleText="your charts"
               />
             </div>
