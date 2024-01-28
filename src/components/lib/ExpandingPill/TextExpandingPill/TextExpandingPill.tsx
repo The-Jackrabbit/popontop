@@ -76,7 +76,7 @@ export const TextAndSwitchExpandingPill: React.FC<PropsTwo> = ({
   return (
     <ExpandingPill
       className={className}
-      height="130px"
+      height="100px"
       isActive={isExpanded}
       isOpenByDefault={isActive}
       toggleVisibility={() => {

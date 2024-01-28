@@ -79,11 +79,12 @@ export const buildDataForChart = (
 };
 
 export const buildDataForAlbums = (albums: Album[], chartUuid?: string) => {
-  return albums.map((album: Album) => ({
+  return albums.map((album: Album, index) => ({
     name: sanitizeToString(album.name),
     artist: sanitizeToString(album.artist),
     album_art_url: formatUrl(album.imageUrl),
     chart_id: sanitizeToString(chartUuid),
+    index,
   }));
 };
 

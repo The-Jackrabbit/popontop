@@ -36,14 +36,21 @@ export const getChartById = async (
   const userIdAssociatedWithChart = chart?.chart_to_user[0]?.user_id;
 
   return {
-    albums: albums.map(
-      (album): Album => ({
-        name: album?.name ?? '',
-        artist: album?.artist ?? '',
-        imageUrl: album?.album_art_url ?? '',
-        lastfmId: '',
+    albums: albums
+      .sort((a, b) => {
+        if (a.index === null || b.index === null) {
+          return 1;
+        }
+        return a.index - b.index;
       })
-    ),
+      .map(
+        (album): Album => ({
+          name: album?.name ?? '',
+          artist: album?.artist ?? '',
+          imageUrl: album?.album_art_url ?? '',
+          lastfmId: '',
+        })
+      ),
     isReadOnly: userIdAssociatedWithChart !== userId,
     name: chart?.name ?? '',
     settings: chartSettings,

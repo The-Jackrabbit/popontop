@@ -68,11 +68,11 @@ export const DesktopSidebar: React.FC<Props> = ({
                 onClickMinify={() => setShowSearchResults(false)}
                 onClickExpand={() => setShowSearchResults(true)}
                 switchComponent={
-                  <>
+                  <div className="flex flex-row gap-2">
                     {SEARCH_TYPES.map((currentSearchType) => (
                       <button
                         key={`option-${currentSearchType}`}
-                        className="mb-2 flex flex-row"
+                        className="flex flex-row"
                         onClick={() => setSearchType(currentSearchType)}
                       >
                         <NavDot
@@ -91,7 +91,7 @@ export const DesktopSidebar: React.FC<Props> = ({
                         </p>
                       </button>
                     ))}
-                  </>
+                  </div>
                 }
               />
 
