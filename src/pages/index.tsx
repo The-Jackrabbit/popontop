@@ -47,6 +47,7 @@ const Home = () => {
         actions.setIsDragging(false);
       }}
     >
+      <div style={{ display: 'none' }} className="text-[8px] text-[12px]" />
       <DesktopPage
         actions={
           <DesktopActions

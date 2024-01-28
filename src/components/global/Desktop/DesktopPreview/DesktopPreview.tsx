@@ -39,6 +39,7 @@ export interface ChartFormat {
     fontSize: number;
     columnCount: number;
     count: number;
+    width?: number;
   };
 }
 

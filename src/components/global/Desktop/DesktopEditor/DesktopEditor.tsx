@@ -91,6 +91,7 @@ const DesktopEditor: React.FC<Props> = ({
             isReadOnly={readonly}
           />
         }
+        chartNode={chart}
       />
     )}
   </>
