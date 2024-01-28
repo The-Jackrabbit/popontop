@@ -5,13 +5,13 @@ import { ChartFormat } from '../DesktopPreview/DesktopPreview';
 
 export interface Props {
   chart: React.ReactNode;
-  chartNode: ChartHookNode;
+  chartNode?: ChartHookNode;
   list: React.ReactNode;
   title: React.ReactNode;
   uuid: string;
 }
 
-const getWidth = (chart: ChartHookNode) => {
+const getWidth = (chart?: ChartHookNode) => {
   if (
     chart &&
     chart.settings &&
